@@ -17,7 +17,7 @@ describe("composeHtml", () => {
       script,
       sceneAudio,
       gapSec: 0.3,
-      bgImageRelPath: "images/bg.jpg",
+      sceneImages: { hook: "images/bg.jpg" },
       audioRelPath: "voice.mp3",
     });
 
@@ -33,12 +33,10 @@ describe("composeHtml", () => {
 
     // ── Persistent brand shell ────────────────────────────────
     expect(html).toContain('class="brand-shell-header"');
-    expect(html).toContain('class="brand-shell-handle"');
-    expect(html).toContain('class="brand-shell-keyword"');
     expect(html).toContain('id="grain-overlay"');
     // Shell has no data-start (persistent)
     expect(html).toContain('class="brand-name"');
-    expect(html).toContain("Công nghệ 24h");
+    expect(html).toContain("Bóng lăn");
 
     // ── Hook scene ─────────────────────────────────────────────
     expect(html).toContain('data-layout="hook"');
@@ -84,17 +82,17 @@ describe("composeHtml", () => {
     expect(html).toContain("fonts.googleapis.com");
   });
 
-  it("falls back to gradient when bgImageRelPath is null", () => {
+  it("falls back to gradient when sceneImages is empty", () => {
     const script = JSON.parse(readFileSync("tests/fixtures/sample-script-with-image.json", "utf8")) as Script;
     const sceneAudio = script.scenes.map((s) => ({ id: s.id, durationSec: 5 }));
     const html = composeHtml({
       script,
       sceneAudio,
       gapSec: 0.3,
-      bgImageRelPath: null,
+      sceneImages: {},
       audioRelPath: "voice.mp3",
     });
-    // Hook scene with bgSrc but no bgImageRelPath → gradient fallback
+    // No image for any scene → all use gradient
     expect(html).toContain('class="bg gradient-news-dark"');
     expect(html).not.toContain("background-image: url");
   });

@@ -3,6 +3,9 @@
 //
 // Usage: npx tsx rerender.ts <outputDir>
 
+import { config } from "dotenv";
+config({ path: ".env.local" });
+
 import { readFile, writeFile, copyFile } from "node:fs/promises";
 import { join, dirname, basename } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -97,11 +100,31 @@ async function main() {
   const totalDur = await getDurationSec(voiceMp3);
   console.log(`voice.mp3 total: ${totalDur.toFixed(2)}s`);
 
-  // Determine bg image
-  const bgImagePath = join(outputDir, "images", "bg.jpg");
+  // Build sceneImages map by scanning existing images/ directory
   const fs = await import("node:fs");
-  const bgImageRelPath = fs.existsSync(bgImagePath) ? "images/bg.jpg" : null;
-  console.log(`bgImage: ${bgImageRelPath ?? "(none — gradient fallback)"}`);
+  const sceneImages: Record<string, string> = {};
+  const imagesDir = join(outputDir, "images");
+  if (fs.existsSync(imagesDir)) {
+    const imageFiles = fs.readdirSync(imagesDir);
+    // bg.jpg → assign to hook scene (og:image fallback)
+    const hookScene = script.scenes.find((s) => s.type === "hook");
+    if (hookScene && imageFiles.includes("bg.jpg")) {
+      sceneImages[hookScene.id] = "images/bg.jpg";
+    }
+    // Per-scene AI images: filenames like "<sceneId>-<hash>.png"
+    for (const scene of script.scenes) {
+      if (sceneImages[scene.id]) continue; // already mapped (e.g. hook → bg.jpg)
+      const match = imageFiles.find((f) => f.startsWith(`${scene.id}-`));
+      if (match) {
+        sceneImages[scene.id] = `images/${match}`;
+      }
+    }
+  }
+  const mappedCount = Object.keys(sceneImages).length;
+  console.log(`sceneImages: ${mappedCount} scene(s) mapped`);
+  for (const [sid, rel] of Object.entries(sceneImages)) {
+    console.log(`  scene ${sid}: ${rel}`);
+  }
 
   // TikTok avatar — find bundled (jpg/jpeg/png/webp) and copy to output dir
   let bundledAvatar: string | null = null;
@@ -123,7 +146,7 @@ async function main() {
     script,
     sceneAudio: sceneAudio.map((a) => ({ id: a.id, durationSec: a.durationSec })),
     gapSec: SCENE_GAP_SEC,
-    bgImageRelPath,
+    sceneImages,
     audioRelPath: "voice.mp3",
     tiktok: cfg.tiktok,
     tiktokAvatarRelPath: ttAvatarFile,

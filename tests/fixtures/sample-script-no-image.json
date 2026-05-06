@@ -7,7 +7,7 @@
       "domain": "local",
       "image": null
     },
-    "channel": "Công nghệ 24h"
+    "channel": "Bóng lăn"
   },
   "voice": { "provider": "lucylab", "voiceId": "${VIETNAMESE_VOICEID}", "speed": 1.0 },
   "scenes": [
@@ -56,11 +56,11 @@
     {
       "id": "outro",
       "type": "outro",
-      "voiceText": "Theo dõi Công nghệ 24h để xem bản tin mới mỗi ngày.",
+      "voiceText": "Theo dõi Bóng lăn để xem bản tin mới mỗi ngày.",
       "templateData": {
         "template": "outro",
         "ctaTop": "Theo dõi ngay",
-        "channelName": "Công nghệ 24h",
+        "channelName": "Bóng lăn",
         "source": "local"
       }
     }

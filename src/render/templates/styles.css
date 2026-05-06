@@ -45,7 +45,8 @@ html, body {
 
 /* ── BRAND SHELL HEADER (top-left persistent) ───────────────── */
 .brand-shell-header {
-  position: absolute; top: 60px; left: 60px;
+  /* top: 220px clears the TikTok/Reels username + follow-button overlay zone */
+  position: absolute; top: 220px; left: 60px;
   display: flex; align-items: center; gap: 28px;
   z-index: 50;
 }
@@ -60,6 +61,13 @@ html, body {
   letter-spacing: -0.05em;
   box-shadow: 0 4px 24px rgba(124,58,237,0.5);
   flex-shrink: 0;
+  overflow: hidden;
+}
+
+.brand-icon img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .brand-text {
@@ -77,44 +85,6 @@ html, body {
   font-size: 24px; font-weight: 500;
   color: #22d3ee;
   letter-spacing: 4px; text-transform: uppercase;
-}
-
-/* ── BRAND SHELL FOOTER HANDLE (bottom-right) ───────────────── */
-.brand-shell-handle {
-  position: absolute; bottom: 200px; right: 60px;
-  display: flex; align-items: center; gap: 14px;
-  background: rgba(15,23,42,0.75);
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 50px;
-  padding: 16px 32px;
-  z-index: 50;
-}
-
-.handle-music {
-  font-size: 30px; color: #fff;
-}
-
-.handle-text {
-  font-family: 'Inter', sans-serif;
-  font-size: 30px; font-weight: 600; color: #fff;
-  letter-spacing: -0.01em;
-}
-
-/* ── BRAND SHELL KEYWORD PILL (bottom-center) ───────────────── */
-.brand-shell-keyword {
-  position: absolute; bottom: 130px; left: 50%;
-  transform: translateX(-50%);
-  background: rgba(34,211,238,0.15);
-  border: 1px solid rgba(34,211,238,0.4);
-  border-radius: 50px;
-  padding: 12px 36px;
-  z-index: 50;
-}
-
-.brand-shell-keyword span {
-  font-family: 'Inter', sans-serif;
-  font-size: 26px; font-weight: 500;
-  color: #22d3ee; letter-spacing: 2px;
 }
 
 /* ── BACKGROUND PRIMITIVES ─────────────────────────────────── */
@@ -443,7 +413,7 @@ html, body {
 
 .tt-card {
   position: absolute;
-  bottom: 360px;            /* above the brand-shell-handle */
+  bottom: 360px;            /* above the TikTok action overlay area */
   left: 50%;
   transform: translate(-50%, 300px);   /* start off-screen below */
   display: flex; align-items: center; gap: 30px;

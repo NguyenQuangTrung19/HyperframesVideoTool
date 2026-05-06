@@ -38,6 +38,7 @@ Single argument: a news article URL (starts with `http://` or `https://`) OR a p
 - Content = remaining lines joined
 - ogImage = `null`
 - domain = `"local"`
+- **Optional but recommended for non-trivial files:** consult [`classify-football-content`](../classify-football-content/SKILL.md) to confirm content type (single-headline / match recap / transfer news / etc.) and apply its hook pattern + structure. News is short-form (5–8 scenes) so most of the classifier's structural advice gets compressed, but its hook patterns and tone guidance translate directly.
 
 ### Step 3: Create slug + output directory
 
@@ -143,22 +144,56 @@ RIGHT (natural):
 {
   "id": "outro",
   "type": "outro",
-  "voiceText": "Theo dõi Công nghệ 24h để xem bản tin mới mỗi ngày.",
-  "visual": {
-    "background": { "type": "gradient", "preset": "outro-purple" },
-    "text": {
-      "position": "center",
-      "style": "outro-card",
-      "lines": [
-        { "content": "Xem bản tin mới mỗi ngày", "emphasis": "primary", "animation": "fade-in" },
-        { "content": "Công nghệ 24h",            "emphasis": "channel", "animation": "scale-pop" },
-        { "content": "Nguồn: <DOMAIN>",          "emphasis": "muted",   "animation": "fade-in-late" }
-      ]
-    }
+  "voiceText": "Theo dõi Bóng lăn để xem bản tin mới mỗi ngày.",
+  "templateData": {
+    "template": "outro",
+    "ctaTop": "Theo dõi ngay",
+    "channelName": "Bóng lăn",
+    "source": "Sưu tầm"
   }
 }
 ```
-Replace `<DOMAIN>` with the actual domain string. Note: outro line 1 is shortened to fit 25-char schema rule (full CTA "Theo dõi để xem bản tin mới mỗi ngày" is 36 chars).
+The video renders `Nguồn: ${source}` at the end. **Always use `"Sưu tầm"`** regardless of input mode (URL, file, topic) — content is editorially curated under the Bóng lăn brand, not direct attribution to a single article.
+
+### ⚠️ AI scene image prompts (recommended for football videos)
+
+To make videos visually rich (not just text on gradient), add an `imagePrompt` field at the **scene level** (sibling of `voiceText` and `templateData`). Pipeline calls OpenAI `gpt-image-1` to generate a 1024×1536 background photo per scene.
+
+**Only effective for templates:** `hook`, `callout`, `stat-hero`. Ignored on `comparison`, `feature-list`, `outro` (those have strong UI of their own).
+
+**Auto-skipped when:** scene is `hook` AND article has `og:image` (real photo from article wins — usually best). For body scenes, AI gen always runs if `imagePrompt` is set.
+
+**Prompt rules (write in English — GPT-Image is much stronger in English):**
+- Sports photography style — cinematic, action, atmospheric. NOT cartoon/illustration.
+- Include vertical hint: `"vertical 9:16 composition"` or `"portrait orientation"`.
+- 30–100 words. Too short → generic; too long → ignored.
+- Real player/coach names usually OK, but DON'T describe specific club logos/crests (model may refuse or render text).
+- Avoid asking for **text in image** (scoreboards, captions) — your video already overlays text.
+
+**Examples for football news:**
+```json
+{
+  "id": "hook",
+  "imagePrompt": "Cinematic action photo of a football player in red and white kit celebrating a goal at a packed European stadium at night, dramatic stadium floodlights, fans blurred in background, intense emotion, vertical 9:16 composition, sports photography, photo-realistic, shallow depth of field"
+},
+{
+  "id": "body-2",
+  "templateData": { "template": "callout" },
+  "imagePrompt": "Football coach on touchline at modern European stadium, intense focused expression, wearing dark suit, gesturing toward the pitch, evening match lighting, blurred crowd, vertical 9:16 portrait, sports photography, dramatic mood"
+},
+{
+  "id": "body-4",
+  "templateData": { "template": "stat-hero" },
+  "imagePrompt": "Wide low-angle shot of a European football stadium at night, packed stands, floodlights piercing fog, dramatic atmosphere, vertical 9:16, cinematic sports photography"
+}
+```
+
+**When to OMIT imagePrompt:**
+- Hook scene + article `og:image` available → omit (og:image used automatically).
+- Body scene with `feature-list` or `comparison` template → omit (pipeline ignores it anyway).
+- Quick news where text-on-gradient is fine.
+
+**No `OPENAI_API_KEY`?** Pipeline silently falls back to gradient backgrounds — your script still renders.
 
 ### Step 5: Self-validate before writing
 
@@ -201,79 +236,99 @@ Tổng thời lượng: XX.Xs
 
 ## Examples
 
-### Example 1: URL with image (vnexpress)
+### Example 1: Football URL with og:image (vnexpress sport)
 
-User: `/create-news-video https://vnexpress.net/iphone-17-200mp`
+User: `/create-news-video https://vnexpress.net/arsenal-vao-chung-ket-c1-5070388.html`
 
-Generated `script.json` (excerpt):
+Generated `script.json` (excerpt — full script has 5–8 scenes total):
 ```json
 {
   "version": "1.0",
   "metadata": {
-    "title": "Apple ra mắt iPhone 17 với camera 200MP",
+    "title": "Arsenal vào chung kết Champions League sau 20 năm",
     "source": {
-      "url": "https://vnexpress.net/iphone-17-200mp",
+      "url": "https://vnexpress.net/arsenal-vao-chung-ket-c1-5070388.html",
       "domain": "vnexpress.net",
-      "image": "https://i1-vnexpress.vnecdn.net/iphone17.jpg"
+      "image": "https://i1-vnexpress.vnecdn.net/arsenal-celebrate.jpg"
     },
-    "channel": "Công nghệ 24h"
+    "channel": "Bóng lăn"
   },
   "voice": { "provider": "lucylab", "voiceId": "${VIETNAMESE_VOICEID}", "speed": 1.0 },
   "scenes": [
     {
       "id": "hook", "type": "hook",
-      "voiceText": "Apple vừa ra mắt iPhone 17 với camera hai trăm megapixel.",
-      "visual": {
-        "background": { "type": "image", "src": "$source.image", "kenBurns": "zoom-in" },
-        "overlay":    { "darkness": 0.4 },
-        "text": {
-          "position": "center", "style": "hook-large",
-          "lines": [
-            { "content": "iPhone 17",     "emphasis": "primary", "animation": "scale-pop" },
-            { "content": "Camera 200MP!", "emphasis": "accent",  "animation": "slide-up-bounce" }
-          ]
-        },
-        "effects": ["flash-white-3f", "particle-burst"]
+      "voiceText": "Arsenal lập kỳ tích, vào chung kết Champions League lần đầu sau gần hai mươi năm chờ đợi.",
+      "templateData": {
+        "template": "hook",
+        "headline": "Arsenal lập kỳ tích!",
+        "subhead": "Vào chung kết C1!",
+        "bgSrc": "$source.image",
+        "kenBurns": "zoom-in"
       }
+    },
+    {
+      "id": "body-1", "type": "body",
+      "voiceText": "Bukayo Saka ghi bàn duy nhất giúp Arsenal hạ Atletico Madrid một không trong trận lượt về đầy kịch tính.",
+      "templateData": {
+        "template": "stat-hero",
+        "value": "1-0",
+        "label": "Saka ghi bàn vàng",
+        "context": "Atletico Madrid bị loại"
+      },
+      "imagePrompt": "Cinematic action photo of a young English football winger in red and white kit celebrating a goal at Emirates Stadium at night, arms outstretched, intense joy, packed crowd blurred behind, dramatic floodlights, vertical 9:16 portrait, photo-realistic sports photography"
+    },
+    {
+      "id": "body-2", "type": "body",
+      "voiceText": "Huấn luyện viên Arteta xúc động chia sẻ ông không thể tự hào hơn về toàn đội và người hâm mộ.",
+      "templateData": {
+        "template": "callout",
+        "statement": "Arteta: Không thể tự hào hơn về toàn đội.",
+        "tag": "Arteta"
+      },
+      "imagePrompt": "Football coach in dark jacket on touchline at packed European stadium at night, intense focused expression, gesturing toward pitch, blurred crowd in background, dramatic floodlights, vertical 9:16 portrait, photo-realistic sports photography, dramatic mood"
     }
-    /* ... 3 body scenes + outro ... */
+    /* ... 1–3 more body scenes + outro ... */
   ]
 }
 ```
 
-### Example 2: .txt file with no image (local)
+Notes:
+- Hook uses `bgSrc: "$source.image"` to slot the article's og:image. No `imagePrompt` needed because the real photo is more authentic than AI gen.
+- Body scenes (callout, stat-hero) get `imagePrompt` for atmospheric AI imagery.
 
-User: `/create-news-video news/agi-update.txt`
+### Example 2: .txt file with no image (local source)
+
+User: `/create-news-video news/v-league-round12.txt`
 
 Generated `script.json` (excerpt):
 ```json
 {
   "metadata": {
-    "title": "OpenAI công bố mô hình mới với khả năng lập luận",
+    "title": "V-League vòng 12: Hà Nội FC dẫn đầu sau chiến thắng kịch tính",
     "source": { "url": "local", "domain": "local", "image": null },
-    "channel": "Công nghệ 24h"
+    "channel": "Bóng lăn"
   },
   "scenes": [
     {
       "id": "hook", "type": "hook",
-      "voiceText": "OpenAI vừa công bố mô hình mới có khả năng lập luận như con người.",
-      "visual": {
-        "background": { "type": "gradient", "preset": "news-dark" },
-        "text": {
-          "position": "center", "style": "hook-large",
-          "lines": [
-            { "content": "Mô hình mới", "emphasis": "primary", "animation": "scale-pop" },
-            { "content": "Lập luận!",  "emphasis": "accent",  "animation": "slide-up-bounce" }
-          ]
-        },
-        "effects": ["flash-white-3f"]
-      }
+      "voiceText": "Hà Nội FC ngược dòng kịch tính ở phút bù giờ, chiếm lại ngôi đầu V-League.",
+      "templateData": {
+        "template": "hook",
+        "headline": "Hà Nội FC ngược dòng!",
+        "subhead": "Bàn thắng phút 90+",
+        "kenBurns": "zoom-in"
+      },
+      "imagePrompt": "Cinematic wide shot of a Vietnamese football stadium at sunset, fans in purple and white packed in stands, dramatic golden lighting, anticipation atmosphere, vertical 9:16 composition, photo-realistic sports photography"
     }
-    /* ... outro line 3 = "Nguồn: local" ... */
+    /* ... 3–6 body scenes + outro with source: "Sưu tầm" ... */
   ]
 }
 ```
-Note: when source has no image, every scene uses `background.type = "gradient"` (no image fallback at composer level needed).
+
+Notes:
+- No og:image → hook gets `imagePrompt` for AI-generated atmospheric photo.
+- All body scenes that benefit from imagery (callout, stat-hero) should include `imagePrompt`.
+- Outro `source` field = `"Sưu tầm"` always — never echo the input domain.
 
 ## Sound Effects (SFX)
 

@@ -90,6 +90,12 @@ const Scene = z.object({
   templateData: TemplateData,
   /** Optional sound effect override (else pipeline picks per template) */
   sfx: SfxSpec.optional(),
+  /**
+   * Optional AI image prompt (English, sports photography style).
+   * Only generated for templates: hook (when no og:image), callout, stat-hero.
+   * Ignored for comparison, feature-list, outro.
+   */
+  imagePrompt: z.string().min(10).max(500).optional(),
 });
 
 // ── Root schema ────────────────────────────────────────────────────────────
@@ -106,14 +112,14 @@ export const ScriptSchema = z.object({
     channel: z.string().min(1),
   }),
   voice: z.object({
-    provider: z.literal("lucylab"),
+    provider: z.enum(["lucylab", "elevenlabs"]),
     voiceId: z.string().min(1),
     speed: z.number().min(0.5).max(2.0),
   }),
   scenes: z
     .array(Scene)
     .min(5)
-    .max(8, "scenes must have at most 8 items")
+    .max(16, "scenes must have at most 16 items (news 5–8, analysis 10–15)")
     .refine(
       (s) => s[0]?.type === "hook",
       { message: "scenes[0] must be type=hook" }

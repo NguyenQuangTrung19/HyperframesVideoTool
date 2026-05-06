@@ -12,8 +12,8 @@ const GRAIN_OVERLAY_HTML = `<div id="grain-overlay" style="position:absolute;top
 
 // Default TikTok config (used if not passed)
 const DEFAULT_TIKTOK: TiktokConfig = {
-  displayName: "Công nghệ 24h",
-  handle: "@congnghe24h",
+  displayName: "Bóng lăn",
+  handle: "@bonglan0702",
   followers: "1.2M followers",
 };
 
@@ -26,7 +26,12 @@ export interface ComposeArgs {
   script: Script;
   sceneAudio: SceneAudio[];
   gapSec: number;
-  bgImageRelPath: string | null;   // null => no image available
+  /**
+   * Map of scene id → relative image path (from output dir).
+   * Hook gets og:image (or AI image if no og:image); callout/stat-hero get AI images
+   * if their scene defines `imagePrompt`. Scenes not in the map render gradient bg.
+   */
+  sceneImages: Record<string, string>;
   audioRelPath: string;
   /** TikTok follow card config (injected into outro scene). Optional — defaults used if omitted. */
   tiktok?: TiktokConfig;
@@ -37,7 +42,7 @@ export interface ComposeArgs {
 }
 
 export function composeHtml(args: ComposeArgs): string {
-  const { script, sceneAudio, gapSec, bgImageRelPath, audioRelPath } = args;
+  const { script, sceneAudio, gapSec, sceneImages, audioRelPath } = args;
   const tiktok = args.tiktok ?? DEFAULT_TIKTOK;
   const tiktokAvatar = args.tiktokAvatarRelPath ?? "tiktok-avatar.jpg";
   const outroHoldSec = args.outroHoldSec ?? 3;
@@ -58,11 +63,12 @@ export function composeHtml(args: ComposeArgs): string {
 
   // Render scenes
   const sceneHtml = timing.map(({ scene, start, duration }) => {
-    return renderScene(scene, start, duration, bgImageRelPath, tiktok, tiktokAvatar);
+    const sceneImg = sceneImages[scene.id] ?? null;
+    return renderScene(scene, start, duration, sceneImg, tiktok, tiktokAvatar);
   }).join("\n");
 
-  // Persistent shell — uses tiktok handle in footer
-  const shellHtml = renderShell(script.metadata, tiktok);
+  // Persistent shell — channel name + logo in top-left
+  const shellHtml = renderShell(script.metadata, tiktokAvatar);
 
   const animJs = readFileSync(join(TPL_DIR, "animations.js"), "utf8");
 
@@ -77,29 +83,18 @@ export function composeHtml(args: ComposeArgs): string {
 }
 
 // ── PERSISTENT SHELL ───────────────────────────────────────────────────────
-function renderShell(metadata: Script["metadata"], tiktok: TiktokConfig): string {
+function renderShell(metadata: Script["metadata"], avatarRelPath: string): string {
   const channel = escapeHtml(metadata.channel);
-  const domain = escapeHtml(metadata.source.domain);
-  const handle = escapeHtml(tiktok.handle);
   return `
 <!-- Shell: persistent brand elements (no data-start → always visible) -->
 <div class="shell-bg"></div>
 
 <div class="brand-shell-header">
-  <div class="brand-icon">&gt;_</div>
+  <div class="brand-icon"><img src="${escapeHtml(avatarRelPath)}" alt="${escapeHtml(metadata.channel)}" crossorigin="anonymous" /></div>
   <div class="brand-text">
     <div class="brand-name">${channel}</div>
-    <div class="brand-tag">TIN CÔNG NGHỆ</div>
+    <div class="brand-tag">TIN TỨC BÓNG ĐÁ</div>
   </div>
-</div>
-
-<div class="brand-shell-handle">
-  <span class="handle-music">&#9835;</span>
-  <span class="handle-text">${handle}</span>
-</div>
-
-<div class="brand-shell-keyword">
-  <span>${escapeHtml(domain)}</span>
 </div>
 
 ${GRAIN_OVERLAY_HTML}`.trim();
@@ -110,7 +105,7 @@ function renderScene(
   scene: Script["scenes"][number],
   start: number,
   duration: number,
-  bgImageRelPath: string | null,
+  sceneImageRelPath: string | null,
   tiktok: TiktokConfig,
   tiktokAvatarRelPath: string,
 ): string {
@@ -121,7 +116,7 @@ function renderScene(
 
   switch (td.template) {
     case "hook":
-      inner = renderHookInner(td, bgImageRelPath);
+      inner = renderHookInner(td, sceneImageRelPath);
       layoutName = "hook";
       break;
     case "comparison":
@@ -129,7 +124,7 @@ function renderScene(
       layoutName = "comparison";
       break;
     case "stat-hero":
-      inner = renderStatHeroInner(td);
+      inner = renderStatHeroInner(td, sceneImageRelPath);
       layoutName = "stat-hero";
       break;
     case "feature-list":
@@ -137,7 +132,7 @@ function renderScene(
       layoutName = "feature-list";
       break;
     case "callout":
-      inner = renderCalloutInner(td);
+      inner = renderCalloutInner(td, sceneImageRelPath);
       layoutName = "callout";
       break;
     case "outro":
@@ -153,24 +148,33 @@ function renderScene(
   return buildScene(scene, start, duration, layoutName, inner);
 }
 
+/** Renders a Ken-Burns photo bg + dark overlay, or a gradient fallback. */
+function bgWithImageOrGradient(imageRelPath: string | null, kbClass = "kb-zoom-in", overlayOpacity = 0.55): string {
+  if (imageRelPath) {
+    return `<div class="bg ${kbClass}" style="background-image: url('${imageRelPath}')"></div>
+  <div class="overlay" style="opacity: ${overlayOpacity}"></div>`;
+  }
+  return `<div class="bg gradient-news-dark"></div>`;
+}
+
 // ── HOOK SCENE ─────────────────────────────────────────────────────────────
-function renderHookInner(td: Extract<TemplateDataType, { template: "hook" }>, bgImageRelPath: string | null): string {
-  // Background
+function renderHookInner(
+  td: Extract<TemplateDataType, { template: "hook" }>,
+  sceneImageRelPath: string | null,
+): string {
   let bgHtml: string;
-  if (td.bgSrc && bgImageRelPath) {
-    // Ken Burns image
-    const kbClass = td.kenBurns ?? "zoom-in";
-    bgHtml = `<div class="bg kb-${kbClass}" style="background-image: url('${bgImageRelPath}')"></div>`;
+  if (sceneImageRelPath) {
+    const kbClass = `kb-${td.kenBurns ?? "zoom-in"}`;
+    bgHtml = `<div class="bg ${kbClass}" style="background-image: url('${sceneImageRelPath}')"></div>
+  <div class="overlay" style="opacity: 0.55"></div>`;
   } else {
     bgHtml = `<div class="bg gradient-news-dark"></div>`;
   }
-  const overlayHtml = `<div class="overlay" style="opacity: 0.55"></div>`;
 
   const headline = escapeHtml(td.headline);
   const subhead = td.subhead ? escapeHtml(td.subhead) : "";
 
   return `${bgHtml}
-  ${overlayHtml}
   <div class="layout-hook">
     <div class="hook-headline shimmer-sweep-target">${headline}</div>
     ${subhead ? `<div class="hook-subhead">${subhead}</div>` : ""}
@@ -199,9 +203,14 @@ function renderComparisonInner(td: Extract<TemplateDataType, { template: "compar
 }
 
 // ── STAT HERO SCENE ────────────────────────────────────────────────────────
-function renderStatHeroInner(td: Extract<TemplateDataType, { template: "stat-hero" }>): string {
+function renderStatHeroInner(
+  td: Extract<TemplateDataType, { template: "stat-hero" }>,
+  sceneImageRelPath: string | null,
+): string {
   const context = td.context ? `<div class="stat-context">${escapeHtml(td.context)}</div>` : "";
-  return `
+  // Stronger overlay (0.6) since stat numbers must read clearly over photo.
+  const bg = bgWithImageOrGradient(sceneImageRelPath, "kb-zoom-in", 0.6);
+  return `${bg}
 <div class="layout-stat-hero">
   <div class="stat-value shimmer-sweep-target">${escapeHtml(td.value)}</div>
   <div class="stat-label">${escapeHtml(td.label)}</div>
@@ -231,9 +240,14 @@ function renderFeatureListInner(td: Extract<TemplateDataType, { template: "featu
 }
 
 // ── CALLOUT SCENE ──────────────────────────────────────────────────────────
-function renderCalloutInner(td: Extract<TemplateDataType, { template: "callout" }>): string {
+function renderCalloutInner(
+  td: Extract<TemplateDataType, { template: "callout" }>,
+  sceneImageRelPath: string | null,
+): string {
   const tag = td.tag ? `<div class="callout-tag">${escapeHtml(td.tag)}</div>` : "";
-  return `
+  // Callout already has a card with its own bg, so a slightly lighter overlay is fine.
+  const bg = bgWithImageOrGradient(sceneImageRelPath, "kb-zoom-in", 0.5);
+  return `${bg}
 <div class="layout-callout">
   <div class="callout-card">
     ${tag}

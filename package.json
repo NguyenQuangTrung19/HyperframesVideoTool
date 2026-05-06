@@ -15,7 +15,9 @@
     "typecheck": "tsc --noEmit",
     "build": "tsc",
     "sfx:download": "tsx scripts/download-sfx.ts",
-    "sfx:filter": "tsx scripts/filter-sfx.ts"
+    "sfx:filter": "tsx scripts/filter-sfx.ts",
+    "images:list": "tsx scripts/list-image-prompts.ts",
+    "images:stage": "tsx scripts/stage-planned-images.ts"
   },
   "keywords": [
     "video",

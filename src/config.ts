@@ -10,6 +10,33 @@ export interface TiktokConfig {
   avatarUrl?: string;
 }
 
+export type ImageQuality = "low" | "medium" | "high" | "auto";
+export type ImageProviderName = "openai" | "gemini" | "xai";
+export type XAIResolution = "1k" | "2k";
+
+export interface ImageGenConfig {
+  /** Active provider, default "openai" */
+  provider: ImageProviderName;
+  /** OpenAI API key — required when provider="openai" */
+  openaiApiKey?: string;
+  /** OpenAI model id, default "gpt-image-1" */
+  openaiModel: string;
+  /** Gemini API key — required when provider="gemini" (free tier on AI Studio) */
+  geminiApiKey?: string;
+  /** Gemini model id, default "gemini-2.5-flash-image" */
+  geminiModel: string;
+  /** xAI API key — required when provider="xai" (console.x.ai, pay-per-use credits) */
+  xaiApiKey?: string;
+  /** xAI model id, default "grok-imagine-image-quality" */
+  xaiModel: string;
+  /** xAI resolution (xAI only), default "1k" */
+  xaiResolution: XAIResolution;
+  /** Quality preset (OpenAI only — Gemini/xAI ignore), default "medium" */
+  quality: ImageQuality;
+  /** Whether AI image generation is enabled (true iff active provider's key is set). */
+  enabled: boolean;
+}
+
 export interface Config {
   ttsProvider: TtsProvider;
 
@@ -28,6 +55,9 @@ export interface Config {
 
   // TikTok follow card (outro)
   tiktok: TiktokConfig;
+
+  // AI scene image generation (optional)
+  image: ImageGenConfig;
 
   ttsConcurrency: number;
 }
@@ -87,11 +117,45 @@ export function loadConfig(): Config {
     elevenlabsModelId: process.env.ELEVENLABS_MODEL_ID ?? "eleven_multilingual_v2",
     elevenlabsEndpoint: process.env.ELEVENLABS_ENDPOINT ?? "https://api.elevenlabs.io/v1",
     tiktok: {
-      displayName: process.env.TIKTOK_DISPLAY_NAME ?? "Công nghệ 24h",
-      handle: process.env.TIKTOK_HANDLE ?? "@congnghe24h",
+      displayName: process.env.TIKTOK_DISPLAY_NAME ?? "Bóng lăn",
+      handle: process.env.TIKTOK_HANDLE ?? "@bonglan0702",
       followers: process.env.TIKTOK_FOLLOWERS ?? "1.2M followers",
       avatarUrl: process.env.TIKTOK_AVATAR_URL || undefined,
     },
+    image: parseImageConfig(),
     ttsConcurrency: intDefault("TTS_CONCURRENCY", 1),
+  };
+}
+
+function parseImageConfig(): ImageGenConfig {
+  const rawProvider = (process.env.IMAGE_PROVIDER ?? "openai").toLowerCase();
+  if (rawProvider !== "openai" && rawProvider !== "gemini" && rawProvider !== "xai") {
+    throw new Error(`IMAGE_PROVIDER must be "openai", "gemini", or "xai", got "${rawProvider}"`);
+  }
+  const provider = rawProvider as ImageProviderName;
+  const openaiApiKey = process.env.OPENAI_API_KEY?.trim() || undefined;
+  const geminiApiKey = process.env.GEMINI_API_KEY?.trim() || undefined;
+  const xaiApiKey = process.env.XAI_API_KEY?.trim() || undefined;
+  const rawQuality = (process.env.IMAGE_QUALITY ?? "medium").toLowerCase();
+  if (!["low", "medium", "high", "auto"].includes(rawQuality)) {
+    throw new Error(`IMAGE_QUALITY must be one of low|medium|high|auto, got "${rawQuality}"`);
+  }
+  const rawResolution = (process.env.XAI_IMAGE_RESOLUTION ?? "1k").toLowerCase();
+  if (rawResolution !== "1k" && rawResolution !== "2k") {
+    throw new Error(`XAI_IMAGE_RESOLUTION must be "1k" or "2k", got "${rawResolution}"`);
+  }
+  const activeKey =
+    provider === "openai" ? openaiApiKey : provider === "gemini" ? geminiApiKey : xaiApiKey;
+  return {
+    provider,
+    openaiApiKey,
+    openaiModel: process.env.OPENAI_IMAGE_MODEL ?? "gpt-image-1",
+    geminiApiKey,
+    geminiModel: process.env.GEMINI_IMAGE_MODEL ?? "gemini-2.5-flash-image",
+    xaiApiKey,
+    xaiModel: process.env.XAI_IMAGE_MODEL ?? "grok-imagine-image-quality",
+    xaiResolution: rawResolution as XAIResolution,
+    quality: rawQuality as ImageQuality,
+    enabled: !!activeKey,
   };
 }

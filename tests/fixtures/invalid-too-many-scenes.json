@@ -7,7 +7,7 @@
       "domain": "vnexpress.net",
       "image": "https://i1-vnexpress.vnecdn.net/iphone17.jpg"
     },
-    "channel": "Công nghệ 24h"
+    "channel": "Bóng lăn"
   },
   "voice": {
     "provider": "lucylab",
@@ -70,10 +70,52 @@
       "templateData": { "template": "stat-hero", "value": "256GB", "label": "Dung lượng" }
     },
     {
+      "id": "body-9",
+      "type": "body",
+      "voiceText": "Sạc nhanh 65W.",
+      "templateData": { "template": "stat-hero", "value": "65W", "label": "Sạc nhanh" }
+    },
+    {
+      "id": "body-10",
+      "type": "body",
+      "voiceText": "Kết nối 5G nhanh hơn.",
+      "templateData": { "template": "callout", "statement": "Hỗ trợ 5G mmWave." }
+    },
+    {
+      "id": "body-11",
+      "type": "body",
+      "voiceText": "Camera macro mới.",
+      "templateData": { "template": "feature-list", "title": "Macro mode", "bullets": ["1cm focus", "AI auto"] }
+    },
+    {
+      "id": "body-12",
+      "type": "body",
+      "voiceText": "Nâng cấp ổn định ảnh.",
+      "templateData": { "template": "stat-hero", "value": "8 stops", "label": "OIS+" }
+    },
+    {
+      "id": "body-13",
+      "type": "body",
+      "voiceText": "Bảo mật Face ID nâng cấp.",
+      "templateData": { "template": "callout", "statement": "Face ID nhanh hơn 30%." }
+    },
+    {
+      "id": "body-14",
+      "type": "body",
+      "voiceText": "Chống nước IP68.",
+      "templateData": { "template": "stat-hero", "value": "IP68", "label": "Chống nước" }
+    },
+    {
+      "id": "body-15",
+      "type": "body",
+      "voiceText": "Mở bán toàn cầu tháng 9.",
+      "templateData": { "template": "callout", "statement": "Mở bán tháng 9 trên toàn cầu." }
+    },
+    {
       "id": "outro",
       "type": "outro",
-      "voiceText": "Theo dõi Công nghệ 24h.",
-      "templateData": { "template": "outro", "ctaTop": "Theo dõi ngay", "channelName": "Công nghệ 24h", "source": "vnexpress.net" }
+      "voiceText": "Theo dõi Bóng lăn.",
+      "templateData": { "template": "outro", "ctaTop": "Theo dõi ngay", "channelName": "Bóng lăn", "source": "vnexpress.net" }
     }
   ]
 }

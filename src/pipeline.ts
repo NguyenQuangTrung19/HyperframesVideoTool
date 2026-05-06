@@ -11,11 +11,14 @@ import { indexSfxLibrary, pickSfxForScene, defaultPlayback } from "./assets/sfx-
 import { existsSync } from "node:fs";
 import { composeHtml } from "./render/html-composer.js";
 import { renderWithHyperframes } from "./render/hyperframes-runner.js";
+import { generateSceneImages } from "./image/index.js";
 import { log } from "./utils/logger.js";
 
-const TOTAL_STEPS = 8;
+const TOTAL_STEPS = 9;
+// Pipeline only WARNS outside this range — exact bounds enforced by skill rules.
+// News: 55–65s ideal. Analysis: 90–180s ideal. Range below tolerates both modes.
 const DURATION_MIN_SEC = 48;
-const DURATION_MAX_SEC = 72;
+const DURATION_MAX_SEC = 200;
 const SCENE_GAP_SEC = 0.3;
 /**
  * Extra seconds added to the outro scene visual duration AFTER the voice ends.
@@ -106,8 +109,17 @@ export async function runPipeline(scriptPath: string): Promise<void> {
     log.warn(`Background image fetch failed: ${imgResult.reason} → using gradient fallback`);
   }
 
-  // STEP 5
-  log.step(5, TOTAL_STEPS, "Concat voice scenes + mix SFX layer");
+  // STEP 5 — Generate AI images for eligible scenes (parallel with SFX mix below)
+  log.step(5, TOTAL_STEPS, "Generate AI scene images (hook/callout/stat-hero with imagePrompt)");
+  const sceneImagesPromise = generateSceneImages({
+    script,
+    outputDir,
+    config: cfg.image,
+    hookOgImageRelPath: bgImageRelPath,
+  });
+
+  // STEP 6
+  log.step(6, TOTAL_STEPS, "Concat voice scenes + mix SFX layer");
   const voiceRawMp3 = join(outputDir, "voice-raw.mp3");
   const voiceMp3 = join(outputDir, "voice.mp3");
   await concatWithSilence(sceneAudio.map((a) => a.path), SCENE_GAP_SEC, voiceRawMp3);
@@ -176,8 +188,11 @@ export async function runPipeline(scriptPath: string): Promise<void> {
     log.warn(`Total duration ${totalAudioSec.toFixed(1)}s outside [${DURATION_MIN_SEC}, ${DURATION_MAX_SEC}]s tolerance — proceeding anyway`);
   }
 
-  // STEP 6 — Compose HTML + write hyperframes project files
-  log.step(6, TOTAL_STEPS, "Compose HTML + project files");
+  // STEP 7 — Compose HTML + write hyperframes project files
+  log.step(7, TOTAL_STEPS, "Compose HTML + project files");
+
+  // Resolve image generation results (started in step 5, awaited here)
+  const sceneImages = await sceneImagesPromise;
 
   // Resolve TikTok avatar — download URL if provided, else copy bundled default
   // Bundled avatar can be jpg/jpeg/png/webp — pick whichever exists
@@ -207,7 +222,7 @@ export async function runPipeline(scriptPath: string): Promise<void> {
     script,
     sceneAudio: sceneAudio.map((a) => ({ id: a.id, durationSec: a.durationSec })),
     gapSec: SCENE_GAP_SEC,
-    bgImageRelPath,
+    sceneImages,
     audioRelPath: "voice.mp3",
     tiktok: cfg.tiktok,
     tiktokAvatarRelPath: ttAvatarFile,
@@ -230,13 +245,13 @@ export async function runPipeline(scriptPath: string): Promise<void> {
   await copyFile(join(TPL_DIR, "styles.css"),    join(outputDir, "styles.css"));
   await copyFile(join(TPL_DIR, "animations.js"), join(outputDir, "animations.js"));
 
-  // STEP 7
-  log.step(7, TOTAL_STEPS, "Render with hyperframes");
+  // STEP 8
+  log.step(8, TOTAL_STEPS, "Render with hyperframes");
   const videoPath = join(outputDir, "video.mp4");
   await renderWithHyperframes({ compositionDir: outputDir, outputPath: videoPath });
 
-  // STEP 8
-  log.step(8, TOTAL_STEPS, "Done");
+  // STEP 9
+  log.step(9, TOTAL_STEPS, "Done");
   console.log("\n=== Result ===");
   console.log(`Video:  ${videoPath}`);
   console.log(`Audio:  ${voiceMp3}  (cho CapCut)`);

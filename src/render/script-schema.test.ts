@@ -32,4 +32,16 @@ describe("ScriptSchema", () => {
     data.scenes = data.scenes.filter((s: any) => s.type !== "outro");
     expect(() => ScriptSchema.parse(data)).toThrow(/outro/);
   });
+
+  it("accepts voice.provider = elevenlabs", () => {
+    const data = load("sample-script-with-image.json");
+    data.voice.provider = "elevenlabs";
+    expect(() => ScriptSchema.parse(data)).not.toThrow();
+  });
+
+  it("rejects unknown voice.provider", () => {
+    const data = load("sample-script-with-image.json");
+    data.voice.provider = "google";
+    expect(() => ScriptSchema.parse(data)).toThrow(/provider/);
+  });
 });
