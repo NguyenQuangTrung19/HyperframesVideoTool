@@ -57,8 +57,8 @@ Creating short-form news videos is **time-consuming and repetitive**:
 | ⏱️ Time per video | ~3 hours | **~5 minutes** |
 | 🎓 Skill required | Video editor | **None** |
 | 🎯 Consistency | Varies | **Studio-grade every time** |
-| 💰 Cost per video | $50–200 (freelancer) | **~$0.10 (API costs)** |
-| 🇻🇳 Vietnamese voice | Hard to source | **Built-in (LucyLab cloning)** |
+| 💰 Cost per video | $50–200 (freelancer) | **~$0.03 (free local TTS)** |
+| 🇻🇳 Vietnamese voice | Hard to source | **Built-in (VieNeu local, free + offline)** |
 
 ---
 
@@ -70,9 +70,10 @@ git clone https://github.com/hoquanghai/Auto-Create-Video.git
 cd Auto-Create-Video
 npm install
 
-# 2. Configure TTS API key
+# 2. Configure TTS (default: VieNeu local — no API key)
 cp .env.example .env.local
-# → edit .env.local, set TTS_PROVIDER + key (LucyLab or ElevenLabs)
+# → edit .env.local, point VIENEU_PROJECT_DIR at the cloned VieNeu-TTS repo
+#   (or switch TTS_PROVIDER=ausynclab for the optional paid cloud option)
 ```
 
 Then choose your path:
@@ -82,7 +83,7 @@ Then choose your path:
 1. Install Claude Code: `npm install -g @anthropic-ai/claude-code`
 2. Inside the project directory, run `claude`, then type:
    ```
-   /create-news-video https://vnexpress.net/some-article
+   /create-video https://vnexpress.net/some-article
    ```
 
 **Path B — Without Claude Code (hand-write the script):**
@@ -108,11 +109,11 @@ Either way, after ~3–5 minutes you'll have `output/<slug>/video.mp4` — a 108
 </td>
 <td width="33%" align="center">
 <h3>🎤 Multi-TTS</h3>
-<sub>LucyLab (Vietnamese cloning + free SRT) or ElevenLabs (30+ languages)</sub>
+<sub>VieNeu (free, local, offline Vietnamese — 7 preset voices) or AusyncLab (paid cloud, large Vietnamese voice library + voice cloning)</sub>
 </td>
 <td width="33%" align="center">
 <h3>🤖 Claude Code Skill</h3>
-<sub>One slash command:<br/><code>/create-news-video &lt;url&gt;</code><br/>(URL / .txt / .md input)</sub>
+<sub>One slash command:<br/><code>/create-video &lt;url&gt;</code><br/>(URL / .txt / .md input)</sub>
 </td>
 </tr>
 <tr>
@@ -165,11 +166,11 @@ Either way, after ~3–5 minutes you'll have `output/<slug>/video.mp4` — a 108
 
 ```mermaid
 flowchart LR
-    A[📰 URL / .txt / .md] -->|/create-news-video| B[Claude Code]
+    A[📰 URL / .txt / .md] -->|/create-video| B[Claude Code]
     B -->|fetch + analyze| C[Generate script.json]
     C -->|Zod validate| D{Template Picker}
     D -->|12 variants| E[Scene Types]
-    E -->|TTS per scene<br/>or per chunk| F[LucyLab / ElevenLabs]
+    E -->|TTS per scene<br/>or per chunk| F[VieNeu / AusyncLab]
     F -->|voice.mp3<br/>+ SFX mix<br/>+ beat SFX| G[HyperFrames]
     G -.->|lint<br/>validate<br/>inspect| G
     G -->|Puppeteer + GSAP| H[1800 frames @ 30fps]
@@ -196,14 +197,14 @@ The pipeline is **AI for content** (Claude writes the script) and **deterministi
 | **Runtime** | Node.js ≥ 22, TypeScript 6+, ESM |
 | **Render engine** | [HyperFrames](https://hyperframes.heygen.com) ^0.4.34 (Puppeteer + GSAP + FFmpeg) |
 | **Quality gates** | `hyperframes lint` (errors block) → `validate` (WCAG contrast) → `inspect` (text overflow / off-canvas) — all run before render |
-| **TTS providers** | [LucyLab.io](https://lucylab.io) (JSON-RPC async, Vietnamese cloning) or [ElevenLabs](https://elevenlabs.io) (REST sync, multilingual) |
+| **TTS providers** | [VieNeu-TTS](https://github.com/pnnbao97/VieNeu-TTS) (local Python via uv, Apache 2.0, 100% offline — default) or [AusyncLab.io](https://ausynclab.io) (paid cloud, large Vietnamese voice library + 3–10s voice cloning) |
 | **Image generation** | [Gemini 2.5 Flash Image](https://aistudio.google.com) — 9:16 thumbnails, embedded as MP4 cover |
 | **Schema validation** | [Zod](https://zod.dev) ^4 discriminated unions (12 template variants) |
 | **HTTP** | axios ^1.15 + nock (test mocking) |
 | **Concurrency** | [p-limit](https://github.com/sindresorhus/p-limit) ^7 (TTS rate-limiting per provider) |
 | **Testing** | [Vitest](https://vitest.dev) ^4 — ESM-native, with @vitest/coverage-v8 |
 | **Audio processing** | FFmpeg + ffprobe (mix, concat with silence, attach cover image) |
-| **AI orchestration** | [Claude Code](https://docs.claude.com/en/docs/claude-code/overview) skill (`/create-news-video`) |
+| **AI orchestration** | [Claude Code](https://docs.claude.com/en/docs/claude-code/overview) skill (`/create-video`) |
 | **Visual blocks** | HyperFrames registry: `grain-overlay`, `shimmer-sweep`, `tiktok-follow` |
 | **Brand spec** | See [`design.md`](design.md) — palette, layout density, motion principles |
 | **Fonts** | Manrope (body) + Anton (display) + Lora (italic serif for quotes) — Google Fonts |
@@ -218,7 +219,9 @@ The pipeline is **AI for content** (Claude writes the script) and **deterministi
 | **FFmpeg + ffprobe** | any modern | must be in PATH (`ffmpeg -version`) |
 | **Chrome / Chromium** | any | auto-downloaded by Puppeteer on first render |
 | **Claude Code CLI** | latest | [install here](https://docs.claude.com/en/docs/claude-code/overview) |
-| **TTS account** | one of two | LucyLab.io OR ElevenLabs |
+| **VieNeu-TTS repo** | latest `main` | clone [VieNeu-TTS](https://github.com/pnnbao97/VieNeu-TTS) **next to this project** as a sibling folder, then `uv sync` (default provider — no API key needed) |
+| **`uv`** | latest | Python package manager VieNeu uses ([install](https://docs.astral.sh/uv/getting-started/installation/)) |
+| **AusyncLab.io account** | optional | only if you want the paid premium fallback (`TTS_PROVIDER=ausynclab`) |
 
 ---
 
@@ -257,30 +260,42 @@ npm test             # 44 tests should pass
 
 Open `.env.local` and pick **one of two providers**:
 
-### Option 1 — LucyLab.io (recommended for Vietnamese)
+### Option 1 — VieNeu-TTS (default, free, local Python)
 
 ```env
-TTS_PROVIDER=lucylab
-VIETNAMESE_API_KEY=sk_live_xxxxxxxxxxxxxxxxxxxx
-VIETNAMESE_VOICEID=22charvoiceiduuidhere
+TTS_PROVIDER=vieneu
+VIENEU_PROJECT_DIR=../VieNeu-TTS    # path to the cloned sibling repo
+VIENEU_VOICE_ID=Binh                # default; switch to Tuyen, Vinh, Doan, Ly, Sơn, Ngoc as desired
+VIENEU_EMOTION=natural
 ```
 
-- ✅ Natural Vietnamese voice (cloning), free SRT subtitle file included
-- ⚠️ Only 1 concurrent export per account (pipeline serialises automatically)
-- 🔗 Sign up: https://lucylab.io
+One-time setup (after cloning [VieNeu-TTS](https://github.com/pnnbao97/VieNeu-TTS) next to this project):
 
-### Option 2 — ElevenLabs
+```bash
+cd ../VieNeu-TTS
+uv sync
+# Windows users: install the pre-built CPU wheel for llama-cpp-python
+uv pip install llama-cpp-python --extra-index-url https://pnnbao97.github.io/llama-cpp-python-v0.3.16/cpu/
+```
+
+- ✅ **Free** — runs on your CPU, no API quota, no key
+- ✅ **100% offline** — works on flights, in air-gapped environments
+- ✅ **Apache 2.0** — open source, commercial use OK
+- ✅ Decent Vietnamese voice quality (Standard CPU GGUF Q4 mode)
+- ⚠️ Slower than cloud TTS (CPU inference); first run downloads the model (~2GB)
+- 🔗 Repo: https://github.com/pnnbao97/VieNeu-TTS
+
+### Option 2 — AusyncLab.io (optional paid premium)
 
 ```env
-TTS_PROVIDER=elevenlabs
-ELEVENLABS_API_KEY=sk_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-ELEVENLABS_VOICE_ID=EXAVITQu4vr4xnSDxMaL
-ELEVENLABS_MODEL_ID=eleven_multilingual_v2
+TTS_PROVIDER=ausynclab
+AUSYNCLAB_API_KEY=ak_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+AUSYNCLAB_VOICE_ID=1234567
 ```
 
-- ✅ Multilingual (30+ languages), large voice library, high quality
-- ⚠️ Pricier than LucyLab, no SRT included
-- 🔗 Get key: https://elevenlabs.io/app/settings/api-keys · Browse voices: https://elevenlabs.io/app/voice-library
+- ✅ Large Vietnamese voice library + 3–10s voice cloning, natural delivery for podcast / news narration
+- ⚠️ Paid plan (free tier returns `paid_plan_only` on TTS), 1 concurrent export per account (pipeline serialises automatically)
+- 🔗 Sign up: https://ausynclab.io — pick a voice at `/voices`, click "Use", copy the numeric ID
 
 ### TikTok follow card (optional, all defaults work)
 
@@ -291,7 +306,7 @@ TIKTOK_FOLLOWERS=11.5k followers
 TIKTOK_AVATAR_URL=https://example.com/your-avatar.jpg   # optional
 ```
 
-To customise the avatar, either replace `assets/avatar.png` with your own square ≥256×256 image, **or** set `TIKTOK_AVATAR_URL` so the pipeline downloads it on every render.
+To customise the avatar, either replace `assets/logoTV.png` with your own square ≥256×256 image, **or** set `TIKTOK_AVATAR_URL` so the pipeline downloads it on every render.
 
 ### Option 3 — Gemini thumbnail (optional, gracefully skipped if absent)
 
@@ -307,7 +322,7 @@ GEMINI_IMAGE_MODEL=gemini-2.5-flash-image    # default; ~7s per call
 ### Pipeline tuning (optional)
 
 ```env
-TTS_CONCURRENCY=1    # 1 for LucyLab (API limit). Increase for ElevenLabs parallelism.
+TTS_CONCURRENCY=1    # 1 is safe for both VieNeu (single CPU process) and AusyncLab (API limit).
 ```
 
 ---
@@ -319,13 +334,13 @@ TTS_CONCURRENCY=1    # 1 for LucyLab (API limit). Increase for ElevenLabs parall
 Open Claude Code in the project directory and type:
 
 ```
-/create-news-video https://vnexpress.net/iphone-17-200mp
+/create-video https://vnexpress.net/iphone-17-200mp
 ```
 
 Or with a local file (`.txt` or `.md`):
 
 ```
-/create-news-video news/my-article.md
+/create-video news/my-article.md
 ```
 
 After ~3–5 minutes:
@@ -364,7 +379,7 @@ output/<slug>-<timestamp>/
 ├── images/bg.jpg              # og:image (if URL had one)
 ├── voice/
 │   ├── scene-hook.mp3         # TTS per scene (idempotent — skipped if exists)
-│   ├── scene-hook.srt         # SRT subtitles (LucyLab only)
+│   ├── scene-hook.srt         # SRT subtitles (when the provider emits them; AusyncLab/VieNeu skip)
 │   ├── scene-body-1.mp3
 │   ├── scene-body-1-chunk-0.mp3   # voiceChunks: per-element TTS files
 │   └── scene-body-1-chunk-1.mp3   # used to compute sync-accurate beat timings
@@ -492,18 +507,16 @@ Within a category, files are picked **deterministically** by hashing the scene i
 <details>
 <summary><b>Can I use this for languages other than Vietnamese?</b></summary>
 
-Yes. Switch `TTS_PROVIDER=elevenlabs` in `.env.local` — ElevenLabs supports 30+ languages including English, Chinese, Japanese.
-
-Note: the Claude Code skill currently optimises script generation for Vietnamese. For other languages you may want to adjust the prompts in `.claude/skills/create-news-video/SKILL.md`.
+Not out of the box — both bundled TTS providers (VieNeu and AusyncLab) are Vietnamese-only. The Claude Code skill is also optimised for Vietnamese script generation. To support another language, you'd need to add a TTS client for that language (see `src/tts/factory.ts`) and adjust the prompts in `.claude/skills/create-video/SKILL.md`.
 </details>
 
 <details>
 <summary><b>How much does it cost per video?</b></summary>
 
-Roughly **$0.05–0.15 per video**, depending on TTS provider:
+Roughly **$0.03–0.05 per video** with the default setup:
 
-- LucyLab: ~$0.02 per video (cheapest, Vietnamese only)
-- ElevenLabs: ~$0.10 per video (multilingual)
+- VieNeu (default): **$0** — runs locally on your CPU, no API quota
+- AusyncLab (paid premium): plan-based — see https://ausynclab.io/pricing
 - Claude API (script generation): ~$0.03 per video
 </details>
 
@@ -551,7 +564,7 @@ Vietnamese TTS reads digits literally. Spell them out in `voiceText` (the on-scr
 | `một triệu token` | `1M tokens` |
 | `hai trăm megapixel` | `200MP` |
 
-The Claude Code skill handles this automatically when generating scripts. See [`SKILL.md`](.claude/skills/create-news-video/SKILL.md) for the full phonetic ruleset.
+The Claude Code skill handles this automatically when generating scripts. See [`SKILL.md`](.claude/skills/create-video/SKILL.md) for the full phonetic ruleset.
 </details>
 
 <details>
@@ -576,7 +589,7 @@ To re-render visuals only (keep all voice files): use `npm run rerender -- outpu
 <details>
 <summary><b>How long can the video be?</b></summary>
 
-The pipeline supports **45–180 seconds**. Heuristic in [`SKILL.md`](.claude/skills/create-news-video/SKILL.md):
+The pipeline supports **45–180 seconds**. Heuristic in [`SKILL.md`](.claude/skills/create-video/SKILL.md):
 
 | Source words | Script words | Scenes | Duration |
 |---|---|---|---|
@@ -596,7 +609,7 @@ npm run test:watch       # watch mode
 npx tsc --noEmit         # type-check without build
 ```
 
-Tests cover Zod schema validation (12 templates), TTS clients for both LucyLab + ElevenLabs (with `nock` HTTP mocking — no real API calls), audio tools (with fixture mp3 sine waves), beat profiles + chunk-derived beats, timing computation, transition profiles, SFX selector (3-tier + anti-repetition), Gemini thumbnail prompt builder, and HTML composer snapshots. CI runs on every push (see badges at top).
+Tests cover Zod schema validation (12 templates), TTS clients for both VieNeu (subprocess mock) and AusyncLab (with `nock` HTTP mocking — no real API calls), audio tools (with fixture mp3 sine waves), beat profiles + chunk-derived beats, timing computation, transition profiles, SFX selector (3-tier + anti-repetition), Gemini thumbnail prompt builder, and HTML composer snapshots. CI runs on every push (see badges at top).
 
 ---
 
@@ -604,11 +617,13 @@ Tests cover Zod schema validation (12 templates), TTS clients for both LucyLab +
 
 | Error | Fix |
 |---|---|
-| `Missing VIETNAMESE_API_KEY` / `Missing ELEVENLABS_API_KEY` | Check `.env.local` exists and `TTS_PROVIDER` matches the provider you have keys for |
+| `Missing VIENEU_PROJECT_DIR` / `Missing AUSYNCLAB_API_KEY` | Check `.env.local` exists and `TTS_PROVIDER` matches the provider you've configured |
+| `VieNeu worker exited non-zero` / `uv: command not found` | Install `uv` ([guide](https://docs.astral.sh/uv/getting-started/installation/)), `cd ../VieNeu-TTS && uv sync`, then re-run |
 | `hyperframes render failed` | Run `npx hyperframes render --help` to verify CLI; ensure Chrome can be downloaded by Puppeteer |
-| `LucyLab polling timeout` | Increase `LUCYLAB_POLL_TIMEOUT_MS` in `.env.local` (default 120000ms) |
-| `ElevenLabs 401 Invalid API key` | Verify the key on the ElevenLabs dashboard, re-paste into `.env.local` |
-| `Total duration outside [45, 180]s` | Pipeline only **warns** — re-trigger the skill or hand-edit `script.json` to lengthen / shorten text. Heuristic in [`SKILL.md`](.claude/skills/create-news-video/SKILL.md). |
+| `AusyncLab polling timeout` | Increase `AUSYNCLAB_POLL_TIMEOUT_MS` in `.env.local` (default 180000ms) |
+| `AusyncLab 401 Invalid API key` | Verify the key on the AusyncLab dashboard, re-paste into `.env.local` |
+| `AusyncLab 403 paid_plan_only` | Your account is on the free tier — upgrade at https://ausynclab.io/pricing |
+| `Total duration outside [45, 180]s` | Pipeline only **warns** — re-trigger the skill or hand-edit `script.json` to lengthen / shorten text. Heuristic in [`SKILL.md`](.claude/skills/create-video/SKILL.md). |
 | `ffprobe: command not found` | Install FFmpeg (see [Configuration](#-configuration)) |
 | `Thumbnail skipped: GEMINI_API_KEY not set` | Optional step. Add a key in `.env.local` (free at https://aistudio.google.com/apikey) or ignore — video still renders fine. |
 | `hyperframes lint failed` | Quality gate caught a composition error. Read the message and fix `index.html` / `animations.js` in the output dir, then re-run `rerender`. |
@@ -672,8 +687,8 @@ Commit prefixes: `feat:` (new feature) · `fix:` (bug) · `docs:` · `refactor:`
 This project stands on the shoulders of giants:
 
 - [HyperFrames by HeyGen](https://hyperframes.heygen.com) — the HTML-to-video framework that makes this possible
-- [LucyLab.io](https://lucylab.io) — Vietnamese voice cloning API
-- [ElevenLabs](https://elevenlabs.io) — multilingual TTS
+- [VieNeu-TTS](https://github.com/pnnbao97/VieNeu-TTS) — Apache 2.0 local Vietnamese TTS, the default voice engine
+- [AusyncLab.io](https://ausynclab.io) — paid Vietnamese voice library + cloning API (premium fallback)
 - [Anthropic Claude](https://www.anthropic.com/claude) — the LLM that writes scripts via Claude Code skill
 - [Remotion](https://www.remotion.dev) — inspiration for HTML-based video rendering
 

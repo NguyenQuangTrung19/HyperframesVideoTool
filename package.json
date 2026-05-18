@@ -1,7 +1,7 @@
 {
   "name": "auto-news-video",
   "version": "2.0.0",
-  "description": "Auto-generate Vietnamese 9:16 short news videos from URL/txt — Claude Code skill + HyperFrames + LucyLab/ElevenLabs TTS",
+  "description": "Auto-generate Vietnamese 9:16 short news videos from URL/txt — Claude Code skill + HyperFrames + VieNeu (local) / AusyncLab (cloud) TTS",
   "main": "src/cli.ts",
   "directories": {
     "doc": "docs"
@@ -11,6 +11,8 @@
     "test": "vitest run --passWithNoTests",
     "test:watch": "vitest",
     "pipeline": "tsx src/cli.ts",
+    "podcast": "tsx src/podcast/cli.ts",
+    "music": "tsx src/music/cli.ts",
     "rerender": "tsx rerender.ts",
     "typecheck": "tsc --noEmit",
     "build": "tsc",
@@ -28,8 +30,8 @@
     "shorts",
     "hyperframes",
     "claude-code",
-    "lucylab",
-    "elevenlabs"
+    "vieneu",
+    "ausynclab"
   ],
   "author": "",
   "license": "MIT",

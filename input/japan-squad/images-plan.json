@@ -1,0 +1,65 @@
+{
+  "version": "1.0",
+  "source": "japan-squad.txt",
+  "contentType": "PRE-MATCH PREVIEW",
+  "title": "Samurai Blue chốt 26 chiến binh dự World Cup 2026",
+  "createdAt": "2026-05-15T15:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Samurai Blue ra sân — Endo dẫn đầu đoàn quân Nhật Bản",
+      "prompt": "Cinematic vertical 9:16 portrait sports photograph of the Japan national football team walking out of the tunnel at a packed stadium, led by Wataru Endo, the Japanese defensive midfielder and captain for Liverpool and the Japan national team, in a deep sapphire blue Japan national team home kit with the JFA (Japan Football Association) Yatagarasu three-legged crow crest clearly visible on the chest, captain's armband on his left arm, intense focused expression. Behind him a line of Japan teammates in matching blue kits visible in soft bokeh. The stadium fills with Japanese flags (red rising sun on white) waving in the stands, a giant tifo banner of the Yatagarasu crow unfurled on the far end, atmospheric haze under floodlights, faint blue and red smoke from flares. Telephoto compression, shallow depth of field, sharp focus on Endo and the JFA crest, motion blur on his stride, dramatic rim-lighting from stadium floodlights, natural skin texture, no plastic AI smoothness, 85mm lens, photo-realistic press photography style, matching FIFA World Cup broadcast photographs. The JFA Yatagarasu crest visible on the jersey, no scoreboard graphics, no on-image text overlays."
+    },
+    {
+      "id": "moriyasu",
+      "template": "callout",
+      "filename": "moriyasu.png",
+      "subjectHint": "HLV Hajime Moriyasu công bố danh sách 26",
+      "prompt": "Cinematic vertical 9:16 portrait sports photograph of Hajime Moriyasu, the Japanese head coach of the Japan national football team, in a charcoal navy suit with a small JFA Yatagarasu lapel pin, standing behind a press conference desk with the JFA (Japan Football Association) backdrop branded with the Yatagarasu three-legged crow logo repeated across the wall behind him, mid-sentence with his right hand raised in a measured gesture, microphones mounted on the desk in front of him, glass of water nearby. Photographers' camera flashes flare softly in the background, a sea of press lenses pointed at him in shallow bokeh. Warm soft press-room lighting, telephoto compression, shallow depth of field, sharp focus on Moriyasu's torso and the JFA backdrop, natural skin texture, no plastic AI smoothness, 85mm lens, photo-realistic press photography style, matching FIFA and AFC press conference broadcast photographs. The JFA Yatagarasu crest visible on the backdrop, no scoreboard graphics, no on-image text overlays."
+    },
+    {
+      "id": "endo",
+      "template": "stat-hero",
+      "filename": "endo.png",
+      "subjectHint": "Wataru Endo — Liverpool captain trở lại từ chấn thương",
+      "prompt": "Cinematic vertical 9:16 portrait sports photograph of Wataru Endo, the Japanese defensive midfielder and captain for Liverpool and the Japan national team, in a deep sapphire blue Japan national team home kit with the JFA Yatagarasu three-legged crow crest clearly visible on the chest and the captain's armband on his left arm. He is mid-stride, scanning the field with intense focused expression, ball at his feet, leadership posture upright. The stadium behind him packed with Japanese fans, red-sun flags raised, a banner reading 'NIPPON' partially visible in soft bokeh, floodlights piercing through evening atmospheric haze. Telephoto compression, shallow depth of field, sharp focus on Endo and the JFA crest, motion blur on his shorts and the ball, dramatic rim-lighting from floodlights, natural skin texture, no plastic AI smoothness, 35mm lens compression, photo-realistic press photography style, matching FIFA World Cup and Premier League broadcast photographs. The JFA Yatagarasu crest visible on the jersey, no scoreboard graphics, no on-image text overlays."
+    },
+    {
+      "id": "mitoma-out",
+      "template": "callout",
+      "filename": "mitoma-out.png",
+      "subjectHint": "Mitoma vắng mặt — somber, áo Brighton",
+      "prompt": "Cinematic vertical 9:16 portrait sports photograph of Kaoru Mitoma, the Japanese winger for Brighton & Hove Albion and the Japan national team, in a blue and white striped Brighton & Hove Albion home kit with the Brighton seagull crest clearly visible on the chest, sitting alone on a wooden physiotherapy bench in the Brighton medical room at the Amex Stadium training ground, head bowed slightly, towel draped over his shoulders, a melancholy reflective expression. Soft cool clinical lighting from above, the Brighton seagull crest faintly visible on the wall behind him in soft bokeh. The mood is reflective and somber — a star player on the sidelines while the national team prepares without him. Telephoto compression, shallow depth of field, sharp focus on Mitoma's torso and the Brighton crest, natural skin texture, no plastic AI smoothness, 85mm lens, photo-realistic press photography style, matching Premier League broadcast photographs. The Brighton crest visible on the jersey, no scoreboard graphics, no on-image text overlays."
+    },
+    {
+      "id": "kubo",
+      "template": "stat-hero",
+      "filename": "kubo.png",
+      "subjectHint": "Takefusa Kubo — Real Sociedad, 'Messi Nhật Bản'",
+      "prompt": "Cinematic vertical 9:16 portrait sports photograph of Takefusa Kubo, the Japanese forward and attacking midfielder for Real Sociedad and the Japan national team, in a blue and white striped Real Sociedad home kit with the Real Sociedad txuri-urdin club crest clearly visible on the chest, dribbling at full speed past a defender at the Reale Arena (Anoeta), the stadium's blue-and-white packed home stand visible in the upper background, Real Sociedad fans waving txuri-urdin scarves behind him in soft bokeh, dramatic floodlights. Telephoto compression, motion blur on his trailing leg and the ball, sharp focus on Kubo and the club crest, dramatic rim-lighting on his shoulders, natural skin texture, no plastic AI smoothness, 85mm lens, photo-realistic press photography style, matching La Liga broadcast photographs. The Real Sociedad crest visible on the jersey, no scoreboard graphics, no on-image text overlays."
+    },
+    {
+      "id": "brazil-shock",
+      "template": "callout",
+      "filename": "brazil-shock.png",
+      "subjectHint": "Lội ngược dòng 3-2 trước Brazil — Nhật ăn mừng",
+      "prompt": "Cinematic vertical 9:16 sports photograph of Japan national team players celebrating after a comeback goal against Brazil — three Japanese players in deep sapphire blue Japan home kits with the JFA Yatagarasu crest clearly visible on the chests, mouths open mid-roar, arms raised in celebration, leaping together in front of the away end packed with travelling Japanese fans waving red-sun flags. In the deep background out of focus, Brazil players in their iconic yellow shirts with the CBF crest visible, slumped or walking dejectedly. Dramatic stadium floodlights cut through atmospheric haze, blue and yellow lighting contrast. Telephoto compression, shallow depth of field, sharp focus on the Japan players' faces and the JFA crests, motion blur on their leaping legs, dramatic rim-lighting, natural skin texture, no plastic AI smoothness, 35mm lens compression, photo-realistic press photography style, matching FIFA international friendly broadcast photographs. The JFA Yatagarasu crests visible on the jerseys, no scoreboard graphics, no on-image text overlays."
+    },
+    {
+      "id": "wembley-shock",
+      "template": "callout",
+      "filename": "wembley-shock.png",
+      "subjectHint": "Hạ Anh 1-0 tại Wembley — Nhật ăn mừng dưới mái vòm",
+      "prompt": "Cinematic vertical 9:16 sports photograph of Japan national team players celebrating their historic 1-0 win over England at Wembley Stadium, the iconic Wembley arch glowing white against the night sky in the upper background. Several Japanese players in deep sapphire blue Japan home kits with the JFA Yatagarasu crest clearly visible on the chests, arms raised, sliding on their knees in celebration toward the corner flag, the Japanese travelling support visible in soft bokeh waving red-sun flags. In the deep background out of focus, England players in white kits with the Three Lions crest visible, slumped with hands on hips. Dramatic Wembley floodlights piercing through atmospheric haze, the arch lighting catching the celebration. Telephoto compression, shallow depth of field, sharp focus on the celebrating Japanese players and the JFA crests, motion blur on their sliding knees, dramatic rim-lighting, natural skin texture, no plastic AI smoothness, 35mm lens compression, photo-realistic press photography style, matching FIFA international friendly broadcast photographs from Wembley Stadium. The JFA Yatagarasu crests visible on the jerseys, no scoreboard graphics, no on-image text overlays."
+    },
+    {
+      "id": "nagatomo",
+      "template": "stat-hero",
+      "filename": "nagatomo.png",
+      "subjectHint": "Yuta Nagatomo — biểu tượng, 144 trận, 5 kỳ World Cup",
+      "prompt": "Cinematic vertical 9:16 portrait sports photograph of Yuta Nagatomo, the Japanese veteran left-back for FC Tokyo and the Japan national team, in a deep sapphire blue Japan national team home kit with the JFA Yatagarasu three-legged crow crest clearly visible on the chest, standing alone at the centre of an empty stadium pitch before a World Cup match, hands on hips in a contemplative reflective pose, looking up at the floodlights with quiet pride. Wide low-angle composition emphasising scale — the stadium stands rising around him in soft bokeh, Japanese flags visible scattered through the stands, atmospheric haze drifting across the pitch under dramatic floodlights. Golden hour rim-light on his shoulders contrasting with the cooler stadium lighting. Telephoto compression, shallow depth of field, sharp focus on Nagatomo and the JFA crest, natural skin texture and visible signs of experience and age, no plastic AI smoothness, 85mm lens, photo-realistic press photography style, matching FIFA World Cup broadcast photographs. The JFA Yatagarasu crest visible on the jersey, no scoreboard graphics, no on-image text overlays."
+    }
+  ]
+}

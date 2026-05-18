@@ -1,12 +1,16 @@
 import "dotenv/config";
+import { existsSync } from "node:fs";
+import { homedir } from "node:os";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 
-export type TtsProvider = "lucylab" | "elevenlabs";
+export type TtsProvider = "vieneu" | "ausynclab";
 
 export interface TiktokConfig {
   displayName: string;
   handle: string;
   followers: string;
-  /** URL to download avatar JPG. If undefined, the bundled `assets/avatar.jpg` is used. */
+  /** URL to download avatar image. If undefined, the bundled `assets/logoTV.png` is used. */
   avatarUrl?: string;
 }
 
@@ -40,18 +44,21 @@ export interface ImageGenConfig {
 export interface Config {
   ttsProvider: TtsProvider;
 
-  // LucyLab
-  lucylabApiKey?: string;
-  lucylabVoiceId?: string;
-  lucylabEndpoint: string;
-  lucylabPollIntervalMs: number;
-  lucylabPollTimeoutMs: number;
+  // VieNeu (local Python TTS — default, free)
+  vieneuProjectDir: string;
+  vieneuWorkerScript: string;
+  vieneuVoiceId: string;
+  vieneuEmotion: string;
+  vieneuUvBin: string;
 
-  // ElevenLabs
-  elevenlabsApiKey?: string;
-  elevenlabsVoiceId?: string;
-  elevenlabsModelId: string;
-  elevenlabsEndpoint: string;
+  // AusyncLab (paid, Vietnamese voice library + cloning)
+  ausynclabApiKey?: string;
+  ausynclabVoiceId?: number;
+  ausynclabModelName: string;
+  ausynclabSpeed: number;
+  ausynclabBaseUrl: string;
+  ausynclabPollIntervalMs: number;
+  ausynclabPollTimeoutMs: number;
 
   // TikTok follow card (outro)
   tiktok: TiktokConfig;
@@ -70,54 +77,76 @@ function intDefault(name: string, def: number): number {
   return n;
 }
 
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const PROJECT_ROOT = join(__dirname, "..");
+
+/** Best-effort uv binary lookup — env override → user-local bin → fall back to PATH. */
+function findUvBin(): string {
+  if (process.env.UV_BIN) return process.env.UV_BIN;
+  const userBin = join(homedir(), ".local", "bin", process.platform === "win32" ? "uv.exe" : "uv");
+  if (existsSync(userBin)) return userBin;
+  return "uv";
+}
+
 export function loadConfig(): Config {
-  const provider = (process.env.TTS_PROVIDER ?? "lucylab") as TtsProvider;
-  if (provider !== "lucylab" && provider !== "elevenlabs") {
-    throw new Error(`TTS_PROVIDER must be "lucylab" or "elevenlabs", got "${provider}"`);
+  const provider = (process.env.TTS_PROVIDER ?? "vieneu") as TtsProvider;
+  if (provider !== "vieneu" && provider !== "ausynclab") {
+    throw new Error(`TTS_PROVIDER must be "vieneu" or "ausynclab", got "${provider}"`);
   }
 
   // Validate provider-specific required vars
-  if (provider === "lucylab") {
-    if (!process.env.VIETNAMESE_API_KEY || process.env.VIETNAMESE_API_KEY.trim() === "") {
+  const vieneuProjectDir =
+    process.env.VIENEU_PROJECT_DIR?.trim() || join(PROJECT_ROOT, "..", "VieNeu-TTS");
+  const vieneuWorkerScript = join(PROJECT_ROOT, "scripts", "vieneu_worker.py");
+
+  if (provider === "vieneu") {
+    if (!existsSync(vieneuProjectDir)) {
       throw new Error(
-        `Missing VIETNAMESE_API_KEY (required when TTS_PROVIDER=lucylab). ` +
-        `Copy .env.example to .env.local and fill in your LucyLab API key.`
+        `VieNeu project dir not found at ${vieneuProjectDir}. ` +
+        `Clone https://github.com/pnnbao97/VieNeu-TTS and either place it next to this repo ` +
+        `or set VIENEU_PROJECT_DIR in .env.local to its absolute path.`
       );
     }
-    if (!process.env.VIETNAMESE_VOICEID || process.env.VIETNAMESE_VOICEID.trim() === "") {
-      throw new Error(
-        `Missing VIETNAMESE_VOICEID (required when TTS_PROVIDER=lucylab). ` +
-        `Copy .env.example to .env.local and fill in your LucyLab voice ID.`
-      );
+    if (!existsSync(vieneuWorkerScript)) {
+      throw new Error(`VieNeu worker script missing at ${vieneuWorkerScript}`);
     }
   } else {
-    if (!process.env.ELEVENLABS_API_KEY || process.env.ELEVENLABS_API_KEY.trim() === "") {
+    // ausynclab
+    if (!process.env.AUSYNCLAB_API_KEY || process.env.AUSYNCLAB_API_KEY.trim() === "") {
       throw new Error(
-        `Missing ELEVENLABS_API_KEY (required when TTS_PROVIDER=elevenlabs). ` +
-        `Copy .env.example to .env.local and fill in your ElevenLabs API key.`
+        `Missing AUSYNCLAB_API_KEY (required when TTS_PROVIDER=ausynclab). ` +
+        `Get one at https://ausynclab.io dashboard.`
       );
     }
-    if (!process.env.ELEVENLABS_VOICE_ID || process.env.ELEVENLABS_VOICE_ID.trim() === "") {
+    if (!process.env.AUSYNCLAB_VOICE_ID || process.env.AUSYNCLAB_VOICE_ID.trim() === "") {
       throw new Error(
-        `Missing ELEVENLABS_VOICE_ID (required when TTS_PROVIDER=elevenlabs). ` +
-        `Copy .env.example to .env.local and fill in your ElevenLabs voice ID.`
+        `Missing AUSYNCLAB_VOICE_ID (required when TTS_PROVIDER=ausynclab). ` +
+        `Pick a voice at https://ausynclab.io/voices, click "Use", then copy the numeric ID.`
       );
     }
   }
 
   return {
     ttsProvider: provider,
-    lucylabApiKey: process.env.VIETNAMESE_API_KEY,
-    lucylabVoiceId: process.env.VIETNAMESE_VOICEID,
-    lucylabEndpoint: process.env.LUCYLAB_ENDPOINT ?? "https://api.lucylab.io/json-rpc",
-    lucylabPollIntervalMs: intDefault("LUCYLAB_POLL_INTERVAL_MS", 2000),
-    lucylabPollTimeoutMs: intDefault("LUCYLAB_POLL_TIMEOUT_MS", 120000),
-    elevenlabsApiKey: process.env.ELEVENLABS_API_KEY,
-    elevenlabsVoiceId: process.env.ELEVENLABS_VOICE_ID,
-    elevenlabsModelId: process.env.ELEVENLABS_MODEL_ID ?? "eleven_multilingual_v2",
-    elevenlabsEndpoint: process.env.ELEVENLABS_ENDPOINT ?? "https://api.elevenlabs.io/v1",
+
+    vieneuProjectDir,
+    vieneuWorkerScript,
+    vieneuVoiceId: process.env.VIENEU_VOICE_ID?.trim() || "Binh",
+    vieneuEmotion: process.env.VIENEU_EMOTION?.trim() || "natural",
+    vieneuUvBin: findUvBin(),
+
+    ausynclabApiKey: process.env.AUSYNCLAB_API_KEY,
+    ausynclabVoiceId: process.env.AUSYNCLAB_VOICE_ID
+      ? parseInt(process.env.AUSYNCLAB_VOICE_ID, 10)
+      : undefined,
+    ausynclabModelName: process.env.AUSYNCLAB_MODEL_NAME?.trim() || "myna-1-turbo",
+    ausynclabSpeed: parseFloat(process.env.AUSYNCLAB_SPEED ?? "1.0"),
+    ausynclabBaseUrl: process.env.AUSYNCLAB_BASE_URL ?? "https://api.ausynclab.io/api/v1",
+    ausynclabPollIntervalMs: intDefault("AUSYNCLAB_POLL_INTERVAL_MS", 2000),
+    ausynclabPollTimeoutMs: intDefault("AUSYNCLAB_POLL_TIMEOUT_MS", 180000),
+
     tiktok: {
-      displayName: process.env.TIKTOK_DISPLAY_NAME ?? "Bóng lăn",
+      displayName: process.env.TIKTOK_DISPLAY_NAME ?? "SportsForAllTV",
       handle: process.env.TIKTOK_HANDLE ?? "@bonglan0702",
       followers: process.env.TIKTOK_FOLLOWERS ?? "1.2M followers",
       avatarUrl: process.env.TIKTOK_AVATAR_URL || undefined,

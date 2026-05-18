@@ -44,7 +44,8 @@ async function main() {
       console.error(`    prompt:  ${scene.prompt}`);
       console.error("");
     }
-    console.error(`Generate the missing image(s) on grok.com and save them at the listed filenames, then re-run.`);
+    console.error(`Generate the missing image(s) on grok.com and save them in ${inputDir}.`);
+    console.error(`Any of .png / .jpg / .jpeg / .webp is accepted — extension in the plan is just a recommendation.`);
     process.exit(1);
   }
 

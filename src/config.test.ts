@@ -1,17 +1,16 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
+import { tmpdir } from "node:os";
 import { loadConfig } from "./config.js";
 
 const ENV_KEYS = [
   "TTS_PROVIDER",
-  "VIETNAMESE_API_KEY",
-  "VIETNAMESE_VOICEID",
-  "LUCYLAB_ENDPOINT",
-  "LUCYLAB_POLL_INTERVAL_MS",
-  "LUCYLAB_POLL_TIMEOUT_MS",
-  "ELEVENLABS_API_KEY",
-  "ELEVENLABS_VOICE_ID",
-  "ELEVENLABS_MODEL_ID",
-  "ELEVENLABS_ENDPOINT",
+  "VIENEU_PROJECT_DIR",
+  "VIENEU_VOICE_ID",
+  "VIENEU_EMOTION",
+  "AUSYNCLAB_API_KEY",
+  "AUSYNCLAB_VOICE_ID",
+  "AUSYNCLAB_MODEL_NAME",
+  "AUSYNCLAB_SPEED",
   "TTS_CONCURRENCY",
 ];
 
@@ -21,6 +20,9 @@ describe("loadConfig", () => {
   beforeEach(() => {
     saved = Object.fromEntries(ENV_KEYS.map((k) => [k, process.env[k]]));
     ENV_KEYS.forEach((k) => delete process.env[k]);
+    // Point VieNeu at any existing dir so the existence check passes —
+    // the actual project structure isn't validated by loadConfig.
+    process.env.VIENEU_PROJECT_DIR = tmpdir();
   });
 
   afterEach(() => {
@@ -30,65 +32,59 @@ describe("loadConfig", () => {
     });
   });
 
-  describe("LucyLab provider (default)", () => {
-    it("reads LucyLab env vars when no provider specified", () => {
-      process.env.VIETNAMESE_API_KEY = "sk_test_abc";
-      process.env.VIETNAMESE_VOICEID = "voice123";
+  describe("VieNeu provider (default)", () => {
+    it("uses VieNeu when no provider specified", () => {
       const cfg = loadConfig();
-      expect(cfg.ttsProvider).toBe("lucylab");
-      expect(cfg.lucylabApiKey).toBe("sk_test_abc");
-      expect(cfg.lucylabVoiceId).toBe("voice123");
+      expect(cfg.ttsProvider).toBe("vieneu");
+      expect(cfg.vieneuVoiceId).toBe("Binh");
+      expect(cfg.vieneuEmotion).toBe("natural");
     });
 
-    it("throws when VIETNAMESE_API_KEY missing", () => {
-      process.env.VIETNAMESE_VOICEID = "voice123";
-      expect(() => loadConfig()).toThrow(/VIETNAMESE_API_KEY/);
+    it("respects VIENEU_VOICE_ID and VIENEU_EMOTION overrides", () => {
+      process.env.VIENEU_VOICE_ID = "Tuyen";
+      process.env.VIENEU_EMOTION = "storytelling";
+      const cfg = loadConfig();
+      expect(cfg.vieneuVoiceId).toBe("Tuyen");
+      expect(cfg.vieneuEmotion).toBe("storytelling");
+    });
+
+    it("throws when VIENEU_PROJECT_DIR points at a missing dir", () => {
+      process.env.VIENEU_PROJECT_DIR = "C:/this/path/does/not/exist/vieneu-xxx";
+      expect(() => loadConfig()).toThrow(/VieNeu project dir not found/);
+    });
+  });
+
+  describe("AusyncLab provider", () => {
+    it("reads AusyncLab env vars when TTS_PROVIDER=ausynclab", () => {
+      process.env.TTS_PROVIDER = "ausynclab";
+      process.env.AUSYNCLAB_API_KEY = "ak_test_abc";
+      process.env.AUSYNCLAB_VOICE_ID = "1234567";
+      const cfg = loadConfig();
+      expect(cfg.ttsProvider).toBe("ausynclab");
+      expect(cfg.ausynclabApiKey).toBe("ak_test_abc");
+      expect(cfg.ausynclabVoiceId).toBe(1234567);
+    });
+
+    it("throws when AUSYNCLAB_API_KEY missing", () => {
+      process.env.TTS_PROVIDER = "ausynclab";
+      process.env.AUSYNCLAB_VOICE_ID = "1234567";
+      expect(() => loadConfig()).toThrow(/AUSYNCLAB_API_KEY/);
     });
 
     it("uses sensible defaults for optional vars", () => {
-      process.env.VIETNAMESE_API_KEY = "k";
-      process.env.VIETNAMESE_VOICEID = "v";
+      process.env.TTS_PROVIDER = "ausynclab";
+      process.env.AUSYNCLAB_API_KEY = "k";
+      process.env.AUSYNCLAB_VOICE_ID = "1";
       const cfg = loadConfig();
-      expect(cfg.lucylabEndpoint).toBe("https://api.lucylab.io/json-rpc");
-      expect(cfg.lucylabPollIntervalMs).toBe(2000);
-      expect(cfg.lucylabPollTimeoutMs).toBe(120000);
+      expect(cfg.ausynclabModelName).toBe("myna-1-turbo");
+      expect(cfg.ausynclabSpeed).toBe(1.0);
+      expect(cfg.ausynclabBaseUrl).toBe("https://api.ausynclab.io/api/v1");
       expect(cfg.ttsConcurrency).toBe(1);
     });
   });
 
-  describe("ElevenLabs provider", () => {
-    it("reads ElevenLabs env vars when TTS_PROVIDER=elevenlabs", () => {
-      process.env.TTS_PROVIDER = "elevenlabs";
-      process.env.ELEVENLABS_API_KEY = "sk_eleven_xyz";
-      process.env.ELEVENLABS_VOICE_ID = "EXAVITQu4vr4xnSDxMaL";
-      const cfg = loadConfig();
-      expect(cfg.ttsProvider).toBe("elevenlabs");
-      expect(cfg.elevenlabsApiKey).toBe("sk_eleven_xyz");
-      expect(cfg.elevenlabsVoiceId).toBe("EXAVITQu4vr4xnSDxMaL");
-      expect(cfg.elevenlabsModelId).toBe("eleven_multilingual_v2");
-      expect(cfg.elevenlabsEndpoint).toBe("https://api.elevenlabs.io/v1");
-    });
-
-    it("throws when ELEVENLABS_API_KEY missing", () => {
-      process.env.TTS_PROVIDER = "elevenlabs";
-      process.env.ELEVENLABS_VOICE_ID = "v";
-      expect(() => loadConfig()).toThrow(/ELEVENLABS_API_KEY/);
-    });
-
-    it("respects ELEVENLABS_MODEL_ID override", () => {
-      process.env.TTS_PROVIDER = "elevenlabs";
-      process.env.ELEVENLABS_API_KEY = "k";
-      process.env.ELEVENLABS_VOICE_ID = "v";
-      process.env.ELEVENLABS_MODEL_ID = "eleven_turbo_v2_5";
-      const cfg = loadConfig();
-      expect(cfg.elevenlabsModelId).toBe("eleven_turbo_v2_5");
-    });
-  });
-
   it("rejects invalid TTS_PROVIDER", () => {
-    process.env.TTS_PROVIDER = "google";
-    process.env.VIETNAMESE_API_KEY = "k";
-    process.env.VIETNAMESE_VOICEID = "v";
+    process.env.TTS_PROVIDER = "lucylab";
     expect(() => loadConfig()).toThrow(/TTS_PROVIDER/);
   });
 });

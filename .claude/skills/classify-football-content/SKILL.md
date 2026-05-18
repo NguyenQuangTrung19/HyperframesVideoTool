@@ -1,11 +1,11 @@
 ---
 name: classify-football-content
-description: Classify a Vietnamese football content source (file/URL/topic) into one of 8 canonical content types and propose a script structure (scene count, templates, voice tone, hook pattern). Used as a shared reference by /create-news-video and /create-analysis-video, and can be invoked standalone to preview a structure before generating a full video.
+description: Classify a Vietnamese football content source (file/URL/topic) into one of 8 canonical content types and propose a script structure (scene count, templates, voice tone, hook pattern). Used as a shared reference by /create-video and /images-for-videos, and can be invoked standalone to preview a structure before generating a full video.
 ---
 
 # Football Content Classifier
 
-A shared reference + standalone tool for classifying Vietnamese football content and producing a structured script outline. The two video-generation skills (`create-news-video`, `create-analysis-video`) call this logic when handling user-provided source material.
+A shared reference + standalone tool for classifying Vietnamese football content and producing a structured script outline. The downstream skills (`create-video`, `images-for-videos`) call this logic when handling user-provided source material.
 
 ## Why this exists
 
@@ -14,7 +14,7 @@ Football content has many distinct shapes — ranking lists are NOT structured t
 ## When to use
 
 - **Standalone (diagnostic):** `/classify-football-content input/foo.txt` → returns classification + proposed scene outline (no video generated). Useful for previewing structure before committing to a full render.
-- **Inside other skills:** `/create-news-video` and `/create-analysis-video` invoke this logic at Step 2 when input is a file/URL.
+- **Inside other skills:** `/create-video` and `/images-for-videos` invoke this logic at Step 2 / Step 2 respectively when input is a file/URL.
 
 ## Workflow
 
@@ -150,9 +150,13 @@ hook → rank-7 ... rank-1 → evolution callout → honorable-mentions callout 
 3. Head-to-head stat (1) — `stat-hero` with H2H record
 4. Key matchup scenes (2–3) — `comparison` template per player matchup
 5. Tactical prediction callouts (2–3) — what each side will try to do
-6. Lineup-impact scene (0–1) — `feature-list` of absences / new signings
+6. Lineup scene (0–2):
+   - **Predicted XI** (full starting eleven named) → `formation-pitch` template (green pitch + player tokens; never use `feature-list` for a full XI — see "Lineup / starting XI scenes" rule in `/create-video/SKILL.md`).
+   - **Absences / new signings only** (no full XI, just 2–4 names) → `feature-list`.
 7. Bold prediction (1) — `callout` with the writer's call
 8. Outro (1)
+
+**Tournament-scope variant — SQUAD ANNOUNCEMENT / SQUAD REVEAL:** A 26-man / 23-man squad reveal for a major tournament (World Cup, Euro, Copa, AFF Cup) is structurally PRE-MATCH PREVIEW at tournament scope. Same template sequence, with these adjustments: (a) `stat-hero` highlights or `feature-list` for each position group (GK / DEF / MID / FWD), (b) `formation-pitch` for the predicted XI from that squad — this is the centerpiece scene, (c) `callout` for notable absences (injury / form / age-out).
 
 **Voice tone:** anticipatory, confident but cautious. Use future tense.
 
@@ -314,4 +318,4 @@ When invoked internally by another skill, return the same data as JSON-style str
 
 ## Channel context
 
-This classifier writes for the **Bóng lăn** football channel. All hook patterns are in spoken Vietnamese. Voice tone, structure, and template choice align with the brand's news+analysis dual format.
+This classifier writes for the **SportsForAllTV** football channel. All hook patterns are in spoken Vietnamese. Voice tone, structure, and template choice align with the brand's news+analysis dual format.

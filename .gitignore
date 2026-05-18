@@ -7,7 +7,7 @@ output/
 .DS_Store
 
 # One-off debug scripts
-debug-lucylab.ts
+debug-*.ts
 
 # Big SFX library (downloaded by `npm run sfx:download` — too large to commit)
 SFX/

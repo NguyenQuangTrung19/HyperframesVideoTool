@@ -1,0 +1,103 @@
+# Grok prompts — Carragher chê Liverpool quá nhiều cầu thủ yếu
+
+9 ảnh cần tạo trên grok.com (Imagine, aspect ratio **9:16**), save về cùng folder này theo đúng tên file.
+
+---
+
+## [1] hook → `hook.png`
+
+**Subject:** Carragher mổ xẻ ở studio Sky Sports, màn hình sau lưng là Liverpool gục ngã
+
+```
+Cinematic vertical 9:16 portrait sports photograph of Jamie Carragher, the English former Liverpool centre-back and Sky Sports football pundit, sitting at the Sky Sports Monday Night Football pundit desk, leaning forward with a serious, critical expression mid-analysis, his hands gesturing toward the camera. Behind him, a large studio screen shows a freeze-frame of dejected Liverpool players in their bright red Liverpool home kits with the Liverpool FC Liver-bird crest clearly visible on their chests — Virgil van Dijk with hands on hips, Mohamed Salah head down, sitting on the Anfield turf after a defeat. Sky Sports studio lighting in yellow and dark blue tones, the Premier League trophy faintly outlined in the bokeh background. Telephoto compression, shallow depth of field, sharp focus on Carragher's face and gesturing hand, natural skin texture, no plastic AI smoothness, 85mm lens, photo-realistic press photography. Liverpool's real crest visible on the kits on screen, no scoreboard graphics, no on-image text overlays.
+```
+
+---
+
+## [2] score → `score.png` — tỉ số 2-4
+
+**Subject:** Watkins ăn mừng bàn tại Villa Park, Van Dijk dúi đầu sau lưng
+
+```
+Cinematic vertical 9:16 portrait sports photograph of Ollie Watkins, the English striker for Aston Villa, in a claret-and-sky-blue Aston Villa home kit with the Aston Villa lion crest clearly visible on the chest, mid-celebration with both arms outstretched and mouth open in a roar after scoring at Villa Park, teammate Morgan Rogers in the same Aston Villa home kit sprinting in to join the celebration. Behind them, slightly out of focus in bokeh, Virgil van Dijk in a bright red Liverpool home kit with the Liverpool FC Liver-bird crest visible on the chest and the captain's armband on his left arm, hands on hips, head dropped, fully dejected. Villa Park stands packed with claret-and-blue Aston Villa fans, scarves raised in celebration, atmospheric haze drifting under bright floodlights, dramatic rim-lighting on Watkins. Telephoto compression, shallow depth of field, sharp focus on Watkins and the Villa crest, motion blur on his shorts, natural skin texture, no plastic AI smoothness, 85mm lens, photo-realistic press photography, matching Premier League broadcast photographs. The clubs' real crests visible on the jerseys, no scoreboard graphics, no on-image text overlays.
+```
+
+---
+
+## [3] losses → `losses.png` — 12 trận thua
+
+**Subject:** Liverpool lủi thủi rời sân — Van Dijk dẫn Salah, Gravenberch, Szoboszlai vào đường hầm Anfield
+
+```
+Cinematic vertical 9:16 portrait sports photograph from a low-angle behind a row of dejected Liverpool players walking through the Anfield tunnel after another Premier League defeat. The iconic red 'This Is Anfield' sign glows above the tunnel entrance. In the foreground, captain Virgil van Dijk, the Dutch centre-back, in a bright red Liverpool home kit with the Liverpool FC Liver-bird crest clearly visible on the back of his shirt and the captain's armband on his left arm, head dropped low. Beside and behind him, Mohamed Salah in the same Liverpool home kit with hands on hips, Ryan Gravenberch staring at the tunnel floor, Dominik Szoboszlai trailing slowly. Soft warm tunnel lighting, atmospheric haze, the dispersing Anfield crowd faintly visible in the deep bokeh background. Telephoto compression, shallow depth of field, sharp focus on Van Dijk's shoulders and the Liverpool crest, natural skin texture, no plastic AI smoothness, 85mm lens, photo-realistic press photography, matching Premier League broadcast photographs. Liverpool's real crest visible on the jerseys, the 'This Is Anfield' sign visible above, no scoreboard graphics, no on-image text overlays.
+```
+
+---
+
+## [4] conceded → `conceded.png` — 52 bàn thua
+
+**Subject:** Alisson nhặt bóng từ lưới, Van Dijk + Konaté lắc đầu phía sau
+
+```
+Cinematic vertical 9:16 portrait sports photograph of Alisson Becker, the Brazilian goalkeeper for Liverpool, in a green Liverpool goalkeeper kit with the Liverpool FC Liver-bird crest clearly visible on the chest, crouched inside his own net at Anfield, picking the ball out of the goal after conceding, his expression a mix of frustrated disbelief and weary acceptance. In the background, slightly out of focus, Virgil van Dijk in a bright red Liverpool home kit with the Liverpool FC Liver-bird crest visible and the captain's armband on his left arm, walking away with hands on his hips, Ibrahima Konaté in the same Liverpool home kit beside him shaking his head, palms upturned in disbelief. The Anfield goal-frame netting catches the floodlight, the Kop end packed with red-clad Liverpool fans in the deep bokeh background, scarves lowered. Atmospheric haze, dramatic rim-lighting from the floodlights, telephoto compression, shallow depth of field, sharp focus on Alisson's face and the LFC crest, natural skin texture, no plastic AI smoothness, 85mm lens, photo-realistic press photography, matching Premier League broadcast photographs. Liverpool's real crest visible on the jerseys, no scoreboard graphics, no on-image text overlays.
+```
+
+---
+
+## [5] position → `position.png` — hạng 5
+
+**Subject:** CĐV Liverpool trên Kop ngao ngán — khăn LFC, áo replica, không khí ảm đạm
+
+```
+Cinematic vertical 9:16 portrait sports photograph of dejected Liverpool fans in the Kop stand at Anfield after a defeat. In the front row, a middle-aged Liverpool supporter in a red Liverpool home kit replica with the Liverpool FC Liver-bird crest clearly visible on the chest holds a red-and-white Liverpool scarf with the LFC Liver-bird crest woven into it, taut between his hands, head dropped low. Beside him, a young Liverpool fan in the same replica kit stares blankly toward the empty pitch. Behind them, the Kop end is half-empty, supporters filing out, scarves draped over shoulders, the iconic 'You'll Never Walk Alone' banner faintly visible in the upper bokeh. Atmospheric haze, dim warm floodlight wash, the Anfield stadium lights reflecting in puddles on the concrete steps. Telephoto compression, shallow depth of field, sharp focus on the front-row supporter and the scarf's LFC crest, natural skin texture, no plastic AI smoothness, 85mm lens, photo-realistic press photography, matching Premier League broadcast photographs. Liverpool's real crest visible on the scarves and replica kits, no scoreboard graphics, no on-image text overlays.
+```
+
+---
+
+## [6] weak-players → `weak-players.png` — "quá nhiều cầu thủ yếu"
+
+**Subject:** Carragher đứng trước màn hình chiến thuật Sky Sports, gay gắt mổ xẻ đội hình Liverpool
+
+```
+Cinematic vertical 9:16 portrait sports photograph of Jamie Carragher, the English former Liverpool centre-back and Sky Sports football pundit, standing in front of the Sky Sports Monday Night Football tactics touchscreen with a firm, critical expression, gesturing with an open hand toward the screen mid-analysis. On the touchscreen behind him, a Liverpool team-shape graphic in 4-3-3 with red player tokens on a green pitch, the Liverpool FC Liver-bird crest visible as a watermark in the screen corner. Sky Sports studio floor lighting in yellow and dark blue tones, the studio backdrop softly bokeh'd. Telephoto compression, shallow depth of field, sharp focus on Carragher's gesturing hand and the touchscreen tactics board, natural skin texture, no plastic AI smoothness, 85mm lens, photo-realistic press photography. Liverpool's real crest visible on the touchscreen watermark, no scoreboard graphics, no on-image text overlays.
+```
+
+---
+
+## [7] not-excel → `not-excel.png` — "đội bóng rất, rất tầm thường"
+
+**Subject:** Salah cúi đầu chạy về vạch giữa sau pha bỏ lỡ, Gakpo + Szoboszlai bất lực phía sau
+
+```
+Cinematic vertical 9:16 portrait sports photograph of Mohamed Salah, the Egyptian forward for Liverpool, in a bright red Liverpool home kit with the Liverpool FC Liver-bird crest clearly visible on the chest, walking slowly back to the halfway line at Villa Park with his hands on his hips, shoulders slumped after a missed chance, jaw set in frustration. Behind him, slightly out of focus, Cody Gakpo in the same Liverpool home kit shakes his head, and Dominik Szoboszlai jogs back palms upturned. In the deeper bokeh, an Aston Villa defender in a claret-and-sky-blue kit with the Aston Villa lion crest visible turns to celebrate with the home crowd, Villa Park stands packed with claret-and-blue supporters waving Aston Villa scarves. Atmospheric haze under bright floodlights, dramatic rim-lighting from behind. Telephoto compression, shallow depth of field, sharp focus on Salah's profile and the Liverpool crest, natural skin texture, no plastic AI smoothness, 85mm lens, photo-realistic press photography, matching Premier League broadcast photographs. The clubs' real crests visible on the jerseys, no scoreboard graphics, no on-image text overlays.
+```
+
+---
+
+## [8] vandijk → `vandijk.png` — "Van Dijk trông giống một con người bình thường"
+
+**Subject:** Van Dijk thua tranh chấp không chiến với Watkins, biểu cảm bất lực hiếm thấy
+
+```
+Cinematic vertical 9:16 portrait sports photograph of Virgil van Dijk, the Dutch centre-back and captain for Liverpool and the Netherlands national team, in a bright red Liverpool home kit with the Liverpool FC Liver-bird crest clearly visible on the chest and the captain's armband on his left arm, mid-air losing a header duel to Ollie Watkins, the English striker for Aston Villa, who is wearing a claret-and-sky-blue Aston Villa home kit with the Aston Villa lion crest clearly visible on the chest. Watkins gets above Van Dijk to flick the ball on with his forehead, the ball already leaving Watkins' head; Van Dijk's expression is strained and disbelieving, his outstretched arm reaching too late. Villa Park stands packed with claret-and-blue Aston Villa supporters in the bokeh background, scarves raised, floodlights piercing through atmospheric haze. Telephoto compression, shallow depth of field, sharp focus on both players and the ball, motion blur on the ball, dramatic rim-lighting on both, natural skin texture, no plastic AI smoothness, 85mm lens, photo-realistic press photography, matching Premier League broadcast photographs. The clubs' real crests visible on the jerseys, no scoreboard graphics, no on-image text overlays.
+```
+
+---
+
+## [9] slot-future → `slot-future.png` — Slot phải khắc phục mùa sau
+
+**Subject:** Arne Slot đơn độc trên đường biên Anfield sau trận, tâm trạng nặng nề
+
+```
+Cinematic vertical 9:16 portrait sports photograph of Arne Slot, the Dutch head coach of Liverpool, standing alone on the Anfield touchline at the end of a Premier League match, wearing a charcoal Liverpool training jacket with the Liverpool FC Liver-bird crest clearly visible on the left chest. His arms are crossed, expression contemplative and weary, jaw set in thought. Behind him, the empty Anfield pitch stretches into soft bokeh, the iconic red 'This Is Anfield' tunnel sign faintly glowing in the deep distance, scattered Liverpool ground-staff figures in red bibs packing equipment in the background. Late-evening floodlights wash the scene in a moody amber-and-red tone, atmospheric haze drifting across the pitch. Telephoto compression, shallow depth of field, sharp focus on Slot's face and the LFC crest on his jacket, natural skin texture, no plastic AI smoothness, 85mm lens, photo-realistic press photography, matching Premier League broadcast photographs. Liverpool's real crest visible on the training jacket, no scoreboard graphics, no on-image text overlays.
+```
+
+---
+
+## Tiếp theo
+
+1. Mở https://grok.com → Imagine, aspect ratio **9:16**.
+2. Copy từng block prompt phía trên, paste, generate, tải ảnh về.
+3. Save mỗi ảnh vào folder này (`input/carragher-che-liverpool-cau-thu-yeu/`) với stem đúng như file đã ghi (`hook`, `score`, `losses`, `conceded`, `position`, `weak-players`, `not-excel`, `vandijk`, `slot-future`).
+   - **Extension nào cũng được:** `.png` / `.jpg` / `.jpeg` / `.webp`. Grok export `.jpg` thì giữ nguyên, không cần đổi đuôi.
+4. Khi đủ 9 ảnh, chạy: `/create-video input/carragher-che-liverpool-cau-thu-yeu/carragher-che-liverpool-cau-thu-yeu.txt`

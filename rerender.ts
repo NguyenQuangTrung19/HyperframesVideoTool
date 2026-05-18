@@ -40,8 +40,9 @@ async function main() {
 
   // Load script.json
   const raw = JSON.parse(await readFile(join(outputDir, "script.json"), "utf8"));
-  if (raw.voice?.voiceId === "${VIETNAMESE_VOICEID}" || raw.voice?.voiceId === "${VOICE_ID}") {
-    raw.voice.voiceId = cfg.ttsProvider === "lucylab" ? cfg.lucylabVoiceId! : cfg.elevenlabsVoiceId!;
+  if (raw.voice?.voiceId === "${VOICE_ID}") {
+    raw.voice.voiceId =
+      cfg.ttsProvider === "vieneu" ? cfg.vieneuVoiceId : String(cfg.ausynclabVoiceId!);
   }
   const script = ScriptSchema.parse(raw);
 
@@ -111,12 +112,22 @@ async function main() {
     if (hookScene && imageFiles.includes("bg.jpg")) {
       sceneImages[hookScene.id] = "images/bg.jpg";
     }
-    // Per-scene AI images: filenames like "<sceneId>-<hash>.png"
+    // Per-scene image — match either plan-mode "<sceneId>.<ext>" or
+    // AI-gen "<sceneId>-<hash>.<ext>". Exact-stem takes priority.
+    const IMG_EXT_RE = /\.(png|jpg|jpeg|webp)$/i;
     for (const scene of script.scenes) {
       if (sceneImages[scene.id]) continue; // already mapped (e.g. hook → bg.jpg)
-      const match = imageFiles.find((f) => f.startsWith(`${scene.id}-`));
-      if (match) {
-        sceneImages[scene.id] = `images/${match}`;
+      const exact = imageFiles.find((f) => {
+        const stem = f.replace(IMG_EXT_RE, "");
+        return stem === scene.id && IMG_EXT_RE.test(f);
+      });
+      if (exact) {
+        sceneImages[scene.id] = `images/${exact}`;
+        continue;
+      }
+      const hashed = imageFiles.find((f) => f.startsWith(`${scene.id}-`) && IMG_EXT_RE.test(f));
+      if (hashed) {
+        sceneImages[scene.id] = `images/${hashed}`;
       }
     }
   }
@@ -129,11 +140,11 @@ async function main() {
   // TikTok avatar — find bundled (jpg/jpeg/png/webp) and copy to output dir
   let bundledAvatar: string | null = null;
   for (const ext of ["jpg", "jpeg", "png", "webp"]) {
-    const p = join(__dirname, "assets", `avatar.${ext}`);
+    const p = join(__dirname, "assets", `logoTV.${ext}`);
     if (existsSync(p)) { bundledAvatar = p; break; }
   }
   if (!bundledAvatar) {
-    throw new Error("No bundled avatar found. Place an image at assets/avatar.{jpg,png,webp}");
+    throw new Error("No bundled avatar found. Place an image at assets/logoTV.{jpg,png,webp}");
   }
   const ttAvatarExt = bundledAvatar.split(".").pop()!.toLowerCase();
   const ttAvatarFile = `tiktok-avatar.${ttAvatarExt}`;

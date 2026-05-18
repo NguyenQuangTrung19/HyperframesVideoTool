@@ -11,7 +11,7 @@ const PlannedScene = z.object({
     .min(1)
     .regex(/\.(png|jpg|jpeg|webp)$/i, "filename must end in .png/.jpg/.jpeg/.webp"),
   /** Grok / image-gen prompt (English, sports photography style). */
-  prompt: z.string().min(20).max(800),
+  prompt: z.string().min(20).max(1500),
   /** Free-text hint for the user (Vietnamese OK) — what's in the image. */
   subjectHint: z.string().max(200).optional(),
 });

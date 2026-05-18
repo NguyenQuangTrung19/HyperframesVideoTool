@@ -35,21 +35,43 @@ export function loadImagesPlan(txtPath: string): ImagesPlan | null {
 }
 
 /**
+ * Looks for an image file in `dir` whose stem matches `stem`, trying each known
+ * extension in priority order. Returns the actual filename (with extension) or null.
+ *
+ * This is what makes the plan tolerant of `.jpg`/`.jpeg`/`.webp` even when the
+ * plan's `filename` field says `.png` — the user can save under any supported
+ * format and we'll find it.
+ */
+function findExistingImageByStem(dir: string, stem: string): string | null {
+  for (const ext of KNOWN_EXTENSIONS) {
+    const candidate = stem + ext;
+    if (existsSync(join(dir, candidate))) return candidate;
+  }
+  return null;
+}
+
+function stemOf(filename: string): string {
+  return basename(filename, extname(filename));
+}
+
+/**
  * Compares the plan against the input folder contents and reports
- * missing planned images + orphaned image files.
+ * missing planned images + orphaned image files. Matching is stem-based:
+ * a planned `cb-1.png` is satisfied by any of `cb-1.{png,jpg,jpeg,webp}`.
  */
 export function validatePlan(plan: ImagesPlan, inputDir: string): ValidationResult {
-  const plannedFilenames = new Set(plan.scenes.map((s) => s.filename));
+  const plannedStems = new Set(plan.scenes.map((s) => stemOf(s.filename)));
 
   const missing = plan.scenes
-    .filter((s) => !existsSync(join(inputDir, s.filename)))
+    .filter((s) => !findExistingImageByStem(inputDir, stemOf(s.filename)))
     .map((s) => ({ id: s.id, filename: s.filename }));
 
   const orphans: string[] = [];
   if (existsSync(inputDir)) {
     for (const f of readdirSync(inputDir)) {
-      if (!KNOWN_EXTENSIONS.includes(extname(f).toLowerCase())) continue;
-      if (!plannedFilenames.has(f)) orphans.push(f);
+      const ext = extname(f).toLowerCase();
+      if (!KNOWN_EXTENSIONS.includes(ext)) continue;
+      if (!plannedStems.has(stemOf(f))) orphans.push(f);
     }
   }
 
@@ -57,8 +79,9 @@ export function validatePlan(plan: ImagesPlan, inputDir: string): ValidationResu
 }
 
 /**
- * Copies each planned image from inputDir into outputDir/images/<sceneId>.<ext>.
- * Caller MUST run validatePlan() first and abort on missing.
+ * Copies each planned image from inputDir into outputDir/images/<sceneId>.<actualExt>.
+ * Caller MUST run validatePlan() first and abort on missing. Uses the file
+ * extension actually present on disk, not the one declared in the plan.
  * Returns the relative paths written (relative to outputDir).
  */
 export async function stageImagesToOutput(
@@ -71,8 +94,14 @@ export async function stageImagesToOutput(
 
   const written: string[] = [];
   for (const scene of plan.scenes) {
-    const src = join(inputDir, scene.filename);
-    const ext = extname(scene.filename).toLowerCase();
+    const actualName = findExistingImageByStem(inputDir, stemOf(scene.filename));
+    if (!actualName) {
+      throw new Error(
+        `staging: no image file for scene "${scene.id}" (looked for ${stemOf(scene.filename)}.{png,jpg,jpeg,webp}) — run validatePlan() first`,
+      );
+    }
+    const ext = extname(actualName).toLowerCase();
+    const src = join(inputDir, actualName);
     const destRel = `images/${scene.id}${ext}`;
     const dest = join(outputDir, destRel);
     await copyFile(src, dest);

@@ -1,0 +1,65 @@
+{
+  "version": "1.0",
+  "source": "man-city-thang-palace-3-0-dua-vo-dich.txt",
+  "contentType": "MATCH ANALYSIS",
+  "title": "Man City thắng Palace 3-0, đua vô địch còn nóng",
+  "createdAt": "2026-05-14T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Etihad đêm Premier League — không khí đua vô địch",
+      "prompt": "Cinematic vertical 9:16 portrait sports photograph of the Etihad Stadium at night during a Premier League title-race match, packed with sky-blue clad Manchester City supporters across the South Stand and the Colin Bell Stand, hundreds of Manchester City scarves with the club crest raised above heads forming a wall of blue, a giant tifo banner of the Manchester City crest unfurled across the upper tier, dramatic floodlights piercing through atmospheric haze drifting thickly across the pitch. In the foreground low-angle, a Manchester City player in the iconic light blue home kit with the Manchester City crest clearly visible on the chest and the Etihad Airways sponsor on the front sprints toward goal with the ball at his feet, motion blur on his legs and the ball. Telephoto compression, shallow depth of field, sharp focus on the player and the City crest, dramatic rim-lighting from behind, natural skin texture, no plastic AI smoothness, 85mm lens. Photo-realistic press photography, matching Premier League broadcast photographs. The Manchester City crest visible on the jersey, no scoreboard graphics, no on-image text overlays."
+    },
+    {
+      "id": "score",
+      "template": "stat-hero",
+      "filename": "score.png",
+      "subjectHint": "Etihad ăn mừng full-time, không khí thắng đậm",
+      "prompt": "Cinematic vertical 9:16 portrait sports photograph of the Etihad Stadium at full-time celebration following a Manchester City home victory, packed sky-blue clad Manchester City supporters across the South Stand and the Colin Bell Stand on their feet applauding, hundreds of Manchester City scarves with the club crest raised above heads, a giant 'CITY' banner unfurled across the upper tier, the Etihad's geometric exterior glowing under the night floodlights, atmospheric haze drifting across the pitch. In the foreground, several Manchester City players in light blue home kits with the Manchester City crest clearly visible on their chests embrace and applaud the supporters, smiles on their faces. Telephoto compression, shallow depth of field, sharp focus on the central player and the City crests, dramatic rim-lighting, natural skin texture, no plastic AI smoothness, 85mm lens. Photo-realistic press photography, matching Premier League broadcast photographs. The Manchester City crest visible on the jerseys, no scoreboard graphics, no on-image text overlays."
+    },
+    {
+      "id": "foden",
+      "template": "stat-hero",
+      "filename": "foden.png",
+      "subjectHint": "Phil Foden — Man City, nhạc trưởng trận này (2 pha kiến tạo)",
+      "prompt": "Cinematic vertical 9:16 portrait sports photograph of Phil Foden, the English attacking midfielder for Manchester City and the England national team, on the half-turn with the ball at his feet at the Etihad Stadium, wearing a light blue Manchester City home kit with the Manchester City crest clearly visible on the chest and the Etihad Airways sponsor on the front. He is looking up to spot a forward run, an opposing player in a dark red Crystal Palace away kit closing him down in soft bokeh, focused intense expression. The South Stand rises behind him packed with sky-blue clad Manchester City supporters, club scarves raised, atmospheric haze drifting across the pitch under the night floodlights. Telephoto compression, shallow depth of field, sharp focus on Foden's torso and the ball, motion blur on his planted foot, dramatic rim-lighting on his shoulders, natural skin texture, no plastic AI smoothness, 85mm lens. Photo-realistic press photography, matching Premier League broadcast photographs. The Manchester City crest visible on the jersey, no scoreboard graphics, no on-image text overlays."
+    },
+    {
+      "id": "marmoush",
+      "template": "callout",
+      "filename": "marmoush.png",
+      "subjectHint": "Omar Marmoush ăn mừng bàn thắng phút 40",
+      "prompt": "Cinematic vertical 9:16 portrait sports photograph of Omar Marmoush, the Egyptian forward for Manchester City and the Egypt national team, celebrating a goal at the Etihad Stadium, wearing a light blue Manchester City home kit with the Manchester City crest clearly visible on the chest and the Etihad Airways sponsor on the front. He is mid-celebration, both arms raised wide, mouth open in a roar, sprinting toward the corner flag, fellow City teammates in matching light blue kits sprinting in behind him to join the celebration. The South Stand behind him is in full eruption — sky-blue clad Manchester City fans on their feet, club scarves raised, a 'CITY' banner unfurled across the upper tier. Floodlights pierce through atmospheric haze, dramatic rim-lighting on Marmoush's shoulders. Telephoto compression, shallow depth of field, sharp focus on Marmoush and the City crest, motion blur on his shorts, natural skin texture, no plastic AI smoothness, 85mm lens. Photo-realistic press photography, matching Premier League broadcast photographs. The Manchester City crest visible on the jersey, no scoreboard graphics, no on-image text overlays."
+    },
+    {
+      "id": "savinho",
+      "template": "callout",
+      "filename": "savinho.png",
+      "subjectHint": "Savinho + Cherki ăn mừng bàn 84 phút",
+      "prompt": "Cinematic vertical 9:16 portrait sports photograph of Savinho, the Brazilian winger for Manchester City and the Brazil national team, celebrating a late goal at the Etihad Stadium, wearing a light blue Manchester City home kit with the Manchester City crest clearly visible on the chest and the Etihad Airways sponsor on the front. He is mid-celebration with one fist clenched and held high, sprinting toward the home end, Rayan Cherki — the French attacking midfielder for Manchester City and the France national team — in a matching light blue Manchester City home kit with the City crest visible on his chest, just behind him pointing at him in acknowledgement of the assist, joy on both faces. The Colin Bell Stand behind them in full eruption, sky-blue clad Manchester City supporters on their feet, club scarves and arms raised, the Etihad floodlights cutting through atmospheric haze. Telephoto compression, shallow depth of field, sharp focus on Savinho and the City crest, motion blur on his trailing leg, dramatic rim-lighting, natural skin texture, no plastic AI smoothness, 85mm lens. Photo-realistic press photography, matching Premier League broadcast photographs. The Manchester City crest visible on the jerseys, no scoreboard graphics, no on-image text overlays."
+    },
+    {
+      "id": "title-race",
+      "template": "stat-hero",
+      "filename": "title-race.png",
+      "subjectHint": "Sức nóng đua vô địch — 2 điểm cách biệt, 2 vòng còn lại",
+      "prompt": "Cinematic vertical 9:16 portrait sports photograph of the Etihad Stadium on a Premier League title-race night — packed sky-blue clad Manchester City supporters across the South Stand and the Colin Bell Stand, hundreds of Manchester City scarves with the club crest raised above heads, a huge tifo banner of the Manchester City crest unfurled across the upper tier, the Etihad's geometric exterior glowing under heavy floodlights, atmospheric haze drifting thickly across the pitch giving an end-of-season weighty feel. In the foreground, several Manchester City players in light blue home kits with the Manchester City crest clearly visible on their chests stand together near the centre circle applauding the supporters, intense focused expressions, the season's pressure visible on their shoulders. Telephoto compression, shallow depth of field, sharp focus on the central players and the City crests, dramatic rim-lighting from behind, natural skin texture, no plastic AI smoothness, 85mm lens. Photo-realistic press photography, matching Premier League title-race broadcast photographs. The Manchester City crest visible on the jerseys, no scoreboard graphics, no on-image text overlays."
+    },
+    {
+      "id": "pep",
+      "template": "callout",
+      "filename": "pep.png",
+      "subjectHint": "Pep Guardiola chỉ đạo từ technical area",
+      "prompt": "Cinematic vertical 9:16 portrait sports photograph of Pep Guardiola, the Spanish head coach of Manchester City, standing in the Etihad Stadium technical area mid-match, wearing a smart dark navy Manchester City training jacket with the Manchester City crest clearly visible on the chest and a navy Manchester City pullover underneath. He is mid-instruction, both hands gesturing emphatically as he explains, his face focused and animated, mouth open issuing instructions. Behind him, the Etihad's sky-blue clad supporters fill the lower tier of the South Stand, club scarves and arms raised, atmospheric haze under bright floodlights. Telephoto compression, shallow depth of field, sharp focus on Guardiola's face and the City crest, dramatic rim-lighting from above, natural skin texture, no plastic AI smoothness, 85mm lens. Photo-realistic press photography, matching Premier League broadcast photographs. The Manchester City crest visible on the jacket, no scoreboard graphics, no on-image text overlays."
+    },
+    {
+      "id": "glasner",
+      "template": "callout",
+      "filename": "glasner.png",
+      "subjectHint": "Oliver Glasner thừa nhận thất bại trên đường piste Etihad",
+      "prompt": "Cinematic vertical 9:16 portrait sports photograph of Oliver Glasner, the Austrian head coach of Crystal Palace, standing on the away-team technical area at the Etihad Stadium, wearing a dark Crystal Palace training jacket with the Crystal Palace eagle crest clearly visible on the chest. His expression is somber and reflective, arms folded across his chest, watching the match with a furrowed brow accepting the result. Behind him, a small section of Crystal Palace away supporters in red-and-blue striped shirts is visible in soft bokeh, the rest of the Etihad's home stands rising in sky-blue beyond. Atmospheric haze under bright floodlights, dramatic rim-lighting from one side. Telephoto compression, shallow depth of field, sharp focus on Glasner's face and the Palace crest, natural skin texture, no plastic AI smoothness, 85mm lens. Photo-realistic press photography, matching Premier League broadcast photographs. The Crystal Palace crest visible on the jacket, no scoreboard graphics, no on-image text overlays."
+    }
+  ]
+}

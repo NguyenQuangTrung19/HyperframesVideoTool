@@ -1,6 +1,13 @@
 import { z } from "zod";
 
 // ── Template data shapes (discriminated by template field) ─────────────────
+//
+// Soft line-break convention: in fields rendered with very large fonts —
+// hook.headline, hook.subhead, callout.statement, feature-list.title,
+// stat-hero.label — the character `|` is converted to <br> by the HTML
+// composer, so writers can place phrasing-aware line breaks (e.g.
+// "Top 5 vua phá lưới|Champions League"). The `|` counts toward the
+// field's max-length cap. Other fields render `|` verbatim.
 
 const HookData = z.object({
   template: z.literal("hook"),
@@ -29,6 +36,13 @@ const StatHeroData = z.object({
   value: z.string().min(1).max(20),
   label: z.string().min(1).max(40),
   context: z.string().max(50).optional(),
+  /**
+   * Optional short trait bullets shown between label and context.
+   * Use for ranking/list items where one-line context isn't enough —
+   * e.g. ["Sức mạnh", "Không chiến", "24 bàn / 32 trận"].
+   * Each bullet ≤ 20 chars, max 4 bullets.
+   */
+  highlights: z.array(z.string().min(1).max(20)).min(1).max(4).optional(),
 });
 
 const FeatureListData = z.object({
@@ -41,6 +55,73 @@ const FeatureListData = z.object({
 const CalloutData = z.object({
   template: z.literal("callout"),
   statement: z.string().min(1).max(80),
+  tag: z.string().max(20).optional(),
+});
+
+const BigQuoteData = z.object({
+  template: z.literal("big-quote"),
+  /** The quoted text (≤200 chars). */
+  quote: z.string().min(1).max(200),
+  /** Speaker + role line, e.g. "Florentino Perez, chủ tịch Real Madrid" (≤60). */
+  attribution: z.string().min(1).max(60),
+});
+
+const TimelineItemData = z.object({
+  year: z.string().min(1).max(8),
+  event: z.string().min(1).max(60),
+});
+
+const TimelineData = z.object({
+  template: z.literal("timeline"),
+  title: z.string().min(1).max(40),
+  /** 3–5 milestones, year + 1-line event. */
+  items: z.array(TimelineItemData).min(3).max(5),
+});
+
+/**
+ * Tactical pre-match formation graphic — green pitch with player tokens
+ * placed by formation rows.
+ *
+ * `rows` is ordered from BACK (GK row) to FRONT (striker row). Each entry
+ * is one horizontal line of the formation; players within a row spread
+ * evenly. Total player count should equal 11 for a standard lineup.
+ *
+ * Example 4-2-3-1:
+ *   rows: [
+ *     ["Maignan"],                                          // GK
+ *     ["Koundé", "Upamecano", "Saliba", "Théo Hernández"],  // 4 DEF
+ *     ["Tchouaméni", "Rabiot"],                             // 2 DM
+ *     ["Dembélé", "Olise", "Cherki"],                       // 3 AM
+ *     ["Mbappé"]                                            // 1 ST
+ *   ]
+ */
+const FormationPitchData = z.object({
+  template: z.literal("formation-pitch"),
+  title: z.string().min(1).max(40),
+  /** Formation label shown in the header, e.g. "4-2-3-1", "4-3-3", "3-5-2". */
+  formation: z.string().min(1).max(12),
+  rows: z
+    .array(z.array(z.string().min(1).max(24)).min(1).max(5))
+    .min(2)
+    .max(6),
+});
+
+/**
+ * Engagement-question scene — sits between the last body scene and the
+ * outro. Asks the viewer a content-derived question (forces opinion /
+ * choice) and prompts a comment. Pattern is mandatory in every script
+ * per channel convention (see `/create-video/SKILL.md` and
+ * `memory/feedback_engagement_question_scene.md`).
+ *
+ * `question` should follow the "Theo bạn, …?" / "Ai mới là …?" /
+ * "X hay Y?" forced-choice pattern derived from the video's central
+ * debate or uncertainty. Use `|` to insert phrase-aware line breaks
+ * for long questions rendered at 60px Inter.
+ */
+const EngagementQuestionData = z.object({
+  template: z.literal("engagement-question"),
+  question: z.string().min(1).max(120),
+  cta: z.string().min(1).max(40),
   tag: z.string().max(20).optional(),
 });
 
@@ -57,6 +138,10 @@ export const TemplateData = z.discriminatedUnion("template", [
   StatHeroData,
   FeatureListData,
   CalloutData,
+  BigQuoteData,
+  TimelineData,
+  FormationPitchData,
+  EngagementQuestionData,
   OutroData,
 ]);
 
@@ -95,7 +180,7 @@ const Scene = z.object({
    * Only generated for templates: hook (when no og:image), callout, stat-hero.
    * Ignored for comparison, feature-list, outro.
    */
-  imagePrompt: z.string().min(10).max(500).optional(),
+  imagePrompt: z.string().min(10).max(1500).optional(),
 });
 
 // ── Root schema ────────────────────────────────────────────────────────────
@@ -112,7 +197,7 @@ export const ScriptSchema = z.object({
     channel: z.string().min(1),
   }),
   voice: z.object({
-    provider: z.enum(["lucylab", "elevenlabs"]),
+    provider: z.enum(["vieneu", "ausynclab"]),
     voiceId: z.string().min(1),
     speed: z.number().min(0.5).max(2.0),
   }),

@@ -7,11 +7,11 @@
       "domain": "vnexpress.net",
       "image": "https://i1-vnexpress.vnecdn.net/iphone17.jpg"
     },
-    "channel": "Bóng lăn"
+    "channel": "SportsForAllTV"
   },
   "voice": {
-    "provider": "lucylab",
-    "voiceId": "${VIETNAMESE_VOICEID}",
+    "provider": "vieneu",
+    "voiceId": "${VOICE_ID}",
     "speed": 1
   },
   "scenes": [
@@ -114,8 +114,8 @@
     {
       "id": "outro",
       "type": "outro",
-      "voiceText": "Theo dõi Bóng lăn.",
-      "templateData": { "template": "outro", "ctaTop": "Theo dõi ngay", "channelName": "Bóng lăn", "source": "vnexpress.net" }
+      "voiceText": "Theo dõi SportsForAllTV.",
+      "templateData": { "template": "outro", "ctaTop": "Theo dõi ngay", "channelName": "SportsForAllTV", "source": "vnexpress.net" }
     }
   ]
 }

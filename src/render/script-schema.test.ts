@@ -33,9 +33,9 @@ describe("ScriptSchema", () => {
     expect(() => ScriptSchema.parse(data)).toThrow(/outro/);
   });
 
-  it("accepts voice.provider = elevenlabs", () => {
+  it("accepts voice.provider = vieneu", () => {
     const data = load("sample-script-with-image.json");
-    data.voice.provider = "elevenlabs";
+    data.voice.provider = "vieneu";
     expect(() => ScriptSchema.parse(data)).not.toThrow();
   });
 

@@ -1,0 +1,65 @@
+{
+  "version": "1.0",
+  "source": "messi-co-the-doat-qua-bong-vang-thu-9.txt",
+  "contentType": "TRIVIA",
+  "title": "Messi có thể đoạt Quả Bóng Vàng thứ 9?",
+  "createdAt": "2026-05-16T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Messi cầm cúp QBV, sau lưng là các ứng viên trẻ mờ ảo trong bokeh",
+      "prompt": "Cinematic vertical 9:16 portrait sports photograph of Lionel Messi, the Argentine forward and captain for Inter Miami and the Argentina national team, in his current era, holding a golden Ballon d'Or trophy at chest height with a contemplative, almost knowing expression, looking directly into the camera. Behind him, four ghostly silhouettes of contender footballers in different club home kits visible in soft bokeh — implying competition for the next Ballon d'Or trophy. Dark stage backdrop with subtle photographers' camera flashes in the deep bokeh, dramatic single spotlight from above creating a halo on Messi and the golden trophy, telephoto compression, shallow depth of field, sharp focus on Messi's face and the trophy engravings, natural skin texture, no plastic AI smoothness, 85mm lens, photo-realistic press photography matching Ballon d'Or ceremony broadcast photographs. The Ballon d'Or trophy clearly visible, no scoreboard graphics, no on-image text overlays."
+    },
+    {
+      "id": "messi-8",
+      "template": "stat-hero",
+      "filename": "messi-8.png",
+      "subjectHint": "Messi nâng QBV thứ 8 trong lễ trao giải Paris",
+      "prompt": "Cinematic vertical 9:16 portrait sports photograph of Lionel Messi, the Argentine forward and captain for Inter Miami and the Argentina national team, in a light blue and white striped Argentina national team home kit with the AFA crest clearly visible on the chest and the captain's armband on his left arm, lifting a golden Ballon d'Or trophy above his head with both hands, beaming smile, packed Théâtre du Châtelet-style Ballon d'Or ceremony hall in the background with soft bokeh of photographers' camera flashes, golden confetti hovering in the air around him, dramatic spotlight from above creating a halo on the trophy. Telephoto compression, shallow depth of field, sharp focus on Messi's face and the trophy, natural skin texture, no plastic AI smoothness, 85mm lens, photo-realistic press photography matching Ballon d'Or ceremony broadcast photographs. The Ballon d'Or trophy clearly visible, no scoreboard graphics, no on-image text overlays."
+    },
+    {
+      "id": "ronaldo",
+      "template": "stat-hero",
+      "filename": "ronaldo.png",
+      "subjectHint": "Ronaldo 41 tuổi vẫn ra sân cho Al-Nassr",
+      "prompt": "Cinematic vertical 9:16 portrait sports photograph of Cristiano Ronaldo, the Portuguese forward and captain for Al-Nassr and the Portugal national team, in his current era at 41 years old, in a bright yellow Al-Nassr home kit with the Al-Nassr club crest clearly visible on the chest and the captain's armband on his left arm, mid-stride at full speed during a Saudi Pro League match, intense focused expression, eyes locked on the ball. Behind him, packed Al-Awwal Park stands with yellow and blue Al-Nassr fans waving Al-Nassr scarves, dramatic floodlights piercing through atmospheric haze, telephoto compression, motion blur on his trailing leg and shorts, sharp focus on Ronaldo's face and the Al-Nassr crest, natural skin texture, no plastic AI smoothness, 85mm lens, photo-realistic press photography matching Saudi Pro League broadcast photographs. The Al-Nassr crest visible on the jersey, no scoreboard graphics, no on-image text overlays."
+    },
+    {
+      "id": "messi-wc2022",
+      "template": "callout",
+      "filename": "messi-wc2022.png",
+      "subjectHint": "Messi nâng cúp World Cup 2022 tại Lusail — khoảnh khắc dẫn tới QBV thứ 8",
+      "prompt": "Cinematic vertical 9:16 portrait sports photograph of Lionel Messi, the Argentine captain for the Argentina national team, in a light blue and white striped Argentina national team home kit with the AFA crest clearly visible on the chest and the captain's armband on his left arm, lifting the golden FIFA World Cup trophy high above his head with both hands at Lusail Stadium, beaming triumphant smile, gold confetti raining around him, Argentine teammates blurred in joyful celebration behind, packed Argentina-blue-and-white stands waving Argentina flags. Dramatic floodlight rim-lighting glinting off the World Cup trophy, telephoto compression, shallow depth of field, sharp focus on Messi's face and the trophy, natural skin texture, no plastic AI smoothness, 85mm lens, photo-realistic press photography matching 2022 World Cup final broadcast photographs. The FIFA World Cup trophy clearly visible, no scoreboard graphics, no on-image text overlays."
+    },
+    {
+      "id": "yamal",
+      "template": "stat-hero",
+      "filename": "yamal.png",
+      "subjectHint": "Lamine Yamal — Barcelona, mất cửa C1 mùa này",
+      "prompt": "Cinematic vertical 9:16 portrait sports photograph of Lamine Yamal, the Spanish young winger for Barcelona and the Spain national team, in a dark blue and red striped Barcelona home kit with the FC Barcelona crest clearly visible on the chest, mid-dribble at full pace with the ball at his feet at Camp Nou, focused intense expression. Behind him, packed blaugrana stands waving Barcelona scarves and senyera flags, the Camp Nou facade visible in the upper background, dramatic floodlights piercing through atmospheric haze, telephoto compression, motion blur on the defender chasing him from behind, sharp focus on Yamal and the ball, natural skin texture, no plastic AI smoothness, 85mm lens, photo-realistic press photography matching La Liga broadcast photographs. The FC Barcelona crest visible on the jersey, no scoreboard graphics, no on-image text overlays."
+    },
+    {
+      "id": "dembele",
+      "template": "stat-hero",
+      "filename": "dembele.png",
+      "subjectHint": "Dembélé nâng cúp Champions League trong màu áo PSG",
+      "prompt": "Cinematic vertical 9:16 portrait sports photograph of Ousmane Dembélé, the French winger for Paris Saint-Germain and the France national team, in a navy blue PSG home kit with the Paris Saint-Germain crest in red and white clearly visible on the chest, lifting the UEFA Champions League trophy with its iconic starball pattern high above his head, beaming triumphant smile, gold and silver confetti raining around him, PSG teammates blurred in joyful celebration behind, packed PSG fans in navy and red waving Paris Saint-Germain scarves, dramatic floodlight rim-lighting glinting off the trophy, telephoto compression, shallow depth of field, sharp focus on Dembélé's face and the trophy, natural skin texture, no plastic AI smoothness, 85mm lens, photo-realistic press photography matching UEFA Champions League final broadcast photographs. The PSG crest visible on the jersey, no scoreboard graphics, no on-image text overlays."
+    },
+    {
+      "id": "vitinha",
+      "template": "callout",
+      "filename": "vitinha.png",
+      "subjectHint": "Vitinha — 'động cơ tuyến giữa' PSG, kiểm soát bóng giữa sân",
+      "prompt": "Cinematic vertical 9:16 portrait sports photograph of Vitinha, the Portuguese central midfielder for Paris Saint-Germain and the Portugal national team, in a navy blue PSG home kit with the Paris Saint-Germain crest in red and white clearly visible on the chest, in mid-stride controlling the ball at midfield with intense focused expression, head up scanning the field for a pass, an opponent in a contrasting kit closing in from behind. Behind him, the Parc des Princes stands packed with PSG fans in navy and red waving Paris Saint-Germain scarves, dramatic floodlights piercing through atmospheric haze, telephoto compression, shallow depth of field, sharp focus on Vitinha and the ball, motion blur on the chasing opponent, natural skin texture, no plastic AI smoothness, 85mm lens, photo-realistic press photography matching Ligue 1 and Champions League broadcast photographs. The PSG crest visible on the jersey, no scoreboard graphics, no on-image text overlays."
+    },
+    {
+      "id": "wc-rule",
+      "template": "callout",
+      "filename": "wc-rule.png",
+      "subjectHint": "Cúp QBV và cúp World Cup đặt cạnh nhau — quy luật năm có WC",
+      "prompt": "Cinematic vertical 9:16 portrait still-life sports photograph of the golden Ballon d'Or trophy and the golden FIFA World Cup trophy standing side by side on a dark velvet display plinth under a single dramatic overhead spotlight, gold reflections gleaming on both trophies, deep dark velvet backdrop with soft bokeh of photographers' camera flashes in the distance. Atmospheric haze drifting in the spotlight beam, telephoto compression, shallow depth of field, sharp focus on the engraving details of both trophies, natural metallic texture and patina, no plastic AI smoothness, 85mm lens, photo-realistic press photography matching Ballon d'Or and FIFA ceremony photographs. Both trophies clearly visible, no scoreboard graphics, no on-image text overlays."
+    }
+  ]
+}

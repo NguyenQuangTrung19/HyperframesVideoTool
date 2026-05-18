@@ -81,7 +81,6 @@ describe("ElevenLabsClient", () => {
     const out = join(tmpDir, "out.mp3");
     const srt = join(tmpDir, "out.srt");
     await client.generate("hi", out, srt);
-    // mp3 written, srt NOT written (no error)
     expect(readFileSync(out).toString()).toBe("MP3");
     expect(() => readFileSync(srt)).toThrow();
   });
