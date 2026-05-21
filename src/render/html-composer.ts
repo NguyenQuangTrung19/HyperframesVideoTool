@@ -80,16 +80,18 @@ export function composeHtml(args: ComposeArgs): string {
   // Persistent shell — channel name + logo in top-left
   const shellHtml = renderShell(script.metadata, tiktokAvatar);
 
-  const animJs = readFileSync(join(TPL_DIR, "animations.js"), "utf8");
-
+  // animations.js is referenced externally by base.html.tmpl and copied to
+  // outputDir by the pipeline (src/pipeline.ts copyFile). Keeping it external
+  // (instead of inlining) keeps index.html under the hyperframes 300-line
+  // composition lint threshold, which lets Chrome auto-worker calibration
+  // stay at 4 workers instead of dropping to 1 (~4x render speedup).
   const tpl = readFileSync(join(TPL_DIR, "base.html.tmpl"), "utf8");
   return tpl
     .replace("{{TITLE}}", escapeHtml(script.metadata.title))
     .replace(/\{\{TOTAL_DURATION\}\}/g, totalDuration.toFixed(2))
     .replace("{{SHELL}}", shellHtml)
     .replace("{{SCENES}}", sceneHtml)
-    .replace(/src="voice\.mp3"/g, `src="${audioRelPath}"`)
-    .replace('<script src="animations.js"></script>', `<script>\n${animJs}\n</script>`);
+    .replace(/src="voice\.mp3"/g, `src="${audioRelPath}"`);
 }
 
 // ── PERSISTENT SHELL ───────────────────────────────────────────────────────

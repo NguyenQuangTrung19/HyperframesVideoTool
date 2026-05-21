@@ -6,10 +6,19 @@ export interface RenderArgs {
   outputPath: string;      // path for .mp4
   fps?: number;            // default 30
   quality?: "draft" | "standard" | "high"; // default "standard"
+  workers?: number | "auto"; // default "auto" (hyperframes calibrates); fixed number overrides
+  gpu?: boolean;             // default false; true → NVENC (needs NVIDIA driver >= 570.0)
 }
 
 export async function renderWithHyperframes(args: RenderArgs): Promise<void> {
-  const { compositionDir, outputPath, fps = 30, quality = "standard" } = args;
+  const {
+    compositionDir,
+    outputPath,
+    fps = 30,
+    quality = "standard",
+    workers = "auto",
+    gpu = false,
+  } = args;
 
   const spawnArgs = [
     "hyperframes",
@@ -22,6 +31,12 @@ export async function renderWithHyperframes(args: RenderArgs): Promise<void> {
     "--quality",
     quality,
   ];
+  if (workers !== "auto") {
+    spawnArgs.push("--workers", String(workers));
+  }
+  if (gpu) {
+    spawnArgs.push("--gpu");
+  }
 
   await new Promise<void>((resolve, reject) => {
     const proc = spawn("npx", spawnArgs, {

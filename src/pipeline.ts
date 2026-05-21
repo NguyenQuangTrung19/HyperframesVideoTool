@@ -253,7 +253,12 @@ export async function runPipeline(scriptPath: string): Promise<void> {
   // STEP 8
   log.step(8, TOTAL_STEPS, "Render with hyperframes");
   const videoPath = join(outputDir, "video.mp4");
-  await renderWithHyperframes({ compositionDir: outputDir, outputPath: videoPath });
+  await renderWithHyperframes({
+    compositionDir: outputDir,
+    outputPath: videoPath,
+    workers: cfg.hyperframesWorkers,
+    gpu: cfg.hyperframesGpu,
+  });
 
   // STEP 9
   log.step(9, TOTAL_STEPS, "Done");

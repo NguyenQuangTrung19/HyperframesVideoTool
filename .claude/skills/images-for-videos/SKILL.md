@@ -278,11 +278,13 @@ Two files, both written to the same directory as the source .txt:
 
 ## Tiếp theo
 
-1. Mở https://grok.com → Imagine, aspect ratio **9:16**.
-2. Copy từng block prompt phía trên, paste, generate, tải ảnh về.
+⚡ **Tip — gen ảnh song song để tiết kiệm thời gian.** Mở `<N>` tab grok.com cùng lúc, paste prompt vào từng tab, bấm generate đồng loạt rồi mới chờ. Cắt thời gian từ ~10-15 phút (sequential) xuống ~3-5 phút (batch parallel).
+
+1. Mở https://grok.com trên **`<N>` tab cùng lúc** → Imagine, aspect ratio **9:16**.
+2. Copy từng block prompt phía trên, paste vào tab tương ứng, bấm generate **đồng loạt rồi mới chờ tất cả xong**.
 3. Save mỗi ảnh vào folder này (`input/<slug>/`) với stem đúng như file đã ghi (`hook`, `cb-1`, ...).
    - **Extension nào cũng được:** `.png` / `.jpg` / `.jpeg` / `.webp`. Grok export `.jpg` thì giữ nguyên, không cần đổi đuôi.
-4. Khi đủ <N> ảnh, chạy: `/create-video input/<slug>/<slug>.txt`
+4. Khi đủ `<N>` ảnh, chạy: `/create-video input/<slug>/<slug>.txt`
 ```
 
 The "## [N] sceneId → filename" header should also include the player's name + club when the scene depicts a specific person (e.g. RANKING items, VS sides, PLAYER PROFILE chapters). For atmosphere-only scenes (hook in many cases), just the sceneId/filename is fine.
