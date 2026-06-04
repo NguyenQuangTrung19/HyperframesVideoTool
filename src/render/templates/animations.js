@@ -42,9 +42,29 @@ const EASE = {
     const isLast = idx === scenes.length - 1;
 
     // Scene visibility: fade-in at start, fade-out into next scene for true crossfade.
-    tl.fromTo(scene, { opacity: 0 }, { opacity: 1, duration: FADE, ease: EASE.drawIn }, start);
+    // Scene entrance — per-type cinematic transition (Phase 1 visual overhaul)
+    const ENTER_DUR = 0.42;
+    if (layout === 'hook') {
+      tl.fromTo(scene, { opacity: 0, scale: 1.06 }, { opacity: 1, scale: 1, duration: 0.50, ease: EASE.pop }, start);
+    } else if (layout === 'stat-hero' || layout === 'callout') {
+      tl.fromTo(scene, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: ENTER_DUR, ease: EASE.slide }, start);
+    } else if (layout === 'big-quote') {
+      tl.fromTo(scene, { opacity: 0, scale: 1.10 }, { opacity: 1, scale: 1, duration: 0.50, ease: EASE.pop }, start);
+    } else if (layout === 'engagement-question') {
+      tl.fromTo(scene, { opacity: 0, scale: 0.90 }, { opacity: 1, scale: 1, duration: 0.50, ease: "back.out(1.7)" }, start);
+    } else if (layout === 'outro') {
+      tl.fromTo(scene, { opacity: 0, scale: 0.94 }, { opacity: 1, scale: 1, duration: 0.55, ease: EASE.drawIn }, start);
+    } else {
+      tl.fromTo(scene, { opacity: 0 }, { opacity: 1, duration: FADE, ease: EASE.drawIn }, start);
+    }
+
+    // Scene exit — scale-down + fade for mid scenes (Phase 1 visual overhaul)
     const fadeOutStart = isLast ? Math.max(start + 0.01, start + dur - FADE) : start + dur;
-    tl.to(scene, { opacity: 0, duration: FADE, ease: EASE.drawIn }, fadeOutStart);
+    if (!isLast) {
+      tl.to(scene, { opacity: 0, scale: 0.94, duration: FADE + 0.15, ease: EASE.drawIn }, fadeOutStart);
+    } else {
+      tl.to(scene, { opacity: 0, duration: FADE, ease: EASE.drawIn }, fadeOutStart);
+    }
 
     if (layout === "hook") {
       animateHook(scene, tl, start);
@@ -75,8 +95,8 @@ const EASE = {
     words.forEach((w, i) => {
       tl.fromTo(
         w,
-        { y: 60, opacity: 0 },
-        { y: 0, opacity: 1, duration: wordDur, ease: EASE.reveal },
+        { y: 40, opacity: 0, scale: 0.88, rotation: -3 },
+        { y: 0, opacity: 1, scale: 1, rotation: 0, duration: wordDur, ease: EASE.reveal },
         baseStart + i * perWordStagger
       );
     });
@@ -125,12 +145,37 @@ const EASE = {
     if (lbTop) tl.fromTo(lbTop, { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: 0.5, ease: EASE.drawIn }, start);
     if (lbBot) tl.fromTo(lbBot, { opacity: 0, y: 30 },  { opacity: 1, y: 0, duration: 0.5, ease: EASE.drawIn }, start);
 
-    // Eyebrow chip
+    // BIG STAT — punchy scale-in at ~0.12s, owns the hook. When present,
+    // headline word reveal is delayed so the eye lands on bigStat first.
+    const bigStat = scene.querySelector(".hook-bigstat");
+    const headlineOffset = bigStat ? 0.95 : 0.5;
+    if (bigStat) {
+      // Phase 2: more dramatic entrance — smaller initial scale + rotation + bounce
+      tl.fromTo(
+        bigStat,
+        { opacity: 0, scale: 0.25, rotation: -8 },
+        { opacity: 1, scale: 1.0, rotation: 0, duration: 0.65, ease: "back.out(3.0)" },
+        start + 0.10,
+      );
+      // Dramatic double-pump emphasis after landing
+      tl.to(bigStat, { scale: 1.08, duration: 0.12, ease: "power2.in" }, start + 0.80);
+      tl.to(bigStat, { scale: 0.97, duration: 0.10, ease: "power2.out" }, start + 0.92);
+      tl.to(bigStat, { scale: 1.03, duration: 0.15, ease: "sine.out" }, start + 1.02);
+      tl.to(bigStat, { scale: 1.0, duration: 0.20, ease: "sine.inOut" }, start + 1.17);
+    }
+
+    // Eyebrow chip — delayed so it appears AFTER the hook lands
     const eyebrow = scene.querySelector(".hook-eyebrow");
-    if (eyebrow) tl.fromTo(eyebrow, { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.4, ease: EASE.slide }, start + 0.25);
+    if (eyebrow) tl.fromTo(eyebrow, { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.4, ease: EASE.slide }, start + 1.6);
 
     // Per-word reveal on headline
-    const wordEnd = animateWords(scene, ".hook-headline .hh-word", start + 0.5, 0.07, 0.5);
+    const wordEnd = animateWords(scene, ".hook-headline .hh-word", start + headlineOffset, 0.07, 0.5);
+
+    // Hook gold divider line — draws in between bigstat and headline
+    const dividerLine = scene.querySelector(".hook-divider-line");
+    if (dividerLine) {
+      tl.fromTo(dividerLine, { scaleX: 0, opacity: 0 }, { scaleX: 1, opacity: 1, duration: 0.45, ease: EASE.drawIn }, start + headlineOffset - 0.15);
+    }
 
     // Shimmer sweep after words land
     const headlineEl = scene.querySelector(".hook-headline");
@@ -143,6 +188,18 @@ const EASE = {
     const subhead = scene.querySelector(".hook-subhead");
     if (subhead) tl.fromTo(subhead, { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: EASE.slide }, wordEnd);
     animateUnderline(scene, ".hook-subhead .draw-underline", wordEnd + 0.4, 0.55);
+
+    // Hook bottom accent — diamond + lines fade in late
+    const bottomAccent = scene.querySelector(".hook-bottom-accent");
+    if (bottomAccent) {
+      tl.fromTo(bottomAccent, { opacity: 0, y: 15 }, { opacity: 0.7, y: 0, duration: 0.55, ease: EASE.slide }, wordEnd + 0.3);
+    }
+
+    // Brand Logo/Header slide-in from top-left (persistent shell logo element)
+    const brandHeader = document.querySelector(".brand-shell-header");
+    if (brandHeader) {
+      tl.fromTo(brandHeader, { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.5, ease: EASE.slide }, start + 1.5);
+    }
   }
 
   // ── COMPARISON ────────────────────────────────────────────────────────
@@ -202,82 +259,102 @@ const EASE = {
 
   // ── STAT HERO ─────────────────────────────────────────────────────────
   function animateStatHero(scene, tl, start) {
+    // v4 (2026-05-26): FULL-BLEED image (subtle Ken Burns) + lower-safe-zone
+    // content panel. Kinetic moment is the value pop.
+
+    // 1. Image — fade in only (Ken Burns is handled via CSS animation class on bg)
+    // We do NOT animate scale here to prevent overriding CSS keyframes.
+    const imageCard = scene.querySelector(".stat-hero-image-card");
+    if (imageCard) {
+      tl.fromTo(
+        imageCard,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.55, ease: EASE.drawIn },
+        start + 0.0
+      );
+    }
+
+    // 2. Value — overshoot scale-in for POP (ease back.out(2.5), duration 0.7s at start + 0.3)
     const value = scene.querySelector(".stat-value");
     const hasCounter = value && value.dataset.counterTo;
-
     if (value) {
       tl.fromTo(
         value,
-        { scale: 0.4, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 0.65, ease: EASE.pop },
-        start + 0.15
+        { scale: 0.3, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.7, ease: "back.out(2.5)" },
+        start + 0.3
       );
-      const mask = value.querySelector(".shimmer-mask");
-      if (mask) tl.fromTo(mask, { x: "-120%" }, { x: "120%", duration: 1.1, ease: EASE.drawIn }, start + 0.9);
     }
-
     if (hasCounter) {
-      animateCounter(scene, start + 0.2);
+      animateCounter(scene, start + 0.3);
     }
 
-    // Accent ring fade-in
-    const ring = scene.querySelector(".stat-ring");
-    if (ring) {
-      tl.fromTo(ring, { opacity: 0 }, { opacity: 1, duration: 0.6, ease: EASE.drawIn }, start + 0.35);
+    // 3. Divider — draws in between value and label at start + 0.8
+    const divider = scene.querySelector(".sh2-divider");
+    if (divider) {
+      tl.fromTo(
+        divider,
+        { scaleX: 0, opacity: 0 },
+        { scaleX: 1, opacity: 1, duration: 0.5, ease: EASE.slide },
+        start + 0.8
+      );
     }
 
-    // SVG progress arc — fills around the number
-    const arc = scene.querySelector(".stat-arc");
-    const arcFill = scene.querySelector(".stat-arc-fill");
-    if (arc) tl.fromTo(arc, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: EASE.drawIn }, start + 0.3);
-    if (arcFill) {
-      // Circumference of r=148 is 930. Fill on a count-up: dashoffset 930 → 0.
-      tl.fromTo(arcFill, { strokeDashoffset: 930 }, { strokeDashoffset: 0, duration: 1.2, ease: EASE.pop }, start + 0.4);
-    }
-
-    // FX burst flash
-    flashFx(scene, ".fx.particle-burst", start + 0.55, 0.55, 0.5);
-
+    // 4. Label fade-up + slide at start + 1.0
     const label = scene.querySelector(".stat-label");
     if (label) {
-      tl.fromTo(label, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: EASE.slide }, start + 0.85);
+      tl.fromTo(
+        label,
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.45, ease: EASE.slide },
+        start + 1.0
+      );
     }
-    animateUnderline(scene, ".stat-label .draw-underline", start + 1.15, 0.6);
 
-    const highlights = scene.querySelectorAll(".stat-highlight");
-    highlights.forEach((h, i) => {
-      tl.fromTo(h, { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: EASE.slide }, start + 1.3 + i * 0.13);
-    });
-
+    // 5. Context badge fade-up last at start + 1.15
     const context = scene.querySelector(".stat-context");
     if (context) {
-      const ctxStart = start + 1.4 + highlights.length * 0.13;
-      tl.fromTo(context, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: EASE.slide }, ctxStart);
+      tl.fromTo(
+        context,
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.4, ease: EASE.slide },
+        start + 1.15
+      );
     }
+
+    // 6. Highlights stagger slide-in from left/scale-pop (~120ms apart) starting at start + 1.35
+    const highlights = scene.querySelectorAll(".stat-highlight");
+    highlights.forEach((h, i) => {
+      tl.fromTo(
+        h,
+        { scale: 0.5, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(1.6)" },
+        start + 1.35 + i * 0.12
+      );
+    });
   }
 
   // ── ENGAGEMENT QUESTION ───────────────────────────────────────────────
   function animateEngagementQuestion(scene, tl, start) {
     const card = scene.querySelector(".eq-card");
     if (card) {
-      tl.fromTo(card, { y: 50, scale: 0.94, opacity: 0 }, { y: 0, scale: 1, opacity: 1, duration: 0.6, ease: EASE.pop }, start + 0.2);
+      tl.fromTo(card, { y: 40, scale: 0.9, opacity: 0 }, { y: 0, scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.8)" }, start + 0.2);
     }
     const tag = scene.querySelector(".eq-tag");
     if (tag) {
-      tl.fromTo(tag, { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: EASE.pop }, start + 0.5);
+      tl.fromTo(tag, { scale: 0.85, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(1.5)" }, start + 0.5);
     }
     // Word-by-word question reveal
-    const wordEnd = animateWords(scene, ".eq-question .eq-word", start + 0.7, 0.05, 0.4);
+    const wordEnd = animateWords(scene, ".eq-question .eq-word", start + 0.65, 0.055, 0.28);
     // Divider draw-in once question is in
     const divider = scene.querySelector(".eq-divider");
     if (divider) {
-      tl.set(divider, { opacity: 1 }, wordEnd + 0.05);
-      tl.fromTo(divider, { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: EASE.drawIn }, wordEnd + 0.05);
+      tl.fromTo(divider, { scaleX: 0, opacity: 0 }, { scaleX: 1, opacity: 1, duration: 0.4, ease: EASE.slide }, start + 1.2);
     }
     // CTA pill last
     const cta = scene.querySelector(".eq-cta");
     if (cta) {
-      tl.fromTo(cta, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: EASE.pop }, wordEnd + 0.35);
+      tl.fromTo(cta, { y: 15, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: EASE.slide }, start + 1.4);
     }
   }
 
@@ -286,35 +363,33 @@ const EASE = {
     // Header — eyebrow stroke, title, formation label
     const eyebrow = scene.querySelector(".fp-eyebrow");
     if (eyebrow) {
-      tl.fromTo(eyebrow, { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: EASE.drawIn }, start + 0.05);
+      tl.fromTo(eyebrow, { scaleX: 0 }, { scaleX: 1, duration: 0.4, ease: EASE.slide }, start + 0.1);
     }
     const title = scene.querySelector(".fp-title");
     if (title) {
-      tl.fromTo(title, { y: -18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: EASE.slide }, start + 0.2);
+      tl.fromTo(title, { opacity: 0 }, { opacity: 1, duration: 0.45, ease: EASE.slide }, start + 0.2);
     }
     const formation = scene.querySelector(".fp-formation");
     if (formation) {
-      tl.fromTo(formation, { scale: 0.7, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: EASE.pop }, start + 0.4);
+      tl.fromTo(formation, { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.5)" }, start + 0.35);
     }
     // Pitch fades + scales into place
     const pitch = scene.querySelector(".fp-pitch");
     if (pitch) {
-      tl.fromTo(pitch, { scale: 0.94, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.55, ease: EASE.pop }, start + 0.55);
+      tl.fromTo(pitch, { scale: 0.95, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: EASE.slide }, start + 0.5);
     }
-    // Players cascade in from back (GK row) → forward (ST row).
-    // data-row counts from 0 = first row in DOM, which (with column-reverse)
-    // sits at the BOTTOM of the pitch → that's the GK row in our convention.
+    // Players cascade in from back (GK row) → forward (ST row) with soccer-specific grid alignment
     const rows = scene.querySelectorAll(".fp-row");
-    const ROW_DELAY = 0.18;
-    const TOKEN_STAGGER = 0.06;
+    const ROW_DELAY = 0.15;
+    const TOKEN_STAGGER = 0.05;
     rows.forEach((row, rowIdx) => {
       const tokens = row.querySelectorAll(".fp-player");
-      const rowStart = start + 1.0 + rowIdx * ROW_DELAY;
+      const rowStart = start + 0.7 + rowIdx * ROW_DELAY;
       tokens.forEach((p, i) => {
         tl.fromTo(
           p,
-          { y: 24, scale: 0.55, opacity: 0 },
-          { y: 0, scale: 1, opacity: 1, duration: 0.45, ease: EASE.pop },
+          { scale: 0.5, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 0.35, ease: "back.out(1.5)" },
           rowStart + i * TOKEN_STAGGER,
         );
       });
@@ -338,54 +413,70 @@ const EASE = {
     cards.forEach((card, i) => {
       tl.fromTo(
         card,
-        { x: 80, opacity: 0 },
-        { x: 0, opacity: 1, duration: 0.5, ease: EASE.pop },
-        start + 0.55 + i * 0.16
+        { x: 80, opacity: 0, scale: 0.92 },
+        { x: 0, opacity: 1, scale: 1, duration: 0.55, ease: "back.out(1.4)" },
+        start + 0.55 + i * 0.18
       );
     });
   }
 
-  // ── CALLOUT ───────────────────────────────────────────────────────────
+  // ── CALLOUT v3 (full-bleed image + lower content panel) ───────────────
   function animateCallout(scene, tl, start) {
-    const card = scene.querySelector(".callout-card");
-    if (card) {
-      tl.fromTo(card, { y: 60, scale: 0.94, opacity: 0 }, { y: 0, scale: 1, opacity: 1, duration: 0.6, ease: EASE.pop }, start + 0.2);
+    // v3 (2026-05-26): full-bleed image fades in, content panel in lower
+    // safe zone slides up, tag pill bounces, statement word-by-word reveals.
+
+    // 1. Image fade-in (no scale animation to prevent overriding CSS keyframes)
+    const imageCard = scene.querySelector(".callout-image-card");
+    if (imageCard) {
+      tl.fromTo(
+        imageCard,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.65, ease: EASE.drawIn },
+        start + 0.0
+      );
     }
-    // Accent bars draw in
-    const accentTop = scene.querySelector(".callout-accent-top");
-    const accentBot = scene.querySelector(".callout-accent-bottom");
-    if (accentTop) {
-      tl.set(accentTop, { opacity: 1 }, start + 0.55);
-      tl.fromTo(accentTop, { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: EASE.drawIn }, start + 0.55);
+
+    // 2. Content panel slide-up + fade (subtle backdrop slide)
+    const content = scene.querySelector(".callout-content");
+    if (content) {
+      tl.fromTo(
+        content,
+        { y: 15, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.40, ease: EASE.drawIn },
+        start + 0.10
+      );
     }
-    if (accentBot) {
-      tl.set(accentBot, { opacity: 1 }, start + 0.6);
-      tl.fromTo(accentBot, { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: EASE.drawIn }, start + 0.6);
-    }
-    // Tag bounce-in
+
+    // 3. Tag pill scale-bounce
     const tag = scene.querySelector(".callout-tag");
     if (tag) {
-      tl.fromTo(tag, { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: EASE.pop }, start + 0.45);
+      tl.fromTo(
+        tag,
+        { scale: 0.9, opacity: 0, y: 15 },
+        { scale: 1, opacity: 1, y: 0, duration: 0.45, ease: "back.out(1.5)" },
+        start + 0.2
+      );
     }
-    // Word reveal on statement
-    animateWords(scene, ".callout-statement .co-word", start + 0.7, 0.06, 0.45);
+
+    // 4. Statement word-by-word reveal (aligned to 0.5s start and 0.3s word duration)
+    animateWords(scene, ".callout-statement .co-word", start + 0.5, 0.06, 0.30);
   }
 
   // ── BIG QUOTE ─────────────────────────────────────────────────────────
   function animateBigQuote(scene, tl, start) {
     const card = scene.querySelector(".bq-card");
     if (card) {
-      tl.fromTo(card, { y: 80, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: EASE.pop }, start + 0.2);
+      tl.fromTo(card, { y: 60, opacity: 0, scale: 0.92 }, { y: 0, opacity: 1, scale: 1, duration: 0.65, ease: "back.out(1.5)" }, start + 0.2);
     }
     const mark = scene.querySelector(".bq-mark");
     if (mark) {
-      tl.fromTo(mark, { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: EASE.pop }, start + 0.45);
+      tl.fromTo(mark, { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(2.0)" }, start + 0.4);
     }
-    const wordEnd = animateWords(scene, ".bq-quote .bq-word", start + 0.7, 0.05, 0.4);
+    animateWords(scene, ".bq-quote .bq-word", start + 0.6, 0.06, 0.30);
 
     const attribution = scene.querySelector(".bq-attribution");
     if (attribution) {
-      tl.fromTo(attribution, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: EASE.slide }, wordEnd + 0.1);
+      tl.fromTo(attribution, { y: 15, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: EASE.slide }, start + 1.5);
     }
   }
 
@@ -393,19 +484,21 @@ const EASE = {
   function animateTimeline(scene, tl, start) {
     const title = scene.querySelector(".tl-title");
     if (title) {
-      tl.fromTo(title, { y: -30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, ease: EASE.slide }, start + 0.15);
+      tl.fromTo(title, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: EASE.slide }, start + 0.1);
     }
     const spine = scene.querySelector(".tl-spine");
     if (spine) {
-      tl.fromTo(spine, { scaleY: 0 }, { scaleY: 1, duration: 0.8, ease: EASE.drawIn }, start + 0.5);
+      tl.fromTo(spine, { scaleY: 0 }, { scaleY: 1, duration: 0.8, ease: EASE.slide }, start + 0.3);
     }
     const items = scene.querySelectorAll(".tl-item");
     items.forEach((it, i) => {
+      const isOdd = i % 2 === 0;
+      const slideX = isOdd ? -30 : 30;
       tl.fromTo(
         it,
-        { x: -40, opacity: 0 },
-        { x: 0, opacity: 1, duration: 0.5, ease: EASE.pop },
-        start + 0.9 + i * 0.22
+        { x: slideX, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.5, ease: "back.out(1.3)" },
+        start + 0.6 + i * 0.2
       );
     });
   }
@@ -414,15 +507,15 @@ const EASE = {
   function animateOutro(scene, tl, start, dur) {
     const cta = scene.querySelector(".out-cta-top");
     if (cta) {
-      tl.fromTo(cta, { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: 0.5, ease: EASE.pop }, start + 0.2);
+      tl.fromTo(cta, { opacity: 0, scale: 0.92 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.5)" }, start + 0.2);
     }
     const channel = scene.querySelector(".out-channel");
     if (channel) {
-      tl.fromTo(channel, { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.6, ease: EASE.pop }, start + 0.55);
+      tl.fromTo(channel, { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: EASE.slide }, start + 0.5);
     }
     const underline = scene.querySelector(".out-underline");
     if (underline) {
-      tl.fromTo(underline, { width: 0 }, { width: "600px", duration: 0.55, ease: EASE.drawIn }, start + 0.95);
+      tl.fromTo(underline, { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: EASE.slide }, start + 0.8);
     }
     const source = scene.querySelector(".out-source");
     if (source) {
@@ -434,26 +527,43 @@ const EASE = {
     if (ttCard) {
       const ttBtn      = scene.querySelector("#tt-follow-btn");
       const ttFollow   = scene.querySelector("#tt-btn-follow");
-      const ttFollwing = scene.querySelector("#tt-btn-following");
-      const ttBase     = start + 1.6;
+      const ttFollowing = scene.querySelector("#tt-btn-following");
+      const ttBase     = start + 1.1;
 
       tl.fromTo(ttCard,
-        { opacity: 0, y: 300 },
-        { opacity: 1, y: 0, duration: 0.55, ease: EASE.pop },
+        { opacity: 0, y: 150, scale: 1 },
+        { opacity: 1, y: 0, duration: 0.55, ease: "back.out(1.5)" },
         ttBase
       );
 
       if (ttBtn) {
-        tl.to(ttBtn, { scale: 0.92, duration: 0.15 }, ttBase + 0.9);
-        tl.to(ttBtn, { scale: 1, duration: 0.4, ease: EASE.pop }, ttBase + 1.05);
+        tl.to(ttBtn, { scale: 0.88, duration: 0.12 }, start + 1.9);
+        tl.to(ttBtn, { scale: 1, duration: 0.3, ease: "back.out(1.8)" }, start + 2.02);
       }
-      if (ttFollow)   tl.to(ttFollow,   { opacity: 0, duration: 0.08 }, ttBase + 1.05);
-      if (ttFollwing) tl.to(ttFollwing, { opacity: 1, duration: 0.08 }, ttBase + 1.08);
+      if (ttFollow)   tl.to(ttFollow,   { opacity: 0, duration: 0.06 }, start + 2.02);
+      if (ttFollowing) tl.to(ttFollowing, { opacity: 1, duration: 0.06 }, start + 2.05);
 
-      const holdStart = ttBase + 1.3;
+      const holdStart = start + 2.2;
       const holdEnd   = start + dur - 0.1;
       const holdLen   = Math.max(0.5, holdEnd - holdStart);
-      tl.to(ttCard, { scale: 1.08, duration: holdLen }, holdStart);
+      tl.to(ttCard, { scale: 1.05, duration: holdLen, ease: "sine.out" }, holdStart);
     }
+  }
+
+  // ── PROGRESS BAR ANIMATION ──────────────────────────────────────────────
+  // Sync progress-fill width and progress-dot position with scene timeline.
+  const progressFill = document.getElementById("progress-fill");
+  const progressDot  = document.getElementById("progress-dot");
+  if (progressFill && progressDot && scenes.length > 0) {
+    const totalDur = parseFloat(stage.dataset.duration) || 1;
+    scenes.forEach((scene) => {
+      const sStart = parseFloat(scene.dataset.start);
+      const sDur   = parseFloat(scene.dataset.duration);
+      const endPct = ((sStart + sDur) / totalDur) * 100;
+      const pctStr = Math.min(100, endPct).toFixed(1) + "%";
+      // Animate fill width to reach scene end percentage
+      tl.to(progressFill, { width: pctStr, duration: sDur, ease: "none" }, sStart);
+      tl.to(progressDot,  { left: pctStr, duration: sDur, ease: "none" }, sStart);
+    });
   }
 })();

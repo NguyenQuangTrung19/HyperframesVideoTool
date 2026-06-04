@@ -29,7 +29,7 @@ describe("composeHtml", () => {
     expect(html).toContain('data-start="0"');           // root composition timing
     expect(html).toContain('id="voice"');               // audio element discoverable by hyperframes
     expect(html).toContain('class="scene clip"');       // clip class required for hyperframes visibility
-    expect(html).toContain('window.__timelines');       // timeline registry (inlined JS)
+    expect(html).toContain('src="animations.js"');       // timeline registry (external JS)
 
     // ── Persistent brand shell ────────────────────────────────
     expect(html).toContain('class="brand-shell-header"');
@@ -51,7 +51,7 @@ describe("composeHtml", () => {
     // ── Body templates ─────────────────────────────────────────
     // body-1: stat-hero
     expect(html).toContain('data-layout="stat-hero"');
-    expect(html).toContain('class="stat-value shimmer-sweep-target"');
+    expect(html).toContain('class="stat-value"');
     expect(html).toContain('class="stat-label"');
     expect(html).toContain("200MP");
 
@@ -63,14 +63,13 @@ describe("composeHtml", () => {
 
     // body-3: callout
     expect(html).toContain('data-layout="callout"');
-    expect(html).toContain('class="callout-card"');
+    expect(html).toContain('class="layout-callout"');
     expect(html).toContain('class="callout-statement"');
 
     // ── Outro scene ────────────────────────────────────────────
     expect(html).toContain('data-layout="outro"');
     expect(html).toContain('class="out-channel"');
     expect(html).toContain('class="out-underline"');
-    expect(html).toContain('class="out-source"');
     expect(html).toContain("Theo dõi ngay");            // ctaTop content
     expect(html).toContain('class="out-cta-top"');
 

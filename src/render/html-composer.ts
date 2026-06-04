@@ -97,9 +97,42 @@ export function composeHtml(args: ComposeArgs): string {
 // ── PERSISTENT SHELL ───────────────────────────────────────────────────────
 function renderShell(metadata: Script["metadata"], avatarRelPath: string): string {
   const channel = escapeHtml(metadata.channel);
+  // Particles HTML — 20 random floating dots generated at build time
+  const particleCount = 20;
+  const particleColors = [
+    'rgba(16,185,129,0.35)', 'rgba(196,163,90,0.30)',
+    'rgba(5,150,105,0.25)', 'rgba(255,255,255,0.20)',
+  ];
+  const particlesHtml = Array.from({ length: particleCount }, (_, i) => {
+    const size = 3 + Math.round(Math.random() * 6);
+    const left = Math.round(Math.random() * 100);
+    const dur = 10 + Math.round(Math.random() * 15);
+    const delay = Math.round(Math.random() * 12);
+    const color = particleColors[i % particleColors.length];
+    return `<div class="particle" style="width:${size}px;height:${size}px;left:${left}%;background:${color};box-shadow:0 0 ${size * 2}px ${color};animation-duration:${dur}s;animation-delay:${delay}s;"></div>`;
+  }).join('');
+
   return `
 <!-- Shell: persistent brand elements (no data-start → always visible) -->
-<div class="shell-bg"></div>
+<div class="shell-bg">
+  <div class="glow-orb glow-orb-1"></div>
+  <div class="glow-orb glow-orb-2"></div>
+  <div class="glow-orb glow-orb-3"></div>
+</div>
+
+<div class="dot-grid-layer"></div>
+
+<div class="particles-layer">${particlesHtml}</div>
+
+<div class="corner-accent corner-tl"></div>
+<div class="corner-accent corner-tr"></div>
+<div class="corner-accent corner-bl"></div>
+<div class="corner-accent corner-br"></div>
+
+<div class="progress-bar">
+  <div class="progress-fill" id="progress-fill"></div>
+  <div class="progress-dot" id="progress-dot"></div>
+</div>
 
 <div class="brand-shell-header">
   <div class="brand-icon"><img src="${escapeHtml(avatarRelPath)}" alt="${escapeHtml(metadata.channel)}" crossorigin="anonymous" /></div>
@@ -206,15 +239,30 @@ function renderHookInner(
 
   const headline = wrapWordsWithBreaks(td.headline, "hh-word");
   const subhead = td.subhead ? escapeHtmlWithBreaks(td.subhead) : "";
+  const bigStat = td.bigStat ? escapeHtml(td.bigStat) : "";
+
+  // Brand eyebrow is suppressed when bigStat is set — the big number
+  // owns the top of frame in that case. Otherwise the eyebrow is still
+  // rendered (animation timeline fades it in late, after the hook lands).
+  const eyebrowHtml = bigStat
+    ? ""
+    : `<div class="hook-eyebrow"><span class="hook-eyebrow-dot"></span><span class="hook-eyebrow-text">Sports For All TV</span></div>`;
 
   return `${bgHtml}
   <div class="bg-grade-overlay"></div>
   <div class="hook-letterbox hook-letterbox-top"></div>
   <div class="hook-letterbox hook-letterbox-bottom"></div>
   <div class="layout-hook">
-    <div class="hook-eyebrow"><span class="hook-eyebrow-dot"></span><span class="hook-eyebrow-text">Sports For All TV</span></div>
+    ${eyebrowHtml}
+    ${bigStat ? `<div class="hook-bigstat" data-len="${td.bigStat!.length}">${bigStat}</div>` : ""}
+    <div class="hook-divider-line"></div>
     <div class="hook-headline shimmer-sweep-target">${headline}</div>
     ${subhead ? `<div class="hook-subhead">${subhead}<div class="draw-underline draw-cyan"></div></div>` : ""}
+  </div>
+  <div class="hook-bottom-accent">
+    <div class="hook-bottom-line"></div>
+    <div class="hook-bottom-diamond"></div>
+    <div class="hook-bottom-line"></div>
   </div>`;
 }
 
@@ -292,11 +340,23 @@ function renderComparisonInner(td: Extract<TemplateDataType, { template: "compar
 </div>`.trim();
 }
 
-// ── STAT HERO SCENE ────────────────────────────────────────────────────────
+// ── STAT HERO SCENE (v2 — photo-hero top + text stack below) ──────────────
+// Redesigned 2026-05-26 per visual-overhaul slide-deck pivot.
+// - Image is a HERO ROUNDED CARD (≈63% width, ≈48% height) in upper frame,
+//   not a fullbleed background. User feedback: images must be VISIBLY dominant.
+// - Text content stacks below (value HUGE, label, highlights, context).
+// - Kinetic entry (scale + fade) for stop-scroll on info-dense slides.
+// - Premium dark backdrop (radial deep-navy), no fullbleed photo blur.
 function renderStatHeroInner(
   td: Extract<TemplateDataType, { template: "stat-hero" }>,
   sceneImageRelPath: string | null,
 ): string {
+  const bgHtml = sceneImageRelPath
+    ? `<div class="bg kb-zoom-in" style="background-image: url('${sceneImageRelPath}')"></div>
+  <div class="overlay" style="opacity: 0.3"></div>
+  <div class="bg-grade-overlay" style="background: radial-gradient(ellipse 80% 70% at 50% 40%, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.7) 60%, rgba(0,0,0,0.82) 100%)"></div>`
+    : `<div class="bg gradient-forest"></div>`;
+
   const context = td.context ? `<div class="stat-context">${escapeHtml(td.context)}</div>` : "";
   const highlights = td.highlights && td.highlights.length > 0
     ? `<div class="stat-highlights">
@@ -305,27 +365,24 @@ function renderStatHeroInner(
     )).join("\n    ")}
   </div>`
     : "";
-  // Lighter overlay (0.4) — stat content lives inside its own solid badge,
-  // so the upper portrait can keep colour and punch.
-  const bg = bgWithImageOrGradient(sceneImageRelPath, "kb-zoom-in", 0.4);
   const counter = pickCounterTarget(td.value);
   const counterAttr = counter !== null ? ` data-counter-to="${counter}"` : "";
   const initialText = counter !== null ? "0" : escapeHtml(td.value);
-  return `${bg}
-<div class="bg-grade-overlay"></div>
-<div class="layout-stat-hero">
-  <div class="stat-value shimmer-sweep-target"${counterAttr}>
-    <div class="stat-ring"></div>
-    <svg class="stat-arc" viewBox="-170 -170 340 340" aria-hidden="true">
-      <circle class="stat-arc-track" r="148" cx="0" cy="0" fill="none"></circle>
-      <circle class="stat-arc-fill"  r="148" cx="0" cy="0" fill="none" transform="rotate(-90)"></circle>
-    </svg>
-    <span class="stat-value-text">${initialText}</span>
+  return `${bgHtml}
+<div class="layout-stat-hero stat-hero-v2">
+  <div class="stat-hero-content">
+    <div class="stat-value"${counterAttr}>
+      <span class="stat-value-text">${initialText}</span>
+    </div>
+    <div class="sh2-divider">
+      <div class="sh2-div-line"></div>
+      <div class="sh2-div-diamond"></div>
+      <div class="sh2-div-line"></div>
+    </div>
+    <div class="stat-label">${escapeHtmlWithBreaks(td.label)}</div>
+    ${highlights}
+    ${context}
   </div>
-  <div class="stat-label">${escapeHtmlWithBreaks(td.label)}<div class="draw-underline draw-cyan"></div></div>
-  ${highlights}
-  ${context}
-  <div class="fx particle-burst"></div>
 </div>`.trim();
 }
 
@@ -355,23 +412,25 @@ function renderFeatureListInner(td: Extract<TemplateDataType, { template: "featu
 </div>`.trim();
 }
 
-// ── CALLOUT SCENE ──────────────────────────────────────────────────────────
+// ── CALLOUT SCENE (v2 — image card top + quote-style statement below) ────
+// Redesigned 2026-05-26 per visual-overhaul slide-deck pivot. Premium-slow
+// staggered entries — image fade-up first, tag scale-in, statement word-reveal.
 function renderCalloutInner(
   td: Extract<TemplateDataType, { template: "callout" }>,
   sceneImageRelPath: string | null,
 ): string {
+  const bgHtml = sceneImageRelPath
+    ? `<div class="bg kb-zoom-in" style="background-image: url('${sceneImageRelPath}')"></div>
+  <div class="overlay" style="opacity: 0.35"></div>
+  <div class="bg-grade-overlay" style="background: radial-gradient(ellipse 80% 70% at 50% 50%, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.65) 60%, rgba(0,0,0,0.8) 100%)"></div>`
+    : `<div class="bg gradient-cream"></div>`;
+
   const tag = td.tag ? `<div class="callout-tag">${escapeHtml(td.tag)}</div>` : "";
-  // Callout already has a card with its own bg → keep overlay light so the
-  // press photo behind retains saturation and punch.
-  const bg = bgWithImageOrGradient(sceneImageRelPath, "kb-zoom-in", 0.4);
-  return `${bg}
-<div class="bg-grade-overlay"></div>
+  return `${bgHtml}
 <div class="layout-callout">
-  <div class="callout-card">
-    <div class="callout-accent-top"></div>
+  <div class="callout-content">
     ${tag}
     <div class="callout-statement">${wrapWordsWithBreaks(td.statement, "co-word")}</div>
-    <div class="callout-accent-bottom"></div>
   </div>
 </div>`.trim();
 }
@@ -476,17 +535,21 @@ function renderEngagementQuestionInner(
 function renderTimelineInner(td: Extract<TemplateDataType, { template: "timeline" }>): string {
   const items = td.items.map((it, i) => `
     <div class="tl-item" data-idx="${i}">
-      <div class="tl-year">${escapeHtml(it.year)}</div>
+      <div class="tl-card">
+        <div class="tl-year">${escapeHtml(it.year)}</div>
+        <div class="tl-event">${escapeHtml(it.event)}</div>
+      </div>
+      <div class="tl-connector"></div>
       <div class="tl-dot"></div>
-      <div class="tl-event">${escapeHtml(it.event)}</div>
     </div>`).join("\n  ");
 
   return `
 <div class="bg gradient-news-dark"></div>
 <div class="layout-timeline">
   <div class="tl-title">${escapeHtmlWithBreaks(td.title)}</div>
-  <div class="tl-spine"></div>
-  <div class="tl-items">${items}
+  <div class="tl-items">
+    <div class="tl-spine"></div>
+    ${items}
   </div>
 </div>`.trim();
 }
@@ -503,7 +566,6 @@ function renderOutroInner(
   <div class="out-cta-top">${escapeHtml(td.ctaTop)}</div>
   <div class="out-channel">${escapeHtml(td.channelName)}</div>
   <div class="out-underline"></div>
-  <div class="out-source">Nguồn: ${escapeHtml(td.source)}</div>
 </div>
 ${ttCard}`.trim();
 }
