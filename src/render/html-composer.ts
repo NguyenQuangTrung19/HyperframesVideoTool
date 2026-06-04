@@ -215,7 +215,7 @@ function renderScene(
 }
 
 /** Renders a Ken-Burns photo bg + dark overlay, or a gradient fallback. */
-function bgWithImageOrGradient(imageRelPath: string | null, kbClass = "kb-zoom-in", overlayOpacity = 0.55): string {
+function bgWithImageOrGradient(imageRelPath: string | null, kbClass = "kb-zoom-in", overlayOpacity = 0.20): string {
   if (imageRelPath) {
     return `<div class="bg ${kbClass}" style="background-image: url('${imageRelPath}')"></div>
   <div class="overlay" style="opacity: ${overlayOpacity}"></div>`;
@@ -232,7 +232,7 @@ function renderHookInner(
   if (sceneImageRelPath) {
     const kbClass = `kb-${td.kenBurns ?? "zoom-in"}`;
     bgHtml = `<div class="bg ${kbClass}" style="background-image: url('${sceneImageRelPath}')"></div>
-  <div class="overlay" style="opacity: 0.55"></div>`;
+  <div class="overlay" style="opacity: 0.05"></div>`;
   } else {
     bgHtml = `<div class="bg gradient-news-dark"></div>`;
   }
@@ -353,8 +353,8 @@ function renderStatHeroInner(
 ): string {
   const bgHtml = sceneImageRelPath
     ? `<div class="bg kb-zoom-in" style="background-image: url('${sceneImageRelPath}')"></div>
-  <div class="overlay" style="opacity: 0.3"></div>
-  <div class="bg-grade-overlay" style="background: radial-gradient(ellipse 80% 70% at 50% 40%, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.7) 60%, rgba(0,0,0,0.82) 100%)"></div>`
+  <div class="overlay" style="opacity: 0.03"></div>
+  <div class="bg-grade-overlay" style="background: radial-gradient(ellipse 80% 70% at 50% 40%, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.32) 60%, rgba(0,0,0,0.48) 100%)"></div>`
     : `<div class="bg gradient-forest"></div>`;
 
   const context = td.context ? `<div class="stat-context">${escapeHtml(td.context)}</div>` : "";
@@ -421,8 +421,8 @@ function renderCalloutInner(
 ): string {
   const bgHtml = sceneImageRelPath
     ? `<div class="bg kb-zoom-in" style="background-image: url('${sceneImageRelPath}')"></div>
-  <div class="overlay" style="opacity: 0.35"></div>
-  <div class="bg-grade-overlay" style="background: radial-gradient(ellipse 80% 70% at 50% 50%, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.65) 60%, rgba(0,0,0,0.8) 100%)"></div>`
+  <div class="overlay" style="opacity: 0.04"></div>
+  <div class="bg-grade-overlay" style="background: radial-gradient(ellipse 80% 70% at 50% 50%, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.28) 60%, rgba(0,0,0,0.42) 100%)"></div>`
     : `<div class="bg gradient-cream"></div>`;
 
   const tag = td.tag ? `<div class="callout-tag">${escapeHtml(td.tag)}</div>` : "";
