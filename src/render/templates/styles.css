@@ -403,11 +403,14 @@ html, body {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   animation: hf-gradient-shimmer 2.5s ease-in-out infinite;
-  line-height: 0.9; letter-spacing: -0.04em;
+  line-height: 1.25; letter-spacing: -0.04em;
   text-align: center;
   filter: drop-shadow(0 6px 20px rgba(139,105,20,0.5)) drop-shadow(0 0 60px rgba(196,163,90,0.3)) drop-shadow(0 10px 25px rgba(0,0,0,0.6));
   -webkit-text-stroke: 1px rgba(255,255,255,0.15);
-  margin-bottom: -16px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  margin-top: -50px;
+  margin-bottom: -66px;
   opacity: 0;
   transform: scale(0.4);
   transform-origin: center;
@@ -831,15 +834,18 @@ html, body {
   font-size: 260px;
   font-weight: 900;
   color: #c4a35a;
-  line-height: 0.85;
+  line-height: 1.25;
   letter-spacing: -0.04em;
   /* Use drop-shadow filter to prevent black clipping in headless Chrome */
   filter: drop-shadow(0 6px 24px rgba(139,105,20,0.6)) drop-shadow(0 0 80px rgba(196,163,90,0.25)) drop-shadow(0 12px 30px rgba(0,0,0,0.65));
   display: inline-block;
   position: relative;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  margin-top: -50px;
+  margin-bottom: -46px;
   opacity: 0;
   z-index: 6;
-  margin-bottom: 4px;
 }
 .layout-stat-hero.stat-hero-v2 .stat-value-text {
   display: inline-block;
@@ -849,6 +855,10 @@ html, body {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   animation: hf-gradient-shimmer 3s ease-in-out infinite;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  margin-top: -50px;
+  margin-bottom: -50px;
 }
 
 .layout-stat-hero.stat-hero-v2 .stat-label {
