@@ -1,0 +1,96 @@
+# Grok prompts — Sáu cuộc tranh cãi chọn người lớn nhất World Cup 2026
+
+8 ảnh cần tạo trên grok.com (Imagine, aspect ratio **9:16**), save về cùng folder này theo đúng tên file.
+
+---
+
+## [1] hook → `hook.png`
+
+**Subject:** Hook — 6 tranh cãi chọn người World Cup 2026
+
+```
+Vertical 9:16 football poster artwork. Centre composition: a low-angle silhouette of an elite international footballer in a generic national-team home kit hero pose, arms slightly outstretched, intense atmosphere. Background: a layered dark navy-and-gold graphic backdrop with a huge stylized FIFA World Cup trophy floating faintly as a glowing golden watermark, dramatic golden light rays radiating outward from behind the figure, faint stylized national-flag color bands (England red-and-white, Spain red-and-gold, Brazil yellow-and-green, Argentina sky-blue-and-white, France blue, Germany black-red-gold) flanking the composition as graphic accents along the side edges. Vibrant saturated palette with gold highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup tournament promotional poster. No on-image text or captions, no scoreboard graphics.
+```
+
+---
+
+## [2] england → `england.png` — Anh: Bellingham vs Rogers
+
+**Subject:** Anh — Bellingham vs Rogers (split-frame tranh suất tiền vệ tấn công)
+
+```
+Vertical 9:16 split-frame football poster artwork showing an England selection battle. Left half: Jude Bellingham, the English attacking midfielder for Real Madrid and the England national team, in a white England home kit with the Three Lions crest clearly visible on the chest, intense focused hero pose with arms wide. Behind him, a stylized white-and-red England graphic backdrop with a huge faint Three Lions crest watermark and radiating light rays. Right half: Morgan Rogers, the English attacking midfielder for Aston Villa and the England national team, in a white England home kit with the Three Lions crest clearly visible on the chest, confident mirroring hero pose mid-celebration. Behind him, a stylized white-and-claret England graphic backdrop with a huge faint Three Lions crest watermark and radiating light rays. Down the centre seam: a diagonal lightning-burst slash separator with dramatic energy glow. Vibrant saturated palette, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday rivalry promotional poster. Both England crests visible on the jerseys, no on-image text or captions, no scoreboard graphics.
+```
+
+---
+
+## [3] spain → `spain.png` — Tây Ban Nha: Unai Simon vs David Raya
+
+**Subject:** Tây Ban Nha — Unai Simon vs David Raya (tranh suất bắt chính)
+
+```
+Vertical 9:16 split-frame football poster artwork showing a Spain goalkeeper selection battle. Left half: Unai Simon, the Spanish goalkeeper for Athletic Club and the Spain national team, in a vivid Spain red-and-gold goalkeeper kit with the Spain national-team crest clearly visible on the chest and goalkeeper gloves raised in a confident hero pose. Behind him, a stylized red-and-gold Spain graphic backdrop with a huge faint Spain crest watermark and radiating light rays. Right half: David Raya, the Spanish goalkeeper for Arsenal and the Spain national team, in a contrasting Spain dark goalkeeper kit with the Spain national-team crest clearly visible on the chest, in a sharp diving-ready goalkeeper stance, gloves spread. Behind him, a stylized deep-red Spain graphic backdrop with a huge faint Spain crest watermark and radiating light rays. Down the centre seam: a diagonal lightning-burst slash separator with dramatic energy glow. Vibrant saturated red-and-gold palette, very high contrast, glossy graphic-design finish. Stylized like a World Cup goalkeeper-duel promotional poster. Both Spain crests visible on the jerseys, no on-image text or captions, no scoreboard graphics.
+```
+
+---
+
+## [4] brazil → `brazil.png` — Brazil: cuộc đua áo số 9
+
+**Subject:** Brazil — cuộc đua áo số 9 (Matheus Cunha, Igor Thiago, Endrick)
+
+```
+Vertical 9:16 football poster artwork showing a three-way Brazil striker battle for the No.9 role. Three Brazilian forwards arranged as overlapping hero figures across the frame, all in the iconic bright yellow Brazil home kit with the CBF Brazil national-team crest clearly visible on the chest. Front and centre: Matheus Cunha, the Brazilian forward for Manchester United and the Brazil national team, in a confident hero pose. Flanking him: Igor Thiago, the Brazilian striker for Brentford and the Brazil national team, in a clinical finishing pose, and Endrick, the young Brazilian forward for Real Madrid and the Brazil national team, in a celebratory pose. Background: a bold yellow-and-green Brazil graphic backdrop with a huge stylized CBF crest floating faintly as a watermark, dramatic golden-green light rays radiating outward, faint samba-yellow color-block shards arranged like overlapping geometric panes. Vibrant saturated yellow-and-green palette, very high contrast, glossy graphic-design finish. Stylized like a World Cup promotional poster. The Brazil crest visible on the jerseys, no on-image text or captions, no scoreboard graphics.
+```
+
+---
+
+## [5] argentina → `argentina.png` — Argentina: Lautaro vs Alvarez
+
+**Subject:** Argentina — Lautaro Martinez vs Julian Alvarez (vị trí trung phong)
+
+```
+Vertical 9:16 split-frame football poster artwork showing an Argentina striker selection battle. Left half: Lautaro Martinez, the Argentine striker for Inter Milan and the Argentina national team, in a sky-blue-and-white striped Argentina home kit with the AFA Argentina national-team crest clearly visible on the chest, fierce goal-celebration hero pose roaring. Behind him, a stylized sky-blue-and-white Argentina graphic backdrop with a huge faint AFA crest watermark and radiating light rays. Right half: Julian Alvarez, the Argentine forward for Atletico Madrid and the Argentina national team, in a sky-blue-and-white striped Argentina home kit with the AFA crest clearly visible on the chest, focused mid-stride driving pose. Behind him, a stylized sky-blue-and-white Argentina graphic backdrop with a huge faint AFA crest watermark and radiating light rays. Down the centre seam: a diagonal lightning-burst slash separator with dramatic energy glow, a faint glowing FIFA World Cup trophy as a stylized graphic accent between them marking the defending champions. Vibrant saturated sky-blue-and-white palette, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday rivalry promotional poster. Both Argentina crests visible on the jerseys, no on-image text or captions, no scoreboard graphics.
+```
+
+---
+
+## [6] france → `france.png` — Pháp: Rayan Cherki
+
+**Subject:** Pháp — Rayan Cherki (nguy cơ ngồi dự bị dù phát biểu gây tranh cãi)
+
+```
+Vertical 9:16 football poster artwork featuring Rayan Cherki, the French attacking midfielder for Manchester City and the France national team, in a confident defiant hero pose with arms spread wide and an intense expression. He wears a deep blue France home kit with the FFF Gallic rooster crest clearly visible on the chest. Background: a rich royal-blue France graphic backdrop with a huge stylized FFF rooster crest floating faintly behind him as a watermark, dramatic light rays radiating outward from behind his head, faint red-white-and-blue tricolore color bands across the lower frame as a graphic ribbon, the Eiffel Tower silhouetted faintly as a graphic motif. Vibrant saturated French-blue palette with red-and-white accents, very high contrast, glossy graphic-design finish. Stylized like a World Cup promotional poster. The France crest visible on the jersey, no on-image text or captions, no scoreboard graphics.
+```
+
+---
+
+## [7] germany → `germany.png` — Đức: Havertz vs Undav
+
+**Subject:** Đức — Kai Havertz vs Deniz Undav (cuộc đua trung phong)
+
+```
+Vertical 9:16 split-frame football poster artwork showing a Germany striker selection battle. Left half: Kai Havertz, the German forward for Arsenal and the Germany national team, in a classic white Germany home kit with the DFB eagle crest and black-red-gold trim clearly visible on the chest, composed confident hero pose. Behind him, a stylized white-and-black Germany graphic backdrop with a huge faint DFB eagle crest watermark and radiating light rays. Right half: Deniz Undav, the German striker for VfB Stuttgart and the Germany national team, in a white Germany home kit with the DFB eagle crest clearly visible on the chest, sharp clinical goal-celebration pose. Behind him, a stylized white-and-black Germany graphic backdrop with a huge faint DFB eagle crest watermark and radiating light rays. Down the centre seam: a diagonal lightning-burst slash separator with dramatic energy glow, faint black-red-gold German tricolour color bands along the lower edge. Vibrant saturated palette with black-red-gold accents, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday rivalry promotional poster. Both Germany crests visible on the jerseys, no on-image text or captions, no scoreboard graphics.
+```
+
+---
+
+## [8] verdict → `verdict.png` — Bối cảnh: sáu HLV trước giờ G
+
+**Subject:** Bối cảnh — sáu HLV và bài toán nhân sự trước giờ G World Cup 2026
+
+```
+Vertical 9:16 football poster artwork showing six elite international football managers arranged as overlapping silhouetted figures across the frame in contemplative decision-making poses, arms folded, studying notes, looking out over a pitch. Each figure is rendered in the color palette of their national team along a sweep from left to right (England white-and-red, Spain red-and-gold, Brazil yellow-and-green, Argentina sky-blue-and-white, France royal-blue, Germany black-red-gold). Background: a dramatic dark stadium-tunnel graphic backdrop with a huge stylized glowing golden FIFA World Cup trophy floating as a central watermark, intense spotlight beams and light rays radiating downward, layered color-block shards in all six national palettes arranged like overlapping geometric panes. Moody yet vibrant saturated palette with gold highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup tournament editorial promotional poster. No on-image text or captions, no scoreboard graphics.
+```
+
+---
+
+## Tiếp theo
+
+⚡ **Tip — gen ảnh song song để tiết kiệm thời gian.** Mở `8` tab grok.com cùng lúc, paste prompt vào từng tab, bấm generate đồng loạt rồi mới chờ. Cắt thời gian từ ~10-15 phút (sequential) xuống ~3-5 phút (batch parallel).
+
+1. Mở https://grok.com trên **`8` tab cùng lúc** → Imagine, aspect ratio **9:16**.
+2. Copy từng block prompt phía trên, paste vào tab tương ứng, bấm generate **đồng loạt rồi mới chờ tất cả xong**.
+3. Save mỗi ảnh vào cùng folder với .txt (`video/input/sau-cuoc-tranh-cai-chon-nguoi-wc-2026/`) với stem đúng như file đã ghi (`hook`, `england`, `spain`, `brazil`, `argentina`, `france`, `germany`, `verdict`).
+   - **Extension nào cũng được:** `.png` / `.jpg` / `.jpeg` / `.webp`. Grok export `.jpg` thì giữ nguyên, không cần đổi đuôi.
+4. Khi đủ `8` ảnh, chạy: `/create-video video/input/sau-cuoc-tranh-cai-chon-nguoi-wc-2026/sau-cuoc-tranh-cai-chon-nguoi-wc-2026.txt`
+```

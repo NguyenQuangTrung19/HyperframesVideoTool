@@ -1,0 +1,72 @@
+{
+  "version": "1.0",
+  "source": "tam-cap-anh-em-ruot-tai-world-cup-2026.txt",
+  "contentType": "RANKING",
+  "title": "Tám cặp anh em ruột thi đấu tại World Cup 2026",
+  "createdAt": "2026-06-09T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Hero hook — 8 cặp anh em ruột tại World Cup 2026",
+      "prompt": "Vertical 9:16 football poster artwork celebrating brother pairs at the FIFA World Cup 2026. Centre composition: two elite footballers standing back-to-back in a heroic pose, both in generic national-team kits, arms folded, intense confident expressions, symbolizing siblings on opposite teams. Background: a layered gold-and-navy graphic backdrop with a huge stylized FIFA World Cup 2026 trophy floating faintly as a glowing watermark, dramatic golden light rays radiating outward from behind the two figures, faint stylized flags of France, Spain, Netherlands and Ghana arranged as graphic color bands flanking the lower frame. Vibrant saturated gold-and-blue palette, very high contrast, glossy graphic-design finish. Stylized like a FIFA World Cup promotional poster. No on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "pair-doue",
+      "template": "stat-hero",
+      "filename": "pair-doue.png",
+      "subjectHint": "Guela Doue (Bờ Biển Ngà, Strasbourg) & Desire Doue (Pháp, PSG)",
+      "prompt": "Vertical 9:16 split-frame football poster artwork showing two brothers on opposite national teams. Left half: Guela Doue, the Ivorian right-back for Strasbourg and the Côte d'Ivoire national team, in an orange Côte d'Ivoire national kit, confident hero pose. Behind him, an orange-and-green graphic backdrop with a faint Côte d'Ivoire flag motif and radiating light rays. Right half: Desire Doue, the young French forward for Paris Saint-Germain and the France national team, in a navy PSG home kit with the PSG crest clearly visible on the chest, dynamic celebration pose. Behind him, a navy-and-red graphic backdrop with a huge faint PSG crest watermark and radiating light rays. Down the centre seam: a glowing diagonal energy-slash separator. Vibrant saturated palette per side, very high contrast, glossy graphic-design finish. Stylized like a FIFA World Cup matchday promotional poster. The PSG crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "pair-williams",
+      "template": "stat-hero",
+      "filename": "pair-williams.png",
+      "subjectHint": "Inaki Williams (Ghana, Bilbao) & Nico Williams (TBN, Bilbao)",
+      "prompt": "Vertical 9:16 split-frame football poster artwork showing two brothers on opposite national teams. Left half: Inaki Williams, the Ghanaian forward for Athletic Bilbao and the Ghana national team, in a white-and-black Ghana national kit, powerful driving-forward hero pose. Behind him, a black-white-and-red Ghana graphic backdrop with a faint Ghana flag motif and radiating light rays. Right half: Nico Williams, the Spanish winger for Athletic Bilbao and the Spain national team, in a red Spain national kit, explosive sprinting pose. Behind him, a red-and-gold Spain graphic backdrop with a faint Spain flag motif and radiating light rays. Down the centre seam: a glowing diagonal energy-slash separator. Vibrant saturated palette per side, very high contrast, glossy graphic-design finish. Stylized like a FIFA World Cup matchday promotional poster. No on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "pair-souttar",
+      "template": "stat-hero",
+      "filename": "pair-souttar.png",
+      "subjectHint": "John Souttar (Scotland, Rangers) & Harry Souttar (Australia)",
+      "prompt": "Vertical 9:16 split-frame football poster artwork showing two brothers on opposite national teams. Left half: John Souttar, the Scottish centre-back for Rangers and the Scotland national team, in a dark blue Scotland national kit, commanding defensive hero pose. Behind him, a navy-and-white Scotland graphic backdrop with a faint Saltire flag motif and radiating light rays. Right half: Harry Souttar, the very tall Australian centre-back for the Australia national team, in a gold Australia national kit, towering aerial defensive pose. Behind him, a green-and-gold Australia graphic backdrop with a faint Australian flag motif and radiating light rays. Down the centre seam: a glowing diagonal energy-slash separator. Vibrant saturated palette per side, very high contrast, glossy graphic-design finish. Stylized like a FIFA World Cup matchday promotional poster. No on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "pair-brobbey",
+      "template": "stat-hero",
+      "filename": "pair-brobbey.png",
+      "subjectHint": "Derrick Brobbey (Ghana) & Brian Brobbey (Hà Lan, Sunderland)",
+      "prompt": "Vertical 9:16 split-frame football poster artwork showing two brothers on opposite national teams. Left half: Derrick Brobbey, the Ghanaian forward for the Ghana national team, in a white-and-black Ghana national kit, determined hero pose. Behind him, a black-white-and-red Ghana graphic backdrop with a faint Ghana flag motif and radiating light rays. Right half: Brian Brobbey, the powerful Dutch striker for Sunderland and the Netherlands national team, in a bright orange Netherlands national kit, strong physical shielding pose. Behind him, an orange graphic backdrop with a faint Netherlands lion crest motif and radiating light rays. Down the centre seam: a glowing diagonal energy-slash separator. Vibrant saturated palette per side, very high contrast, glossy graphic-design finish. Stylized like a FIFA World Cup matchday promotional poster. No on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "pair-timber",
+      "template": "stat-hero",
+      "filename": "pair-timber.png",
+      "subjectHint": "Jurrien Timber (Arsenal) & Quinten Timber (Marseille) — sinh đôi, tuyển Hà Lan",
+      "prompt": "Vertical 9:16 split-frame football poster artwork showing identical twin brothers on the same national team. Left half: Jurrien Timber, the Dutch centre-back and right-back for Arsenal and the Netherlands national team, in a bright orange Netherlands national kit, composed commanding defensive hero pose. Behind him, an orange graphic backdrop with a faint Netherlands lion crest motif and radiating light rays. Right half: Quinten Timber, the Dutch midfielder for Marseille and the Netherlands national team, in a bright orange Netherlands national kit, mid-stride driving pose. Behind him, a matching orange graphic backdrop with a faint Netherlands lion crest motif and radiating light rays. Down the centre seam: a glowing diagonal energy-slash separator and a small stylized 'twin' double-arrow graphic accent. Vibrant saturated orange palette, very high contrast, glossy graphic-design finish. Stylized like a FIFA World Cup matchday promotional poster. No on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "pair-hernandez",
+      "template": "stat-hero",
+      "filename": "pair-hernandez.png",
+      "subjectHint": "Lucas Hernandez (Pháp, PSG) & Theo Hernandez (Pháp, Al Hilal)",
+      "prompt": "Vertical 9:16 split-frame football poster artwork showing two brothers on the same national team. Left half: Lucas Hernandez, the French defender for Paris Saint-Germain and the France national team, in a navy blue France national kit, gritty determined defensive hero pose, a faint World Cup trophy graphic accent near his shoulder. Behind him, a navy-and-red France graphic backdrop with a faint French cockerel motif and radiating light rays. Right half: Theo Hernandez, the French left-back for Al Hilal and the France national team, in a navy blue France national kit, explosive overlapping attacking run pose. Behind him, a matching navy-and-red France graphic backdrop with a faint French cockerel motif and radiating light rays. Down the centre seam: a glowing diagonal energy-slash separator. Vibrant saturated navy-blue-and-red palette, very high contrast, glossy graphic-design finish. Stylized like a FIFA World Cup matchday promotional poster. No on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "pair-bacuna",
+      "template": "stat-hero",
+      "filename": "pair-bacuna.png",
+      "subjectHint": "Leandro Bacuna (đội trưởng) & Juninho Bacuna — tuyển Curacao",
+      "prompt": "Vertical 9:16 split-frame football poster artwork showing two brothers on the same national team. Left half: Leandro Bacuna, the Curaçao captain and former Premier League player for Aston Villa and Cardiff, in a royal-blue Curaçao national kit with a captain's armband, proud leadership hero pose. Behind him, a royal-blue-and-yellow Curaçao graphic backdrop with a faint Curaçao flag motif and radiating light rays. Right half: Juninho Bacuna, the Curaçao midfielder, in a royal-blue Curaçao national kit, energetic driving-forward pose. Behind him, a matching royal-blue-and-yellow graphic backdrop with a faint Curaçao flag motif and radiating light rays. Down the centre seam: a glowing diagonal energy-slash separator. Vibrant saturated royal-blue-and-yellow palette, very high contrast, glossy graphic-design finish. Stylized like a FIFA World Cup historic-debut promotional poster. No on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "pair-duarte",
+      "template": "stat-hero",
+      "filename": "pair-duarte.png",
+      "subjectHint": "Laros Duarte (Puskas Akademia) & Deroy Duarte (Ludogorets) — tuyển Cape Verde",
+      "prompt": "Vertical 9:16 split-frame football poster artwork showing two brothers on the same national team. Left half: Laros Duarte, the Cape Verde midfielder for Puskás Akadémia in Hungary, in a blue Cape Verde national kit, composed playmaking hero pose. Behind him, a blue-white-and-red Cape Verde graphic backdrop with a faint Cape Verde flag motif and radiating light rays. Right half: Deroy Duarte, the Cape Verde midfielder for Ludogorets Razgrad in Bulgaria, in a blue Cape Verde national kit, dynamic passing pose. Behind him, a matching blue-white-and-red Cape Verde graphic backdrop with a faint Cape Verde flag motif and radiating light rays. Down the centre seam: a glowing diagonal energy-slash separator. Vibrant saturated blue-and-white palette, very high contrast, glossy graphic-design finish. Stylized like a FIFA World Cup historic-debut promotional poster. No on-image text or captions, no scoreboard graphics."
+    }
+  ]
+}
