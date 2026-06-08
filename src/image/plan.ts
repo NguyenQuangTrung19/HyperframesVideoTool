@@ -71,7 +71,13 @@ export function validatePlan(plan: ImagesPlan, inputDir: string): ValidationResu
     for (const f of readdirSync(inputDir)) {
       const ext = extname(f).toLowerCase();
       if (!KNOWN_EXTENSIONS.includes(ext)) continue;
-      if (!plannedStems.has(stemOf(f))) orphans.push(f);
+      const stem = stemOf(f);
+      if (plannedStems.has(stem)) continue;
+      // Split-frame source halves (<plannedStem>-1 / -2) get composited into the
+      // planned <plannedStem>.png by combine-split-images — not orphans.
+      const half = stem.match(/^(.+)-[12]$/);
+      if (half && plannedStems.has(half[1])) continue;
+      orphans.push(f);
     }
   }
 

@@ -2,7 +2,7 @@
    v2 VISUAL SYSTEM — Vietnamese News Short Video 9:16 (1080×1920)
    Cream + Green + Gold palette — Luxury editorial look
    ============================================================ */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@500;700&family=Oswald:wght@500;600;700&display=swap');
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -338,82 +338,59 @@ html, body {
 }
 
 /* ── LAYOUT: HOOK ────────────────────────────────────────────── */
-/* Cinematic letterbox bars (top + bottom) for the hook scene */
-.hook-letterbox {
-  position: absolute; left: 0; right: 0;
-  height: 100px;
-  background: linear-gradient(180deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.0) 100%);
-  z-index: 4;
-  opacity: 0;
-  pointer-events: none;
-}
-.hook-letterbox-top    { top: 0; }
-.hook-letterbox-bottom { bottom: 0; transform: rotate(180deg); transform-origin: center; }
-
+/* ── HOOK (A2 broadcast: red kicker + white score + headline, left-aligned) ── */
 .layout-hook {
   position: absolute; inset: 0; z-index: 5;
   display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  padding: 260px 80px 260px;
-  text-align: center;
-  gap: 32px;
+  align-items: flex-start; justify-content: center;
+  /* TikTok/Reels safe zone: top 240 / right 120 / bottom 420 / left 80 */
+  padding: 240px 120px 420px 80px;
+  text-align: left;
+  gap: 0;
 }
 
-/* Eyebrow chip above the headline — pulse dot + small label */
-.hook-eyebrow {
-  display: inline-flex; align-items: center; gap: 14px;
-  padding: 12px 28px;
-  background: rgba(255,255,255,0.2);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(16,185,129,0.45);
-  border-radius: 50px;
+/* Kicker — red vertical bar + competition/context label (Oswald). Optional
+   second line (eyebrowSub) for matchweek/context. */
+.hook-kicker {
+  display: flex; align-items: center; gap: 28px;
+  margin-bottom: 48px;
   opacity: 0;
-  margin-bottom: 8px;
 }
-.hook-eyebrow-dot {
-  width: 12px; height: 12px;
-  background: #10b981;
-  border-radius: 50%;
-  box-shadow: 0 0 12px rgba(16,185,129,0.9);
-  animation: hook-eyebrow-pulse 2s ease-in-out infinite;
+.hook-kicker-bar {
+  width: 12px; align-self: stretch; min-height: 86px;
+  background: #e0232b; border-radius: 4px;
+  box-shadow: 0 0 24px rgba(224,35,43,0.5);
 }
-@keyframes hook-eyebrow-pulse {
-  0%,100% { transform: scale(1); opacity: 1; }
-  50%     { transform: scale(1.4); opacity: 0.55; }
+.hook-kicker-text {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600; font-size: 46px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: #fff; line-height: 1.08;
+  text-shadow: 0 4px 18px rgba(0,0,0,0.6);
 }
-.hook-eyebrow-text {
-  font-family: 'Inter', sans-serif;
-  font-size: 28px; font-weight: 700;
-  color: #10b981;
-  letter-spacing: 4px; text-transform: uppercase;
+.hook-kicker-text small {
+  display: block;
+  font-size: 28px; font-weight: 500;
+  letter-spacing: 0.14em;
+  color: rgba(255,255,255,0.6);
+  margin-top: 4px;
 }
 
 /* BIG STAT — giant attention-grabber above the headline at frame 0.
    Used for stat-shock hooks ("19", "€80M", "22 NĂM", "0-7", "#1")
    or short text phrases ("HUYỀN THOẠI", "KỶ LỤC").
    Font auto-scales via data-len attribute set by the HTML composer. */
+/* BIG STAT — white serif score/number, owns the frame. data-len autoscale below. */
 .hook-bigstat {
   font-family: 'Playfair Display', serif;
   font-size: 320px; font-weight: 900;
-  color: #c4a35a; /* gold — luxury fallback */
-  background: linear-gradient(135deg, #c4a35a 0%, #fde68a 30%, #f59e0b 60%, #c4a35a 100%);
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: hf-gradient-shimmer 2.5s ease-in-out infinite;
-  line-height: 1.25; letter-spacing: -0.04em;
-  text-align: center;
-  filter: drop-shadow(0 6px 20px rgba(139,105,20,0.5)) drop-shadow(0 0 60px rgba(196,163,90,0.3)) drop-shadow(0 10px 25px rgba(0,0,0,0.6));
-  -webkit-text-stroke: 1px rgba(255,255,255,0.15);
-  padding-top: 50px;
-  padding-bottom: 50px;
-  margin-top: -50px;
-  margin-bottom: -66px;
+  color: #fff;
+  line-height: 0.9; letter-spacing: -0.04em;
+  text-align: left;
+  text-shadow: 0 12px 40px rgba(0,0,0,0.6), 0 4px 8px rgba(0,0,0,0.85);
   opacity: 0;
   transform: scale(0.4);
-  transform-origin: center;
+  transform-origin: left center;
   will-change: transform, opacity;
 }
 
@@ -438,20 +415,29 @@ html, body {
 .hook-bigstat[data-len="19"],
 .hook-bigstat[data-len="20"] { font-size: 110px; letter-spacing: -0.01em; }
 
+/* Red accent bar under the score (broadcast underline) */
+.hook-statbar {
+  width: 220px; height: 14px;
+  background: #e0232b; border-radius: 4px;
+  margin: 40px 0 40px;
+  box-shadow: 0 0 28px rgba(224,35,43,0.45);
+  transform: scaleX(0); transform-origin: left center;
+  opacity: 0;
+}
+
 .hook-headline {
   font-family: 'Playfair Display', serif;
-  font-size: 80px; font-weight: 900;
-  color: #fff; line-height: 1.08;
-  text-align: center; letter-spacing: -0.01em;
-  text-shadow: 0 3px 16px rgba(0,0,0,0.8), 0 1px 3px rgba(0,0,0,0.9), 0 0 60px rgba(0,0,0,0.4);
+  font-size: 108px; font-weight: 900;
+  color: #fff; line-height: 1.06;
+  text-align: left; letter-spacing: -0.01em;
+  text-shadow: 0 9px 36px rgba(0,0,0,0.65), 0 3px 6px rgba(0,0,0,0.8);
   display: block; width: 100%;
   /* opacity:1 — words animate individually */
-  -webkit-text-stroke: 1px rgba(255,255,255,0.15);
 }
 
 /* When a bigStat is present, the headline shrinks to play supporting role */
 .hook-bigstat ~ .hook-headline {
-  font-size: 64px;
+  font-size: 76px;
 }
 
 /* Per-word reveal targets (hook headline, callout statement). */
@@ -462,48 +448,13 @@ html, body {
 }
 
 .hook-subhead {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 42px; font-weight: 600;
-  color: rgba(255,255,255,0.85); line-height: 1.1;
-  text-align: center; font-style: italic;
-  letter-spacing: 0.06em;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.7), 0 0 30px rgba(0,0,0,0.3);
-  margin-top: 28px;
+  font-family: 'Inter', sans-serif;
+  font-size: 44px; font-weight: 600;
+  color: rgba(255,255,255,0.78); line-height: 1.3;
+  text-align: left; letter-spacing: 0.005em;
+  text-shadow: 0 4px 18px rgba(0,0,0,0.7);
+  margin-top: 32px;
   opacity: 0;
-  display: flex; flex-direction: column; align-items: center; gap: 18px;
-}
-
-/* Hook gold divider line — separates bigstat from headline */
-.hook-divider-line {
-  width: 160px; height: 2px;
-  background: linear-gradient(90deg, transparent 0%, #c4a35a 20%, #e8d5a0 50%, #c4a35a 80%, transparent 100%);
-  margin: 0 auto 36px;
-  opacity: 0;
-  box-shadow: 0 0 12px rgba(196,163,90,0.4);
-}
-
-/* Hook bottom accent — diamond + lines at lower frame */
-.hook-bottom-accent {
-  position: absolute;
-  bottom: 90px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  z-index: 6;
-  opacity: 0;
-}
-.hook-bottom-line {
-  width: 60px; height: 1px;
-  background: rgba(196,163,90,0.4);
-}
-.hook-bottom-diamond {
-  width: 8px; height: 8px;
-  background: #c4a35a;
-  transform: rotate(45deg);
-  box-shadow: 0 0 8px rgba(196,163,90,0.4);
-  flex-shrink: 0;
 }
 
 /* ── DRAW-IN UNDERLINE (animated horizontal bar) ──────────────────── */
@@ -1586,6 +1537,33 @@ html, body {
   max-width: 220px;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+/* Goal frame at the GK (bottom) end — net grid, posts + crossbar, no base.
+   Sits inside the bottom penalty box; z-index:1 so the keeper token (z-index:3)
+   stands in front of it. Marks which end is the goalkeeper's. */
+.fp-goal {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  height: 58px;
+  z-index: 1;
+  border: 4px solid rgba(255,255,255,0.9);
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 16px, rgba(255,255,255,0.22) 16px 18px),
+    repeating-linear-gradient(0deg, transparent 0 16px, rgba(255,255,255,0.22) 16px 18px);
+  box-shadow: 0 0 18px rgba(255,255,255,0.12);
+}
+/* Goalkeeper token — gold fill + ring so the keeper reads at a glance. */
+.fp-player.fp-gk .fp-token {
+  background: linear-gradient(135deg, #fde68a, #c4a35a);
+  box-shadow:
+    0 2px 14px rgba(0,0,0,0.3),
+    0 0 0 3px rgba(196,163,90,0.9);
 }
 
 /* ── LAYOUT: OUTRO ───────────────────────────────────────────── */

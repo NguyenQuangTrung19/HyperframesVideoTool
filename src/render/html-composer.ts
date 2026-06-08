@@ -241,28 +241,24 @@ function renderHookInner(
   const subhead = td.subhead ? escapeHtmlWithBreaks(td.subhead) : "";
   const bigStat = td.bigStat ? escapeHtml(td.bigStat) : "";
 
-  // Brand eyebrow is suppressed when bigStat is set — the big number
-  // owns the top of frame in that case. Otherwise the eyebrow is still
-  // rendered (animation timeline fades it in late, after the hook lands).
-  const eyebrowHtml = bigStat
-    ? ""
-    : `<div class="hook-eyebrow"><span class="hook-eyebrow-dot"></span><span class="hook-eyebrow-text">Sports For All TV</span></div>`;
+  // Kicker = competition / context strap (broadcast lower-third). Rendered only
+  // when `eyebrow` is set; `eyebrowSub` adds an optional second line (matchweek).
+  // No fallback to the channel name — the persistent shell already brands.
+  const kickerHtml = td.eyebrow
+    ? `<div class="hook-kicker">
+      <span class="hook-kicker-bar"></span>
+      <span class="hook-kicker-text">${escapeHtml(td.eyebrow)}${td.eyebrowSub ? `<small>${escapeHtml(td.eyebrowSub)}</small>` : ""}</span>
+    </div>`
+    : "";
 
   return `${bgHtml}
   <div class="bg-grade-overlay"></div>
-  <div class="hook-letterbox hook-letterbox-top"></div>
-  <div class="hook-letterbox hook-letterbox-bottom"></div>
   <div class="layout-hook">
-    ${eyebrowHtml}
-    ${bigStat ? `<div class="hook-bigstat" data-len="${td.bigStat!.length}">${bigStat}</div>` : ""}
-    <div class="hook-divider-line"></div>
-    <div class="hook-headline shimmer-sweep-target">${headline}</div>
-    ${subhead ? `<div class="hook-subhead">${subhead}<div class="draw-underline draw-cyan"></div></div>` : ""}
-  </div>
-  <div class="hook-bottom-accent">
-    <div class="hook-bottom-line"></div>
-    <div class="hook-bottom-diamond"></div>
-    <div class="hook-bottom-line"></div>
+    ${kickerHtml}
+    ${bigStat ? `<div class="hook-bigstat" data-len="${td.bigStat!.length}">${bigStat}</div>
+    <div class="hook-statbar"></div>` : ""}
+    <div class="hook-headline">${headline}</div>
+    ${subhead ? `<div class="hook-subhead">${subhead}</div>` : ""}
   </div>`;
 }
 
@@ -477,7 +473,7 @@ function renderFormationPitchInner(
       ${row
         .map(
           (name) =>
-            `<div class="fp-player" data-idx="${playerIdx++}">
+            `<div class="fp-player${rowIdx === 0 ? " fp-gk" : ""}" data-idx="${playerIdx++}">
         <div class="fp-token"></div>
         <div class="fp-name">${escapeHtml(name)}</div>
       </div>`,
@@ -497,6 +493,7 @@ function renderFormationPitchInner(
   </div>
   <div class="fp-pitch">
     <div class="fp-pitch-lines"></div>
+    <div class="fp-goal"></div>
     ${rowsHtml}
   </div>
 </div>`.trim();
