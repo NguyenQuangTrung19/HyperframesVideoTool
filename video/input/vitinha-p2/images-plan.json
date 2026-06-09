@@ -1,0 +1,58 @@
+{
+  "version": "1.0",
+  "source": "vitinha-p2.txt",
+  "contentType": "BIO-PLAYER",
+  "title": "Vitinha: Kỷ nguyên Enrique & Đỉnh cao châu Âu — Phần 2",
+  "createdAt": "2026-05-31T23:58:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "HLV Luis Enrique đứng bên đường biên chỉ đạo tự tin, Vitinha thi đấu phía sau",
+      "prompt": "Vertical 9:16 football poster artwork featuring Luis Enrique, the Spanish manager of Paris Saint-Germain, gesturing tactically at the touchline with intense focus, and in the foreground, Vitinha in a navy PSG kit driving forward with the ball. Background: a bold navy-and-red PSG graphic backdrop with a huge faint PSG crest watermark and radiating light rays. Saturated dark navy and red palette, very high contrast, glossy graphic-design finish. Stylized like an elite Champions League tactical profile poster. No text."
+    },
+    {
+      "id": "fact-1",
+      "template": "stat-hero",
+      "filename": "fact-1.png",
+      "subjectHint": "Vitinha ngước nhìn quan sát xung quanh với luồng quét không gian phát sáng",
+      "prompt": "Vertical 9:16 football poster artwork featuring Vitinha in a navy PSG kit mid-stride, ngoái đầu scanning the pitch with a fierce focused expression. Glowing tactical 3D blueprint overlay lines and distance metrics radiate from his head, mapping the pitch in glowing neon blue. Background: dark navy graphic backdrop with a large faint PSG crest watermark and glowing light rays. Saturated glossy finish, very high contrast, editorial sports graphic style. No text."
+    },
+    {
+      "id": "fact-2",
+      "template": "callout",
+      "filename": "fact-2.png",
+      "subjectHint": "Vitinha thoát pressing dẻo dai compa, Thierry Henry ở góc khen ngợi",
+      "prompt": "Vertical 9:16 football poster artwork featuring Vitinha in a navy PSG kit frozen mid-action in a dynamic twist, executing a classic pirouette compa turn to escape two opposing defenders in white kits. In the upper corner, a stylized graphic cutout portrait of Thierry Henry pointing in admiration. Saturated navy and crimson graphic backdrop with dynamic motion lines and flying golden sparkles surrounding his movement. High contrast, premium glossy finish. Stylized like an elite skill spotlight poster. No scoreboard."
+    },
+    {
+      "id": "fact-3",
+      "template": "callout",
+      "filename": "fact-3.png",
+      "subjectHint": "Vitinha tranh chấp nảy lửa với các tiền vệ Arsenal tại chung kết",
+      "prompt": "Vertical 9:16 split-frame football poster artwork showing a dramatic UEFA Champions League final matchup. Left half: Vitinha in a navy PSG kit, body positioned low to protect the ball, intense focus. Right half: Declan Rice in a red-and-white Arsenal kit, lunging in to press him under dynamic motion lines. Background: Puskas Arena stands silhouetted faintly as a graphic motif under bright white stadium floodlights. Vibrant saturated palette per side, very high contrast, glossy graphic-design finish. Stylized like a Champions League matchday promotional poster. No scoreboard, no text."
+    },
+    {
+      "id": "fact-4",
+      "template": "callout",
+      "filename": "fact-4.png",
+      "subjectHint": "Vitinha nhận bóng bình tĩnh từ Donnarumma thoát ép Rice và Odegaard",
+      "prompt": "Vertical 9:16 football poster artwork featuring Vitinha in a navy PSG kit, calmly shielding the ball under his boot near his own penalty box, with two red-and-white Arsenal shirts pressing from behind. Background: a bold navy and red graphic backdrop with a huge faded PSG crest watermark, dramatic white light rays radiating outward, faint silver energy particles floating around him. Very high contrast, glossy finish, stylized like a Champions League final heroic moment poster. No text."
+    },
+    {
+      "id": "fact-5",
+      "template": "stat-hero",
+      "filename": "fact-5.png",
+      "subjectHint": "Vitinha giơ cao danh hiệu FMVP và cúp vô địch Champions League",
+      "prompt": "Vertical 9:16 football poster artwork featuring Vitinha in a navy PSG home kit holding the UEFA Champions League Final MVP trophy proudly, gold medal around his neck, shouting in pure victory joy. Symmetrical composition, dramatic golden sparkles and light rays, the giant UEFA Champions League trophy watermark glowing in gold behind him. Saturated navy and gold palette, extremely high contrast, premium glossy graphic finish. Stylized like a champions MVP profile poster. No text."
+    },
+    {
+      "id": "fact-6",
+      "template": "stat-hero",
+      "filename": "fact-6.png",
+      "subjectHint": "Vitinha trong màu áo Bồ Đào Nha kết nối Cristiano Ronaldo",
+      "prompt": "Vertical 9:16 football poster artwork showing a split layout: in the foreground, Vitinha in the red-and-green Portugal home kit looking commanding and pointing forward, while in the background a faded ghostly transparent image shows Cristiano Ronaldo in the same kit smiling and giving a thumbs-up. Background: a bold red and green Portugal graphic backdrop with a huge stylized Portuguese Federation crest watermark, dramatic light rays and gold dust floating. Saturated rich palette, very high contrast, glossy sports design finish. Stylized like a World Cup squad profile poster. No text."
+    }
+  ]
+}

@@ -30,7 +30,7 @@ async function main() {
 
   const inputDir = dirname(absTxt);
   const slug = deriveSlugFromTxtPath(absTxt);
-  const outputDir = resolve("output", slug);
+  const outputDir = resolve("video", "output", slug);
 
   // Pre-step: composite any split-frame source pairs (<stem>-1 + <stem>-2 →
   // <stem>.png) so VS / sibling-pair scenes can be fed two single-subject

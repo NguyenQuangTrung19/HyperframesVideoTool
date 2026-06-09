@@ -1,0 +1,44 @@
+{
+  "version": "1.0",
+  "source": "fifa-luat-hat-quoc-ca-moi.txt",
+  "contentType": "TRIVIA",
+  "title": "FIFA thay đổi nghi lễ hát quốc ca tại World Cup 2026",
+  "createdAt": "2026-06-07T07:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Nghi lễ hát quốc ca hoành tráng tại World Cup 2026",
+      "prompt": "Vertical 9:16 football poster artwork featuring the World Cup 2026 stadium filled with fans holding giant flags, and the FIFA World Cup trophy glowing brilliantly at the center of the pitch. Background: a stylized graphic backdrop in gold, blue, and white colors, a huge faint FIFA World Cup trophy watermark, dramatic light bursts radiating from the center. Saturated high-contrast color palette, glossy graphic-design finish. Stylized like a FIFA World Cup 2026 tournament promotional poster. No on-image text or captions."
+    },
+    {
+      "id": "all-players",
+      "template": "stat-hero",
+      "filename": "all-players.png",
+      "subjectHint": "Toàn bộ cầu thủ (cả dự bị) và trọng tài đứng ở vòng tròn trung tâm",
+      "prompt": "Vertical 9:16 football poster artwork showing a large group of football players and referees standing together in unity around the green pitch's centre circle. The players wear national team kits of blue and white, while referees wear bright yellow official shirts. Background: a stylized green and gold graphic backdrop with radiating light rays and faint geometric shards. Saturated high-contrast color palette, glossy graphic-design finish. Stylized like an official tournament matchday promotional poster. No on-image text."
+    },
+    {
+      "id": "infantino",
+      "template": "callout",
+      "filename": "infantino.png",
+      "subjectHint": "Chủ tịch FIFA Gianni Infantino phát biểu về quyết định",
+      "prompt": "Vertical 9:16 football poster artwork featuring Gianni Infantino, the FIFA president, in a professional black suit and tie, looking confident and smiling. Background: a classy dark blue graphic backdrop with a giant faint gold FIFA logo watermark floating behind him, golden light beams radiating outward. Saturated palette, high contrast, glossy finish. Stylized like an official FIFA announcement promotional graphic. No on-image text."
+    },
+    {
+      "id": "stadium-360",
+      "template": "callout",
+      "filename": "stadium-360.png",
+      "subjectHint": "Trải nghiệm nghi lễ 360 độ hoành tráng",
+      "prompt": "Vertical 9:16 football poster artwork featuring a futuristic 360-degree stadium view with massive flags of competing countries unfurled on the pitch. Fans in the stands hold shining flags under glowing neon spotlights. Background: a dark graphic backdrop with overlapping color panes in green, gold, and blue, light bursts radiating from the pitch. Saturated high-contrast color palette, glossy finish. Stylized like a tournament opening ceremony promotional poster. No on-image text."
+    },
+    {
+      "id": "captains",
+      "template": "callout",
+      "filename": "captains.png",
+      "subjectHint": "Nghi thức bắt tay và tung đồng xu truyền thống",
+      "prompt": "Vertical 9:16 football poster artwork featuring two team captains shaking hands at the centre of the pitch, a shiny silver coin flipping in the air between them. They wear national team kits of red and white. Background: a split red-and-white graphic backdrop with subtle radiating energy lines. Saturated color palette, high contrast, glossy finish. Stylized like a pre-match rivalry promotional poster. No on-image text."
+    }
+  ]
+}

@@ -139,8 +139,49 @@ export interface ComposeOpts {
    *     top, progress bar + timestamp at bottom, faded watermark on the card.
    *   - `"card"`: legacy look. Solid black canvas, rounded card centered,
    *     optional white outline. Brand-shell text top-left.
+   *   - `"fullbleed"`: aesthetic-bg mode for high-quality scenery / street
+   *     ambient footage. Source video fills the full 1080×1920 canvas (cover
+   *     crop), with an optional dim overlay so the karaoke captions stay
+   *     legible. No card, no search bar, no progress bar, no watermark — the
+   *     footage IS the visual. Wordmark sits free-floating at the top of the
+   *     canvas. Best when paired with cinematic / aesthetic footage where the
+   *     image quality is the draw, not topic-specific clips.
+   *   - `"landscape"`: 16:9 footage on a black 9:16 canvas. Source is scaled
+   *     to width=1080 (no crop) and sits as a horizontal strip slightly above
+   *     center. Same corner brand text + caption font as fullbleed, but the
+   *     karaoke is positioned INSIDE the strip's bottom area (not the empty
+   *     black region below it). Use when source aspect ratio is landscape
+   *     (auto-selected by pipeline.ts based on ffprobe).
    */
-  layout?: "vignette" | "card";
+  layout?: "vignette" | "card" | "fullbleed" | "landscape";
+  /**
+   * Landscape only — vertical offset of the 16:9 strip from canvas center.
+   * Negative = above center (default -80, biased upward for caption space
+   * below the strip's natural reading position).
+   */
+  landscapeVerticalBias?: number;
+  /**
+   * Fullbleed only — opacity (0..1) of the black dim overlay over the
+   * scenery footage. Higher = darker scenery = more legible captions.
+   * Default 0.28 — a noticeable dim without crushing the image. Set to 0
+   * to disable the dim entirely.
+   */
+  fullbleedDim?: number;
+  /**
+   * Fullbleed only — small decorative text drawn at the top-left corner of
+   * the canvas (in place of the wordmark stack). Default "Podcast và bạn".
+   * Empty string disables the corner text entirely (clean scenery only).
+   */
+  fullbleedCornerText?: string;
+  /** Fullbleed corner-text font size (px). Default 48. */
+  fullbleedCornerFontSize?: number;
+  /**
+   * Fullbleed corner-text font file (absolute Windows path or ffmpeg-style
+   * escaped path). Default Palatino Linotype Italic — elegant serif italic
+   * that pairs well with scenery aesthetic. Swap to `segoesc.ttf` for a
+   * handwritten cursive, or `gabriola.ttf` for a more decorative feel.
+   */
+  fullbleedCornerFontFile?: string;
   /** Vignette bg: gblur sigma (higher = blurrier). Default 40. Vignette only. */
   vignetteBlurSigma?: number;
   /** Vignette bg: brightness offset (-1..1). Default -0.3 (dims for contrast). */
@@ -196,6 +237,44 @@ export interface ComposeOpts {
    * the top edge of the foreground card without also pushing it rightward.
    */
   logoMarginTop?: number;
+  /**
+   * When `true`, replace the legacy side-by-side logo + brandName + brandTag
+   * with a centered "wordmark" stack drawn directly above the card outline:
+   *   • `brandName` rendered big in white Segoe UI Bold with a soft purple
+   *     drop-shadow glow.
+   *   • A short gradient underline (purple → cyan) below the name.
+   *   • `brandTag` rendered small in cyan beneath the underline.
+   * No logo PNG is overlaid — the wordmark IS the brand identity. Suppresses
+   * the logo input entirely (saves an ffmpeg `-i` slot too). Default `false`.
+   */
+  brandWordmark?: boolean;
+  /**
+   * Main wordmark font size (px) when `brandWordmark=true`. Default `56`.
+   */
+  brandWordmarkFontSize?: number;
+  /**
+   * Tag font size (px) for the small line below the wordmark underline when
+   * `brandWordmark=true`. Default `22`.
+   */
+  brandWordmarkTagFontSize?: number;
+  /**
+   * Width (px) of the gradient underline beneath the wordmark. Default `280`.
+   */
+  brandWordmarkUnderlineWidth?: number;
+  /**
+   * Wordmark visual style.
+   *   - `"display"` (default): heavy Segoe UI Black, purple border glow,
+   *     gradient underline, cyan tag. Bold broadcast aesthetic.
+   *   - `"elegant"`: refined serif italic (Palatino), no glow, thin subtle
+   *     separator, no tag, letter-spaced. Minimal editorial masthead that
+   *     doesn't compete with the video. Ideal for locket / pendant-frame.
+   */
+  brandWordmarkStyle?: "display" | "elegant";
+  /**
+   * Font file for the wordmark main text. Default depends on `brandWordmarkStyle`:
+   * Segoe UI Black for "display", Palatino Linotype Italic for "elegant".
+   */
+  brandWordmarkFontFile?: string;
 }
 
 /**
@@ -227,7 +306,23 @@ export async function composeVideo(opts: ComposeOpts): Promise<void> {
   const fps = opts.fps ?? 30;
   const crf = opts.crf ?? 20;
   const preset = opts.preset ?? "medium";
-  const layout: "vignette" | "card" = opts.layout === "card" ? "card" : "vignette";
+  const layout: "vignette" | "card" | "fullbleed" | "landscape" =
+    opts.layout === "card" ? "card"
+    : opts.layout === "fullbleed" ? "fullbleed"
+    : opts.layout === "landscape" ? "landscape"
+    : "vignette";
+  const isFullbleed = layout === "fullbleed";
+  const isLandscape = layout === "landscape";
+  /**
+   * Fullbleed AND landscape both skip the wordmark/card/brand-shell overlays
+   * and rely on the corner brand text + a cleaner caption position.
+   */
+  const isChromeless = isFullbleed || isLandscape;
+  const landscapeVerticalBias = Math.floor(opts.landscapeVerticalBias ?? -80);
+  const fullbleedDim = Math.max(0, Math.min(1, opts.fullbleedDim ?? 0.28));
+  const fullbleedCornerText = opts.fullbleedCornerText ?? "Podcast và bạn";
+  const fullbleedCornerFontSize = Math.max(16, Math.floor(opts.fullbleedCornerFontSize ?? 48));
+  const fullbleedCornerFontFile = opts.fullbleedCornerFontFile ?? "C\\:/Windows/Fonts/palai.ttf";
   const blurSigma = Math.max(0, Math.min(100, opts.vignetteBlurSigma ?? 40));
   const vBrightness = Math.max(-1, Math.min(1, opts.vignetteBrightness ?? -0.3));
   const vSaturation = Math.max(0, Math.min(3, opts.vignetteSaturation ?? 0.7));
@@ -354,7 +449,7 @@ export async function composeVideo(opts: ComposeOpts): Promise<void> {
     const oR = radius + cardStrokeW;
     const oRSq = oR * oR;
     const strokeMask = `if(lt(X,${oR})*lt(Y,${oR}),if(lte(pow(${oR}-X,2)+pow(${oR}-Y,2),${oRSq}),255,0),if(gt(X,W-${oR})*lt(Y,${oR}),if(lte(pow(X-W+${oR},2)+pow(${oR}-Y,2),${oRSq}),255,0),if(lt(X,${oR})*gt(Y,H-${oR}),if(lte(pow(${oR}-X,2)+pow(Y-H+${oR},2),${oRSq}),255,0),if(gt(X,W-${oR})*gt(Y,H-${oR}),if(lte(pow(X-W+${oR},2)+pow(Y-H+${oR},2),${oRSq}),255,0),255))))`;
-    strokeChain = `color=c=white:s=${outerW}x${outerH}:d=0.04:rate=${fps},format=yuva420p,geq=lum='p(X,Y)':cb='p(X,Y)':cr='p(X,Y)':a='${strokeMask}',loop=loop=-1:size=1:start=0[stroke]`;
+    strokeChain = `color=c=black:s=${outerW}x${outerH}:d=0.04:rate=${fps},format=yuva420p,geq=lum='p(X,Y)':cb='p(X,Y)':cr='p(X,Y)':a='${strokeMask}',loop=loop=-1:size=1:start=0[stroke]`;
     strokeOverlay = `[bg][stroke]overlay=${fgX - cardStrokeW}:${fgY - cardStrokeW}[bg_stroked]`;
     preFgOverlayLabel = "bg_stroked";
   }
@@ -403,6 +498,25 @@ export async function composeVideo(opts: ComposeOpts): Promise<void> {
   }
   const aoutLabel = bgMusic ? "[aout]" : `[${speechLabel}]`;
 
+  // Wordmark mode: a centered branded stack above the card outline. When on,
+  // it replaces BOTH the side-by-side brand-text drawtexts AND the logo PNG
+  // overlay below (legacyBrandShell paths are skipped). Forced on by the
+  // /create-podcast pipeline for the card layout — the wordmark is the brand.
+  //
+  // Fullbleed layout suppresses the wordmark entirely — it renders a small
+  // decorative corner text instead (set by `fullbleedCornerText`). The user
+  // can still pass `brandWordmark: true` but it'll be ignored in fullbleed.
+  const useWordmark = !!opts.brandWordmark && !isChromeless;
+  const wmFontSize = Math.max(20, Math.floor(opts.brandWordmarkFontSize ?? 62));
+  const wmTagFontSize = Math.max(10, Math.floor(opts.brandWordmarkTagFontSize ?? 28));
+  const wmUnderlineW = Math.max(80, Math.min(1080, Math.floor(opts.brandWordmarkUnderlineWidth ?? 320)));
+  const wmUnderlineH = 6;
+  const wmStyle = opts.brandWordmarkStyle ?? "display";
+  // Font for the wordmark main text. Elegant: Palatino Italic (editorial);
+  // Display: Segoe UI Black (heavy broadcast). Custom override via opts.
+  const wmFontFile = opts.brandWordmarkFontFile
+    ?? (wmStyle === "elegant" ? "C\\:/Windows/Fonts/palai.ttf" : "C\\:/Windows/Fonts/seguibl.ttf");
+
   // /create-video matches the brand-shell header at top-left: square logo +
   // brand name (white Segoe UI Bold) + tag line (cyan #22D3EE Segoe UI).
   // Tag is uppercased manually to fake CSS text-transform.
@@ -418,20 +532,25 @@ export async function composeVideo(opts: ComposeOpts): Promise<void> {
   const brandTagY = brandNameY + brandNameFontSize + brandTextGap;
   const fontBold = "C\\:/Windows/Fonts/segoeuib.ttf";
   const fontReg = "C\\:/Windows/Fonts/segoeui.ttf";
+  // Segoe UI Black — heavier display weight, used for the centered wordmark
+  // main text so it reads as a wordmark rather than a regular bold header.
+  const fontBlack = "C\\:/Windows/Fonts/seguibl.ttf";
 
+  // Legacy brand-text drawtexts are suppressed in fullbleed too — the corner
+  // text replaces them with a single decorative line at top-left.
   const textFilters: string[] = [];
-  if (brandName) {
+  if (!useWordmark && !isChromeless && brandName) {
     textFilters.push(
       `drawtext=fontfile='${fontBold}':text='${escapeDrawtext(brandName)}':fontsize=${brandNameFontSize}:fontcolor=white:x=${brandNameX}:y=${brandNameY}:shadowcolor=black@0.6:shadowx=2:shadowy=2`,
     );
   }
-  if (brandTag) {
+  if (!useWordmark && !isChromeless && brandTag) {
     textFilters.push(
       `drawtext=fontfile='${fontReg}':text='${escapeDrawtext(brandTag.toUpperCase())}':fontsize=${brandTagFontSize}:fontcolor=0x22D3EE:x=${brandNameX}:y=${brandTagY}:shadowcolor=black@0.6:shadowx=2:shadowy=2`,
     );
   }
   const textChain = textFilters.length > 0
-    ? [`[${logoPath ? "with_logo" : "burned"}]${textFilters.join(",")}[final]`]
+    ? [`[${logoPath && !useWordmark ? "with_logo" : "burned"}]${textFilters.join(",")}[final]`]
     : [];
 
   // Logo with optional rounded corners via the same geq alpha-mask trick as
@@ -445,11 +564,20 @@ export async function composeVideo(opts: ComposeOpts): Promise<void> {
   const lr = logoCornerRadius;
   const avatarDiameter = 240;
   const avatarR = avatarDiameter / 2;
-  const wantAvatar = logoPath && outroSec > 0;
-  const logoSplit = wantAvatar
+  const wantAvatar = !!logoPath && outroSec > 0;
+  // In wordmark mode (and fullbleed mode) the brand-shell logo PNG is NOT
+  // overlaid. We only need the logo input for the outro avatar (a circular
+  // 240px version).
+  const wantBrandLogo = !!logoPath && !useWordmark && !isChromeless;
+  // Split the logo input into two streams only when BOTH the brand-shell AND
+  // the avatar need it. Otherwise feed the avatar/brand directly from the raw
+  // input — splitting and leaving one output unconsumed is a ffmpeg error.
+  const needsLogoSplit = wantAvatar && wantBrandLogo;
+  const logoSplit = needsLogoSplit
     ? `[${logoIndex}:v]split=2[logo_brand_in][logo_avatar_in]`
     : null;
-  const logoBrandInput = wantAvatar ? "logo_brand_in" : `${logoIndex}:v`;
+  const logoBrandInput = needsLogoSplit ? "logo_brand_in" : `${logoIndex}:v`;
+  const logoAvatarInput = needsLogoSplit ? "logo_avatar_in" : `${logoIndex}:v`;
   const logoBrandScaleAndMask = lr > 0
     ? `[${logoBrandInput}]scale=${logoWidth}:-1,format=yuva420p,geq=lum='p(X,Y)':cb='p(X,Y)':cr='p(X,Y)':a='if(lt(X,${lr})*lt(Y,${lr}),if(lte(pow(${lr}-X,2)+pow(${lr}-Y,2),${lr * lr}),255,0),if(gt(X,W-${lr})*lt(Y,${lr}),if(lte(pow(X-W+${lr},2)+pow(${lr}-Y,2),${lr * lr}),255,0),if(lt(X,${lr})*gt(Y,H-${lr}),if(lte(pow(${lr}-X,2)+pow(Y-H+${lr},2),${lr * lr}),255,0),if(gt(X,W-${lr})*gt(Y,H-${lr}),if(lte(pow(X-W+${lr},2)+pow(Y-H+${lr},2),${lr * lr}),255,0),255))))'[logo]`
     : `[${logoBrandInput}]scale=${logoWidth}:-1[logo]`;
@@ -457,25 +585,35 @@ export async function composeVideo(opts: ComposeOpts): Promise<void> {
   // crop dimension equals the smaller of the scaled width/height so the
   // result is exactly avatarDiameter × avatarDiameter.
   const logoAvatarScaleAndMask = wantAvatar
-    ? `[logo_avatar_in]scale=${avatarDiameter}:${avatarDiameter}:force_original_aspect_ratio=increase,crop=${avatarDiameter}:${avatarDiameter},format=yuva420p,geq=lum='p(X,Y)':cb='p(X,Y)':cr='p(X,Y)':a='if(lte(pow(X-${avatarR},2)+pow(Y-${avatarR},2),${avatarR * avatarR}),255,0)'[logo_avatar]`
+    ? `[${logoAvatarInput}]scale=${avatarDiameter}:${avatarDiameter}:force_original_aspect_ratio=increase,crop=${avatarDiameter}:${avatarDiameter},format=yuva420p,geq=lum='p(X,Y)':cb='p(X,Y)':cr='p(X,Y)':a='if(lte(pow(X-${avatarR},2)+pow(Y-${avatarR},2),${avatarR * avatarR}),255,0)'[logo_avatar]`
     : null;
 
+  // In wordmark mode AND fullbleed mode the logo PNG isn't overlaid on the
+  // canvas. We still build the circular avatar branch when the outro card
+  // needs it, so the logoPath input stays useful.
   const logoChain = logoPath
-    ? [
-        ...(logoSplit ? [logoSplit] : []),
-        logoBrandScaleAndMask,
-        // Overlay top-LEFT — X=logoMargin, Y=logoMarginTop (separate so brand-
-        // shell can sit close to the card top without shifting right).
-        `[burned][logo]overlay=${logoMargin}:${logoMarginTop}[${textChain.length > 0 ? "with_logo" : "final"}]`,
-        ...(logoAvatarScaleAndMask ? [logoAvatarScaleAndMask] : []),
-      ]
+    ? (useWordmark || isChromeless)
+      ? [
+          ...(logoSplit ? [logoSplit] : []),
+          ...(logoAvatarScaleAndMask ? [logoAvatarScaleAndMask] : []),
+        ]
+      : [
+          ...(logoSplit ? [logoSplit] : []),
+          logoBrandScaleAndMask,
+          // Overlay top-LEFT — X=logoMargin, Y=logoMarginTop (separate so brand-
+          // shell can sit close to the card top without shifting right).
+          `[burned][logo]overlay=${logoMargin}:${logoMarginTop}[${textChain.length > 0 ? "with_logo" : "final"}]`,
+          ...(logoAvatarScaleAndMask ? [logoAvatarScaleAndMask] : []),
+        ]
     : [];
 
   // Subtitles output target: pipe straight to [final] only when no logo AND
   // no brand text AND no outro overlay follows. Otherwise route to [burned]
   // so the next stage can overlay on top.
   const hasOutroOverlay = outroSec > 0;
-  const hasOverlayStage = !!logoPath || textChain.length > 0 || hasOutroOverlay;
+  const hasLegacyBrandOverlay = !useWordmark && !isChromeless && (!!logoPath || textChain.length > 0);
+  const hasFullbleedCorner = isChromeless && !!fullbleedCornerText;
+  const hasOverlayStage = useWordmark || hasLegacyBrandOverlay || hasFullbleedCorner || hasOutroOverlay;
 
   // Last label produced by the existing visual chain before the outro stage.
   // If outro is enabled, every prior stage targets [pre_outro] so we can
@@ -485,9 +623,115 @@ export async function composeVideo(opts: ComposeOpts): Promise<void> {
   // Adjust the last visual stage's output label to [pre_outro] when outro is
   // on. Each stage in the original chain wrote to [final]; rewrite to use
   // preOutroLabel so the outro stage gets a clean handoff.
-  const subtitlesLabel = (!!logoPath || textChain.length > 0) ? "burned" : preOutroLabel;
+  const subtitlesLabel = useWordmark || hasLegacyBrandOverlay || hasFullbleedCorner ? "burned" : preOutroLabel;
   const logoChainAdjusted = logoChain.map((step) => step.replace(/\[final\]$/, `[${preOutroLabel}]`));
   const textChainAdjusted = textChain.map((step) => step.replace(/\[final\]$/, `[${preOutroLabel}]`));
+
+  // Brand-wordmark chain — only built when `useWordmark` is on. Geometry:
+  //   • Anchored 32px above the card outline top.
+  //   • Stack (bottom-up): tag → 14px gap → underline (4px) → 18px gap → main.
+  //   • All elements horizontally centered on the 1080-wide canvas.
+  // The main text gets a soft purple drop-shadow glow (#A855F7) to mimic the
+  // gradient-fill look /create-video uses on its hero text without paying the
+  // cost of a true gradient mask. The underline is a 4px tall geq gradient
+  // #7C3AED → #22D3EE that the outro stage already proved works in this
+  // pipeline. Tag is the existing `brandTag` value, uppercased + cyan.
+  const wordmarkChain: string[] = [];
+  if (useWordmark) {
+    // Wordmark is suppressed in fullbleed layout, so this branch only runs
+    // for card / vignette layouts — anchor above the card outline.
+    const outlineTopY = Math.max(0, fgY - cardStrokeW);
+    const wmName = brandName || "SportsForAllPodcast";
+
+    if (wmStyle === "elegant") {
+      // ── Elegant masthead ──────────────────────────────────────────────
+      // Single centered line in refined serif italic (Palatino). No gradient
+      // underline, no tag, no purple glow — just the name floating gracefully
+      // above the card outline with a thin subtle separator. Letter-spaced
+      // for an editorial-magazine feel. Designed for the locket / pendant-
+      // frame aesthetic where the brand should be visible but must NOT
+      // compete with the video.
+      const sepH = 2;
+      const sepW = 80;
+      const sepGap = 30;   // gap between separator and card outline
+      const nameGap = 16;  // gap between name bottom and separator top
+      const sepY = outlineTopY - sepGap;
+      const nameY = Math.max(20, sepY - nameGap - wmFontSize);
+      const sepX = Math.round((1080 - sepW) / 2);
+      // Letter-spacing: space between each char within words, wider gaps
+      // between words for clear word boundaries.
+      const spacedName = wmName.split(" ").map((w: string) => w.split("").join(" ")).join("   ");
+
+      // 1) Thin subtle separator line — white at very low opacity.
+      wordmarkChain.push(
+        `color=c=white@0.15:s=${sepW}x${sepH}:d=0.04:rate=${fps},format=yuva420p,loop=loop=-1:size=1:start=0[wm_sep]`,
+      );
+      // 2) Brand name text — refined italic, soft shadow, no border glow.
+      wordmarkChain.push(
+        `[burned]drawtext=fontfile='${wmFontFile}':text='${escapeDrawtext(spacedName)}':fontsize=${wmFontSize}:fontcolor=white@0.92:x=(w-text_w)/2:y=${nameY}:shadowcolor=black@0.3:shadowx=0:shadowy=2[wm_name]`,
+      );
+      // 3) Overlay separator between name and card.
+      wordmarkChain.push(
+        `[wm_name][wm_sep]overlay=${sepX}:${sepY}[${preOutroLabel}]`,
+      );
+    } else {
+      // ── Display wordmark ──────────────────────────────────────────────
+      // Heavy bold broadcast aesthetic: Segoe UI Black + purple border glow +
+      // gradient underline (purple→cyan) + cyan uppercased tag.
+      const gapAboveOutline = 32;
+      const tagToUnderlineGap = 14;
+      const mainToUnderlineGap = 18;
+      const wmTag = brandTag ? brandTag.toUpperCase() : "";
+      // Compute Ys bottom-up so the block always lands flush above the outline.
+      const wmBlockBottom = outlineTopY - gapAboveOutline;
+      const tagBottomY = wmBlockBottom;
+      const tagY = tagBottomY - wmTagFontSize;
+      const underlineBottomY = wmTag ? (tagY - tagToUnderlineGap) : wmBlockBottom;
+      const underlineY = underlineBottomY - wmUnderlineH;
+      const mainBottomY = underlineY - mainToUnderlineGap;
+      const mainY = Math.max(20, mainBottomY - wmFontSize);
+      const underlineX = Math.round((1080 - wmUnderlineW) / 2);
+
+      // 1) Gradient underline color-source. R=124→34 (G=58→211, B=237→238).
+      wordmarkChain.push(
+        `color=c=black:s=${wmUnderlineW}x${wmUnderlineH}:r=${fps}:d=0.04,format=rgba,geq=r='124-90*X/W':g='58+153*X/W':b='237+X/W':a=255,format=yuva420p,loop=loop=-1:size=1:start=0[wm_underline]`,
+      );
+      // 2) Main wordmark text — drawn straight onto [burned] (post-captions).
+      //    Segoe UI Black for the heavier display weight, plus a slim purple
+      //    border (#A855F7@0.65, 2px) that reads as a colored halo around each
+      //    letter. Black drop-shadow at +0/+3 adds depth without harshness.
+      wordmarkChain.push(
+        `[burned]drawtext=fontfile='${wmFontFile}':text='${escapeDrawtext(wmName)}':fontsize=${wmFontSize}:fontcolor=white:x=(w-text_w)/2:y=${mainY}:bordercolor=0xA855F7@0.65:borderw=2:shadowcolor=black@0.55:shadowx=0:shadowy=3[wm_main]`,
+      );
+      // 3) Overlay underline on top of main-text stage.
+      const afterUnderlineLabel = wmTag ? "wm_underline_done" : preOutroLabel;
+      wordmarkChain.push(
+        `[wm_main][wm_underline]overlay=${underlineX}:${underlineY}[${afterUnderlineLabel}]`,
+      );
+      // 4) Tag text (cyan, uppercased, semibold for a touch more weight,
+      //    light letter-spacing approximated by inserting thin spaces ` ` (U+2009)
+      //    between glyphs — gives the wordmark a "broadcasting" feel).
+      if (wmTag) {
+        const spacedTag = wmTag.split("").join(" ");
+        wordmarkChain.push(
+          `[wm_underline_done]drawtext=fontfile='${fontBold}':text='${escapeDrawtext(spacedTag)}':fontsize=${wmTagFontSize}:fontcolor=0x22D3EE:x=(w-text_w)/2:y=${tagY}:shadowcolor=black@0.4:shadowx=0:shadowy=2[${preOutroLabel}]`,
+        );
+      }
+    }
+  }
+
+  // Fullbleed corner text — small decorative line at the top-left of the
+  // canvas (in place of the wordmark stack). Default font is Palatino
+  // Linotype Italic for an elegant serif feel; swap via fullbleedCornerFontFile.
+  // Anchor at x=60, y=80 — a respectful margin from the top-left corner.
+  const fullbleedCornerChain: string[] = [];
+  if (hasFullbleedCorner) {
+    const cornerX = 60;
+    const cornerY = 80;
+    fullbleedCornerChain.push(
+      `[burned]drawtext=fontfile='${fullbleedCornerFontFile}':text='${escapeDrawtext(fullbleedCornerText)}':fontsize=${fullbleedCornerFontSize}:fontcolor=white:x=${cornerX}:y=${cornerY}:shadowcolor=black@0.75:shadowx=0:shadowy=3:borderw=1:bordercolor=black@0.4[${preOutroLabel}]`,
+    );
+  }
 
   // Outro stage — matches the /create-video Remotion outro layout as close as
   // ffmpeg primitives allow.
@@ -743,6 +987,62 @@ export async function composeVideo(opts: ComposeOpts): Promise<void> {
     );
   }
 
+  // === FULLBLEED VISUAL CHAIN ===
+  // Aesthetic-bg mode: source video fills the full 1080×1920 canvas
+  // (cover-crop), with an optional black dim overlay so the karaoke
+  // captions stay legible. No card, no chrome.
+  const fullbleedVisual: string[] = [];
+  if (layout === "fullbleed") {
+    if (fullbleedDim > 0) {
+      fullbleedVisual.push(
+        `[0:v]scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,setsar=1[fb_scaled]`,
+      );
+      fullbleedVisual.push(
+        `color=c=black@${fullbleedDim.toFixed(3)}:s=1080x1920:r=${fps}[fb_dim]`,
+      );
+      fullbleedVisual.push(
+        `[fb_scaled][fb_dim]overlay=0:0:shortest=1[composed]`,
+      );
+    } else {
+      fullbleedVisual.push(
+        `[0:v]scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,setsar=1[composed]`,
+      );
+    }
+  }
+
+  // === LANDSCAPE VISUAL CHAIN ===
+  // 16:9 (or wider) source on a black 9:16 canvas. Source is fitted to
+  // width=1080 with NO crop — letterbox safety pad if aspect is wider than
+  // 16:9. Height comes from `landscapeVideoHeight` (resolved by pipeline.ts
+  // from ffprobe) and centered vertically with a small upward bias so the
+  // burned-in caption (sitting inside the strip's lower portion) reads
+  // against the footage, not against dead black space below it.
+  const landscapeVisual: string[] = [];
+  let landscapeVideoY = 0;
+  let landscapeVideoH = 608;
+  if (layout === "landscape") {
+    // Caller may pass the actual source W/H via foregroundWidth/foregroundHeight
+    // as a hint; otherwise we let ffmpeg's force_original_aspect_ratio=decrease
+    // pad to a default 1080×608 box (true 16:9 strip). The pipeline normally
+    // probes the source and passes the real height so the strip matches.
+    landscapeVideoH = Math.max(200, Math.min(1080, Math.floor(opts.foregroundHeight ?? 608)));
+    landscapeVideoY = Math.max(0, Math.min(
+      1920 - landscapeVideoH,
+      Math.round((1920 - landscapeVideoH) / 2) + landscapeVerticalBias,
+    ));
+    // Black 9:16 canvas.
+    landscapeVisual.push(`color=c=black:s=1080x1920:r=${fps}[bg]`);
+    // Scale source to width=1080 fit-inside (no crop). Pad if needed so the
+    // strip is exactly 1080×landscapeVideoH.
+    landscapeVisual.push(
+      `[0:v]scale=1080:${landscapeVideoH}:force_original_aspect_ratio=decrease,` +
+        `pad=1080:${landscapeVideoH}:(ow-iw)/2:(oh-ih)/2:color=black,setsar=1[ls_strip]`,
+    );
+    landscapeVisual.push(
+      `[bg][ls_strip]overlay=0:${landscapeVideoY}:shortest=1[composed]`,
+    );
+  }
+
   // === VIGNETTE VISUAL CHAIN ===
   // Split source: one copy is scaled up + heavily blurred + dimmed to cover
   // the full 1080×1920 canvas as a vignette background; the second copy sits
@@ -845,16 +1145,22 @@ export async function composeVideo(opts: ComposeOpts): Promise<void> {
   const filter = [
     ...(layout === "vignette"
       ? vignetteVisual
-      : [
-          // Pure-black 9:16 canvas. Duration is clamped at the output side via -t.
-          `color=c=black:s=1080x1920:r=${fps}[bg]`,
-          fgChain,
-          ...(strokeChain ? [strokeChain, strokeOverlay!] : []),
-          `[${preFgOverlayLabel}][fg]overlay=${fgX}:${fgY}:shortest=1[composed]`,
-        ]),
+      : layout === "fullbleed"
+        ? fullbleedVisual
+        : layout === "landscape"
+          ? landscapeVisual
+          : [
+            // Pure-black 9:16 canvas. Duration is clamped at the output side via -t.
+            `color=c=black:s=1080x1920:r=${fps}[bg]`,
+            fgChain,
+            ...(strokeChain ? [strokeChain, strokeOverlay!] : []),
+            `[${preFgOverlayLabel}][fg]overlay=${fgX}:${fgY}:shortest=1[composed]`,
+          ]),
     `[${layout === "vignette" ? vignetteSubsInput : "composed"}]subtitles=${assFilename}[${subtitlesLabel}]`,
     ...logoChainAdjusted,
     ...textChainAdjusted,
+    ...wordmarkChain,
+    ...fullbleedCornerChain,
     ...outroChain,
     ...audioChain,
   ].join(";");
@@ -952,13 +1258,25 @@ function runFfmpeg(args: string[], cwd: string): Promise<void> {
  * Validate that a source video file exists and is something ffmpeg can read.
  * Cheap probe via ffprobe; returns the duration in seconds for logging.
  */
-export async function probeVideo(sourceVideoPath: string): Promise<{ durationSec: number; width: number; height: number }> {
+export interface ProbeResult {
+  durationSec: number;
+  width: number;
+  height: number;
+  /** Decimal frames-per-second, parsed from r_frame_rate (e.g. "30/1" → 30, "30000/1001" → 29.97). */
+  fps: number;
+  /** Pixel format (e.g. "yuv420p"). May be empty when stream metadata is missing it. */
+  pixFmt: string;
+  /** Video codec name (e.g. "h264"). */
+  codec: string;
+}
+
+export async function probeVideo(sourceVideoPath: string): Promise<ProbeResult> {
   const abs = resolvePath(sourceVideoPath);
   const out = await new Promise<string>((resolve, reject) => {
     const proc = spawn("ffprobe", [
       "-v", "error",
       "-select_streams", "v:0",
-      "-show_entries", "stream=width,height:format=duration",
+      "-show_entries", "stream=width,height,r_frame_rate,pix_fmt,codec_name:format=duration",
       "-of", "default=noprint_wrappers=1",
       abs,
     ]);
@@ -972,17 +1290,34 @@ export async function probeVideo(sourceVideoPath: string): Promise<{ durationSec
     });
   });
 
-  const parse = (key: string): number | null => {
+  const parseNum = (key: string): number | null => {
     const m = out.match(new RegExp(`${key}=([0-9.]+)`));
     return m ? parseFloat(m[1]) : null;
   };
-  const width = parse("width");
-  const height = parse("height");
-  const durationSec = parse("duration");
+  const parseStr = (key: string): string => {
+    const m = out.match(new RegExp(`${key}=([^\\r\\n]+)`));
+    return m ? m[1].trim() : "";
+  };
+  const width = parseNum("width");
+  const height = parseNum("height");
+  const durationSec = parseNum("duration");
   if (!width || !height || !durationSec) {
     throw new Error(`ffprobe did not return width/height/duration for ${basename(abs)}: ${out}`);
   }
-  return { durationSec, width, height };
+  // r_frame_rate is a ratio like "30/1" or "30000/1001". Convert to decimal.
+  const frRaw = parseStr("r_frame_rate") || "0/1";
+  const frParts = frRaw.split("/");
+  const fpsNum = parseFloat(frParts[0]) || 0;
+  const fpsDen = parseFloat(frParts[1]) || 1;
+  const fps = fpsDen ? fpsNum / fpsDen : 0;
+  return {
+    durationSec,
+    width,
+    height,
+    fps,
+    pixFmt: parseStr("pix_fmt"),
+    codec: parseStr("codec_name"),
+  };
 }
 
 /**

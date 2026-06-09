@@ -13,10 +13,44 @@ const HookData = z.object({
   template: z.literal("hook"),
   headline: z.string().min(1).max(40),
   subhead: z.string().max(40).optional(),
+  /**
+   * Kicker label (broadcast lower-third style) — competition / context, e.g.
+   * "Ngoại hạng Anh", "Champions League". Rendered as the red-bar kicker above
+   * the score/headline. If omitted, no kicker is shown (the persistent shell
+   * already carries the channel brand).
+   */
+  eyebrow: z.string().max(30).optional(),
+  /** Optional second line under the kicker, e.g. matchweek "Vòng 32" (≤24). */
+  eyebrowSub: z.string().max(24).optional(),
+  /**
+   * Optional giant attention-grabber rendered ABOVE the headline at frame 0.
+   * Use for stat-shock hooks: "19", "€80M", "22 NĂM", "0-7", "#1"
+   * or short text phrases: "HUYỀN THOẠI", "KỶ LỤC".
+   * Font auto-scales via CSS: ≤3 chars → 320px, 4-5 → 240px,
+   * 6-8 → 180px, 9-12 → 140px, 13+ → 110px.
+   */
+  bigStat: z.string().min(1).max(20).optional(),
   /** background image path (literal "$source.image" → substituted at pipeline level) */
   bgSrc: z.string().optional(),
-  /** Ken Burns effect class */
-  kenBurns: z.enum(["zoom-in", "zoom-out", "pan-left", "pan-right"]).default("zoom-in"),
+  /**
+   * Background motion class. The kinetic options (impact-zoom, whip-pan,
+   * shake-on-beat) are preferred for hooks on short-form video — they stop
+   * scroll better than the slow Ken Burns pans. Use Ken Burns for
+   * meditative/tribute hooks only.
+   */
+  kenBurns: z
+    .enum([
+      "zoom-in",
+      "zoom-out",
+      "pan-left",
+      "pan-right",
+      "impact-zoom",
+      "whip-pan",
+      "shake-on-beat",
+      "drift-diagonal",
+      "breathe",
+    ])
+    .default("impact-zoom"),
 });
 
 const ComparisonSide = z.object({
@@ -204,7 +238,7 @@ export const ScriptSchema = z.object({
   scenes: z
     .array(Scene)
     .min(5)
-    .max(16, "scenes must have at most 16 items (news 5–8, analysis 10–15)")
+    .max(20, "scenes must have at most 20 items (news 5–8, analysis 10–15)")
     .refine(
       (s) => s[0]?.type === "hook",
       { message: "scenes[0] must be type=hook" }

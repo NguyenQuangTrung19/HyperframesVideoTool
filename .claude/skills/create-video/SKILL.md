@@ -362,10 +362,10 @@ Anti-test: if the headline could appear unchanged as a `<h1>` on a news website,
 
 #### B. `bigStat` field — use for stat-shock hooks
 
-Optional `templateData.bigStat` (≤8 chars) renders a giant neon-yellow value ABOVE the headline at frame 0. When set:
-- The headline shrinks to a supporting role.
-- The "Sports For All TV" brand eyebrow is suppressed at frame 0 (it would compete with the big stat).
+Optional `templateData.bigStat` (≤8 chars) renders a giant **WHITE serif** value (Playfair Display) as the hero of the frame, with a short **red accent bar** drawn beneath it. When set:
+- The headline shrinks to a supporting role below the red bar.
 - The viewer's eye lands on the big number before anything else — exactly the scroll-stopper TikTok rewards.
+- The kicker (`eyebrow`, see §B2) STILL shows above the stat — competition context + the big number coexist, broadcast lower-third style.
 
 Use `bigStat` whenever the hook's punchline is a number, a money figure, a rank, a score, or a duration. Skip it for question / verdict / contradiction hooks where the words ARE the punch.
 
@@ -383,6 +383,15 @@ Use `bigStat` whenever the hook's punchline is a number, a money figure, a rank,
 - Strip spaces where possible: `"22 NĂM"`, `"€80M"`, `"0-7"`, `"#1"`.
 - UPPERCASE for VN words inside bigStat (the "NĂM" in `"22 NĂM"`); digits/symbols stay as-is.
 - Keep VN diacritics in bigStat when present (`"NĂM"`, not `"NAM"`) — visible field rules apply.
+
+#### B2. `eyebrow` + `eyebrowSub` — the competition kicker (ALWAYS fill `eyebrow`)
+
+The hook opens with a **broadcast-style kicker**: a red vertical bar + an uppercase label (Oswald font, automatic), rendered above the bigStat/headline. This is what gives the hook its **tin tức / thời sự / phân tích** authority instead of a clickbait shout — it reads like a real sports broadcast lower-third.
+
+- **`eyebrow`** (≤30 chars) = the **competition / context label**. **ALWAYS set it.** Use the tournament or league the story belongs to: `"Ngoại hạng Anh"`, `"Champions League"`, `"World Cup 2026"`, `"La Liga"`, `"Vòng loại World Cup"`, `"Chuyển nhượng"`. For non-match content pick the topical desk: bio → `"Chân dung"`, history → `"Hồi ký"`, ranking → `"Bảng xếp hạng"`, trivia → `"Có thể bạn chưa biết"`, transfer → `"Chuyển nhượng"`.
+- **`eyebrowSub`** (≤24 chars, optional) = a **second context line** under the kicker: matchweek, stage, date, or venue — `"Vòng 32"`, `"Bán kết lượt về"`, `"08.06.2026"`, `"Tại Anfield"`. Omit when it adds nothing (channel rule = fewer words).
+- ❌ Do NOT put urgency slogans here (`"TIN NÓNG"`, `"GÂY SỐC"`, `"ĐỘC QUYỀN"`). The kicker carries **context**; the headline carries the **hook**. The competition label generalizes across every video and reads as authoritative, not clickbait.
+- If `eyebrow` is omitted the kicker is hidden (only the persistent shell brand top-left shows) — always prefer to set it.
 
 #### C. `kenBurns` — pick kinetic motion for hooks, not slow zoom
 
@@ -426,9 +435,10 @@ The first SHORT sentence (≤8 words) is the hook. The voice can elaborate in se
   "voiceText": "22 năm. Pháo Thủ trở lại đỉnh Ngoại hạng. 23 cầu thủ, 23 hành trình khác nhau.",
   "templateData": {
     "template": "hook",
+    "eyebrow": "Ngoại hạng Anh",
+    "eyebrowSub": "Mùa 2024-25",
     "bigStat": "22 NĂM",
     "headline": "Pháo Thủ trở lại đỉnh",
-    "subhead": "Premier League 2024-25",
     "kenBurns": "impact-zoom"
   },
   "imagePrompt": "..."
@@ -443,8 +453,9 @@ The first SHORT sentence (≤8 words) is the hook. The voice can elaborate in se
   "voiceText": "Maguire hết cửa Tam Sư. Tuchel chốt 26 — số 5 trống.",
   "templateData": {
     "template": "hook",
+    "eyebrow": "World Cup 2026",
+    "eyebrowSub": "Tuyển Anh chốt 26",
     "headline": "Maguire hết cửa|Tam Sư",
-    "subhead": "Tuchel chốt 26 cho WC 2026",
     "kenBurns": "shake-on-beat"
   }
 }
@@ -458,9 +469,10 @@ The first SHORT sentence (≤8 words) is the hook. The voice can elaborate in se
   "voiceText": "Bảy quyết định có thể khiến tuyển Anh về sớm. Tuchel đang đứng giữa lằn ranh.",
   "templateData": {
     "template": "hook",
+    "eyebrow": "World Cup 2026",
+    "eyebrowSub": "Trước ngày chốt 26",
     "bigStat": "7",
     "headline": "Quyết định khó nhất|của Tuchel",
-    "subhead": "Trước ngày chốt danh sách",
     "kenBurns": "impact-zoom"
   }
 }
@@ -474,9 +486,10 @@ The first SHORT sentence (≤8 words) is the hook. The voice can elaborate in se
   "voiceText": "Vô địch xong, nhưng cuộc đua chưa hết. Mười trận, năm cuộc đua, một Chủ Nhật.",
   "templateData": {
     "template": "hook",
+    "eyebrow": "Ngoại hạng Anh",
+    "eyebrowSub": "Vòng cuối — 10 trận cùng giờ",
     "bigStat": "5",
     "headline": "Cuộc đua còn lại|của Premier League",
-    "subhead": "Vòng cuối, 10 trận cùng giờ",
     "kenBurns": "whip-pan"
   }
 }
@@ -489,6 +502,8 @@ The first SHORT sentence (≤8 words) is the hook. The voice can elaborate in se
 - ❌ First sentence of voiceText is >10 words.
 - ❌ bigStat contains more than one giant token (e.g. `"22 năm Pháo Thủ"` — that's a headline, not a bigStat).
 - ❌ kenBurns is `"zoom-in"` and the content type isn't meditative / tribute. Default should be `"impact-zoom"`.
+- ❌ `eyebrow` is missing — the hook loses its broadcast kicker. ALWAYS set it to the competition / context label.
+- ❌ `eyebrow` or `eyebrowSub` is an urgency slogan (`"TIN NÓNG"`, `"GÂY SỐC"`) instead of competition context.
 - ❌ Hook headline and outro caption say roughly the same thing — wasted opportunity, the hook should commit harder.
 
 **Body — content-type specific patterns:**
@@ -696,6 +711,8 @@ When the source mentions a **starting lineup, predicted XI, squad reveal, or for
 
 Rows go **back to front** (GK row first, ST row last). CSS reverses display so GK lands at the bottom of the pitch and the striker at the top. Each row spreads players evenly across the pitch width. Total players should equal 11 for a standard XI; the schema accepts 2–6 rows with 1–5 players per row to support every common formation.
 
+**Important row order rule:** Within each row, order players from **left-to-right from the viewer's perspective**. The first item in the array must be the left-most player (e.g., Left Back), and the last item must be the right-most player (e.g., Right Back). Example for Portugal defense (L to R): `["Nuno Mendes", "Inacio", "Ruben Dias", "Cancelo"]`.
+
 **Name compression — keep tokens readable:**
 - Use **surname only** when possible (`Mbappé`, `Koundé`, `Tchouaméni`, `Upamecano`).
 - For first-name+surname duos that share a club (`Théo Hernández` and `Lucas Hernández`), use `"T. Hernández"` and `"L. Hernández"` to disambiguate.
@@ -900,7 +917,7 @@ Other fields render `|` as a literal character — don't use it there.
 | `feature-list.bullets[]` | 50 each, max 4 | 50px Inter | Each = a clause/short sentence. Sentence case. CSS adds the dot — don't prefix `-` or `•`. |
 | `formation-pitch.title` | 40 | 64px Inter | Sentence case. E.g. `"Đội hình dự kiến"`, `"Đội hình ra sân"`. |
 | `formation-pitch.formation` | 12 | 56px Anton cyan | Formation label, e.g. `"4-2-3-1"`, `"4-3-3"`, `"3-5-2"`. |
-| `formation-pitch.rows[][]` | 24 per name, 1–5 names/row, 2–6 rows | 26px Inter on green pitch | Player names by row, **back to front** (GK row first, ST row last). Use surnames only (`Mbappé`, `T. Hernández`); compress long first-names with initial (e.g. `"T. Hernández"` for `"Théo Hernández"`). Total should be 11 for a standard XI. |
+| `formation-pitch.rows[][]` | 24 per name, 1–5 names/row, 2–6 rows | 26px Inter on green pitch | Player names by row, **back to front** (GK row first, ST row last). Order within rows MUST be **left-to-right from the viewer's perspective** (Left Back first, Right Back last). Use surnames only (`Mbappé`, `T. Hernández`). Total 11 for standard XI. |
 | `engagement-question.question` | 120 | 60px Inter | Content-derived question. Sentence case. `|` allowed for phrase-aware line breaks. End with `?`. |
 | `engagement-question.cta` | 40 | 38px Inter pill | Short comment prompt, e.g. `"Để lại bình luận bên dưới nhé"`. |
 | `engagement-question.tag` | 20 | 36px CSS uppercase | Optional. Natural case (`Câu hỏi`, `Bình luận`). |

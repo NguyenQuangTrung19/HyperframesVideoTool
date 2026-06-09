@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "source": "hop-bao-thomas-tuchel-tuyen-anh-wc-2026.txt",
+  "contentType": "NEWS",
+  "title": "Thomas Tuchel lên tiếng trước thềm chiến dịch World Cup của tuyển Anh",
+  "createdAt": "2026-06-06T12:35:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Thomas Tuchel tại buổi họp báo tuyển Anh",
+      "prompt": "Vertical 9:16 football poster artwork featuring Thomas Tuchel, the German manager of the England national team, sitting at a World Cup press conference desk, speaking into microphones with a confident, intense expression. Background: a stylized white-and-red graphic backdrop with a giant England Three Lions crest watermark and radiating light rays. Saturated white, red, and blue palette, high contrast, glossy graphic finish. Stylized like a FIFA World Cup press conference promotional graphic. The England crest visible on his jacket, no on-image text."
+    },
+    {
+      "id": "transfers",
+      "template": "callout",
+      "filename": "transfers.png",
+      "subjectHint": "Cầu thủ Anh và tin đồn chuyển nhượng",
+      "prompt": "Vertical 9:16 football poster artwork (humor edit / playful what-if scene) featuring Marcus Rashford in a white England national team kit, looking thoughtfully at a glowing smartphone in his hand, with floating abstract transfer logos and phone icons around him. Background: a stylized red-and-white graphic backdrop with a giant faint England crest watermark and diagonal light trails. Saturated red-and-white dominant palette, high contrast, glossy graphic-design finish. Stylized like a football transfer rumor editorial graphic. No on-image text."
+    },
+    {
+      "id": "kane",
+      "template": "stat-hero",
+      "filename": "kane.png",
+      "subjectHint": "Harry Kane sung mãn trong buổi tập",
+      "prompt": "Vertical 9:16 football poster artwork featuring Harry Kane, the English striker and captain, in a hero pose sprinting and leading intensity in training, sweating, looking in peak physical shape. He wears a white-and-blue England training kit with the Three Lions crest clearly visible on the chest. Background: a stylized white graphic backdrop with a giant faint England crest watermark and dynamic red-and-blue light bursts. Vibrant saturated palette, high contrast, glossy graphic-design finish. Stylized like a tournament preparation matchday poster. The England crest visible on the jersey, no on-image text."
+    },
+    {
+      "id": "toney",
+      "template": "stat-hero",
+      "filename": "toney.png",
+      "subjectHint": "Ivan Toney tự tin thể hiện",
+      "prompt": "Vertical 9:16 football poster artwork featuring Ivan Toney, the English striker, in a hero pose pointing a finger to his temple in his signature celebration, confident expression. He wears the white England home kit with the Three Lions crest visible on the chest. Background: a stylized red-and-white graphic backdrop with a giant faint England crest watermark and gold spark accents. Saturated red and white palette, high contrast, glossy graphic-design finish. Stylized like an international matchday promotional poster. The England crest visible on the jersey, no on-image text."
+    },
+    {
+      "id": "pitch",
+      "template": "callout",
+      "filename": "pitch.png",
+      "subjectHint": "Mặt sân Tampa Bay gây lo ngại",
+      "prompt": "Vertical 9:16 football poster artwork showing a close-up of a damaged, patchy green football pitch with visible brown soil and uneven turf. In the background, the empty Tampa Bay stadium silhouette stands under dramatic, heavy stadium floodlights pointing downwards, creating a somber, worrying atmosphere. High-contrast saturated green and brown palette, dramatic lighting, glossy graphic-design finish. Stylized like a matchday pitch inspection editorial graphic. No on-image text."
+    },
+    {
+      "id": "rules",
+      "template": "callout",
+      "filename": "rules.png",
+      "subjectHint": "Luật lệ mới của IFAB gây tranh cãi",
+      "prompt": "Vertical 9:16 football poster artwork showing a football referee in a yellow referee kit seen from behind, drawing a giant glowing neon-cyan VAR screen rectangle in the air. In the background, a moody dark blue graphic backdrop with a giant faint FIFA World Cup trophy watermark and sharp red-and-blue warning laser lights. Saturated high-contrast palette, glossy graphic finish. Stylized like a tournament refereeing rules editorial graphic. No on-image text."
+    }
+  ]
+}

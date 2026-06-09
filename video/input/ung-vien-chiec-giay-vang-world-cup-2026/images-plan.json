@@ -1,0 +1,65 @@
+{
+  "version": "1.0",
+  "source": "ung-vien-chiec-giay-vang-world-cup-2026.txt",
+  "contentType": "RANKING",
+  "title": "Những ứng cử viên hàng đầu cho Chiếc giày vàng World Cup 2026",
+  "createdAt": "2026-06-05T09:41:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Chiếc giày vàng World Cup bên cạnh Mbappe, Haaland và Messi",
+      "prompt": "Vertical 9:16 football poster artwork featuring the Golden Boot trophy glowing in gold in the center. Kylian Mbappe in the blue French kit, Erling Haaland in the red Norwegian kit, and Lionel Messi in the blue-and-white Argentine kit are shown behind it in intense, determined poses. Background: a dynamic gold and black graphic design with a giant faint World Cup 2026 logo watermark, dramatic golden light rays radiating outwards. Saturated palette, high contrast, glossy finish, sports promotional poster style. No on-image text."
+    },
+    {
+      "id": "mbappe",
+      "template": "stat-hero",
+      "filename": "mbappe.png",
+      "subjectHint": "Kylian Mbappe ăn mừng bàn thắng cho tuyển Pháp",
+      "prompt": "Vertical 9:16 football poster artwork featuring Kylian Mbappe, the French forward. He is shown celebrating a goal with his signature arms-crossed pose, looking confident, wearing the blue France home kit with the French rooster crest clearly visible on the chest. Background: a bold dark blue and red graphic backdrop with layered color-block shards, a giant faint France crest watermark, and glowing white light trails. Vibrant saturated palette, high contrast, glossy finish. No on-image text."
+    },
+    {
+      "id": "kane",
+      "template": "stat-hero",
+      "filename": "kane.png",
+      "subjectHint": "Harry Kane trong màu áo đội tuyển Anh",
+      "prompt": "Vertical 9:16 football poster artwork featuring Harry Kane, the English striker. He is depicted smiling and celebrating, wearing the white England home kit with the Three Lions crest visible on the chest. Background: a stylized red and white graphic backdrop with a giant faint Three Lions crest watermark, sharp geometric diagonal color panes, and radiating white light rays. Saturated palette, high contrast, glossy finish. No on-image text."
+    },
+    {
+      "id": "haaland",
+      "template": "stat-hero",
+      "filename": "haaland.png",
+      "subjectHint": "Erling Haaland trong màu áo đội tuyển Na Uy",
+      "prompt": "Vertical 9:16 football poster artwork featuring Erling Haaland, the Norwegian striker. He is shown roaring in triumph, blonde hair flowing, wearing the red Norway home kit with the Norway crest visible on the chest. Background: a dramatic red and navy-blue graphic backdrop with a giant faint Norway crest watermark, explosive white light bursts radiating behind his head. Saturated palette, very high contrast, glossy finish. No on-image text."
+    },
+    {
+      "id": "messi",
+      "template": "stat-hero",
+      "filename": "messi.png",
+      "subjectHint": "Lionel Messi dẫn bóng trong màu áo Argentina",
+      "prompt": "Vertical 9:16 football poster artwork featuring Lionel Messi, the Argentine forward. He is shown dribbling the ball with high focus, wearing the blue-and-white striped Argentina home kit with the AFA crest clearly visible on the chest. Background: a bold light blue and white graphic backdrop with a giant faint Argentina crest watermark, sharp diagonal color panels, and glowing yellow light trails. Saturated palette, high contrast, glossy finish. No on-image text."
+    },
+    {
+      "id": "ronaldo",
+      "template": "stat-hero",
+      "filename": "ronaldo.png",
+      "subjectHint": "Cristiano Ronaldo ăn mừng trong màu áo Bồ Đào Nha",
+      "prompt": "Vertical 9:16 football poster artwork featuring Cristiano Ronaldo, the Portuguese forward. He is depicted in his iconic 'Siu' celebration pose, wearing the red-and-green Portugal home kit with the Portuguese crest visible on the chest. Background: a vibrant red and green graphic backdrop with layered shards, a giant faint Portugal crest watermark, and glowing golden light trails. Vibrant saturated palette, high contrast, glossy finish. No on-image text."
+    },
+    {
+      "id": "vinicius",
+      "template": "stat-hero",
+      "filename": "vinicius.png",
+      "subjectHint": "Vinicius Junior bứt tốc dũng mãnh cho tuyển Brazil",
+      "prompt": "Vertical 9:16 football poster artwork featuring Vinicius Junior, the Brazilian winger. He is shown sprint dribbling with incredible speed, looking intense and focused, wearing the yellow Brazil home kit. Background: a stylized yellow and green graphic backdrop with a giant faint Brazil crest watermark, fast motion lines, and glowing yellow light trails. Vibrant palette, high contrast, glossy finish. No on-image text."
+    },
+    {
+      "id": "question",
+      "template": "callout",
+      "filename": "question.png",
+      "subjectHint": "Chiếc cúp vàng thế giới rực rỡ bên cạnh quả bóng vàng",
+      "prompt": "Vertical 9:16 football poster artwork featuring the Golden Boot trophy and the FIFA World Cup Trophy standing side by side on a pedestal, glowing brilliantly. Background: a dark grid network with dramatic gold spotlight rays, gold confetti floating in the air. Saturated dark gold palette, high contrast, glossy premium finish. No on-image text."
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "version": "1.0",
+  "source": "79-bom-tan-chuyen-nhuong-he-p2.txt",
+  "contentType": "TRANSFER NEWS",
+  "title": "79 bom tấn chuyển nhượng hè 2026 — Phần 2",
+  "createdAt": "2026-06-01T09:52:38.058Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Poster chuyển nhượng hè 2026 — Phần 2",
+      "prompt": "Vertical 9:16 football poster artwork. Centre composition: a low-angle silhouette of an elite footballer in a generic home kit in a hero pose, arms slightly outstretched, standing over a glowing golden platform. Background: a layered deep-blue and gold graphic backdrop with a huge stylized transfer window arrows icon floating faintly as a watermark, dramatic golden light rays radiating outward from behind the figure, faint stylized silhouettes of major European league trophies flanking the composition as graphic accents in the upper corners. Vibrant saturated palette with gold highlights, very high contrast, glossy graphic-design finish. Stylized like a Premier League season-opening promotional poster. No on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "player-1",
+      "template": "stat-hero",
+      "filename": "player-1.png",
+      "subjectHint": "Said El Mala — FC Köln",
+      "prompt": "Vertical 9:16 football poster artwork featuring Said El Mala, the Đức winger for FC Köln, in a speedy dribble pose down the wing, body leaned low for sudden acceleration. He wears a bright white-and-red FC Köln home kit with the FC Köln crest clearly visible on the chest. Background: a bold white and red Köln colors graphic backdrop with a huge stylized FC Köln Billy Goat crest floating faintly behind him as a watermark, dramatic light rays radiating outward from behind his body, faint stylized fan-crowd silhouettes flanking the lower edge of the frame. Vibrant saturated white and red Köln colors dominant palette, very high contrast, glossy graphic-design finish. Stylized like a Premier League promotional poster. The FC Köln crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "player-2",
+      "template": "stat-hero",
+      "filename": "player-2.png",
+      "subjectHint": "Mateus Fernandes — West Ham United",
+      "prompt": "Vertical 9:16 football poster artwork featuring Mateus Fernandes, the Bồ Đào Nha midfielder for West Ham United, in a playmaker stance making a precise chọc khe pass with his right foot. He wears a bright claret-and-blue West Ham United home kit with the West Ham United crest clearly visible on the chest. Background: a bold claret and sky blue West Ham colors graphic backdrop with a huge stylized West Ham United crossed-hammers crest floating faintly behind him as a watermark, dramatic light rays radiating outward from behind his body, faint stylized fan-crowd silhouettes flanking the lower edge of the frame. Vibrant saturated claret and sky blue West Ham colors dominant palette, very high contrast, glossy graphic-design finish. Stylized like a Premier League promotional poster. The West Ham United crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "player-3",
+      "template": "stat-hero",
+      "filename": "player-3.png",
+      "subjectHint": "Enzo Fernández — Chelsea",
+      "prompt": "Vertical 9:16 football poster artwork featuring Enzo Fernandez, the Argentina midfielder for Chelsea, in a midfielder command stance, arms spread as he dictates the tempo of the play. He wears a bright royal-blue Chelsea home kit with the Chelsea crest clearly visible on the chest. Background: a bold royal blue Chelsea colors graphic backdrop with a huge stylized Chelsea FC lion crest floating faintly behind him as a watermark, dramatic light rays radiating outward from behind his body, faint stylized fan-crowd silhouettes flanking the lower edge of the frame. Vibrant saturated royal blue Chelsea colors dominant palette, very high contrast, glossy graphic-design finish. Stylized like a Premier League promotional poster. The Chelsea crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "player-4",
+      "template": "stat-hero",
+      "filename": "player-4.png",
+      "subjectHint": "Matias Fernandez-Pardo — Lille",
+      "prompt": "Vertical 9:16 football poster artwork featuring Matias Fernandez-Pardo, the Bỉ forward for Lille, in a young striker celebration pose, sliding on knees with a jubilant smile. He wears a bright red-and-blue Lille home kit with the Lille crest clearly visible on the chest. Background: a bold red and navy blue Lille colors graphic backdrop with a huge stylized Lille OSC crest floating faintly behind him as a watermark, dramatic light rays radiating outward from behind his body, faint stylized fan-crowd silhouettes flanking the lower edge of the frame. Vibrant saturated red and navy blue Lille colors dominant palette, very high contrast, glossy graphic-design finish. Stylized like a Premier League promotional poster. The Lille crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "player-5",
+      "template": "stat-hero",
+      "filename": "player-5.png",
+      "subjectHint": "João Gomes — Wolverhampton Wanderers",
+      "prompt": "Vertical 9:16 football poster artwork featuring Joao Gomes, the Brazil midfielder for Wolverhampton Wanderers, in a defensive midfielder battle stance, standing strong shielding the ball with high intensity. He wears a bright gold Wolverhampton Wanderers home kit with the Wolverhampton Wanderers crest clearly visible on the chest. Background: a bold gold and black Wolves colors graphic backdrop with a huge stylized Wolverhampton Wanderers wolf head crest floating faintly behind him as a watermark, dramatic light rays radiating outward from behind his body, faint stylized fan-crowd silhouettes flanking the lower edge of the frame. Vibrant saturated gold and black Wolves colors dominant palette, very high contrast, glossy graphic-design finish. Stylized like a Premier League promotional poster. The Wolverhampton Wanderers crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "player-6",
+      "template": "stat-hero",
+      "filename": "player-6.png",
+      "subjectHint": "Joe Gomez — Liverpool",
+      "prompt": "Vertical 9:16 football poster artwork featuring Joe Gomez, the Anh defender for Liverpool, in a resolute defensive stance, legs spread wide as he stops an opponent's attack. He wears a bright red Liverpool home kit with the Liverpool crest clearly visible on the chest. Background: a bold deep crimson Liverpool red graphic backdrop with a huge stylized Liverpool FC Liver-bird crest floating faintly behind him as a watermark, dramatic light rays radiating outward from behind his body, faint stylized fan-crowd silhouettes flanking the lower edge of the frame. Vibrant saturated deep crimson Liverpool red dominant palette, very high contrast, glossy graphic-design finish. Stylized like a Premier League promotional poster. The Liverpool crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "player-7",
+      "template": "stat-hero",
+      "filename": "player-7.png",
+      "subjectHint": "Jack Grealish — Everton",
+      "prompt": "Vertical 9:16 football poster artwork featuring Jack Grealish, the Anh winger for Everton, in a classic winger pose, carrying the ball with low socks and trademark hair band, driving forward. He wears a bright blue Everton home kit with the Everton crest clearly visible on the chest. Background: a bold royal blue Everton colors graphic backdrop with a huge stylized Everton FC crest floating faintly behind him as a watermark, dramatic light rays radiating outward from behind his body, faint stylized fan-crowd silhouettes flanking the lower edge of the frame. Vibrant saturated royal blue Everton colors dominant palette, very high contrast, glossy graphic-design finish. Stylized like a Premier League promotional poster. The Everton crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "player-8",
+      "template": "stat-hero",
+      "filename": "player-8.png",
+      "subjectHint": "Bruno Guimarães — Newcastle United",
+      "prompt": "Vertical 9:16 football poster artwork featuring Bruno Guimaraes, the Brazil midfielder for Newcastle United, in a triumphant captain roar celebration, pounding the Newcastle crest on his chest. He wears a bright black-and-white striped Newcastle United home kit with the Newcastle United crest clearly visible on the chest. Background: a bold black and white Newcastle colors graphic backdrop with a huge stylized Newcastle United crest floating faintly behind him as a watermark, dramatic light rays radiating outward from behind his body, faint stylized fan-crowd silhouettes flanking the lower edge of the frame. Vibrant saturated black and white Newcastle colors dominant palette, very high contrast, glossy graphic-design finish. Stylized like a Premier League promotional poster. The Newcastle United crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "player-9",
+      "template": "stat-hero",
+      "filename": "player-9.png",
+      "subjectHint": "Lewis Hall — Newcastle United",
+      "prompt": "Vertical 9:16 football poster artwork featuring Lewis Hall, the Anh left-back for Newcastle United, in a determined overlap run, driving down the left wing with high focus. He wears a bright black-and-white striped Newcastle United home kit with the Newcastle United crest clearly visible on the chest. Background: a bold black and white Newcastle colors graphic backdrop with a huge stylized Newcastle United crest floating faintly behind him as a watermark, dramatic light rays radiating outward from behind his body, faint stylized fan-crowd silhouettes flanking the lower edge of the frame. Vibrant saturated black and white Newcastle colors dominant palette, very high contrast, glossy graphic-design finish. Stylized like a Premier League promotional poster. The Newcastle United crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "player-10",
+      "template": "stat-hero",
+      "filename": "player-10.png",
+      "subjectHint": "Nicolas Jackson — Chelsea",
+      "prompt": "Vertical 9:16 football poster artwork featuring Nicolas Jackson, the Senegal striker for Chelsea, in a dynamic shooting pose, striking the ball powerful mid-stride. He wears a bright royal-blue Chelsea home kit with the Chelsea crest clearly visible on the chest. Background: a bold royal blue Chelsea colors graphic backdrop with a huge stylized Chelsea FC lion crest floating faintly behind him as a watermark, dramatic light rays radiating outward from behind his body, faint stylized fan-crowd silhouettes flanking the lower edge of the frame. Vibrant saturated royal blue Chelsea colors dominant palette, very high contrast, glossy graphic-design finish. Stylized like a Premier League promotional poster. The Chelsea crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "player-11",
+      "template": "stat-hero",
+      "filename": "player-11.png",
+      "subjectHint": "Gabriel Jesus — Arsenal",
+      "prompt": "Vertical 9:16 football poster artwork featuring Gabriel Jesus, the Brazil striker for Arsenal, in a classic 'phone call' goal celebration pose with a determined expression. He wears a bright red-and-white Arsenal home kit with the Arsenal crest clearly visible on the chest. Background: a bold red and white Arsenal colors graphic backdrop with a huge stylized Arsenal cannon crest floating faintly behind him as a watermark, dramatic light rays radiating outward from behind his body, faint stylized fan-crowd silhouettes flanking the lower edge of the frame. Vibrant saturated red and white Arsenal colors dominant palette, very high contrast, glossy graphic-design finish. Stylized like a Premier League promotional poster. The Arsenal crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "player-12",
+      "template": "stat-hero",
+      "filename": "player-12.png",
+      "subjectHint": "Curtis Jones — Liverpool",
+      "prompt": "Vertical 9:16 football poster artwork featuring Curtis Jones, the Anh midfielder for Liverpool, in a focused mid-field dribble, looking up to scan the pitch for passing options. He wears a bright red Liverpool home kit with the Liverpool crest clearly visible on the chest. Background: a bold deep crimson Liverpool red graphic backdrop with a huge stylized Liverpool FC Liver-bird crest floating faintly behind him as a watermark, dramatic light rays radiating outward from behind his body, faint stylized fan-crowd silhouettes flanking the lower edge of the frame. Vibrant saturated deep crimson Liverpool red dominant palette, very high contrast, glossy graphic-design finish. Stylized like a Premier League promotional poster. The Liverpool crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "player-13",
+      "template": "stat-hero",
+      "filename": "player-13.png",
+      "subjectHint": "Ibrahima Konaté — Liverpool",
+      "prompt": "Vertical 9:16 football poster artwork featuring Ibrahima Konate, the Pháp defender for Liverpool, in a solid defensive block, rising high to clear the ball with absolute authority. He wears a bright red Liverpool home kit with the Liverpool crest clearly visible on the chest. Background: a bold deep crimson Liverpool red graphic backdrop with a huge stylized Liverpool FC Liver-bird crest floating faintly behind him as a watermark, dramatic light rays radiating outward from behind his body, faint stylized fan-crowd silhouettes flanking the lower edge of the frame. Vibrant saturated deep crimson Liverpool red dominant palette, very high contrast, glossy graphic-design finish. Stylized like a Premier League promotional poster. The Liverpool crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "player-14",
+      "template": "stat-hero",
+      "filename": "player-14.png",
+      "subjectHint": "Mateo Kovačić — Manchester City",
+      "prompt": "Vertical 9:16 football poster artwork featuring Mateo Kovacic, the Croatia midfielder for Manchester City, in a experienced midfielder pose, shielding the ball with high tactical composure. He wears a bright sky-blue Manchester City home kit with the Manchester City crest clearly visible on the chest. Background: a bold sky blue Manchester City colors graphic backdrop with a huge stylized Manchester City crest floating faintly behind him as a watermark, dramatic light rays radiating outward from behind his body, faint stylized fan-crowd silhouettes flanking the lower edge of the frame. Vibrant saturated sky blue Manchester City colors dominant palette, very high contrast, glossy graphic-design finish. Stylized like a Premier League promotional poster. The Manchester City crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "player-15",
+      "template": "stat-hero",
+      "filename": "player-15.png",
+      "subjectHint": "Eli Junior Kroupi — Bournemouth",
+      "prompt": "Vertical 9:16 football poster artwork featuring Eli Junior Kroupi, the Pháp forward for Bournemouth, in a jubilant teenage goal celebration, roaring with hands behind his ears. He wears a bright red-and-black striped Bournemouth home kit with the Bournemouth crest clearly visible on the chest. Background: a bold red and black Bournemouth colors graphic backdrop with a huge stylized Bournemouth crest floating faintly behind him as a watermark, dramatic light rays radiating outward from behind his body, faint stylized fan-crowd silhouettes flanking the lower edge of the frame. Vibrant saturated red and black Bournemouth colors dominant palette, very high contrast, glossy graphic-design finish. Stylized like a Premier League promotional poster. The Bournemouth crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "player-16",
+      "template": "stat-hero",
+      "filename": "player-16.png",
+      "subjectHint": "Khvicha Kvaratskhelia — Paris Saint-Germain",
+      "prompt": "Vertical 9:16 football poster artwork featuring Khvicha Kvaratskhelia, the Georgia forward for Paris Saint-Germain, in a dynamic dribbling pose cutting inside from the left wing with electric pace. He wears a bright navy-blue Paris Saint-Germain home kit with red accents with the Paris Saint-Germain crest clearly visible on the chest. Background: a bold navy blue and red PSG colors graphic backdrop with a huge stylized Paris Saint-Germain crest floating faintly behind him as a watermark, dramatic light rays radiating outward from behind his body, faint stylized fan-crowd silhouettes flanking the lower edge of the frame. Vibrant saturated navy blue and red PSG colors dominant palette, very high contrast, glossy graphic-design finish. Stylized like a UEFA Champions League knockout promotional poster. The Paris Saint-Germain crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    }
+  ]
+}

@@ -252,7 +252,7 @@ local notes ──/refine-txt──► clean .txt (in place, .raw.txt backup)
                          /create-video
                               │
                               ▼
-                    output/<slug>/video.mp4
+                    video/output/<slug>/video.mp4
 ```
 
 `/refine-txt` lives in slot 1 of this chain — strictly between "user notes" and `/images-for-videos`. It does not auto-chain because the user wants editorial control over the refined version before image planning commits to a structure.

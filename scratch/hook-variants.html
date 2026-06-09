@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hook — 3 mẫu tối giản, an toàn vùng TikTok/Reels</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,800;0,900;1,900&family=Inter:wght@500;600;700;800;900&family=Oswald:wght@600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',sans-serif;background:#0c0f0d;color:#e7eae6;padding:42px 28px 90px}
+  .wrap{max-width:1300px;margin:0 auto}
+  h1{font-family:'Playfair Display',serif;font-weight:800;font-size:36px;color:#fff;letter-spacing:-.5px}
+  .sub{color:#98a39b;margin-top:8px;font-size:15px;max-width:880px}
+  .legend{display:flex;gap:20px;flex-wrap:wrap;font-size:12.5px;color:#9aa39c;margin-top:14px}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .sw{width:16px;height:11px;border-radius:2px;display:inline-block}
+  .row{display:flex;gap:36px;flex-wrap:wrap;justify-content:center;margin-top:36px}
+  .col{width:360px;display:flex;flex-direction:column;gap:14px}
+
+  /* 9:16 frame 360x640 (=/3 of 1080x1920) */
+  .frame{position:relative;width:360px;height:640px;border-radius:20px;overflow:hidden;
+    box-shadow:0 18px 50px rgba(0,0,0,.55);border:1px solid #262626}
+  .bgphoto{position:absolute;inset:0;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 30%, rgba(40,90,65,.5) 0%, transparent 60%),
+      linear-gradient(180deg,#11201a 0%,#0a130e 55%,#060a07 100%)}
+  .bgphoto::after{content:"";position:absolute;inset:0;
+    background-image:radial-gradient(circle,rgba(255,255,255,.05) 1px,transparent 1px);
+    background-size:18px 18px;opacity:.4}
+  .scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.3),rgba(0,0,0,.12) 45%,rgba(0,0,0,.5))}
+
+  /* ── SAFE ZONE guide (display scale /3 of 240/120/420/80) ── */
+  .safe{position:absolute;top:80px;left:27px;right:40px;bottom:140px;
+    border:1.5px dashed rgba(16,185,129,.55);border-radius:8px;z-index:20;pointer-events:none}
+  .safe::before{content:"VÙNG AN TOÀN";position:absolute;top:-7px;left:10px;font-family:'IBM Plex Mono',monospace;
+    font-size:8px;letter-spacing:1px;color:#10b981;background:#0a130e;padding:0 5px}
+  .unsafe{position:absolute;background:rgba(224,35,43,.10);z-index:19;pointer-events:none}
+  .u-top{top:0;left:0;right:0;height:80px}
+  .u-bot{bottom:0;left:0;right:0;height:140px}
+  .u-right{top:0;bottom:0;right:0;width:40px}
+  .u-left{top:0;bottom:0;left:0;width:27px}
+
+  /* ── mock TikTok UI ── */
+  .tk{position:absolute;z-index:21;pointer-events:none}
+  .tk-btns{right:8px;bottom:170px;display:flex;flex-direction:column;gap:16px;align-items:center}
+  .tk-btns .b{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.16);
+    border:1px solid rgba(255,255,255,.25)}
+  .tk-btns .lab{font-size:7px;color:rgba(255,255,255,.7);margin-top:-12px}
+  .tk-cap{left:14px;right:60px;bottom:96px;color:rgba(255,255,255,.92)}
+  .tk-cap .u{font-size:11px;font-weight:800}
+  .tk-cap .t{font-size:9px;color:rgba(255,255,255,.75);margin-top:3px;line-height:1.3}
+  .tk-prog{left:0;right:0;bottom:60px;height:2px;background:rgba(255,255,255,.25)}
+  .tk-prog::after{content:"";position:absolute;left:0;top:0;height:100%;width:40%;background:#fff}
+  .tk-nav{left:0;right:0;bottom:18px;display:flex;justify-content:space-around;color:rgba(255,255,255,.6);font-size:8px}
+
+  /* mini shell brand (top-left, inside top-unsafe but it's just branding) */
+  .shell{position:absolute;top:14px;left:16px;z-index:9;display:flex;align-items:center;gap:7px}
+  .shell .av{width:20px;height:20px;border-radius:6px;background:linear-gradient(135deg,#10b981,#c4a35a)}
+  .shell .bn{font-size:8.5px;font-weight:800;color:#fff}
+
+  /* content sits centered INSIDE safe band */
+  .content{position:absolute;top:80px;left:27px;right:40px;bottom:140px;z-index:10;
+    display:flex;flex-direction:column;justify-content:center;padding:0 6px}
+
+  .cap{font-weight:800;color:#fff;font-size:17px}
+  .cap .tag{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;padding:2px 8px;border-radius:5px;margin-right:8px}
+  .desc{font-size:12.5px;color:#9aa39c;line-height:1.5}
+  .desc b{color:#cdd3cd}
+  .fonts{font-family:'IBM Plex Mono',monospace;font-size:10px;color:#74807a}
+  .fonts b{color:#c4a35a;font-weight:600}
+
+  /* ═══ A — BẢN TIN NÓNG ═══ */
+  .vA .content{align-items:flex-start;text-align:left}
+  .vA .live{display:inline-flex;align-items:center;gap:7px;background:#e0232b;padding:6px 12px;border-radius:4px;margin-bottom:18px}
+  .vA .live .dot{width:8px;height:8px;border-radius:50%;background:#fff;animation:blink 1.1s steps(2) infinite}
+  @keyframes blink{50%{opacity:.25}}
+  .vA .live span{font-family:'Oswald',sans-serif;font-weight:700;font-size:14px;letter-spacing:2px;color:#fff;text-transform:uppercase}
+  .vA .stat{font-family:'Playfair Display',serif;font-weight:900;font-size:128px;color:#fff;line-height:.85;letter-spacing:-4px;text-shadow:0 8px 30px rgba(0,0,0,.6)}
+  .vA .statbar{width:78px;height:6px;background:#e0232b;border-radius:2px;margin:16px 0 16px}
+  .vA .hl{font-family:'Playfair Display',serif;font-weight:900;font-size:40px;color:#fff;line-height:1.05;letter-spacing:-.5px;text-shadow:0 6px 24px rgba(0,0,0,.7)}
+
+  /* ═══ B — TRANG NHẤT ═══ */
+  .vB .content{align-items:center;text-align:center}
+  .vB .kicker{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+  .vB .kicker .ln{width:36px;height:1px;background:rgba(255,255,255,.5)}
+  .vB .kicker .kt{font-family:'Playfair Display',serif;font-weight:800;font-size:14px;letter-spacing:6px;text-transform:uppercase;color:#d9c79a}
+  .vB .rule{width:100%;height:1px;background:rgba(255,255,255,.3)}
+  .vB .hl{font-family:'Playfair Display',serif;font-weight:900;font-size:54px;color:#fff;line-height:1.02;letter-spacing:-1px;padding:30px 0;text-shadow:0 6px 26px rgba(0,0,0,.6)}
+
+  /* ═══ C — BÀN PHÂN TÍCH ═══ */
+  .vC .content{align-items:flex-start;text-align:left}
+  .vC .desk{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:12px;letter-spacing:2px;color:#06231a;background:#10b981;padding:5px 11px;border-radius:4px;text-transform:uppercase;margin-bottom:20px}
+  .vC .statwrap{display:flex;align-items:flex-end;gap:13px}
+  .vC .stat{font-family:'Playfair Display',serif;font-weight:900;font-size:108px;color:#fff;line-height:.8;letter-spacing:-3px}
+  .vC .statlab{font-family:'IBM Plex Mono',monospace;font-size:10px;color:#7f8f87;text-transform:uppercase;letter-spacing:1px;padding-bottom:16px;line-height:1.4}
+  .vC .accent{width:100%;height:2px;background:linear-gradient(90deg,#10b981,transparent);margin:18px 0}
+  .vC .hl{font-family:'Playfair Display',serif;font-weight:800;font-size:40px;color:#fff;line-height:1.05;letter-spacing:-.5px}
+  .vC .gridoverlay{position:absolute;inset:0;z-index:7;opacity:.45;
+    background-image:linear-gradient(rgba(16,185,129,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(16,185,129,.06) 1px,transparent 1px);
+    background-size:40px 40px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Hook — 3 mẫu tối giản · an toàn vùng TikTok / Reels</h1>
+  <p class="sub">Ít chữ, mọi thông tin nằm trong <b>vùng an toàn giữa khung</b> (đường xanh đứt nét). Vùng đỏ mờ = nơi bị nút TikTok/Reels che (trên, cột like/comment/share bên phải, caption + nav dưới). Cùng nội dung mẫu để so sánh.</p>
+  <div class="legend">
+    <span><i class="sw" style="border:1.5px dashed #10b981"></i> Vùng an toàn — đặt chữ ở đây</span>
+    <span><i class="sw" style="background:rgba(224,35,43,.25)"></i> Vùng bị UI che — tránh</span>
+    <span><i class="sw" style="background:rgba(255,255,255,.2)"></i> UI TikTok mô phỏng</span>
+  </div>
+
+  <div class="row">
+
+    <!-- A -->
+    <div class="col">
+      <div class="frame vA">
+        <div class="bgphoto"></div><div class="scrim"></div>
+        <div class="unsafe u-top"></div><div class="unsafe u-bot"></div><div class="unsafe u-right"></div><div class="unsafe u-left"></div>
+        <div class="shell"><div class="av"></div><div class="bn">SportsForAllTV</div></div>
+        <div class="content">
+          <div class="live"><span class="dot"></span><span>Tin nóng</span></div>
+          <div class="stat">0-4</div>
+          <div class="statbar"></div>
+          <div class="hl">Man City sụp đổ</div>
+        </div>
+        <div class="safe"></div>
+        <div class="tk tk-btns"><div class="b"></div><div class="b"></div><div class="b"></div><div class="b"></div></div>
+        <div class="tk tk-cap"><div class="u">@bonglan0702</div><div class="t">Đêm kinh hoàng của Pep tại Anfield... #bongda</div></div>
+        <div class="tk tk-prog"></div>
+        <div class="tk tk-nav"><span>Home</span><span>Bạn bè</span><span>+</span><span>Hộp thư</span><span>Tôi</span></div>
+      </div>
+      <div class="cap"><span class="tag" style="background:#e0232b;color:#fff">A</span>Bản tin nóng</div>
+      <div class="desc">Tag đỏ "TIN NÓNG" + chấm live, tỉ số lớn + gạch đỏ, headline <b>1 dòng</b>. Truyền hình thời sự, dứt khoát.</div>
+      <div class="fonts">headline <b>Playfair</b> · tag <b>Oswald</b> · <b>#e0232b</b></div>
+    </div>
+
+    <!-- B -->
+    <div class="col">
+      <div class="frame vB">
+        <div class="bgphoto"></div><div class="scrim"></div>
+        <div class="unsafe u-top"></div><div class="unsafe u-bot"></div><div class="unsafe u-right"></div><div class="unsafe u-left"></div>
+        <div class="shell"><div class="av"></div><div class="bn">SportsForAllTV</div></div>
+        <div class="content">
+          <div class="kicker"><span class="ln"></span><span class="kt">Bình luận</span><span class="ln"></span></div>
+          <div class="rule"></div>
+          <div class="hl">Man City<br>sụp đổ</div>
+          <div class="rule"></div>
+        </div>
+        <div class="safe"></div>
+        <div class="tk tk-btns"><div class="b"></div><div class="b"></div><div class="b"></div><div class="b"></div></div>
+        <div class="tk tk-cap"><div class="u">@bonglan0702</div><div class="t">Đêm kinh hoàng của Pep tại Anfield... #bongda</div></div>
+        <div class="tk tk-prog"></div>
+        <div class="tk tk-nav"><span>Home</span><span>Bạn bè</span><span>+</span><span>Hộp thư</span><span>Tôi</span></div>
+      </div>
+      <div class="cap"><span class="tag" style="background:#d9c79a">B</span>Trang nhất</div>
+      <div class="desc">Kicker serif + 2 đường kẻ mảnh kẹp headline như măng-sét báo. Chỉ <b>kicker + headline</b>, không hơn. Báo in, trí thức.</div>
+      <div class="fonts">headline + kicker <b>Playfair</b> · hairline trắng</div>
+    </div>
+
+    <!-- C -->
+    <div class="col">
+      <div class="frame vC">
+        <div class="bgphoto"></div><div class="gridoverlay"></div><div class="scrim"></div>
+        <div class="unsafe u-top"></div><div class="unsafe u-bot"></div><div class="unsafe u-right"></div><div class="unsafe u-left"></div>
+        <div class="shell"><div class="av"></div><div class="bn">SportsForAllTV</div></div>
+        <div class="content">
+          <div class="desk">Phân tích</div>
+          <div class="statwrap"><span class="stat">0-4</span><span class="statlab">tỉ số<br>chung cuộc</span></div>
+          <div class="accent"></div>
+          <div class="hl">Man City sụp đổ</div>
+        </div>
+        <div class="safe"></div>
+        <div class="tk tk-btns"><div class="b"></div><div class="b"></div><div class="b"></div><div class="b"></div></div>
+        <div class="tk tk-cap"><div class="u">@bonglan0702</div><div class="t">Đêm kinh hoàng của Pep tại Anfield... #bongda</div></div>
+        <div class="tk tk-prog"></div>
+        <div class="tk tk-nav"><span>Home</span><span>Bạn bè</span><span>+</span><span>Hộp thư</span><span>Tôi</span></div>
+      </div>
+      <div class="cap"><span class="tag" style="background:#10b981;color:#06231a">C</span>Bàn phân tích</div>
+      <div class="desc">Tag mono "PHÂN TÍCH" + số liệu data-callout (nhãn nhỏ) + headline 1 dòng + accent xanh. Lưới nền mờ. Data-journalism.</div>
+      <div class="fonts">headline <b>Playfair</b> · tag/nhãn <b>IBM Plex Mono</b> · <b>#10b981</b></div>
+    </div>
+
+  </div>
+
+  <p class="sub" style="margin-top:40px">Chọn <b>A / B / C</b> (hoặc pha trộn). Khi chốt, mình áp vào <code style="color:#10b981">styles.css</code> + <code style="color:#10b981">renderHookInner</code> trong html-composer.ts, dùng đúng padding safe-zone <b>top 240 / phải 120 / dưới 420 / trái 80</b> để bản render thật cũng không bị che.</p>
+</div>
+</body>
+</html>

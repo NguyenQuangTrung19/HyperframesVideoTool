@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>callout — 3 mẫu thiết kế</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&family=Cormorant+Garamond:wght@600;700&family=JetBrains+Mono:wght@400;600&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#f5f0e6; --cream-lt:#f8f4ec; --cream-dk:#ede8dd;
+    --green:#10b981; --green-dk:#059669; --forest:#1a3c2a;
+    --gold:#c4a35a; --ink:#15241b; --muted:#5b6b60; --navy:#0d1a13;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',sans-serif;background:#0e120f;color:#e8eae6;line-height:1.55;padding:48px 32px 96px}
+  .wrap{max-width:1180px;margin:0 auto}
+  h1{font-family:'Playfair Display',serif;font-size:42px;color:#fff;letter-spacing:-.5px}
+  h1 .accent{color:var(--gold)}
+  .sub{color:#9aa39c;margin-top:8px;font-size:16px;max-width:860px}
+  h2{font-family:'Playfair Display',serif;font-size:28px;color:#fff;margin:56px 0 8px;border-left:4px solid var(--gold);padding-left:14px}
+  .h2note{color:#9aa39c;font-size:14px;margin:0 0 24px 18px}
+  .key{display:inline-block;width:13px;height:9px;vertical-align:-1px;margin:0 3px;
+    background:repeating-linear-gradient(45deg,rgba(255,70,100,.5) 0 4px,transparent 4px 8px);border:1px dashed rgba(255,70,100,.7)}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:30px;margin-top:8px}
+  .card{display:flex;flex-direction:column;gap:10px}
+  .frame{position:relative;aspect-ratio:9/16;border-radius:18px;overflow:hidden;
+    background:#0d1f17;box-shadow:0 12px 32px rgba(0,0,0,.45);border:1px solid #2c2c2c;color:#f3f1e9}
+  .shell{display:flex;align-items:center;gap:7px;position:absolute;top:12px;left:14px;z-index:6}
+  .shell .av{width:22px;height:22px;border-radius:7px;background:linear-gradient(135deg,var(--green),var(--gold))}
+  .shell .bn{font-size:8.5px;font-weight:800;color:#eafff3;line-height:1}
+  .badge{position:absolute;top:10px;right:12px;z-index:6;font-family:'JetBrains Mono',monospace;
+    font-size:8px;font-weight:600;padding:3px 7px;border-radius:20px;
+    background:rgba(196,163,90,.18);color:var(--gold);border:1px solid rgba(196,163,90,.4)}
+  .safe{position:absolute;left:0;right:0;z-index:5;pointer-events:none;
+    background:repeating-linear-gradient(45deg,rgba(255,70,100,.10) 0 7px,transparent 7px 14px)}
+  .safe.t{top:0;height:12.5%;border-bottom:1px dashed rgba(255,70,100,.45)}
+  .safe.b{bottom:0;height:21.9%;border-top:1px dashed rgba(255,70,100,.45)}
+
+  .meta{font-size:12.5px}
+  .meta .name{font-weight:800;color:#fff;font-size:15px}
+  .meta .when{color:#9aa39c;margin-top:2px}
+  .meta .fields{margin-top:6px;color:#7f8a82;font-family:'JetBrains Mono',monospace;font-size:10.5px}
+  .meta .fields b{color:var(--gold);font-weight:600}
+
+  /* ảnh placeholder */
+  .sh-photo{position:absolute;inset:0;background:linear-gradient(160deg,#2f6b4d,#1a3c2a 55%,#0c1c13)}
+  .sh-photo::after{content:"[ ảnh minh hoạ — chủ thể 1/3 trên ]";position:absolute;top:20%;left:0;right:0;
+     text-align:center;color:rgba(170,225,195,.42);font-size:8px;font-family:'JetBrains Mono',monospace}
+  .scrim{position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,
+     rgba(8,16,11,0) 26%,rgba(8,16,11,.4) 48%,rgba(7,15,10,.8) 70%,rgba(6,13,9,.92) 100%)}
+
+  /* ===== Mẫu A · quote serif căn giữa ===== */
+  .cA .c{position:absolute;left:20px;right:20px;bottom:26%;z-index:3;display:flex;flex-direction:column;align-items:center;text-align:center}
+  .cA .tag{font-family:'Oswald',sans-serif;font-weight:700;font-size:8px;letter-spacing:3px;text-transform:uppercase;
+     color:#0c1c13;background:linear-gradient(135deg,#fde68a,#c4a35a);padding:4px 12px;border-radius:20px}
+  .cA .qm{font-family:'Playfair Display',serif;font-weight:900;font-size:46px;line-height:.4;color:var(--gold);height:22px;margin:14px 0 0}
+  .cA .st{font-family:'Playfair Display',serif;font-weight:800;font-size:22px;line-height:1.26;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.95)}
+
+  /* ===== Mẫu B · editorial trái + gạch vàng (đồng bộ stat-hero 1A) ===== */
+  .cB .grL{position:absolute;inset:0;z-index:2;background:
+     linear-gradient(90deg,rgba(0,0,0,.5),transparent 62%),
+     linear-gradient(180deg,transparent 38%,rgba(6,13,9,.9))}
+  .cB .c{position:absolute;left:18px;right:30px;bottom:26%;z-index:3;display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:11px}
+  .cB .tag{font-family:'Oswald',sans-serif;font-weight:700;font-size:8px;letter-spacing:1.5px;text-transform:uppercase;
+     color:#fff;background:#e0232b;padding:4px 10px;border-radius:2px}
+  .cB .st{font-family:'Playfair Display',serif;font-weight:800;font-size:23px;line-height:1.22;color:#fff;
+     padding-left:11px;border-left:3px solid var(--gold);text-shadow:0 2px 10px rgba(0,0,0,.9)}
+
+  /* ===== Mẫu C · tấm kính bo góc ===== */
+  .cC .plate{position:absolute;left:16px;right:16px;bottom:24%;z-index:3;
+     background:rgba(9,20,14,.66);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+     border:1px solid rgba(196,163,90,.4);border-radius:16px;padding:16px 16px 17px;
+     display:flex;flex-direction:column;align-items:center;text-align:center;gap:11px;box-shadow:0 12px 30px rgba(0,0,0,.45)}
+  .cC .tag{font-family:'Oswald',sans-serif;font-weight:700;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}
+  .cC .st{font-family:'Playfair Display',serif;font-weight:800;font-size:21px;line-height:1.26;color:#fff}
+
+  /* ===== Mẫu D · kiểu overview: ảnh trên + statement trên panel kem sạch dưới ===== */
+  .cD .img{position:absolute;top:0;left:0;right:0;height:52%;z-index:1;background:linear-gradient(160deg,#2f6b4d,#1a3c2a 60%,#0c1c13)}
+  .cD .img::after{content:"[ ảnh minh hoạ ]";position:absolute;top:40%;left:0;right:0;text-align:center;color:rgba(170,225,195,.5);font-size:8px;font-family:'JetBrains Mono',monospace}
+  .cD .panel{position:absolute;left:0;right:0;top:52%;bottom:0;z-index:3;background:linear-gradient(180deg,#f8f4ec,#ede8dd);
+     display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:22px 16px 0}
+  .cD .tag{font-family:'Oswald',sans-serif;font-weight:700;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:#a87f2e}
+  .cD .qm{font-family:'Playfair Display',serif;font-weight:900;font-size:34px;line-height:.4;color:var(--gold);height:16px}
+  .cD .st{font-family:'Playfair Display',serif;font-weight:800;font-size:20px;line-height:1.24;color:#1a3c2a}
+
+  footer{margin-top:60px;color:#6c756e;font-size:12.5px;border-top:1px solid #26312a;padding-top:20px}
+  footer code{font-family:'JetBrains Mono',monospace;color:var(--green)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Template <span class="accent">callout</span> — 3 mẫu thiết kế</h1>
+  <p class="sub">Callout = câu chốt / nhận định / money line nổi bật trên ảnh full-bleed. Mục tiêu chỉnh: <b>statement dễ đọc, không đè ảnh, nằm gọn trong safe zone</b>. Câu mẫu: <i>"Đây là bản hợp đồng hời nhất mùa hè 2026"</i>. Lằn đỏ <span class="key"></span> = safe zone TikTok.</p>
+
+  <h2>4 phương án</h2>
+  <p class="h2note">Mockup tỉ lệ thật 9:16 (thu nhỏ). A/B/C là full-bleed (chữ trên ảnh + scrim); <b>D là kiểu trong overview</b> (ảnh trên / chữ trên panel kem dưới — tách bạch hoàn toàn). Tất cả neo nội dung trên vùng caption.</p>
+
+  <div class="grid">
+
+    <!-- A -->
+    <div class="card">
+      <div class="frame cA">
+        <div class="sh-photo"></div>
+        <div class="shell"><div class="av"></div><div><div class="bn">SportsForAllTV</div></div></div>
+        <span class="badge">callout</span>
+        <div class="scrim"></div>
+        <div class="c">
+          <div class="tag">Phán quyết</div>
+          <div class="qm">"</div>
+          <div class="st">Đây là bản hợp đồng hời nhất mùa hè 2026</div>
+        </div>
+        <div class="safe t"></div><div class="safe b"></div>
+      </div>
+      <div class="meta"><div class="name">Mẫu A · quote serif căn giữa</div>
+      <div class="when">Tag pill vàng + dấu trích lớn + statement Playfair căn giữa trên scrim. Trang trọng, giống pull-quote. Đồng bộ với stat-hero 1A (căn giữa, vàng).</div>
+      <div class="fields"><b>statement</b> (≤80) · tag?</div></div>
+    </div>
+
+    <!-- B -->
+    <div class="card">
+      <div class="frame cB">
+        <div class="sh-photo"></div>
+        <div class="shell"><div class="av"></div><div><div class="bn">SportsForAllTV</div></div></div>
+        <span class="badge">callout</span>
+        <div class="grL"></div>
+        <div class="c">
+          <div class="tag">Phán quyết</div>
+          <div class="st">Đây là bản hợp đồng hời nhất mùa hè 2026</div>
+        </div>
+        <div class="safe t"></div><div class="safe b"></div>
+      </div>
+      <div class="meta"><div class="name">Mẫu B · editorial trái + gạch vàng</div>
+      <div class="when">Tag chip đỏ + statement căn trái, gạch dọc vàng. Mạnh, báo chí, đồng bộ hook A2. Câu dài đọc tốt vì căn trái.</div>
+      <div class="fields"><b>statement</b> (≤80) · tag?</div></div>
+    </div>
+
+    <!-- C -->
+    <div class="card">
+      <div class="frame cC">
+        <div class="sh-photo"></div>
+        <div class="shell"><div class="av"></div><div><div class="bn">SportsForAllTV</div></div></div>
+        <span class="badge">callout</span>
+        <div class="scrim"></div>
+        <div class="plate">
+          <div class="tag">Phán quyết</div>
+          <div class="st">Đây là bản hợp đồng hời nhất mùa hè 2026</div>
+        </div>
+        <div class="safe t"></div><div class="safe b"></div>
+      </div>
+      <div class="meta"><div class="name">Mẫu C · tấm kính bo góc</div>
+      <div class="when">Statement trên tấm kính mờ viền vàng → dễ đọc nhất, không đè ảnh. An toàn cho ảnh nền rối &amp; câu dài.</div>
+      <div class="fields"><b>statement</b> (≤80) · tag?</div></div>
+    </div>
+
+    <!-- D -->
+    <div class="card">
+      <div class="frame cD">
+        <div class="img"></div>
+        <div class="shell"><div class="av"></div><div><div class="bn">SportsForAllTV</div></div></div>
+        <span class="badge">callout</span>
+        <div class="panel">
+          <div class="tag">Phán quyết</div>
+          <div class="qm">"</div>
+          <div class="st">Đây là bản hợp đồng hời nhất mùa hè 2026</div>
+        </div>
+        <div class="safe t"></div><div class="safe b"></div>
+      </div>
+      <div class="meta"><div class="name">Mẫu D · kiểu overview (ảnh trên / panel kem dưới)</div>
+      <div class="when">Ảnh chiếm nửa trên, statement trên panel kem dưới — <b>tách bạch hoàn toàn, chữ không bao giờ đè ảnh</b>. Đọc thoải mái nhất; đổi lại ảnh nhỏ hơn (không full-bleed).</div>
+      <div class="fields"><b>statement</b> (≤80) · tag?</div></div>
+    </div>
+
+  </div>
+
+  <footer>
+    Chốt 1 trong 3 → áp vào <code>src/render/html-composer.ts</code> (renderCalloutInner) + <code>styles.css</code> (.callout-content / .callout-statement).
+    Statement nằm gọn trên safe zone; chủ thể ảnh ở 1/3 trên.
+  </footer>
+
+</div>
+</body>
+</html>

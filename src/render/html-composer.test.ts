@@ -40,7 +40,7 @@ describe("composeHtml", () => {
 
     // ── Hook scene ─────────────────────────────────────────────
     expect(html).toContain('data-layout="hook"');
-    expect(html).toContain('class="hook-headline shimmer-sweep-target"');
+    expect(html).toContain('class="hook-headline"');
     expect(html).toContain("iPhone 17");                // headline content
     expect(html).toContain("Camera 200MP!");            // subhead content
 

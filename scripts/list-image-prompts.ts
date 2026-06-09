@@ -24,11 +24,11 @@ function main() {
   const slug = process.argv[2];
   if (!slug) {
     console.error("Usage: npm run images:list -- <slug>");
-    console.error("       (slug is the folder name under output/)");
+    console.error("       (slug is the folder name under video/output/)");
     process.exit(2);
   }
 
-  const outputDir = resolve("output", slug);
+  const outputDir = resolve("video", "output", slug);
   const scriptPath = join(outputDir, "script.json");
   if (!existsSync(scriptPath)) {
     console.error(`✗ not found: ${scriptPath}`);

@@ -1,0 +1,58 @@
+{
+  "version": "1.0",
+  "source": "garnachofunny.txt",
+  "contentType": "TRIVIA",
+  "title": "Buổi tập hài hước của Alejandro Garnacho tại World Cup 2026",
+  "createdAt": "2026-06-06T15:45:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Garnacho tập luyện sớm dưới sương mù",
+      "prompt": "Vertical 9:16 football poster artwork showing a foggy sunrise at the Argentina national team training camp. In the center, Alejandro Garnacho with his distinct bleached blonde hair is jogging intensely on the grass, sweat on his face, wearing the light blue and white striped Argentina training jersey. Behind him, the faint silhouette of a modern stadium and palm trees in Mexico under a hazy morning sky. Saturated colors, high contrast, glossy graphic-design finish. No on-image text."
+    },
+    {
+      "id": "surprise",
+      "template": "callout",
+      "filename": "surprise.png",
+      "subjectHint": "HLV Lionel Scaloni bất ngờ nhìn",
+      "prompt": "Vertical 9:16 football poster artwork featuring Lionel Scaloni, the Argentina manager, holding a mate cup, looking wide-eyed and shocked, pointing into the distance. Background: a stylized light-blue graphic backdrop with a giant faint Argentina crest watermark and dramatic light rays. Saturated blue and white palette, high contrast, glossy graphic finish. Stylized like an international manager profile graphic. The Argentina crest visible on his jacket, no on-image text."
+    },
+    {
+      "id": "military",
+      "template": "callout",
+      "filename": "military.png",
+      "subjectHint": "Garnacho đứng chào kiểu quân đội đầy tự hào",
+      "prompt": "Vertical 9:16 football poster artwork featuring Alejandro Garnacho in a light blue and white striped Argentina jersey, standing straight and saluting with a proud, enthusiastic expression. Behind him, a bold blue-and-white graphic backdrop with radiating golden light bursts and a giant faint AFA crest watermark. Saturated vibrant color palette, high contrast, glossy graphic-design finish. Stylized like a matchday hero promotional poster. The Argentina crest visible on his jersey, no on-image text."
+    },
+    {
+      "id": "list",
+      "template": "callout",
+      "filename": "list.png",
+      "subjectHint": "Scaloni toát mồ hôi đọc tờ danh sách",
+      "prompt": "Vertical 9:16 football poster artwork showing HLV Lionel Scaloni looking intensely focused and sweating, holding and reading an official paper document with red stamp. Background: a stylized light-blue and red graphic backdrop with speed lines and a faint Argentina national team crest. Saturated palette, high contrast, glossy graphic-design finish. Stylized like a dramatic tactical decision broadcast graphic. No on-image text."
+    },
+    {
+      "id": "rejection",
+      "template": "callout",
+      "filename": "rejection.png",
+      "subjectHint": "Ảnh chế — Garnacho khóc mếu bên Scaloni ngơ ngác",
+      "prompt": "Vertical 9:16 football poster artwork (humorous meme style) showing Alejandro Garnacho with a funny crying, shocked facial expression, holding a football. Next to him, HLV Lionel Scaloni is explaining with hands outstretched in a confused gesture. Behind them, a stylized Argentina training pitch under bright sunlight with a giant question mark graphic in the sky. Saturated palette, high contrast, glossy graphic-design finish. No on-image text."
+    },
+    {
+      "id": "antony",
+      "template": "callout",
+      "filename": "antony.png",
+      "subjectHint": "Ảnh chế — Antony rủ Garnacho đi đá phủi",
+      "prompt": "Vertical 9:16 football poster artwork (humorous meme style) featuring Antony, the Brazilian winger, wearing the yellow Brazil training jersey, running closer while holding two cups of coffee, smiling and waving enthusiastically. In the background, Alejandro Garnacho looks back at him with a puzzled expression. Stylized Brazilian yellow-and-green graphic backdrop mixed with Argentine blue-and-white. Saturated vibrant colors, high contrast, glossy graphic-design finish. No on-image text."
+    },
+    {
+      "id": "carrington",
+      "template": "callout",
+      "filename": "carrington.png",
+      "subjectHint": "Garnacho lủi thủi đi về Carrington lo Erik ten Hag phạt",
+      "prompt": "Vertical 9:16 football poster artwork showing Alejandro Garnacho walking away with a sad expression, holding a football under his arm. Background: a gloomy raining day with a faint Carrington training ground silhouette and a giant Manchester United crest watermark in the dark red and grey sky. Saturated colors, high contrast, glossy graphic-design finish. No on-image text."
+    }
+  ]
+}

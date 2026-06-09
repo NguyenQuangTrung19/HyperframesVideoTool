@@ -45,9 +45,11 @@ export async function concatWithSilence(
 ): Promise<void> {
   if (inputPaths.length === 0) throw new Error("concatWithSilence: empty inputPaths");
   if (inputPaths.length === 1) {
-    // No concat needed — just normalize the single file
+    // No concat needed — just normalize the single file + apply voice
+    // dynaudnorm to level out TTS prosody decay at sentence tails.
     await run("ffmpeg", [
       "-y", "-i", inputPaths[0],
+      "-af", "dynaudnorm=p=0.9:f=250:g=15:m=15",
       "-ar", "44100", "-ac", "1",
       "-c:a", "libmp3lame", "-b:a", "192k",
       outPath,
@@ -79,20 +81,28 @@ export async function concatWithSilence(
     let idx = 0;
     const FADE_SEC = 0.008; // 8ms — inaudible
 
-    const addInput = (path: string) => {
+    // Voice inputs get dynaudnorm to level out AusyncLab's natural prosody
+    // decay at sentence ends (which the user perceives as "nuốt chữ cuối" —
+    // tail consonants quieter than the rest of the utterance). Silence
+    // inserts skip the filter (no-op on silence anyway, just wastes CPU).
+    //
+    // dynaudnorm tuning:
+    //   p=0.9   peak target (90%) — leaves headroom
+    //   f=250   250ms frame length — short enough to catch single-word tails
+    //   g=15    Gaussian smoothing window — gentle enough to keep prosody
+    //           natural, aggressive enough to bring up the quietest 100ms tails
+    //   m=15    max gain — cap at 15× boost (prevents pumping on pure-silence)
+    const VOICE_FILTER = "dynaudnorm=p=0.9:f=250:g=15:m=15";
+
+    const addInput = (path: string, isVoice: boolean) => {
       ffArgs.push("-i", path);
       const inLabel = `[${idx}:a]`;
       const outLabel = `a${idx}`;
-      // Pre-pad: we cannot know exact duration here without probing every input,
-      // so use afade with `t=in/out:st=...` and rely on `acrossfade` style.
-      // Simpler robust trick: use afade `st` for in, and `afade=t=out` with
-      // start_time=eof-FADE_SEC by providing duration after `-t` is hard.
-      // Use `afade=t=in:st=0:d=FADE` then `afade=t=out:st=0:d=FADE` won't work
-      // for variable-length inputs. So we use `apad=pad_dur=0` (no-op) +
-      // `aresample` then rely on concat filter doing sample-accurate join.
-      // The micro-fade is applied via `areverse,afade,areverse` trick to fade out:
+      // Chain: resample → (voice only: dynaudnorm) → micro-fade-in → micro-fade-out
+      const dynaudnormStep = isVoice ? `${VOICE_FILTER},` : "";
       filterParts.push(
         `${inLabel}aresample=44100,aformat=sample_fmts=fltp:channel_layouts=mono,` +
+        `${dynaudnormStep}` +
         `afade=t=in:st=0:d=${FADE_SEC},` +
         // Trim fade-out: reverse → fade-in → reverse (this fades the END)
         `areverse,afade=t=in:st=0:d=${FADE_SEC},areverse[${outLabel}]`
@@ -102,8 +112,8 @@ export async function concatWithSilence(
     };
 
     inputPaths.forEach((p, i) => {
-      addInput(p);
-      if (i < inputPaths.length - 1) addInput(silencePath);
+      addInput(p, true); // voice scene
+      if (i < inputPaths.length - 1) addInput(silencePath, false); // silence insert
     });
 
     const concatFilter = `${labels.join("")}concat=n=${labels.length}:v=0:a=1[out]`;
@@ -160,14 +170,24 @@ export async function mixSfxOntoVoice(
   const filterParts: string[] = [];
   const sfxLabels: string[] = [];
 
+  // Cap every SFX to 1.0s (with a 0.15s fade-out so the cut isn't a click).
+  // SFX impact comes from the onset; sustained tones beyond ~1s drone over
+  // the voice and perceptually mask Vietnamese tail consonants (-ng, -nh,
+  // -n, -m). Cap is universal — applies even to short SFX (no-op there).
+  const SFX_MAX_SEC = 1.0;
+  const SFX_FADE_OUT_SEC = 0.15;
+  const SFX_FADE_START = SFX_MAX_SEC - SFX_FADE_OUT_SEC; // 0.85s
+
   sfxList.forEach((s, i) => {
     ffArgs.push("-i", s.path);
     const inputIdx = i + 1; // voice is index 0
     const outLabel = `s${i}`;
     const delayMs = Math.max(0, Math.round(s.startSec * 1000));
-    // Per-SFX chain: resample to 44100 mono → adelay to start time → volume
+    // Per-SFX chain: resample → trim to 1.0s → fade out → delay → volume
     filterParts.push(
       `[${inputIdx}:a]aresample=44100,aformat=sample_fmts=fltp:channel_layouts=mono,` +
+      `atrim=0:${SFX_MAX_SEC},asetpts=PTS-STARTPTS,` +
+      `afade=t=out:st=${SFX_FADE_START}:d=${SFX_FADE_OUT_SEC},` +
       `adelay=${delayMs}|${delayMs},volume=${s.volume}[${outLabel}]`
     );
     sfxLabels.push(`[${outLabel}]`);

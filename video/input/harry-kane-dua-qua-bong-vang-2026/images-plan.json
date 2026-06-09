@@ -1,0 +1,44 @@
+{
+  "version": "1.0",
+  "source": "harry-kane-dua-qua-bong-vang-2026.txt",
+  "contentType": "PLAYER PROFILE",
+  "title": "Harry Kane vào cuộc đua Quả Bóng Vàng nhờ kỷ lục tại Bayern Munich",
+  "createdAt": "2026-06-06T12:15:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Harry Kane và Quả Bóng Vàng",
+      "prompt": "Vertical 9:16 football poster artwork featuring Harry Kane, the English striker for Bayern Munich and captain of the England national team, in a hero pose smiling confidently, hands resting on his hips. Behind him, a stylized red-and-white Bayern Munich graphic backdrop with a huge faint Bayern Munich crest watermark, and a large golden Ballon d'Or trophy glowing brightly with radiating light rays in the centre background. Saturated red, white, and golden color palette, very high contrast, glossy graphic-design finish. Stylized like an end-of-season award promotional graphic. The Bayern Munich crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "goals",
+      "template": "stat-hero",
+      "filename": "goals.png",
+      "subjectHint": "Kỷ lục 61 bàn thắng của Harry Kane",
+      "prompt": "Vertical 9:16 football poster artwork featuring Harry Kane, the English striker for Bayern Munich, frozen mid-air in his signature roaring goal celebration with arms outstretched. He wears the white-and-red Bayern Munich home kit with the crest visible on the chest. Background: a bold red-and-white graphic backdrop with a giant faint Bayern Munich crest watermark and dynamic diagonal light bursts. Saturated red-and-white dominant palette, high contrast, glossy graphic finish. Stylized like a Bundesliga matchday promotional poster. The Bayern Munich crest visible on the jersey, no on-image text."
+    },
+    {
+      "id": "trophies",
+      "template": "stat-hero",
+      "filename": "trophies.png",
+      "subjectHint": "Harry Kane ăn mừng chức vô địch cùng Bayern",
+      "prompt": "Vertical 9:16 football poster artwork featuring Harry Kane, the English striker for Bayern Munich, lifting the Bundesliga Meisterschale trophy high above his head with a triumphant shout. He wears the red Bayern Munich home kit with the crest visible on the chest. Background: a stylized red-and-gold graphic backdrop with a huge faint Bundesliga crest watermark and floating golden confetti. Vibrant red-and-gold palette, high contrast, glossy graphic-design finish. Stylized like a champions celebration broadcast graphic. The Bayern Munich crest visible on the jersey, no on-image text."
+    },
+    {
+      "id": "fowler",
+      "template": "callout",
+      "filename": "fowler.png",
+      "subjectHint": "Robbie Fowler nhận định về Kane",
+      "prompt": "Vertical 9:16 football poster artwork featuring Robbie Fowler, the legendary English former striker for Liverpool and England, in a smart suits-and-tie attire, speaking dynamically and gesturing with his hands. Background: a stylized deep-red and white graphic backdrop with a faint giant Liverpool FC Liver-bird crest watermark, light rays radiating from behind him. Saturated red-and-white palette, high contrast, glossy graphic-design finish. Stylized like a sports broadcast interview graphic. No on-image text."
+    },
+    {
+      "id": "england",
+      "template": "stat-hero",
+      "filename": "england.png",
+      "subjectHint": "Harry Kane trong màu áo tuyển Anh",
+      "prompt": "Vertical 9:16 football poster artwork featuring Harry Kane, the English striker and captain of the England national team, in a hero pose wearing the white England home kit with the captain's armband visible on his left arm, pointing forward determinedly. Background: a stylized white-and-red graphic backdrop with a huge faint England Three Lions crest watermark and radiating blue-and-red light bursts. Saturated red, white, and blue palette, high contrast, glossy graphic-design finish. Stylized like a historic-moment promotional poster. The England crest visible on the jersey, no on-image text."
+    }
+  ]
+}

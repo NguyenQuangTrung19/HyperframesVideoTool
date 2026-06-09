@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1080, height=1920">
+  <title>Vitinha: Kỷ nguyên Enrique &amp; Đỉnh cao châu Âu — Phần 2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Anton&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="stage"
+       data-composition-id="news-video"
+       data-width="1080"
+       data-height="1920"
+       data-start="0"
+       data-duration="81.78">
+
+    <!-- Shell: persistent brand elements (no data-start → always visible) -->
+<div class="shell-bg">
+  <div class="glow-orb glow-orb-1"></div>
+  <div class="glow-orb glow-orb-2"></div>
+  <div class="glow-orb glow-orb-3"></div>
+</div>
+
+<div class="dot-grid-layer"></div>
+
+<div class="particles-layer"><div class="particle" style="width:8px;height:8px;left:19%;background:rgba(34,211,238,0.45);box-shadow:0 0 16px rgba(34,211,238,0.45);animation-duration:24s;animation-delay:10s;"></div><div class="particle" style="width:5px;height:5px;left:64%;background:rgba(168,85,247,0.35);box-shadow:0 0 10px rgba(168,85,247,0.35);animation-duration:22s;animation-delay:1s;"></div><div class="particle" style="width:8px;height:8px;left:98%;background:rgba(59,130,246,0.35);box-shadow:0 0 16px rgba(59,130,246,0.35);animation-duration:16s;animation-delay:8s;"></div><div class="particle" style="width:3px;height:3px;left:68%;background:rgba(255,255,255,0.25);box-shadow:0 0 6px rgba(255,255,255,0.25);animation-duration:18s;animation-delay:8s;"></div><div class="particle" style="width:5px;height:5px;left:68%;background:rgba(34,211,238,0.45);box-shadow:0 0 10px rgba(34,211,238,0.45);animation-duration:16s;animation-delay:7s;"></div><div class="particle" style="width:8px;height:8px;left:70%;background:rgba(168,85,247,0.35);box-shadow:0 0 16px rgba(168,85,247,0.35);animation-duration:23s;animation-delay:4s;"></div><div class="particle" style="width:6px;height:6px;left:86%;background:rgba(59,130,246,0.35);box-shadow:0 0 12px rgba(59,130,246,0.35);animation-duration:25s;animation-delay:0s;"></div><div class="particle" style="width:8px;height:8px;left:63%;background:rgba(255,255,255,0.25);box-shadow:0 0 16px rgba(255,255,255,0.25);animation-duration:11s;animation-delay:10s;"></div><div class="particle" style="width:4px;height:4px;left:13%;background:rgba(34,211,238,0.45);box-shadow:0 0 8px rgba(34,211,238,0.45);animation-duration:19s;animation-delay:8s;"></div><div class="particle" style="width:3px;height:3px;left:21%;background:rgba(168,85,247,0.35);box-shadow:0 0 6px rgba(168,85,247,0.35);animation-duration:16s;animation-delay:1s;"></div><div class="particle" style="width:8px;height:8px;left:65%;background:rgba(59,130,246,0.35);box-shadow:0 0 16px rgba(59,130,246,0.35);animation-duration:19s;animation-delay:4s;"></div><div class="particle" style="width:4px;height:4px;left:90%;background:rgba(255,255,255,0.25);box-shadow:0 0 8px rgba(255,255,255,0.25);animation-duration:12s;animation-delay:10s;"></div><div class="particle" style="width:7px;height:7px;left:65%;background:rgba(34,211,238,0.45);box-shadow:0 0 14px rgba(34,211,238,0.45);animation-duration:16s;animation-delay:5s;"></div><div class="particle" style="width:6px;height:6px;left:10%;background:rgba(168,85,247,0.35);box-shadow:0 0 12px rgba(168,85,247,0.35);animation-duration:14s;animation-delay:10s;"></div><div class="particle" style="width:6px;height:6px;left:35%;background:rgba(59,130,246,0.35);box-shadow:0 0 12px rgba(59,130,246,0.35);animation-duration:23s;animation-delay:8s;"></div><div class="particle" style="width:9px;height:9px;left:31%;background:rgba(255,255,255,0.25);box-shadow:0 0 18px rgba(255,255,255,0.25);animation-duration:12s;animation-delay:7s;"></div><div class="particle" style="width:5px;height:5px;left:6%;background:rgba(34,211,238,0.45);box-shadow:0 0 10px rgba(34,211,238,0.45);animation-duration:22s;animation-delay:5s;"></div><div class="particle" style="width:8px;height:8px;left:60%;background:rgba(168,85,247,0.35);box-shadow:0 0 16px rgba(168,85,247,0.35);animation-duration:21s;animation-delay:6s;"></div><div class="particle" style="width:9px;height:9px;left:89%;background:rgba(59,130,246,0.35);box-shadow:0 0 18px rgba(59,130,246,0.35);animation-duration:22s;animation-delay:10s;"></div><div class="particle" style="width:8px;height:8px;left:55%;background:rgba(255,255,255,0.25);box-shadow:0 0 16px rgba(255,255,255,0.25);animation-duration:24s;animation-delay:6s;"></div></div>
+
+<div class="corner-accent corner-tl"></div>
+<div class="corner-accent corner-tr"></div>
+<div class="corner-accent corner-bl"></div>
+<div class="corner-accent corner-br"></div>
+
+<div class="progress-bar">
+  <div class="progress-fill" id="progress-fill"></div>
+  <div class="progress-dot" id="progress-dot"></div>
+</div>
+
+<div class="brand-shell-header">
+  <div class="brand-icon"><img src="tiktok-avatar.png" alt="SportsForAllTV" crossorigin="anonymous" /></div>
+  <div class="brand-text">
+    <div class="brand-name">SportsForAllTV</div>
+    <div class="brand-tag">TIN TỨC BÓNG ĐÁ</div>
+  </div>
+</div>
+
+<div id="grain-overlay" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:100;"><div class="grain-texture"></div></div>
+
+    <audio id="voice"
+           class="clip"
+           data-start="0"
+           data-duration="81.78"
+           data-track-index="0"
+           src="voice.mp3"></audio>
+
+    <div class="scene clip" id="scene-hook"
+     data-start="0.00" data-duration="9.18" data-active="0"
+     data-layout="hook">
+  <div class="bg gradient-news-dark"></div>
+  <div class="bg-grade-overlay"></div>
+  <div class="hook-letterbox hook-letterbox-top"></div>
+  <div class="hook-letterbox hook-letterbox-bottom"></div>
+  <div class="layout-hook">
+    
+    <div class="hook-bigstat">ENRIQUE</div>
+    <div class="hook-headline shimmer-sweep-target"><span class="hh-word">Đánh</span> <span class="hh-word">thức</span> <span class="hh-word">viên</span> <span class="hh-word">kim</span> <span class="hh-word">cương</span></div>
+    <div class="hook-subhead">Cuộc cách mạng tuyến giữa vĩ đại của PSG<div class="draw-underline draw-cyan"></div></div>
+  </div>
+</div>
+<div class="scene clip" id="scene-fact-1"
+     data-start="9.18" data-duration="9.82" data-active="0"
+     data-layout="stat-hero">
+  <div class="bg stat-hero-bg-v2"></div>
+<div class="layout-stat-hero stat-hero-v2">
+  <div class="stat-hero-image-card stat-hero-image-card--placeholder"></div>
+  <div class="stat-hero-content">
+    <div class="stat-value">
+      <span class="stat-value-text">Regista</span>
+    </div>
+    <div class="stat-label">Bộ não quét không gian xuất chúng</div>
+    
+    <div class="stat-context">Quét không gian 5.5 lần mỗi 10 giây</div>
+  </div>
+</div><div class="chapter-marker"><span class="chapter-idx">1</span><span class="chapter-sep">/</span><span class="chapter-total">7</span></div>
+</div>
+<div class="scene clip" id="scene-fact-2"
+     data-start="19.00" data-duration="9.62" data-active="0"
+     data-layout="callout">
+  <div class="bg callout-bg-v2"></div>
+<div class="layout-callout">
+  <div class="callout-image-card callout-image-card--placeholder"></div>
+  <div class="callout-content">
+    <div class="callout-tag">THOÁT PRESSING</div>
+    <div class="callout-statement"><span class="co-word">Nghệ</span> <span class="co-word">thuật</span> <span class="co-word">thoát</span> <span class="co-word">pressing</span> <span class="co-word">bằng</span> <span class="co-word">La</span> <span class="co-word">Pausa</span><br><span class="co-word">Nhận</span> <span class="co-word">bóng,</span> <span class="co-word">khựng</span> <span class="co-word">nửa</span> <span class="co-word">giây</span> <span class="co-word">dụ</span> <span class="co-word">đối</span> <span class="co-word">thủ</span></div>
+  </div>
+</div><div class="chapter-marker"><span class="chapter-idx">2</span><span class="chapter-sep">/</span><span class="chapter-total">7</span></div>
+</div>
+<div class="scene clip" id="scene-fact-3"
+     data-start="28.62" data-duration="8.98" data-active="0"
+     data-layout="callout">
+  <div class="bg callout-bg-v2"></div>
+<div class="layout-callout">
+  <div class="callout-image-card callout-image-card--placeholder"></div>
+  <div class="callout-content">
+    <div class="callout-tag">CHUNG KẾT NGHẸT THỞ</div>
+    <div class="callout-statement"><span class="co-word">Arsenal</span> <span class="co-word">pressing</span> <span class="co-word">tầm</span> <span class="co-word">cao</span> <span class="co-word">khét</span> <span class="co-word">tiếng</span><br><span class="co-word">PSG</span> <span class="co-word">đứng</span> <span class="co-word">bên</span> <span class="co-word">bờ</span> <span class="co-word">vực</span> <span class="co-word">sụp</span> <span class="co-word">đổ</span> <span class="co-word">dây</span> <span class="co-word">chuyền</span></div>
+  </div>
+</div><div class="chapter-marker"><span class="chapter-idx">3</span><span class="chapter-sep">/</span><span class="chapter-total">7</span></div>
+</div>
+<div class="scene clip" id="scene-fact-4"
+     data-start="37.60" data-duration="9.38" data-active="0"
+     data-layout="callout">
+  <div class="bg callout-bg-v2"></div>
+<div class="layout-callout">
+  <div class="callout-image-card callout-image-card--placeholder"></div>
+  <div class="callout-content">
+    <div class="callout-tag">ĐIỀM TĨNH BẢN LĨNH</div>
+    <div class="callout-statement"><span class="co-word">Điềm</span> <span class="co-word">tĩnh</span> <span class="co-word">nhận</span> <span class="co-word">bóng</span> <span class="co-word">Donnarumma</span><br><span class="co-word">Đập</span> <span class="co-word">nhả</span> <span class="co-word">tam</span> <span class="co-word">giác</span> <span class="co-word">cự</span> <span class="co-word">ly</span> <span class="co-word">ngắn</span> <span class="co-word">thoát</span> <span class="co-word">pressing</span></div>
+  </div>
+</div><div class="chapter-marker"><span class="chapter-idx">4</span><span class="chapter-sep">/</span><span class="chapter-total">7</span></div>
+</div>
+<div class="scene clip" id="scene-fact-5"
+     data-start="46.98" data-duration="10.54" data-active="0"
+     data-layout="stat-hero">
+  <div class="bg stat-hero-bg-v2"></div>
+<div class="layout-stat-hero stat-hero-v2">
+  <div class="stat-hero-image-card stat-hero-image-card--placeholder"></div>
+  <div class="stat-hero-content">
+    <div class="stat-value" data-counter-to="141">
+      <span class="stat-value-text">0</span>
+    </div>
+    <div class="stat-label">141 đường chuyền chính xác lịch sử</div>
+    
+    <div class="stat-context">Xô đổ kỷ lục vĩ đại của Xavi Hernandez</div>
+  </div>
+</div><div class="chapter-marker"><span class="chapter-idx">5</span><span class="chapter-sep">/</span><span class="chapter-total">7</span></div>
+</div>
+<div class="scene clip" id="scene-fact-6"
+     data-start="57.52" data-duration="9.78" data-active="0"
+     data-layout="stat-hero">
+  <div class="bg stat-hero-bg-v2"></div>
+<div class="layout-stat-hero stat-hero-v2">
+  <div class="stat-hero-image-card stat-hero-image-card--placeholder"></div>
+  <div class="stat-hero-content">
+    <div class="stat-value">
+      <span class="stat-value-text">POR</span>
+    </div>
+    <div class="stat-label">Hạt nhân mới chinh phục Bắc Mỹ</div>
+    
+    <div class="stat-context">Mảnh ghép kết nối Ronaldo và thế hệ trẻ</div>
+  </div>
+</div><div class="chapter-marker"><span class="chapter-idx">6</span><span class="chapter-sep">/</span><span class="chapter-total">7</span></div>
+</div>
+<div class="scene clip" id="scene-engagement"
+     data-start="67.30" data-duration="6.18" data-active="0"
+     data-layout="engagement-question">
+  <div class="bg gradient-news-dark"></div>
+<div class="bg-grade-overlay"></div>
+<div class="layout-engagement-question">
+  <div class="eq-card">
+    <div class="eq-tag">GÓC THẢO LUẬN</div>
+    <div class="eq-question"><span class="eq-word">Vitinha</span> <span class="eq-word">giúp</span> <span class="eq-word">Ronaldo</span> <span class="eq-word">vô</span> <span class="eq-word">địch</span> <span class="eq-word">World</span> <span class="eq-word">Cup?</span><br><span class="eq-word">Bồ</span> <span class="eq-word">Đào</span> <span class="eq-word">Nha</span> <span class="eq-word">sẽ</span> <span class="eq-word">nâng</span> <span class="eq-word">cúp</span> <span class="eq-word">vàng</span> <span class="eq-word">tại</span> <span class="eq-word">Bắc</span> <span class="eq-word">Mỹ?</span></div>
+    <div class="eq-divider"></div>
+    <div class="eq-cta">
+      <span class="eq-cta-arrow">↓</span>
+      <span class="eq-cta-text">Để lại comment chia sẻ ý kiến của bạn!</span>
+    </div>
+  </div>
+</div><div class="chapter-marker"><span class="chapter-idx">7</span><span class="chapter-sep">/</span><span class="chapter-total">7</span></div>
+</div>
+<div class="scene clip" id="scene-outro"
+     data-start="73.48" data-duration="8.30" data-active="0"
+     data-layout="outro">
+  <div class="layout-outro">
+  <div class="out-cta-top">Đăng ký kênh nhé!</div>
+  <div class="out-channel">SportsForAllTV</div>
+  <div class="out-underline"></div>
+  <div class="out-source">Nguồn: Goal.com</div>
+</div>
+<div id="tt-card" class="tt-card">
+  <img class="tt-avatar" src="tiktok-avatar.png" alt="SportsForAllTV" crossorigin="anonymous" />
+  <div class="tt-profile-info">
+    <div class="tt-display-name">SportsForAllTV</div>
+    <div class="tt-handle">@bonglan0702</div>
+    <div class="tt-followers">47 followers</div>
+  </div>
+  <div id="tt-follow-btn" class="tt-follow-btn">
+    <span id="tt-btn-follow" class="tt-btn-text">Follow</span>
+    <span id="tt-btn-following" class="tt-btn-text tt-btn-text-following">
+      <span>Following</span>
+      <span class="tt-check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+    </span>
+  </div>
+</div>
+</div>
+  </div>
+  <script src="animations.js"></script>
+</body>
+</html>

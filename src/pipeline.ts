@@ -3,7 +3,7 @@ import { join, dirname, basename } from "node:path";
 import { fileURLToPath } from "node:url";
 import pLimit from "p-limit";
 import { ScriptSchema, type Script } from "./render/script-schema.js";
-import { loadConfig } from "./config.js";
+import { loadConfig, type Config } from "./config.js";
 import { createTtsClient } from "./tts/tts-client.js";
 import { fetchImage } from "./assets/image-fetcher.js";
 import { getDurationSec, concatWithSilence, mixSfxOntoVoice, type SfxMixSpec } from "./assets/audio-tools.js";
@@ -13,6 +13,9 @@ import { composeHtml } from "./render/html-composer.js";
 import { renderWithHyperframes } from "./render/hyperframes-runner.js";
 import { generateSceneImages } from "./image/index.js";
 import { log } from "./utils/logger.js";
+import { spawn } from "node:child_process";
+import { alignAudio, type WordTiming } from "./podcast/align.js";
+import { realignCaptionsToSource } from "./podcast/realign-to-source.js";
 
 const TOTAL_STEPS = 9;
 // Pipeline only WARNS outside this range — exact bounds enforced by skill rules.
@@ -69,43 +72,49 @@ export async function runPipeline(scriptPath: string): Promise<void> {
   const imgPromise = fetchImage(script.metadata.source.image, imgPath);
 
   // STEP 4
-  const ttsClient = createTtsClient(cfg);
-  // Concurrency: VieNeu worker is single-threaded (one Python subprocess);
-  // AusyncLab requires 1 (only 1 concurrent export per key). Default 1.
-  const limit = pLimit(cfg.ttsConcurrency);
   const voiceDir = join(outputDir, "voice");
   await mkdir(voiceDir, { recursive: true });
+  let sceneAudio: Array<{ id: string; path: string; durationSec: number }>;
 
-  const sceneAudioPromises = script.scenes.map((scene) =>
-    limit(async () => {
-      const out = join(voiceDir, `scene-${scene.id}.mp3`);
-      const srtOut = join(voiceDir, `scene-${scene.id}.srt`);
+  if (cfg.ttsProvider === "ausynclab") {
+    // ── AusyncLab: full-text TTS for natural prosody ──────────────────
+    // Generate one continuous audio from the complete script, then use
+    // Whisper alignment to locate per-scene boundaries and split. This
+    // avoids quality loss from generating each short scene independently
+    // (AusyncLab treats each API call as a standalone utterance).
+    sceneAudio = await ausyncFullTextTts(cfg, script, fullText, voiceDir);
+  } else {
+    // ── VieNeu: per-scene TTS (local, no prosody-continuity concern) ──
+    const ttsClient = createTtsClient(cfg);
+    const limit = pLimit(cfg.ttsConcurrency);
 
-      // IDEMPOTENT: skip TTS if voice file already exists.
-      // To force re-TTS for a scene, delete its mp3 file before running.
-      // This saves API quota when only some scenes' voiceText changed.
-      if (existsSync(out)) {
+    const sceneAudioPromises = script.scenes.map((scene) =>
+      limit(async () => {
+        const out = join(voiceDir, `scene-${scene.id}.mp3`);
+        const srtOut = join(voiceDir, `scene-${scene.id}.srt`);
+
+        // IDEMPOTENT: skip TTS if voice file already exists.
+        if (existsSync(out)) {
+          const dur = await getDurationSec(out);
+          log.info(`  scene ${scene.id}: REUSE existing mp3 (${dur.toFixed(2)}s) — delete to force re-TTS`);
+          return { id: scene.id, path: out, durationSec: dur };
+        }
+
+        log.info(`  TTS scene ${scene.id} (${scene.voiceText.length} chars)...`);
+        await ttsClient.generate(scene.voiceText, out, srtOut);
         const dur = await getDurationSec(out);
-        log.info(`  scene ${scene.id}: REUSE existing mp3 (${dur.toFixed(2)}s) — delete to force re-TTS`);
+        log.info(`  scene ${scene.id}: ${dur.toFixed(2)}s`);
         return { id: scene.id, path: out, durationSec: dur };
-      }
+      }),
+    );
 
-      log.info(`  TTS scene ${scene.id} (${scene.voiceText.length} chars)...`);
-      await ttsClient.generate(scene.voiceText, out, srtOut);
-      const dur = await getDurationSec(out);
-      log.info(`  scene ${scene.id}: ${dur.toFixed(2)}s`);
-      return { id: scene.id, path: out, durationSec: dur };
-    }),
-  );
+    sceneAudio = await Promise.all(sceneAudioPromises);
+    // Done with TTS — release any worker subprocess (VieNeu) so its ~600 MB of
+    // model weights stop sitting in memory during the rest of the pipeline.
+    await ttsClient.dispose?.();
+  }
 
-  const [imgResult, sceneAudio] = await Promise.all([
-    imgPromise,
-    Promise.all(sceneAudioPromises),
-  ]);
-
-  // Done with TTS — release any worker subprocess (VieNeu) so its ~600 MB of
-  // model weights stop sitting in memory during the rest of the pipeline.
-  await ttsClient.dispose?.();
+  const imgResult = await imgPromise;
 
   let bgImageRelPath: string | null = null;
   if (imgResult.success) {
@@ -267,4 +276,171 @@ export async function runPipeline(scriptPath: string): Promise<void> {
   console.log(`Audio:  ${voiceMp3}  (cho CapCut)`);
   console.log(`Script: ${join(outputDir, "script.txt")}  (cho CapCut auto-caption)`);
   console.log(`Tong thoi luong: ${totalAudioSec.toFixed(2)}s`);
+}
+
+/**
+ * AusyncLab full-text TTS: generate one continuous audio from the full script,
+ * align with Whisper, then split into per-scene segments.
+ *
+ * Idempotency:
+ *   - `voice/full.mp3`        — cached, delete to force re-TTS
+ *   - `voice/full-words.json` — cached, delete to force re-align
+ *   - `voice/scene-*.mp3`     — always re-extracted from full.mp3
+ */
+async function ausyncFullTextTts(
+  cfg: Config,
+  script: Script,
+  fullText: string,
+  voiceDir: string,
+): Promise<Array<{ id: string; path: string; durationSec: number }>> {
+  const ttsClient = createTtsClient(cfg);
+  const fullMp3 = join(voiceDir, "full.mp3");
+  const wordsJsonPath = join(voiceDir, "full-words.json");
+
+  // 1. TTS: generate full audio (cached)
+  if (existsSync(fullMp3)) {
+    log.info(`  REUSE existing full.mp3 — delete to force re-TTS`);
+  } else {
+    log.info(`  TTS full script (${fullText.length} chars) via AusyncLab...`);
+    try {
+      await ttsClient.generate(fullText, fullMp3);
+    } finally {
+      await ttsClient.dispose?.();
+    }
+  }
+  const fullDur = await getDurationSec(fullMp3);
+  log.info(`  full.mp3 duration: ${fullDur.toFixed(2)}s`);
+
+  // 2. Whisper alignment: word-level timings (cached)
+  let words: WordTiming[];
+  if (existsSync(wordsJsonPath)) {
+    log.info(`  REUSE existing full-words.json — delete to force re-align`);
+    words = JSON.parse(await readFile(wordsJsonPath, "utf-8")) as WordTiming[];
+  } else {
+    log.info(`  Aligning full audio → word timings (faster-whisper)...`);
+    words = await alignAudio({
+      audioPath: fullMp3,
+      vieneuProjectDir: cfg.vieneuProjectDir,
+      workerScript: join(dirname(cfg.vieneuWorkerScript), "align_worker.py"),
+      uvBin: cfg.vieneuUvBin,
+      language: "vi",
+      modelSize: "small",
+      initialPrompt: fullText,
+    });
+    await writeFile(wordsJsonPath, JSON.stringify(words, null, 2), "utf-8");
+  }
+  log.info(`  aligned ${words.length} words across ${fullDur.toFixed(1)}s`);
+
+  if (words.length === 0) {
+    throw new Error("Alignment returned 0 words. Check that the TTS audio contains speech.");
+  }
+
+  // 2.5. Realign Whisper word timings to source-text spelling
+  const { words: realignedWords, report } = realignCaptionsToSource(words, fullText);
+  log.info(`  Realigned words to source text: ${realignedWords.length} words (${report.unchanged} unchanged, ${report.replaced} replaced, ${report.inserted} inserted, ${report.dropped} dropped)`);
+
+  const tokenize = (text: string): string[] => {
+    const cleaned = text.replace(/[“”‘’]/g, '"');
+    const tokens = cleaned.split(/\s+/).filter((t) => t.length > 0);
+    return tokens.filter((t) => /[\p{L}\p{N}]/u.test(t));
+  };
+
+  const sceneTokens = script.scenes.map((s) => tokenize(s.voiceText));
+  const totalSceneWords = sceneTokens.reduce((sum, tokens) => sum + tokens.length, 0);
+
+  const isMatch = realignedWords.length === totalSceneWords;
+  if (!isMatch) {
+    log.warn(`  Realigned word count (${realignedWords.length}) mismatches total scene tokens (${totalSceneWords})! Falling back to proportional splitting.`);
+  }
+
+  // 3. Map aligned words to scenes by exact token counts (if matching) or proportionally, then
+  //    extract per-scene audio segments with ffmpeg.
+  const sceneWordCounts = script.scenes.map((s) =>
+    s.voiceText.trim().split(/\s+/).length,
+  );
+
+  const results: Array<{ id: string; path: string; durationSec: number }> = [];
+  let wordIdx = 0;
+
+  for (let i = 0; i < script.scenes.length; i++) {
+    const scene = script.scenes[i];
+    const outPath = join(voiceDir, `scene-${scene.id}.mp3`);
+
+    let startSec = 0;
+    let endSec = 0;
+    let hasValidSegment = true;
+    let startIdx = 0;
+    let endIdx = 0;
+
+    if (isMatch) {
+      const tokensCount = sceneTokens[i].length;
+      startIdx = wordIdx;
+      endIdx = wordIdx + tokensCount - 1;
+      wordIdx += tokensCount;
+
+      if (startIdx >= realignedWords.length) {
+        hasValidSegment = false;
+      } else {
+        const startWord = realignedWords[startIdx];
+        const endWord = realignedWords[Math.min(endIdx, realignedWords.length - 1)] || realignedWords[realignedWords.length - 1];
+        startSec = startWord ? startWord.start : 0;
+        endSec = endWord ? endWord.end : 0;
+      }
+    } else {
+      // Fallback: proportional word assignment
+      const wordsForScene =
+        i === script.scenes.length - 1
+          ? words.length - wordIdx
+          : Math.max(1, Math.round((sceneWordCounts[i] / totalSceneWords) * words.length));
+
+      startIdx = wordIdx;
+      endIdx = Math.min(wordIdx + wordsForScene - 1, words.length - 1);
+      wordIdx = endIdx + 1;
+
+      if (startIdx >= words.length) {
+        hasValidSegment = false;
+      } else {
+        startSec = words[startIdx]?.start ?? 0;
+        endSec = words[endIdx]?.end ?? 0;
+      }
+    }
+
+    if (!hasValidSegment) {
+      log.warn(`  scene ${scene.id}: no aligned words — creating 1s silence`);
+      await runFfmpeg([
+        "-y", "-f", "lavfi", "-i", "anullsrc=r=44100:cl=mono",
+        "-t", "1", "-c:a", "libmp3lame", "-b:a", "192k", outPath,
+      ]);
+      results.push({ id: scene.id, path: outPath, durationSec: 1.0 });
+      continue;
+    }
+
+    // Extract segment from full audio
+    await runFfmpeg([
+      "-y", "-i", fullMp3,
+      "-ss", startSec.toFixed(3), "-to", endSec.toFixed(3),
+      "-ar", "44100", "-ac", "1",
+      "-c:a", "libmp3lame", "-b:a", "192k",
+      outPath,
+    ]);
+
+    const actualDur = await getDurationSec(outPath);
+    log.info(`  scene ${scene.id}: ${actualDur.toFixed(2)}s (words ${startIdx}–${endIdx})`);
+    results.push({ id: scene.id, path: outPath, durationSec: actualDur });
+  }
+
+  return results;
+}
+
+function runFfmpeg(args: string[]): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const proc = spawn("ffmpeg", args);
+    let err = "";
+    proc.stderr.on("data", (d: Buffer) => { err += d.toString(); });
+    proc.on("close", (code) => {
+      if (code === 0) resolve();
+      else reject(new Error(`ffmpeg failed (exit ${code}): ${err.split("\n").slice(-5).join("\n")}`));
+    });
+    proc.on("error", reject);
+  });
 }

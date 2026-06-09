@@ -1,0 +1,193 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "title": "Vitinha: Từ Porto đến Sóng gió PSG — Phần 1",
+    "source": {
+      "url": "https://www.goal.com/en/lists/vitinha-psg-champions-league-final-mvp/",
+      "domain": "goal.com",
+      "image": null
+    },
+    "channel": "SportsForAllTV"
+  },
+  "voice": {
+    "provider": "ausynclab",
+    "voiceId": "${VOICE_ID}",
+    "speed": 1.2
+  },
+  "scenes": [
+    {
+      "id": "hook",
+      "type": "hook",
+      "voiceText": "Bạn có biết điều gì giết chết một tiền vệ trong bóng đá hiện đại không? Không phải chấn thương, không phải tuổi tác. Mà là sự sợ hãi.",
+      "templateData": {
+        "template": "hook",
+        "headline": "Điều gì giết chết|tiền vệ hiện đại?",
+        "subhead": "Sự sợ hãi trước những gã khổng lồ",
+        "bigStat": "FEAR",
+        "kenBurns": "impact-zoom"
+      },
+      "imagePrompt": "Vertical 9:16 football poster artwork (close-up concept) depicting a low-angle dramatic shot of a player's tense eyes behind a wet transparent visor, with four massive blurry ghostly shadows of opposing defenders looming directly over him. Background: a moody dark grey and silver graphic backdrop with heavy rain streaks and cracked glass textures suggesting intense psychological pressure. High contrast, saturated moody palette, glossy editorial finish. Stylized like a psychological sports drama poster. No text."
+    },
+    {
+      "id": "intro",
+      "type": "body",
+      "voiceText": "Sự sợ hãi khi bị bốn gã khổng lồ vây hãm, la ó dưới 80.000 khán giả. Nhưng tại chung kết Champions League 2026, chàng trai 1m72 Vitinha đã dẫm nát mọi nỗi sợ ấy để khiêu vũ trước Arsenal.",
+      "templateData": {
+        "template": "callout",
+        "statement": "Chàng trai 1m72 dẫm nát mọi nỗi sợ|Tự tin khiêu vũ giữa bầy Pháo thủ",
+        "tag": "VƯỢT QUA NỖI SỢ"
+      },
+      "imagePrompt": "Vertical 9:16 football poster artwork featuring Vitinha, the Portuguese midfielder for Paris Saint-Germain, standing in a confident hero pose in the centre of the Puskas Arena pitch under brilliant white floodlights. He is 1.72m, compact build, wearing the navy-and-red PSG home kit. Symmetrical composition, dramatic golden sparkles and particles floating around him like a halo, a massive glowing UEFA Champions League trophy behind him as a semi-transparent watermark. Saturated navy and gold palette, very high contrast, glossy graphic-design finish. Stylized like an elite Champions League hero poster. No on-image text, no scoreboard."
+    },
+    {
+      "id": "fact-1",
+      "type": "body",
+      "voiceText": "Sinh năm 2000 tại Santo Tirso, Bồ Đào Nha, Vitinha mang DNA Iberia hào hoa nhưng thực dụng. Anh gia nhập học viện Porto từ năm 11 tuổi và nhanh chóng bộc lộ tài năng thiên bẩm.",
+      "templateData": {
+        "template": "stat-hero",
+        "value": "Porto",
+        "label": "Bệ phóng tài năng từ Dragão",
+        "context": "Gia nhập học viện FC Porto từ năm 11 tuổi"
+      },
+      "imagePrompt": "Vertical 9:16 football poster artwork featuring a young 11-year-old Vítor Machado Ferreira (Vitinha) in a FC Porto youth jersey, looking up with big hopeful eyes at the massive glowing Estadio do Dragao archway in the background. Saturated royal blue and white color blocks, dynamic light rays radiating outward, glossy graphic-design finish. Stylized like a rising star academy poster. No scoreboard."
+    },
+    {
+      "id": "fact-2",
+      "type": "body",
+      "voiceText": "Anh sớm chứng minh mình là hạt nhân rực sáng dẫn dắt đội trẻ Porto xưng vương giải trẻ UEFA Youth League danh giá vào năm 2019.",
+      "templateData": {
+        "template": "stat-hero",
+        "value": "U19",
+        "label": "Xưng vương giải trẻ châu Âu",
+        "context": "Hạt nhân vô địch Youth League 2019"
+      },
+      "imagePrompt": "Vertical 9:16 football poster artwork featuring a young Vitinha in his blue-and-white stripes FC Porto home kit, sliding on his knees celebrating a victory with pure youthful joy, arms outstretched, gold medal on chest. In the background, the iconic Estadio do Dragao stands glowing in white and blue light rays, with faint silver confetti falling. Saturated blue and white palette, high contrast, glossy graphic finish. Stylized like an elite youth champion promotional poster. No scoreboard."
+    },
+    {
+      "id": "fact-3",
+      "type": "body",
+      "voiceText": "Tuy nhiên, sự nghiệp của anh không trải đầy hoa hồng. Bước ngoặt lớn đến khi anh bị đem cho mượn tại Wolves ở Ngoại hạng Anh mùa giải 2020/2021.",
+      "templateData": {
+        "template": "stat-hero",
+        "value": "Wolves",
+        "label": "Thử thách khắc nghiệt nước Anh",
+        "context": "Cho mượn tại Wolves mùa giải 2020-2021"
+      },
+      "imagePrompt": "Vertical 9:16 football poster artwork featuring Vitinha in a gold-and-black Wolverhampton Wanderers home kit, holding a football under his arm, smiling confidently. Background: a bold gold and black Wolves graphic backdrop with a huge faint Wolves club crest watermark, dynamic light rays and sparkles. Saturated glossy finish, very high contrast. Stylized like a Premier League signing announcement poster. No text."
+    },
+    {
+      "id": "fact-4",
+      "type": "body",
+      "voiceText": "Tại đây, anh bị vùi dập không thương tiếc dưới mưa lạnh bởi những tiền vệ cơ bắp. Từ đó, anh tự học bài học sinh tồn: Nếu không thể thắng bằng cơ bắp, phải thắng bằng bộ não.",
+      "templateData": {
+        "template": "callout",
+        "statement": "Bị vùi dập bởi các gã khổng lồ|Học bài học tư duy để sinh tồn",
+        "tag": "BÀI HỌC SINH TỒN"
+      },
+      "imagePrompt": "Vertical 9:16 football poster artwork featuring Vitinha in a gold-and-black Wolves kit, looking determined under a freezing English rain at Molineux Stadium, shielded by his body position against a massive ghostly silhouette of an opposing defender pressing him from behind. Background: moody gold and dark grey graphic backdrop with rain streaks, dynamic motion lines suggesting high pressure. High contrast, glossy graphic-design finish. Stylized like an editorial story poster about rising from adversity. No scoreboard."
+    },
+    {
+      "id": "fact-5",
+      "type": "body",
+      "voiceText": "Trở lại Porto với khối óc Ngoại hạng Anh, anh bùng nổ thi đấu trọn vẹn 47 trận, giúp câu lạc bộ chủ sân Dragão giành cú đúp quốc nội danh giá.",
+      "templateData": {
+        "template": "stat-hero",
+        "value": "🏆🏆",
+        "label": "Cú đúp quốc nội rực rỡ",
+        "context": "Trở lại Porto thi đấu bùng nổ 47 trận"
+      },
+      "imagePrompt": "Vertical 9:16 football poster artwork featuring Vitinha in a Porto home kit holding the Liga Portugal trophy proudly with a fierce look of achievement, gold medals hanging from his neck. Saturated dark blue and gold graphic backdrop with glowing rays and champions confetti floating. Saturated glossy finish, very high contrast. Stylized like a champion profile announcement poster. No text."
+    },
+    {
+      "id": "fact-6",
+      "type": "body",
+      "voiceText": "Màn trình diễn đỉnh cao giúp anh thâu tóm luôn danh hiệu Cầu thủ trẻ xuất sắc nhất Primeira Liga, khẳng định vị thế nhạc trưởng tương lai.",
+      "templateData": {
+        "template": "stat-hero",
+        "value": "MVP",
+        "label": "Cầu thủ trẻ xuất sắc nhất giải",
+        "context": "Nhạc trưởng tương lai của bóng đá Bồ"
+      },
+      "imagePrompt": "Vertical 9:16 football poster artwork featuring Vitinha in a Porto home kit, holding up a beautiful MVP trophy with both hands in front of his chest. Symmetrical composition, glowing blue and silver light rays, a giant gold 'MVP' word watermark floating in the background. Saturated blue and silver palette, extremely high contrast, premium glossy graphic finish. Stylized like an award ceremony broadcast graphic. No text."
+    },
+    {
+      "id": "fact-7",
+      "type": "body",
+      "voiceText": "Mùa hè 2022, Paris Saint Germain kích hoạt điều khoản giải phóng 41 phẩy 5 triệu Euro đưa anh tới Paris. Nhưng đây lại là bước đi ném anh thẳng vào hang cọp.",
+      "templateData": {
+        "template": "stat-hero",
+        "value": "€41.5M",
+        "label": "Cập bến Công viên các Hoàng tử",
+        "context": "PSG kích hoạt điều khoản giải phóng hợp đồng"
+      },
+      "imagePrompt": "Vertical 9:16 football poster artwork featuring Vitinha in a navy PSG home kit holding up a Paris Saint-Germain shirt with the number 17, walking out of the Parc des Princes tunnel under a massive glowing club crest watermark. Saturated navy and red neon light rays radiating outward, dynamic particles and gold dust floating. Saturated glossy finish, very high contrast. Stylized like a major transfer announcement poster. No scoreboard."
+    },
+    {
+      "id": "fact-8",
+      "type": "body",
+      "voiceText": "Phòng thay đồ Paris Saint Germain lúc đó cực kỳ độc hại, thống trị bởi cái tôi siêu sao Messi, Neymar, Mbappé cùng luật ngầm: Chuyền bóng cho họ và tránh ra.",
+      "templateData": {
+        "template": "callout",
+        "statement": "Phòng thay đồ độc hại đầy cái tôi|Luật ngầm chuyền bóng cho siêu sao",
+        "tag": "HANG CỌP PARIS"
+      },
+      "imagePrompt": "Vertical 9:16 football poster artwork depicting a stylized dark-red and gold PSG locker room with three massive glowing throne silhouettes of Messi, Neymar, and Mbappe empty in the background. In the foreground, a generic navy PSG kit locker stands locked with glowing chains wrapped around it. Moody saturated dark-red and gold palette, extremely high contrast, glossy dramatic finish. Stylized like a locker room drama promotional graphic. No text."
+    },
+    {
+      "id": "fact-9",
+      "type": "body",
+      "voiceText": "Sự rụt rè khiến anh đánh mất chính mình. Mỗi đường chuyền hỏng là một cái nhíu mày của Messi, một cái vung tay đầy bực dọc của Neymar.",
+      "templateData": {
+        "template": "callout",
+        "statement": "Đánh mất chính mình vì sợ hãi|Nhận cái nhíu mày từ Messi và Neymar",
+        "tag": "ÁP LỰC ĐÈ NẶNG"
+      },
+      "imagePrompt": "Vertical 9:16 football poster artwork showing a split layout: on the left, a faded ghostly transparent red-and-blue image of Lionel Messi and Neymar looking disappointed with arms crossed. In the foreground, Vitinha in his navy PSG kit looks tense and anxious, holding the ball, surrounded by dynamic glowing blue pressure waves pressing inward. Background: navy and crimson graphic backdrop with strong dramatic downlight. Saturated moody palette, very high contrast, glossy editorial style. No text."
+    },
+    {
+      "id": "fact-10",
+      "type": "body",
+      "voiceText": "Đỉnh điểm là trận thua Monaco tháng 2 năm 2023. Trong đường hầm, Neymar đã công khai quát mắng, biến chàng trai trẻ thành vật tế thần hoàn hảo.",
+      "templateData": {
+        "template": "callout",
+        "statement": "Neymar quát mắng trong đường hầm|Biến thành vật tế thần của siêu sao",
+        "tag": "SỨC ÉP CỰC ĐẠI"
+      },
+      "imagePrompt": "Vertical 9:16 football poster artwork depicting Vitinha in a navy PSG kit looking down in frustration in a dark stadium tunnel, while in the background a faded ghostly transparent red image shows a gesturing Neymar shouting in anger, pointing forward. Background: dark moody navy and crimson split graphic backdrop with neon warning signs and cracked patterns suggesting intense pressure and toxicity. Very high contrast, moody saturated palette, glossy finish. Stylized like a football drama editorial poster. No text."
+    },
+    {
+      "id": "fact-11",
+      "type": "body",
+      "voiceText": "Nhưng bị vùi dập không có nghĩa là đầu hàng. Vitinha chọn im lặng, nuốt tự ái vào trong, lao vào phòng gym và phân tích video rèn bản lĩnh thép.",
+      "templateData": {
+        "template": "stat-hero",
+        "value": "STEEL",
+        "label": "Rèn giũa bản lĩnh thép trong bóng tối",
+        "context": "Lao vào tập luyện, kiên nhẫn đợi thời cơ"
+      },
+      "imagePrompt": "Vertical 9:16 football poster artwork featuring Vitinha in a black training kit, lifting dumbbells in a moody dark gym, sweating with fierce determination on his face under a harsh downward spotlight. Symmetrical compositions showing floating data lines and glowing blueprint metrics of player analytics in the background. High contrast, saturated dark grey and neon blue palette, premium glossy graphic finish. Stylized like an athletic grind and dedication poster. No text."
+    },
+    {
+      "id": "engagement",
+      "type": "body",
+      "voiceText": "Neymar công khai đổ lỗi cho một cầu thủ trẻ mới đến như Vitinha lúc đó là quá đáng hay bình thường? Hãy comment để lại ý kiến của bạn nhé.",
+      "templateData": {
+        "template": "engagement-question",
+        "question": "Neymar mắng Vitinha là quá đáng?|Vitinha chỉ là nạn nhân của dải ngân hà?",
+        "cta": "Để lại comment chia sẻ ý kiến của bạn!",
+        "tag": "GÓC THẢO LUẬN"
+      }
+    },
+    {
+      "id": "outro",
+      "type": "outro",
+      "voiceText": "Cảm ơn bạn đã xem. Nhấn đăng ký kênh và đón chờ ngay Phần 2 để xem màn lột xác kinh điển của Vitinha dưới thời Luis Enrique nhé!",
+      "templateData": {
+        "template": "outro",
+        "ctaTop": "Đón xem Phần 2 cực hot!",
+        "channelName": "SportsForAllTV",
+        "source": "Goal.com"
+      }
+    }
+  ]
+}

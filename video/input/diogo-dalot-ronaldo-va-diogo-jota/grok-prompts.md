@@ -1,0 +1,145 @@
+# Grok prompts — Diogo Dalot chia sẻ ký ức xúc động về Ronaldo và Diogo Jota
+
+13 ảnh cần tạo trên grok.com (Imagine, aspect ratio **9:16**), save về cùng folder này theo đúng tên file.
+
+---
+
+## [1] hook → `hook.png`
+
+**Subject:** Poster Diogo Dalot trong màu áo đội tuyển Bồ Đào Nha đầy cảm xúc
+
+```
+Vertical 9:16 football poster artwork featuring Diogo Dalot, the Portuguese right-back for Manchester United and the Portugal national team, in a hero pose with a determined yet emotional expression, looking slightly upwards. He wears the red-and-green Portugal national team home kit with the Portuguese Football Federation crest clearly visible on the chest. Background: a bold red-and-green graphic backdrop with a huge stylized Portuguese national team crest floating faintly behind him as a watermark, dramatic light rays radiating outward from behind, subtle golden sparkles in the air. Saturated palette, high contrast, glossy graphic-design finish. Stylized like an international tournament promotional poster. The Portugal crest visible on the jersey, no on-image text or captions, no scoreboard graphics.
+```
+
+---
+
+## [2] mourinho-call → `mourinho-call.png`
+
+**Subject:** Jose Mourinho và Diogo Dalot tại Manchester United
+
+```
+Vertical 9:16 split-frame football poster artwork showing Jose Mourinho and Diogo Dalot. Left side: Jose Mourinho, the Portuguese manager, in an intense speaking pose as if talking on the phone. Right side: Diogo Dalot as a young 19-year-old Portuguese player in a classic red Manchester United home kit with the Manchester United crest visible on the chest, holding a phone with a look of disbelief and joy. Background: a deep red and black graphic backdrop with a huge faint Manchester United crest watermark floating behind them, dramatic light bursts. Vibrant saturated palette, high contrast, glossy finish. Stylized like a Premier League promotional transfer graphic. The Manchester United crest visible on the jersey, no on-image text or captions.
+```
+
+---
+
+## [3] knee-injury → `knee-injury.png`
+
+**Subject:** Nỗi buồn chấn thương sụn chêm của Dalot
+
+```
+Vertical 9:16 football poster artwork featuring Diogo Dalot, the Portuguese defender for Manchester United, in a dejected pose sitting on the pitch holding his right knee, expressing disappointment. He wears the red Manchester United home jersey with the crest visible. Background: a dark crimson-and-black graphic backdrop with a huge stylized Manchester United crest watermark, geometric shards in red and black, cold downward blue light rays creating a somber atmosphere. Saturated dark palette, high contrast, glossy graphic-design finish. Stylized like an editorial sports poster. The Manchester United crest visible on the jersey, no on-image text or captions.
+```
+
+---
+
+## [4] bench-struggle → `bench-struggle.png`
+
+**Subject:** Dalot ngồi cô đơn trên khán đài Old Trafford
+
+```
+Vertical 9:16 football poster artwork featuring Diogo Dalot, the Portuguese defender for Manchester United, in a reflective pose with arms folded, sitting alone on the spectators' stand looking down at the pitch, wearing a dark Manchester United training jacket. Background: a moody dark red-and-grey graphic backdrop with a huge faded Manchester United crest watermark, faint silhouettes of stadium rafters and empty seats in soft focus. Moody saturated palette, high contrast, glossy graphic-design finish. Stylized like a dramatic sports portrait poster. The Manchester United logo visible on the jacket, no on-image text or captions.
+```
+
+---
+
+## [5] milan-maldini → `milan-maldini.png`
+
+**Subject:** Paolo Maldini và Diogo Dalot trên sân tập Milan
+
+```
+Vertical 9:16 football poster artwork featuring Paolo Maldini, the legendary Italian defender and manager, standing next to Diogo Dalot on a training pitch, giving him a reassuring pat on the shoulder. Maldini is in a classy black club suit, Dalot is in a red-and-black AC Milan training kit with the AC Milan crest visible. Background: a bold red-and-black AC Milan graphic backdrop with a huge stylized AC Milan crest floating faintly as a watermark, warm golden light rays radiating from above. Saturated red-and-black palette, high contrast, glossy graphic finish. Stylized like an AC Milan training day promotional graphic. The AC Milan crest visible on the kit, no on-image text or captions.
+```
+
+---
+
+## [6] ronaldo-message → `ronaldo-message.png`
+
+**Subject:** Cristiano Ronaldo kêu gọi Dalot ở lại Manchester United
+
+```
+Vertical 9:16 football poster artwork featuring Cristiano Ronaldo, the Portuguese striker, in a commanding hero pose pointing forward with a look of conviction. He wears the red Manchester United home kit with the Manchester United crest clearly visible on the chest. Background: a vibrant red-and-black graphic backdrop with a huge faint Manchester United crest watermark, dramatic light bursts radiating from behind his head. Saturated palette, high contrast, glossy graphic-design finish. Stylized like a dramatic Manchester United matchday announcement poster. The Manchester United crest visible on the jersey, no on-image text or captions.
+```
+
+---
+
+## [7] striker-no-fire → `striker-no-fire.png`
+
+**Subject:** Hình ảnh mang tính biểu tượng về sự khát khao bàn thắng
+
+```
+Vertical 9:16 football poster artwork illustrating football ambition. A stylized silhouette of an elite striker looking back over his shoulder towards a glowing football on a dark pitch, while a secondary figure of Cristiano Ronaldo looking focused and intense in the background. Background: a dark charcoal-and-gold graphic backdrop with abstract fire embers and glowing geometric shards, gold light rays highlighting Ronaldo's face. High contrast, rich golden and black palette, glossy graphic-design finish. Stylized like a football documentary poster. No on-image text or captions.
+```
+
+---
+
+## [8] young-boys-nervous → `young-boys-nervous.png`
+
+**Subject:** Ronaldo tập trung cao độ trước trận đấu
+
+```
+Vertical 9:16 football poster artwork featuring Cristiano Ronaldo, the Portuguese legend, in an intensely focused and slightly anxious pose in the dressing room before a match, hands clasped, deep in thought. He wears the red Manchester United jersey. Background: a moody dark red-and-grey graphic backdrop with a large faded Manchester United crest watermark, dramatic spotlight shining down on him, creating high-contrast shadows. Moody saturated dark palette, glossy graphic-design finish. Stylized like a pre-match Champions League locker room graphic. The Manchester United crest visible on the jersey, no on-image text or captions.
+```
+
+---
+
+## [9] ronaldo-anger → `ronaldo-anger.png`
+
+**Subject:** Ronaldo biểu lộ sự bực dọc trên ghế dự bị
+
+```
+Vertical 9:16 football poster artwork featuring Cristiano Ronaldo, the Portuguese striker, on the substitute bench showing frustration, jaw set, looking intensely at the pitch. He wears a neon Manchester United substitute bib over his training kit. Background: a dark red-and-black graphic backdrop with a huge stylized Manchester United crest watermark, cold blue and red light rays crossing, creating a tense atmosphere. Saturated palette, very high contrast, glossy graphic-design finish. Stylized like a dramatic Premier League matchday highlight poster. The Manchester United logo visible on the bib, no on-image text or captions.
+```
+
+---
+
+## [10] jota-memorial → `jota-memorial.png`
+
+**Subject:** Tưởng niệm Diogo Jota rạng rỡ nâng cúp Nations League
+
+```
+Vertical 9:16 football poster artwork featuring Diogo Jota, the late Portuguese forward, in a triumphant pose smiling brightly while holding the UEFA Nations League trophy under falling silver confetti. He wears the red Portugal national team home kit with the Portuguese Football Federation crest clearly visible on the chest. Background: a soft green-and-red graphic backdrop with a large faint Portugal crest watermark, warm golden light rays illuminating him. Saturated colors, high contrast, glossy graphic-design finish. Stylized like a tribute champions promotional graphic. The Portugal crest visible on the jersey, no on-image text or captions.
+```
+
+---
+
+## [11] jota-referee → `jota-referee.png`
+
+**Subject:** Diogo Jota tranh cãi với trọng tài biên
+
+```
+Vertical 9:16 football poster artwork featuring Diogo Jota, the Portuguese forward, standing at the touchline, energetically talking to the assistant referee with a passionate expression. He wears the red Portugal national team kit. Background: a red-and-green graphic backdrop with a huge stylized Portuguese Football Federation crest watermark, abstract speed lines and light rays. Saturated colors, high contrast, glossy finish. Stylized like an intense matchday moment graphic. The Portugal crest visible on the jersey, no on-image text or captions.
+```
+
+---
+
+## [12] neves-bus → `neves-bus.png`
+
+**Subject:** Ruben Neves cô đơn trên xe buýt đội tuyển
+
+```
+Vertical 9:16 football poster artwork featuring Ruben Neves, the Portuguese midfielder, sitting inside a team bus, looking out the window with a melancholic expression, the seat next to him empty. He wears a red Portugal national team polo shirt. Background: a moody dark green-and-red graphic backdrop with a large faded Portugal crest watermark, rain droplets visible on the glass overlay, cold blue light rays shining through the window. Saturated moody palette, high contrast, glossy graphic-design finish. Stylized like a dramatic sports documentary poster. The Portugal crest visible on the polo, no on-image text or captions.
+```
+
+---
+
+## [13] portugal-worldcup → `portugal-worldcup.png`
+
+**Subject:** Đội tuyển Bồ Đào Nha chiến đấu tại World Cup vì Jota
+
+```
+Vertical 9:16 football poster artwork featuring Portuguese players Diogo Dalot, Bruno Fernandes, and Ruben Neves standing together shoulder to shoulder in solidarity, looking forward with resolute expressions. They wear the red Portugal national team kits with the Portuguese Federation crests clearly visible. Background: a vibrant red-and-green graphic backdrop with a huge stylized Portugal crest watermark floating faintly, dramatic gold light rays beaming from behind, a faint silhouette of the World Cup trophy. Saturated palette, high contrast, glossy graphic-design finish. Stylized like an international tournament campaign poster. The Portugal crests visible on the jerseys, no on-image text or captions.
+```
+
+---
+
+## Tiếp theo
+
+⚡ **Tip — gen ảnh song song để tiết kiệm thời gian.** Mở `13` tab grok.com cùng lúc, paste prompt vào từng tab, bấm generate đồng loạt rồi mới chờ. Cắt thời gian từ ~10-15 phút xuống ~3-5 phút.
+
+1. Mở https://grok.com trên **`13` tab cùng lúc** → Imagine, aspect ratio **9:16**.
+2. Copy từng block prompt phía trên, paste vào tab tương ứng, bấm generate **đồng loạt rồi mới chờ tất cả xong**.
+3. Save mỗi ảnh vào cùng folder với .txt (`video/input/diogo-dalot-ronaldo-va-diogo-jota/`) với stem đúng như file đã ghi (`hook`, `mourinho-call`, ...).
+   - **Extension nào cũng được:** `.png` / `.jpg` / `.jpeg` / `.webp`. Grok export `.jpg` thì giữ nguyên, không cần đổi đuôi.
+4. Khi đủ `13` ảnh, chạy: `/create-video video/input/diogo-dalot-ronaldo-va-diogo-jota/diogo-dalot-ronaldo-va-diogo-jota.txt`

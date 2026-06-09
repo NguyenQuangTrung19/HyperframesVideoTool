@@ -1,0 +1,86 @@
+{
+  "version": "1.0",
+  "source": "argentina-worldcup.txt",
+  "contentType": "PRE-MATCH PREVIEW",
+  "title": "Argentina và kịch bản bảo vệ ngôi vương World Cup 2026",
+  "createdAt": "2026-06-04T16:45:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Cúp vàng thế giới trên nền cờ Argentina",
+      "prompt": "Vertical 9:16 football poster artwork celebrating Argentina's 2026 World Cup campaign. The central focus is the iconic FIFA World Cup trophy glowing brilliantly with golden light. Behind it, a bold graphic backdrop of light blue and white stripes, representing the Argentina national flag, with a giant faint Argentine Football Association (AFA) crest floating as a watermark. Radiating golden light rays burst from the trophy, illuminating the scene. Saturated sky blue and white palette with rich gold accents, high contrast, glossy graphic-design finish. Stylized like an international tournament promotional poster. The Argentine crest visible, no on-image text or captions."
+    },
+    {
+      "id": "dibu-martinez",
+      "template": "stat-hero",
+      "filename": "dibu-martinez.png",
+      "subjectHint": "Emiliano Martínez — Argentina GK",
+      "prompt": "Vertical 9:16 football poster artwork featuring Emiliano Martínez, the Argentine goalkeeper. He is depicted in a triumphant hero pose, roaring in celebration after a penalty save. He wears the official Argentina goalkeeper jersey in red, with the Argentine Football Association (AFA) crest clearly visible on the chest. Background: a stylized dark grey and red graphic backdrop with a huge faint Argentine crest watermark, dramatic red and white light rays radiating outward, faint silhouettes of goalposts. Vibrant saturated palette, high contrast, glossy graphic-design finish. Stylized like a matchday promotional poster. The Argentine crest visible on the jersey, no on-image text or captions."
+    },
+    {
+      "id": "romero",
+      "template": "stat-hero",
+      "filename": "romero.png",
+      "subjectHint": "Cristian Romero — Argentina Defender",
+      "prompt": "Vertical 9:16 football poster artwork featuring Cristian Romero, the Argentine centre-back. He is shown in an intense defensive action pose, making a slide tackle. He wears the sky-blue-and-white striped Argentina home kit, with the Argentine Football Association (AFA) crest clearly visible on the chest. Background: a bold sky-blue and white graphic backdrop with a giant faint Argentine crest watermark, sharp geometric diagonal color panes, radiating white light rays. Vibrant saturated palette, high contrast, glossy graphic-design finish. Stylized like a Premier League style promotional poster. The Argentine crest visible on the jersey, no on-image text or captions."
+    },
+    {
+      "id": "enzo",
+      "template": "stat-hero",
+      "filename": "enzo.png",
+      "subjectHint": "Enzo Fernández — Argentina Midfielder",
+      "prompt": "Vertical 9:16 football poster artwork featuring Enzo Fernández, the Argentine midfielder. He is in a focused playmaker pose, looking up to deliver a long-range pass, foot poised to strike the ball. He wears the sky-blue-and-white striped Argentina home kit, with the Argentine Football Association (AFA) crest clearly visible on the chest. Background: a stylized sky-blue graphic backdrop with overlapping geometric panes, a huge faint Argentine crest watermark, gold light bursts radiating from behind him. Vibrant saturated palette, high contrast, glossy graphic-design finish. Stylized like a matchday promotional poster. The Argentine crest visible on the jersey, no on-image text or captions."
+    },
+    {
+      "id": "messi",
+      "template": "stat-hero",
+      "filename": "messi.png",
+      "subjectHint": "Lionel Messi — Argentina Captain",
+      "prompt": "Vertical 9:16 football poster artwork featuring Lionel Messi, the legendary Argentine playmaker. He is shown in a classic thoughtful captain pose, smiling slightly, looking forward. He wears the sky-blue-and-white striped Argentina home kit, with the Argentine Football Association (AFA) crest clearly visible on the chest and the captain's armband on his arm. Background: a premium golden and sky-blue graphic backdrop, a giant faint Argentine crest watermark, radiating golden sunburst rays creating a majestic aura. Saturated golden-blue palette, very high contrast, glossy graphic-design finish. Stylized like an award ceremony promotional poster. The Argentine crest visible on the jersey, no on-image text or captions."
+    },
+    {
+      "id": "lautaro",
+      "template": "stat-hero",
+      "filename": "lautaro.png",
+      "subjectHint": "Lautaro Martínez — Argentina Striker",
+      "prompt": "Vertical 9:16 football poster artwork featuring Lautaro Martínez, the Argentine striker. He is in a passionate goal celebration pose, sliding on his knees with arms wide open, screaming in triumph. He wears the sky-blue-and-white striped Argentina home kit, with the Argentine Football Association (AFA) crest clearly visible on the chest. Background: a bold sky-blue and white graphic backdrop with a giant faint Argentine crest watermark, dramatic radiating white and blue light rays. Vibrant saturated palette, high contrast, glossy graphic-design finish. Stylized like a matchday promotional poster. The Argentine crest visible on the jersey, no on-image text or captions."
+    },
+    {
+      "id": "group-stage",
+      "template": "callout",
+      "filename": "group-stage.png",
+      "subjectHint": "Ăn mừng vòng bảng của Argentina",
+      "prompt": "Vertical 9:16 football poster artwork showing a group stage celebration. An Argentine player in the sky-blue-and-white striped kit is shown celebrating a goal, running toward the corner flag. Background: a stylized graphic backdrop of light blue, white, and gold, a giant faint Argentine crest watermark, stylized fan silhouettes waving flags at the bottom. Vibrant saturated palette, high contrast, glossy graphic-design finish. Stylized like a tournament group stage promotional poster. The Argentine crest visible on the jersey, no on-image text or captions."
+    },
+    {
+      "id": "portugal-clash",
+      "template": "callout",
+      "filename": "portugal-clash.png",
+      "subjectHint": "Argentina vs Bồ Đào Nha — Messi vs Ronaldo",
+      "prompt": "Vertical 9:16 split-frame football poster artwork. Left half: Lionel Messi, the Argentine playmaker, in the sky-blue-and-white striped Argentina kit with the Argentine Football Association (AFA) crest visible on the chest, intense focused pose. Behind him, a stylized sky-blue graphic backdrop with a faint Argentine crest watermark. Right half: Cristiano Ronaldo, the Portuguese striker, in the red-and-green Portugal kit with the Portuguese Football Federation (FPF) crest visible on the chest, mirroring intense pose. Behind him, a stylized red-and-green graphic backdrop with a faint Portuguese crest watermark. Down the centre seam: a diagonal glowing golden lightning-burst slash separator, with the FIFA World Cup trophy glowing as a stylized graphic accent between them. Saturated colors, high contrast, glossy finish. Stylized like a World Cup knockout matchday rivalry graphic. Both crests visible on jerseys, no on-image text."
+    },
+    {
+      "id": "brazil-clash",
+      "template": "callout",
+      "filename": "brazil-clash.png",
+      "subjectHint": "Argentina vs Brazil — Siêu kinh điển Nam Mỹ",
+      "prompt": "Vertical 9:16 football poster artwork representing the Superclásico de las Américas. An Argentine player in the sky-blue-and-white kit is depicted celebrating a decisive goal against Brazil. Background: a dramatic split graphic backdrop of Argentine sky-blue and Brazilian yellow-and-green, a giant faint Argentine crest watermark on the left and a Brazilian crest on the right, separated by a sharp diagonal line. Vibrant saturated palette, high contrast, glossy finish. Stylized like a historic-moment rivalry poster. The Argentine crest visible on the jersey, no on-image text."
+    },
+    {
+      "id": "champions-celebration",
+      "template": "callout",
+      "filename": "champions-celebration.png",
+      "subjectHint": "Argentina nâng cúp vô địch thế giới 2026",
+      "prompt": "Vertical 9:16 football poster artwork celebrating Argentina as World Cup Champions. Lionel Messi is shown lifting the golden FIFA World Cup trophy high above his head, surrounded by teammates in sky-blue-and-white jerseys. Background: a massive golden and sky-blue graphic backdrop with a giant Argentine Football Association (AFA) crest watermark, gold confetti and stars raining down, radiating light bursts. Saturated golden-blue palette, high contrast, glossy finish. Stylized like a champions celebration promotional poster. The Argentine crest visible, no on-image text."
+    },
+    {
+      "id": "awards",
+      "template": "stat-hero",
+      "filename": "awards.png",
+      "subjectHint": "Nico Paz — Cầu thủ trẻ Argentina",
+      "prompt": "Vertical 9:16 football poster artwork featuring Nico Paz, the young Argentine midfielder. He is in a dynamic dribbling pose, shielding the ball from opponents, looking focused and determined. He wears the sky-blue-and-white striped Argentina home kit, with the Argentine Football Association (AFA) crest clearly visible on the chest. Background: a stylized sky-blue graphic backdrop with a huge faint Argentine crest watermark, glowing cyan and white light trails wrapping around him. Vibrant saturated palette, high contrast, glossy finish. Stylized like an end-of-season breakout player graphic. The Argentine crest visible on the jersey, no on-image text."
+    }
+  ]
+}

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>stat-hero — Mẫu 1 tinh chỉnh</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&family=Cormorant+Garamond:wght@600;700&family=JetBrains+Mono:wght@400;600&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#f5f0e6; --cream-lt:#f8f4ec; --cream-dk:#ede8dd;
+    --green:#10b981; --green-dk:#059669; --forest:#1a3c2a;
+    --gold:#c4a35a; --ink:#15241b; --muted:#5b6b60; --navy:#0d1a13;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',sans-serif;background:#0e120f;color:#e8eae6;line-height:1.55;padding:48px 32px 96px}
+  .wrap{max-width:1180px;margin:0 auto}
+  h1{font-family:'Playfair Display',serif;font-size:42px;color:#fff;letter-spacing:-.5px}
+  h1 .accent{color:var(--gold)}
+  .sub{color:#9aa39c;margin-top:8px;font-size:16px;max-width:860px}
+  h2{font-family:'Playfair Display',serif;font-size:28px;color:#fff;margin:56px 0 8px;border-left:4px solid var(--gold);padding-left:14px}
+  .h2note{color:#9aa39c;font-size:14px;margin:0 0 24px 18px}
+  .key{display:inline-block;width:13px;height:9px;vertical-align:-1px;margin:0 3px;
+    background:repeating-linear-gradient(45deg,rgba(255,70,100,.5) 0 4px,transparent 4px 8px);border:1px dashed rgba(255,70,100,.7)}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:30px;margin-top:8px}
+  .card{display:flex;flex-direction:column;gap:10px}
+  .frame{position:relative;aspect-ratio:9/16;border-radius:18px;overflow:hidden;
+    background:#0d1f17;box-shadow:0 12px 32px rgba(0,0,0,.45);border:1px solid #2c2c2c;color:#f3f1e9}
+  .shell{display:flex;align-items:center;gap:7px;position:absolute;top:12px;left:14px;z-index:6}
+  .shell .av{width:22px;height:22px;border-radius:7px;background:linear-gradient(135deg,var(--green),var(--gold))}
+  .shell .bn{font-size:8.5px;font-weight:800;color:#eafff3;line-height:1}
+  .badge{position:absolute;top:10px;right:12px;z-index:6;font-family:'JetBrains Mono',monospace;
+    font-size:8px;font-weight:600;padding:3px 7px;border-radius:20px;
+    background:rgba(196,163,90,.18);color:var(--gold);border:1px solid rgba(196,163,90,.4)}
+  /* safe-zone TikTok (tham chiếu): top 12.5% (240/1920), bottom ~22% (420/1920) */
+  .safe{position:absolute;left:0;right:0;z-index:5;pointer-events:none;
+    background:repeating-linear-gradient(45deg,rgba(255,70,100,.10) 0 7px,transparent 7px 14px)}
+  .safe.t{top:0;height:12.5%;border-bottom:1px dashed rgba(255,70,100,.45)}
+  .safe.b{bottom:0;height:21.9%;border-top:1px dashed rgba(255,70,100,.45)}
+
+  .meta{font-size:12.5px}
+  .meta .name{font-weight:800;color:#fff;font-size:15px}
+  .meta .when{color:#9aa39c;margin-top:2px}
+  .meta .fields{margin-top:6px;color:#7f8a82;font-family:'JetBrains Mono',monospace;font-size:10.5px}
+  .meta .fields b{color:var(--gold);font-weight:600}
+
+  /* ảnh placeholder + helper gold text */
+  .sh-photo{position:absolute;inset:0;background:linear-gradient(160deg,#2f6b4d 0%,#1a3c2a 55%,#0c1c13 100%)}
+  .sh-photo::after{content:"[ ảnh poster cầu thủ — mặt ở 1/3 trên ]";position:absolute;top:20%;left:0;right:0;text-align:center;
+     color:rgba(170,225,195,.42);font-size:8px;letter-spacing:.5px;font-family:'JetBrains Mono',monospace}
+  .goldtext{background:linear-gradient(135deg,#c4a35a,#fde68a 45%,#f59e0b 75%,#c4a35a);
+     -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  /* số lớn — line-height thoáng + padding để KHÔNG bị cắt đáy */
+  .num{font-family:'Playfair Display',serif;font-weight:900;line-height:1.12;padding-bottom:6px;
+     filter:drop-shadow(0 4px 16px rgba(0,0,0,.75))}
+  /* divider gold */
+  .dv{display:flex;align-items:center;gap:7px;justify-content:center}
+  .dv .ln{width:32px;height:1.5px;background:linear-gradient(90deg,transparent,var(--gold))}
+  .dv .ln.r{background:linear-gradient(90deg,var(--gold),transparent)}
+  .dv .dm{width:6px;height:6px;background:var(--gold);transform:rotate(45deg);box-shadow:0 0 6px rgba(196,163,90,.6)}
+
+  /* === HIGHLIGHTS căn trái đầu dòng (hanging indent) — dùng chung === */
+  .hl-list{display:flex;flex-direction:column;gap:7px;margin:13px auto 0;text-align:left;max-width:92%}
+  .hl-list span{display:flex;align-items:flex-start;gap:8px;line-height:1.32}
+  .hl-list span::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--green);flex:0 0 auto;margin-top:5px}
+
+  /* scrim đáy mượt */
+  .scrim{position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,
+     rgba(8,16,11,0) 28%, rgba(8,16,11,.45) 50%, rgba(7,15,10,.82) 70%, rgba(6,13,9,.92) 100%)}
+
+  /* —— Mẫu 1A: scrim mượt —— */
+  .s1a .c{position:absolute;left:18px;right:18px;bottom:26%;z-index:3;display:flex;flex-direction:column;align-items:center;text-align:center}
+  .s1a .eb{font-family:'Oswald',sans-serif;font-weight:600;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+  .s1a .num{font-size:64px}
+  .s1a .dv{margin:9px 0 11px}
+  .s1a .lb{font-family:'Playfair Display',serif;font-weight:700;font-size:15px;color:#fff;line-height:1.18;text-shadow:0 2px 10px rgba(0,0,0,.95)}
+  .s1a .hl-list span{font-size:9.5px;font-weight:600;color:#e9efe9;text-shadow:0 1px 5px rgba(0,0,0,1)}
+
+  /* —— Mẫu 1B: tấm kính bo góc —— */
+  .s1b .plate{position:absolute;left:14px;right:14px;bottom:25%;z-index:3;
+     background:rgba(9,20,14,.66);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+     border:1px solid rgba(196,163,90,.4);border-radius:16px;padding:18px 16px 15px;
+     display:flex;flex-direction:column;align-items:center;text-align:center;box-shadow:0 12px 30px rgba(0,0,0,.45)}
+  .s1b .plate::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:46px;height:3px;
+     background:linear-gradient(90deg,transparent,var(--gold),transparent);border-radius:2px;margin-top:-1.5px}
+  .s1b .num{font-size:56px}
+  .s1b .dv{margin:7px 0 9px}
+  .s1b .lb{font-family:'Playfair Display',serif;font-weight:700;font-size:14px;color:#fff;line-height:1.18}
+  .s1b .hl-list{max-width:100%}
+  .s1b .hl-list span{font-size:9.5px;font-weight:600;color:#d8e6dc}
+
+  footer{margin-top:60px;color:#6c756e;font-size:12.5px;border-top:1px solid #26312a;padding-top:20px}
+  footer code{font-family:'JetBrains Mono',monospace;color:var(--green)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Mẫu 1 · <span class="accent">full-bleed gold</span> — tinh chỉnh v3</h1>
+  <p class="sub">Theo góp ý: <b>nội dung nâng lên</b> (đáy ~25–26% thay vì 24%), <b>highlights căn trái đầu dòng</b> (bullet + hanging indent) thay vì căn giữa — chữ dài xuống dòng vẫn thẳng hàng, dễ đọc. Lằn đỏ <span class="key"></span> = safe zone. Khối nội dung neo đáy &amp; <b>mọc ngược lên</b> nên nhiều highlights chỉ đẩy số lên cao, không tràn vào vùng caption.</p>
+
+  <h2>1A &amp; 1B — highlights căn trái</h2>
+  <p class="h2note">Số mẫu: <b>33 · bàn thắng và kiến tạo</b>, 2 highlights. Số căn giữa làm tâm điểm; highlights thành list căn trái bên dưới.</p>
+
+  <div class="grid">
+
+    <!-- 1A -->
+    <div class="card">
+      <div class="frame s1a">
+        <div class="sh-photo"></div>
+        <div class="shell"><div class="av"></div><div><div class="bn">SportsForAllTV</div></div></div>
+        <span class="badge">stat-hero</span>
+        <div class="scrim"></div>
+        <div class="c">
+          <div class="eb">Champions League</div>
+          <div class="num goldtext">33</div>
+          <div class="dv"><span class="ln"></span><span class="dm"></span><span class="ln r"></span></div>
+          <div class="lb">Bàn thắng và kiến tạo</div>
+          <div class="hl-list"><span>Người hùng chung kết Munich</span><span>Vua phá lưới Champions League</span></div>
+        </div>
+        <div class="safe t"></div><div class="safe b"></div>
+      </div>
+      <div class="meta"><div class="name">Mẫu 1A · scrim mượt</div>
+      <div class="when">Dải tối nền sạch. Highlights căn trái bullet xanh, hanging indent. Sát bản hiện tại nhất.</div></div>
+    </div>
+
+    <!-- 1B -->
+    <div class="card">
+      <div class="frame s1b">
+        <div class="sh-photo"></div>
+        <div class="shell"><div class="av"></div><div><div class="bn">SportsForAllTV</div></div></div>
+        <span class="badge">stat-hero</span>
+        <div class="plate">
+          <div class="num goldtext">33</div>
+          <div class="dv"><span class="ln"></span><span class="dm"></span><span class="ln r"></span></div>
+          <div class="lb">Bàn thắng và kiến tạo</div>
+          <div class="hl-list"><span>Người hùng chung kết Munich</span><span>Vua phá lưới Champions League</span></div>
+        </div>
+        <div class="safe t"></div><div class="safe b"></div>
+      </div>
+      <div class="meta"><div class="name">Mẫu 1B · tấm kính bo góc</div>
+      <div class="when">Highlights căn trái trên tấm kính — tách bạch, không đè ảnh. Sang nhất.</div></div>
+    </div>
+
+  </div>
+
+  <h2>Stress test — highlights nhiều &amp; dài</h2>
+  <p class="h2note">4 highlights câu dài để xem co giãn. Khối mọc ngược lên trên; chữ wrap căn trái thẳng hàng đầu dòng; vẫn clear safe zone.</p>
+
+  <div class="grid">
+
+    <!-- 1A stress -->
+    <div class="card">
+      <div class="frame s1a">
+        <div class="sh-photo"></div>
+        <div class="shell"><div class="av"></div><div><div class="bn">SportsForAllTV</div></div></div>
+        <span class="badge">stat-hero</span>
+        <div class="scrim"></div>
+        <div class="c">
+          <div class="eb">Champions League</div>
+          <div class="num goldtext">33</div>
+          <div class="dv"><span class="ln"></span><span class="dm"></span><span class="ln r"></span></div>
+          <div class="lb">Bàn thắng và kiến tạo</div>
+          <div class="hl-list">
+            <span>Người hùng trong trận chung kết tại Munich mùa trước</span>
+            <span>Vua phá lưới Champions League hai mùa liên tiếp</span>
+            <span>Cầu thủ hay nhất giải theo bình chọn UEFA</span>
+            <span>Phá kỷ lục kiến tạo của câu lạc bộ trong một mùa</span>
+          </div>
+        </div>
+        <div class="safe t"></div><div class="safe b"></div>
+      </div>
+      <div class="meta"><div class="name">1A · 4 highlights dài</div>
+      <div class="when">Bullet căn trái nên dòng 2 thụt thẳng theo dòng 1. Số bị đẩy lên cao — cân nhắc giảm số highlight hoặc rút gọn câu khi đã quá 3 ý dài.</div></div>
+    </div>
+
+    <!-- 1B stress -->
+    <div class="card">
+      <div class="frame s1b">
+        <div class="sh-photo"></div>
+        <div class="shell"><div class="av"></div><div><div class="bn">SportsForAllTV</div></div></div>
+        <span class="badge">stat-hero</span>
+        <div class="plate">
+          <div class="num goldtext">33</div>
+          <div class="dv"><span class="ln"></span><span class="dm"></span><span class="ln r"></span></div>
+          <div class="lb">Bàn thắng và kiến tạo</div>
+          <div class="hl-list">
+            <span>Người hùng trong trận chung kết tại Munich mùa trước</span>
+            <span>Vua phá lưới Champions League hai mùa liên tiếp</span>
+            <span>Cầu thủ hay nhất giải theo bình chọn UEFA</span>
+            <span>Phá kỷ lục kiến tạo của câu lạc bộ trong một mùa</span>
+          </div>
+        </div>
+        <div class="safe t"></div><div class="safe b"></div>
+      </div>
+      <div class="meta"><div class="name">1B · 4 highlights dài</div>
+      <div class="when">Tấm kính nở theo nội dung, viền gọn quanh chữ → chịu nội dung dài tốt nhất. Đáy kính vẫn neo trên safe zone.</div></div>
+    </div>
+
+  </div>
+
+  <footer>
+    Khuyến nghị: highlights ≤3 ý, mỗi ý ≤ ~6 từ cho cân; quá nhiều/dài thì 1B (tấm kính) chịu tốt hơn 1A.
+    Áp vào <code>src/render/html-composer.ts</code> (renderStatHeroInner) + <code>styles.css</code> (.stat-highlights / .stat-highlight-text).
+  </footer>
+
+</div>
+</body>
+</html>

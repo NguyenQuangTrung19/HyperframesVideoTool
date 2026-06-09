@@ -112,6 +112,36 @@
       "templateData": { "template": "callout", "statement": "Mở bán tháng 9 trên toàn cầu." }
     },
     {
+      "id": "body-16",
+      "type": "body",
+      "voiceText": "Thêm tính năng AI mới.",
+      "templateData": { "template": "callout", "statement": "Siri thông minh hơn với Apple Intelligence." }
+    },
+    {
+      "id": "body-17",
+      "type": "body",
+      "voiceText": "Thiết kế mỏng hơn.",
+      "templateData": { "template": "stat-hero", "value": "7.1mm", "label": "Độ mỏng" }
+    },
+    {
+      "id": "body-18",
+      "type": "body",
+      "voiceText": "Hỗ trợ Wi-Fi 7.",
+      "templateData": { "template": "callout", "statement": "Kết nối Wi-Fi 7 siêu tốc." }
+    },
+    {
+      "id": "body-19",
+      "type": "body",
+      "voiceText": "Nút Action mới.",
+      "templateData": { "template": "stat-hero", "value": "Action Button", "label": "Nút bấm mới" }
+    },
+    {
+      "id": "body-20",
+      "type": "body",
+      "voiceText": "Hệ điều hành iOS 19.",
+      "templateData": { "template": "callout", "statement": "Cài sẵn iOS 19." }
+    },
+    {
       "id": "outro",
       "type": "outro",
       "voiceText": "Theo dõi SportsForAllTV.",

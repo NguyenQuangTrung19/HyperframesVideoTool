@@ -1,0 +1,65 @@
+{
+  "version": "1.0",
+  "source": "nha-va-cai-nhat-p1.txt",
+  "contentType": "TRIVIA",
+  "title": "Ngoại hạng Anh 25-26: Những ngôi sao và đỉnh cao xuất sắc nhất",
+  "createdAt": "2026-05-28T04:36:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Kỷ lục Ngoại hạng Anh 25-26 — Poster danh hiệu xuất sắc nhất",
+      "prompt": "Vertical 9:16 football poster artwork featuring a stylized compilation of elite Premier League champions of the 2025-26 season. In the center, Martin Ødegaard of Arsenal lifting the Premier League trophy, flanked by Bruno Fernandes of Manchester United celebrating with raised arms and Erling Haaland of Manchester City roaring in a goal celebration. Background: a bold dynamic multi-color graphic backdrop split in Arsenal red, Man Utd crimson, and Man City sky blue, a giant faint Premier League lion logo watermark, radiating golden light bursts and digital wind streaks. Rich saturated colors, high contrast, glossy graphic-design finish. Stylized like a Premier League season-review promotional poster. All club crests visible on the jerseys, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "fact-1",
+      "template": "stat-hero",
+      "filename": "fact-1.png",
+      "subjectHint": "Martin Ødegaard — Arsenal vô địch",
+      "prompt": "Vertical 9:16 football poster artwork featuring Martin Ødegaard, the Norwegian midfielder and captain of Arsenal, in a triumphant hero pose lifting the Premier League trophy high above his head, golden confetti falling around him. He wears the classic red and white Arsenal home kit with the Arsenal cannon crest clearly visible on the chest. Background: a vibrant red and white graphic backdrop with a huge stylized Arsenal cannon crest floating faintly behind him as a watermark, brilliant golden light rays radiating from the center. Saturated red-and-white-and-gold palette, very high contrast, glossy graphic finish. Stylized like a Premier League champions promotional poster. The Arsenal crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "fact-2",
+      "template": "stat-hero",
+      "filename": "fact-2.png",
+      "subjectHint": "Bruno Fernandes — Cầu thủ xuất sắc nhất năm",
+      "prompt": "Vertical 9:16 football poster artwork featuring Bruno Fernandes, the Portuguese midfielder and captain for Manchester United, in a hero pose celebrating with arms outstretched and a roaring, triumphant expression. He wears the vibrant red Manchester United home kit with the Manchester United crest clearly visible on the chest and the captain's armband. Background: a deep crimson Manchester United red graphic backdrop with a giant stylized Manchester United devil crest watermark, glowing golden and white light streaks emanating from the background. Rich saturated red palette with gold highlights, very high contrast, glossy graphic-design finish. Stylized like an end-of-season award broadcast graphic. The Manchester United crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "fact-3",
+      "template": "stat-hero",
+      "filename": "fact-3.png",
+      "subjectHint": "Erling Haaland — Vua phá lưới 27 bàn",
+      "prompt": "Vertical 9:16 football poster artwork featuring Erling Haaland, the Norwegian striker for Manchester City, in a dynamic hero pose celebrating a goal with his signature double-index-finger point to the sky, roaring in victory with long blonde hair flowing. He wears the sky blue Manchester City home kit with the Manchester City crest clearly visible on the chest. Background: a stylized sky blue and white graphic backdrop with a giant Manchester City crest watermark, bright golden rays of light and celebratory star bursts exploding outwards. Rich saturated sky blue palette, very high contrast, glossy graphic-design finish. Stylized like a Premier League Golden Boot promotional poster. The Manchester City crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "fact-4",
+      "template": "stat-hero",
+      "filename": "fact-4.png",
+      "subjectHint": "Bruno Fernandes — Kỷ lục 21 kiến tạo",
+      "prompt": "Vertical 9:16 football poster artwork featuring Bruno Fernandes, the Portuguese midfielder and captain for Manchester United, in a hero pose executing a pinpoint line-breaking pass, eyes fixed forward with concentration. He wears the vibrant red Manchester United home kit with the Manchester United crest clearly visible on the chest. Background: a deep crimson Manchester United red graphic backdrop with a giant stylized Manchester United devil crest watermark, radiating white and gold light bursts. Rich saturated red-and-gold palette, very high contrast, glossy graphic-design finish. Stylized like a historic-moment award promotional poster. The Manchester United crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "fact-5",
+      "template": "stat-hero",
+      "filename": "fact-5.png",
+      "subjectHint": "David Raya — Găng tay vàng 19 sạch lưới",
+      "prompt": "Vertical 9:16 football poster artwork featuring David Raya, the Spanish goalkeeper for Arsenal, in a dramatic hero pose leaping horizontally to make a finger-tip save, frozen in mid-air with intense concentration. He wears the black Arsenal goalkeeper kit with the Arsenal cannon crest clearly visible on the chest and goalkeeper gloves. Background: a sleek black and gold graphic backdrop with a huge stylized Arsenal cannon crest watermark floating faintly behind him, radiating white and gold light bursts. High contrast, saturated colors, glossy graphic-design finish. Stylized like a Premier League Golden Glove award broadcast graphic. The Arsenal crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "fact-6",
+      "template": "stat-hero",
+      "filename": "fact-6.png",
+      "subjectHint": "Mikel Arteta — HLV xuất sắc nhất",
+      "prompt": "Vertical 9:16 football poster artwork featuring Mikel Arteta, the Spanish manager of Arsenal, in a hero pose on the touchline punching the air in passionate celebration, wearing a smart dark shirt. Background: a vibrant red and white graphic backdrop with a huge stylized Arsenal cannon crest watermark floating faintly behind him, radiating white and gold light bursts. Saturated red-and-white palette, very high contrast, glossy graphic finish. Stylized like a Premier League Manager of the Season promotional poster. The Arsenal crest visible in the background, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "fact-7",
+      "template": "stat-hero",
+      "filename": "fact-7.png",
+      "subjectHint": "Nico O'Reilly — Cầu thủ trẻ xuất sắc nhất",
+      "prompt": "Vertical 9:16 football poster artwork featuring Nico O'Reilly, the young English midfielder for Manchester City, in a dynamic action pose dribbling past an opponent with speed and confidence. He wears the sky blue Manchester City home kit with the Manchester City crest clearly visible on the chest. Background: a stylized sky blue and white graphic backdrop with a giant Manchester City crest watermark, glowing green and gold light streaks emanating from the background. Saturated colors, high contrast, glossy graphic-design finish. Stylized like a Premier League young-player-of-the-year promotional poster. The Manchester City crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    }
+  ]
+}

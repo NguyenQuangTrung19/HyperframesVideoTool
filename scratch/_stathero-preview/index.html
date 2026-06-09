@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>stat-hero — so sánh thiết kế</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --scale: 0.34; }   /* đổi số này để phóng to / thu nhỏ tất cả mẫu */
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background:#15171c; color:#e8e6e0; font-family:'Inter',system-ui,sans-serif;
+    padding:40px 32px 80px; -webkit-font-smoothing:antialiased;
+  }
+  .page-head { max-width:1200px; margin:0 auto 36px; }
+  .page-head h1 { font-family:'Oswald',sans-serif; font-weight:700; font-size:30px; letter-spacing:0.5px; }
+  .page-head p { color:#9aa0aa; font-size:15px; margin-top:8px; line-height:1.5; }
+  .page-head .hatch-key { display:inline-block; width:14px; height:14px; vertical-align:-2px; margin:0 2px;
+    background:repeating-linear-gradient(45deg, rgba(255,0,80,0.55) 0 4px, transparent 4px 8px);
+    border:1px dashed rgba(255,0,80,0.7); }
+
+  .gallery { display:flex; flex-wrap:wrap; gap:36px 28px; justify-content:center; max-width:1500px; margin:0 auto; }
+  .card { width:calc(1080px * var(--scale)); }
+  .thumb {
+    width:calc(1080px * var(--scale)); height:calc(1920px * var(--scale));
+    overflow:hidden; border-radius:14px; box-shadow:0 12px 40px rgba(0,0,0,0.5);
+    position:relative;
+  }
+  .thumb .frame { transform:scale(var(--scale)); transform-origin:top left; }
+  .card h2 { font-family:'Oswald',sans-serif; font-weight:600; font-size:18px; margin:16px 2px 6px; }
+  .card h2 b { color:#c4a35a; }
+  .card p { color:#9aa0aa; font-size:13.5px; line-height:1.5; margin:0 2px; }
+
+  /* ===================== KHUNG GỐC 1080×1920 ===================== */
+  .frame { position:relative; width:1080px; height:1920px; overflow:hidden; background:#0a1024; font-family:'Inter',sans-serif; }
+  .frame img.poster { position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; object-position:50% 22%; }   /* mặt ở 1/3 trên */
+  /* safe-zone guides */
+  .safe-top, .safe-bottom { position:absolute; left:0; right:0; z-index:50; pointer-events:none;
+    background:repeating-linear-gradient(45deg, rgba(255,0,80,0.10) 0 14px, transparent 14px 28px);
+    border-bottom:1px dashed rgba(255,0,80,0.45); }
+  .safe-top { top:0; height:240px; }
+  .safe-bottom { bottom:0; height:420px; border-top:1px dashed rgba(255,0,80,0.45); border-bottom:none; }
+
+  /* ===== MẪU 1 — full-bleed gold ===== */
+  .v1 .grad { position:absolute; inset:0; z-index:2; background:linear-gradient(180deg,
+      rgba(0,0,0,0.12) 0%, rgba(0,0,0,0) 35%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.42) 78%, rgba(0,0,0,0.72) 100%); }
+  .v1 .content { position:absolute; left:80px; right:80px; bottom:440px; z-index:5;
+      display:flex; flex-direction:column; align-items:center; text-align:center; gap:18px; }
+  .v1 .num { font-family:'Playfair Display',serif; font-weight:900; font-size:260px; line-height:1;
+      background:linear-gradient(135deg,#c4a35a,#fde68a 45%,#f59e0b 75%,#c4a35a);
+      -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+      filter:drop-shadow(0 10px 26px rgba(0,0,0,0.65)); }
+  .v1 .divider { width:120px; height:3px; background:linear-gradient(90deg,transparent,#c4a35a,transparent); margin:6px 0; }
+  .v1 .label { font-family:'Playfair Display',serif; font-weight:700; font-size:58px; color:#fff; text-shadow:0 4px 18px rgba(0,0,0,0.85); }
+  .v1 .hl { display:flex; align-items:center; gap:16px; font-weight:700; font-size:38px; color:#f3ead2; text-shadow:0 3px 12px rgba(0,0,0,0.9); }
+  .v1 .hl .dot { width:14px; height:14px; border-radius:50%; background:#10b981; flex:0 0 auto; }
+
+  /* ===== MẪU 2 — panel cream-green ===== */
+  .v2 .panel { position:absolute; left:0; right:0; bottom:0; height:760px; z-index:5;
+      background:linear-gradient(180deg, rgba(7,26,14,0) 0%, rgba(7,26,14,0.86) 18%, rgba(5,20,11,0.97) 45%);
+      border-top:3px solid rgba(196,163,90,0.55);
+      padding:120px 84px 440px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:16px; }
+  .v2 .kicker { font-family:'Oswald',sans-serif; font-weight:600; font-size:30px; letter-spacing:5px; color:#c4a35a; }
+  .v2 .num { font-family:'Playfair Display',serif; font-weight:900; font-size:210px; line-height:1; color:#f5f0e6; text-shadow:0 6px 22px rgba(0,0,0,0.5); }
+  .v2 .label { font-family:'Playfair Display',serif; font-weight:700; font-size:52px; color:#fff; }
+  .v2 .hls { display:flex; flex-direction:column; gap:12px; margin-top:8px; }
+  .v2 .hl { font-weight:600; font-size:34px; color:#cfe6d6; }
+  .v2 .hl b { color:#c4a35a; }
+
+  /* ===== MẪU 3 — editorial + kicker đỏ ===== */
+  .v3 .grad { position:absolute; inset:0; z-index:2;
+      background:linear-gradient(90deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.35) 42%, rgba(0,0,0,0) 70%),
+                 linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.55) 100%); }
+  .v3 .content { position:absolute; left:80px; right:200px; bottom:460px; z-index:5;
+      display:flex; flex-direction:column; align-items:flex-start; text-align:left; gap:14px; }
+  .v3 .kicker { font-family:'Oswald',sans-serif; font-weight:700; font-size:34px; letter-spacing:2px; color:#fff; background:#e11d2a; padding:8px 20px; border-radius:3px; }
+  .v3 .num { font-family:'Playfair Display',serif; font-weight:900; font-size:280px; line-height:0.92;
+      background:linear-gradient(135deg,#c4a35a,#fde68a 45%,#f59e0b 75%,#c4a35a);
+      -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+      filter:drop-shadow(0 10px 26px rgba(0,0,0,0.7)); }
+  .v3 .label { font-family:'Playfair Display',serif; font-weight:700; font-size:56px; color:#fff;
+      padding-left:24px; border-left:8px solid #e11d2a; line-height:1.15; text-shadow:0 4px 16px rgba(0,0,0,0.8); }
+  .v3 .ctx { font-weight:600; font-size:32px; color:#f3ead2; text-shadow:0 3px 12px rgba(0,0,0,0.9); }
+
+  /* ===== MẪU 4 — số ghost khổng lồ ===== */
+  .v4 .grad { position:absolute; inset:0; z-index:2; background:linear-gradient(180deg,
+      rgba(0,0,0,0.18) 0%, rgba(0,0,0,0) 45%, rgba(0,0,0,0.5) 82%, rgba(0,0,0,0.78) 100%); }
+  .v4 .ghost { position:absolute; left:0; right:0; top:430px; z-index:3; text-align:center;
+      font-family:'Playfair Display',serif; font-weight:900; font-size:520px; line-height:0.8;
+      color:transparent; -webkit-text-stroke:5px rgba(255,255,255,0.85); text-shadow:0 0 60px rgba(0,0,0,0.4); }
+  .v4 .content { position:absolute; left:80px; right:80px; bottom:450px; z-index:5;
+      display:flex; flex-direction:column; align-items:center; text-align:center; gap:18px; }
+  .v4 .chip { font-family:'Oswald',sans-serif; font-weight:700; font-size:42px; letter-spacing:1px;
+      color:#0a1024; background:linear-gradient(135deg,#fde68a,#c4a35a); padding:14px 34px; border-radius:8px; }
+  .v4 .hl { display:flex; align-items:center; gap:16px; font-weight:700; font-size:38px; color:#fff; text-shadow:0 3px 14px rgba(0,0,0,0.9); }
+  .v4 .hl .dot { width:14px; height:14px; border-radius:50%; background:#c4a35a; flex:0 0 auto; }
+</style>
+</head>
+<body>
+
+<div class="page-head">
+  <h1>stat-hero · 4 hướng thiết kế</h1>
+  <p>Ảnh placeholder dùng tạm 1 tấm press-photo (poster dọc thật sẽ đẹp hơn). Vùng gạch chéo đỏ
+  <span class="hatch-key"></span> = safe zone TikTok (username trên / caption dưới) — chỉ tham chiếu, không có trong video.
+  Đổi <code>--scale</code> ở đầu file để phóng to/thu nhỏ.</p>
+</div>
+
+<div class="gallery">
+
+  <!-- MẪU 1 -->
+  <div class="card">
+    <div class="thumb">
+      <div class="frame v1">
+        <img class="poster" src="poster.jpg">
+        <div class="grad"></div>
+        <div class="content">
+          <div class="num">33</div>
+          <div class="divider"></div>
+          <div class="label">Bàn thắng và kiến tạo mùa này</div>
+          <div class="hl"><span class="dot"></span>Người hùng chung kết Munich</div>
+          <div class="hl"><span class="dot"></span>Vua phá lưới Champions League</div>
+        </div>
+        <div class="safe-top"></div><div class="safe-bottom"></div>
+      </div>
+    </div>
+    <h2><b>Mẫu 1</b> · full-bleed gold <i>(hiện tại)</i></h2>
+    <p>Số vàng Playfair căn giữa đáy + divider + highlights chấm xanh. An toàn, cân đối — nhưng số dễ chìm khi ảnh nền rối.</p>
+  </div>
+
+  <!-- MẪU 2 -->
+  <div class="card">
+    <div class="thumb">
+      <div class="frame v2">
+        <img class="poster" src="poster.jpg">
+        <div class="panel">
+          <div class="kicker">CHAMPIONS LEAGUE</div>
+          <div class="num">33</div>
+          <div class="label">Bàn thắng và kiến tạo mùa này</div>
+          <div class="hls">
+            <div class="hl"><b>›</b> Người hùng chung kết Munich</div>
+            <div class="hl"><b>›</b> Vua phá lưới Champions League</div>
+          </div>
+        </div>
+        <div class="safe-top"></div><div class="safe-bottom"></div>
+      </div>
+    </div>
+    <h2><b>Mẫu 2</b> · panel cream-green</h2>
+    <p>Ảnh sạch nguyên nửa trên, panel xanh rêu ôm đáy. Chữ dễ đọc nhất, đúng tông luxury cream-green của kênh.</p>
+  </div>
+
+  <!-- MẪU 3 -->
+  <div class="card">
+    <div class="thumb">
+      <div class="frame v3">
+        <img class="poster" src="poster.jpg">
+        <div class="grad"></div>
+        <div class="content">
+          <div class="kicker">CHAMPIONS LEAGUE</div>
+          <div class="num">33</div>
+          <div class="label">Bàn thắng và kiến tạo mùa này</div>
+          <div class="ctx">Mùa hay nhất sự nghiệp ở tuổi 27</div>
+        </div>
+        <div class="safe-top"></div><div class="safe-bottom"></div>
+      </div>
+    </div>
+    <h2><b>Mẫu 3</b> · editorial + kicker đỏ</h2>
+    <p>Căn trái, chip đỏ Oswald + số vàng khổng lồ + label gạch đỏ. Mạnh, đồng bộ với hook A2 broadcast đang dùng.</p>
+  </div>
+
+  <!-- MẪU 4 -->
+  <div class="card">
+    <div class="thumb">
+      <div class="frame v4">
+        <img class="poster" src="poster.jpg">
+        <div class="grad"></div>
+        <div class="ghost">33</div>
+        <div class="content">
+          <div class="chip">Bàn thắng và kiến tạo mùa này</div>
+          <div class="hl"><span class="dot"></span>Người hùng chung kết Munich</div>
+          <div class="hl"><span class="dot"></span>Vua phá lưới Champions League</div>
+        </div>
+        <div class="safe-top"></div><div class="safe-bottom"></div>
+      </div>
+    </div>
+    <h2><b>Mẫu 4</b> · số ghost khổng lồ</h2>
+    <p>Số viền trắng trong suốt phủ sau cầu thủ (kiểu bìa FIFA) + chip vàng label. Ấn tượng mạnh nhất, "wow" nhất.</p>
+  </div>
+
+</div>
+</body>
+</html>

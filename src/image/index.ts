@@ -42,32 +42,41 @@ export async function generateSceneImages(
     if (hookScene) map[hookScene.id] = hookOgImageRelPath;
   }
 
-  const candidates = script.scenes.filter((s) => {
-    if (!s.imagePrompt) return false;
+  // PASS 1 — manual overrides for ALL image-eligible scenes, regardless of
+  // whether the scene has an imagePrompt. A staged image at
+  // `images/<sceneId>.{png,jpg,jpeg,webp}` short-circuits any further work
+  // for that scene. (Previously this only ran on scenes with imagePrompt,
+  // which silently dropped staged images for prompt-less scenes — feedback
+  // 2026-05-26 "Mất ảnh".)
+  const eligibleScenes = script.scenes.filter((s) => {
     if (!IMAGE_TEMPLATES.has(s.templateData.template)) return false;
-    // Hook with og:image already covered → skip AI gen.
-    if (s.type === "hook" && hookOgImageRelPath) return false;
+    if (s.type === "hook" && hookOgImageRelPath) return false; // already mapped
     return true;
   });
-
-  // Manual overrides win over AI generation. A file at
-  // `images/<sceneId>.{png,jpg,jpeg,webp}` short-circuits the API call.
-  const remaining: typeof candidates = [];
-  for (const scene of candidates) {
+  for (const scene of eligibleScenes) {
+    if (map[scene.id]) continue; // already set (e.g. hook og:image)
     const overrideRel = findOverride(outputDir, scene.id);
     if (overrideRel) {
       map[scene.id] = overrideRel;
       log.info(`    scene ${scene.id}: MANUAL OVERRIDE → ${overrideRel}`);
-    } else {
-      remaining.push(scene);
     }
   }
 
+  // PASS 2 — AI generation, only for scenes with imagePrompt that didn't
+  // get a manual override above.
+  const remaining = eligibleScenes.filter(
+    (s) => !map[s.id] && s.imagePrompt,
+  );
+
   if (remaining.length === 0) {
-    if (candidates.length === 0) {
-      log.info("  AI image gen: no scenes with imagePrompt + eligible template");
+    const overrideCount = eligibleScenes.filter((s) => map[s.id]).length;
+    const withPrompt = eligibleScenes.filter((s) => s.imagePrompt).length;
+    if (overrideCount === 0 && withPrompt === 0) {
+      log.info("  AI image gen: no eligible scenes (none have imagePrompt or manual override)");
+    } else if (overrideCount > 0 && withPrompt === overrideCount) {
+      log.info(`  AI image gen: all ${overrideCount} scene(s) covered by manual overrides`);
     } else {
-      log.info(`  AI image gen: all ${candidates.length} scene(s) covered by manual overrides`);
+      log.info(`  AI image gen: ${overrideCount} manual override(s), no remaining AI work`);
     }
     return map;
   }
