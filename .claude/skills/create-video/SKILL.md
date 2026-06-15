@@ -721,6 +721,141 @@ Rows go **back to front** (GK row first, ST row last). CSS reverses display so G
 **voiceText for the formation-pitch scene** still names every player in spoken Vietnamese — the screen carries spatial info, the voice carries the introduction. Example:
 > *"Đội hình dự kiến chạy theo sơ đồ bốn hai ba một. Maignan trấn giữ khung gỗ. Hàng thủ Koundé, Upamecano, Saliba và Théo Hernández. Tchouaméni cùng Rabiot án ngữ trục giữa. Hàng công Dembélé, Olise, Cherki vây quanh Mbappé."*
 
+#### PRE-MATCH PREVIEW — standard shape (mirror `nhan-dinh-han-quoc-vs-sec-wc-2026`)
+
+For a two-team pre-match preview, follow the proven structure of `video/output/nhan-dinh-han-quoc-vs-sec-wc-2026/script.json`. Two rules are mandatory:
+
+**1. Put the predicted scoreline IN THE HOOK.** The hook leads with the result, not a generic "trận đại chiến" line. Set `bigStat` to the predicted score and open `voiceText` with it:
+- `bigStat: "1-0"`, `eyebrow: "World Cup 2026"`, `eyebrowSub: "<bảng> · <sân>"`, `headline` = the marquee player matchup (`"Son đấu Schick|ở cao nguyên Mexico"`, `"Davies đấu Dzeko|trên sân nhà Canada"`).
+- voiceText first sentence ≤8 words IS the prediction: *"Hàn Quốc thắng một không."* / *"Canada thắng một không."* — then one sentence of framing (giải / sân / stakes). This is a score-shock hook (see the hook archetype table).
+
+**2. The prediction/verdict card uses the `comparison` SCOREBOARD (flags + scoreline), NOT a feature-list or bare bars.** Place ONE `comparison` scene near the end (the "verdict", right before the engagement question). Give BOTH sides a `flag` — that triggers the score-prediction scoreboard render (two national flags + team names + a big centered scoreline, higher score glows as winner). The two `value`s ARE the predicted score.
+
+> ⚠️ **MANDATORY — DO NOT SHIP A PREVIEW WITHOUT THIS SCENE.** This is the #1 recurring miss: 4 previews in a row (2026-06-14) rendered with NO verdict scoreboard scene at all — the score appeared only in the hook, the flags+scoreline card was silently dropped. The render does NOT error on a missing scene (it's schema-valid), so nothing flags it for you. The capability is fully built (`html-composer.ts:278`, CSS `.cs-flag`, schema) and works — the only failure mode is FORGETTING to emit the scene. Every `nhan-dinh-*` script.json MUST contain exactly one `comparison` scene with `flag` set on BOTH sides. See the pre-save checklist at the end of this section.
+
+```json
+{
+  "id": "verdict",
+  "type": "body",
+  "voiceText": "Bosnia phòng ngự kỷ luật, nhưng Canada có lợi thế sân nhà. Opta nghiêng về Canada với gần sáu mươi phần trăm. Kênh chốt Canada thắng một không.",
+  "templateData": {
+    "template": "comparison",
+    "left":  { "label": "Canada", "value": "1", "color": "cyan",   "flag": "https://flagcdn.com/ca.svg" },
+    "right": { "label": "Bosnia", "value": "0", "color": "purple", "flag": "https://flagcdn.com/ba.svg" }
+  }
+}
+```
+
+- **`flag`** = a flag/crest image URL or local path. Default to national flags `https://flagcdn.com/<iso2>.svg` (e.g. `ca` Canada, `ba` Bosnia, `kr` S.Korea, `cz` Czechia, `br` Brazil, `es` Spain, `gb-eng` England). For a club fixture, point `flag` at a crest under `assets/` instead.
+- **Both sides MUST set `flag`** or the scene falls back to the bar chart (wrong for a scoreline). The score (`value`) should match the `bigStat` in the hook — keep them consistent.
+- **No `imagePrompt`** — the scoreboard is a non-image (data-driven) template, like `formation-pitch`/`group-intro`. In plan mode it's added on top of the image-eligible plan scenes; `images-for-videos` must NOT plan an image for it.
+- The bar-chart `comparison` (no flags) stays the default for METRIC comparisons (goals/trophies/QBV in VS content). Flags + scoreline is specifically the predicted-result card.
+
+**3. Recent form + head-to-head = 2–3 scenes** (from the source's "Phong độ gần đây & đối đầu" section), placed early — right after the hook. Don't cram it into one card; give it room:
+
+- **H2H scene** (`feature-list`, title `"Lịch sử đối đầu"`): the all-time record + the standout meeting + the last meeting. If the teams have never met, a single line ("Lần đầu hai đội chạm trán") + 1–2 framing bullets is fine and this scene can be merged into the first form board instead.
+- **One `match-results` board PER team** (`"<Đội> · 5 trận gần nhất"`), each listing that team's last 5 results with scorelines — most recent first. These are ACTUAL past results, so **override the prediction labels**: set `eyebrow: "Phong độ · World Cup 2026"` and `foot: "Kết quả gần đây · SportsForAllTV"` (without the override the board reads "Dự đoán", which mislabels real results). List the team first in each row; strip foreign-team diacritics (`Đức`, `Bồ Đào Nha`, `Bỉ`, `Hy Lạp`, `Maroc`).
+
+```json
+{
+  "id": "h2h",
+  "type": "body",
+  "voiceText": "Lịch sử nghiêng hẳn về Mỹ, đội thắng 5 trong 9 lần gặp. Lần duy nhất chạm trán ở World Cup năm 1930, Mỹ thắng 3-0. Gần nhất, Mỹ cũng thắng 2-1 cuối năm ngoái.",
+  "templateData": {
+    "template": "feature-list",
+    "title": "Lịch sử đối đầu",
+    "bullets": ["9 lần gặp: Mỹ thắng 5, hòa 2, thua 2", "World Cup 1930: Mỹ thắng 3-0", "Gần nhất: Mỹ 2-1 (11/2025)"]
+  }
+}
+```
+```json
+{
+  "id": "form-usa",
+  "type": "body",
+  "voiceText": "Mỹ vào giải với phong độ chập chờn. Thua Đức và Bồ Đào Nha, nhưng vừa thắng Senegal 3-2 đầy thuyết phục.",
+  "templateData": {
+    "template": "match-results",
+    "title": "Mỹ · 5 trận gần nhất",
+    "eyebrow": "Phong độ · World Cup 2026",
+    "foot": "Kết quả gần đây · SportsForAllTV",
+    "matches": [
+      { "home": "Mỹ", "homeScore": "1", "away": "Đức", "awayScore": "2" },
+      { "home": "Mỹ", "homeScore": "3", "away": "Senegal", "awayScore": "2" },
+      { "home": "Mỹ", "homeScore": "0", "away": "Bồ Đào Nha", "awayScore": "2" },
+      { "home": "Mỹ", "homeScore": "2", "away": "Bỉ", "awayScore": "5" },
+      { "home": "Mỹ", "homeScore": "3", "away": "Costa Rica", "awayScore": "0" }
+    ]
+  }
+}
+```
+
+The `match-results voiceText` gives narrative colour (the run's story), NOT a read-out of all 5 scores — the board shows the digits.
+
+**4. Keep the standout-players section BRIEF.** Each star stat-hero gets just **1–2 short voice sentences** (a quick hit, not a profile) — surface the detail in the visible `value`/`highlights`/`context`, let the voice stay punchy. E.g. *"Bên kia, Edin Dzeko ở tuổi 40 vẫn là biểu tượng của Bosnia, dẫn đầu ghi bàn vòng loại với 6 pha lập công."* The deep multi-sentence treatment is for PLAYER PROFILE / BIO content, NOT for preview stars.
+
+A full preview thus runs: hook (score in bigStat) → **H2H feature-list + one `match-results` last-5 board per team (2–3 scenes)** → [lineups via formation-pitch] → brief star stat-heros → manager callouts → **verdict scoreboard** → engagement → outro.
+
+##### ⚠️ Pre-save checklist (PRE-MATCH PREVIEW) — verify BEFORE writing script.json
+
+Run this gate on every `nhan-dinh-*` script. If any box fails, fix it before saving — a missing scene renders silently (no error).
+
+1. ☐ **Hook** has `bigStat` = predicted scoreline (e.g. `"1-0"`), voiceText opens with it.
+2. ☐ **Exactly one `comparison` verdict scoreboard** exists near the end, and **BOTH `left.flag` AND `right.flag` are set** (`https://flagcdn.com/<iso2>.svg`). `grep -c '"flag"'` on the script should be **≥ 2**. The two `value`s match the hook's `bigStat`.
+3. ☐ ISO2 codes correct for THIS fixture (verify, don't guess): e.g. Pháp `fr`, Senegal `sn`, Iraq `iq`, Na Uy `no`, Argentina `ar`, Algeria `dz`, Áo `at`, Jordan `jo`, Bồ Đào Nha `pt`, CHDC Congo `cd`, Anh `gb-eng`, Hàn Quốc `kr`, Séc `cz`. Club fixture → crest path under `assets/`.
+4. ☐ Form section present: H2H `feature-list` + one `match-results` board per team (labels overridden to `eyebrow: "Phong độ · World Cup 2026"` / `foot: "Kết quả gần đây · SportsForAllTV"`).
+5. ☐ The verdict scoreboard scene has **NO `imagePrompt`** (data-driven, like formation-pitch / group-intro).
+
+A fast self-check after writing: `grep -c '"flag"' <script.json>` must be ≥ 2 (verdict) — more if a `group-intro` is also present.
+
+#### Group-stage team reveal — use the `group-intro` template (data-driven, NOT per-team images)
+
+When the source introduces a **World Cup / tournament group** (a bảng with its 3–4 teams + predicted finishing order), render the team reveal as ONE **`group-intro`** scene per group — a code-driven HTML/CSS card (flags/crests + team names + predicted finish), NOT a stack of per-team `stat-hero` image scenes. This is the group-stage analog of `formation-pitch`: the data is the visual, so no AI image is needed (and `images-for-videos` should NOT plan per-team posters for it).
+
+**Triggers:** content is a group-stage preview/prediction (`Bảng A`, `Bảng F`, "Group D", squad-group reveal) listing the teams in a group with a predicted order/standing.
+
+**Schema usage** (teams listed in predicted finishing order — index+1 is the displayed rank; `qualify:true` gold-highlights the advancing teams):
+```json
+{
+  "template": "group-intro",
+  "group": "F",
+  "teams": [
+    { "name": "Argentina", "flag": "https://flagcdn.com/ar.svg", "note": "Nam Mỹ · ƯCV vô địch", "result": "Nhất bảng", "qualify": true },
+    { "name": "Na Uy",     "flag": "https://flagcdn.com/no.svg", "note": "Haaland dẫn dắt",      "result": "Đi tiếp",   "qualify": true },
+    { "name": "Australia",  "flag": "https://flagcdn.com/au.svg", "note": "Châu Á · Socceroos",   "result": "Hạng 3" },
+    { "name": "Tunisia",    "flag": "https://flagcdn.com/tn.svg", "note": "Đại bàng Carthage",    "result": "Bị loại" }
+  ]
+}
+```
+- **`flag`** = an image URL or local path. Default to `https://flagcdn.com/<iso2>.svg` (national flags; e.g. `ar`, `no`, `gb-eng` for England, `de` Germany, `jp` Japan, `kr` S.Korea, `br` Brazil, `es` Spain). For federation crests instead, drop the SVG under `assets/` (or the input folder) and point `flag` at that path.
+- **`result`** ≤20 chars: `"Nhất bảng"`, `"Đi tiếp"`, `"Hạng 3"`, `"Bị loại"`. **`qualify`** true for advancing teams (gold row + gold chip).
+- **No `imagePrompt`** — `group-intro` is a non-image template (like `formation-pitch`/`comparison`); in plan mode it's added on top of the image-eligible plan scenes.
+- **`voiceText`** introduces the 4 teams + the prediction in spoken Vietnamese; the screen carries the table. Example: *"Bảng F là bảng của Messi. Argentina được dự đoán nhất bảng, Na Uy của Haaland đi tiếp. Australia và Tunisia chia tay sớm."*
+- A group-stage part covering 2 groups (e.g. Bảng A + B) = 2 `group-intro` scenes (one per group) + hook + 1–2 highlight image scenes + engagement + outro. Don't also make per-team `stat-hero` images for those teams — that's what `group-intro` replaces.
+
+#### Predicted match scores — use the `match-results` template (data-driven scoreline board, NO image)
+
+When the source carries **predicted/actual match scorelines** (a group's game-by-game results, or a knockout round's results), render them as a **`match-results`** scene — a code-driven board listing each result `home  H-A  away`, NO AI image. This is the scoreline analog of `group-intro`: the scores ARE the visual.
+
+**Triggers:** source has a "Key scores" / "Diễn biến" / game-by-game block (e.g. `Mexico 2-0 Nam Phi; Hàn Quốc 1-1 Séc; …`), OR a knockout round with multiple results. Use ONE board per group (its 6 matches) or ONE board per knockout round (its 8–16 results — cap 8 rows/board; split into 2 boards if a round has >8).
+
+**Schema usage:**
+```json
+{
+  "template": "match-results",
+  "title": "Bảng A · Kết quả",
+  "matches": [
+    { "home": "Mexico",   "homeScore": "2", "away": "Nam Phi",  "awayScore": "0" },
+    { "home": "Hàn Quốc", "homeScore": "1", "away": "Séc",      "awayScore": "1" },
+    { "home": "Séc",       "homeScore": "1", "away": "Mexico",   "awayScore": "2", "note": "luân lưu" }
+  ]
+}
+```
+- **`title`** ≤40 (e.g. `"Bảng A · Kết quả"`, `"Vòng 16 đội"`). Optional **`subtitle`** ≤40.
+- **`home`/`away`** ≤20 (team name, strip foreign diacritics per typography rules). **`homeScore`/`awayScore`** are strings ≤8 (allow `"2"`, or pen shorthand). **`note`** ≤20 optional (`"luân lưu"`, `"Nhất bảng"`).
+- **2–8 matches** per board. **No `imagePrompt`** — non-image template; `images-for-videos` must NOT plan an image for it.
+- **`voiceText` summarizes, does NOT read all scores** — the board shows the digits; the voice gives narrative color (who stayed unbeaten, the key result). E.g. *"Đây là toàn bộ kết quả Bảng A. Mexico bất bại, chỉ bị Hàn Quốc cầm chân. Séc vượt Nam Phi lấy vé vớt."* Reading 6 scorelines aloud is robotic — don't.
+- For a group-stage part: pair each `group-intro` (standings) with a `match-results` (the 6 scores) — standings answer "ai đi tiếp", scores answer "diễn biến thế nào". For knockout parts, a `match-results` board replaces a stack of per-match `comparison` scenes when a round has many results (a round of 16 = 8 rows in ONE board, not 8 separate scenes).
+
 #### Player lists (NOT lineups) — SPLIT into individual stat-hero scenes, don't pack into feature-list
 
 When the source names **2-5 specific named players** as a thematic group (workers / leaders / breakout stars / trụ cột / nhân tố chìa khoá / shortlist transfer targets / vô địch chia tay đội tuyển) and each player has a **distinguishing trait or role**, render each player as their **OWN `stat-hero` (or `callout`) scene with their own image** — NOT as a single `feature-list` of bullet names.

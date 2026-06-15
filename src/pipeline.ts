@@ -61,6 +61,24 @@ export async function runPipeline(scriptPath: string): Promise<void> {
   }
   const script: Script = ScriptSchema.parse(raw);
 
+  // Guard: a PRE-MATCH PREVIEW (folder `nhan-dinh-*`) MUST carry the verdict
+  // scoreboard — a `comparison` scene with a `flag` on BOTH sides (flags + scoreline).
+  // The render is schema-valid without it, so the scene is easy to silently drop
+  // (happened 4× on 2026-06-14). Warn loudly so it's caught before publishing.
+  if (basename(outputDir).startsWith("nhan-dinh-")) {
+    const hasFlagScoreboard = script.scenes.some((s) => {
+      const td = s.templateData as { template?: string; left?: { flag?: string }; right?: { flag?: string } };
+      return td?.template === "comparison" && !!td.left?.flag && !!td.right?.flag;
+    });
+    if (!hasFlagScoreboard) {
+      log.warn(
+        "⚠ PRE-MATCH PREVIEW missing the verdict scoreboard: no `comparison` scene has a flag on both sides. " +
+          "The predicted flags + scoreline card will NOT render. Add it per /create-video SKILL " +
+          '(both sides set `flag: "https://flagcdn.com/<iso2>.svg"`).',
+      );
+    }
+  }
+
   // STEP 2
   log.step(2, TOTAL_STEPS, "Write script.txt for CapCut");
   const fullText = script.scenes.map((s) => s.voiceText).join("\n\n");
