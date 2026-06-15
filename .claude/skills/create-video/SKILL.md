@@ -287,7 +287,8 @@ The `voiceText` field is read aloud by AusyncLab Vietnamese TTS (default, paid �
 | Year + date | `17/10/2023` | `ngày 17 tháng 10 năm 2023` |
 | Age | `34 tuổi` | `34 tuổi` |
 | Count + unit | `26 cầu thủ` / `79 bàn` / `40 năm` | `26 cầu thủ` / `79 bàn` / `40 năm` — digit form |
-| Score | `3-1` / `0-2` | `ba một` / `0-2` (cả 2 đều OK on AusyncLab) |
+| Score | `3-1` / `0-2` | `ba một` / `không hai` — MUST spell. A hyphen between digits is read as the minus word "trừ" (`3-1` → "ba TRỪ một") |
+| Formation | `4-2-3-1` / `4-3-3` | `bốn hai ba một` / `bốn ba ba` — MUST spell. Same hyphen-as-"trừ" bug (`4-2-3-1` → "bốn TRỪ hai TRỪ ba TRỪ một"). The visible `formation` field keeps digits |
 | Decimal | `82.7%` | `tám mươi hai phẩy bảy phần trăm` (MUST spell — decimals read wrong) |
 | Decimal version | `iOS 18.2` | `iOS mười tám chấm hai` (MUST spell) |
 | Money | `€80M` | `80 triệu euro` (digit + spelled unit) |
@@ -302,7 +303,7 @@ The `voiceText` field is read aloud by AusyncLab Vietnamese TTS (default, paid �
 
 1. **`năm` homophone (= year + 5)** — `bốn mươi năm` (40 years) gets read as "bốn mươi lăm" (45). **Fix: use digit form `40 năm`**. Triggers any spelled `X mươi/chục năm` followed by anything meaning "years". Detail: `memory/feedback_vietnamese_homophone_nam.md`.
 2. **Long compound spelled numbers** — AusyncLab eats syllables in `hai nghìn không trăm hai mươi sáu` style. Always prefer `2026` or `năm 2026`.
-3. **Score `2-0` vs `2 ngày 0 tháng`** — score reads fine as `0-2` or spelled `không hai`. For dates use full `ngày X tháng Y` form to disambiguate.
+3. **⚠️ Hyphen between digits is read as "trừ" (minus) — NEVER leave `X-Y` digit forms in voiceText.** This is a confirmed AusyncLab bug (2026-06-15): a scoreline `2-1` reads "hai TRỪ một" and a formation `4-2-3-1` reads "bốn TRỪ hai TRỪ ba TRỪ một". ALWAYS spell them as space-separated words in voiceText — scores `2-1` → `hai một`, `1-0` → `một không`, `10-0` → `mười không`; formations `4-2-3-1` → `bốn hai ba một`, `3-4-3` → `ba bốn ba`. Better still for match-results boards: drop the score from the spoken line entirely (narrative color only — the board shows the digits). The visible `templateData` fields (`bigStat`, `formation`, `match-results` scores, `comparison.value`) keep the digit/hyphen form. Detail: `memory/feedback_voicetext_hyphen_reads_as_minus.md`.
 
 **Notation choices:**
 - Decimal point — use `chấm` (more spoken/natural) or `phẩy` (formal). Pick one and stay consistent.
@@ -727,7 +728,7 @@ For a two-team pre-match preview, follow the proven structure of `video/output/n
 
 **1. Put the predicted scoreline IN THE HOOK.** The hook leads with the result, not a generic "trận đại chiến" line. Set `bigStat` to the predicted score and open `voiceText` with it:
 - `bigStat: "1-0"`, `eyebrow: "World Cup 2026"`, `eyebrowSub: "<bảng> · <sân>"`, `headline` = the marquee player matchup (`"Son đấu Schick|ở cao nguyên Mexico"`, `"Davies đấu Dzeko|trên sân nhà Canada"`).
-- voiceText first sentence ≤8 words IS the prediction: *"Hàn Quốc thắng một không."* / *"Canada thắng một không."* — then one sentence of framing (giải / sân / stakes). This is a score-shock hook (see the hook archetype table).
+- voiceText first sentence ≤8 words IS the prediction, and MUST flag that it's a prediction so viewers don't hear it as a result — open with `"Kênh dự đoán <đội> thắng <tỷ số spelled>."`: *"Kênh dự đoán Hàn Quốc thắng một không."* / *"Kênh dự đoán Canada thắng một không."* — then one sentence of framing (giải / sân / stakes). ⚠️ SPELL the scoreline as words (`hai một`, not `2-1` — the hyphen reads as "trừ", see phonetic rules). This is a score-shock hook (see the hook archetype table). (Feedback 2026-06-15: a bare `"Pháp thắng 2-1"` opener sounds like a final result + reads the hyphen as minus — both wrong.)
 
 **2. The prediction/verdict card uses the `comparison` SCOREBOARD (flags + scoreline), NOT a feature-list or bare bars.** Place ONE `comparison` scene near the end (the "verdict", right before the engagement question). Give BOTH sides a `flag` — that triggers the score-prediction scoreboard render (two national flags + team names + a big centered scoreline, higher score glows as winner). The two `value`s ARE the predicted score.
 
@@ -799,11 +800,13 @@ A full preview thus runs: hook (score in bigStat) → **H2H feature-list + one `
 
 Run this gate on every `nhan-dinh-*` script. If any box fails, fix it before saving — a missing scene renders silently (no error).
 
-1. ☐ **Hook** has `bigStat` = predicted scoreline (e.g. `"1-0"`), voiceText opens with it.
-2. ☐ **Exactly one `comparison` verdict scoreboard** exists near the end, and **BOTH `left.flag` AND `right.flag` are set** (`https://flagcdn.com/<iso2>.svg`). `grep -c '"flag"'` on the script should be **≥ 2**. The two `value`s match the hook's `bigStat`.
-3. ☐ ISO2 codes correct for THIS fixture (verify, don't guess): e.g. Pháp `fr`, Senegal `sn`, Iraq `iq`, Na Uy `no`, Argentina `ar`, Algeria `dz`, Áo `at`, Jordan `jo`, Bồ Đào Nha `pt`, CHDC Congo `cd`, Anh `gb-eng`, Hàn Quốc `kr`, Séc `cz`. Club fixture → crest path under `assets/`.
-4. ☐ Form section present: H2H `feature-list` + one `match-results` board per team (labels overridden to `eyebrow: "Phong độ · World Cup 2026"` / `foot: "Kết quả gần đây · SportsForAllTV"`).
-5. ☐ The verdict scoreboard scene has **NO `imagePrompt`** (data-driven, like formation-pitch / group-intro).
+1. ☐ **Hook** has `bigStat` = predicted scoreline (e.g. `"1-0"`), and voiceText opens with `"Kênh dự đoán <đội> thắng <tỷ số spelled>"` (flag it as a prediction, NOT a bare result) — scoreline SPELLED as words (`hai một`, never `2-1`).
+2. ☐ **No `X-Y` digit-hyphen-digit anywhere in any voiceText** (scores AND formations) — the hyphen reads as "trừ". `grep -E '"voiceText".*[0-9]-[0-9]'` on the script must return NOTHING. Formations spelled (`bốn hai ba một`); the visible `formation`/`bigStat`/board fields keep digits.
+3. ☐ **Every `formation-pitch` row goes GK-first → ST-last** (`rows[0]` is the lone goalkeeper, `rows[-1]` the striker). Inverted rows render the team upside-down on the pitch.
+4. ☐ **Exactly one `comparison` verdict scoreboard** exists near the end, and **BOTH `left.flag` AND `right.flag` are set** (`https://flagcdn.com/<iso2>.svg`). `grep -c '"flag"'` on the script should be **≥ 2**. The two `value`s match the hook's `bigStat`.
+5. ☐ ISO2 codes correct for THIS fixture (verify, don't guess): e.g. Pháp `fr`, Senegal `sn`, Iraq `iq`, Na Uy `no`, Argentina `ar`, Algeria `dz`, Áo `at`, Jordan `jo`, Bồ Đào Nha `pt`, CHDC Congo `cd`, Anh `gb-eng`, Hàn Quốc `kr`, Séc `cz`. Club fixture → crest path under `assets/`.
+6. ☐ Form section present: H2H `feature-list` + one `match-results` board per team (labels overridden to `eyebrow: "Phong độ · World Cup 2026"` / `foot: "Kết quả gần đây · SportsForAllTV"`). A board titled `"… 5 trận gần nhất"` MUST list 5 matches; if you only have N<5 reliable results, title it `"… phong độ gần đây"` instead (don't claim 5 and show 4).
+7. ☐ The verdict scoreboard scene has **NO `imagePrompt`** (data-driven, like formation-pitch / group-intro).
 
 A fast self-check after writing: `grep -c '"flag"' <script.json>` must be ≥ 2 (verdict) — more if a `group-intro` is also present.
 
