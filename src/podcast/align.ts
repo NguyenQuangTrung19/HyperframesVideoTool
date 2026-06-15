@@ -1,7 +1,8 @@
 import { spawn } from "node:child_process";
+import { existsSync } from "node:fs";
 import { mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join, resolve as resolvePath } from "node:path";
+import { dirname, join, resolve as resolvePath } from "node:path";
 
 export interface WordTiming {
   /** The word as transcribed (UTF-8, may include Vietnamese diacritics) */
@@ -60,10 +61,20 @@ export async function alignAudio(opts: AlignOpts): Promise<WordTiming[]> {
     await writeFile(promptPath, opts.initialPrompt, "utf-8");
   }
 
+  // Run the worker as a PEP 723 inline-deps script so uv auto-provisions an
+  // ephemeral (cached) env with faster-whisper — no external uv project
+  // required. cwd just needs to exist; prefer the VieNeu project dir when it's
+  // still around (keeps the model cache co-located), else fall back to the
+  // worker script's own dir. This decouples alignment from VieNeu-TTS, which
+  // the channel no longer keeps installed.
+  const cwd = opts.vieneuProjectDir && existsSync(opts.vieneuProjectDir)
+    ? opts.vieneuProjectDir
+    : dirname(resolvePath(opts.workerScript));
+
   return new Promise<WordTiming[]>((resolve, reject) => {
-    const args = ["run", "python", opts.workerScript, absAudio, language, modelSize, promptPath];
+    const args = ["run", "--script", opts.workerScript, absAudio, language, modelSize, promptPath];
     const proc = spawn(uvBin, args, {
-      cwd: opts.vieneuProjectDir,
+      cwd,
       env: { ...process.env, PYTHONIOENCODING: "utf-8" },
       stdio: ["ignore", "pipe", "pipe"],
     });
