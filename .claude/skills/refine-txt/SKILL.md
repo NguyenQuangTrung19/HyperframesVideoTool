@@ -244,7 +244,7 @@ local notes ──/refine-txt──► clean .txt (in place, .raw.txt backup)
                        /images-for-videos
                               │
                               ▼
-                       images-plan.json + grok-prompts.md
+                       images-plan.json
                               │
                               │ user gens images on grok.com
                               │

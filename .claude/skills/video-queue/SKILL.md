@@ -12,7 +12,7 @@ Batch driver for motion-graphic videos. Mirrors `/podcast-queue` (Excel-driven, 
 Motion-graphic videos have a **manual image-generation bottleneck** in the middle of the pipeline — the user gens images on grok.com themselves, the queue cannot do it. So the workflow splits in two:
 
 1. **Pass 1 (prep):** /refine-txt (if requested) → /images-for-videos. Auto-split decides single-video vs N parts. Status moves `pending` → `planned`. Skill halts and prints every folder the user must gen images for.
-2. **User manual:** open grok-prompts.md in each folder, gen images in parallel tabs, save them under the filenames the plan declared.
+2. **User manual:** open images-plan.json in each folder (read each scene's `prompt`), gen images in parallel tabs, save them under the filenames the plan declared.
 3. **Pass 2 (render):** for every `planned` row, verify images are now in place, then run /create-video per part. Multi-part renders fan out — the row's `result` column collects all part mp4 paths joined by `; `. Status moves `planned` → `done`.
 
 Re-running `/video-queue` does Pass 1 on still-pending rows AND Pass 2 on still-planned rows in a single invocation. The split into "passes" is conceptual — for the user it looks like "run the skill, gen images, run again."
@@ -104,7 +104,7 @@ For each row with status pending:
    - Skip the `refine=yes` step for URL sources — /read-rewrite already produces channel-voice text.
 3. **File branch — validate `source` exists.** If file is missing → `set <rowIdx> status=error error="source not found: <path>"` and continue to next row.
 4. **If `refine=yes` (file branch only):** invoke the `/refine-txt` skill on the source. The skill polishes in place + creates `<slug>.raw.txt` backup.
-5. **Invoke `/images-for-videos`** on the source (skip if already chained by /read-rewrite in step 2). The skill auto-detects long sources (≥ 4 000 chars) and splits them into `<slug>-p1/`, `<slug>-p2/`, … each with its own .txt + images-plan.json + grok-prompts.md.
+5. **Invoke `/images-for-videos`** on the source (skip if already chained by /read-rewrite in step 2). The skill auto-detects long sources (≥ 4 000 chars) and splits them into `<slug>-p1/`, `<slug>-p2/`, … each with its own .txt + images-plan.json.
 6. **If `title` is non-empty:** record the override for Pass 2 (the part .txt files don't carry queue-row metadata — keep a local in-memory map of `rowIdx → title override` for use when /create-video runs).
 7. **Update row:** `set <rowIdx> status=planned`. Leave `result` and `error` empty.
 8. **Log to user:** "Row 3: planned, gen ảnh tại video/input/<slug>-p1/, <slug>-p2/, <slug>-p3/" (list all part folders that need images, or the base folder if single-video).
@@ -180,7 +180,7 @@ Row 2 (modric-bio, refine=yes):
   → /refine-txt: polished in-place, .raw.txt backed up
   → /images-for-videos: source 9 240 chars → split 3 phần
   → status=planned, gen ảnh tại:
-    • video/input/modric-bio-p1/  (7 ảnh — grok-prompts.md)
+    • video/input/modric-bio-p1/  (7 ảnh — xem images-plan.json)
     • video/input/modric-bio-p2/  (8 ảnh)
     • video/input/modric-bio-p3/  (7 ảnh)
 Row 3 (top10-trivia, refine=no):

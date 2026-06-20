@@ -87,7 +87,7 @@ If the user runs `/create-video` directly without a plan, that skill will work i
 5. **For each part, run Steps 2–7 INDEPENDENTLY** against its own .txt:
    - Classify the part's content separately (it inherits the parent content type in practice — RANKING stays RANKING; BIO-PLAYER stays BIO-PLAYER).
    - Apply the density rules from Step 3 against this part's distinct points (each part should support 6–11 scenes on its own — see `/create-video` density table). If a part would have < 3 points → reduce N by 1 and re-split (rare).
-   - Write `images-plan.json` + `grok-prompts.md` into the part folder.
+   - Write `images-plan.json` into the part folder.
 6. **Original source .txt stays untouched** at `video/input/<base-slug>/<base-slug>.txt` as source of truth. Do NOT delete it, do NOT overwrite it.
 7. **Step 8 reply (multi-part case)** — list all part folders + image counts:
    ```
@@ -95,8 +95,8 @@ If the user runs `/create-video` directly without a plan, that skill will work i
    ✓ Phần 1: video/input/modric-bio-p1/ — 7 ảnh
    ✓ Phần 2: video/input/modric-bio-p2/ — 8 ảnh
    ✓ Phần 3: video/input/modric-bio-p3/ — 7 ảnh
-   → Mở grok-prompts.md trong từng folder để copy prompts, gen ảnh song song,
-     rồi chạy /create-video cho từng .txt theo thứ tự part 1 → part N.
+   → Mở images-plan.json trong từng folder để đọc prompt (field `prompt`), gen ảnh
+     song song, rồi chạy /create-video cho từng .txt theo thứ tự part 1 → part N.
    ```
 
 ### Step 2: Classify content
@@ -167,6 +167,8 @@ For each content type, the typical image set (capped by density above):
 
 Each individual scene gets its own sceneId / filename / prompt entry in `images-plan.json`. The prompt focuses on THAT player (name + club + nation anchor) instead of a group composition. The downstream `/create-video` skill renders each as a separate scene with its own image.
 
+**⚠️ Group-stage team reveal → NO per-team images (handled by the `group-intro` code template).** When the source introduces a tournament **group** (a bảng with its 3–4 teams + predicted order, e.g. "Bảng F: Argentina, Na Uy, Australia, Tunisia"), do NOT plan a `stat-hero` image per team for that table. The team reveal is rendered by the data-driven **`group-intro`** template (flags/crests + names + predicted finish — code, no AI image) by `/create-video`. Plan images ONLY for the `hook` + 1–2 **highlights** of that group (a marquee match VS, a star player). A group-stage part covering 2 bảng = `hook` + ~2 highlight image scenes in `images-plan.json`; the two `group-intro` table scenes carry no plan entry. (This is exactly how `du-doan-world-cup-2026-p1…p6` are planned.)
+
 ### Step 4: Assign sceneIds + filenames
 
 Pick stable, lowercase, hyphen-separated IDs that match the content shape. The id and filename stem MUST match — `id: "cb-1"` ↔ `filename: "cb-1.png"`.
@@ -182,7 +184,7 @@ Convention by content type:
 
 Use the `<topic>` prefix that's natural for the content. For "Top 7 Trung vệ" → `cb-1` to `cb-7`. For "Top 10 vua phá lưới" → `striker-1` to `striker-10` (or `rank-1` to `rank-10` if more generic). Pick whatever the user is likely to recognize at a glance.
 
-Default filename extension: `.png`. The pipeline accepts `.png` / `.jpg` / `.jpeg` / `.webp` — the user may save under any of these and the staging step handles it.
+Default filename extension: `.png`. The pipeline accepts `.png` / `.jpg` / `.jpeg` / `.webp` / `.avif` — the user may save under any of these and the staging step handles it (the Chromium renderer decodes AVIF natively).
 
 ### Step 5: Write a prompt for each scene
 
@@ -228,8 +230,8 @@ Prompt rules — same as the imagePrompt rules in `/create-video`. Default visua
   ```
 
 - **Split-frame via TWO single-subject images (preferred when "together" shots are hard to source).** A single AI prompt for two specific named people in one frame is unreliable — Grok often mangles one face, and real two-person photos rarely exist. So for any **VS / sibling-pair / head-to-head** scene (`stat-hero`, `callout`, or a matchup `hook`), plan it as **two single-subject images** that the pipeline composites into one split-frame at build time:
-  - Keep ONE scene entry in `images-plan.json` with `filename: "<sceneId>.png"` (the composited result) and a `prompt` describing the combined split-frame (good AI fallback + missing-file hint).
-  - In `grok-prompts.md`, list **two** single-subject prompts under that scene, one per person, named `<sceneId>-1` (left) and `<sceneId>-2` (right). Each is a clean one-person 9:16 poster (name + club/nation anchor, framed chest-up, head in upper third).
+  - Keep ONE scene entry in `images-plan.json` with `filename: "<sceneId>.png"` (the composited result). In its `prompt`, describe **both halves in one string, clearly labelled**: `<sceneId>-1` (left) = which person, `<sceneId>-2` (right) = which person. Each half is a clean one-person 9:16 poster (name + club/nation anchor, framed chest-up, head in upper third). For a preview `hook`, this is simply: `hook-1` = cầu thủ X (chest-up), `hook-2` = HLV Y (chest-up) — no separate prompts file needed.
+  - `subjectHint` should name both in Vietnamese, e.g. `hook-1: Messi (cầu thủ) · hook-2: Scaloni (HLV)`.
   - At `npm run images:stage` time, `combine-split-images` auto-merges `<sceneId>-1` + `<sceneId>-2` → `<sceneId>.png` (left | gold seam | right). The user generates two easy single-player images instead of one hard two-person image. They may also drop a real two-person photo as `<sceneId>.png` to skip the merge.
   - `validatePlan` treats `<sceneId>-1` / `<sceneId>-2` as split sources, not orphans. This is exactly what the `tam-cap-anh-em-ruot-tai-world-cup-2026` (sibling pairs) plan uses — model new VS/pair plans on it.
 
@@ -318,7 +320,7 @@ If `images-plan.json` already exists at the target path:
 2. Compare its filenames to the new plan's filenames.
 3. Any filename in the OLD plan but not in the NEW plan → list as "orphan" (user should delete from input folder after re-running, since they won't be used).
 
-### Step 7: Write images-plan.json + grok-prompts.md
+### Step 7: Write images-plan.json
 
 Schema (validated by `src/image/plan-schema.ts`):
 
@@ -348,67 +350,25 @@ Schema (validated by `src/image/plan-schema.ts`):
 }
 ```
 
-Two files, both written to the same directory as the source .txt:
-
-1. **`images-plan.json`** — machine-readable plan, validated by `src/image/plan-schema.ts`. This is what `/create-video` and `npm run images:stage` consume.
-2. **`grok-prompts.md`** — copy-paste-friendly version for the user. Each prompt in a fenced markdown code block (so editors render a copy button), with a clear header per scene including the planned filename and Vietnamese subjectHint. Format:
-
-```markdown
-# Grok prompts — <title>
-
-8 ảnh cần tạo trên grok.com (Imagine, aspect ratio **9:16**), save về cùng folder này theo đúng tên file.
-
----
-
-## [1] hook → `hook.png`
-
-**Subject:** <subjectHint>
-
-​```
-<full english prompt>
-​```
-
----
-
-## [2] cb-1 → `cb-1.png` — #1 <Player Name> (<Club>)
-
-**Subject:** <subjectHint>
-
-​```
-<full english prompt>
-​```
-
-... (one block per scene) ...
-
----
-
-## Tiếp theo
-
-⚡ **Tip — gen ảnh song song để tiết kiệm thời gian.** Mở `<N>` tab grok.com cùng lúc, paste prompt vào từng tab, bấm generate đồng loạt rồi mới chờ. Cắt thời gian từ ~10-15 phút (sequential) xuống ~3-5 phút (batch parallel).
-
-1. Mở https://grok.com trên **`<N>` tab cùng lúc** → Imagine, aspect ratio **9:16**.
-2. Copy từng block prompt phía trên, paste vào tab tương ứng, bấm generate **đồng loạt rồi mới chờ tất cả xong**.
-3. Save mỗi ảnh vào cùng folder với .txt (mới: `video/input/<slug>/`; legacy `input/<slug>/` cũng OK) với stem đúng như file đã ghi (`hook`, `cb-1`, ...).
-   - **Extension nào cũng được:** `.png` / `.jpg` / `.jpeg` / `.webp`. Grok export `.jpg` thì giữ nguyên, không cần đổi đuôi.
-4. Khi đủ `<N>` ảnh, chạy: `/create-video <path-to-.txt>`
-```
-
-The "## [N] sceneId → filename" header should also include the player's name + club when the scene depicts a specific person (e.g. RANKING items, VS sides, PLAYER PROFILE chapters). For atmosphere-only scenes (hook in many cases), just the sceneId/filename is fine.
+**One file** — `images-plan.json` — written to the same directory as the source .txt. This is the single source of truth: machine-readable plan validated by `src/image/plan-schema.ts`, consumed by `/create-video` and `npm run images:stage`. The image description the user generates from lives in each scene's **`prompt`** field (full English image-gen prompt) with **`subjectHint`** naming the subject in Vietnamese. Do **NOT** emit a separate `grok-prompts.md` — the user reads prompts straight from `images-plan.json`.
 
 ### Step 8: Reply concisely
 
-Do NOT dump the prompts into the chat — they are already in `grok-prompts.md` for the user to copy from. Reply with a short confirmation only:
+Do NOT dump full prompts into the chat — they are in `images-plan.json` for the user to read. Reply with a short confirmation + the parallel-gen reminder:
 
 ```
 ✓ Plan: <input-dir>/images-plan.json
-✓ Prompts: <input-dir>/grok-prompts.md (mở file này để copy)
-<N> ảnh cần tạo (1 hook + N CB / N item / ...).
+<N> ảnh cần tạo (1 hook + N CB / N item / ...). Mô tả từng ảnh ở field `prompt`.
+
+⚡ Gen ảnh song song: mở <N> tab grok.com cùng lúc (Imagine, 9:16), paste prompt từng
+   tab, bấm generate ĐỒNG LOẠT rồi mới chờ. Save về cùng folder, stem đúng tên file
+   (`hook`, `cb-1`, ...); đuôi .png/.jpg/.jpeg/.webp/.avif đều OK. Xong → /create-video <path>.
 
 ⚠ Orphan từ plan cũ (xóa sau):  ← only if any
   • old-cb-8.png
 ```
 
-If the user wants to inspect or tweak prompts, they open `grok-prompts.md`. If they want to re-run the skill (e.g. they changed the source .txt), just regenerate both files.
+If the user wants to tweak a prompt, they open `images-plan.json` and edit the `prompt` field. If they changed the source .txt, just regenerate `images-plan.json`.
 
 ## What this skill does NOT do
 

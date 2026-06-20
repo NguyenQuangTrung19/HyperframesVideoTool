@@ -264,9 +264,26 @@ That skill will:
 1. Read the .txt
 2. Classify the content type via `classify-football-content`
 3. Plan scenes + write image prompts (English, Grok-optimized, with name+club+nation identity anchors and real club iconography per existing rules)
-4. Write `images-plan.json` and `grok-prompts.md` next to the .txt
+4. Write `images-plan.json` next to the .txt (image descriptions live in each scene's `prompt` field — no separate prompts file)
 
 Do NOT duplicate any of that skill's logic here — just chain into it as the next step in your workflow. All existing rules (image prompt typography, real iconography, name-not-features) apply automatically because they live in that skill.
+
+### Step 6.5: Record the source in the video queue (queue.xlsx)
+
+After the image plan is written, append this source to the batch render queue so it shows up in `/video-queue` and the worksheet tracks every prepped source in one place. ALWAYS do this once the `.txt` + `images-plan.json` exist.
+
+1. **Read the queue** to find the next free row and avoid duplicates:
+   ```bash
+   npm run video-queue --silent -- list
+   ```
+   Parse the JSON. Let `maxRow` = the largest `rowIdx` (or `1` if the queue is empty / only the header exists). The next free row is `maxRow + 1`.
+2. **Dedup:** if any existing row's `source` already equals `video/input/<slug>/<slug>.txt`, do NOT add a duplicate. Leave it as-is and skip to Step 7 (mention it was already queued). One exception: if that row's `status` is `done`/`error`, leave it for the user to reset — don't silently re-queue.
+3. **Append the row** with the base `.txt` as `source` and `status=planned`. `planned` is exactly the "prepped, waiting for images" state `/video-queue` Pass 2 expects (the `.txt` + `images-plan.json` exist but the user still has to gen images). Always write the BASE source path even if `/images-for-videos` auto-split into parts (`<slug>-p1/`, `-p2/`, …) — the queue fans out parts itself in Pass 2:
+   ```bash
+   npm run video-queue --silent -- set <maxRow+1> source=video/input/<slug>/<slug>.txt status=planned notes="read-rewrite"
+   ```
+   Only write `source`, `status`, `notes` — leave `result`/`error` empty.
+4. If the helper errors (e.g. queue.xlsx open/locked in Excel), do NOT fail the whole skill — note it in the reply and continue; the user can add the row manually.
 
 ### Step 7: Reply concisely
 
@@ -274,15 +291,15 @@ After the chained skill completes, reply with one combined summary covering both
 
 ```
 ✓ Bài báo đã rewrite: video/input/<slug>/<slug>.txt
-✓ Image plan: video/input/<slug>/images-plan.json
-✓ Grok prompts: video/input/<slug>/grok-prompts.md  (mở file này để copy)
+✓ Image plan: video/input/<slug>/images-plan.json  (mô tả ảnh ở field `prompt`)
 
 Phân loại: <CONTENT TYPE từ classify skill>
 <N> ảnh cần tạo trên grok.com (Imagine, aspect ratio 9:16):
+✓ Đã thêm vào hàng đợi render: video/input/queue.xlsx (row <N>, status=planned)
 
 Tiếp theo:
-1. Mở grok-prompts.md → copy từng prompt → grok.com → save về cùng folder theo đúng tên file
-2. Khi đủ <N> ảnh, chạy: /create-video video/input/<slug>/<slug>.txt
+1. Mở images-plan.json → đọc field `prompt` từng scene → grok.com → save về cùng folder theo đúng tên file
+2. Khi đủ <N> ảnh, chạy: /create-video video/input/<slug>/<slug>.txt — hoặc gen ảnh hết rồi chạy /video-queue để render cả loạt
 
 ⚠ Tone đã rewrite theo brand SportsForAllTV — đọc qua file .txt nếu muốn chỉnh trước khi gen ảnh.
 ```
@@ -324,7 +341,7 @@ If the WebFetch failed and the user pasted the article, mention it once at the t
 ```
 URL ──/read-rewrite──► video/input/<slug>/<slug>.txt
                               │
-                              ├──/images-for-videos (chained automatically)──► images-plan.json + grok-prompts.md
+                              ├──/images-for-videos (chained automatically)──► images-plan.json
                               │                                                        │
                               │                                              user generates images on grok.com
                               │                                                        │
