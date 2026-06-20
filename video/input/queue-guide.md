@@ -95,7 +95,7 @@ Ghi chú riêng của bạn. Queue **không đọc**, chỉ để bạn tự t�
 | Giá trị | Ý nghĩa |
 |---|---|
 | empty / `pending` | Chưa xử lý — Pass 1 sẽ pick up |
-| `planned` | Pass 1 xong: .txt + images-plan.json đã sẵn. **Chờ bạn gen ảnh.** |
+| `planned` | Pass 1 xong: .txt + images-plan.json + anh-can-tao.md đã sẵn. **Chờ bạn gen ảnh.** |
 | `done` | Pass 2 xong: mp4 đã render. Path ở cột `result`. |
 | `error` | Fail. Xem cột `error` để biết lý do. |
 
@@ -182,7 +182,7 @@ Queue Pass 2: verify ảnh đủ → render.
 3. /video-queue  (lần 1)
    → status=planned cho mỗi row
    → queue list folder cần gen ảnh
-4. Gen ảnh trên grok.com per folder, save filename theo images-plan.json (field `prompt`)
+4. Gen ảnh trên grok.com per folder, xem anh-can-tao.md (checklist) — prompt English ở images-plan.json
 5. /video-queue  (lần 2)
    → verify ảnh, render → status=done, result=mp4 paths
 6. Đọc cột result → upload mp4

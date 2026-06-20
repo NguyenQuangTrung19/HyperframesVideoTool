@@ -1,0 +1,121 @@
+{
+  "version": "1.0",
+  "source": "cham-diem-brazil-vs-haiti-wc-2026.txt",
+  "contentType": "MATCH RECAP",
+  "title": "Brazil thắng Haiti 3-0, Vinicius cầm trịch và cú đúp Cunha",
+  "createdAt": "2026-06-20T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Vinicius Junior — Real Madrid | Brazil dẫn dắt lối chơi tấn công",
+      "prompt": "Vertical 9:16 football poster artwork featuring Vinicius Junior, the Brazilian winger for Real Madrid and the Brazil national team, in the yellow Brazil national-team home kit with the Brazil CBF crest clearly visible on the chest. He stands in a dynamic hero pose mid-stride, chest out, arms flexed with electric attacking swagger, pointing forward as if commanding the attack. Bold Brazil-yellow graphic backdrop with green and blue accents, a huge faint Brazil CBF crest watermark behind the figure, radiating Selecao green-yellow light bursts, glossy graphic-design finish, vibrant saturated palette, very high contrast. Stylized like a World Cup matchday broadcast graphic. The Brazil crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "vinicius",
+      "template": "stat-hero",
+      "filename": "vinicius.png",
+      "subjectHint": "Vinicius Junior — Real Madrid | MVP 8/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Vinicius Junior, the Brazilian winger for Real Madrid and the Brazil national team, in the yellow Brazil national-team home kit with the Brazil CBF crest clearly visible on the chest. He is captured in an ecstatic goal celebration, arms spread wide and head tilted back in triumphant joy after scoring. A large glowing GOLDEN-BLUE MVP badge glowing with the number 8 floats near his shoulder with subtle golden sparkle, styled like a video-game stat overlay reading the rating. Bold Brazil-yellow graphic backdrop with green and blue accents, a huge faint Brazil CBF crest watermark behind the figure, radiating light rays, glossy graphic-design finish, vibrant saturated palette, very high contrast. Stylized like a World Cup matchday broadcast graphic. The Brazil crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "cunha",
+      "template": "stat-hero",
+      "filename": "cunha.png",
+      "subjectHint": "Matheus Cunha — Manchester United | Điểm 7/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Matheus Cunha, the Brazilian forward for Manchester United and the Brazil national team, in the yellow Brazil national-team home kit with the Brazil CBF crest clearly visible on the chest. He wheels away in a sharp goal celebration, sliding on one knee with both fists clenched and a roaring grin after his first-half brace. A glowing BLUE rating badge glowing with the number 7 floats near his shoulder, styled like a video-game stat overlay. Bold Brazil-yellow graphic backdrop with green and blue accents, a huge faint Brazil CBF crest watermark behind the figure, radiating light rays, glossy graphic-design finish, vibrant saturated palette, very high contrast. Stylized like a World Cup matchday broadcast graphic. The Brazil crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "paqueta",
+      "template": "stat-hero",
+      "filename": "paqueta.png",
+      "subjectHint": "Lucas Paqueta — West Ham | Điểm 8/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Lucas Paqueta, the Brazilian midfielder for West Ham and the Brazil national team, in the yellow Brazil national-team home kit with the Brazil CBF crest clearly visible on the chest. He is shown mid-pass, body leaning, leg following through on a threaded assist with a focused, composed expression and an outstretched arm guiding the ball. A glowing GOLDEN badge glowing with the number 8 floats near his shoulder, styled like a video-game stat overlay. Bold Brazil-yellow graphic backdrop with green and blue accents, a huge faint Brazil CBF crest watermark behind the figure, radiating light rays, glossy graphic-design finish, vibrant saturated palette, very high contrast. Stylized like a World Cup matchday broadcast graphic. The Brazil crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "bruno",
+      "template": "stat-hero",
+      "filename": "bruno.png",
+      "subjectHint": "Bruno Guimaraes — Newcastle | Điểm 7/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Bruno Guimaraes, the Brazilian midfielder for Newcastle and the Brazil national team, in the yellow Brazil national-team home kit with the Brazil CBF crest clearly visible on the chest. He is captured driving forward with the ball at his feet, head up scanning the pitch, arms pumping in a tireless box-to-box stride. A glowing BLUE rating badge glowing with the number 7 floats near his shoulder, styled like a video-game stat overlay. Bold Brazil-yellow graphic backdrop with green and blue accents, a huge faint Brazil CBF crest watermark behind the figure, radiating light rays, glossy graphic-design finish, vibrant saturated palette, very high contrast. Stylized like a World Cup matchday broadcast graphic. The Brazil crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "casemiro",
+      "template": "stat-hero",
+      "filename": "casemiro.png",
+      "subjectHint": "Casemiro — Manchester United | Điểm 5/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Casemiro, the Brazilian defensive midfielder for Manchester United and the Brazil national team, in the yellow Brazil national-team home kit with the Brazil CBF crest clearly visible on the chest. He looks frustrated and sluggish, hands on hips with a dejected lowered gaze, shoulders slumped after a flat performance. A deep-red warning badge glowing with the number 5 floats near his shoulder, styled like a video-game stat overlay. Bold Brazil-yellow graphic backdrop with green and blue accents, a huge faint Brazil CBF crest watermark behind the figure, radiating light rays, glossy graphic-design finish, vibrant saturated palette, very high contrast. Stylized like a World Cup matchday broadcast graphic. The Brazil crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "alisson",
+      "template": "stat-hero",
+      "filename": "alisson.png",
+      "subjectHint": "Alisson — Liverpool | Điểm 7/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Alisson, the Brazilian goalkeeper for Liverpool and the Brazil national team, in a yellow-and-green Brazil national-team goalkeeper kit with the Brazil CBF crest clearly visible on the chest and goalkeeper gloves. He is captured in a commanding pose, fists raised and barking organisation to his defence, alert and authoritative in his box. A glowing BLUE rating badge glowing with the number 7 floats near his shoulder, styled like a video-game stat overlay. Bold Brazil-yellow graphic backdrop with green and blue accents, a huge faint Brazil CBF crest watermark behind the figure, radiating light rays, glossy graphic-design finish, vibrant saturated palette, very high contrast. Stylized like a World Cup matchday broadcast graphic. The Brazil crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "marquinhos",
+      "template": "stat-hero",
+      "filename": "marquinhos.png",
+      "subjectHint": "Marquinhos — PSG | Điểm 7/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Marquinhos, the Brazilian centre-back for Paris Saint-Germain and the Brazil national team, in the yellow Brazil national-team home kit with the Brazil CBF crest clearly visible on the chest. He is shown mid sliding tackle, fully stretched and committed to win the ball cleanly, focused and determined in defence. A glowing BLUE rating badge glowing with the number 7 floats near his shoulder, styled like a video-game stat overlay. Bold Brazil-yellow graphic backdrop with green and blue accents, a huge faint Brazil CBF crest watermark behind the figure, radiating light rays, glossy graphic-design finish, vibrant saturated palette, very high contrast. Stylized like a World Cup matchday broadcast graphic. The Brazil crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "martinelli",
+      "template": "stat-hero",
+      "filename": "martinelli.png",
+      "subjectHint": "Gabriel Martinelli — Arsenal | Điểm 6/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Gabriel Martinelli, the Brazilian winger for Arsenal and the Brazil national team, in the yellow Brazil national-team home kit with the Brazil CBF crest clearly visible on the chest. He is captured in the follow-through of a curling left-footed shot, body torqued and eyes tracking the ball, an energetic late-game burst of pace. A glowing badge glowing with the number 6 floats near his shoulder, styled like a video-game stat overlay. Bold Brazil-yellow graphic backdrop with green and blue accents, a huge faint Brazil CBF crest watermark behind the figure, radiating light rays, glossy graphic-design finish, vibrant saturated palette, very high contrast. Stylized like a World Cup matchday broadcast graphic. The Brazil crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "endrick",
+      "template": "stat-hero",
+      "filename": "endrick.png",
+      "subjectHint": "Endrick — Real Madrid | Điểm 7/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Endrick, the young Brazilian striker for Real Madrid and the Brazil national team, in the yellow Brazil national-team home kit with the Brazil CBF crest clearly visible on the chest. He is shown sprinting on with raw youthful energy, arms wide and eyes lit up as the crowd roars his introduction, hungry and electric. A glowing BLUE rating badge glowing with the number 7 floats near his shoulder, styled like a video-game stat overlay. Bold Brazil-yellow graphic backdrop with green and blue accents, a huge faint Brazil CBF crest watermark behind the figure, radiating light rays, glossy graphic-design finish, vibrant saturated palette, very high contrast. Stylized like a World Cup matchday broadcast graphic. The Brazil crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "gabriel",
+      "template": "stat-hero",
+      "filename": "gabriel.png",
+      "subjectHint": "Gabriel Magalhães — Arsenal | Điểm 7/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Gabriel Magalhaes, the Brazilian centre-back for Arsenal and the Brazil national team, in the yellow Brazil national-team home kit with the Brazil CBF crest clearly visible on the chest. He is shown rising tall to win a commanding header, neck muscles taut and arms balancing, a dominant defensive presence reading the play. A glowing BLUE rating badge glowing with the number 7 floats near his shoulder, styled like a video-game stat overlay. Bold Brazil-yellow graphic backdrop with green and blue accents, a huge faint Brazil CBF crest watermark behind the figure, radiating light rays, glossy graphic-design finish, vibrant saturated palette, very high contrast. Stylized like a World Cup matchday broadcast graphic. The Brazil crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "douglas",
+      "template": "stat-hero",
+      "filename": "douglas.png",
+      "subjectHint": "Douglas Santos — Zenit | Điểm 6/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Douglas Santos, the Brazilian left-back for Zenit and the Brazil national team, in the yellow Brazil national-team home kit with the Brazil CBF crest clearly visible on the chest. He is shown tracking back and covering down the left flank, body turned to shepherd an attacker, steady and disciplined in his positioning. A glowing badge glowing with the number 6 floats near his shoulder, styled like a video-game stat overlay. Bold Brazil-yellow graphic backdrop with green and blue accents, a huge faint Brazil CBF crest watermark behind the figure, radiating light rays, glossy graphic-design finish, vibrant saturated palette, very high contrast. Stylized like a World Cup matchday broadcast graphic. The Brazil crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "danilo",
+      "template": "stat-hero",
+      "filename": "danilo.png",
+      "subjectHint": "Danilo — Flamengo | Điểm 6/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Danilo, the Brazilian right-back for Flamengo and the Brazil national team, in the yellow Brazil national-team home kit with the Brazil CBF crest clearly visible on the chest. He is shown jockeying an opponent near the touchline, low and balanced with arms out, a tidy experienced full-back holding his line. A glowing badge glowing with the number 6 floats near his shoulder, styled like a video-game stat overlay. Bold Brazil-yellow graphic backdrop with green and blue accents, a huge faint Brazil CBF crest watermark behind the figure, radiating light rays, glossy graphic-design finish, vibrant saturated palette, very high contrast. Stylized like a World Cup matchday broadcast graphic. The Brazil crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "raphinha",
+      "template": "stat-hero",
+      "filename": "raphinha.png",
+      "subjectHint": "Raphinha — Barcelona | 6/10, rời sân vì chấn thương gân kheo",
+      "prompt": "Vertical 9:16 football poster artwork featuring Raphinha, the Brazilian winger for Barcelona and the Brazil national team, in the yellow Brazil national-team home kit with the Brazil CBF crest clearly visible on the chest. He is grimacing in discomfort, one hand clutching the back of his thigh at the hamstring as he limps off the pitch, face tight with pain and concern. A glowing badge glowing with the number 6 floats near his shoulder, styled like a video-game stat overlay. Bold Brazil-yellow graphic backdrop with green and blue accents, a huge faint Brazil CBF crest watermark behind the figure, radiating light rays, glossy graphic-design finish, vibrant saturated palette, very high contrast. Stylized like a World Cup matchday broadcast graphic. The Brazil crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "rayan",
+      "template": "stat-hero",
+      "filename": "rayan.png",
+      "subjectHint": "Rayan — tài năng trẻ Brazil | Điểm 6/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Rayan, a young Brazilian winger for the Brazil national team, in the yellow Brazil national-team home kit with the Brazil CBF crest clearly visible on the chest. He is shown as a fresh substitute trying to make an impact on the right flank, sprinting with the ball and attempting to take on a defender, eager but still finding his rhythm. A glowing badge glowing with the number 6 floats near his shoulder, styled like a video-game stat overlay. Bold Brazil-yellow graphic backdrop with green and blue accents, a huge faint Brazil CBF crest watermark behind the figure, radiating light rays, glossy graphic-design finish, vibrant saturated palette, very high contrast. Stylized like a World Cup matchday broadcast graphic. The Brazil crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "ancelotti",
+      "template": "callout",
+      "filename": "ancelotti.png",
+      "subjectHint": "Carlo Ancelotti — HLV Brazil | 6/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Carlo Ancelotti, the Italian head coach of the Brazil national team, in Brazil-branded yellow-and-green touchline coaching gear with the Brazil CBF crest visible on the jacket. He stands on the technical area, arms folded in calm composure with a knowing, measured expression as he watches the match unfold. A glowing badge glowing with the number 6 floats near his shoulder, styled like a video-game stat overlay. Bold Brazil-yellow graphic backdrop with green and blue accents, a huge faint Brazil CBF crest watermark behind the figure, radiating light rays, glossy graphic-design finish, vibrant saturated palette, very high contrast. Stylized like a World Cup matchday broadcast graphic. The Brazil crest visible on the coaching gear, no on-image text or captions, no scoreboard graphics."
+    }
+  ]
+}

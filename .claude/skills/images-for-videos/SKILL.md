@@ -87,7 +87,7 @@ If the user runs `/create-video` directly without a plan, that skill will work i
 5. **For each part, run Steps 2–7 INDEPENDENTLY** against its own .txt:
    - Classify the part's content separately (it inherits the parent content type in practice — RANKING stays RANKING; BIO-PLAYER stays BIO-PLAYER).
    - Apply the density rules from Step 3 against this part's distinct points (each part should support 6–11 scenes on its own — see `/create-video` density table). If a part would have < 3 points → reduce N by 1 and re-split (rare).
-   - Write `images-plan.json` into the part folder.
+   - Write `images-plan.json` + `anh-can-tao.md` into the part folder.
 6. **Original source .txt stays untouched** at `video/input/<base-slug>/<base-slug>.txt` as source of truth. Do NOT delete it, do NOT overwrite it.
 7. **Step 8 reply (multi-part case)** — list all part folders + image counts:
    ```
@@ -95,8 +95,8 @@ If the user runs `/create-video` directly without a plan, that skill will work i
    ✓ Phần 1: video/input/modric-bio-p1/ — 7 ảnh
    ✓ Phần 2: video/input/modric-bio-p2/ — 8 ảnh
    ✓ Phần 3: video/input/modric-bio-p3/ — 7 ảnh
-   → Mở images-plan.json trong từng folder để đọc prompt (field `prompt`), gen ảnh
-     song song, rồi chạy /create-video cho từng .txt theo thứ tự part 1 → part N.
+   → Mở anh-can-tao.md trong từng folder để xem cần ảnh gì (prompt English đầy đủ ở
+     images-plan.json), gen song song, rồi chạy /create-video cho từng .txt theo thứ tự part 1 → part N.
    ```
 
 ### Step 2: Classify content
@@ -320,7 +320,7 @@ If `images-plan.json` already exists at the target path:
 2. Compare its filenames to the new plan's filenames.
 3. Any filename in the OLD plan but not in the NEW plan → list as "orphan" (user should delete from input folder after re-running, since they won't be used).
 
-### Step 7: Write images-plan.json
+### Step 7: Write images-plan.json + anh-can-tao.md
 
 Schema (validated by `src/image/plan-schema.ts`):
 
@@ -350,15 +350,32 @@ Schema (validated by `src/image/plan-schema.ts`):
 }
 ```
 
-**One file** — `images-plan.json` — written to the same directory as the source .txt. This is the single source of truth: machine-readable plan validated by `src/image/plan-schema.ts`, consumed by `/create-video` and `npm run images:stage`. The image description the user generates from lives in each scene's **`prompt`** field (full English image-gen prompt) with **`subjectHint`** naming the subject in Vietnamese. Do **NOT** emit a separate `grok-prompts.md` — the user reads prompts straight from `images-plan.json`.
+**Two files**, both written to the same directory as the source .txt:
+
+1. **`images-plan.json`** — the machine source of truth: validated by `src/image/plan-schema.ts`, consumed by `/create-video` and `npm run images:stage`. The **full English image-gen prompt** lives in each scene's `prompt` field (this is what the user copies into grok.com), with `subjectHint` naming the subject in Vietnamese.
+2. **`anh-can-tao.md`** — a **lightweight Vietnamese checklist** so the user knows at a glance which images to generate/hand over, without reading raw JSON. Do **NOT** put the full English prompts here (those stay in `images-plan.json`) — this is just a manifest. Format:
+
+```markdown
+# Ảnh cần tạo — <title> (<N> ảnh)
+
+Gen trên grok.com (Imagine, 9:16). Prompt English đầy đủ ở `images-plan.json` (field `prompt`). Save đúng tên file dưới đây vào folder này; đuôi .png/.jpg/.jpeg/.webp/.avif đều được.
+
+- [ ] `hook.png` — <subjectHint của scene hook>
+- [ ] `cb-1.png` — <subjectHint>
+- [ ] `cb-2.png` — <subjectHint>
+... (một dòng `- [ ] \`<filename>\` — <subjectHint>` cho MỖI scene, đúng thứ tự plan) ...
+```
+
+One line per scene, in plan order, `- [ ] \`<filename>\` — <subjectHint>`. The old heavy `grok-prompts.md` (full English prompts duplicated into markdown) is retired — `anh-can-tao.md` is the lighter replacement.
 
 ### Step 8: Reply concisely
 
-Do NOT dump full prompts into the chat — they are in `images-plan.json` for the user to read. Reply with a short confirmation + the parallel-gen reminder:
+Do NOT dump full prompts into the chat — they are in `images-plan.json`, and `anh-can-tao.md` is the readable checklist. Reply with a short confirmation + the parallel-gen reminder:
 
 ```
 ✓ Plan: <input-dir>/images-plan.json
-<N> ảnh cần tạo (1 hook + N CB / N item / ...). Mô tả từng ảnh ở field `prompt`.
+✓ Checklist ảnh: <input-dir>/anh-can-tao.md (xem cần tạo ảnh gì)
+<N> ảnh cần tạo (1 hook + N CB / N item / ...). Prompt English ở field `prompt`.
 
 ⚡ Gen ảnh song song: mở <N> tab grok.com cùng lúc (Imagine, 9:16), paste prompt từng
    tab, bấm generate ĐỒNG LOẠT rồi mới chờ. Save về cùng folder, stem đúng tên file
@@ -368,7 +385,7 @@ Do NOT dump full prompts into the chat — they are in `images-plan.json` for th
   • old-cb-8.png
 ```
 
-If the user wants to tweak a prompt, they open `images-plan.json` and edit the `prompt` field. If they changed the source .txt, just regenerate `images-plan.json`.
+If the user wants to tweak a prompt, they open `images-plan.json` and edit the `prompt` field. If they changed the source .txt, just regenerate both files.
 
 ## What this skill does NOT do
 

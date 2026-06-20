@@ -164,7 +164,7 @@ New content goes under `video/input/<slug>/`. **If `video/input/<slug>/` already
 
 ### Step 6: Hand off to images-for-videos
 
-Invoke [`images-for-videos`](../images-for-videos/SKILL.md) on `video/input/<slug>/<slug>.txt` — UNLESS the folder already had a valid `images-plan.json` + generated images covering the scenes (then skip planning and just point the user at `/create-video`). That skill classifies (→ PRE-MATCH PREVIEW), plans scenes (hook split-frame, stat-hero per star, callout per manager, formation-pitch for the XIs where useful), and writes `images-plan.json` (no separate prompts file — descriptions live in each scene's `prompt`). Do not duplicate its logic.
+Invoke [`images-for-videos`](../images-for-videos/SKILL.md) on `video/input/<slug>/<slug>.txt` — UNLESS the folder already had a valid `images-plan.json` + generated images covering the scenes (then skip planning and just point the user at `/create-video`). That skill classifies (→ PRE-MATCH PREVIEW), plans scenes (hook split-frame, stat-hero per star, callout per manager, formation-pitch for the XIs where useful), and writes `images-plan.json` (full English prompts in each scene's `prompt`) + `anh-can-tao.md` (lightweight VN checklist). Do not duplicate its logic.
 
 **Rendering convention (downstream `/create-video`):** a preview renders in the shape of `nhan-dinh-han-quoc-vs-sec-wc-2026` — the **predicted scoreline goes in the hook** (`bigStat: "1-0"`, voiceText opens with the result), and the **prediction/verdict card is a `comparison` scoreboard with both national flags + the scoreline** (set `flag` on both sides → `https://flagcdn.com/<iso2>.svg`), not a feature-list or bar chart. The `.txt` already carries the score in `## Dự đoán tỷ số`; `/create-video` lifts it into the hook + scoreboard. See `/create-video` SKILL "PRE-MATCH PREVIEW — standard shape".
 
@@ -189,7 +189,8 @@ After the image plan is written (or after reusing an already-prepped folder), ap
 
 ```
 ✓ Preview đã viết: video/input/<slug>/<slug>.txt
-✓ Image plan: video/input/<slug>/images-plan.json (mô tả ảnh ở field `prompt`)
+✓ Image plan: video/input/<slug>/images-plan.json (prompt English ở field `prompt`)
+✓ Checklist ảnh: video/input/<slug>/anh-can-tao.md (xem cần tạo ảnh gì)
 
 Phân loại: PRE-MATCH PREVIEW
 Đã gom: dự đoán tỷ số (kênh + <nguồn>), đội hình dự kiến 2 đội, lối chơi 2 đội, <N> ngôi sao, họp báo 2 HLV.
@@ -197,7 +198,7 @@ Phân loại: PRE-MATCH PREVIEW
 ✓ Đã thêm vào hàng đợi render: video/input/queue.xlsx (row <N>, status=planned)
 
 Tiếp theo:
-1. Mở images-plan.json → đọc field `prompt` từng scene → grok.com (mở nhiều tab gen song song) → save về cùng folder đúng tên file
+1. Mở anh-can-tao.md → xem cần ảnh gì (prompt English đầy đủ ở images-plan.json) → grok.com (mở nhiều tab gen song song) → save về cùng folder đúng tên file
 2. Khi đủ ảnh, chạy: /create-video video/input/<slug>/<slug>.txt — hoặc gen ảnh hết rồi chạy /video-queue để render cả loạt
 ```
 
@@ -233,7 +234,7 @@ match link ──/match-preview──► classify
                                   ▼
                     video/input/<slug>/<slug>.txt  (rich preview template)
                                   │
-                                  ├──/images-for-videos (chained)──► images-plan.json
+                                  ├──/images-for-videos (chained)──► images-plan.json + anh-can-tao.md
                                   │                                          │
                                   │                                user gens images on grok.com
                                   │                                          │

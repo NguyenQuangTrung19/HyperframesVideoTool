@@ -244,7 +244,7 @@ local notes ──/refine-txt──► clean .txt (in place, .raw.txt backup)
                        /images-for-videos
                               │
                               ▼
-                       images-plan.json
+                       images-plan.json + anh-can-tao.md
                               │
                               │ user gens images on grok.com
                               │

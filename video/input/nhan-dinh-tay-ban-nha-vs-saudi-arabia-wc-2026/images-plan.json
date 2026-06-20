@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "source": "nhan-dinh-tay-ban-nha-vs-saudi-arabia-wc-2026.txt",
+  "contentType": "PRE-MATCH PREVIEW",
+  "title": "Nhận định Tây Ban Nha vs Saudi Arabia — World Cup 2026: dự đoán tỷ số, đội hình và những cái tên đáng xem",
+  "createdAt": "2026-06-20T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "hook-1: Lamine Yamal (tiền đạo cánh Tây Ban Nha, Barcelona) · hook-2: Salem Al-Dawsari (đội trưởng Saudi Arabia, Al-Hilal)",
+      "prompt": "Vertical 9:16 football poster artwork split-frame designed as two distinct labelled halves stitched at a sharp diagonal seam, stylized like a World Cup matchday broadcast graphic. Left half hook-1 features Lamine Yamal, the Spanish right winger for Barcelona and the Spain national team, chest-up in the red Spain national kit, confident stare, against a bold crimson graphic backdrop with a huge faint FCF Spain crest watermark, sweeping light rays and a glossy finish. Right half hook-2 features Salem Al-Dawsari, the Saudi Arabian left winger for Al-Hilal and the Saudi Arabia national team, chest-up in the green Saudi national kit, intense expression, against a bold green graphic backdrop with a huge faint SAFF crest watermark, light rays and glossy finish. The respective team crests visible on each jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "yamal",
+      "template": "stat-hero",
+      "filename": "yamal.png",
+      "subjectHint": "Lamine Yamal — tiền đạo cánh Tây Ban Nha (Barcelona), vũ khí phá khối phòng ngự thấp",
+      "prompt": "Vertical 9:16 football poster artwork featuring Lamine Yamal, the Spanish right winger for Barcelona and the Spain national team, in the red Spain national kit, captured mid-stride driving forward with the ball at his feet in an explosive attacking dribble, eyes locked on goal, conveying the spark he brought off the bench against Cabo Verde. Stylized like a World Cup matchday broadcast graphic with a bold crimson and gold national-color graphic backdrop, a huge faint FCF Spain crest watermark, dramatic light rays and a glossy premium finish. The Spain crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "al-owais",
+      "template": "stat-hero",
+      "filename": "al-owais.png",
+      "subjectHint": "Mohammed Al-Owais — thủ môn Saudi Arabia, người hùng 9 pha cứu thua trước Uruguay",
+      "prompt": "Vertical 9:16 football poster artwork featuring Mohammed Al-Owais, the Saudi Arabian goalkeeper for Al-Hilal and the Saudi Arabia national team, in the green Saudi national goalkeeper kit and gloves, captured in a commanding shot-stopping pose leaping to push the ball away, radiating the heroic form that earned nine saves against Uruguay. Stylized like a World Cup matchday broadcast graphic with a bold green national-color graphic backdrop, a huge faint SAFF crest watermark, sweeping light rays and a glossy premium finish. The Saudi Arabia crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "al-amri",
+      "template": "stat-hero",
+      "filename": "al-amri.png",
+      "subjectHint": "Abdelelah Al-Amri — trung vệ Saudi Arabia, ghi bàn mở tỷ số vào lưới Uruguay",
+      "prompt": "Vertical 9:16 football poster artwork featuring Abdelelah Al-Amri, the Saudi Arabian centre-back for Al-Nassr and the Saudi Arabia national team, in the green Saudi national kit, captured rising high to power a header from a set-piece, jaw set in determination, evoking his opening goal against Uruguay and his role as both defensive anchor and aerial threat. Stylized like a World Cup matchday broadcast graphic with a bold green national-color graphic backdrop, a huge faint SAFF crest watermark, dramatic light rays and a glossy premium finish. The Saudi Arabia crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "de-la-fuente",
+      "template": "callout",
+      "filename": "de-la-fuente.png",
+      "subjectHint": "Luis de la Fuente — huấn luyện viên trưởng Tây Ban Nha, chỉ đạo bên đường biên",
+      "prompt": "Vertical 9:16 football poster artwork featuring Luis de la Fuente, the Spanish head coach of the Spain national team, standing on the touchline in a sharp dark coaching outfit, gesturing instructions to his players with focused intensity, conveying his message that the team must be sharper and more clinical. Stylized like a World Cup matchday broadcast graphic with a bold crimson and gold national-color graphic backdrop, a huge faint FCF Spain crest watermark, soft light rays and a glossy premium finish. The Spain crest visible on his coaching jacket, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "donis",
+      "template": "callout",
+      "filename": "donis.png",
+      "subjectHint": "Georgios Donis — huấn luyện viên trưởng Saudi Arabia, chỉ đạo bên đường biên",
+      "prompt": "Vertical 9:16 football poster artwork featuring Georgios Donis, the Greek head coach of the Saudi Arabia national team, standing on the touchline in a smart dark coaching outfit, gesturing with both hands to direct his side with assured intensity, conveying his proactive philosophy of pressing, organised defending and counter-attacking. Stylized like a World Cup matchday broadcast graphic with a bold green national-color graphic backdrop, a huge faint SAFF crest watermark, soft light rays and a glossy premium finish. The Saudi Arabia crest visible on his coaching jacket, no on-image text or captions, no scoreboard graphics."
+    }
+  ]
+}

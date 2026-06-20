@@ -1,0 +1,121 @@
+{
+  "version": "1.0",
+  "source": "cham-diem-my-vs-uc-wc-2026.txt",
+  "contentType": "MATCH RECAP",
+  "title": "Mỹ thắng Australia 2-0, Balogun và Freeman tỏa sáng vào vòng knock-out",
+  "createdAt": "2026-06-20T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Tuyển Mỹ ăn mừng tại Seattle | Mỹ 2-0 Australia, vào vòng knock-out",
+      "prompt": "Vertical 9:16 football poster artwork featuring the United States national team celebrating a goal in Seattle, players in the white USA national-team home kit with navy and red accents and the US Soccer crest clearly visible on the chest, Alex Freeman leading a triumphant arms-raised celebration with two or three teammates rushing in behind him, dynamic explosive energy. Bold USA navy-and-white graphic backdrop with red accent, a huge faint US Soccer crest watermark behind the players, radiating light rays, faint Seattle crowd silhouettes rendered as graphic color bands, glossy graphic-design finish, vibrant saturated palette, very high contrast. Stylized like a World Cup matchday broadcast graphic. The USA crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "freese",
+      "template": "stat-hero",
+      "filename": "freese.png",
+      "subjectHint": "Matt Freese — NYCFC | Điểm 6/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Matt Freese, the American goalkeeper for NYCFC and the United States national team, in the white USA national-team home goalkeeper kit with navy and red accents and the US Soccer crest clearly visible on the chest, captured in a commanding diving save pose with arms outstretched and fingertips reaching for the ball, focused and composed. Bold USA navy-and-white graphic backdrop with red accent, a huge faint US Soccer crest watermark, radiating light rays, glossy graphic-design finish, vibrant saturated palette, very high contrast. A neutral silver-blue rating badge showing the number 6 floats near his shoulder like a video-game stat overlay. Stylized like a World Cup matchday broadcast graphic. The USA crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "robinson",
+      "template": "stat-hero",
+      "filename": "robinson.png",
+      "subjectHint": "Antonee Robinson — Fulham | Điểm 6/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Antonee Robinson, the American left-back for Fulham and the United States national team, in the white USA national-team home kit with navy and red accents and the US Soccer crest clearly visible on the chest, captured surging forward down the left flank with the ball at his feet, balanced and athletic mid-stride. Bold USA navy-and-white graphic backdrop with red accent, a huge faint US Soccer crest watermark, radiating light rays, glossy graphic-design finish, vibrant saturated palette, very high contrast. A neutral silver-blue rating badge showing the number 6 floats near his shoulder like a video-game stat overlay. Stylized like a World Cup matchday broadcast graphic. The USA crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "ream",
+      "template": "stat-hero",
+      "filename": "ream.png",
+      "subjectHint": "Tim Ream — Charlotte FC | Điểm 7/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Tim Ream, the American centre-back for Charlotte FC and the United States national team, in the white USA national-team home kit with navy and red accents and the US Soccer crest clearly visible on the chest, captured rising to win an aerial header with eyes on the ball, strong and assured. Bold USA navy-and-white graphic backdrop with red accent, a huge faint US Soccer crest watermark, radiating light rays, glossy graphic-design finish, vibrant saturated palette, very high contrast. A glowing blue rating badge showing the number 7 floats near his shoulder like a video-game stat overlay. Stylized like a World Cup matchday broadcast graphic. The USA crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "richards",
+      "template": "stat-hero",
+      "filename": "richards.png",
+      "subjectHint": "Chris Richards — Crystal Palace | Điểm 7/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Chris Richards, the American centre-back for Crystal Palace and the United States national team, in the white USA national-team home kit with navy and red accents and the US Soccer crest clearly visible on the chest, captured stepping out with the ball under control and a steady, leading-the-line stance, calm and dominant. Bold USA navy-and-white graphic backdrop with red accent, a huge faint US Soccer crest watermark, radiating light rays, glossy graphic-design finish, vibrant saturated palette, very high contrast. A glowing blue rating badge showing the number 7 floats near his shoulder like a video-game stat overlay. Stylized like a World Cup matchday broadcast graphic. The USA crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "freeman",
+      "template": "stat-hero",
+      "filename": "freeman.png",
+      "subjectHint": "Alex Freeman — Orlando City | Điểm 8/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Alex Freeman, the American right-back for Orlando City and the United States national team, in the white USA national-team home kit with navy and red accents and the US Soccer crest clearly visible on the chest, captured in a powerful header celebration with fists clenched and a roar after scoring the clinching goal, explosive match-winning energy. Bold USA navy-and-white graphic backdrop with red accent, a huge faint US Soccer crest watermark, radiating light rays, glossy graphic-design finish, vibrant saturated palette, very high contrast. A large golden-blue MVP rating badge showing the number 8 with subtle golden sparkle floats near his shoulder like a premium video-game stat overlay. Stylized like a World Cup matchday broadcast graphic. The USA crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "dest",
+      "template": "stat-hero",
+      "filename": "dest.png",
+      "subjectHint": "Sergino Dest — PSV Eindhoven | Điểm 7/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Sergino Dest, the American full-back for PSV Eindhoven and the United States national team, in the white USA national-team home kit with navy and red accents and the US Soccer crest clearly visible on the chest, captured in a confident street-style dribble flicking the ball past a challenge, flair and swagger in his body shape. Bold USA navy-and-white graphic backdrop with red accent, a huge faint US Soccer crest watermark, radiating light rays, glossy graphic-design finish, vibrant saturated palette, very high contrast. A glowing blue rating badge showing the number 7 floats near his shoulder like a video-game stat overlay. Stylized like a World Cup matchday broadcast graphic. The USA crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "adams",
+      "template": "stat-hero",
+      "filename": "adams.png",
+      "subjectHint": "Tyler Adams — Bournemouth | Điểm 8/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Tyler Adams, the American defensive midfielder for Bournemouth and the United States national team, in the white USA national-team home kit with navy and red accents and the US Soccer crest clearly visible on the chest, captured in a committed full-stretch sliding block winning the ball, intense and tireless. Bold USA navy-and-white graphic backdrop with red accent, a huge faint US Soccer crest watermark, radiating light rays, glossy graphic-design finish, vibrant saturated palette, very high contrast. A glowing golden rating badge showing the number 8 floats near his shoulder like a video-game stat overlay. Stylized like a World Cup matchday broadcast graphic. The USA crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "mckennie",
+      "template": "stat-hero",
+      "filename": "mckennie.png",
+      "subjectHint": "Weston McKennie — Juventus | Điểm 8/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Weston McKennie, the American midfielder for Juventus and the United States national team, in the white USA national-team home kit with navy and red accents and the US Soccer crest clearly visible on the chest, captured driving forward with the ball at speed, head up and chest out, dominant box-to-box presence carrying the midfield. Bold USA navy-and-white graphic backdrop with red accent, a huge faint US Soccer crest watermark, radiating light rays, glossy graphic-design finish, vibrant saturated palette, very high contrast. A large golden-blue MVP rating badge showing the number 8 with subtle golden sparkle floats near his shoulder like a premium video-game stat overlay. Stylized like a World Cup matchday broadcast graphic. The USA crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "tillman",
+      "template": "stat-hero",
+      "filename": "tillman.png",
+      "subjectHint": "Malik Tillman — Bayer Leverkusen | Điểm 7/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Malik Tillman, the American attacking midfielder for Bayer Leverkusen and the United States national team, in the white USA national-team home kit with navy and red accents and the US Soccer crest clearly visible on the chest, captured shielding and holding off a defender with his back, protecting the ball with strength and poise. Bold USA navy-and-white graphic backdrop with red accent, a huge faint US Soccer crest watermark, radiating light rays, glossy graphic-design finish, vibrant saturated palette, very high contrast. A glowing blue rating badge showing the number 7 floats near his shoulder like a video-game stat overlay. Stylized like a World Cup matchday broadcast graphic. The USA crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "balogun",
+      "template": "stat-hero",
+      "filename": "balogun.png",
+      "subjectHint": "Folarin Balogun — AS Monaco | Điểm 7/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Folarin Balogun, the American striker for AS Monaco and the United States national team, in the white USA national-team home kit with navy and red accents and the US Soccer crest clearly visible on the chest, captured bursting past a defender at full pace into the box, arms pumping and stride extended, raw acceleration tearing through the line. Bold USA navy-and-white graphic backdrop with red accent, a huge faint US Soccer crest watermark, radiating light rays, glossy graphic-design finish, vibrant saturated palette, very high contrast. A glowing blue rating badge showing the number 7 floats near his shoulder like a video-game stat overlay. Stylized like a World Cup matchday broadcast graphic. The USA crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "pepi",
+      "template": "stat-hero",
+      "filename": "pepi.png",
+      "subjectHint": "Ricardo Pepi — PSV Eindhoven | Điểm 6/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Ricardo Pepi, the American striker for PSV Eindhoven and the United States national team, in the white USA national-team home kit with navy and red accents and the US Soccer crest clearly visible on the chest, captured leading the line with a strong hold-up pose, back to goal and arm out to occupy a defender, busy and committed. Bold USA navy-and-white graphic backdrop with red accent, a huge faint US Soccer crest watermark, radiating light rays, glossy graphic-design finish, vibrant saturated palette, very high contrast. A neutral silver-blue rating badge showing the number 6 floats near his shoulder like a video-game stat overlay. Stylized like a World Cup matchday broadcast graphic. The USA crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "berhalter",
+      "template": "stat-hero",
+      "filename": "berhalter.png",
+      "subjectHint": "Sebastian Berhalter — Vancouver Whitecaps | Điểm 6/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Sebastian Berhalter, the American midfielder for Vancouver Whitecaps and the United States national team, in the white USA national-team home kit with navy and red accents and the US Soccer crest clearly visible on the chest, captured in a composed pass-and-scan pose mid-game, looking up to distribute with the ball at his feet, steady and reliable. Bold USA navy-and-white graphic backdrop with red accent, a huge faint US Soccer crest watermark, radiating light rays, glossy graphic-design finish, vibrant saturated palette, very high contrast. A neutral silver-blue rating badge showing the number 6 floats near his shoulder like a video-game stat overlay. Stylized like a World Cup matchday broadcast graphic. The USA crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "trusty",
+      "template": "stat-hero",
+      "filename": "trusty.png",
+      "subjectHint": "Auston Trusty — Celtic | Điểm 6/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Auston Trusty, the tall American centre-back for Celtic and the United States national team, in the white USA national-team home kit with navy and red accents and the US Soccer crest clearly visible on the chest, captured in a solid defensive stance clearing a high ball with a strong jump, towering and assured. Bold USA navy-and-white graphic backdrop with red accent, a huge faint US Soccer crest watermark, radiating light rays, glossy graphic-design finish, vibrant saturated palette, very high contrast. A neutral silver-blue rating badge showing the number 6 floats near his shoulder like a video-game stat overlay. Stylized like a World Cup matchday broadcast graphic. The USA crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "scally",
+      "template": "stat-hero",
+      "filename": "scally.png",
+      "subjectHint": "Joe Scally — Borussia Monchengladbach | Điểm 6/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Joe Scally, the American full-back for Borussia Monchengladbach and the United States national team, in the white USA national-team home kit with navy and red accents and the US Soccer crest clearly visible on the chest, captured in a focused defensive tracking pose, low and ready to shut down an attack near the touchline, disciplined and alert. Bold USA navy-and-white graphic backdrop with red accent, a huge faint US Soccer crest watermark, radiating light rays, glossy graphic-design finish, vibrant saturated palette, very high contrast. A neutral silver-blue rating badge showing the number 6 floats near his shoulder like a video-game stat overlay. Stylized like a World Cup matchday broadcast graphic. The USA crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "pochettino",
+      "template": "callout",
+      "filename": "pochettino.png",
+      "subjectHint": "Mauricio Pochettino — HLV tuyển Mỹ | 7/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Mauricio Pochettino, the Argentine head coach of the United States national team, wearing USA touchline coaching gear in navy with US Soccer branding clearly visible, captured in a confident managerial pose on the sideline, arms gesturing as he directs his team, composed and authoritative. Bold USA navy-and-white graphic backdrop with red accent, a huge faint US Soccer crest watermark, radiating light rays, glossy graphic-design finish, vibrant saturated palette, very high contrast. A glowing blue rating badge showing the number 7 floats near his shoulder like a video-game stat overlay. Stylized like a World Cup matchday broadcast graphic. The US Soccer branding visible, no on-image text or captions, no scoreboard graphics."
+    }
+  ]
+}

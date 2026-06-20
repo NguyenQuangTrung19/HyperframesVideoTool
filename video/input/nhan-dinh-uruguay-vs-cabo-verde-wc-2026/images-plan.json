@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "source": "nhan-dinh-uruguay-vs-cabo-verde-wc-2026.txt",
+  "contentType": "PRE-MATCH PREVIEW",
+  "title": "Nhận định Uruguay vs Cabo Verde — World Cup 2026: dự đoán tỷ số, đội hình và những cái tên đáng xem",
+  "createdAt": "2026-06-20T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "prompt": "Vertical 9:16 football poster artwork split into two halves. LEFT HALF features Federico Valverde, the Uruguayan midfielder for Real Madrid and the Uruguay national team, chest-up in the light-blue Uruguay home kit with the AUF crest, set against a bold sky-blue backdrop with a faint AUF crest watermark and dramatic light rays. RIGHT HALF features Vozinha, the Cabo Verde goalkeeper and the Cabo Verde national team, chest-up in the deep-blue Cabo Verde national kit with the FCF crest, set against a rich blue backdrop with a faint FCF crest watermark and light rays. A glossy finish and a vertical seam divide the two halves. Stylized like a World Cup matchday broadcast graphic. The respective national crests visible on each jersey, no on-image text or captions, no scoreboard graphics.",
+      "subjectHint": "hook-1: Federico Valverde (Uruguay) · hook-2: Vozinha (Cabo Verde)"
+    },
+    {
+      "id": "maxi-araujo",
+      "template": "stat-hero",
+      "filename": "maxi-araujo.png",
+      "prompt": "Vertical 9:16 football poster artwork featuring Maxi Araujo, the Uruguayan winger for Sporting CP and the Uruguay national team, in a goal celebration pose with arms spread wide and mouth open in a roar, wearing the light-blue Uruguay home kit with the AUF crest. Bold sky-blue national-color backdrop with a faint AUF crest watermark, sweeping light rays and a glossy finish. Stylized like a World Cup matchday broadcast graphic, capturing the energy of his late equaliser. The Uruguay crest visible on the jersey, no on-image text or captions, no scoreboard graphics.",
+      "subjectHint": "Maxi Araujo (Uruguay) ăn mừng bàn thắng, kit xanh nhạt Uruguay, mỏ neo bàn gỡ hòa trận Saudi Arabia"
+    },
+    {
+      "id": "darwin-nunez",
+      "template": "stat-hero",
+      "filename": "darwin-nunez.png",
+      "prompt": "Vertical 9:16 football poster artwork featuring Darwin Nunez, the Uruguayan striker for Al Hilal and the Uruguay national team, in a powerful determined pose mid-stride as if charging forward to strike the ball, wearing the light-blue Uruguay home kit with the AUF crest. Bold sky-blue national-color backdrop with a faint AUF crest watermark, dynamic light rays and a glossy finish. Stylized like a World Cup matchday broadcast graphic conveying a striker hungry to explode. The Uruguay crest visible on the jersey, no on-image text or captions, no scoreboard graphics.",
+      "subjectHint": "Darwin Nunez (Uruguay) tư thế lao lên dứt điểm, kit xanh nhạt Uruguay, cần bùng nổ khơi thông hàng công"
+    },
+    {
+      "id": "vozinha",
+      "template": "stat-hero",
+      "filename": "vozinha.png",
+      "prompt": "Vertical 9:16 football poster artwork featuring Vozinha, the Cabo Verde goalkeeper for CD Mafra and the Cabo Verde national team, captured mid-air in a full-stretch diving save with both gloves reaching for the ball, wearing a goalkeeper kit in the Cabo Verde national colours with the FCF crest. Bold deep-blue national-color backdrop with a faint FCF crest watermark, sweeping light rays and a glossy finish. Stylized like a World Cup matchday broadcast graphic, evoking his heroic saves against Spain. The Cabo Verde crest visible on the jersey, no on-image text or captions, no scoreboard graphics.",
+      "subjectHint": "Vozinha (Cabo Verde) thủ môn bay người cứu thua, kit xanh Cabo Verde, mỏ neo loạt cứu thua trước Tây Ban Nha"
+    },
+    {
+      "id": "bielsa",
+      "template": "callout",
+      "filename": "bielsa.png",
+      "prompt": "Vertical 9:16 football poster artwork featuring Marcelo Bielsa, the Argentine head coach of the Uruguay national team, on the touchline in an intense focused coaching pose with arms gesturing instructions, wearing dark coaching attire. Bold sky-blue national-color backdrop with a faint AUF crest watermark, soft light rays and a glossy finish. Stylized like a World Cup matchday broadcast graphic presenting the manager. No on-image text or captions, no scoreboard graphics.",
+      "subjectHint": "HLV Marcelo Bielsa (Uruguay) chỉ đạo bên đường biên, phông xanh nhạt Uruguay"
+    },
+    {
+      "id": "bubista",
+      "template": "callout",
+      "filename": "bubista.png",
+      "prompt": "Vertical 9:16 football poster artwork featuring Pedro Leitao Brito, known as Bubista, the Cabo Verdean head coach of the Cabo Verde national team, on the touchline in a calm composed coaching pose directing his players, wearing dark coaching attire. Bold deep-blue national-color backdrop with a faint FCF crest watermark, soft light rays and a glossy finish. Stylized like a World Cup matchday broadcast graphic presenting the manager. No on-image text or captions, no scoreboard graphics.",
+      "subjectHint": "HLV Pedro Leitao Brito biệt danh Bubista (Cabo Verde) chỉ đạo bên đường biên, phông xanh Cabo Verde"
+    }
+  ]
+}

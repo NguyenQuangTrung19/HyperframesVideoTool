@@ -264,7 +264,7 @@ That skill will:
 1. Read the .txt
 2. Classify the content type via `classify-football-content`
 3. Plan scenes + write image prompts (English, Grok-optimized, with name+club+nation identity anchors and real club iconography per existing rules)
-4. Write `images-plan.json` next to the .txt (image descriptions live in each scene's `prompt` field — no separate prompts file)
+4. Write `images-plan.json` (full English prompts in each scene's `prompt`) + `anh-can-tao.md` (lightweight VN checklist) next to the .txt
 
 Do NOT duplicate any of that skill's logic here — just chain into it as the next step in your workflow. All existing rules (image prompt typography, real iconography, name-not-features) apply automatically because they live in that skill.
 
@@ -291,14 +291,15 @@ After the chained skill completes, reply with one combined summary covering both
 
 ```
 ✓ Bài báo đã rewrite: video/input/<slug>/<slug>.txt
-✓ Image plan: video/input/<slug>/images-plan.json  (mô tả ảnh ở field `prompt`)
+✓ Image plan: video/input/<slug>/images-plan.json  (prompt English ở field `prompt`)
+✓ Checklist ảnh: video/input/<slug>/anh-can-tao.md  (xem cần tạo ảnh gì)
 
 Phân loại: <CONTENT TYPE từ classify skill>
 <N> ảnh cần tạo trên grok.com (Imagine, aspect ratio 9:16):
 ✓ Đã thêm vào hàng đợi render: video/input/queue.xlsx (row <N>, status=planned)
 
 Tiếp theo:
-1. Mở images-plan.json → đọc field `prompt` từng scene → grok.com → save về cùng folder theo đúng tên file
+1. Mở anh-can-tao.md → xem cần ảnh gì (prompt English đầy đủ ở images-plan.json) → grok.com → save về cùng folder theo đúng tên file
 2. Khi đủ <N> ảnh, chạy: /create-video video/input/<slug>/<slug>.txt — hoặc gen ảnh hết rồi chạy /video-queue để render cả loạt
 
 ⚠ Tone đã rewrite theo brand SportsForAllTV — đọc qua file .txt nếu muốn chỉnh trước khi gen ảnh.
@@ -341,7 +342,7 @@ If the WebFetch failed and the user pasted the article, mention it once at the t
 ```
 URL ──/read-rewrite──► video/input/<slug>/<slug>.txt
                               │
-                              ├──/images-for-videos (chained automatically)──► images-plan.json
+                              ├──/images-for-videos (chained automatically)──► images-plan.json + anh-can-tao.md
                               │                                                        │
                               │                                              user generates images on grok.com
                               │                                                        │

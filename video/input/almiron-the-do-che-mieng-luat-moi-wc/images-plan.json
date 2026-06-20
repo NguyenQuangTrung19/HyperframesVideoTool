@@ -1,0 +1,58 @@
+{
+  "version": "1.0",
+  "source": "almiron-the-do-che-mieng-luat-moi-wc.txt",
+  "contentType": "NEWS DRAMA",
+  "title": "Almiron nhận thẻ đỏ vì che miệng, luật mới World Cup 2026 gây sốc",
+  "createdAt": "2026-06-20T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Almiron che miệng nhận thẻ đỏ — Paraguay (khoảnh khắc lịch sử luật mới)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Miguel Almiron, the Paraguayan midfielder for the Paraguay national team, in the red-and-white striped Paraguay home kit, one hand pressed over his mouth in a tense confrontational gesture as a referee's raised red card floats prominently beside him. His body language is edgy and defiant, head turned mid-argument. Bold graphic backdrop in Paraguay red and white with a huge faint Paraguay crest watermark, stark red accent slashes, dramatic light rays cutting across, glossy graphic-design finish, vibrant saturated palette, high contrast, dark dramatic news mood. The Paraguay crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "luat-moi",
+      "template": "callout",
+      "filename": "luat-moi.png",
+      "subjectHint": "Luật mới — trọng tài rút thẻ đỏ + biểu tượng bàn tay che miệng + cuốn luật IFAB/FIFA",
+      "prompt": "Vertical 9:16 football poster artwork showing a referee's silhouette holding a bright red card high overhead, with a large stylized icon of a hand covering a mouth set inside a glowing circular emblem beside it, and the suggestion of an open IFAB lawbook graphic with FIFA and World Cup 2026 visual motifs. Symbolic, conceptual, no real human face. Bold graphic backdrop in deep red and charcoal with a huge faint generic football crest watermark, dramatic radial light rays, glossy graphic-design finish, vibrant saturated palette, high contrast, official rulebook tension mood. A generic crest motif visible, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "almiron-muldur",
+      "template": "stat-hero",
+      "filename": "almiron-muldur.png",
+      "subjectHint": "Almiron (Paraguay) vs Mert Muldur (Thổ Nhĩ Kỳ) — màn đối đầu căng thẳng (split-frame)",
+      "prompt": "Vertical 9:16 football poster artwork featuring a split-frame face-off: on the LEFT, Miguel Almiron, the Paraguayan midfielder for the Paraguay national team in the red-and-white striped Paraguay kit, chest-up, hand near his mouth, animated and confrontational; on the RIGHT, Mert Muldur, the Turkish full-back for the Turkey national team in the all-red Turkey kit, chest-up, pointing toward the referee as if signaling the official. Both lean into a tense argument across the divide. Bold graphic backdrop split in Paraguay red-white versus Turkey red, huge faint crests watermarked on each half, stark lightning-bolt divider, dramatic light rays, glossy graphic-design finish, vibrant saturated palette, high contrast, edgy clash mood. The relevant crest visible on each jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "galarza",
+      "template": "stat-hero",
+      "filename": "galarza.png",
+      "subjectHint": "Matias Galarza ăn mừng bàn mở tỷ số sớm — Paraguay dẫn 1-0 sau 65 giây",
+      "prompt": "Vertical 9:16 football poster artwork featuring Matias Galarza, the Paraguayan midfielder for the Paraguay national team, in the red-and-white striped Paraguay home kit, captured mid goal celebration with arms thrown wide and a roaring open-mouth shout, sprinting toward the camera in pure joy. Bold graphic backdrop in Paraguay red and white with a huge faint Paraguay crest watermark, explosive dramatic light rays radiating behind him, glossy graphic-design finish, vibrant saturated palette, high contrast, euphoric early-goal energy. The Paraguay crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "vinicius-prestianni",
+      "template": "stat-hero",
+      "filename": "vinicius-prestianni.png",
+      "subjectHint": "Vinicius (Real Madrid) vs Prestianni (Benfica che miệng) — gốc gác vụ việc (split-frame)",
+      "prompt": "Vertical 9:16 football poster artwork featuring a split-frame confrontation: on the LEFT, Vinicius Junior, the Brazilian winger for Real Madrid in the all-white Real Madrid kit, chest-up, face contorted in anger, pointing accusingly across the frame; on the RIGHT, Gianluca Prestianni, the Argentine winger for Benfica in the red Benfica kit, chest-up, one hand covering his mouth mid-shout in a sly defiant pose. Both bodies lean into a heated clash. Bold graphic backdrop split in Real Madrid white versus Benfica red, huge faint club crests watermarked on each half, jagged red divider, dramatic light rays, glossy graphic-design finish, vibrant saturated palette, high contrast, scandalous tense mood. The relevant club crest visible on each jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "mourinho",
+      "template": "callout",
+      "filename": "mourinho.png",
+      "subjectHint": "Jose Mourinho — HLV Benfica bảo vệ học trò bên đường biên",
+      "prompt": "Vertical 9:16 football poster artwork featuring Jose Mourinho, the Portuguese manager of Benfica, in dark Benfica touchline coaching gear, captured mid-gesture on the sideline with arms spread in a defiant protesting motion, jaw set, defending his player against the officials. Bold graphic backdrop in Benfica red and charcoal with a huge faint Benfica crest watermark, dramatic angled light rays, glossy graphic-design finish, vibrant saturated palette, high contrast, combative touchline mood. The Benfica crest visible on the touchline kit, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "scaloni",
+      "template": "callout",
+      "filename": "scaloni.png",
+      "subjectHint": "Lionel Scaloni — HLV Argentina, gạt Prestianni khỏi danh sách World Cup",
+      "prompt": "Vertical 9:16 football poster artwork featuring Lionel Scaloni, the Argentine head coach of Argentina, in Argentina national-team coaching attire, standing arms folded in a contemplative, decisive pose, gazing off to the side as if weighing a difficult squad decision. Bold graphic backdrop in Argentina sky-blue and white with a huge faint Argentina crest watermark, soft dramatic light rays, glossy graphic-design finish, vibrant saturated palette, high contrast, serious reflective mood. The Argentina crest visible on the kit, no on-image text or captions, no scoreboard graphics."
+    }
+  ]
+}
