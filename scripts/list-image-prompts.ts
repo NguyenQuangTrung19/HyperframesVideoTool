@@ -3,7 +3,7 @@ import { join, resolve } from "node:path";
 import { ScriptSchema } from "../src/render/script-schema.js";
 
 const IMAGE_TEMPLATES = new Set(["hook", "callout", "stat-hero"]);
-const OVERRIDE_EXTS = [".png", ".jpg", ".jpeg", ".webp"];
+const OVERRIDE_EXTS = [".png", ".jpg", ".jpeg", ".webp", ".avif"];
 
 function findOverride(imagesDir: string, sceneId: string): string | null {
   for (const ext of OVERRIDE_EXTS) {

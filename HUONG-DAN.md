@@ -1132,7 +1132,7 @@ Done. ~3-5 phút cho 60-90s clip.
 | Env | Default | Purpose |
 |---|---|---|
 | `PODCAST_FULLBLEED_DIM` | `0` | Opacity dim overlay (0..1). 0 = no dim |
-| `PODCAST_FULLBLEED_CORNER_TEXT` | `Podcast và bạn` | Top-left corner text |
+| `PODCAST_FULLBLEED_CORNER_TEXT` | `Life Podcast` | Top-left corner text, vẽ cạnh logo badge (assets/logoPodcast.png) |
 | `PODCAST_FULLBLEED_CORNER_FONTSIZE` | `48` | px |
 
 **Card-specific:**

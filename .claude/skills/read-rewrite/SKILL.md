@@ -29,11 +29,12 @@ Use `WebFetch` with a prompt like:
 
 > Return the COMPLETE article verbatim — every paragraph in order, preserving ALL names, numbers, dates, statistics, scores, and direct quotes exactly as written. Do NOT summarize, condense, paraphrase, or skip paragraphs. If the article is long, return all of it; do not stop early. Also return the headline and publication date. Attribute each quote to its speaker.
 
-**⚠️ Insist on completeness — WebFetch often silently summarizes.** Even when the page loads fine, the fetch can come back condensed (a few paragraphs that read like a recap, missing the granular stats/quotes a full article carries). If the returned text looks summarized or noticeably shorter than the real article would be, **re-run WebFetch ONCE** with an even more explicit demand for the full verbatim text (e.g. "Return the entire article word-for-word, every sentence, do not omit anything"). If it's still thin after the retry, fall back to asking the user to paste the full article (same fallback block below). Never proceed to rewrite from a summary — a lossy fetch guarantees a lossy `.txt`.
+**⚠️ Insist on completeness — WebFetch (read_url_content) often silently summarizes or fails on JS-rendered pages.** Even when the page loads fine, the fetch can come back condensed or blank. 
+- **JS-rendered page fallback:** If the fast fetch (`read_url_content`) returns blank/thin text (under 500 characters) due to Client-Side Rendering (Next.js/React like Goal.com match pages), **you MUST automatically use `browser_subagent`** to open the URL, wait for it to render completely, and extract the page text (`document.body.innerText`).
+- If the returned text looks summarized or noticeably shorter than the real article would be, **re-run the fetch ONCE** with an even more explicit demand for the full verbatim text. Never proceed to rewrite from a summary — a lossy fetch guarantees a lossy `.txt`.
 
-If the result looks like one of these failure modes:
+If both fetch methods result in one of these failure modes:
 - Less than ~500 characters of meaningful body text
-- Looks summarized / much shorter than a full article (a recap-length blurb where the source is clearly a longer piece) — retry once as above before bailing
 - Mostly paywall / login language (`"đăng ký"`, `"subscribe"`, `"continue reading"`, `"tiếp tục đọc"`)
 - A 404 / error page / "page not found"
 - Clearly bot-blocked (Cloudflare challenge, "are you human", etc.)
@@ -45,7 +46,7 @@ Then **STOP** and reply with a concrete fallback:
 Bạn paste nội dung bài báo vào prompt tiếp theo, mình sẽ tiếp tục từ đó.
 ```
 
-Wait for the user's paste; treat it the same as a successful WebFetch result and continue from Step 2.
+Wait for the user's paste; treat it the same as a successful fetch result and continue from Step 2.
 
 ### Step 2: Sanity-check it's football content
 

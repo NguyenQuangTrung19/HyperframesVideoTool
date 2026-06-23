@@ -44,5 +44,18 @@
       "WebFetch(domain:web.archive.org)",
       "Bash(grep -E '\\\\.\\(png|jpg|jpeg|webp\\)$')"
     ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "echo '{\"hookSpecificOutput\": {\"hookEventName\": \"SessionStart\", \"additionalContext\": \"Memory discipline for this project: (1) Read MEMORY.md now and apply relevant memories before acting. (2) Before finishing each task this session, persist NEW learnings to the project memory dir - both bugs you fixed WITH the root-cause why, AND any approach you verified as working (a success recipe), not only bugs. Add a one-line pointer in MEMORY.md and update an existing memory file instead of duplicating.\"}}'"
+          }
+        ]
+      }
+    ]
   }
 }

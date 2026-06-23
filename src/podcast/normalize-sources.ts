@@ -104,32 +104,34 @@ export async function normalizeSiblingVideos(
   const normalized: NormalizeReport["normalized"] = [];
   const cached: NormalizeReport["cached"] = [];
 
-  for (const { path: origPath, probe } of probes) {
-    // First video is the reference itself — always used as-is.
-    if (origPath === probes[0].path) {
-      resolvedPaths.push(origPath);
-      continue;
-    }
-    const mismatch = describeMismatch(probe, reference);
-    if (!mismatch) {
-      // Already matches the reference. Use the original.
-      resolvedPaths.push(origPath);
-      continue;
-    }
+  // Single source → no concat downstream → nothing to normalize.
+  if (probes.length === 1) {
+    return { resolvedPaths: sourceVideoPaths, reference, normalized: [], cached: [] };
+  }
 
-    // Need to re-encode. Cache: skip work if normalized file is newer than original.
+  // ≥2 sources: re-encode EVERY file (kể cả file reference đầu tiên).
+  // Spec (resolution/fps/codec/pix_fmt) khớp nhau là CHƯA đủ cho concat
+  // demuxer — nó dùng H.264 extradata (SPS/PPS) của file ĐẦU cho cả chain,
+  // nên file đầu raw (encoder lạ) + siblings libx264 vẫn vỡ bitstream
+  // ("No start code is found / Error splitting the input into NAL units")
+  // → đen từ đoạn nối (story60, 2026-06-10). Cho mọi segment đi qua cùng
+  // một libx264 encode là cách duy nhất đảm bảo extradata đồng nhất.
+  for (const { path: origPath, probe } of probes) {
+    const reason =
+      describeMismatch(probe, reference) ?? "đồng nhất encoder/extradata cho concat demuxer";
+
     await mkdir(normalizedDir, { recursive: true });
     const normPath = join(normalizedDir, basename(origPath));
-    if (isCacheFresh(normPath, origPath)) {
+    if (await isCacheValid(normPath, origPath, reference)) {
       log.info(`  REUSE normalized: ${basename(origPath)} (cached)`);
       cached.push({ original: origPath, normalized: normPath });
       resolvedPaths.push(normPath);
       continue;
     }
 
-    log.info(`  NORMALIZE: ${basename(origPath)} — ${mismatch} → ${reference.width}x${reference.height}@${formatFps(reference.fps)}`);
+    log.info(`  NORMALIZE: ${basename(origPath)} — ${reason} → ${reference.width}x${reference.height}@${formatFps(reference.fps)}`);
     await reencodeToReference(origPath, normPath, reference, { crf, preset });
-    normalized.push({ original: origPath, normalized: normPath, reason: mismatch });
+    normalized.push({ original: origPath, normalized: normPath, reason });
     resolvedPaths.push(normPath);
   }
 
@@ -162,12 +164,30 @@ function formatFps(fps: number): string {
   return Number.isInteger(fps) ? String(fps) : fps.toFixed(2).replace(/0+$/, "").replace(/\.$/, "");
 }
 
-function isCacheFresh(normPath: string, origPath: string): boolean {
+/**
+ * Cache validity — mtime alone is NOT enough:
+ *   - podcast-queue stages sources via HARDLINK, so the staged file's mtime is
+ *     the library file's (old) mtime, which makes any stale `.normalized/`
+ *     clone look "newer than the original" forever.
+ *   - re-running a queue row re-picks random videos under the SAME staged
+ *     names (`<slug>2.mp4`, …), so the stale clone can be a different video
+ *     encoded against a different reference → concat black-frames
+ *     (story60, 2026-06-10).
+ * So besides mtime, re-validate facts of THIS run: the clone must match the
+ * current reference spec, and its duration must match the current original.
+ */
+async function isCacheValid(normPath: string, origPath: string, ref: ProbeResult): Promise<boolean> {
   if (!existsSync(normPath)) return false;
   try {
-    const normStat = statSync(normPath);
-    const origStat = statSync(origPath);
-    return normStat.mtimeMs >= origStat.mtimeMs;
+    if (statSync(normPath).mtimeMs < statSync(origPath).mtimeMs) return false;
+  } catch {
+    return false;
+  }
+  try {
+    const norm = await probeVideo(normPath);
+    if (describeMismatch(norm, ref) !== null) return false;
+    const orig = await probeVideo(origPath);
+    return Math.abs(norm.durationSec - orig.durationSec) <= Math.max(1, orig.durationSec * 0.05);
   } catch {
     return false;
   }

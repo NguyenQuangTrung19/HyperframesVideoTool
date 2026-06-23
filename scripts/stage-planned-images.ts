@@ -54,7 +54,7 @@ async function main() {
       console.error("");
     }
     console.error(`Generate the missing image(s) on grok.com and save them in ${inputDir}.`);
-    console.error(`Any of .png / .jpg / .jpeg / .webp is accepted — extension in the plan is just a recommendation.`);
+    console.error(`Any of .png / .jpg / .jpeg / .webp / .avif is accepted — extension in the plan is just a recommendation.`);
     process.exit(1);
   }
 

@@ -54,6 +54,8 @@ const EASE = {
       tl.fromTo(scene, { opacity: 0, scale: 0.90 }, { opacity: 1, scale: 1, duration: 0.50, ease: "back.out(1.7)" }, start);
     } else if (layout === 'outro') {
       tl.fromTo(scene, { opacity: 0, scale: 0.94 }, { opacity: 1, scale: 1, duration: 0.55, ease: EASE.drawIn }, start);
+    } else if (layout === 'group-intro' || layout === 'match-results') {
+      tl.fromTo(scene, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: ENTER_DUR, ease: EASE.slide }, start);
     } else {
       tl.fromTo(scene, { opacity: 0 }, { opacity: 1, duration: FADE, ease: EASE.drawIn }, start);
     }
@@ -82,6 +84,10 @@ const EASE = {
       animateTimeline(scene, tl, start);
     } else if (layout === "formation-pitch") {
       animateFormationPitch(scene, tl, start);
+    } else if (layout === "group-intro") {
+      animateGroupIntro(scene, tl, start);
+    } else if (layout === "match-results") {
+      animateMatchResults(scene, tl, start);
     } else if (layout === "engagement-question") {
       animateEngagementQuestion(scene, tl, start);
     } else if (layout === "outro") {
@@ -179,6 +185,21 @@ const EASE = {
 
   // ── COMPARISON ────────────────────────────────────────────────────────
   function animateComparison(scene, tl, start) {
+    // Score variant (predicted scoreline + flags)
+    if (scene.querySelector(".layout-comparison-score")) {
+      const eyebrow = scene.querySelector(".cs-eyebrow");
+      if (eyebrow) tl.fromTo(eyebrow, { y: -24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: EASE.slide }, start);
+      const left = scene.querySelector(".cs-left");
+      if (left) tl.fromTo(left, { x: -70, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, ease: EASE.pop }, start + 0.2);
+      const right = scene.querySelector(".cs-right");
+      if (right) tl.fromTo(right, { x: 70, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, ease: EASE.pop }, start + 0.35);
+      const score = scene.querySelector(".cs-score");
+      if (score) tl.fromTo(score, { scale: 0.4, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.55, ease: "back.out(1.7)" }, start + 0.55);
+      const foot = scene.querySelector(".cs-foot");
+      if (foot) tl.fromTo(foot, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: EASE.drawIn }, start + 1.1);
+      return;
+    }
+
     // Chart variant
     if (scene.querySelector(".layout-comparison-chart")) {
       const rows = scene.querySelectorAll(".cmp-row");
@@ -372,6 +393,38 @@ const EASE = {
   }
 
   // ── FEATURE LIST ──────────────────────────────────────────────────────
+  function animateGroupIntro(scene, tl, start) {
+    const eb = scene.querySelector(".gi-eyebrow");
+    if (eb) tl.fromTo(eb, { y: -16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: EASE.slide }, start + 0.1);
+    const grp = scene.querySelector(".gi-group");
+    if (grp) tl.fromTo(grp, { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.5)" }, start + 0.2);
+    const rule = scene.querySelector(".gi-rule");
+    if (rule) tl.fromTo(rule, { scaleX: 0 }, { scaleX: 1, duration: 0.4, ease: EASE.drawIn }, start + 0.42);
+    const rows = scene.querySelectorAll(".gi-team");
+    rows.forEach((r, i) => {
+      tl.fromTo(r, { x: 60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, ease: "back.out(1.4)" }, start + 0.5 + i * 0.16);
+    });
+    const foot = scene.querySelector(".gi-foot");
+    if (foot) tl.fromTo(foot, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: EASE.drawIn }, start + 0.6 + rows.length * 0.16);
+  }
+
+  function animateMatchResults(scene, tl, start) {
+    const eb = scene.querySelector(".mr-eyebrow");
+    if (eb) tl.fromTo(eb, { y: -16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: EASE.slide }, start + 0.1);
+    const title = scene.querySelector(".mr-title");
+    if (title) tl.fromTo(title, { scale: 0.85, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.5)" }, start + 0.2);
+    const sub = scene.querySelector(".mr-sub");
+    if (sub) tl.fromTo(sub, { opacity: 0 }, { opacity: 1, duration: 0.35, ease: EASE.drawIn }, start + 0.38);
+    const rule = scene.querySelector(".mr-rule");
+    if (rule) tl.fromTo(rule, { scaleX: 0 }, { scaleX: 1, duration: 0.4, ease: EASE.drawIn }, start + 0.46);
+    const rows = scene.querySelectorAll(".mr-row");
+    rows.forEach((r, i) => {
+      tl.fromTo(r, { y: 28, opacity: 0 }, { y: 0, opacity: 1, duration: 0.42, ease: "back.out(1.3)" }, start + 0.5 + i * 0.12);
+    });
+    const foot = scene.querySelector(".mr-foot");
+    if (foot) tl.fromTo(foot, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: EASE.drawIn }, start + 0.6 + rows.length * 0.12);
+  }
+
   function animateFeatureList(scene, tl, start) {
     // Header eyebrow stroke
     const eyebrow = scene.querySelector(".feat-eyebrow");

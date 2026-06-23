@@ -7,9 +7,6 @@ import type { TiktokConfig } from "../config.js";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const TPL_DIR = join(__dirname, "templates");
 
-// Grain overlay HTML inline (from installed component)
-const GRAIN_OVERLAY_HTML = `<div id="grain-overlay" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:100;"><div class="grain-texture"></div></div>`;
-
 // Default TikTok config (used if not passed)
 const DEFAULT_TIKTOK: TiktokConfig = {
   displayName: "SportsForAllTV",
@@ -140,9 +137,7 @@ function renderShell(metadata: Script["metadata"], avatarRelPath: string): strin
     <div class="brand-name">${channel}</div>
     <div class="brand-tag">TIN TỨC BÓNG ĐÁ</div>
   </div>
-</div>
-
-${GRAIN_OVERLAY_HTML}`.trim();
+</div>`.trim();
 }
 
 // ── SCENE DISPATCH ─────────────────────────────────────────────────────────
@@ -192,6 +187,14 @@ function renderScene(
     case "formation-pitch":
       inner = renderFormationPitchInner(td);
       layoutName = "formation-pitch";
+      break;
+    case "group-intro":
+      inner = renderGroupIntroInner(td);
+      layoutName = "group-intro";
+      break;
+    case "match-results":
+      inner = renderMatchResultsInner(td);
+      layoutName = "match-results";
       break;
     case "engagement-question":
       inner = renderEngagementQuestionInner(td);
@@ -269,6 +272,13 @@ function renderHookInner(
  * old 2-card layout when either side has no extractable number.
  */
 function renderComparisonInner(td: Extract<TemplateDataType, { template: "comparison" }>): string {
+  // Score-prediction scoreboard — when BOTH sides carry a flag/crest, render a
+  // broadcast-style "flags + scoreline" board instead of bars. Used for the
+  // predicted-result card in pre-match previews.
+  if (td.left.flag && td.right.flag) {
+    return renderComparisonScoreboard(td);
+  }
+
   const lNum = extractMagnitude(td.left.value);
   const rNum = extractMagnitude(td.right.value);
   const canChart = lNum !== null && rNum !== null;
@@ -333,6 +343,41 @@ function renderComparisonInner(td: Extract<TemplateDataType, { template: "compar
     </div>
   </div>
   ${deltaHtml}
+</div>`.trim();
+}
+
+/**
+ * Score-prediction scoreboard variant of the comparison scene. Two team blocks
+ * (flag + name) flanking a big centered scoreline. The higher numeric score
+ * glows as the winner (ties → no glow). Same dark "prediction board" aesthetic
+ * as group-intro / match-results so all forecast cards feel like one family.
+ */
+function renderComparisonScoreboard(td: Extract<TemplateDataType, { template: "comparison" }>): string {
+  const lNum = extractMagnitude(td.left.value);
+  const rNum = extractMagnitude(td.right.value);
+  const lWin = lNum !== null && rNum !== null && lNum > rNum;
+  const rWin = lNum !== null && rNum !== null && rNum > lNum;
+
+  return `
+<div class="bg group-intro-bg"></div>
+<div class="layout-comparison layout-comparison-score">
+  <div class="cs-eyebrow">Dự đoán tỉ số</div>
+  <div class="cs-board">
+    <div class="cs-side cs-left color-${td.left.color}${lWin ? " cs-win" : ""}">
+      <div class="cs-flag"><img src="${escapeHtml(td.left.flag!)}" alt="${escapeHtml(td.left.label)}" /></div>
+      <div class="cs-team">${escapeHtml(td.left.label)}</div>
+    </div>
+    <div class="cs-score">
+      <span class="cs-sc cs-sc-l${lWin ? " cs-sc-win" : ""}">${escapeHtml(td.left.value)}</span>
+      <span class="cs-dash">-</span>
+      <span class="cs-sc cs-sc-r${rWin ? " cs-sc-win" : ""}">${escapeHtml(td.right.value)}</span>
+    </div>
+    <div class="cs-side cs-right color-${td.right.color}${rWin ? " cs-win" : ""}">
+      <div class="cs-flag"><img src="${escapeHtml(td.right.flag!)}" alt="${escapeHtml(td.right.label)}" /></div>
+      <div class="cs-team">${escapeHtml(td.right.label)}</div>
+    </div>
+  </div>
+  <div class="cs-foot">Dự đoán của <b>SportsForAllTV</b></div>
 </div>`.trim();
 }
 
@@ -496,6 +541,90 @@ function renderFormationPitchInner(
     <div class="fp-goal"></div>
     ${rowsHtml}
   </div>
+</div>`.trim();
+}
+
+// ── GROUP INTRO SCENE ──────────────────────────────────────────────────────
+/**
+ * Data-driven group-stage reveal (flags/crests + team names + predicted
+ * finish), rendered in HTML/CSS — no AI image. Teams are listed in predicted
+ * finishing order; index+1 is the displayed rank. `qualify` gold-highlights a
+ * row + uses the gold chip. `flag` is an <img> src (flag/crest URL or path).
+ */
+function renderGroupIntroInner(
+  td: Extract<TemplateDataType, { template: "group-intro" }>,
+): string {
+  const rows = td.teams
+    .map(
+      (t, i) => `
+    <div class="gi-team${t.qualify ? " gi-qualify" : ""}" data-idx="${i}">
+      <div class="gi-rank">${i + 1}</div>
+      <div class="gi-flag"><img src="${escapeHtml(t.flag)}" alt="${escapeHtml(t.name)}" /></div>
+      <div class="gi-name">
+        <div class="gi-name-t">${escapeHtml(t.name)}</div>
+        ${t.note ? `<div class="gi-name-s">${escapeHtml(t.note)}</div>` : ""}
+      </div>
+      <div class="gi-chip ${t.qualify ? "go" : "out"}">${escapeHtml(t.result)}</div>
+    </div>`,
+    )
+    .join("\n");
+
+  return `
+<div class="bg group-intro-bg"></div>
+<div class="layout-group-intro">
+  <div class="gi-head">
+    <div class="gi-eyebrow">Dự đoán · World Cup 2026</div>
+    <div class="gi-group"><span class="gi-group-lbl">Bảng</span>${escapeHtml(td.group)}</div>
+    <div class="gi-rule"></div>
+  </div>
+  <div class="gi-teams">
+    ${rows}
+  </div>
+  <div class="gi-foot">Thứ hạng dự đoán của <b>SportsForAllTV</b></div>
+</div>`.trim();
+}
+
+// ── MATCH RESULTS SCENE ────────────────────────────────────────────────────
+/**
+ * Data-driven results board (list of predicted scorelines) — no AI image.
+ * Each row: home (right-aligned) · score-score · away (left-aligned), with an
+ * optional small note (e.g. "luân lưu"). Used for group game-by-game scores
+ * and knockout-round result lists. Same dark-green board aesthetic as
+ * group-intro.
+ */
+function renderMatchResultsInner(
+  td: Extract<TemplateDataType, { template: "match-results" }>,
+): string {
+  const rows = td.matches
+    .map(
+      (m, i) => `
+    <div class="mr-row" data-idx="${i}">
+      <div class="mr-home">${escapeHtml(m.home)}</div>
+      <div class="mr-score">
+        <div class="mr-sc-line"><span class="mr-sc">${escapeHtml(m.homeScore)}</span><span class="mr-sep">-</span><span class="mr-sc">${escapeHtml(m.awayScore)}</span></div>
+        ${m.note ? `<div class="mr-note">${escapeHtml(m.note)}</div>` : ""}
+      </div>
+      <div class="mr-away">${escapeHtml(m.away)}</div>
+    </div>`,
+    )
+    .join("\n");
+
+  const eyebrow = escapeHtml(td.eyebrow ?? "Dự đoán · World Cup 2026");
+  const footHtml = td.foot ? escapeHtml(td.foot) : "Tỉ số dự đoán của <b>SportsForAllTV</b>";
+
+  return `
+<div class="bg group-intro-bg"></div>
+<div class="layout-match-results">
+  <div class="mr-head">
+    <div class="mr-eyebrow">${eyebrow}</div>
+    <div class="mr-title">${escapeHtml(td.title)}</div>
+    ${td.subtitle ? `<div class="mr-sub">${escapeHtml(td.subtitle)}</div>` : ""}
+    <div class="mr-rule"></div>
+  </div>
+  <div class="mr-rows${td.matches.length > 6 ? " mr-dense" : ""}">
+    ${rows}
+  </div>
+  <div class="mr-foot">${footHtml}</div>
 </div>`.trim();
 }
 

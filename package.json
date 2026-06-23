@@ -16,6 +16,7 @@
     "rerender": "tsx rerender.ts",
     "typecheck": "tsc --noEmit",
     "build": "tsc",
+    "render:check": "tsx scripts/verify-render.ts",
     "images:list": "tsx scripts/list-image-prompts.ts",
     "images:stage": "tsx scripts/stage-planned-images.ts",
     "images:combine": "tsx scripts/combine-split-images.ts",

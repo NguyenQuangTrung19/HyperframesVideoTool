@@ -116,7 +116,11 @@ async function cmdList(): Promise<void> {
   }
   const headerToCol = buildHeaderMap(ws);
   const out: RowJson[] = [];
-  const lastRow = ws.actualRowCount;
+  // Use rowCount (index of last row with values), NOT actualRowCount (count of
+  // non-empty rows). They diverge when a row is deleted mid-sheet, leaving a
+  // gap — actualRowCount then under-counts and the loop silently drops the
+  // trailing rows. (Blank rows inside the range are skipped below via `source`.)
+  const lastRow = ws.rowCount;
   for (let rowIdx = 2; rowIdx <= lastRow; rowIdx++) {
     const source = cellString(ws, headerToCol, rowIdx, "source").trim();
     if (!source) continue; // skip blank rows
@@ -155,7 +159,7 @@ async function cmdSet(rowIdxRaw: string, kvPairs: string[]): Promise<void> {
   }
 
   const { wb, ws } = await loadOrCreate();
-  const lastRow = ws.actualRowCount;
+  const lastRow = ws.rowCount; // last row index, not non-empty count (see cmdList)
   if (rowIdx > lastRow + 1) {
     throw new Error(`rowIdx ${rowIdx} is past the last row (${lastRow})`);
   }

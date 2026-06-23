@@ -132,12 +132,25 @@ export async function runPodcastPipeline(txtPath: string, opts: PodcastPipelineO
   }
 
   // STEP 2: TTS (skipped if voice.mp3 already exists — idempotent)
-  const { client: tts, label: ttsLabel } = createPodcastTts(cfg);
-  log.step(2, TOTAL_STEPS, `Generate TTS via ${ttsLabel}`);
+  //
+  // Manual-voice mode: TTS_PROVIDER=manual (and no PODCAST_TTS_PROVIDER
+  // override) means the user supplies a pre-recorded voice.mp3 instead of any
+  // TTS API — used as a temporary fallback when the paid provider's quota runs
+  // out. In that mode we must NOT construct a TTS client (createPodcastTts →
+  // createTtsClient throws for "manual"), so client creation is deferred to the
+  // branch that actually needs it (voice.mp3 missing).
+  const manualVoice = cfg.ttsProvider === "manual" && !process.env.PODCAST_TTS_PROVIDER?.trim();
+  log.step(2, TOTAL_STEPS, `Generate TTS${manualVoice ? " (manual — expecting supplied voice.mp3)" : ""}`);
   const voiceMp3 = join(outputDir, "voice.mp3");
   if (existsSync(voiceMp3)) {
     log.info(`  REUSE existing voice.mp3 — delete to force re-TTS`);
+  } else if (manualVoice) {
+    throw new Error(
+      `TTS_PROVIDER=manual but no voice.mp3 found. Drop your pre-recorded voice at:\n  ${voiceMp3}\nthen re-run. (Set PODCAST_TTS_PROVIDER to use an API provider instead.)`,
+    );
   } else {
+    const { client: tts, label: ttsLabel } = createPodcastTts(cfg);
+    log.info(`  via ${ttsLabel}`);
     try {
       await tts.generate(speakText, voiceMp3);
     } finally {
@@ -239,7 +252,7 @@ export async function runPodcastPipeline(txtPath: string, opts: PodcastPipelineO
   const fullbleedDim = layout === "fullbleed"
     ? Math.max(0, Math.min(1, parseFloat(process.env.PODCAST_FULLBLEED_DIM ?? "0")))
     : 0;
-  const fullbleedCornerText = process.env.PODCAST_FULLBLEED_CORNER_TEXT ?? "Podcast và bạn";
+  const fullbleedCornerText = process.env.PODCAST_FULLBLEED_CORNER_TEXT ?? "Trạm Dừng Bất Ngờ";
   const fullbleedCornerFontSize = parseInt(process.env.PODCAST_FULLBLEED_CORNER_FONTSIZE ?? "48", 10);
   const fullbleedCornerFontFile = process.env.PODCAST_FULLBLEED_CORNER_FONT?.trim() || "C\\:/Windows/Fonts/palai.ttf";
 
@@ -266,12 +279,13 @@ export async function runPodcastPipeline(txtPath: string, opts: PodcastPipelineO
   let defaultH: number;
   let defaultY: number;
   if (isLocket) {
-    // Locket geometry: square video with comfortable margins on all sides.
-    // Canvas 1080x1920, video 960x960, margin-left/right 60px each.
-    // Vertical: top=440, bottom of card at 1400, 520px to canvas bottom.
-    defaultW = 960;
-    defaultH = 960;
-    defaultY = 440;
+    // Locket geometry: full-width square video (updated 2026-06-11, was
+    // 960x960 with 60px side margins). Canvas 1080x1920, video 1080x1080,
+    // edge-to-edge horizontally. Vertical: top=420 (exactly centered),
+    // bottom of card at 1500, 420px above for the wordmark + 420px below.
+    defaultW = 1080;
+    defaultH = 1080;
+    defaultY = 420;
   } else if (layout === "landscape") {
     defaultW = 1080;
     defaultH = firstProbeW > 0 && firstProbeH > 0
@@ -305,8 +319,8 @@ export async function runPodcastPipeline(txtPath: string, opts: PodcastPipelineO
     foregroundHeight = defaultH;
     foregroundY = defaultY;
   }
-  // Locket: explicit X=60 (margin from left edge). Card: centered.
-  if (isLocket) foregroundX = 60;
+  // Locket: full-width card → X=0 (edge-to-edge). Card: centered.
+  if (isLocket) foregroundX = 0;
   log.info(`  layout: ${layout}${isLocket ? " (locket)" : ""}  fg card: ${foregroundWidth}x${foregroundHeight} at y=${foregroundY}${foregroundX !== undefined ? `, x=${foregroundX}` : " (centered)"}`);
 
   // Derive logo defaults from card position so the brand-shell aligns with
@@ -451,6 +465,11 @@ export async function runPodcastPipeline(txtPath: string, opts: PodcastPipelineO
     const outroMp3 = join(outputDir, "outro-voice.mp3");
     if (existsSync(outroMp3)) {
       log.info(`  REUSE existing outro-voice.mp3 — delete to force re-TTS`);
+      outroVoicePath = outroMp3;
+    } else if (manualVoice) {
+      // Manual mode has no TTS to synthesize the outro line. Drop a supplied
+      // outro-voice.mp3 to include one; otherwise the outro card runs silent.
+      log.warn(`  manual mode — no outro-voice.mp3 supplied; outro card will be silent`);
     } else {
       const { client: outroTts } = createPodcastTts(cfg);
       try {
@@ -458,8 +477,8 @@ export async function runPodcastPipeline(txtPath: string, opts: PodcastPipelineO
       } finally {
         await outroTts.dispose?.();
       }
+      outroVoicePath = outroMp3;
     }
-    outroVoicePath = outroMp3;
   }
 
   // STEP 5: compose final video
@@ -530,8 +549,12 @@ export async function runPodcastPipeline(txtPath: string, opts: PodcastPipelineO
     log.info(`  logo: ${logoPath}${brandWordmark ? " (avatar-only — wordmark replaces brand-shell)" : ""}`);
   }
 
-  const resolvedBrandName = isLocket ? "Podcast và bạn" : (process.env.PODCAST_BRAND_NAME ?? (layout === "vignette" ? "" : (process.env.TIKTOK_DISPLAY_NAME ?? "SportsForAllPodcast")));
-  const resolvedOutroChannel = isLocket ? "Podcast và bạn" : (process.env.PODCAST_OUTRO_CHANNEL ?? cfg.tiktok.displayName ?? "SportsForAllTV");
+  const resolvedBrandName = isLocket
+    ? (process.env.PODCAST_BRAND_NAME ?? "Trạm Dừng Bất Ngờ")
+    : (process.env.PODCAST_BRAND_NAME ?? (layout === "vignette" ? "" : (process.env.TIKTOK_DISPLAY_NAME ?? "Trạm Dừng Bất Ngờ")));
+  const resolvedOutroChannel = isLocket
+    ? (process.env.PODCAST_BRAND_NAME ?? "Trạm Dừng Bất Ngờ")
+    : (process.env.PODCAST_OUTRO_CHANNEL ?? cfg.tiktok.displayName ?? "SportsForAllTV");
   log.info(`  brand: isLocket=${isLocket}, brandName="${resolvedBrandName}", outroChannel="${resolvedOutroChannel}"`);
 
   await composeVideo({
@@ -583,8 +606,9 @@ export async function runPodcastPipeline(txtPath: string, opts: PodcastPipelineO
     logoMargin: logoMarginResolved,
     logoMarginTop: logoMarginTopResolved,
     logoCornerRadius: parseInt(process.env.PODCAST_LOGO_RADIUS ?? "12", 10),
-    // Locket: brand name is always "Podcast và bạn" (pendant-frame aesthetic),
-    // ignoring PODCAST_BRAND_NAME env which is meant for the normal card layout.
+    // Brand name follows PODCAST_BRAND_NAME for every layout (locket included
+    // since 2026-06-11 — was hardcoded "Podcast và bạn" before the Life
+    // Podcast rebrand).
     brandName: resolvedBrandName,
     // Locket: no tag (elegant style suppresses it anyway); other layouts keep
     // their existing tag behavior.
@@ -595,6 +619,9 @@ export async function runPodcastPipeline(txtPath: string, opts: PodcastPipelineO
     // Locket: "elegant" wordmark — refined Palatino Italic serif, letter-spaced,
     // thin separator, no glow. Other layouts keep the heavy "display" default.
     brandWordmarkStyle: isLocket ? "elegant" as const : undefined,
+    // Locket dùng corner badge (logo góc trên phải + tên kênh bên trái) giống
+    // fullbleed/landscape — thay cho elegant wordmark giữa (2026-06-11).
+    cornerBadge: isLocket,
     brandWordmarkFontSize: parseInt(process.env.PODCAST_WORDMARK_FONTSIZE ?? (isLocket ? "36" : "56"), 10),
     brandWordmarkTagFontSize: parseInt(process.env.PODCAST_WORDMARK_TAG_FONTSIZE ?? "22", 10),
     brandWordmarkUnderlineWidth: parseInt(process.env.PODCAST_WORDMARK_UNDERLINE_W ?? "280", 10),

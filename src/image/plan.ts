@@ -4,7 +4,11 @@ import { dirname, extname, join, basename } from "node:path";
 import { ImagesPlanSchema, type ImagesPlan } from "./plan-schema.js";
 
 const PLAN_FILENAME = "images-plan.json";
-const KNOWN_EXTENSIONS = [".png", ".jpg", ".jpeg", ".webp"];
+// Extensions accepted for scene images. All are rendered by the Chromium
+// (hyperframes) renderer via CSS background-image, so any format Chromium
+// decodes natively is fine — AVIF included (Chrome ≥85). png/jpg/webp listed
+// first so they win when several files share a stem.
+const KNOWN_EXTENSIONS = [".png", ".jpg", ".jpeg", ".webp", ".avif"];
 
 export interface ValidationResult {
   /** Scenes whose declared `filename` is not present on disk. */
@@ -103,7 +107,7 @@ export async function stageImagesToOutput(
     const actualName = findExistingImageByStem(inputDir, stemOf(scene.filename));
     if (!actualName) {
       throw new Error(
-        `staging: no image file for scene "${scene.id}" (looked for ${stemOf(scene.filename)}.{png,jpg,jpeg,webp}) — run validatePlan() first`,
+        `staging: no image file for scene "${scene.id}" (looked for ${stemOf(scene.filename)}.{png,jpg,jpeg,webp,avif}) — run validatePlan() first`,
       );
     }
     const ext = extname(actualName).toLowerCase();

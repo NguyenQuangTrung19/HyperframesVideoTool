@@ -17,8 +17,9 @@ const IMAGE_TEMPLATES = new Set(["hook", "callout", "stat-hero"]);
 const IMAGE_CONCURRENCY = 3;
 
 /** Manual override extensions, in priority order. Drop a file at
- *  `output/<slug>/images/<sceneId>.<ext>` to bypass AI generation for that scene. */
-const OVERRIDE_EXTENSIONS = [".png", ".jpg", ".jpeg", ".webp"];
+ *  `output/<slug>/images/<sceneId>.<ext>` to bypass AI generation for that scene.
+ *  AVIF is fine — the Chromium renderer decodes it natively (Chrome ≥85). */
+const OVERRIDE_EXTENSIONS = [".png", ".jpg", ".jpeg", ".webp", ".avif"];
 
 export type SceneImageMap = Record<string, string>; // sceneId → relative path from outputDir
 

@@ -94,13 +94,14 @@ export async function runPipeline(scriptPath: string): Promise<void> {
   await mkdir(voiceDir, { recursive: true });
   let sceneAudio: Array<{ id: string; path: string; durationSec: number }>;
 
-  if (cfg.ttsProvider === "ausynclab") {
-    // ── AusyncLab: full-text TTS for natural prosody ──────────────────
-    // Generate one continuous audio from the complete script, then use
-    // Whisper alignment to locate per-scene boundaries and split. This
-    // avoids quality loss from generating each short scene independently
-    // (AusyncLab treats each API call as a standalone utterance).
-    sceneAudio = await ausyncFullTextTts(cfg, script, fullText, voiceDir);
+  if (cfg.ttsProvider === "ausynclab" || cfg.ttsProvider === "manual") {
+    // ── Full-text path (AusyncLab API, or a manually-supplied audio file) ──
+    // Treat the voiceover as one continuous audio, then use Whisper alignment
+    // to locate per-scene boundaries and split. For AusyncLab this avoids
+    // quality loss from generating each short scene independently. For manual
+    // mode (VBee credit exhausted → user records/exports the voice externally),
+    // it lets a single drop-in mp4/mp3 flow through the same align+split logic.
+    sceneAudio = await ausyncFullTextTts(cfg, script, fullText, voiceDir, outputDir);
   } else {
     // ── VieNeu: per-scene TTS (local, no prosody-continuity concern) ──
     const ttsClient = createTtsClient(cfg);
@@ -283,9 +284,18 @@ export async function runPipeline(scriptPath: string): Promise<void> {
   await renderWithHyperframes({
     compositionDir: outputDir,
     outputPath: videoPath,
+    fps: cfg.hyperframesFps,
     workers: cfg.hyperframesWorkers,
     gpu: cfg.hyperframesGpu,
   });
+
+  // Auto fidelity check — so preview vs frame video thật, cảnh báo scene lệch
+  try {
+    const { checkRenderFidelity, printFidelityReport } = await import("./render/render-check.js");
+    printFidelityReport(outputDir, await checkRenderFidelity(outputDir));
+  } catch (e) {
+    console.warn(`render-check skipped: ${e instanceof Error ? e.message : e}`);
+  }
 
   // STEP 9
   log.step(9, TOTAL_STEPS, "Done");
@@ -310,16 +320,27 @@ async function ausyncFullTextTts(
   script: Script,
   fullText: string,
   voiceDir: string,
+  outputDir: string,
 ): Promise<Array<{ id: string; path: string; durationSec: number }>> {
-  const ttsClient = createTtsClient(cfg);
   const fullMp3 = join(voiceDir, "full.mp3");
   const wordsJsonPath = join(voiceDir, "full-words.json");
 
-  // 1. TTS: generate full audio (cached)
+  // 1. Obtain full audio (cached as voice/full.mp3)
   if (existsSync(fullMp3)) {
     log.info(`  REUSE existing full.mp3 — delete to force re-TTS`);
+  } else if (cfg.ttsProvider === "manual") {
+    // ── Manual mode: no API call — convert a user-supplied audio file ──
+    const source = findManualVoiceFile(outputDir);
+    log.info(`  MANUAL voice: converting ${basename(source)} → voice/full.mp3`);
+    await runFfmpeg([
+      "-y", "-i", source,
+      "-vn", "-ar", "44100", "-ac", "1",
+      "-c:a", "libmp3lame", "-b:a", "192k",
+      fullMp3,
+    ]);
   } else {
-    log.info(`  TTS full script (${fullText.length} chars) via AusyncLab...`);
+    log.info(`  TTS full script (${fullText.length} chars) via ${cfg.ttsProvider}...`);
+    const ttsClient = createTtsClient(cfg);
     try {
       await ttsClient.generate(fullText, fullMp3);
     } finally {
@@ -448,6 +469,38 @@ async function ausyncFullTextTts(
   }
 
   return results;
+}
+
+/**
+ * Locate the user-supplied voiceover for TTS_PROVIDER=manual.
+ *
+ * Resolution order:
+ *   1. env VOICE_FILE — absolute (or cwd-relative) path, highest priority
+ *      (handy for the /video-queue orchestrator to point at a per-row file).
+ *   2. outputDir/voice-source.<ext> — drop-in next to script.json. First match
+ *      wins in this extension order: mp4, m4a, mp3, wav, aac, ogg.
+ *
+ * Throws a clear, actionable error when nothing is found so the run fails loud
+ * instead of silently producing a no-speech video.
+ */
+function findManualVoiceFile(outputDir: string): string {
+  const envPath = process.env.VOICE_FILE?.trim();
+  if (envPath) {
+    if (!existsSync(envPath)) {
+      throw new Error(`VOICE_FILE is set but does not exist: ${envPath}`);
+    }
+    return envPath;
+  }
+  const exts = ["mp4", "m4a", "mp3", "wav", "aac", "ogg"];
+  for (const ext of exts) {
+    const p = join(outputDir, `voice-source.${ext}`);
+    if (existsSync(p)) return p;
+  }
+  throw new Error(
+    `TTS_PROVIDER=manual but no voice file found. Drop your recording at ` +
+      `"${join(outputDir, "voice-source.mp4")}" (or .m4a/.mp3/.wav/.aac/.ogg), ` +
+      `or set VOICE_FILE to its absolute path. Tip: place it BEFORE running the pipeline.`,
+  );
 }
 
 function runFfmpeg(args: string[]): Promise<void> {

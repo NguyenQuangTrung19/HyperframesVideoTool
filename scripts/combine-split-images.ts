@@ -23,13 +23,14 @@ import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { extname, basename, join, resolve } from "node:path";
 import puppeteer from "puppeteer";
 
-const KNOWN_EXTENSIONS = [".png", ".jpg", ".jpeg", ".webp"];
+const KNOWN_EXTENSIONS = [".png", ".jpg", ".jpeg", ".webp", ".avif"];
 
 const MIME: Record<string, string> = {
   ".png": "image/png",
   ".jpg": "image/jpeg",
   ".jpeg": "image/jpeg",
   ".webp": "image/webp",
+  ".avif": "image/avif",
 };
 
 export interface SplitPair {

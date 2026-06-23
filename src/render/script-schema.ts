@@ -57,6 +57,16 @@ const ComparisonSide = z.object({
   label: z.string().min(1).max(30),
   value: z.string().min(1).max(20),
   color: z.enum(["cyan", "purple"]),
+  /**
+   * Optional flag/crest image (URL or local path, e.g. flagcdn
+   * "https://flagcdn.com/ca.svg"). When BOTH sides set `flag`, the comparison
+   * renders as a SCORE-PREDICTION SCOREBOARD — two flags + team names + a big
+   * centered scoreline (left.value − right.value), with the higher score
+   * glowing as the winner — instead of the proportional bar chart. Use for the
+   * predicted-result card in pre-match previews. Leave unset for metric
+   * comparisons (goals/trophies/etc), which keep the bar-chart treatment.
+   */
+  flag: z.string().min(1).optional(),
 });
 
 const ComparisonData = z.object({
@@ -74,9 +84,10 @@ const StatHeroData = z.object({
    * Optional short trait bullets shown between label and context.
    * Use for ranking/list items where one-line context isn't enough —
    * e.g. ["Sức mạnh", "Không chiến", "24 bàn / 32 trận"].
-   * Each bullet ≤ 20 chars, max 4 bullets.
+   * Each bullet ≤ 30 chars, max 4 bullets. Chips stack vertically (38px Inter)
+   * and wrap within the ~920px safe zone, so 30 chars fits comfortably on one line.
    */
-  highlights: z.array(z.string().min(1).max(20)).min(1).max(4).optional(),
+  highlights: z.array(z.string().min(1).max(30)).min(1).max(4).optional(),
 });
 
 const FeatureListData = z.object({
@@ -152,6 +163,63 @@ const FormationPitchData = z.object({
  * debate or uncertainty. Use `|` to insert phrase-aware line breaks
  * for long questions rendered at 60px Inter.
  */
+/**
+ * Group-intro scene — data-driven group-stage reveal rendered in HTML/CSS
+ * (flags/crests + team names + predicted finish), NOT an AI image. Used by the
+ * World Cup prediction series' group parts. `teams` are listed in predicted
+ * finishing order (first = top of the group). Each team's `flag` is an image
+ * URL or local path (national flag SVG or federation crest).
+ */
+const GroupTeam = z.object({
+  name: z.string().min(1).max(24),
+  /** Flag/crest image — URL (e.g. flagcdn) or local path. */
+  flag: z.string().min(1),
+  /** Optional one-line descriptor under the name (≤40). */
+  note: z.string().max(40).optional(),
+  /** Short predicted-finish label, e.g. "Nhất bảng", "Đi tiếp", "Hạng 3", "Bị loại" (≤20). */
+  result: z.string().min(1).max(20),
+  /** Gold-highlight the row (advancing teams). */
+  qualify: z.boolean().optional(),
+});
+
+const GroupIntroData = z.object({
+  template: z.literal("group-intro"),
+  /** Group label shown big after "BẢNG", e.g. "A", "F". */
+  group: z.string().min(1).max(24),
+  teams: z.array(GroupTeam).min(2).max(6),
+});
+
+/** One predicted match result row. Scores are strings to allow "2", "1 (4)" pen, etc. */
+const MatchResult = z.object({
+  home: z.string().min(1).max(20),
+  homeScore: z.string().min(1).max(8),
+  away: z.string().min(1).max(20),
+  awayScore: z.string().min(1).max(8),
+  /** Optional short note, e.g. "luân lưu", "vé vớt", "Nhất bảng" (≤20). */
+  note: z.string().max(20).optional(),
+});
+
+const MatchResultsData = z.object({
+  template: z.literal("match-results"),
+  /** Board title, e.g. "Bảng A · Kết quả", "Vòng 16 đội". */
+  title: z.string().min(1).max(40),
+  /** Optional subtitle line (≤40). */
+  subtitle: z.string().max(40).optional(),
+  /**
+   * Optional top-kicker override. Defaults to "Dự đoán · World Cup 2026"
+   * (prediction boards). For ACTUAL past results (e.g. a team's last-5 form
+   * board) set this to "Phong độ · World Cup 2026" or similar so the board
+   * isn't mislabelled as a prediction.
+   */
+  eyebrow: z.string().max(40).optional(),
+  /**
+   * Optional footer override. Defaults to "Tỉ số dự đoán của SportsForAllTV".
+   * For real results use e.g. "Kết quả gần đây · SportsForAllTV".
+   */
+  foot: z.string().max(60).optional(),
+  matches: z.array(MatchResult).min(2).max(8),
+});
+
 const EngagementQuestionData = z.object({
   template: z.literal("engagement-question"),
   question: z.string().min(1).max(120),
@@ -175,6 +243,8 @@ export const TemplateData = z.discriminatedUnion("template", [
   BigQuoteData,
   TimelineData,
   FormationPitchData,
+  GroupIntroData,
+  MatchResultsData,
   EngagementQuestionData,
   OutroData,
 ]);
@@ -231,7 +301,7 @@ export const ScriptSchema = z.object({
     channel: z.string().min(1),
   }),
   voice: z.object({
-    provider: z.enum(["vieneu", "ausynclab"]),
+    provider: z.enum(["vieneu", "ausynclab", "fptai", "vbee"]),
     voiceId: z.string().min(1),
     speed: z.number().min(0.5).max(2.0),
   }),

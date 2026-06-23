@@ -21,6 +21,8 @@ export interface TtsClient {
 
 import type { Config } from "../config.js";
 import { AusynclabClient } from "./ausynclab-client.js";
+import { FptaiClient } from "./fptai-client.js";
+import { VbeeClient } from "./vbee-client.js";
 import { VieNeuClient } from "./vieneu-client.js";
 
 export function createTtsClient(cfg: Config): TtsClient {
@@ -43,6 +45,34 @@ export function createTtsClient(cfg: Config): TtsClient {
         pollIntervalMs: cfg.ausynclabPollIntervalMs,
         pollTimeoutMs: cfg.ausynclabPollTimeoutMs,
       });
+    case "fptai":
+      return new FptaiClient({
+        apiKey: cfg.fptaiApiKey!,
+        voice: cfg.fptaiVoice,
+        speed: cfg.fptaiSpeed,
+        baseUrl: cfg.fptaiBaseUrl,
+        pollIntervalMs: cfg.fptaiPollIntervalMs,
+        pollTimeoutMs: cfg.fptaiPollTimeoutMs,
+      });
+    case "vbee":
+      return new VbeeClient({
+        accessToken: cfg.vbeeAccessToken!,
+        appId: cfg.vbeeAppId!,
+        voiceCode: cfg.vbeeVoiceCode,
+        speedRate: cfg.vbeeSpeedRate,
+        bitrate: cfg.vbeeBitrate,
+        callbackUrl: cfg.vbeeCallbackUrl,
+        baseUrl: cfg.vbeeBaseUrl,
+        pollIntervalMs: cfg.vbeePollIntervalMs,
+        pollTimeoutMs: cfg.vbeePollTimeoutMs,
+      });
+    case "manual":
+      // Manual mode supplies a pre-recorded audio file instead of calling any
+      // TTS API — the pipeline routes it through the full-text align path and
+      // never constructs a client. Reaching here means a code path tried to.
+      throw new Error(
+        'TTS_PROVIDER=manual does not use a TTS client. Drop a voice file next to script.json instead.',
+      );
     default: {
       const _never: never = cfg.ttsProvider;
       throw new Error(`Unknown TTS provider: ${_never}`);

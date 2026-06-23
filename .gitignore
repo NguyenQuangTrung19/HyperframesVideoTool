@@ -9,7 +9,7 @@ output/
 # One-off debug scripts
 debug-*.ts
 
-# Big SFX library (downloaded by `npm run sfx:download` — too large to commit)
+# Big external SFX library (not committed; curated subset lives in assets/sfx/)
 # Anchored to repo root so it does NOT match assets/sfx/ on case-insensitive FS.
 /SFX/
 
@@ -28,11 +28,8 @@ video/input/**/*.mp3
 podcast/**/*.mp4
 podcast/**/*.mp3
 podcast/**/*.wav
-# Design-scratch media (mockup screenshots, sample posters)
-scratch/**/*.png
-scratch/**/*.jpg
-scratch/**/*.jpeg
-scratch/**/*.mp4
+# Design scratch — local-only experiments (mockups, one-off debug scripts, specs)
+scratch/
 # Excel lock files
 ~$*
 

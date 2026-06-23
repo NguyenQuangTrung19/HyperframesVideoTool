@@ -169,7 +169,7 @@ export interface ComposeOpts {
   fullbleedDim?: number;
   /**
    * Fullbleed only — small decorative text drawn at the top-left corner of
-   * the canvas (in place of the wordmark stack). Default "Podcast và bạn".
+   * the canvas (in place of the wordmark stack). Default "Life Podcast".
    * Empty string disables the corner text entirely (clean scenery only).
    */
   fullbleedCornerText?: string;
@@ -275,6 +275,14 @@ export interface ComposeOpts {
    * Segoe UI Black for "display", Palatino Linotype Italic for "elegant".
    */
   brandWordmarkFontFile?: string;
+  /**
+   * Draw the top-right corner badge lockup (rounded logo tile + channel name
+   * to its LEFT) on non-chromeless layouts too — used by locket. Chromeless
+   * layouts (fullbleed / landscape) always use the lockup regardless of this
+   * flag. When enabled it SUPPRESSES the centered brand wordmark and the
+   * legacy top-left brand shell.
+   */
+  cornerBadge?: boolean;
 }
 
 /**
@@ -318,9 +326,15 @@ export async function composeVideo(opts: ComposeOpts): Promise<void> {
    * and rely on the corner brand text + a cleaner caption position.
    */
   const isChromeless = isFullbleed || isLandscape;
+  /**
+   * Corner lockup mode — the top-right logo badge + name branding. Always on
+   * for chromeless layouts; opt-in for card/locket via `cornerBadge`. When
+   * active, the centered wordmark + legacy brand shell are suppressed.
+   */
+  const cornerLockup = isChromeless || !!opts.cornerBadge;
   const landscapeVerticalBias = Math.floor(opts.landscapeVerticalBias ?? -80);
   const fullbleedDim = Math.max(0, Math.min(1, opts.fullbleedDim ?? 0.28));
-  const fullbleedCornerText = opts.fullbleedCornerText ?? "Podcast và bạn";
+  const fullbleedCornerText = opts.fullbleedCornerText ?? "Trạm Dừng Bất Ngờ";
   const fullbleedCornerFontSize = Math.max(16, Math.floor(opts.fullbleedCornerFontSize ?? 48));
   const fullbleedCornerFontFile = opts.fullbleedCornerFontFile ?? "C\\:/Windows/Fonts/palai.ttf";
   const blurSigma = Math.max(0, Math.min(100, opts.vignetteBlurSigma ?? 40));
@@ -506,7 +520,7 @@ export async function composeVideo(opts: ComposeOpts): Promise<void> {
   // Fullbleed layout suppresses the wordmark entirely — it renders a small
   // decorative corner text instead (set by `fullbleedCornerText`). The user
   // can still pass `brandWordmark: true` but it'll be ignored in fullbleed.
-  const useWordmark = !!opts.brandWordmark && !isChromeless;
+  const useWordmark = !!opts.brandWordmark && !cornerLockup;
   const wmFontSize = Math.max(20, Math.floor(opts.brandWordmarkFontSize ?? 62));
   const wmTagFontSize = Math.max(10, Math.floor(opts.brandWordmarkTagFontSize ?? 28));
   const wmUnderlineW = Math.max(80, Math.min(1080, Math.floor(opts.brandWordmarkUnderlineWidth ?? 320)));
@@ -539,12 +553,12 @@ export async function composeVideo(opts: ComposeOpts): Promise<void> {
   // Legacy brand-text drawtexts are suppressed in fullbleed too — the corner
   // text replaces them with a single decorative line at top-left.
   const textFilters: string[] = [];
-  if (!useWordmark && !isChromeless && brandName) {
+  if (!useWordmark && !cornerLockup && brandName) {
     textFilters.push(
       `drawtext=fontfile='${fontBold}':text='${escapeDrawtext(brandName)}':fontsize=${brandNameFontSize}:fontcolor=white:x=${brandNameX}:y=${brandNameY}:shadowcolor=black@0.6:shadowx=2:shadowy=2`,
     );
   }
-  if (!useWordmark && !isChromeless && brandTag) {
+  if (!useWordmark && !cornerLockup && brandTag) {
     textFilters.push(
       `drawtext=fontfile='${fontReg}':text='${escapeDrawtext(brandTag.toUpperCase())}':fontsize=${brandTagFontSize}:fontcolor=0x22D3EE:x=${brandNameX}:y=${brandTagY}:shadowcolor=black@0.6:shadowx=2:shadowy=2`,
     );
@@ -568,11 +582,17 @@ export async function composeVideo(opts: ComposeOpts): Promise<void> {
   // In wordmark mode (and fullbleed mode) the brand-shell logo PNG is NOT
   // overlaid. We only need the logo input for the outro avatar (a circular
   // 240px version).
-  const wantBrandLogo = !!logoPath && !useWordmark && !isChromeless;
-  // Split the logo input into two streams only when BOTH the brand-shell AND
-  // the avatar need it. Otherwise feed the avatar/brand directly from the raw
-  // input — splitting and leaving one output unconsumed is a ffmpeg error.
-  const needsLogoSplit = wantAvatar && wantBrandLogo;
+  const wantBrandLogo = !!logoPath && !useWordmark && !cornerLockup;
+  // Corner badge — the logo PNG rendered as a small rounded "album-art" tile
+  // at the top-right, with the channel name sitting to its LEFT as a lockup
+  // (added 2026-06-11). Always on for chromeless layouts; opt-in for locket
+  // via `cornerBadge`.
+  const wantCornerBadge = cornerLockup && !!logoPath;
+  // Split the logo input into two streams only when BOTH a canvas overlay
+  // (brand-shell or corner badge) AND the avatar need it. Otherwise feed the
+  // single consumer directly from the raw input — splitting and leaving one
+  // output unconsumed is a ffmpeg error.
+  const needsLogoSplit = wantAvatar && (wantBrandLogo || wantCornerBadge);
   const logoSplit = needsLogoSplit
     ? `[${logoIndex}:v]split=2[logo_brand_in][logo_avatar_in]`
     : null;
@@ -592,7 +612,7 @@ export async function composeVideo(opts: ComposeOpts): Promise<void> {
   // canvas. We still build the circular avatar branch when the outro card
   // needs it, so the logoPath input stays useful.
   const logoChain = logoPath
-    ? (useWordmark || isChromeless)
+    ? (useWordmark || cornerLockup)
       ? [
           ...(logoSplit ? [logoSplit] : []),
           ...(logoAvatarScaleAndMask ? [logoAvatarScaleAndMask] : []),
@@ -611,8 +631,8 @@ export async function composeVideo(opts: ComposeOpts): Promise<void> {
   // no brand text AND no outro overlay follows. Otherwise route to [burned]
   // so the next stage can overlay on top.
   const hasOutroOverlay = outroSec > 0;
-  const hasLegacyBrandOverlay = !useWordmark && !isChromeless && (!!logoPath || textChain.length > 0);
-  const hasFullbleedCorner = isChromeless && !!fullbleedCornerText;
+  const hasLegacyBrandOverlay = !useWordmark && !cornerLockup && (!!logoPath || textChain.length > 0);
+  const hasFullbleedCorner = cornerLockup && (!!fullbleedCornerText || wantCornerBadge);
   const hasOverlayStage = useWordmark || hasLegacyBrandOverlay || hasFullbleedCorner || hasOutroOverlay;
 
   // Last label produced by the existing visual chain before the outro stage.
@@ -720,17 +740,61 @@ export async function composeVideo(opts: ComposeOpts): Promise<void> {
     }
   }
 
-  // Fullbleed corner text — small decorative line at the top-left of the
-  // canvas (in place of the wordmark stack). Default font is Palatino
-  // Linotype Italic for an elegant serif feel; swap via fullbleedCornerFontFile.
-  // Anchor at x=60, y=80 — a respectful margin from the top-left corner.
+  // Fullbleed corner branding — top-left of the canvas (in place of the
+  // wordmark stack). Two variants:
+  //   • With logoPath (default since 2026-06-11): a rounded "album-art" badge
+  //     of the logo PNG at (60,60), with the corner text drawn beside it,
+  //     vertically centered against the badge — a horizontal lockup.
+  //   • Without logo: legacy bare corner text at (60,80).
+  // Default text font is Palatino Linotype Italic; swap via
+  // fullbleedCornerFontFile. Badge size/radius ride the existing logoWidth /
+  // logoCornerRadius opts (env PODCAST_LOGO_WIDTH / PODCAST_LOGO_RADIUS).
   const fullbleedCornerChain: string[] = [];
   if (hasFullbleedCorner) {
     const cornerX = 60;
-    const cornerY = 80;
-    fullbleedCornerChain.push(
-      `[burned]drawtext=fontfile='${fullbleedCornerFontFile}':text='${escapeDrawtext(fullbleedCornerText)}':fontsize=${fullbleedCornerFontSize}:fontcolor=white:x=${cornerX}:y=${cornerY}:shadowcolor=black@0.75:shadowx=0:shadowy=3:borderw=1:bordercolor=black@0.4[${preOutroLabel}]`,
-    );
+    if (wantCornerBadge) {
+      const badgeW = logoWidth;
+      const badgeR = Math.max(0, Math.min(Math.floor(badgeW / 2), logoCornerRadius));
+      // Top-RIGHT lockup (moved from top-left 2026-06-11): the channel name
+      // sits to the LEFT of the logo badge. Geometry picked to clear the
+      // TikTok / Reels top-right UI (search / camera icons live at y<160
+      // hugging the corner) and the channel's 120px right safe margin:
+      //   badge right edge at x = 1080-120, badge top at y = 180.
+      const badgeRightMargin = 120;
+      const badgeX = 1080 - badgeRightMargin - badgeW;
+      const badgeY = 180;
+      const badgeTextGap = 26;
+      const badgeMask = badgeR > 0
+        ? `,format=yuva420p,geq=lum='p(X,Y)':cb='p(X,Y)':cr='p(X,Y)':a='if(lt(X,${badgeR})*lt(Y,${badgeR}),if(lte(pow(${badgeR}-X,2)+pow(${badgeR}-Y,2),${badgeR * badgeR}),255,0),if(gt(X,W-${badgeR})*lt(Y,${badgeR}),if(lte(pow(X-W+${badgeR},2)+pow(${badgeR}-Y,2),${badgeR * badgeR}),255,0),if(lt(X,${badgeR})*gt(Y,H-${badgeR}),if(lte(pow(${badgeR}-X,2)+pow(Y-H+${badgeR},2),${badgeR * badgeR}),255,0),if(gt(X,W-${badgeR})*gt(Y,H-${badgeR}),if(lte(pow(X-W+${badgeR},2)+pow(Y-H+${badgeR},2),${badgeR * badgeR}),255,0),255))))'`
+        : "";
+      // Square-crop the logo (it ships square; crop guards odd sources), then
+      // round the corners with the usual geq alpha mask.
+      fullbleedCornerChain.push(
+        `[${logoBrandInput}]scale=${badgeW}:${badgeW}:force_original_aspect_ratio=increase,crop=${badgeW}:${badgeW}${badgeMask}[corner_badge]`,
+      );
+      const afterBadgeLabel = fullbleedCornerText ? "corner_badged" : preOutroLabel;
+      fullbleedCornerChain.push(
+        `[burned][corner_badge]overlay=${badgeX}:${badgeY}[${afterBadgeLabel}]`,
+      );
+      if (fullbleedCornerText) {
+        // Right-align the name against the badge's left edge via text_w.
+        const textRightEdge = badgeX - badgeTextGap;
+        const textY = badgeY + Math.round((badgeW - fullbleedCornerFontSize) / 2) - 2;
+        fullbleedCornerChain.push(
+          `[corner_badged]drawtext=fontfile='${fullbleedCornerFontFile}':text='${escapeDrawtext(fullbleedCornerText)}':fontsize=${fullbleedCornerFontSize}:fontcolor=white:x=${textRightEdge}-text_w:y=${textY}:shadowcolor=black@0.75:shadowx=0:shadowy=3:borderw=1:bordercolor=black@0.4[${preOutroLabel}]`,
+        );
+      }
+    } else {
+      // Text-only branding (logo disabled via PODCAST_LOGO="") — the channel
+      // name alone asserts the watermark. TOP-LEFT placement (moved from
+      // top-right 2026-06-11 per user request): x=80 (left safe margin),
+      // y=180 (clears the TikTok / Reels top UI row at y<160).
+      const cornerLeftX = 80;
+      const cornerY = 180;
+      fullbleedCornerChain.push(
+        `[burned]drawtext=fontfile='${fullbleedCornerFontFile}':text='${escapeDrawtext(fullbleedCornerText)}':fontsize=${fullbleedCornerFontSize}:fontcolor=white:x=${cornerLeftX}:y=${cornerY}:shadowcolor=black@0.75:shadowx=0:shadowy=3:borderw=1:bordercolor=black@0.4[${preOutroLabel}]`,
+      );
+    }
   }
 
   // Outro stage — matches the /create-video Remotion outro layout as close as

@@ -175,7 +175,22 @@ async function main() {
 
   // Render
   const videoPath = join(outputDir, "video.mp4");
-  await renderWithHyperframes({ compositionDir: outputDir, outputPath: videoPath });
+  await renderWithHyperframes({
+    compositionDir: outputDir,
+    outputPath: videoPath,
+    fps: cfg.hyperframesFps,
+    workers: cfg.hyperframesWorkers,
+    gpu: cfg.hyperframesGpu,
+  });
+
+  // Auto fidelity check — so preview vs frame video thật, cảnh báo scene lệch
+  try {
+    const { checkRenderFidelity, printFidelityReport } = await import("./src/render/render-check.js");
+    printFidelityReport(outputDir, await checkRenderFidelity(outputDir));
+  } catch (e) {
+    console.warn(`render-check skipped: ${e instanceof Error ? e.message : e}`);
+  }
+
   console.log(`\nDone: ${videoPath}`);
 }
 

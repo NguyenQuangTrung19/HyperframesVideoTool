@@ -134,27 +134,6 @@ html, body {
   animation: hf-progress-dot-glow 2s ease-in-out infinite;
 }
 
-/* ── GRAIN OVERLAY (from grain-overlay component) ───────────── */
-@keyframes hf-grain-noise {
-  0%,100% { transform: translate(0,0); }
-  10%  { transform: translate(-5%,-5%); }
-  20%  { transform: translate(-10%,5%); }
-  30%  { transform: translate(5%,-10%); }
-  40%  { transform: translate(-5%,15%); }
-  50%  { transform: translate(-10%,5%); }
-  60%  { transform: translate(15%,0); }
-  70%  { transform: translate(0,10%); }
-  80%  { transform: translate(-15%,0); }
-  90%  { transform: translate(10%,5%); }
-}
-
-#grain-overlay .grain-texture {
-  position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  opacity: 0.12;
-  animation: hf-grain-noise 0.5s steps(1) infinite;
-}
-
 /* ── BRAND SHELL HEADER (top-left persistent) ───────────────── */
 .brand-shell-header {
   /* top: 220px clears the TikTok/Reels username + follow-button overlay zone */
@@ -507,10 +486,9 @@ html, body {
 .cmp-side-label {
   font-family: 'Inter', sans-serif;
   font-size: 38px; font-weight: 700;
-  color: #fff;
+  color: #1a3c2a;
   line-height: 1;
   letter-spacing: -0.01em;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
 }
 
 .cmp-bar-value {
@@ -530,8 +508,8 @@ html, body {
   position: relative;
   height: 52px;
   width: 100%;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(26,60,42,0.07);
+  border: 1px solid rgba(26,60,42,0.14);
   border-radius: 26px;
   overflow: hidden;
 }
@@ -541,7 +519,6 @@ html, body {
   left: 0; top: 0; bottom: 0;
   width: 0%; /* tweened by animations.js */
   border-radius: 26px;
-  position: relative;
   overflow: hidden;
 }
 
@@ -583,9 +560,9 @@ html, body {
 .cmp-bar-track::before {
   content: ""; position: absolute; inset: 0;
   background-image:
-    linear-gradient(90deg, transparent 24.6%, rgba(255,255,255,0.10) 24.6%, rgba(255,255,255,0.10) 25.0%, transparent 25.0%),
-    linear-gradient(90deg, transparent 49.6%, rgba(255,255,255,0.13) 49.6%, rgba(255,255,255,0.13) 50.0%, transparent 50.0%),
-    linear-gradient(90deg, transparent 74.6%, rgba(255,255,255,0.10) 74.6%, rgba(255,255,255,0.10) 75.0%, transparent 75.0%);
+    linear-gradient(90deg, transparent 24.6%, rgba(26,60,42,0.12) 24.6%, rgba(26,60,42,0.12) 25.0%, transparent 25.0%),
+    linear-gradient(90deg, transparent 49.6%, rgba(26,60,42,0.16) 49.6%, rgba(26,60,42,0.16) 50.0%, transparent 50.0%),
+    linear-gradient(90deg, transparent 74.6%, rgba(26,60,42,0.12) 74.6%, rgba(26,60,42,0.12) 75.0%, transparent 75.0%);
   pointer-events: none;
   z-index: 2;
 }
@@ -595,7 +572,7 @@ html, body {
   margin-top: 30px;
   font-family: 'Inter', sans-serif;
   font-size: 30px; font-weight: 700;
-  color: rgba(255,255,255,0.92);
+  color: rgba(26,60,42,0.92);
   text-align: center;
   opacity: 0;
 }
@@ -627,7 +604,7 @@ html, body {
 }
 .cmp-card {
   width: 100%;
-  background: rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.60);
   backdrop-filter: blur(8px) saturate(1.2);
   -webkit-backdrop-filter: blur(8px) saturate(1.2);
   border-radius: 24px;
@@ -644,14 +621,14 @@ html, body {
 .cmp-label {
   font-family: 'Inter', sans-serif;
   font-size: 40px; font-weight: 500;
-  color: rgba(255,255,255,0.7);
+  color: rgba(26,60,42,0.70);
   text-transform: uppercase; letter-spacing: 3px;
 }
 
 .cmp-value {
   font-family: 'Playfair Display', serif;
   font-size: 110px; font-weight: 900;
-  color: #fff; line-height: 1.0;
+  color: #1a3c2a; line-height: 1.0;
   letter-spacing: -0.02em;
 }
 
@@ -672,11 +649,79 @@ html, body {
 .cmp-vs {
   font-family: 'Playfair Display', serif;
   font-size: 80px; font-weight: 900;
-  color: rgba(255,255,255,0.35);
+  color: rgba(26,60,42,0.35);
   text-align: center; line-height: 1;
   margin: 32px 0;
   opacity: 0;
 }
+
+/* ── Score variant (predicted scoreline + national flags) ─────── */
+/* Triggered when both comparison sides carry a `flag`. Dark "prediction
+   board" aesthetic shared with group-intro / match-results. Light text. */
+.layout-comparison-score {
+  gap: 70px;
+  align-items: center;
+}
+.cs-eyebrow {
+  font-family: 'Oswald', 'Inter', sans-serif;
+  font-size: 30px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 6px;
+  color: #fff;
+  background: #d6253b;
+  padding: 12px 34px; border-radius: 8px;
+  box-shadow: 0 8px 26px rgba(214,37,59,0.45);
+  opacity: 0;
+}
+.cs-board {
+  display: flex; align-items: center; justify-content: center;
+  gap: 36px; width: 100%;
+}
+.cs-side {
+  flex: 1 1 0;
+  display: flex; flex-direction: column; align-items: center; gap: 30px;
+  opacity: 0;
+}
+.cs-flag {
+  width: 240px; height: 160px;
+  border-radius: 16px; overflow: hidden;
+  border: 4px solid rgba(255,255,255,0.82);
+  box-shadow: 0 14px 44px rgba(0,0,0,0.55);
+  background: #0b1f16;
+}
+.cs-flag img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.cs-team {
+  font-family: 'Inter', sans-serif;
+  font-size: 48px; font-weight: 800;
+  color: #fff; text-align: center; line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+.cs-left.cs-win .cs-flag  { border-color: #34d399; box-shadow: 0 0 52px rgba(16,185,129,0.6); }
+.cs-right.cs-win .cs-flag { border-color: #e6c478; box-shadow: 0 0 52px rgba(196,163,90,0.6); }
+
+.cs-score {
+  display: flex; align-items: center; gap: 20px;
+  flex-shrink: 0;
+  opacity: 0;
+}
+.cs-sc {
+  font-family: 'Anton', sans-serif;
+  font-size: 180px; font-weight: 400; line-height: 0.9;
+  color: rgba(255,255,255,0.92);
+}
+.cs-dash {
+  font-family: 'Anton', sans-serif;
+  font-size: 110px; color: rgba(255,255,255,0.4);
+  transform: translateY(-12px);
+}
+.cs-sc-l.cs-sc-win { color: #34d399; text-shadow: 0 0 46px rgba(16,185,129,0.6); }
+.cs-sc-r.cs-sc-win { color: #e6c478; text-shadow: 0 0 46px rgba(196,163,90,0.6); }
+.cs-foot {
+  font-family: 'Inter', sans-serif;
+  font-size: 28px; font-weight: 500;
+  color: rgba(255,255,255,0.6);
+  text-align: center; opacity: 0;
+}
+.cs-foot b { color: #fff; font-weight: 700; }
 
 /* ── LAYOUT: STAT HERO ───────────────────────────────────────── */
 /* Image (z-1) stays visible behind the entire frame.
@@ -1499,7 +1544,7 @@ html, body {
 
 .fp-row {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
   flex: 1;
   position: relative;
@@ -1507,7 +1552,13 @@ html, body {
   min-height: 0;
 }
 
+/* Each player gets an EQUAL-WIDTH slot (flex: 1 1 0) so the token always
+   centers in its column — token positions stay evenly spaced regardless of
+   name length. (space-evenly equalized gaps between variable-width name boxes,
+   which pushed tokens off-grid when names differed in length.) */
 .fp-player {
+  flex: 1 1 0;
+  min-width: 0;
   display: flex; flex-direction: column;
   align-items: center;
   gap: 8px;
@@ -1534,7 +1585,8 @@ html, body {
   text-shadow: 0 1px 6px rgba(0,0,0,0.5);
   white-space: nowrap;
   letter-spacing: 0.01em;
-  max-width: 220px;
+  max-width: 100%;
+  padding: 0 4px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -1566,13 +1618,139 @@ html, body {
     0 0 0 3px rgba(196,163,90,0.9);
 }
 
+/* ── LAYOUT: GROUP INTRO (data-driven group reveal — flags + predicted finish) ── */
+.bg.group-intro-bg {
+  background:
+    repeating-linear-gradient(180deg, rgba(255,255,255,0.018) 0 56px, transparent 56px 112px),
+    radial-gradient(ellipse 120% 80% at 50% -10%, #1c4a32 0%, #0d2417 55%, #071a0e 100%);
+}
+.layout-group-intro { position: absolute; inset: 0; z-index: 5; }
+.layout-group-intro::before {
+  content: ""; position: absolute; top: -180px; left: 50%; transform: translateX(-50%);
+  width: 760px; height: 760px; border: 2px solid rgba(196,163,90,0.18); border-radius: 50%;
+}
+.gi-head { position: absolute; left: 80px; right: 80px; top: 300px; text-align: center; }
+.gi-eyebrow {
+  font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 34px; letter-spacing: 8px;
+  text-transform: uppercase; color: #c4a35a; opacity: 0;
+}
+.gi-group {
+  font-family: 'Playfair Display', serif; font-weight: 900; font-size: 200px; line-height: 0.9;
+  color: #fff; margin-top: 6px; letter-spacing: -2px; text-shadow: 0 8px 30px rgba(0,0,0,0.5); opacity: 0;
+}
+.gi-group .gi-group-lbl {
+  display: block; font-size: 46px; font-weight: 700; letter-spacing: 6px; color: #c4a35a;
+  text-transform: uppercase; margin-bottom: -6px;
+}
+.gi-rule {
+  width: 120px; height: 4px; margin: 22px auto 0; border-radius: 2px;
+  background: linear-gradient(90deg, transparent, #c4a35a, transparent); transform: scaleX(0);
+}
+.gi-teams { position: absolute; left: 64px; right: 64px; top: 740px; display: flex; flex-direction: column; gap: 26px; }
+.gi-team {
+  display: flex; align-items: center; gap: 30px; padding: 26px 34px; border-radius: 24px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.08);
+  opacity: 0;
+}
+.gi-team.gi-qualify {
+  border-color: rgba(196,163,90,0.55);
+  background: linear-gradient(135deg, rgba(196,163,90,0.16), rgba(196,163,90,0.05));
+}
+.gi-rank {
+  font-family: 'Playfair Display', serif; font-weight: 900; font-size: 84px; line-height: 1;
+  width: 96px; text-align: center; flex: 0 0 auto; color: rgba(255,255,255,0.45);
+}
+.gi-team.gi-qualify .gi-rank {
+  background: linear-gradient(135deg, #fde68a, #c4a35a);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.gi-flag {
+  width: 132px; height: 92px; flex: 0 0 auto; border-radius: 12px; overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.5), 0 0 0 2px rgba(255,255,255,0.18);
+}
+.gi-flag img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.gi-name { flex: 1; min-width: 0; }
+.gi-name-t { font-family: 'Playfair Display', serif; font-weight: 800; font-size: 62px; color: #fff; line-height: 1.05; }
+.gi-name-s { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 30px; color: rgba(255,255,255,0.6); margin-top: 4px; }
+.gi-chip {
+  flex: 0 0 auto; font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 30px; letter-spacing: 1px;
+  text-transform: uppercase; padding: 12px 24px; border-radius: 40px; white-space: nowrap;
+}
+.gi-chip.go { color: #062b1c; background: linear-gradient(135deg, #fde68a, #c4a35a); }
+.gi-chip.out { color: #fff; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); }
+.gi-foot {
+  position: absolute; left: 80px; right: 80px; bottom: 330px; text-align: center;
+  font-family: 'Inter', sans-serif; font-weight: 600; font-size: 30px; color: rgba(255,255,255,0.55); opacity: 0;
+}
+.gi-foot b { color: #c4a35a; }
+
+/* ── LAYOUT: MATCH RESULTS (data-driven scoreline board — no image) ── */
+.layout-match-results { position: absolute; inset: 0; z-index: 5; }
+.mr-head { position: absolute; left: 80px; right: 80px; top: 290px; text-align: center; }
+.mr-eyebrow {
+  font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 32px; letter-spacing: 8px;
+  text-transform: uppercase; color: #c4a35a; opacity: 0;
+}
+.mr-title {
+  font-family: 'Playfair Display', serif; font-weight: 900; font-size: 78px; line-height: 1.0;
+  color: #fff; margin-top: 10px; text-shadow: 0 8px 30px rgba(0,0,0,0.5); opacity: 0;
+}
+.mr-sub {
+  font-family: 'Inter', sans-serif; font-weight: 600; font-size: 32px; color: rgba(255,255,255,0.6);
+  margin-top: 8px; opacity: 0;
+}
+.mr-rule {
+  width: 120px; height: 4px; margin: 22px auto 0; border-radius: 2px;
+  background: linear-gradient(90deg, transparent, #c4a35a, transparent); transform: scaleX(0);
+}
+.mr-rows { position: absolute; left: 64px; right: 64px; top: 600px; display: flex; flex-direction: column; gap: 18px; }
+.mr-row {
+  display: flex; align-items: center; gap: 20px; padding: 20px 30px; border-radius: 20px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.32), inset 0 1px 0 rgba(255,255,255,0.08);
+  opacity: 0;
+}
+.mr-home, .mr-away {
+  flex: 1; min-width: 0; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 44px;
+  color: #fff; line-height: 1.1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.mr-home { text-align: right; }
+.mr-away { text-align: left; }
+.mr-score { flex: 0 0 auto; width: 200px; text-align: center; }
+.mr-sc-line {
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+  font-family: 'Anton', sans-serif; font-size: 56px; line-height: 1; color: #fff;
+}
+.mr-sep { color: #c4a35a; font-size: 40px; }
+.mr-note {
+  font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 22px; letter-spacing: 1px;
+  text-transform: uppercase; color: #c4a35a; margin-top: 6px;
+}
+.mr-foot {
+  position: absolute; left: 80px; right: 80px; bottom: 330px; text-align: center;
+  font-family: 'Inter', sans-serif; font-weight: 600; font-size: 30px; color: rgba(255,255,255,0.55); opacity: 0;
+}
+.mr-foot b { color: #c4a35a; }
+/* Dense variant for 7-8 row boards (knockout rounds) — tighter so it never reaches the footer */
+.mr-rows.mr-dense { top: 560px; gap: 11px; }
+.mr-dense .mr-row { padding: 13px 28px; }
+.mr-dense .mr-home, .mr-dense .mr-away { font-size: 38px; }
+.mr-dense .mr-sc-line { font-size: 46px; }
+.mr-dense .mr-sep { font-size: 34px; }
+.mr-dense .mr-note { font-size: 20px; margin-top: 4px; }
+
 /* ── LAYOUT: OUTRO ───────────────────────────────────────────── */
 .layout-outro {
   position: absolute; inset: 0; z-index: 5;
   background: linear-gradient(180deg, rgba(245,240,230,0.85) 0%, rgba(240,235,224,0.92) 100%);
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
-  padding: 260px 80px 260px;
+  /* bottom padding lớn hơn = chừa chỗ cho tt-card ngay dưới text,
+     để cả cụm [CTA + tên kênh + card] cân quanh tâm khung hình */
+  padding: 260px 80px 540px;
   gap: 0;
   text-align: center;
 }
@@ -1657,7 +1835,7 @@ html, body {
 
 .tt-card {
   position: absolute;
-  bottom: 240px;            /* above the TikTok action overlay area */
+  bottom: 640px;            /* grouped just below the outro text → whole cluster centers; also clears the 420px caption strip */
   left: 50%;
   transform: translate(-50%, 150px);   /* start off-screen below */
   display: flex; align-items: center; gap: 30px;

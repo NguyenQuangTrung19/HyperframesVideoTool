@@ -33,7 +33,7 @@ describe("composeHtml", () => {
 
     // ── Persistent brand shell ────────────────────────────────
     expect(html).toContain('class="brand-shell-header"');
-    expect(html).toContain('id="grain-overlay"');
+    expect(html).not.toContain('id="grain-overlay"'); // grain layer removed 2026-06-10 (video bị đục)
     // Shell has no data-start (persistent)
     expect(html).toContain('class="brand-name"');
     expect(html).toContain("SportsForAllTV");
