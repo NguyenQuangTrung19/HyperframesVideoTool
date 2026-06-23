@@ -1,7 +1,0 @@
-Khoan đã! Bỏ ngay tay ra khỏi chuột và nhìn thẳng vào màn hình đi. Bạn có đang vò đầu bứt tai vì một cái lỗi sai ngớ ngẩn nào đó mà tìm hoài không ra không? Nếu đang bốc hỏa, thì nghe xong câu chuyện này, bạn sẽ thấy mình vẫn còn là một thiên tài sáng chói chán!
-
-Chuyện là về anh bạn đồng nghiệp của tôi, một lập trình viên Full-stack có thâm niên, ngón tay gõ phím nhanh như chớp. Tuần trước, anh ấy nhận một dự án quan trọng. Mọi thứ trôi chảy mượt mà cho đến khi hệ thống báo lỗi đỏ lòm ở đúng một dòng code duy nhất. Anh ấy cau mày, kiểm tra lại cú pháp. Không sai. Thử đổi cả thuật toán. Vẫn báo lỗi.
-
-Sang ngày thứ hai, anh ấy bắt đầu lẩm bẩm một mình. Sang ngày thứ ba, anh ấy tuyệt vọng đến mức mang hẳn một con vịt cao su lên bàn để ngồi "tâm sự" và hỏi nó xem đoạn code này bị ám quẻ ở đâu. Đến chiều ngày thứ ba, khi anh ấy sắp khóc đến nơi thì anh trưởng nhóm đi ngang qua, nheo mắt nhìn màn hình rồi vỗ vai bảo: "Ủa em, file này là file nháp anh xóa từ tháng trước rồi mà, em lôi ra ngồi sửa làm gì vậy?"
-
-Không gian lúc đó tĩnh lặng đến mức nghe được cả tiếng con tim vỡ vụn. Anh bạn tôi nhìn lại đường dẫn file, rồi nhìn con vịt cao su, chỉ muốn hóa thành một dòng lệnh rồi tự xóa mình khỏi vũ trụ này luôn. Thế nên, bài học xương máu là: Trước khi nghi ngờ trí thông minh của mình, hãy chắc chắn rằng bạn đang mở đúng file đã nhé!
