@@ -10,9 +10,15 @@ const PlannedScene = z.object({
     .string()
     .min(1)
     .regex(/\.(png|jpg|jpeg|webp)$/i, "filename must end in .png/.jpg/.jpeg/.webp"),
-  /** Grok / image-gen prompt (English, sports photography style). */
-  prompt: z.string().min(20).max(1500),
-  /** Free-text hint for the user (Vietnamese OK) — what's in the image. */
+  /**
+   * Optional legacy Grok / image-gen prompt (English). No longer authored by
+   * /images-for-videos — image descriptions now live only in subjectHint +
+   * anh-can-tao.md, and the user generates images freehand from those. Kept
+   * optional so older plans that still carry a prompt continue to validate.
+   */
+  prompt: z.string().min(20).max(1500).optional(),
+  /** Hint for the user (Vietnamese OK) — who/what is in the image. The sole
+   *  description now: names subject + key trait/rating; used in anh-can-tao.md. */
   subjectHint: z.string().max(200).optional(),
 });
 
