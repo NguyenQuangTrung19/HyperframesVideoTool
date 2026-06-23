@@ -9,78 +9,67 @@
       "id": "hook",
       "template": "hook",
       "filename": "hook.png",
-      "subjectHint": "Messi — gương mặt của loạt kỷ lục World Cup 2026 (hook trivia)",
-      "prompt": "Vertical 9:16 football poster artwork featuring Lionel Messi, the Argentine forward and captain for the Argentina national team, in a powerful iconic hero pose with arms slightly outstretched, intense focused expression. He wears the light blue and white striped Argentina national team home kit with the AFA crest clearly visible on the chest. Background: a dramatic dark graphic backdrop layered with faint glowing numerical-data motifs and stat-graphic patterns, a huge stylized World Cup 2026 trophy silhouette floating faintly as a watermark, golden light rays radiating outward. Vibrant saturated palette with bold gold-and-cyan highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup statistics broadcast graphic. No on-image text or captions, no scoreboard graphics."
+      "subjectHint": "Messi — gương mặt của loạt kỷ lục World Cup 2026 (hook trivia)"
     },
     {
       "id": "ronaldo",
       "template": "callout",
       "filename": "ronaldo.png",
-      "subjectHint": "Ronaldo sa sút — 10 trận gần nhất tịt ngòi (Bồ Đào Nha)",
-      "prompt": "Vertical 9:16 football poster artwork featuring Cristiano Ronaldo, the Portuguese forward and captain for the Portugal national team, in a somber contemplative hero pose with a thoughtful downward gaze, hands on hips. He wears the red Portugal national team home kit with the Portuguese Football Federation crest clearly visible on the chest and the captain's armband. Background: a moody dark red graphic backdrop with a huge faded Portugal crest watermark, cool muted light rays creating a reflective end-of-era atmosphere. Moody saturated dark red palette, high contrast, glossy graphic-design finish. Stylized like a career-twilight editorial poster. The Portugal crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+      "subjectHint": "Ronaldo sa sút — 10 trận gần nhất tịt ngòi (Bồ Đào Nha)"
     },
     {
       "id": "haaland-hieu-qua",
       "template": "stat-hero",
       "filename": "haaland-hieu-qua.png",
-      "subjectHint": "Haaland hiệu quả — 42 chạm bóng, dẫn đầu xG (Na Uy)",
-      "prompt": "Vertical 9:16 football poster artwork featuring Erling Haaland, the Norwegian striker for Manchester City and the Norway national team, in a cold ruthless hero pose striking the ball with clinical power, ice-cold focused expression. He wears the red Norway national team home kit with the Norway NFF crest clearly visible on the chest. Background: a bold red Norwegian graphic backdrop with a huge faint Norway NFF crest watermark, sharp cyan light rays radiating outward suggesting clinical efficiency. Vibrant saturated red palette with cyan highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup statistics broadcast graphic. The Norway crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+      "subjectHint": "Haaland hiệu quả — 42 chạm bóng, dẫn đầu xG (Na Uy)"
     },
     {
       "id": "pen-hong",
       "template": "callout",
       "filename": "pen-hong.png",
-      "subjectHint": "Ảnh ghép — pen-hong-1: Kane (Anh, hỏng pen 2022) · pen-hong-2: Messi (Argentina, hỏng pen 2026)",
-      "prompt": "Split-frame composed of two single-subject vertical 9:16 football poster images. LEFT image (pen-hong-1): Harry Kane, the English striker and captain for the England national team, in a dejected pose with hands on his head after a missed penalty, wearing the white England national team home kit with the Three Lions crest clearly visible on the chest, against a moody dark white-and-red England graphic backdrop with a faint Three Lions crest watermark and cold light rays, framed chest-up with head in the upper third. RIGHT image (pen-hong-2): Lionel Messi, the Argentine forward and captain for the Argentina national team, in a rueful pose looking down after a missed penalty, wearing the light blue and white striped Argentina national team home kit with the AFA crest clearly visible on the chest, against a moody dark sky-blue Argentine graphic backdrop with a faint AFA crest watermark and cold light rays, framed chest-up with head in the upper third. Both moody, high contrast, glossy graphic-design finish. Stylized like a World Cup penalty-miss editorial poster. Crests visible on jerseys, no on-image text or captions, no scoreboard graphics."
+      "subjectHint": "Ảnh ghép — pen-hong-1: Kane (Anh, hỏng pen 2022) · pen-hong-2: Messi (Argentina, hỏng pen 2026)"
     },
     {
       "id": "messi-5-ban",
       "template": "stat-hero",
       "filename": "messi-5-ban.png",
-      "subjectHint": "Messi — ghi cả 5 bàn đầu của Argentina (cùng Salenko 1994)",
-      "prompt": "Vertical 9:16 football poster artwork featuring Lionel Messi, the Argentine forward and captain for the Argentina national team, in a triumphant goal celebration with arms raised and a roar of joy. He wears the light blue and white striped Argentina national team home kit with the AFA crest clearly visible on the chest and the captain's armband. Background: a bold sky-blue Argentine graphic backdrop with a huge faint AFA crest watermark, dramatic golden light rays radiating outward, golden stars glowing. Vibrant saturated sky-blue palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup record-breaking promotional poster. The Argentina crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+      "subjectHint": "Messi — ghi cả 5 bàn đầu của Argentina (cùng Salenko 1994)"
     },
     {
       "id": "messi-sut",
       "template": "stat-hero",
       "filename": "messi-sut.png",
-      "subjectHint": "Messi — lớn tuổi nhất có 5+ sút & 5+ đi bóng/trận WC",
-      "prompt": "Vertical 9:16 football poster artwork featuring Lionel Messi, the Argentine forward and captain for the Argentina national team, in a mesmerizing dribbling hero pose weaving past with the ball glued to his feet, low and balanced. He wears the light blue and white striped Argentina national team home kit with the AFA crest clearly visible on the chest and the captain's armband. Background: a bold sky-blue Argentine graphic backdrop with a huge faint AFA crest watermark, dramatic light rays radiating outward. Vibrant saturated sky-blue palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup statistics broadcast graphic. The Argentina crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+      "subjectHint": "Messi — lớn tuổi nhất có 5+ sút & 5+ đi bóng/trận WC"
     },
     {
       "id": "messi-cham-bong",
       "template": "stat-hero",
       "filename": "messi-cham-bong.png",
-      "subjectHint": "Messi — tiền đạo lớn tuổi nhất có 50+ chạm bóng/trận WC (71 chạm)",
-      "prompt": "Vertical 9:16 football poster artwork featuring Lionel Messi, the Argentine forward and captain for the Argentina national team, in a composed orchestrating hero pose on the ball, head up surveying the pitch like a conductor. He wears the light blue and white striped Argentina national team home kit with the AFA crest clearly visible on the chest and the captain's armband. Background: a bold sky-blue Argentine graphic backdrop with a huge faint AFA crest watermark, dramatic light rays radiating outward. Vibrant saturated sky-blue palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup statistics broadcast graphic. The Argentina crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+      "subjectHint": "Messi — tiền đạo lớn tuổi nhất có 50+ chạm bóng/trận WC (71 chạm)"
     },
     {
       "id": "olise",
       "template": "stat-hero",
       "filename": "olise.png",
-      "subjectHint": "Olise — 100 bàn+kiến tạo từ mùa 2024-25 (Pháp)",
-      "prompt": "Vertical 9:16 football poster artwork featuring Michael Olise, the French winger for the France national team, in a creative hero pose carrying the ball with an elegant body feint, eyes up and assured. He wears the blue France national team home kit with the French FFF rooster crest clearly visible on the chest. Background: a bold blue French graphic backdrop with a huge faint FFF rooster crest watermark, dramatic golden light rays radiating outward. Vibrant saturated blue palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup statistics broadcast graphic. The France crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+      "subjectHint": "Olise — 100 bàn+kiến tạo từ mùa 2024-25 (Pháp)"
     },
     {
       "id": "haaland-2-ban",
       "template": "stat-hero",
       "filename": "haaland-2-ban.png",
-      "subjectHint": "Haaland — cầu thủ thứ 6 ghi 2+ bàn ở mỗi trận 2 lần đầu dự WC",
-      "prompt": "Vertical 9:16 football poster artwork featuring Erling Haaland, the Norwegian striker for Manchester City and the Norway national team, in an explosive double-goal celebration roar holding up two fingers, ferocious energy. He wears the red Norway national team home kit with the Norway NFF crest clearly visible on the chest. Background: a bold red Norwegian graphic backdrop with a huge faint Norway NFF crest watermark, dramatic golden light rays radiating outward. Vibrant saturated red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Norway crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+      "subjectHint": "Haaland — cầu thủ thứ 6 ghi 2+ bàn ở mỗi trận 2 lần đầu dự WC"
     },
     {
       "id": "haaland-na-uy",
       "template": "stat-hero",
       "filename": "haaland-na-uy.png",
-      "subjectHint": "Haaland — ghi bàn 12 trận liên tiếp cho Na Uy",
-      "prompt": "Vertical 9:16 football poster artwork featuring Erling Haaland, the Norwegian striker for Manchester City and the Norway national team, in a powerful mid-stride hero pose driving forward with relentless momentum. He wears the red Norway national team home kit with the Norway NFF crest clearly visible on the chest. Background: a bold red Norwegian graphic backdrop with a huge faint Norway NFF crest watermark, dramatic light rays radiating outward, faint Norwegian flag color bands across the lower frame. Vibrant saturated red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Norway crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+      "subjectHint": "Haaland — ghi bàn 12 trận liên tiếp cho Na Uy"
     },
     {
       "id": "mbappe",
       "template": "stat-hero",
       "filename": "mbappe.png",
-      "subjectHint": "Mbappé — ghi 2+ bàn ở 3 kỳ WC liên tiếp (Pháp)",
-      "prompt": "Vertical 9:16 football poster artwork featuring Kylian Mbappe, the French forward and captain for the France national team, in his iconic arms-crossed goal celebration with cool swagger and intensity. He wears the blue France national team home kit with the French FFF rooster crest clearly visible on the chest and the captain's armband. Background: a bold blue French graphic backdrop with a huge faint FFF rooster crest watermark, dramatic golden light rays radiating outward. Vibrant saturated blue palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The France crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+      "subjectHint": "Mbappé — ghi 2+ bàn ở 3 kỳ WC liên tiếp (Pháp)"
     }
   ]
 }

@@ -26,8 +26,7 @@
         "bigStat": "15",
         "headline": "Dàn finisher|định đoạt cuộc chơi",
         "kenBurns": "impact-zoom"
-      },
-      "imagePrompt": "Vertical 9:16 football poster artwork featuring Thomas Tuchel, the German head coach of the England national team, in a commanding touchline pose pointing and directing from the sideline, wearing a smart dark England coaching jacket with the Three Lions crest on the chest. Behind him, three stylized England player silhouettes in white kits stand ready like impact substitutes. Background: a bold white-and-red England graphic backdrop with a huge stylized Three Lions crest floating faintly as a watermark, dramatic light rays radiating outward, faint England flag color bands across the lower frame. Vibrant saturated white-and-red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup squad-depth promotional poster. The Three Lions crest visible, no on-image text or captions, no scoreboard graphics."
+      }
     },
     {
       "id": "result",
@@ -53,8 +52,7 @@
           "Manchester United"
         ],
         "context": "Bàn ấn định trận gặp Croatia"
-      },
-      "imagePrompt": "Vertical 9:16 football poster artwork featuring Marcus Rashford, the English forward for Manchester United and the England national team, in an explosive goal celebration roar, arms spread wide with fierce intensity after scoring a decisive goal. He wears the white England national team home kit with the Three Lions crest clearly visible on the chest. Background: a bold white-and-red England graphic backdrop with a huge stylized Three Lions crest floating faintly behind him as a watermark, dramatic golden light rays radiating outward. Vibrant saturated white-and-red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Three Lions crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+      }
     },
     {
       "id": "morgan-rogers",
@@ -70,8 +68,7 @@
           "Aston Villa"
         ],
         "context": "Pha bóng dọn cỗ tinh tế"
-      },
-      "imagePrompt": "Vertical 9:16 football poster artwork featuring Morgan Rogers, the English attacking midfielder for Aston Villa and the England national team, in a dynamic hero pose making a sharp decoy run at full pace, pointing to drag defenders away. He wears the white England national team home kit with the Three Lions crest clearly visible on the chest. Background: a bold white-and-red England graphic backdrop with a huge stylized Three Lions crest floating faintly behind him as a watermark, dramatic light rays radiating outward. Vibrant saturated white-and-red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Three Lions crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+      }
     },
     {
       "id": "gordon",
@@ -87,8 +84,7 @@
           "Chạy chỗ sau lưng hậu vệ"
         ],
         "context": "17 lần chạm bóng"
-      },
-      "imagePrompt": "Vertical 9:16 football poster artwork featuring Anthony Gordon, the English winger for the England national team, in an energetic hero pose sprinting forward and pressing with full commitment, determined expression. He wears the white England national team home kit with the Three Lions crest clearly visible on the chest. Background: a bold white-and-red England graphic backdrop with a huge stylized Three Lions crest floating faintly behind him as a watermark, dramatic light rays radiating outward. Vibrant saturated white-and-red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Three Lions crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+      }
     },
     {
       "id": "saka",
@@ -104,8 +100,7 @@
           "Giữ gìn vì chấn thương"
         ],
         "context": "Arsenal"
-      },
-      "imagePrompt": "Vertical 9:16 football poster artwork featuring Bukayo Saka, the English winger for Arsenal and the England national team, in a hero pose cutting inside on the ball and whipping in a cross, balanced and sharp. He wears the white England national team home kit with the Three Lions crest clearly visible on the chest. Background: a bold white-and-red England graphic backdrop with a huge stylized Three Lions crest floating faintly behind him as a watermark, dramatic light rays radiating outward. Vibrant saturated white-and-red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Three Lions crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+      }
     },
     {
       "id": "spence",
@@ -121,8 +116,7 @@
           "Tottenham"
         ],
         "context": "Suýt ghi bàn từ cánh phải"
-      },
-      "imagePrompt": "Vertical 9:16 football poster artwork featuring Djed Spence, the English right-back for Tottenham Hotspur and the England national team, in an attacking hero pose driving forward down the right flank with the ball, full of running. He wears the white England national team home kit with the Three Lions crest clearly visible on the chest. Background: a bold white-and-red England graphic backdrop with a huge stylized Three Lions crest floating faintly behind him as a watermark, dramatic light rays radiating outward. Vibrant saturated white-and-red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Three Lions crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+      }
     },
     {
       "id": "unused-depth",
@@ -147,8 +141,7 @@
         "template": "callout",
         "statement": "Tuchel: tôi có 14 đến 15 cầu thủ đá chính được.",
         "tag": "Phát biểu"
-      },
-      "imagePrompt": "Vertical 9:16 football poster artwork featuring Thomas Tuchel, the German head coach of the England national team, in a confident touchline hero pose gesturing with both hands as he explains, focused and assured, wearing a smart dark England coaching jacket with the Three Lions crest on the chest. Background: a bold white-and-red England graphic backdrop with a huge stylized Three Lions crest floating faintly behind him as a watermark, dramatic light rays radiating outward, faint England flag color bands across the lower frame. Vibrant saturated white-and-red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup touchline editorial poster. The Three Lions crest visible on the jacket, no on-image text or captions, no scoreboard graphics."
+      }
     },
     {
       "id": "engagement",

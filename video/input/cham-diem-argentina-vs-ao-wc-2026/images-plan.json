@@ -9,113 +9,97 @@
       "id": "hook",
       "template": "hook",
       "filename": "hook.png",
-      "subjectHint": "Messi ăn mừng kỷ lục Vua phá lưới World Cup — hero shot recap",
-      "prompt": "Vertical 9:16 football poster artwork featuring Lionel Messi, the Argentine forward and captain for the Argentina national team, in an emotional goal celebration pointing to the sky after a record-breaking strike, eyes intense with pride. He wears the light blue and white striped Argentina national team home kit with the AFA crest clearly visible on the chest and the captain's armband. Background: a bold sky-blue-and-white Argentine graphic backdrop with a huge stylized AFA crest floating faintly behind him as a watermark, dramatic golden light rays radiating outward, three golden stars glowing above. Vibrant saturated sky-blue palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup record-breaking promotional poster. The Argentina crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+      "subjectHint": "Messi ăn mừng kỷ lục Vua phá lưới World Cup — hero shot recap"
     },
     {
       "id": "messi",
       "template": "stat-hero",
       "filename": "messi.png",
-      "subjectHint": "Lionel Messi — Argentina | MVP Điểm 8/10 (cú đúp, kỷ lục)",
-      "prompt": "Vertical 9:16 football poster artwork featuring Lionel Messi, the Argentine forward and captain for the Argentina national team, in a triumphant hero pose celebrating with both arms raised, fierce joy on his face. He wears the light blue and white striped Argentina national team home kit with the AFA crest clearly visible on the chest and the captain's armband. A large stylized golden-blue rating badge glowing brightly with the number 8 floats prominently near his shoulder like a video-game MVP stat overlay with subtle golden sparkle. Background: a bold sky-blue Argentine graphic backdrop with a huge faint AFA crest watermark, dramatic golden light rays radiating outward, golden stars glowing. Vibrant saturated sky-blue palette with gold highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup MVP broadcast graphic. The Argentina crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+      "subjectHint": "Lionel Messi — Argentina | MVP Điểm 8/10 (cú đúp, kỷ lục)"
     },
     {
       "id": "lisandro-martinez",
       "template": "stat-hero",
       "filename": "lisandro-martinez.png",
-      "subjectHint": "Lisandro Martinez — Argentina | Điểm 7/10",
-      "prompt": "Vertical 9:16 football poster artwork featuring Lisandro Martinez, the combative Argentine centre-back for the Argentina national team, in a fierce defensive hero pose striding out with the ball after a clean clearance, snarling with intensity. He wears the light blue and white striped Argentina national team home kit with the AFA crest clearly visible on the chest. A stylized blue rating badge glowing with the number 7 floats near his shoulder like a video-game stat overlay. Background: a bold sky-blue Argentine graphic backdrop with a huge faint AFA crest watermark, dramatic light rays radiating outward. Vibrant saturated sky-blue palette with cool blue highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Argentina crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+      "subjectHint": "Lisandro Martinez — Argentina | Điểm 7/10"
     },
     {
       "id": "medina",
       "template": "stat-hero",
       "filename": "medina.png",
-      "subjectHint": "Facundo Medina — Argentina | Điểm 7/10 (kiến tạo bàn mở tỷ số)",
-      "prompt": "Vertical 9:16 football poster artwork featuring Facundo Medina, the Argentine left-sided defender for the Argentina national team, in a hero pose driving forward and cutting the ball back for the assist, determined and committed. He wears the light blue and white striped Argentina national team home kit with the AFA crest clearly visible on the chest. A stylized blue rating badge glowing with the number 7 floats near his shoulder like a video-game stat overlay. Background: a bold sky-blue Argentine graphic backdrop with a huge faint AFA crest watermark, dramatic light rays radiating outward. Vibrant saturated sky-blue palette with cool blue highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Argentina crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+      "subjectHint": "Facundo Medina — Argentina | Điểm 7/10 (kiến tạo bàn mở tỷ số)"
     },
     {
       "id": "de-paul",
       "template": "stat-hero",
       "filename": "de-paul.png",
-      "subjectHint": "Rodrigo De Paul — Argentina | Điểm 7/10 (vệ sĩ của Messi)",
-      "prompt": "Vertical 9:16 football poster artwork featuring Rodrigo De Paul, the energetic Argentine midfielder for the Argentina national team, in a tireless hero pose chasing down and winning the ball, all aggression and running. He wears the light blue and white striped Argentina national team home kit with the AFA crest clearly visible on the chest. A stylized blue rating badge glowing with the number 7 floats near his shoulder like a video-game stat overlay. Background: a bold sky-blue Argentine graphic backdrop with a huge faint AFA crest watermark, dramatic light rays radiating outward. Vibrant saturated sky-blue palette with cool blue highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Argentina crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+      "subjectHint": "Rodrigo De Paul — Argentina | Điểm 7/10 (vệ sĩ của Messi)"
     },
     {
       "id": "mac-allister",
       "template": "stat-hero",
       "filename": "mac-allister.png",
-      "subjectHint": "Alexis Mac Allister — Argentina | Điểm 7/10",
-      "prompt": "Vertical 9:16 football poster artwork featuring Alexis Mac Allister, the Argentine midfielder for the Argentina national team, in a composed hero pose spraying a forward pass while shielding the back four, balanced and aware. He wears the light blue and white striped Argentina national team home kit with the AFA crest clearly visible on the chest. A stylized blue rating badge glowing with the number 7 floats near his shoulder like a video-game stat overlay. Background: a bold sky-blue Argentine graphic backdrop with a huge faint AFA crest watermark, dramatic light rays radiating outward. Vibrant saturated sky-blue palette with cool blue highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Argentina crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+      "subjectHint": "Alexis Mac Allister — Argentina | Điểm 7/10"
     },
     {
       "id": "almada",
       "template": "stat-hero",
       "filename": "almada.png",
-      "subjectHint": "Thiago Almada — Argentina | Điểm 7/10 (pha giả bỏ bóng cho Messi)",
-      "prompt": "Vertical 9:16 football poster artwork featuring Thiago Almada, the young Argentine attacking midfielder for the Argentina national team, in a clever hero pose dummying the ball with a quick body feint, light and sharp. He wears the light blue and white striped Argentina national team home kit with the AFA crest clearly visible on the chest. A stylized blue rating badge glowing with the number 7 floats near his shoulder like a video-game stat overlay. Background: a bold sky-blue Argentine graphic backdrop with a huge faint AFA crest watermark, dramatic light rays radiating outward. Vibrant saturated sky-blue palette with cool blue highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Argentina crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+      "subjectHint": "Thiago Almada — Argentina | Điểm 7/10 (pha giả bỏ bóng cho Messi)"
     },
     {
       "id": "emi-martinez",
       "template": "stat-hero",
       "filename": "emi-martinez.png",
-      "subjectHint": "Emiliano Martinez — thủ môn Argentina | Điểm 6/10",
-      "prompt": "Vertical 9:16 football poster artwork featuring Emiliano Martinez, the Argentine goalkeeper for the Argentina national team, in a focused hero pose making a save, palms strong and eyes locked on the ball. He wears a dark goalkeeper kit with the AFA crest clearly visible on the chest and goalkeeper gloves on. A stylized silver rating badge glowing with the number 6 floats near his shoulder like a video-game stat overlay. Background: a sky-blue Argentine graphic backdrop with a huge faint AFA crest watermark, dramatic light rays radiating outward. Saturated sky-blue palette with neutral silver highlights, high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Argentina crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+      "subjectHint": "Emiliano Martinez — thủ môn Argentina | Điểm 6/10"
     },
     {
       "id": "molina",
       "template": "stat-hero",
       "filename": "molina.png",
-      "subjectHint": "Nahuel Molina — Argentina | Điểm 6/10",
-      "prompt": "Vertical 9:16 football poster artwork featuring Nahuel Molina, the Argentine right-back for the Argentina national team, in an attacking hero pose overlapping down the right wing with the ball at pace. He wears the light blue and white striped Argentina national team home kit with the AFA crest clearly visible on the chest. A stylized silver rating badge glowing with the number 6 floats near his shoulder like a video-game stat overlay. Background: a sky-blue Argentine graphic backdrop with a huge faint AFA crest watermark, dramatic light rays radiating outward. Saturated sky-blue palette with neutral silver highlights, high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Argentina crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+      "subjectHint": "Nahuel Molina — Argentina | Điểm 6/10"
     },
     {
       "id": "romero",
       "template": "stat-hero",
       "filename": "romero.png",
-      "subjectHint": "Cristian Romero — Argentina | Điểm 6/10 (rời sân vì chấn thương)",
-      "prompt": "Vertical 9:16 football poster artwork featuring Cristian Romero, the Argentine centre-back for the Argentina national team, in a commanding defensive hero pose winning a header, fierce and dominant. He wears the light blue and white striped Argentina national team home kit with the AFA crest clearly visible on the chest. A stylized silver rating badge glowing with the number 6 floats near his shoulder like a video-game stat overlay. Background: a sky-blue Argentine graphic backdrop with a huge faint AFA crest watermark, dramatic light rays radiating outward. Saturated sky-blue palette with neutral silver highlights, high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Argentina crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+      "subjectHint": "Cristian Romero — Argentina | Điểm 6/10 (rời sân vì chấn thương)"
     },
     {
       "id": "enzo",
       "template": "stat-hero",
       "filename": "enzo.png",
-      "subjectHint": "Enzo Fernandez — Argentina | Điểm 6/10 (chuyền dẫn tới pen)",
-      "prompt": "Vertical 9:16 football poster artwork featuring Enzo Fernandez, the Argentine midfielder for the Argentina national team, in a driving hero pose carrying the ball forward through midfield with purpose. He wears the light blue and white striped Argentina national team home kit with the AFA crest clearly visible on the chest. A stylized silver rating badge glowing with the number 6 floats near his shoulder like a video-game stat overlay. Background: a sky-blue Argentine graphic backdrop with a huge faint AFA crest watermark, dramatic light rays radiating outward. Saturated sky-blue palette with neutral silver highlights, high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Argentina crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+      "subjectHint": "Enzo Fernandez — Argentina | Điểm 6/10 (chuyền dẫn tới pen)"
     },
     {
       "id": "lautaro",
       "template": "stat-hero",
       "filename": "lautaro.png",
-      "subjectHint": "Lautaro Martinez — Argentina | Điểm 6/10 (kiếm phạt đền)",
-      "prompt": "Vertical 9:16 football poster artwork featuring Lautaro Martinez, the Argentine striker for the Argentina national team, in an aggressive hero pose bursting through on a run with snarling intensity. He wears the light blue and white striped Argentina national team home kit with the AFA crest clearly visible on the chest. A stylized silver rating badge glowing with the number 6 floats near his shoulder like a video-game stat overlay. Background: a sky-blue Argentine graphic backdrop with a huge faint AFA crest watermark, dramatic light rays radiating outward. Saturated sky-blue palette with neutral silver highlights, high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Argentina crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+      "subjectHint": "Lautaro Martinez — Argentina | Điểm 6/10 (kiếm phạt đền)"
     },
     {
       "id": "otamendi",
       "template": "stat-hero",
       "filename": "otamendi.png",
-      "subjectHint": "Nicolas Otamendi — Argentina | Điểm 6/10 (vào thay Romero)",
-      "prompt": "Vertical 9:16 football poster artwork featuring Nicolas Otamendi, the veteran Argentine centre-back for the Argentina national team, in a robust defensive hero pose holding the line and clearing the ball, experienced and composed. He wears the light blue and white striped Argentina national team home kit with the AFA crest clearly visible on the chest. A stylized silver rating badge glowing with the number 6 floats near his shoulder like a video-game stat overlay. Background: a sky-blue Argentine graphic backdrop with a huge faint AFA crest watermark, dramatic light rays radiating outward. Saturated sky-blue palette with neutral silver highlights, high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Argentina crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+      "subjectHint": "Nicolas Otamendi — Argentina | Điểm 6/10 (vào thay Romero)"
     },
     {
       "id": "nico-gonzalez",
       "template": "stat-hero",
       "filename": "nico-gonzalez.png",
-      "subjectHint": "Nicolas Gonzalez — Argentina | Điểm 6/10 (đánh đầu chệch cột)",
-      "prompt": "Vertical 9:16 football poster artwork featuring Nicolas Gonzalez, the Argentine winger for the Argentina national team, in a hero pose rising for a glancing header at full stretch. He wears the light blue and white striped Argentina national team home kit with the AFA crest clearly visible on the chest. A stylized silver rating badge glowing with the number 6 floats near his shoulder like a video-game stat overlay. Background: a sky-blue Argentine graphic backdrop with a huge faint AFA crest watermark, dramatic light rays radiating outward. Saturated sky-blue palette with neutral silver highlights, high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Argentina crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+      "subjectHint": "Nicolas Gonzalez — Argentina | Điểm 6/10 (đánh đầu chệch cột)"
     },
     {
       "id": "julian-alvarez",
       "template": "stat-hero",
       "filename": "julian-alvarez.png",
-      "subjectHint": "Julian Alvarez — Argentina | Điểm 5/10 (bỏ lỡ cơ hội ngon)",
-      "prompt": "Vertical 9:16 football poster artwork featuring Julian Alvarez, the Argentine forward for the Argentina national team, in a frustrated dejected pose holding his head after missing a great chance, dismayed expression. He wears the light blue and white striped Argentina national team home kit with the AFA crest clearly visible on the chest. A large stylized deep-red warning rating badge glowing ominously with the number 5 floats near his shoulder like a video-game low-score stat overlay with a cracked glass effect. Background: a moody dark sky-blue graphic backdrop with a huge faded AFA crest watermark, cold downward light rays creating a somber atmosphere. Moody saturated dark palette, high contrast, glossy graphic-design finish. Stylized like a World Cup disappointment editorial poster. The Argentina crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+      "subjectHint": "Julian Alvarez — Argentina | Điểm 5/10 (bỏ lỡ cơ hội ngon)"
     },
     {
       "id": "scaloni",
       "template": "callout",
       "filename": "scaloni.png",
-      "subjectHint": "Lionel Scaloni (HLV) — Điểm 7/10, 'Argentina quá phụ thuộc Messi'",
-      "prompt": "Vertical 9:16 football poster artwork featuring Lionel Scaloni, the Argentine head coach of the Argentina national team, in a thoughtful touchline hero pose with arms folded and a concerned, contemplative expression, wearing a smart dark Argentina coaching jacket with the AFA crest on the chest. Background: a bold sky-blue-and-white Argentine graphic backdrop with a huge faint AFA crest watermark, dramatic light rays radiating outward, three golden stars glowing faintly above, faint Argentine flag color bands across the lower frame. Vibrant saturated sky-blue palette with cool highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup touchline editorial poster. The Argentina crest visible on the jacket, no on-image text or captions, no scoreboard graphics."
+      "subjectHint": "Lionel Scaloni (HLV) — Điểm 7/10, 'Argentina quá phụ thuộc Messi'"
     }
   ]
 }
