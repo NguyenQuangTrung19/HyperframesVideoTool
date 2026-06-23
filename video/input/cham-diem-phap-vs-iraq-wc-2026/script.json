@@ -1,0 +1,286 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "title": "Chấm điểm Pháp 3-0 Iraq: Mbappe cú đúp, Dembele nổ súng",
+    "source": {
+      "url": "local",
+      "domain": "local",
+      "image": null
+    },
+    "channel": "SportsForAllTV"
+  },
+  "voice": {
+    "provider": "ausynclab",
+    "voiceId": "1914439",
+    "speed": 0.9
+  },
+  "scenes": [
+    {
+      "id": "hook",
+      "type": "hook",
+      "voiceText": "Ba không. Pháp nghiền nát Iraq, đoạt vé vào vòng 32 đội. Mbappe lập cú đúp, Dembele nổ phát súng World Cup đầu tiên.",
+      "templateData": {
+        "template": "hook",
+        "eyebrow": "World Cup 2026",
+        "eyebrowSub": "Bảng I · Philadelphia",
+        "bigStat": "3-0",
+        "headline": "Mbappe cú đúp|Dembele nổ súng",
+        "kenBurns": "impact-zoom"
+      },
+      "imagePrompt": "Vertical 9:16 football poster artwork featuring Kylian Mbappe, the French forward and captain for the France national team, in an iconic arms-crossed goal celebration with intense swagger after scoring. He wears the blue France national team home kit with the French FFF rooster crest clearly visible on the chest. Background: a bold blue-white-red French graphic backdrop with a huge stylized FFF rooster crest floating faintly behind him as a watermark, dramatic golden light rays radiating outward, faint French tricolore color bands across the lower frame. Vibrant saturated blue palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The France crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "dienbien",
+      "type": "body",
+      "voiceText": "Trận đấu phải hoãn hai tiếng vì bão tại Philadelphia. Vào cuộc, Mbappe mở tỷ số phút năm mươi tư bằng cú sút xa, rồi nhân đôi cách biệt chỉ ba phút sau. Dembele ấn định phút sáu mươi sáu.",
+      "templateData": {
+        "template": "callout",
+        "statement": "Hoãn 2 tiếng vì bão: Mbappe nổ súng phút 54 và 57, Dembele chốt hạ phút 66.",
+        "tag": "Diễn biến"
+      },
+      "imagePrompt": "Vertical 9:16 football poster artwork showing a dramatic World Cup match moment. Centre: Kylian Mbappe, the French forward and captain for the France national team, striking the ball with power from distance in a dynamic long-range shooting pose, fierce focused expression. He wears the blue France national team home kit with the French FFF rooster crest clearly visible on the chest and the captain armband. Background: a moody storm-tinged blue French graphic backdrop with a huge faint FFF rooster crest watermark, heavy dark storm clouds abstracted as graphic motifs in the upper frame, dramatic lightning-bolt light streaks radiating across the sky, faint French tricolore color bands at the lower edge. Vibrant saturated deep-blue palette with electric white highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup storm-night matchday poster. The France crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "mbappe",
+      "type": "body",
+      "voiceText": "Tâm điểm là Kylian Mbappe, điểm tám trên mười. Một cú đúp đẳng cấp, một bàn sút xa và một pha đệm bóng cận thành. Cú đúp đưa anh chỉ còn kém Messi đúng một bàn trong cuộc đua Vua phá lưới.",
+      "templateData": {
+        "template": "stat-hero",
+        "value": "8/10",
+        "label": "Kylian Mbappe",
+        "highlights": [
+          "Cú đúp",
+          "Sút xa",
+          "Áp sát Messi"
+        ],
+        "context": "Tiền đạo · đội trưởng tuyển Pháp"
+      },
+      "imagePrompt": "Vertical 9:16 football poster artwork featuring Kylian Mbappe, the French forward and captain for the France national team, in an explosive hero pose mid-stride sprinting at full pace after a long-range strike, fierce expression. He wears the blue France national team home kit with the French FFF rooster crest clearly visible on the chest and the captain's armband. A large stylized golden-blue rating badge glowing brightly with the number 8 floats prominently near his shoulder like a video-game MVP stat overlay with subtle golden sparkle. Background: a bold blue French graphic backdrop with a huge faint FFF rooster crest watermark, dramatic golden light rays radiating outward. Vibrant saturated blue palette with gold highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup MVP broadcast graphic. The France crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "dembele",
+      "type": "body",
+      "voiceText": "Ousmane Dembele cũng nhận điểm tám trên mười. Anh ghi bàn World Cup đầu tiên trong sự nghiệp với cú dứt điểm đầy tự tin, ấn định chiến thắng ba không.",
+      "templateData": {
+        "template": "stat-hero",
+        "value": "8/10",
+        "label": "Ousmane Dembele",
+        "highlights": [
+          "Bàn WC đầu tiên",
+          "Dứt điểm tự tin"
+        ],
+        "context": "Tiền vệ cánh tuyển Pháp"
+      },
+      "imagePrompt": "Vertical 9:16 football poster artwork featuring Ousmane Dembele, the French winger for the France national team, in a joyous goal celebration roar after scoring, arms wide with pure delight. He wears the blue France national team home kit with the French FFF rooster crest clearly visible on the chest. A stylized golden rating badge glowing with the number 8 floats near his shoulder like a video-game stat overlay. Background: a bold blue French graphic backdrop with a huge faint FFF rooster crest watermark, dramatic golden light rays radiating outward. Vibrant saturated blue palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The France crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "olise",
+      "type": "body",
+      "voiceText": "Michael Olise cũng đạt tám trên mười. Đường chọc khe tuyệt vời của anh dọn cỗ trọn vẹn cho bàn thắng của Dembele.",
+      "templateData": {
+        "template": "stat-hero",
+        "value": "8/10",
+        "label": "Michael Olise",
+        "highlights": [
+          "Pha kiến tạo",
+          "Chọc khe"
+        ],
+        "context": "Tiền vệ cánh tuyển Pháp"
+      },
+      "imagePrompt": "Vertical 9:16 football poster artwork featuring Michael Olise, the French winger for the France national team, in an elegant hero pose threading a through ball, body poised and eyes up after the assist. He wears the blue France national team home kit with the French FFF rooster crest clearly visible on the chest. A stylized golden rating badge glowing with the number 8 floats near his shoulder like a video-game stat overlay. Background: a bold blue French graphic backdrop with a huge faint FFF rooster crest watermark, dramatic golden light rays radiating outward. Vibrant saturated blue palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The France crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "rabiot",
+      "type": "body",
+      "voiceText": "Adrien Rabiot chấm sáu trên mười. Chuyền bóng gần như hoàn hảo giữa sân, suýt chút nữa ghi bàn bằng một pha đánh đầu.",
+      "templateData": {
+        "template": "stat-hero",
+        "value": "6/10",
+        "label": "Adrien Rabiot",
+        "highlights": [
+          "Chuyền hoàn hảo",
+          "Suýt ghi bàn"
+        ],
+        "context": "Tiền vệ tuyển Pháp"
+      },
+      "imagePrompt": "Vertical 9:16 football poster artwork featuring Adrien Rabiot, the tall French midfielder for the France national team, in a hero pose rising for a header in midfield, composed and powerful. He wears the blue France national team home kit with the French FFF rooster crest clearly visible on the chest. A stylized silver rating badge glowing with the number 6 floats near his shoulder like a video-game stat overlay. Background: a blue French graphic backdrop with a huge faint FFF rooster crest watermark, dramatic light rays radiating outward. Saturated blue palette with neutral silver highlights, high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The France crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "kone",
+      "type": "body",
+      "voiceText": "Manu Kone đạt sáu trên mười. Anh đánh chặn tốt, đọc tình huống nhạy bén để bịt các đường lên bóng của Iraq.",
+      "templateData": {
+        "template": "stat-hero",
+        "value": "6/10",
+        "label": "Manu Kone",
+        "highlights": [
+          "Đánh chặn",
+          "Đọc tình huống"
+        ],
+        "context": "Tiền vệ trung tâm tuyển Pháp"
+      },
+      "imagePrompt": "Vertical 9:16 football poster artwork featuring Manu Kone, the French central midfielder for the France national team, in a determined hero pose intercepting and winning the ball, body low and balanced. He wears the blue France national team home kit with the French FFF rooster crest clearly visible on the chest. A stylized silver rating badge glowing with the number 6 floats near his shoulder like a video-game stat overlay. Background: a blue French graphic backdrop with a huge faint FFF rooster crest watermark, dramatic light rays radiating outward. Saturated blue palette with neutral silver highlights, high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The France crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "barcola",
+      "type": "body",
+      "voiceText": "Bradley Barcola chấm sáu trên mười. Anh có tốc độ tạo đột biến bên cánh, nhưng còn thiếu điểm nhấn ở pha xử lý cuối cùng.",
+      "templateData": {
+        "template": "stat-hero",
+        "value": "6/10",
+        "label": "Bradley Barcola",
+        "highlights": [
+          "Tốc độ",
+          "Thiếu điểm nhấn cuối"
+        ],
+        "context": "Tiền vệ cánh tuyển Pháp"
+      },
+      "imagePrompt": "Vertical 9:16 football poster artwork featuring Bradley Barcola, the young French winger for the France national team, in a dynamic hero pose sprinting with the ball at pace, dropping a shoulder to go past a defender. He wears the blue France national team home kit with the French FFF rooster crest clearly visible on the chest. A stylized silver rating badge glowing with the number 6 floats near his shoulder like a video-game stat overlay. Background: a blue French graphic backdrop with a huge faint FFF rooster crest watermark, dramatic light rays radiating outward. Saturated blue palette with neutral silver highlights, high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The France crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "kounde",
+      "type": "body",
+      "voiceText": "Jules Kounde đạt sáu trên mười. Vài lỗi nhỏ trong phòng ngự, nhưng những pha dâng cao của anh bên hành lang phải lại rất hiệu quả.",
+      "templateData": {
+        "template": "stat-hero",
+        "value": "6/10",
+        "label": "Jules Kounde",
+        "highlights": [
+          "Dâng cao hiệu quả",
+          "Vài lỗi phòng ngự"
+        ],
+        "context": "Hậu vệ phải tuyển Pháp"
+      },
+      "imagePrompt": "Vertical 9:16 football poster artwork featuring Jules Kounde, the French right-back for the France national team, in an attacking hero pose overlapping down the right flank with the ball, full of intent. He wears the blue France national team home kit with the French FFF rooster crest clearly visible on the chest. A stylized silver rating badge glowing with the number 6 floats near his shoulder like a video-game stat overlay. Background: a blue French graphic backdrop with a huge faint FFF rooster crest watermark, dramatic light rays radiating outward. Saturated blue palette with neutral silver highlights, high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The France crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "upamecano",
+      "type": "body",
+      "voiceText": "Dayot Upamecano cũng sáu trên mười. Anh thi đấu thoải mái, kiểm soát tốt khu trung lộ và bịt kín mọi pha phản công của đối thủ.",
+      "templateData": {
+        "template": "stat-hero",
+        "value": "6/10",
+        "label": "Dayot Upamecano",
+        "highlights": [
+          "Kiểm soát trung lộ",
+          "Thi đấu thoải mái"
+        ],
+        "context": "Trung vệ tuyển Pháp"
+      },
+      "imagePrompt": "Vertical 9:16 football poster artwork featuring Dayot Upamecano, the French centre-back for the France national team, in a commanding defensive hero pose striding out with the ball after winning possession, calm and assured. He wears the blue France national team home kit with the French FFF rooster crest clearly visible on the chest. A stylized silver rating badge glowing with the number 6 floats near his shoulder like a video-game stat overlay. Background: a blue French graphic backdrop with a huge faint FFF rooster crest watermark, dramatic light rays radiating outward. Saturated blue palette with neutral silver highlights, high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The France crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "digne",
+      "type": "body",
+      "voiceText": "Lucas Digne đạt sáu trên mười. Anh hỗ trợ tốt cánh trái và giữ phòng ngự chắc chắn suốt cả trận.",
+      "templateData": {
+        "template": "stat-hero",
+        "value": "6/10",
+        "label": "Lucas Digne",
+        "highlights": [
+          "Hỗ trợ cánh trái",
+          "Phòng ngự chắc"
+        ],
+        "context": "Hậu vệ trái tuyển Pháp"
+      },
+      "imagePrompt": "Vertical 9:16 football poster artwork featuring Lucas Digne, the French left-back for the France national team, in a hero pose whipping in a cross from the left flank, balanced on the follow-through. He wears the blue France national team home kit with the French FFF rooster crest clearly visible on the chest. A stylized silver rating badge glowing with the number 6 floats near his shoulder like a video-game stat overlay. Background: a blue French graphic backdrop with a huge faint FFF rooster crest watermark, dramatic light rays radiating outward. Saturated blue palette with neutral silver highlights, high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The France crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "maignan",
+      "type": "body",
+      "voiceText": "Thủ môn Mike Maignan chấm sáu trên mười. Một trận nhàn nhã trong khung gỗ, anh gần như không có nhiều việc phải làm.",
+      "templateData": {
+        "template": "stat-hero",
+        "value": "6/10",
+        "label": "Mike Maignan",
+        "highlights": [
+          "Trận nhàn nhã",
+          "Ít việc phải làm"
+        ],
+        "context": "Thủ môn tuyển Pháp"
+      },
+      "imagePrompt": "Vertical 9:16 football poster artwork featuring Mike Maignan, the French goalkeeper and shot-stopper for the France national team, in a focused hero pose set and ready in goal, gloves up and alert. He wears a dark goalkeeper kit with the French FFF rooster crest clearly visible on the chest and goalkeeper gloves on. A stylized silver rating badge glowing with the number 6 floats near his shoulder like a video-game stat overlay. Background: a blue French graphic backdrop with a huge faint FFF rooster crest watermark, dramatic light rays radiating outward. Saturated blue palette with neutral silver highlights, high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The France crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "cherki",
+      "type": "body",
+      "voiceText": "Rayan Cherki nhận sáu trên mười sau khi vào sân thay Olise giữa hiệp hai, mang theo sự sáng tạo cho hàng công.",
+      "templateData": {
+        "template": "stat-hero",
+        "value": "6/10",
+        "label": "Rayan Cherki",
+        "highlights": [
+          "Vào sân thay Olise",
+          "Sáng tạo"
+        ],
+        "context": "Tiền vệ tấn công tuyển Pháp"
+      },
+      "imagePrompt": "Vertical 9:16 football poster artwork featuring Rayan Cherki, the young French playmaker for the France national team, in a creative hero pose carrying the ball with a flick of skill, light on his feet. He wears the blue France national team home kit with the French FFF rooster crest clearly visible on the chest. A stylized silver rating badge glowing with the number 6 floats near his shoulder like a video-game stat overlay. Background: a blue French graphic backdrop with a huge faint FFF rooster crest watermark, dramatic light rays radiating outward. Saturated blue palette with neutral silver highlights, high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The France crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "doue",
+      "type": "body",
+      "voiceText": "Desire Doue cũng sáu trên mười. Anh vào sân thay đồng đội Dembele, trấn giữ chắc chắn hành lang cánh phải.",
+      "templateData": {
+        "template": "stat-hero",
+        "value": "6/10",
+        "label": "Desire Doue",
+        "highlights": [
+          "Vào sân thay Dembele",
+          "Trấn giữ cánh phải"
+        ],
+        "context": "Tiền đạo trẻ tuyển Pháp"
+      },
+      "imagePrompt": "Vertical 9:16 football poster artwork featuring Desire Doue, the young French forward for the France national team, in a lively hero pose driving at the defence on the right wing with the ball. He wears the blue France national team home kit with the French FFF rooster crest clearly visible on the chest. A stylized silver rating badge glowing with the number 6 floats near his shoulder like a video-game stat overlay. Background: a blue French graphic backdrop with a huge faint FFF rooster crest watermark, dramatic light rays radiating outward. Saturated blue palette with neutral silver highlights, high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The France crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "saliba",
+      "type": "body",
+      "voiceText": "Người bị trừ điểm nhiều nhất là William Saliba, chỉ năm trên mười. Anh để mất Al-Hamadi ngay trong vòng cấm, một khoảnh khắc lơ là hiếm hoi.",
+      "templateData": {
+        "template": "stat-hero",
+        "value": "5/10",
+        "label": "William Saliba",
+        "highlights": [
+          "Để mất người",
+          "Lơ là trong cấm địa"
+        ],
+        "context": "Trung vệ tuyển Pháp · điểm thấp nhất"
+      },
+      "imagePrompt": "Vertical 9:16 football poster artwork featuring William Saliba, the French centre-back for the France national team, in a frustrated dejected pose with hands on hips looking back after a defensive lapse, shoulders dropped. He wears the blue France national team home kit with the French FFF rooster crest clearly visible on the chest. A large stylized deep-red warning rating badge glowing ominously with the number 5 floats near his shoulder like a video-game low-score stat overlay with a cracked glass effect. Background: a moody dark blue graphic backdrop with a huge faded FFF rooster crest watermark, cold downward light rays creating a somber atmosphere. Moody saturated dark blue palette, high contrast, glossy graphic-design finish. Stylized like a World Cup disappointment editorial poster. The France crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "deschamps",
+      "type": "body",
+      "voiceText": "Trên băng ghế chỉ đạo, Didier Deschamps nhận bảy trên mười. Hài lòng với bàn thắng đột phá của Dembele, ông gọi hàng công Pháp là đáng sợ nhất cả giải đấu.",
+      "templateData": {
+        "template": "callout",
+        "statement": "Deschamps: \"Đây là hàng công đáng sợ nhất cả giải đấu.\"",
+        "tag": "Huấn luyện viên 7/10"
+      },
+      "imagePrompt": "Vertical 9:16 football poster artwork featuring Didier Deschamps, the French head coach of the France national team, in a composed touchline hero pose with a satisfied nod, arms slightly raised in approval, wearing a smart dark France coaching jacket with the FFF rooster crest on the chest. A stylized blue rating badge glowing with the number 7 floats near his shoulder like a video-game stat overlay. Background: a bold blue-white-red French graphic backdrop with a huge faint FFF rooster crest watermark, dramatic light rays radiating outward, faint French tricolore color bands across the lower frame. Vibrant saturated blue palette with cool highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup touchline editorial poster. The France crest visible on the jacket, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "engagement",
+      "type": "body",
+      "voiceText": "Theo bạn, ai mới xứng đáng là hay nhất trận này của tuyển Pháp, Mbappe, Dembele hay Olise? Hãy để lại bình luận bên dưới video nhé.",
+      "templateData": {
+        "template": "engagement-question",
+        "question": "Theo bạn, ai hay nhất trận này — Mbappe, Dembele hay Olise?",
+        "cta": "Để lại bình luận bên dưới nhé",
+        "tag": "Câu hỏi"
+      }
+    },
+    {
+      "id": "outro",
+      "type": "outro",
+      "voiceText": "Theo dõi Sports For All Ti Vi để xem nhiều chấm điểm và phân tích sâu hơn mỗi tuần.",
+      "templateData": {
+        "template": "outro",
+        "ctaTop": "Theo dõi ngay",
+        "channelName": "SportsForAllTV",
+        "source": "Sưu tầm"
+      }
+    }
+  ]
+}

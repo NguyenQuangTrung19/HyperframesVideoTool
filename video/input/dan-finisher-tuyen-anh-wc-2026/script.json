@@ -1,0 +1,176 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "title": "Dàn dự bị 'finisher' là chìa khóa World Cup của tuyển Anh",
+    "source": {
+      "url": "local",
+      "domain": "local",
+      "image": null
+    },
+    "channel": "SportsForAllTV"
+  },
+  "voice": {
+    "provider": "ausynclab",
+    "voiceId": "1914439",
+    "speed": 0.9
+  },
+  "scenes": [
+    {
+      "id": "hook",
+      "type": "hook",
+      "voiceText": "Mười lăm cầu thủ đá chính được trong cùng một đội hình. Tuchel đang sở hữu chiều sâu hiếm có ở World Cup, và dàn dự bị chính là chìa khóa.",
+      "templateData": {
+        "template": "hook",
+        "eyebrow": "World Cup 2026",
+        "eyebrowSub": "Tuyển Anh · Chiều sâu",
+        "bigStat": "15",
+        "headline": "Dàn finisher|định đoạt cuộc chơi",
+        "kenBurns": "impact-zoom"
+      },
+      "imagePrompt": "Vertical 9:16 football poster artwork featuring Thomas Tuchel, the German head coach of the England national team, in a commanding touchline pose pointing and directing from the sideline, wearing a smart dark England coaching jacket with the Three Lions crest on the chest. Behind him, three stylized England player silhouettes in white kits stand ready like impact substitutes. Background: a bold white-and-red England graphic backdrop with a huge stylized Three Lions crest floating faintly as a watermark, dramatic light rays radiating outward, faint England flag color bands across the lower frame. Vibrant saturated white-and-red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup squad-depth promotional poster. The Three Lions crest visible, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "result",
+      "type": "body",
+      "voiceText": "Tuyển Anh vừa hạ Croatia với tỷ số bốn hai. Đáng nói nhất không phải hàng công đá chính, mà là cách Tuchel xoay tua mà chất lượng không hề giảm.",
+      "templateData": {
+        "template": "callout",
+        "statement": "Anh 4-2 Croatia: chiến thắng của chiều sâu.",
+        "tag": "Bối cảnh"
+      }
+    },
+    {
+      "id": "rashford",
+      "type": "body",
+      "voiceText": "Marcus Rashford vào sân ở phút 72. Chỉ 13 phút sau, anh ghi luôn bàn ấn định. Đúng kiểu một finisher mà Tuchel cần.",
+      "templateData": {
+        "template": "stat-hero",
+        "value": "72'",
+        "label": "Marcus Rashford",
+        "highlights": [
+          "Vào sân phút 72",
+          "Ghi bàn sau 13 phút",
+          "Manchester United"
+        ],
+        "context": "Bàn ấn định trận gặp Croatia"
+      },
+      "imagePrompt": "Vertical 9:16 football poster artwork featuring Marcus Rashford, the English forward for Manchester United and the England national team, in an explosive goal celebration roar, arms spread wide with fierce intensity after scoring a decisive goal. He wears the white England national team home kit with the Three Lions crest clearly visible on the chest. Background: a bold white-and-red England graphic backdrop with a huge stylized Three Lions crest floating faintly behind him as a watermark, dramatic golden light rays radiating outward. Vibrant saturated white-and-red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Three Lions crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "morgan-rogers",
+      "type": "body",
+      "voiceText": "Morgan Rogers cũng vào sân khoảng phút 70. Một pha chạy chỗ nghi binh của anh đã kéo dãn hàng thủ, mở ra bàn thắng thứ tư cho tuyển Anh.",
+      "templateData": {
+        "template": "stat-hero",
+        "value": "70'",
+        "label": "Morgan Rogers",
+        "highlights": [
+          "Chạy chỗ nghi binh",
+          "Mở ra bàn thứ tư",
+          "Aston Villa"
+        ],
+        "context": "Pha bóng dọn cỗ tinh tế"
+      },
+      "imagePrompt": "Vertical 9:16 football poster artwork featuring Morgan Rogers, the English attacking midfielder for Aston Villa and the England national team, in a dynamic hero pose making a sharp decoy run at full pace, pointing to drag defenders away. He wears the white England national team home kit with the Three Lions crest clearly visible on the chest. Background: a bold white-and-red England graphic backdrop with a huge stylized Three Lions crest floating faintly behind him as a watermark, dramatic light rays radiating outward. Vibrant saturated white-and-red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Three Lions crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "gordon",
+      "type": "body",
+      "voiceText": "Anthony Gordon thì đá chính trận này. Anh có 17 lần chạm bóng, miệt mài pressing và liên tục chạy chỗ sau lưng hàng thủ Croatia.",
+      "templateData": {
+        "template": "stat-hero",
+        "value": "17",
+        "label": "Anthony Gordon",
+        "highlights": [
+          "Đá chính",
+          "Pressing không ngơi nghỉ",
+          "Chạy chỗ sau lưng hậu vệ"
+        ],
+        "context": "17 lần chạm bóng"
+      },
+      "imagePrompt": "Vertical 9:16 football poster artwork featuring Anthony Gordon, the English winger for the England national team, in an energetic hero pose sprinting forward and pressing with full commitment, determined expression. He wears the white England national team home kit with the Three Lions crest clearly visible on the chest. Background: a bold white-and-red England graphic backdrop with a huge stylized Three Lions crest floating faintly behind him as a watermark, dramatic light rays radiating outward. Vibrant saturated white-and-red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Three Lions crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "saka",
+      "type": "body",
+      "voiceText": "Bukayo Saka chỉ vào sân 20 phút, nhưng kịp kiến tạo cho Rashford. Tuchel đang giữ gìn anh vì chấn thương gân Achilles từ mùa giải Arsenal.",
+      "templateData": {
+        "template": "stat-hero",
+        "value": "20'",
+        "label": "Bukayo Saka",
+        "highlights": [
+          "Vào sân 20 phút",
+          "Kiến tạo cho Rashford",
+          "Giữ gìn vì chấn thương"
+        ],
+        "context": "Arsenal"
+      },
+      "imagePrompt": "Vertical 9:16 football poster artwork featuring Bukayo Saka, the English winger for Arsenal and the England national team, in a hero pose cutting inside on the ball and whipping in a cross, balanced and sharp. He wears the white England national team home kit with the Three Lions crest clearly visible on the chest. Background: a bold white-and-red England graphic backdrop with a huge stylized Three Lions crest floating faintly behind him as a watermark, dramatic light rays radiating outward. Vibrant saturated white-and-red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Three Lions crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "spence",
+      "type": "body",
+      "voiceText": "Ở hàng thủ, Djed Spence vào thay Reece James bên cánh phải. Anh dâng cao đầy biến hóa và suýt nữa đã có bàn thắng cho riêng mình.",
+      "templateData": {
+        "template": "stat-hero",
+        "value": "Hậu vệ",
+        "label": "Djed Spence",
+        "highlights": [
+          "Thay Reece James",
+          "Dâng cao biến hóa",
+          "Tottenham"
+        ],
+        "context": "Suýt ghi bàn từ cánh phải"
+      },
+      "imagePrompt": "Vertical 9:16 football poster artwork featuring Djed Spence, the English right-back for Tottenham Hotspur and the England national team, in an attacking hero pose driving forward down the right flank with the ball, full of running. He wears the white England national team home kit with the Three Lions crest clearly visible on the chest. Background: a bold white-and-red England graphic backdrop with a huge stylized Three Lions crest floating faintly behind him as a watermark, dramatic light rays radiating outward. Vibrant saturated white-and-red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Three Lions crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "unused-depth",
+      "type": "body",
+      "voiceText": "Ấn tượng nhất là Ollie Watkins, Eberechi Eze và Kobbie Mainoo vẫn chưa được dùng tới. Năm 2018, lựa chọn dự bị của tuyển Anh chỉ là Danny Welbeck và Fabian Delph.",
+      "templateData": {
+        "template": "feature-list",
+        "title": "Chiều sâu vẫn còn nguyên",
+        "bullets": [
+          "Ollie Watkins · chưa ra sân",
+          "Eberechi Eze · chưa ra sân",
+          "Kobbie Mainoo · chưa ra sân",
+          "2018: chỉ Welbeck và Delph dự bị"
+        ]
+      }
+    },
+    {
+      "id": "tuchel",
+      "type": "body",
+      "voiceText": "Tuchel nói anh có 14 đến 15 cầu thủ đủ sức tạo ảnh hưởng, đều là người đá chính được. Một lợi thế khác biệt trên đường tới chung kết ngày 19 tháng 7.",
+      "templateData": {
+        "template": "callout",
+        "statement": "Tuchel: tôi có 14 đến 15 cầu thủ đá chính được.",
+        "tag": "Phát biểu"
+      },
+      "imagePrompt": "Vertical 9:16 football poster artwork featuring Thomas Tuchel, the German head coach of the England national team, in a confident touchline hero pose gesturing with both hands as he explains, focused and assured, wearing a smart dark England coaching jacket with the Three Lions crest on the chest. Background: a bold white-and-red England graphic backdrop with a huge stylized Three Lions crest floating faintly behind him as a watermark, dramatic light rays radiating outward, faint England flag color bands across the lower frame. Vibrant saturated white-and-red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup touchline editorial poster. The Three Lions crest visible on the jacket, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "engagement",
+      "type": "body",
+      "voiceText": "Theo bạn, ai mới là quân bài tẩy nguy hiểm nhất trong dàn finisher của tuyển Anh, Rashford hay Morgan Rogers? Hãy để lại bình luận bên dưới video nhé.",
+      "templateData": {
+        "template": "engagement-question",
+        "question": "Theo bạn, ai là finisher nguy hiểm nhất của tuyển Anh, Rashford hay Morgan Rogers?",
+        "cta": "Để lại bình luận bên dưới nhé",
+        "tag": "Câu hỏi"
+      }
+    },
+    {
+      "id": "outro",
+      "type": "outro",
+      "voiceText": "Theo dõi Sports For All Ti Vi để xem nhiều phân tích sâu hơn mỗi tuần.",
+      "templateData": {
+        "template": "outro",
+        "ctaTop": "Theo dõi ngay",
+        "channelName": "SportsForAllTV",
+        "source": "Sưu tầm"
+      }
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "version": "1.0",
+  "source": "cham-diem-na-uy-vs-senegal-wc-2026.txt",
+  "contentType": "MATCH RECAP",
+  "title": "Cham diem Na Uy 3-2 Senegal: Haaland cu dup dua Vikings vao vong trong",
+  "createdAt": "2026-06-23T12:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Haaland ăn mừng cú đúp — hero shot recap Na Uy 3-2 Senegal",
+      "prompt": "Vertical 9:16 football poster artwork featuring Erling Haaland, the Norwegian striker for Manchester City and the Norway national team, in an explosive goal celebration roar, arms spread wide, veins-out intensity after scoring. He wears the red Norway national team home kit with the Norway NFF crest clearly visible on the chest. Background: a bold red-and-white Norwegian graphic backdrop with a huge stylized Norway NFF crest floating faintly behind him as a watermark, dramatic golden light rays radiating outward, faint Norwegian flag color bands across the lower frame. Vibrant saturated red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Norway crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "haaland",
+      "template": "stat-hero",
+      "filename": "haaland.png",
+      "subjectHint": "Erling Haaland — Man City | MVP Điểm 9/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Erling Haaland, the Norwegian striker for Manchester City and the Norway national team, in a triumphant powerful hero pose mid-stride driving forward with ferocious intensity. He wears the red Norway national team home kit with the Norway NFF crest clearly visible on the chest. A large stylized golden-blue rating badge glowing brightly with the number 9 floats prominently near his shoulder like a video-game MVP stat overlay with subtle golden sparkle. Background: a bold red Norwegian graphic backdrop with a huge faint Norway NFF crest watermark, dramatic golden light rays radiating outward. Vibrant saturated red palette with gold highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup MVP broadcast graphic. The Norway crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "ajer",
+      "template": "stat-hero",
+      "filename": "ajer.png",
+      "subjectHint": "Kristoffer Ajer — Brentford | Điểm 8/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Kristoffer Ajer, the tall Norwegian centre-back for Brentford and the Norway national team, in a commanding defensive hero pose rising for a clearance, jaw set with focus. He wears the red Norway national team home kit with the Norway NFF crest clearly visible on the chest. A stylized golden rating badge glowing with the number 8 floats near his shoulder like a video-game stat overlay. Background: a deep red Norwegian graphic backdrop with a huge faint Norway NFF crest watermark, dramatic light rays radiating outward from behind. Vibrant saturated red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Norway crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "berge",
+      "template": "stat-hero",
+      "filename": "berge.png",
+      "subjectHint": "Sander Berge — Fulham | Điểm 8/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Sander Berge, the towering Norwegian midfielder for Fulham and the Norway national team, in a determined hero pose striding through midfield winning the ball, body leaning into a tackle. He wears the red Norway national team home kit with the Norway NFF crest clearly visible on the chest. A stylized golden rating badge glowing with the number 8 floats near his shoulder like a video-game stat overlay. Background: a bold red Norwegian graphic backdrop with a huge faint Norway NFF crest watermark, dramatic light rays radiating outward. Vibrant saturated red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Norway crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "odegaard",
+      "template": "stat-hero",
+      "filename": "odegaard.png",
+      "subjectHint": "Martin Odegaard — Arsenal | Điểm 8/10 (kiến tạo bàn thắng)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Martin Odegaard, the Norwegian playmaker and captain for Arsenal and the Norway national team, in an elegant hero pose pointing and directing play after threading a pass, composed and assured. He wears the red Norway national team home kit with the Norway NFF crest clearly visible on the chest and the captain's armband on his left arm. A stylized golden rating badge glowing with the number 8 floats near his shoulder like a video-game stat overlay. Background: a bold red Norwegian graphic backdrop with a huge faint Norway NFF crest watermark, dramatic light rays radiating outward. Vibrant saturated red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Norway crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "pedersen",
+      "template": "stat-hero",
+      "filename": "pedersen.png",
+      "subjectHint": "Marcus Pedersen — hậu vệ phải | Điểm 8/10 (mở tỷ số)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Marcus Pedersen, the Norwegian right-back for the Norway national team, in a joyous goal celebration hero pose, fist pumped and mouth open in a shout of disbelief after scoring an unexpected goal. He wears the red Norway national team home kit with the Norway NFF crest clearly visible on the chest. A stylized golden rating badge glowing with the number 8 floats near his shoulder like a video-game stat overlay. Background: a bold red Norwegian graphic backdrop with a huge faint Norway NFF crest watermark, dramatic golden light rays radiating outward. Vibrant saturated red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Norway crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "heggem",
+      "template": "stat-hero",
+      "filename": "heggem.png",
+      "subjectHint": "Torbjorn Heggem — trung vệ | Điểm 7/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Torbjorn Heggem, the Norwegian centre-back for the Norway national team, in a gritty defensive hero pose sliding in to block a shot, fully committed and focused. He wears the red Norway national team home kit with the Norway NFF crest clearly visible on the chest. A stylized blue rating badge glowing with the number 7 floats near his shoulder like a video-game stat overlay. Background: a deep red Norwegian graphic backdrop with a huge faint Norway NFF crest watermark, dramatic light rays radiating outward. Vibrant saturated red palette with cool blue highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Norway crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "patrick-berg",
+      "template": "stat-hero",
+      "filename": "patrick-berg.png",
+      "subjectHint": "Patrick Berg — Bodø/Glimt | Điểm 7/10 (vào sân)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Patrick Berg, the Norwegian central midfielder for Bodo/Glimt and the Norway national team, in a busy hero pose driving forward on the ball through midfield, eyes scanning for the pass. He wears the red Norway national team home kit with the Norway NFF crest clearly visible on the chest. A stylized blue rating badge glowing with the number 7 floats near his shoulder like a video-game stat overlay. Background: a bold red Norwegian graphic backdrop with a huge faint Norway NFF crest watermark, dramatic light rays radiating outward. Vibrant saturated red palette with cool blue highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Norway crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "wolfe",
+      "template": "stat-hero",
+      "filename": "wolfe.png",
+      "subjectHint": "David Wolfe — hậu vệ trái | Điểm 6/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring David Moller Wolfe, the young Norwegian left-back for the Norway national team, in a determined hero pose racing back to defend along the touchline. He wears the red Norway national team home kit with the Norway NFF crest clearly visible on the chest. A stylized silver rating badge glowing with the number 6 floats near his shoulder like a video-game stat overlay. Background: a red Norwegian graphic backdrop with a huge faint Norway NFF crest watermark, dramatic light rays radiating outward. Saturated red palette with neutral silver highlights, high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Norway crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "aursnes",
+      "template": "stat-hero",
+      "filename": "aursnes.png",
+      "subjectHint": "Fredrik Aursnes — Benfica | Điểm 6/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Fredrik Aursnes, the Norwegian midfielder for Benfica and the Norway national team, in a composed hero pose playing a forward pass, calm and balanced. He wears the red Norway national team home kit with the Norway NFF crest clearly visible on the chest. A stylized silver rating badge glowing with the number 6 floats near his shoulder like a video-game stat overlay. Background: a red Norwegian graphic backdrop with a huge faint Norway NFF crest watermark, dramatic light rays radiating outward. Saturated red palette with neutral silver highlights, high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Norway crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "nusa",
+      "template": "stat-hero",
+      "filename": "nusa.png",
+      "subjectHint": "Antonio Nusa — RB Leipzig | Điểm 6/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Antonio Nusa, the young Norwegian winger for RB Leipzig and the Norway national team, in a dynamic hero pose sprinting at full pace with the ball, dropping a shoulder to beat a defender. He wears the red Norway national team home kit with the Norway NFF crest clearly visible on the chest. A stylized silver rating badge glowing with the number 6 floats near his shoulder like a video-game stat overlay. Background: a red Norwegian graphic backdrop with a huge faint Norway NFF crest watermark, dramatic light rays radiating outward. Saturated red palette with neutral silver highlights, high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Norway crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "sorloth",
+      "template": "stat-hero",
+      "filename": "sorloth.png",
+      "subjectHint": "Alexander Sorloth — Atletico Madrid | Điểm 6/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Alexander Sorloth, the tall Norwegian forward for Atletico Madrid and the Norway national team, in a hero pose leaping to win an aerial duel, arms out for balance. He wears the red Norway national team home kit with the Norway NFF crest clearly visible on the chest. A stylized silver rating badge glowing with the number 6 floats near his shoulder like a video-game stat overlay. Background: a red Norwegian graphic backdrop with a huge faint Norway NFF crest watermark, dramatic light rays radiating outward. Saturated red palette with neutral silver highlights, high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Norway crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "schjelderup",
+      "template": "stat-hero",
+      "filename": "schjelderup.png",
+      "subjectHint": "Andreas Schjelderup — Benfica | Điểm 6/10 (vào sân)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Andreas Schjelderup, the young Norwegian forward for Benfica and the Norway national team, in a lively hero pose carrying the ball at pace down the flank. He wears the red Norway national team home kit with the Norway NFF crest clearly visible on the chest. A stylized silver rating badge glowing with the number 6 floats near his shoulder like a video-game stat overlay. Background: a red Norwegian graphic backdrop with a huge faint Norway NFF crest watermark, dramatic light rays radiating outward. Saturated red palette with neutral silver highlights, high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Norway crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "nyland",
+      "template": "stat-hero",
+      "filename": "nyland.png",
+      "subjectHint": "Orjan Nyland — thủ môn | Điểm 5/10 (chới với)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Orjan Nyland, the Norwegian goalkeeper for the Norway national team, in a frustrated dejected pose beaten and looking back as the ball passes him, shoulders tense. He wears a dark green-and-black Norway national team goalkeeper kit with the Norway NFF crest clearly visible on the chest and goalkeeper gloves on. A large stylized deep-red warning rating badge glowing ominously with the number 5 floats near his shoulder like a video-game low-score stat overlay with a cracked glass effect. Background: a moody dark red graphic backdrop with a huge faded Norway NFF crest watermark, cold downward light rays creating a somber atmosphere. Moody saturated dark palette, high contrast, glossy graphic-design finish. Stylized like a World Cup disappointment editorial poster. The Norway crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "solbakken",
+      "template": "callout",
+      "filename": "solbakken.png",
+      "subjectHint": "Stale Solbakken (HLV) — Điểm 7/10, vào vòng trong sau 1998",
+      "prompt": "Vertical 9:16 football poster artwork featuring Stale Solbakken, the Norwegian head coach of the Norway national team, in a composed touchline hero pose, arms folded with a satisfied yet thoughtful expression, wearing a smart dark coach's jacket with the Norway NFF crest on the chest. A stylized blue rating badge glowing with the number 7 floats near his shoulder like a video-game stat overlay. Background: a bold red-and-white Norwegian graphic backdrop with a huge faint Norway NFF crest watermark, dramatic light rays radiating outward, faint Norwegian flag color bands across the lower frame. Vibrant saturated red palette with cool blue highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup touchline editorial poster. The Norway crest visible on the jacket, no on-image text or captions, no scoreboard graphics."
+    }
+  ]
+}
