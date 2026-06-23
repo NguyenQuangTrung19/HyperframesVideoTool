@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "source": "nhan-dinh-ao-vs-jordan-wc-2026.txt",
+  "contentType": "PRE-MATCH PREVIEW",
+  "title": "Nhận định Áo vs Jordan — World Cup 2026",
+  "createdAt": "2026-06-15T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Hook split-frame — Arnautovic (Áo) vs Al-Tamari (Jordan), cúp World Cup ở giữa",
+      "prompt": "Vertical 9:16 split-frame football poster artwork showing a 2026 FIFA World Cup group-stage showdown. Left half: Marko Arnautovic, the Austrian striker for the Austria national team, in a red Austria home kit with white trim and the Austrian Football Association eagle crest clearly visible on the chest, intense focused hero pose. Behind him, a stylized red Austria graphic backdrop with a huge faint eagle crest watermark and radiating light rays. Right half: Mousa Al-Tamari, the Jordanian winger and captain for the Jordan national team, in a white Jordan home kit with red trim and the Jordan Football Association crest clearly visible on the chest, mirroring determined hero pose. Behind him, a stylized white-and-red Jordan graphic backdrop with a huge faint crest watermark and radiating light rays. Down the centre seam: a diagonal lightning-burst slash separator with dramatic energy glow, the golden FIFA World Cup trophy glowing as a stylized graphic accent between them. Vibrant saturated palette per side, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday rivalry promotional poster. Both crests visible on the jerseys, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "arnautovic",
+      "template": "stat-hero",
+      "filename": "arnautovic.png",
+      "subjectHint": "Marko Arnautovic — Áo (chân sút vĩ đại nhất lịch sử tuyển Áo, ~45 bàn)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Marko Arnautovic, the Austrian striker for the Austria national team, in a confident goal-celebration hero pose, arms spread, intense proud expression. He wears a red Austria home kit with white trim and the Austrian Football Association eagle crest clearly visible on the chest. Background: a bold red Austria graphic backdrop with a huge stylized eagle crest floating faintly behind him as a watermark, dramatic golden light rays radiating outward, the golden FIFA World Cup trophy as a stylized graphic accent in a corner. Vibrant saturated red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Austria crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "altamari",
+      "template": "stat-hero",
+      "filename": "altamari.png",
+      "subjectHint": "Mousa Al-Tamari — Jordan (\"Messi của Jordan\", 7 bàn vòng loại)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Mousa Al-Tamari, the Jordanian winger and captain for the Jordan national team, in a dynamic dribbling hero pose cutting inside at speed, ball at his feet, focused fierce expression. He wears a white Jordan home kit with red trim and the Jordan Football Association crest clearly visible on the chest, captain's armband on his left arm. Background: a bold white-and-red Jordan graphic backdrop with a huge stylized crest floating faintly behind him as a watermark, dramatic light rays radiating outward, faint motion-blur energy streaks suggesting pace. Vibrant saturated red-and-white palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Jordan crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "alaba",
+      "template": "stat-hero",
+      "filename": "alaba.png",
+      "subjectHint": "David Alaba — Áo (đội trưởng, Real Madrid)",
+      "prompt": "Vertical 9:16 football poster artwork featuring David Alaba, the Austrian defender and captain for the Austria national team, in a commanding leadership hero pose pointing and organising, composed focused expression. He wears a red Austria home kit with white trim and the Austrian Football Association eagle crest clearly visible on the chest, captain's armband on his left arm. Background: a bold red Austria graphic backdrop with a huge stylized eagle crest floating faintly behind him as a watermark, dramatic light rays radiating outward. Vibrant saturated red palette with silver highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Austria crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "rangnick",
+      "template": "callout",
+      "filename": "rangnick.png",
+      "subjectHint": "Ralf Rangnick — HLV Áo (triết lý pressing)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Ralf Rangnick, the German head coach of the Austria national team, in a fired-up animated touchline pose gesturing intensely, focused expression behind glasses, wearing a dark Austria training jacket with the Austrian Football Association eagle crest clearly visible on the chest. Background: a deep red Austria graphic backdrop with a huge stylized eagle crest floating faintly behind him as a watermark, dramatic cool light rays radiating outward. Vibrant saturated red palette with silver highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup pre-match press-conference editorial poster. The Austria crest visible on the jacket, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "sellami",
+      "template": "callout",
+      "filename": "sellami.png",
+      "subjectHint": "Jamal Sellami — HLV Jordan (phát biểu họp báo)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Jamal Sellami, the Moroccan head coach of the Jordan national team, in a passionate animated touchline pose giving instructions, focused intense expression, wearing a dark Jordan training jacket with the Jordan Football Association crest clearly visible on the chest. Background: a bold white-and-red Jordan graphic backdrop with a huge stylized crest floating faintly behind him as a watermark, dramatic warm light rays radiating outward. Vibrant saturated red-and-white palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup pre-match press-conference editorial poster. The Jordan crest visible on the jacket, no on-image text or captions, no scoreboard graphics."
+    }
+  ]
+}

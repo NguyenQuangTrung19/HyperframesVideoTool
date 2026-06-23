@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "source": "nhan-dinh-bo-dao-nha-vs-congo-wc-2026.txt",
+  "contentType": "PRE-MATCH PREVIEW",
+  "title": "Nhận định Bồ Đào Nha vs CHDC Congo — World Cup 2026",
+  "createdAt": "2026-06-15T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Hook split-frame — Ronaldo (Bồ Đào Nha) vs Wissa (CHDC Congo), cúp World Cup ở giữa",
+      "prompt": "Vertical 9:16 split-frame football poster artwork showing a 2026 FIFA World Cup group-stage showdown. Left half: Cristiano Ronaldo, the Portuguese forward and captain for the Portugal national team, in a deep crimson-red Portugal home kit with green trim and the Portuguese Football Federation crest clearly visible on the chest, intense iconic hero pose. Behind him, a stylized crimson-red Portugal graphic backdrop with a huge faint crest watermark and radiating golden light rays. Right half: Yoane Wissa, the Congolese striker for the DR Congo national team, in a royal-blue DR Congo home kit with red-and-yellow trim and the Congolese Leopards crest clearly visible on the chest, mirroring determined hero pose. Behind him, a stylized royal-blue DR Congo graphic backdrop with a huge faint leopard crest watermark and radiating light rays. Down the centre seam: a diagonal lightning-burst slash separator with dramatic energy glow, the golden FIFA World Cup trophy glowing as a stylized graphic accent between them. Vibrant saturated palette per side, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday rivalry promotional poster. Both crests visible on the jerseys, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "ronaldo",
+      "template": "stat-hero",
+      "filename": "ronaldo.png",
+      "subjectHint": "Cristiano Ronaldo — Bồ Đào Nha (143 bàn ĐTQG kỷ lục, kỳ World Cup thứ 6)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Cristiano Ronaldo, the Portuguese forward and captain for the Portugal national team in his current era, in his signature mid-air leaping celebration hero pose, intense focused expression. He wears a deep crimson-red Portugal home kit with green trim and the Portuguese Football Federation crest clearly visible on the chest, captain's armband on his left arm. Background: a bold crimson-red Portugal graphic backdrop with a huge stylized crest floating faintly behind him as a watermark, dramatic golden light rays radiating outward, the golden FIFA World Cup trophy as a stylized graphic accent in a corner. Vibrant saturated red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Portugal crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "wissa",
+      "template": "stat-hero",
+      "filename": "wissa.png",
+      "subjectHint": "Yoane Wissa — CHDC Congo (mũi nhọn, Newcastle)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Yoane Wissa, the Congolese striker for the DR Congo national team, in an explosive sprinting hero pose driving forward at speed, fierce determined expression. He wears a royal-blue DR Congo home kit with red-and-yellow trim and the Congolese Leopards crest clearly visible on the chest. Background: a bold royal-blue DR Congo graphic backdrop with a huge stylized leopard crest floating faintly behind him as a watermark, dramatic light rays radiating outward, faint DR Congo flag color bands (sky-blue-yellow-red) across the lower frame as a graphic ribbon, subtle motion-blur energy streaks suggesting pace. Vibrant saturated royal-blue palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The DR Congo crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "bruno",
+      "template": "stat-hero",
+      "filename": "bruno.png",
+      "subjectHint": "Bruno Fernandes — Bồ Đào Nha (nhạc trưởng, Manchester United)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Bruno Fernandes, the Portuguese midfielder for the Portugal national team, in a commanding playmaker hero pose pointing and directing play, focused intense expression. He wears a deep crimson-red Portugal home kit with green trim and the Portuguese Football Federation crest clearly visible on the chest. Background: a bold crimson-red Portugal graphic backdrop with a huge stylized crest floating faintly behind him as a watermark, dramatic light rays radiating outward. Vibrant saturated red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Portugal crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "martinez",
+      "template": "callout",
+      "filename": "martinez.png",
+      "subjectHint": "Roberto Martinez — HLV Bồ Đào Nha (phát biểu họp báo)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Roberto Martinez, the Spanish head coach of the Portugal national team, in a composed authoritative touchline pose, calm focused expression, wearing a smart dark Portugal training jacket with the Portuguese Football Federation crest clearly visible on the chest. Background: a deep crimson-red Portugal graphic backdrop with a huge stylized crest floating faintly behind him as a watermark, dramatic cool light rays radiating outward. Vibrant saturated red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup pre-match press-conference editorial poster. The Portugal crest visible on the jacket, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "desabre",
+      "template": "callout",
+      "filename": "desabre.png",
+      "subjectHint": "Sebastien Desabre — HLV CHDC Congo (phát biểu họp báo)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Sebastien Desabre, the French head coach of the DR Congo national team, in a passionate animated touchline pose giving instructions, focused intense expression, wearing a dark DR Congo training jacket with the Congolese Leopards crest clearly visible on the chest. Background: a bold royal-blue DR Congo graphic backdrop with a huge stylized leopard crest floating faintly behind him as a watermark, dramatic warm light rays radiating outward. Vibrant saturated royal-blue palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup pre-match press-conference editorial poster. The DR Congo crest visible on the jacket, no on-image text or captions, no scoreboard graphics."
+    }
+  ]
+}

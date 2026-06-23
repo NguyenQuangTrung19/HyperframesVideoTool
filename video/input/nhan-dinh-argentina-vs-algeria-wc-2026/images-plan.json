@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "source": "nhan-dinh-argentina-vs-algeria-wc-2026.txt",
+  "contentType": "PRE-MATCH PREVIEW",
+  "title": "Nhận định Argentina vs Algeria — World Cup 2026",
+  "createdAt": "2026-06-15T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Hook split-frame — Messi (Argentina) vs Mahrez (Algeria), cúp World Cup ở giữa",
+      "prompt": "Vertical 9:16 split-frame football poster artwork showing a 2026 FIFA World Cup group-stage showdown. Left half: Lionel Messi, the Argentine forward and captain for the Argentina national team, in a sky-blue-and-white striped Argentina home kit with the AFA crest and three champion stars clearly visible on the chest, intense focused hero pose. Behind him, a stylized sky-blue Argentina graphic backdrop with a huge faint AFA crest watermark and radiating golden light rays. Right half: Riyad Mahrez, the Algerian winger and captain for the Algeria national team, in a white Algeria home kit with green trim and the Algerian Football Federation crest clearly visible on the chest, mirroring determined hero pose. Behind him, a stylized white-and-green Algeria graphic backdrop with a huge faint crest watermark and radiating light rays. Down the centre seam: a diagonal lightning-burst slash separator with dramatic energy glow, the golden FIFA World Cup trophy glowing as a stylized graphic accent between them. Vibrant saturated palette per side, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday rivalry promotional poster. Both crests visible on the jerseys, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "messi",
+      "template": "stat-hero",
+      "filename": "messi.png",
+      "subjectHint": "Lionel Messi — Argentina (kỳ World Cup thứ 6, ~trận thứ 200)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Lionel Messi, the Argentine forward and captain for the Argentina national team, in a composed iconic hero pose with the captain's armband, focused determined expression. He wears a sky-blue-and-white striped Argentina home kit with the AFA crest and three champion stars clearly visible on the chest. Background: a bold sky-blue-and-white Argentina graphic backdrop with a huge stylized AFA crest floating faintly behind him as a watermark, dramatic golden light rays radiating outward, the golden FIFA World Cup trophy as a stylized graphic accent in a corner. Vibrant saturated sky-blue palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Argentina crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "amoura",
+      "template": "stat-hero",
+      "filename": "amoura.png",
+      "subjectHint": "Mohamed Amoura — Algeria (vua phá lưới vòng loại châu Phi, 10 bàn)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Mohamed Amoura, the Algerian striker for the Algeria national team, in an explosive sprinting hero pose driving forward at speed, fierce focused expression. He wears a white Algeria home kit with green trim and the Algerian Football Federation crest clearly visible on the chest. Background: a bold white-and-green Algeria graphic backdrop with a huge stylized crest floating faintly behind him as a watermark, dramatic light rays radiating outward, faint Algerian flag color bands (green-white-red) across the lower frame as a graphic ribbon, subtle motion-blur energy streaks suggesting pace. Vibrant saturated green-and-white palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Algeria crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "lautaro",
+      "template": "stat-hero",
+      "filename": "lautaro.png",
+      "subjectHint": "Lautaro Martinez — Argentina (17 bàn Serie A mùa vừa rồi)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Lautaro Martinez, the Argentine striker for the Argentina national team, in a passionate goal-celebration roar hero pose, fist clenched, intense expression. He wears a sky-blue-and-white striped Argentina home kit with the AFA crest and three champion stars clearly visible on the chest. Background: a bold sky-blue Argentina graphic backdrop with a huge stylized AFA crest floating faintly behind him as a watermark, dramatic light rays radiating outward. Vibrant saturated sky-blue palette with silver highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Argentina crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "scaloni",
+      "template": "callout",
+      "filename": "scaloni.png",
+      "subjectHint": "Lionel Scaloni — HLV Argentina (phát biểu họp báo)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Lionel Scaloni, the Argentine head coach of the Argentina national team, in a composed authoritative touchline pose, calm focused expression, wearing a dark Argentina training jacket with the AFA crest clearly visible on the chest. Background: a deep sky-blue Argentina graphic backdrop with a huge stylized AFA crest floating faintly behind him as a watermark, dramatic cool light rays radiating outward. Vibrant saturated sky-blue palette with silver highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup pre-match press-conference editorial poster. The Argentina crest visible on the jacket, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "petkovic",
+      "template": "callout",
+      "filename": "petkovic.png",
+      "subjectHint": "Vladimir Petkovic — HLV Algeria (phát biểu họp báo)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Vladimir Petkovic, the head coach of the Algeria national team, in a composed animated touchline pose giving instructions, focused expression, wearing a dark Algeria training jacket with the Algerian Football Federation crest clearly visible on the chest. Background: a bold white-and-green Algeria graphic backdrop with a huge stylized crest floating faintly behind him as a watermark, dramatic warm light rays radiating outward. Vibrant saturated green-and-white palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup pre-match press-conference editorial poster. The Algeria crest visible on the jacket, no on-image text or captions, no scoreboard graphics."
+    }
+  ]
+}

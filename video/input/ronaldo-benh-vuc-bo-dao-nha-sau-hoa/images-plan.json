@@ -1,0 +1,65 @@
+{
+  "version": "1.0",
+  "source": "ronaldo-benh-vuc-bo-dao-nha-sau-hoa.txt",
+  "contentType": "NEWS DRAMA",
+  "title": "Ronaldo bênh vực Bồ Đào Nha sau trận hòa Congo",
+  "createdAt": "2026-06-18T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Ronaldo lầm lũi rời sân sau trận hòa — poster World Cup",
+      "prompt": "Vertical 9:16 football poster artwork featuring Cristiano Ronaldo, the Portuguese forward and captain for Portugal and the Portugal national team, in his current 2025-26 era, in a tense frustrated hero pose walking off the pitch with a clenched jaw and a hard stare, head held high despite visible disappointment. He wears the deep red Portugal home kit with the Portuguese Football Federation crest clearly visible on the chest and the captain's armband on his left arm. Background: a bold dark-red and green Portugal graphic backdrop with a huge stylized Portugal federation crest floating faintly behind him as a watermark, dramatic light rays radiating outward, faint stylized 2026 World Cup trophy motif glowing in a corner. Vibrant saturated red-and-green palette, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday editorial poster. The Portugal crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "draw-congo",
+      "template": "stat-hero",
+      "filename": "draw-congo.png",
+      "subjectHint": "Bồ Đào Nha 1-1 Congo, Yoane Wissa gỡ hòa — Houston",
+      "prompt": "Vertical 9:16 football poster artwork featuring Yoane Wissa, the DR Congo forward for the DR Congo national team, in a triumphant goal-celebration pose with arms spread wide and a roaring expression after scoring an equalizer. He wears the bright blue DR Congo home kit with the DR Congo federation crest clearly visible on the chest. Background: a bold sky-blue and yellow DR Congo graphic backdrop with a huge faint DR Congo federation crest watermark, dramatic light rays radiating outward, faint stylized leopard silhouette motif (the Leopards) in a corner as a graphic accent. Vibrant saturated blue-and-yellow palette, very high contrast, glossy graphic-design finish. Stylized like a World Cup giant-killing editorial poster. The DR Congo crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "tunnel",
+      "template": "callout",
+      "filename": "tunnel.png",
+      "subjectHint": "Ronaldo đi thẳng vào đường hầm, vẻ thất vọng",
+      "prompt": "Vertical 9:16 football poster artwork featuring Cristiano Ronaldo, the Portuguese forward and captain for Portugal and the Portugal national team, in his current 2025-26 era, in a moody dejected pose walking into the stadium tunnel alone, head lowered slightly with a shadowed brooding expression, hands on hips. He wears the deep red Portugal home kit with the Portuguese Football Federation crest clearly visible on the chest and the captain's armband. Background: a dark moody graphic backdrop suggesting a stadium tunnel with cold low light, a huge faded Portugal federation crest watermark, dramatic downward shafts of cool light creating a somber atmosphere. Moody saturated dark-red palette, high contrast, glossy graphic-design finish. Stylized like a World Cup disappointment editorial poster. The Portugal crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "interview",
+      "template": "callout",
+      "filename": "interview.png",
+      "subjectHint": "Ronaldo ký tặng fan, trả lời Sport TV bênh vực đồng đội",
+      "prompt": "Vertical 9:16 football poster artwork featuring Cristiano Ronaldo, the Portuguese forward and captain for Portugal and the Portugal national team, in his current 2025-26 era, in a calm composed pose mid-speech with a slight reassuring gesture of one hand, a measured determined expression, as if defending his team in an interview. He wears the deep red Portugal home kit with the Portuguese Football Federation crest clearly visible on the chest. Background: a bold dark-red and green Portugal graphic backdrop with a huge stylized Portugal federation crest watermark, dramatic light rays radiating outward, faint stylized fan-crowd silhouettes in red and green as graphic color bands at the lower edge. Vibrant saturated red-and-green palette, very high contrast, glossy graphic-design finish. Stylized like a World Cup post-match editorial poster. The Portugal crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "goal-drought",
+      "template": "stat-hero",
+      "filename": "goal-drought.png",
+      "subjectHint": "Ronaldo tịt ngòi 10 trận liên tiếp ở giải lớn",
+      "prompt": "Vertical 9:16 football poster artwork featuring Cristiano Ronaldo, the Portuguese forward and captain for Portugal and the Portugal national team, in his current 2025-26 era, in a frustrated pose with both hands on his head after a missed clear chance, eyes wide with disbelief, a ghostly transparent action-replay of a shot sailing just wide in the background. He wears the deep red Portugal home kit with the Portuguese Football Federation crest clearly visible on the chest. Background: a moody dark-red graphic backdrop with a huge faded Portugal federation crest watermark, dramatic cold light rays creating a tense atmosphere. Moody saturated dark-red palette, very high contrast, glossy graphic-design finish. Stylized like a World Cup near-miss editorial poster. The Portugal crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "oldest-portugal",
+      "template": "stat-hero",
+      "filename": "oldest-portugal.png",
+      "subjectHint": "Ronaldo 41 tuổi — cầu thủ lớn tuổi nhất lịch sử Bồ Đào Nha, vượt Pepe",
+      "prompt": "Vertical 9:16 football poster artwork featuring Cristiano Ronaldo, the Portuguese forward and captain for Portugal and the Portugal national team, in his current 2025-26 era at age 41, in a commanding veteran hero pose with arms folded and a proud determined expression, exuding longevity and authority. He wears the deep red Portugal home kit with the Portuguese Football Federation crest clearly visible on the chest and the captain's armband on his left arm. Background: a bold dark-red and green Portugal graphic backdrop with a huge stylized Portugal federation crest floating faintly behind him as a watermark, dramatic golden light rays radiating outward, faint stylized milestone-record ribbon motif across the lower frame in gold. Vibrant saturated red-and-green palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a historic-record promotional poster. The Portugal crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "messi-record",
+      "template": "stat-hero",
+      "filename": "messi-record.png",
+      "subjectHint": "Ronaldo cân bằng Messi — 6 kỳ World Cup góp mặt (split-frame)",
+      "prompt": "Vertical 9:16 split-frame football poster artwork showing two World Cup record holders. Left half: Cristiano Ronaldo, the Portuguese forward for Portugal and the Portugal national team, in his current 2025-26 era, in a proud hero pose, in the deep red Portugal home kit with the Portuguese Football Federation crest clearly visible on the chest. Behind him, a bold dark-red and green Portugal graphic backdrop with a huge faint Portugal federation crest watermark and radiating golden light rays. Right half: Lionel Messi, the Argentine forward and captain for Argentina and the Argentina national team, in his current 2025-26 era, in a mirroring proud hero pose, in the light-blue-and-white striped Argentina home kit with the Argentine Football Association crest clearly visible on the chest. Behind him, a bold sky-blue and white Argentina graphic backdrop with a huge faint Argentina federation crest watermark and radiating golden light rays. Down the centre seam: a diagonal lightning-burst slash separator with dramatic energy glow, a stylized golden World Cup trophy glowing as a graphic accent between them. Vibrant saturated palette per side, very high contrast, glossy graphic-design finish. Stylized like a historic-record promotional poster. Both crests visible on the jerseys, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "milla-record",
+      "template": "callout",
+      "filename": "milla-record.png",
+      "subjectHint": "Roger Milla — kỷ lục cầu thủ lớn tuổi nhất World Cup (42 tuổi 39 ngày, 1994)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Roger Milla, the legendary Cameroonian forward for the Cameroon national team, depicted in his iconic 1994 World Cup era, in a joyful celebratory hero pose mid-stride, exuding the energy of a record-setting veteran. He wears the green Cameroon home kit with the Cameroon federation crest clearly visible on the chest. Background: a bold green-red-yellow Cameroon graphic backdrop with a huge stylized Cameroon federation crest floating faintly behind him as a watermark, dramatic golden light rays radiating outward, a faint stylized 1994 USA World Cup trophy motif in a corner as a graphic accent. Vibrant saturated green-red-yellow palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a historic-record promotional poster. The Cameroon crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    }
+  ]
+}

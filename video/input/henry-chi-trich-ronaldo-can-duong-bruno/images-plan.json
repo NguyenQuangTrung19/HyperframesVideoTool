@@ -1,0 +1,72 @@
+{
+  "version": "1.0",
+  "source": "henry-chi-trich-ronaldo-can-duong-bruno.txt",
+  "contentType": "MATCH ANALYSIS",
+  "title": "Henry chi trich Ronaldo can duong Bruno Fernandes",
+  "createdAt": "2026-06-18T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Henry vs Ronaldo — Henry phan tich (split-frame)",
+      "prompt": "Vertical 9:16 split-frame football poster artwork showing a pundit-versus-icon analysis face-off. Left half: Thierry Henry, the French former Arsenal striker now a television pundit, in a sharp dark studio blazer, arms folded in a thoughtful analytical hero pose, intense critical expression. Behind him, a stylized cool-blue broadcast-studio graphic backdrop with faint geometric tactical-arrow motifs and radiating light rays. Right half: Cristiano Ronaldo, the Portuguese forward and captain for the Portugal national team, in a deep red Portugal home kit with the Portuguese Football Federation crest clearly visible on the chest, frustrated downcast hero pose. Behind him, a stylized deep-red Portugal graphic backdrop with a huge faint Portugal crest watermark and radiating light rays. Down the centre seam: a diagonal lightning-burst slash separator with dramatic energy glow. Vibrant saturated palette per side, very high contrast, glossy graphic-design finish. Stylized like a World Cup post-match analysis broadcast graphic. The Portugal crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "match-draw",
+      "template": "stat-hero",
+      "filename": "match-draw.png",
+      "subjectHint": "Joao Neves an mung — Bo Dao Nha hoa Congo 1-1",
+      "prompt": "Vertical 9:16 football poster artwork featuring Joao Neves, the Portuguese midfielder for the Portugal national team, in an energetic goal-celebration hero pose, arms spread wide and mouth open in a roar after scoring. He wears a deep red Portugal home kit with the Portuguese Football Federation crest clearly visible on the chest. Background: a bold deep-red Portugal graphic backdrop with a huge stylized Portugal crest floating faintly behind him as a watermark, dramatic golden light rays radiating outward, faint stylized green-and-yellow DR Congo color bands across the lower frame as a graphic accent hinting at the opponent. Vibrant saturated red-and-gold palette, very high contrast, glossy graphic-design finish. Stylized like a World Cup group-stage matchday promotional poster. The Portugal crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "wissa",
+      "template": "stat-hero",
+      "filename": "wissa.png",
+      "subjectHint": "Yoane Wissa — Congo go hoa, diem World Cup dau tien lich su",
+      "prompt": "Vertical 9:16 football poster artwork featuring Yoane Wissa, the DR Congo forward for the DR Congo national team, in a jubilant goal-celebration hero pose, fists clenched and arms raised after scoring an equalizer. He wears a green-and-red DR Congo home kit with the DR Congo Football Association crest clearly visible on the chest. Background: a bold green-and-yellow DR Congo graphic backdrop with a huge stylized DR Congo crest floating faintly behind him as a watermark, dramatic golden light rays radiating outward celebrating a historic moment, faint stylized fan-crowd silhouettes in green at the lower edge. Vibrant saturated green-and-yellow palette, very high contrast, glossy graphic-design finish. Stylized like a historic-moment World Cup promotional poster. The DR Congo crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "henry-verdict",
+      "template": "callout",
+      "filename": "henry-verdict.png",
+      "subjectHint": "Thierry Henry phan tich trong studio",
+      "prompt": "Vertical 9:16 football poster artwork featuring Thierry Henry, the French former Arsenal striker now a television pundit, in a commanding analytical hero pose, one hand raised mid-explanation as if breaking down a tactical point, sharp focused expression. He wears a sharp dark studio blazer. Background: a stylized cool-blue broadcast-studio graphic backdrop with faint geometric tactical-arrow and chalkboard-line motifs floating behind him, dramatic light rays radiating outward, a faint large stylized football pitch diagram glowing in the background as a graphic accent. Vibrant saturated cool-blue palette with white highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup post-match punditry broadcast graphic. No on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "blocked-lane",
+      "template": "callout",
+      "filename": "blocked-lane.png",
+      "subjectHint": "Ronaldo lao vao duong chuyen cua Bruno — chan co hoi",
+      "prompt": "Vertical 9:16 football poster artwork featuring Cristiano Ronaldo, the Portuguese forward and captain for the Portugal national team, in a tense mid-stride hero pose drifting across into a teammate's space, demanding the ball with one arm outstretched. He wears a deep red Portugal home kit with the Portuguese Football Federation crest clearly visible on the chest. Behind him, slightly smaller and partly obscured, Bruno Fernandes, the Portuguese midfielder for Portugal, in the same red Portugal kit, arms spread in exasperation at a passing lane being blocked. Background: a deep-red Portugal graphic backdrop with a huge faint Portugal crest watermark, stylized white tactical-arrow motifs showing a passing lane being cut off, dramatic light rays. Vibrant saturated red palette, very high contrast, glossy graphic-design finish. Stylized like a tactical-breakdown analysis broadcast graphic. The Portugal crest visible on the jerseys, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "bruno-frustration",
+      "template": "callout",
+      "filename": "bruno-frustration.png",
+      "subjectHint": "Bruno Fernandes kho chiu, gio tay",
+      "prompt": "Vertical 9:16 football poster artwork featuring Bruno Fernandes, the Portuguese midfielder and playmaker for the Portugal national team, in a frustrated hero pose, both arms thrown up and palms open in visible exasperation, mouth open mid-protest. He wears a deep red Portugal home kit with the Portuguese Football Federation crest clearly visible on the chest and the captain's armband on his left arm. Background: a moody deep-red Portugal graphic backdrop with a huge faded Portugal crest watermark, cool tense light rays angling downward, faint geometric tactical-arrow motifs. Moody saturated dark red palette, very high contrast, glossy graphic-design finish. Stylized like a World Cup tension editorial poster. The Portugal crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "ronaldo-age",
+      "template": "stat-hero",
+      "filename": "ronaldo-age.png",
+      "subjectHint": "Ronaldo 41 tuoi — cau thu lon tuoi nhat da chinh World Cup",
+      "prompt": "Vertical 9:16 football poster artwork featuring Cristiano Ronaldo, the Portuguese forward and captain for the Portugal national team, in a proud determined hero pose, chest out and gaze fixed forward, captain's armband on his left arm. He wears a deep red Portugal home kit with the Portuguese Football Federation crest clearly visible on the chest. Background: a deep-red Portugal graphic backdrop with a huge stylized Portugal crest floating faintly behind him as a watermark, dramatic golden light rays radiating outward, a subtle stylized golden laurel-wreath graphic accent framing him to suggest a record-setting milestone. Vibrant saturated red-and-gold palette, very high contrast, glossy graphic-design finish. Stylized like a historic-record World Cup promotional poster. The Portugal crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "ronaldo-blank",
+      "template": "stat-hero",
+      "filename": "ronaldo-blank.png",
+      "subjectHint": "Ronaldo tit ngoi — khong cu sut trung dich, 5 tran lien tiep",
+      "prompt": "Vertical 9:16 football poster artwork featuring Cristiano Ronaldo, the Portuguese forward and captain for the Portugal national team, in a dejected frustrated hero pose, head tilted down and hands on hips after a scoreless display. He wears a deep red Portugal home kit with the Portuguese Football Federation crest clearly visible on the chest. Background: a moody dark deep-red Portugal graphic backdrop with a huge faded Portugal crest watermark, dramatic downward-pointing cold light rays creating a somber atmosphere, faint geometric motifs. Moody saturated dark red palette, very high contrast, glossy graphic-design finish. Stylized like a World Cup disappointment editorial poster. The Portugal crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "meme-ballhog",
+      "template": "callout",
+      "filename": "meme-ballhog.png",
+      "subjectHint": "Anh che — Ronaldo om bong khong chia, Bruno do tay",
+      "prompt": "Vertical 9:16 football poster artwork (humor edit / playful what-if scene) featuring Cristiano Ronaldo, the Portuguese forward for the Portugal national team, in a comically exaggerated hero pose hugging the football tightly to his chest with both arms wrapped around it, refusing to pass, a wide stubborn grin on his face. He wears a deep red Portugal home kit with the Portuguese Football Federation crest clearly visible on the chest. Beside him at the lower edge, a small graphic-treated supporter-style silhouette of Bruno Fernandes in red throwing both hands up in disbelief. Background: a bold deep-red Portugal graphic backdrop with a huge stylized Portugal crest floating faintly as a watermark, dramatic light rays radiating outward. Vibrant saturated red palette, very high contrast, glossy graphic-design finish. Stylized like a World Cup promotional poster with an ironic twist. The Portugal crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    }
+  ]
+}

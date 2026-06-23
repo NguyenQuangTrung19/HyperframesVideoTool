@@ -1,0 +1,44 @@
+{
+  "version": "1.0",
+  "source": "3-ky-luc-cho-messi-o-tran-gap-ao.txt",
+  "contentType": "PLAYER PROFILE",
+  "title": "Ba kỷ lục lịch sử chờ đợi Lionel Messi ở trận gặp Áo",
+  "createdAt": "2026-06-21T04:42:16.237Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Lionel Messi trong màu áo ĐT Argentina hướng tới các kỷ lục lịch sử",
+      "prompt": "Vertical 9:16 football poster artwork featuring Lionel Messi, the Argentine forward and captain for Inter Miami and the Argentina national team, in an iconic focused hero pose, looking ahead with determination, captain's armband visible. He wears the light-blue and white striped Argentina home kit with the Argentina association crest clearly visible on the chest. Background: a majestic golden graphic backdrop with a huge faint Argentina national team crest watermark, dramatic light rays radiating from behind his head. Saturated golden-accented palette, extreme contrast, glossy graphic finish. Stylized like a historic-moment promotional poster. The Argentina crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "world-cup-goals",
+      "template": "stat-hero",
+      "filename": "world-cup-goals.png",
+      "subjectHint": "Lionel Messi (16 bàn World Cup) hướng tới kỷ lục ghi bàn của Miroslav Klose",
+      "prompt": "Vertical 9:16 football poster artwork featuring Lionel Messi, the Argentine forward for Argentina national team, in a passionate goal celebration roar, fists clenched. Beside him in the background as a faint graphic watermark is Miroslav Klose, the legendary German striker in his Germany kit, looking on. Messi wears the striped Argentina home kit with the crest visible on the chest. A large stylized number 16 floats near his shoulder as a glowing golden stat badge. Background: a stylized split-color graphic backdrop (light blue and white for Argentina, black and white for Germany) with a faint FIFA World Cup trophy graphic. Vibrant saturated colors, high contrast, glossy graphic finish. Stylized like a World Cup goal-record promotional poster. The crests visible on the jerseys, no on-image text or captions."
+    },
+    {
+      "id": "world-cup-wins",
+      "template": "stat-hero",
+      "filename": "world-cup-wins.png",
+      "subjectHint": "Lionel Messi (16 trận thắng World Cup) hướng tới kỷ lục thắng nhiều nhất lịch sử",
+      "prompt": "Vertical 9:16 football poster artwork featuring Lionel Messi, the Argentine forward and captain, in a triumphant victory pose, arms raised to the sky, smiling warmly in the striped Argentina home kit. A large stylized golden rating badge glowing with the number 17 floats near his shoulder, symbolizing the upcoming 17th World Cup win. Background: a vibrant Argentina-colored graphic backdrop with a huge giant Argentina crest watermark, explosive golden light bursts, faint silhouettes of celebrating supporters. Saturated colors, high contrast, glossy graphic finish. Stylized like a champions celebration promotional poster. The Argentina crest visible on the jersey, no on-image text or captions."
+    },
+    {
+      "id": "long-shots",
+      "template": "stat-hero",
+      "filename": "long-shots.png",
+      "subjectHint": "Lionel Messi (5 bàn sút xa ngoài vòng cấm) ngang hàng Rivelino",
+      "prompt": "Vertical 9:16 football poster artwork featuring Lionel Messi, the Argentine forward, frozen mid-motion immediately after striking a powerful long-range shot with his left foot, ball flying with a golden light trail. Behind him in the background is a faint graphic watermark of Rivelino, the Brazilian legend in his classic yellow Brazil jersey. Messi wears the striped Argentina home kit with the crest clearly visible. A stylized blue rating badge with the number 5 floats near his shoulder. Background: a high-contrast graphic backdrop in Argentina and Brazil colors with a faint golden trophy graphic. Vibrant colors, high contrast, glossy graphic finish. Stylized like a matchday special-achievement poster. The crests visible on the jerseys, no on-image text or captions."
+    },
+    {
+      "id": "other-records",
+      "template": "callout",
+      "filename": "other-records.png",
+      "subjectHint": "Lionel Messi sở hữu loạt kỷ lục vô tiền khoáng hậu tại World Cup",
+      "prompt": "Vertical 9:16 football poster artwork featuring Lionel Messi, the Argentine forward, in a majestic pose holding the FIFA World Cup Golden Ball trophy, looking proud. He wears the striped Argentina home kit with the crest clearly visible on the chest. Background: a deep gold-and-blue graphic backdrop with a huge faint Argentina national team crest watermark, dramatic light rays and gold sparkle particles floating in the air. Saturated gold-dominated palette, extreme contrast, glossy graphic finish. Stylized like an end-of-season award broadcast graphic. The Argentina crest visible on the jersey, no on-image text or captions."
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "version": "1.0",
+  "source": "nhan-dinh-phap-vs-iraq-wc-2026.txt",
+  "contentType": "PRE-MATCH PREVIEW",
+  "title": "Nhận định Pháp vs Iraq — World Cup 2026: dự đoán tỷ số, đội hình và những cái tên đáng xem",
+  "createdAt": "2026-06-22T00:10:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "hook-1: Kylian Mbappe (ĐT Pháp) · hook-2: Aymen Hussein (ĐT Iraq)",
+      "prompt": "Vertical 9:16 split-frame football poster artwork showing a 2026 FIFA World Cup Group I matchday showdown. Left half: Kylian Mbappe, the French forward for Real Madrid and the France national team, in a dark blue France home kit with the French Football Federation cockerel crest clearly visible on the chest, intense iconic hero pose. Behind him, a stylized blue graphic backdrop with a huge faint French cockerel crest watermark and radiating golden light rays. Right half: Aymen Hussein, the Iraqi striker for the Iraq national team, in a green Iraq home kit with the Iraq Football Association crest clearly visible on the chest, mirroring determined hero pose. Behind him, a stylized green graphic backdrop with a huge faint Iraqi crest watermark and radiating light rays. Down the centre seam: a diagonal lightning-burst slash separator with dramatic energy glow, the golden FIFA World Cup trophy glowing as a stylized graphic accent between them. Vibrant saturated palette per side, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday rivalry promotional poster. Both crests visible on the jerseys, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "star-mbappe",
+      "template": "stat-hero",
+      "filename": "star-mbappe.png",
+      "subjectHint": "Kylian Mbappe ăn mừng bàn thắng cho ĐT Pháp",
+      "prompt": "Vertical 9:16 football poster artwork featuring Kylian Mbappe, the legendary French forward for Real Madrid and the France national team, in his signature arms-crossed goal celebration hero pose, screaming with passion. He wears a dark blue France home kit with the French Football Federation cockerel crest clearly visible on the chest. Background: a bold dark-blue France graphic backdrop with a huge stylized French cockerel crest watermark floating faintly behind him, dramatic golden light rays radiating outward, faint tricolor flag accents (blue-white-red) at the bottom. Saturated color palette with golden highlights, high contrast, glossy graphic finish. Stylized like a World Cup promotional poster. The France crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "star-hussein",
+      "template": "stat-hero",
+      "filename": "star-hussein.png",
+      "subjectHint": "Aymen Hussein dẫn bóng tấn công cho ĐT Iraq",
+      "prompt": "Vertical 9:16 football poster artwork featuring Aymen Hussein, the Iraqi striker for the Iraq national team, in an explosive sprinting hero pose driving forward at speed, fierce determined expression. He wears a green Iraq home kit with the Iraq Football Association crest clearly visible on the chest. Background: a bold green Iraq graphic backdrop with a huge stylized Iraqi crest watermark floating faintly behind him, dramatic warm light rays radiating outward. Vibrant saturated green palette, high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Iraq crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "coach-deschamps",
+      "template": "callout",
+      "filename": "coach-deschamps.png",
+      "subjectHint": "HLV Didier Deschamps chỉ đạo chiến thuật tuyển Pháp",
+      "prompt": "Vertical 9:16 football poster artwork featuring Didier Deschamps, the French head coach of the France national team, in a composed touchline pose pointing instructions, focused intense expression. He wears a smart dark France team track jacket with the French cockerel crest visible on the chest. Background: a deep blue France graphic backdrop with a huge stylized cockerel crest floating faintly behind him, dramatic light rays. Saturated blue palette, very high contrast, glossy finish. Stylized like a World Cup pre-match press-conference poster. The France crest visible on the jacket, no on-image text or captions."
+    },
+    {
+      "id": "coach-arnold",
+      "template": "callout",
+      "filename": "coach-arnold.png",
+      "subjectHint": "HLV Graham Arnold chỉ đạo chiến thuật tuyển Iraq",
+      "prompt": "Vertical 9:16 football poster artwork featuring Graham Arnold, the head coach of the Iraq national team, in a passionate touchline coaching pose gesturing with his hands, focused tactical expression. He wears a dark Iraq team track jacket with the Iraq Football Association crest clearly visible on the chest. Background: a bold green Iraq graphic backdrop with a huge stylized Iraqi crest watermark floating faintly behind him, dramatic light rays radiating. Saturated green palette with golden highlights, high contrast, glossy finish. Stylized like a World Cup matchday promotional poster. The Iraq crest visible on the jacket, no on-image text or captions."
+    }
+  ]
+}

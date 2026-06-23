@@ -1,0 +1,37 @@
+{
+  "version": "1.0",
+  "source": "nhan-dinh-my-vs-uc-wc-2026.txt",
+  "contentType": "PRE-MATCH PREVIEW",
+  "title": "Nhận định Mỹ vs Úc — World Cup 2026",
+  "createdAt": "2026-06-18T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Hook split-frame — Pulisic (Mỹ) trái vs Irankunda (Úc) phải; ghép từ hook-1 + hook-2",
+      "prompt": "Vertical 9:16 split-frame football poster artwork showing a World Cup 2026 Group D matchup. Left half: Christian Pulisic, the American winger and captain for the United States national team, in a white USA home kit with the US Soccer crest clearly visible on the chest and the captain's armband, intense focused hero pose. Behind him, a stylized navy-white-and-red USA graphic backdrop with a huge faint US Soccer crest watermark and radiating light rays. Right half: Nestory Irankunda, the young Australian winger for the Australia Socceroos national team, in a gold-and-green Australia home kit with the Football Australia crest clearly visible on the chest, mirroring driving hero pose. Behind him, a stylized green-and-gold graphic backdrop with a huge faint Socceroos crest watermark and radiating light rays. Down the centre seam: a diagonal lightning-burst slash separator with dramatic energy glow, the FIFA World Cup trophy glowing as a stylized graphic accent between them. Vibrant saturated palette per side, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday rivalry promotional poster. Both national-team crests visible on the jerseys, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "balogun",
+      "template": "stat-hero",
+      "filename": "balogun.png",
+      "subjectHint": "Folarin Balogun — Mỹ, tiền đạo (cú đúp vs Paraguay)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Folarin Balogun, the American striker for the United States national team, in a triumphant goal-celebration roar with both arms spread wide after scoring, intense joyful expression. He wears a white USA home kit with the US Soccer crest clearly visible on the chest. Background: a bold navy-and-red USA graphic backdrop with a huge stylized US Soccer crest floating faintly behind him as a watermark, dramatic golden light rays radiating outward from behind his head, faint stars-and-stripes ribbon motif across the lower frame as a graphic accent. Vibrant saturated navy-white-and-red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The US Soccer crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "pulisic",
+      "template": "stat-hero",
+      "filename": "pulisic.png",
+      "subjectHint": "Christian Pulisic — Mỹ, đội trưởng (nhạc trưởng, kiến tạo)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Christian Pulisic, the American winger and captain for the United States national team, in a dynamic mid-stride driving pose carrying the ball forward at speed, determined commanding expression, captain's armband on his left arm. He wears a white USA home kit with the US Soccer crest clearly visible on the chest. Background: a deep navy USA graphic backdrop with a huge stylized US Soccer crest floating faintly behind him as a watermark, dramatic light rays radiating outward, faint stylized fan-crowd silhouettes in red and white flanking the composition as graphic accents. Vibrant saturated navy-and-red palette with bright highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The US Soccer crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "irankunda",
+      "template": "stat-hero",
+      "filename": "irankunda.png",
+      "subjectHint": "Nestory Irankunda — Úc, 20 tuổi (mở tỷ số vs Thổ Nhĩ Kỳ, mũi phản công tốc độ)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Nestory Irankunda, the young Australian winger for the Australia Socceroos national team, in his current 2026 era, in an explosive sprinting hero pose driving forward on a counter-attack, fierce focused expression. He wears a gold-and-green Australia Socceroos home kit with the Football Australia crest clearly visible on the chest. Background: a bold green-and-gold graphic backdrop with a huge stylized Socceroos crest floating faintly behind him as a watermark, dramatic light rays radiating outward conveying speed, faint motion-streak graphic accents trailing behind him. Vibrant saturated green-and-gold palette, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Football Australia crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    }
+  ]
+}

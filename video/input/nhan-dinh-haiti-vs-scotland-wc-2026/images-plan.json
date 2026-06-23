@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "source": "nhan-dinh-haiti-vs-scotland-wc-2026.txt",
+  "contentType": "PRE-MATCH PREVIEW",
+  "title": "Nhan dinh Haiti vs Scotland — World Cup 2026: du doan ty so, doi hinh va nhung cai ten dang xem",
+  "createdAt": "2026-06-13T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Hook split-frame — McTominay (Scotland) vs Nazon (Haiti), khai man bang C",
+      "prompt": "Vertical 9:16 split-frame football poster artwork showing a World Cup 2026 group-stage opener. Left half: Scott McTominay, the Scottish midfielder for the Scotland national team, in the dark navy-blue Scotland home kit with the Scottish FA crest clearly visible on the chest, intense determined hero pose. Behind him, a stylized navy-blue Scotland graphic backdrop with a huge faint Scottish FA crest watermark and radiating light rays. Right half: Duckens Nazon, the Haitian striker for the Haiti national team, in the blue-and-red Haiti home kit with the Haitian Football Federation crest clearly visible on the chest, mirroring hero pose. Behind him, a stylized blue-and-red Haiti graphic backdrop with a huge faint crest watermark and radiating light rays. Down the centre seam: a diagonal lightning-burst slash separator with dramatic energy glow, the FIFA World Cup trophy glowing as a stylized graphic accent between them. Vibrant saturated palette per side, very high contrast, glossy graphic-design finish. Stylized like a FIFA World Cup knockout matchday graphic. Both crests visible on the jerseys, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "mctominay",
+      "template": "stat-hero",
+      "filename": "mctominay.png",
+      "subjectHint": "Scott McTominay — dau tau tuyen Scotland",
+      "prompt": "Vertical 9:16 football poster artwork featuring Scott McTominay, the Scottish midfielder for Scotland and Napoli, in a powerful hero pose surging into the box to strike the ball, intense driven expression. He wears the dark navy-blue Scotland home kit with the Scottish FA crest clearly visible on the chest. Background: a bold navy-blue Scotland graphic backdrop with a huge stylized Scottish FA crest floating faintly behind him as a watermark, dramatic light rays radiating outward. Vibrant saturated navy-blue palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a FIFA World Cup matchday promotional poster. The Scotland crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "nazon",
+      "template": "stat-hero",
+      "filename": "nazon.png",
+      "subjectHint": "Duckens Nazon — vua pha luoi vong loai cua Haiti",
+      "prompt": "Vertical 9:16 football poster artwork featuring Duckens Nazon, the Haitian striker for the Haiti national team, in a celebratory hero pose with arms outstretched after scoring, an intense joyful expression. He wears the blue-and-red Haiti home kit with the Haitian Football Federation crest clearly visible on the chest. Background: a bold blue-and-red Haiti graphic backdrop with a huge stylized crest floating faintly behind him as a watermark, dramatic golden light burst radiating outward. Vibrant saturated blue-and-red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a FIFA World Cup matchday promotional poster. The Haiti crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "isidor",
+      "template": "stat-hero",
+      "filename": "isidor.png",
+      "subjectHint": "Wilson Isidor — tan binh tan cong cua Haiti (Sunderland)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Wilson Isidor, the Haitian striker for the Haiti national team and Sunderland, in a dynamic hero pose driving at the defence with the ball, sharp focused expression. He wears the blue-and-red Haiti home kit with the Haitian Football Federation crest clearly visible on the chest. Background: a bold blue-and-red Haiti graphic backdrop with a huge stylized crest floating faintly behind him as a watermark, dramatic light rays radiating outward. Vibrant saturated blue-and-red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a FIFA World Cup matchday promotional poster. The Haiti crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "clarke",
+      "template": "callout",
+      "filename": "clarke.png",
+      "subjectHint": "Steve Clarke — HLV Scotland, phat bieu hop bao",
+      "prompt": "Vertical 9:16 football poster artwork featuring Steve Clarke, the Scottish head coach of the Scotland national team, in a composed touchline pose with a focused expression and one hand gesturing, wearing a dark Scotland national team coaching jacket with the Scottish FA crest clearly visible on the chest. Background: a bold navy-blue Scotland graphic backdrop with a huge stylized Scottish FA crest floating faintly behind him as a watermark, dramatic light rays radiating outward. Vibrant saturated navy-blue palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a FIFA World Cup pre-match editorial poster. The Scotland crest visible on the jacket, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "migne",
+      "template": "callout",
+      "filename": "migne.png",
+      "subjectHint": "Sebastien Migne — HLV Haiti, phat bieu hop bao",
+      "prompt": "Vertical 9:16 football poster artwork featuring Sebastien Migne, the French head coach of the Haiti national team, in a passionate touchline pose gesturing with conviction, intense focused expression, wearing a dark Haiti national team coaching jacket with the Haitian Football Federation crest clearly visible on the chest. Background: a bold blue-and-red Haiti graphic backdrop with a huge stylized crest floating faintly behind him as a watermark, dramatic light rays radiating outward. Vibrant saturated blue-and-red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a FIFA World Cup pre-match editorial poster. The Haiti crest visible on the jacket, no on-image text or captions, no scoreboard graphics."
+    }
+  ]
+}

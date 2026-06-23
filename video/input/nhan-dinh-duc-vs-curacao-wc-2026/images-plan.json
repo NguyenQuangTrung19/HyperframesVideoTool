@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "source": "nhan-dinh-duc-vs-curacao-wc-2026.txt",
+  "contentType": "PRE-MATCH PREVIEW",
+  "title": "Nhận định Đức vs Curacao — World Cup 2026",
+  "createdAt": "2026-06-13T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Hook đối đầu — Havertz (Đức) vs Chong (Curacao) · tỷ số dự đoán 3-0",
+      "prompt": "Vertical 9:16 split-frame football poster artwork showing a World Cup 2026 group-stage matchup. Left half: Kai Havertz, the German striker for the Germany national team, in a clean white Germany home kit with the black DFB eagle crest clearly visible on the chest, intense focused hero pose with arms slightly spread. Behind him, a stylized white-and-black Germany graphic backdrop with a huge faint DFB eagle crest watermark and radiating golden light rays. Right half: Tahith Chong, the Curacao winger for the Curacao national team, in a bright blue Curacao home kit with the Curacao Football Federation crest clearly visible on the chest, mirroring driving hero pose. Behind him, a stylized royal-blue Curacao graphic backdrop with a huge faint Curacao Football Federation crest watermark and radiating light rays. Down the centre seam: a diagonal lightning-burst slash separator with dramatic energy glow, the FIFA World Cup trophy rendered as a glowing golden graphic accent between them. Vibrant saturated palette per side, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. Both national-team crests visible on the jerseys, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "star-musiala",
+      "template": "stat-hero",
+      "filename": "star-musiala.png",
+      "subjectHint": "Jamal Musiala — nhạc trưởng tuyển Đức",
+      "prompt": "Vertical 9:16 football poster artwork featuring Jamal Musiala, the German attacking midfielder for the Germany national team, in a hero pose mid-stride driving forward with the ball at his feet, body low and balanced, eyes scanning ahead with a sharp creative expression. He wears a clean white Germany home kit with the black DFB eagle crest clearly visible on the chest. Background: a bold white-and-black Germany graphic backdrop with a huge stylized DFB eagle crest floating faintly behind him as a watermark, dramatic golden light rays radiating outward, faint layered color-block shards in white, black and gold arranged like overlapping geometric panes. Vibrant saturated palette with gold highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Germany DFB crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "star-woltemade",
+      "template": "stat-hero",
+      "filename": "star-woltemade.png",
+      "subjectHint": "Nick Woltemade — dẫn đầu Đức về dấu giày vòng loại",
+      "prompt": "Vertical 9:16 football poster artwork featuring Nick Woltemade, the tall German striker for the Germany national team, in a triumphant goal-celebration hero pose with one arm raised and a roaring expression after scoring. He wears a clean white Germany home kit with the black DFB eagle crest clearly visible on the chest. Background: a bold white-and-black Germany graphic backdrop with a huge stylized DFB eagle crest floating faintly behind him as a watermark, dramatic golden light rays bursting outward from behind his head, faint stylized goal-net ripple graphic across the lower frame. Vibrant saturated palette with gold highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Germany DFB crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "star-bacuna",
+      "template": "stat-hero",
+      "filename": "star-bacuna.png",
+      "subjectHint": "Juninho Bacuna — đầu tàu phản công Curacao",
+      "prompt": "Vertical 9:16 football poster artwork featuring Juninho Bacuna, the Curacao midfielder for the Curacao national team, in a hero pose striking a forward pass with his weight driving through the ball, intense determined expression, the picture of a counter-attack engine. He wears a bright blue Curacao home kit with the Curacao Football Federation crest clearly visible on the chest. Background: a bold royal-blue Curacao graphic backdrop with a huge stylized Curacao Football Federation crest floating faintly behind him as a watermark, dramatic light rays radiating outward, faint layered color-block shards in blue and white arranged like overlapping geometric panes. Vibrant saturated royal-blue palette with white highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Curacao crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "coach-nagelsmann",
+      "template": "callout",
+      "filename": "coach-nagelsmann.png",
+      "subjectHint": "HLV Julian Nagelsmann (Đức)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Julian Nagelsmann, the German head coach of the Germany national team, in a commanding touchline hero pose pointing and giving instructions, sharp focused expression, wearing a smart dark coaching suit jacket over Germany training gear. Background: a bold white-and-black Germany graphic backdrop with a huge stylized DFB eagle crest floating faintly behind him as a watermark, dramatic golden light rays radiating outward, faint layered color-block shards in white, black and gold arranged like overlapping geometric panes at the lower edge. Vibrant saturated palette with gold highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup managerial editorial poster. The Germany DFB crest motif visible in the backdrop, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "coach-advocaat",
+      "template": "callout",
+      "filename": "coach-advocaat.png",
+      "subjectHint": "HLV Dick Advocaat (Curacao, 78 tuổi)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Dick Advocaat, the veteran 78-year-old Dutch head coach of the Curacao national team and the oldest manager at the World Cup, in a dignified experienced touchline hero pose with arms folded and a calm knowing expression, wearing a smart dark coaching jacket over Curacao training gear. Background: a bold royal-blue Curacao graphic backdrop with a huge stylized Curacao Football Federation crest floating faintly behind him as a watermark, dramatic light rays radiating outward, faint layered color-block shards in blue and white arranged like overlapping geometric panes at the lower edge. Vibrant saturated royal-blue palette with white highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup managerial editorial poster. The Curacao crest motif visible in the backdrop, no on-image text or captions, no scoreboard graphics."
+    }
+  ]
+}

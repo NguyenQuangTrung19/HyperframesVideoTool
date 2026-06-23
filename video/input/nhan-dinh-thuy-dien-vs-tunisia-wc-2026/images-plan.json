@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "source": "nhan-dinh-thuy-dien-vs-tunisia-wc-2026.txt",
+  "contentType": "PRE-MATCH PREVIEW",
+  "title": "Nhận định Thụy Điển vs Tunisia — World Cup 2026",
+  "createdAt": "2026-06-13T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Hook đối đầu — Isak (Thụy Điển) vs Skhiri (Tunisia) · tỷ số dự đoán 2-1",
+      "prompt": "Vertical 9:16 split-frame football poster artwork showing a World Cup 2026 group-stage matchup. Left half: Alexander Isak, the Swedish striker for the Sweden national team, in a bright yellow Sweden home kit with the Swedish FA three-crowns crest clearly visible on the chest, intense focused hero pose leaning forward ready to strike. Behind him, a bold yellow-and-blue Sweden graphic backdrop with a huge faint three-crowns crest watermark and radiating light rays. Right half: Ellyes Skhiri, the Tunisian midfielder and captain for the Tunisia national team, in a deep red Tunisia home kit with the Tunisia FTF Eagle of Carthage crest clearly visible on the chest and the captain's armband, mirroring commanding hero pose. Behind him, a bold red Tunisia graphic backdrop with a huge faint Eagle of Carthage crest watermark and radiating light rays. Down the centre seam: a diagonal lightning-burst slash separator with dramatic energy glow, the gold World Cup trophy glowing as a stylized graphic accent between them. Vibrant saturated palette per side, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday rivalry promotional poster. Both national-team crests visible on the jerseys, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "star-gyokeres",
+      "template": "stat-hero",
+      "filename": "star-gyokeres.png",
+      "subjectHint": "Viktor Gyokeres — người hùng play-off",
+      "prompt": "Vertical 9:16 football poster artwork featuring Viktor Gyokeres, the Swedish striker for the Sweden national team, in a powerful goal-celebration roar mid-stride with both arms flung wide and fists clenched, triumphant expression. He wears a bright yellow Sweden home kit with the Swedish FA three-crowns crest clearly visible on the chest. Background: a bold yellow-and-blue Sweden graphic backdrop with a huge stylized three-crowns crest floating faintly behind him as a watermark, dramatic golden light rays radiating outward from behind his head, faint stylized Swedish blue ribbon banner across the lower frame. Vibrant saturated yellow-and-blue palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Sweden crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "star-isak",
+      "template": "stat-hero",
+      "filename": "star-isak.png",
+      "subjectHint": "Alexander Isak — bom tấn Liverpool",
+      "prompt": "Vertical 9:16 football poster artwork featuring Alexander Isak, the Swedish striker for the Sweden national team, in a fluid mid-stride driving pose carrying the ball forward at speed, calm focused expression. He wears a bright yellow Sweden home kit with the Swedish FA three-crowns crest clearly visible on the chest. Background: a layered yellow-and-blue Sweden graphic backdrop with a huge stylized three-crowns crest floating faintly behind him as a watermark, dramatic light rays radiating outward, layered color-block shards in Swedish yellow and blue arranged like overlapping geometric panes. Vibrant saturated yellow-and-blue palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Sweden crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "star-skhiri",
+      "template": "stat-hero",
+      "filename": "star-skhiri.png",
+      "subjectHint": "Ellyes Skhiri — nhạc trưởng Tunisia",
+      "prompt": "Vertical 9:16 football poster artwork featuring Ellyes Skhiri, the Tunisian midfielder and captain for the Tunisia national team, in a commanding captain pose pointing and directing his teammates, intense leadership expression, the captain's armband on his left arm. He wears a deep red Tunisia home kit with the Tunisia FTF Eagle of Carthage crest clearly visible on the chest. Background: a bold red Tunisia graphic backdrop with a huge stylized Eagle of Carthage crest floating faintly behind him as a watermark, dramatic light rays radiating outward from behind, faint stylized red-and-white fan-scarf color bands across the lower frame. Vibrant saturated deep-red palette with white highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Tunisia crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "coach-potter",
+      "template": "callout",
+      "filename": "coach-potter.png",
+      "subjectHint": "HLV Graham Potter (Thụy Điển)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Graham Potter, the English head coach of the Sweden national team, in a contemplative touchline pose with arms folded, focused thoughtful expression, wearing a smart dark coach's jacket. Background: a bold yellow-and-blue Sweden graphic backdrop with a huge stylized Swedish FA three-crowns crest floating faintly behind him as a watermark motif dominating the upper frame, dramatic light rays radiating outward, layered color-block shards in Swedish yellow and blue arranged like overlapping geometric panes. Vibrant saturated yellow-and-blue palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup manager editorial poster. The Sweden three-crowns crest visible as the backdrop motif, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "coach-lamouchi",
+      "template": "callout",
+      "filename": "coach-lamouchi.png",
+      "subjectHint": "HLV Sabri Lamouchi (Tunisia)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Sabri Lamouchi, the French-Tunisian head coach of the Tunisia national team, in an animated touchline pose gesturing instructions to his players, intense determined expression, wearing a smart dark coach's jacket. Background: a bold red Tunisia graphic backdrop with a huge stylized Tunisia FTF Eagle of Carthage crest floating faintly behind him as a watermark motif dominating the upper frame, dramatic light rays radiating outward, layered color-block shards in Tunisian red and white arranged like overlapping geometric panes. Vibrant saturated deep-red palette with white highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup manager editorial poster. The Tunisia Eagle of Carthage crest visible as the backdrop motif, no on-image text or captions, no scoreboard graphics."
+    }
+  ]
+}

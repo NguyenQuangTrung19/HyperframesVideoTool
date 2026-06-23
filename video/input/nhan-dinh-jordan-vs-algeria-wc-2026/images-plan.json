@@ -1,0 +1,44 @@
+{
+  "version": "1.0",
+  "source": "nhan-dinh-jordan-vs-algeria-wc-2026.txt",
+  "contentType": "PRE-MATCH PREVIEW",
+  "title": "Nhận định Jordan vs Algeria — World Cup 2026: dự đoán tỷ số, đội hình và những cái tên đáng xem",
+  "createdAt": "2026-06-22T00:15:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "hook-1: Mousa Tamari (ĐT Jordan) · hook-2: Riyad Mahrez (ĐT Algeria)",
+      "prompt": "Vertical 9:16 split-frame football poster artwork showing a 2026 FIFA World Cup Group J matchday showdown. Left half: Mousa Tamari, the Jordanian winger for Montpellier and the Jordan national team, in a white Jordan home kit with the Jordan Football Association crest clearly visible on the chest, intense iconic hero pose. Behind him, a stylized white-and-red graphic backdrop with a huge faint Jordanian crest watermark and radiating golden light rays. Right half: Riyad Mahrez, the Algerian winger for Al Ahli and the Algeria national team, in a green Algeria home kit with the Algerian Football Federation crest clearly visible on the chest, mirroring determined hero pose. Behind him, a stylized green graphic backdrop with a huge faint Algerian crest watermark and radiating light rays. Down the centre seam: a diagonal lightning-burst slash separator with dramatic energy glow, the golden FIFA World Cup trophy glowing as a stylized graphic accent between them. Vibrant saturated palette per side, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday rivalry promotional poster. Both crests visible on the jerseys, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "star-tamari",
+      "template": "stat-hero",
+      "filename": "star-tamari.png",
+      "subjectHint": "Mousa Tamari ăn mừng bàn thắng cho ĐT Jordan",
+      "prompt": "Vertical 9:16 football poster artwork featuring Mousa Tamari, the legendary Jordanian winger for Montpellier and the Jordan national team, in a triumphant goal celebration hero pose, arms outstretched, screaming with passion. He wears the white Jordan home jersey with the Jordan Football Association crest clearly visible on the chest. Background: a bold white-and-red Jordan graphic backdrop with a huge stylized Jordanian crest watermark floating faintly behind him, dramatic golden light rays radiating outward. Saturated color palette, high contrast, glossy graphic finish. Stylized like a World Cup promotional poster. The Jordan crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "star-mahrez",
+      "template": "stat-hero",
+      "filename": "star-mahrez.png",
+      "subjectHint": "Riyad Mahrez dẫn bóng tấn công cho ĐT Algeria",
+      "prompt": "Vertical 9:16 football poster artwork featuring Riyad Mahrez, the Algerian winger for Al Ahli and the Algeria national team, in a hero pose controlling the ball on the wing, intense focused expression. He wears the green Algeria home jersey with the Algerian Football Federation crest clearly visible on the chest. Background: a bold green Algeria backdrop with a huge stylized Algerian crest watermark floating faintly behind him, dramatic warm light rays radiating outward. Saturated green-and-white palette, high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Algeria crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "coach-sellami",
+      "template": "callout",
+      "filename": "coach-sellami.png",
+      "subjectHint": "HLV Jamal Sellami chỉ đạo chiến thuật tuyển Jordan",
+      "prompt": "Vertical 9:16 football poster artwork featuring Jamal Sellami, the Moroccan head coach of the Jordan national team, in a composed touchline pose pointing instructions, focused intense expression. He wears a smart dark Jordan team track jacket with the Jordan Football Association crest visible on the chest. Background: a deep white-and-red Jordan graphic backdrop with a huge stylized crest floating faintly behind him, dramatic light rays. Saturated palette, very high contrast, glossy finish. Stylized like a World Cup pre-match press-conference poster. The Jordan crest visible on the jacket, no on-image text or captions."
+    },
+    {
+      "id": "coach-petkovic",
+      "template": "callout",
+      "filename": "coach-petkovic.png",
+      "subjectHint": "HLV Vladimir Petkovic chỉ đạo chiến thuật tuyển Algeria",
+      "prompt": "Vertical 9:16 football poster artwork featuring Vladimir Petkovic, the head coach of the Algeria national team, in a passionate touchline coaching pose gesturing with his hands, focused tactical expression, wearing glasses. He wears a dark Algeria team training jacket with the Algerian Football Federation crest clearly visible on the chest. Background: a bold green Algeria graphic backdrop with a huge stylized Algerian crest watermark floating faintly behind him, dramatic light rays radiating. Saturated green palette with golden highlights, high contrast, glossy finish. Stylized like a World Cup matchday promotional poster. The Algeria crest visible on the jacket, no on-image text or captions."
+    }
+  ]
+}

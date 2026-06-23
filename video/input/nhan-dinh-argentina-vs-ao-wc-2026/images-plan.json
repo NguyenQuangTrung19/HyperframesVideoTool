@@ -1,0 +1,65 @@
+{
+  "version": "1.0",
+  "source": "nhan-dinh-argentina-vs-ao-wc-2026.txt",
+  "contentType": "PRE-MATCH PREVIEW",
+  "title": "Nhận định Argentina vs Áo: Quyết đấu giành ngôi đầu bảng J World Cup 2026",
+  "createdAt": "2026-06-21T23:07:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "hook-1: Lionel Messi (ĐT Argentina) · hook-2: Marcel Sabitzer (ĐT Áo)",
+      "prompt": "hook-1 (left): Vertical 9:16 football poster artwork featuring Lionel Messi, the legendary Argentine forward and captain for Argentina national team, in the iconic sky-blue and white striped Argentina home kit with the AFA crest clearly visible on the chest, intense focused hero pose, framed chest-up with head in the upper third. Background: a stylized sky-blue and white graphic backdrop with a huge faint Argentina AFA crest watermark, dramatic light rays. Vibrant saturated colors, high contrast, glossy finish. The AFA crest visible on the jersey, no on-image text or captions.\n---\nhook-2 (right): Vertical 9:16 football poster artwork featuring Marcel Sabitzer, the Austrian midfielder and captain for Austria national team, in a red and white Austria home kit with the Austria national team crest clearly visible on the chest, intense focused hero pose, framed chest-up with head in the upper third. Behind him, a stylized red and white graphic backdrop with a huge faint Austrian crest watermark, radiating light rays. Vibrant saturated colors, high contrast, glossy finish. The Austria crest visible on the jersey, no on-image text or captions."
+    },
+    {
+      "id": "argentina-run",
+      "template": "stat-hero",
+      "filename": "argentina-run.png",
+      "subjectHint": "Lautaro Martínez ăn mừng bàn thắng cho Argentina",
+      "prompt": "Vertical 9:16 football poster artwork featuring Lautaro Martínez, the Argentine striker for Inter Milan and Argentina national team, in a triumphant hero pose celebrating a goal, screaming with passion, arms outstretched. He wears the sky-blue and white striped Argentina home jersey with the AFA crest clearly visible on the chest. Background: a bold sky-blue and white graphic backdrop with a huge stylized AFA crest floating faintly behind him as a watermark, dramatic light rays and golden sparks radiating outward from behind. Vibrant saturated palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like an Argentina national team promotional poster. The AFA crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "austria-run",
+      "template": "stat-hero",
+      "filename": "austria-run.png",
+      "subjectHint": "Sasa Kalajdzic dẫn bóng tấn công cho tuyển Áo",
+      "prompt": "Vertical 9:16 football poster artwork featuring Sasa Kalajdzic, the Austrian striker for Austria national team, in an intense hero pose mid-stride driving forward with determination, eyes locked on the target. He wears the red and white Austria home jersey with the Austria national team crest clearly visible on the chest. Background: a bold red and white graphic backdrop with a huge stylized Austria crest floating faintly behind him as a watermark, sharp white and red geometric shards and light rays radiating from behind. Vibrant saturated Austria-red palette, very high contrast, glossy graphic-design finish. Stylized like an Austria national team matchday promotional poster. The Austria crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "key-player-messi",
+      "template": "callout",
+      "filename": "key-player-messi.png",
+      "subjectHint": "Thủ quân Lionel Messi chỉ đạo đồng đội trên sân",
+      "prompt": "Vertical 9:16 football poster artwork featuring Lionel Messi, the legendary playmaker and captain of Argentina national team, in a commanding pose pointing instructions to teammates, intense focused expression, captain's armband visible on his left arm. He wears the classic sky-blue and white striped Argentina home kit with the AFA crest clearly visible on the chest. Background: a dark navy-blue and sky-blue graphic backdrop with a huge glowing AFA crest floating faintly behind him as a watermark, dramatic golden light bursts radiating from behind his head. Saturated color palette with golden accent highlights, very high contrast, glossy graphic-design finish. Stylized like a historic-moment promotional poster. The AFA crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "key-player-sabitzer",
+      "template": "callout",
+      "filename": "key-player-sabitzer.png",
+      "subjectHint": "Nhạc trưởng Marcel Sabitzer khống chế bóng kiến thiết",
+      "prompt": "Vertical 9:16 football poster artwork featuring Marcel Sabitzer, the Austrian midfielder and playmaker for Austria national team, in a hero pose controlling the ball with his chest, intense focused expression. He wears the red and white Austria home jersey with the Austria national team crest clearly visible on the chest. Background: a deep red and white graphic backdrop with a huge stylized Austrian crest floating faintly behind him as a watermark, dramatic light rays and geometric design elements radiating from the center. Vibrant saturated palette, very high contrast, glossy graphic-design finish. Stylized like a matchday promotional poster. The Austria crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "coach-scaloni",
+      "template": "callout",
+      "filename": "coach-scaloni.png",
+      "subjectHint": "HLV trưởng Lionel Scaloni chỉ đạo chiến thuật tuyển Argentina",
+      "prompt": "Vertical 9:16 football poster artwork featuring Lionel Scaloni, the Argentine manager of the Argentina national team, in a focused and thoughtful coaching pose on the touchline, arms crossed, intense determined expression. He wears the official navy-blue Argentina national team track jacket with the AFA crest clearly visible on the chest. Background: a bold sky-blue and white graphic backdrop with a huge stylized AFA crest floating faintly behind him as a watermark, dramatic light rays. Vibrant saturated palette with golden highlights, very high contrast, glossy finish. Stylized like an Argentina national team promotional poster. The AFA crest visible on the jacket, no on-image text or captions."
+    },
+    {
+      "id": "coach-rangnick",
+      "template": "callout",
+      "filename": "coach-rangnick.png",
+      "subjectHint": "HLV trưởng Ralf Rangnick chỉ đạo chiến thuật tuyển Áo",
+      "prompt": "Vertical 9:16 football poster artwork featuring Ralf Rangnick, the German manager of the Austria national team, in an intense coaching pose on the sideline, gesturing instructions with his hand, focused tactical expression, wearing thin-rimmed glasses. He wears a black Austria national team track jacket with the Austria crest clearly visible on the chest. Background: a deep red and white graphic backdrop with a huge stylized Austria crest watermark floating behind him, sharp geometric design elements and red light beams radiating. Vibrant saturated palette, very high contrast, glossy finish. Stylized like an Austria national team matchday promotional poster. The Austria crest visible on the jacket, no on-image text or captions."
+    },
+    {
+      "id": "fans-pilgrimage",
+      "template": "callout",
+      "filename": "fans-pilgrimage.png",
+      "subjectHint": "Cổ động viên Argentina cuồng nhiệt và sân vận động Dallas Stadium",
+      "prompt": "Vertical 9:16 football poster artwork capturing the passion of Argentina fans. In the foreground, a close-up graphic of hands holding a stylized sky-blue and white Argentina fan scarf high. In the background, the modern architectural silhouette of Dallas Stadium rendered as a faint geometric motif under dramatic sky-blue and white light beams. A huge faint AFA crest watermark floats in the sky. Saturated sky-blue, white, and golden color palette, high contrast, glossy graphic-design finish. Stylized like a World Cup promotional poster showing fan support. No on-image text or captions, no scoreboard graphics."
+    }
+  ]
+}

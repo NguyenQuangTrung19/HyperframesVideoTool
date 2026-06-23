@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "source": "nhan-dinh-brazil-vs-haiti-wc-2026.txt",
+  "contentType": "PRE-MATCH PREVIEW",
+  "title": "Nhận định Brazil vs Haiti — World Cup 2026",
+  "createdAt": "2026-06-18T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Split-frame Brazil vs Haiti — Vinicius (trái) vs Isidor (phải), poster World Cup",
+      "prompt": "Vertical 9:16 split-frame football poster artwork showing a 2026 World Cup group-stage matchup. Left half: Vinicius Junior, the Brazilian winger for the Brazil national team, in a bright yellow Brazil home kit with the green CBF crest clearly visible on the chest, intense focused hero pose. Behind him, a stylized yellow-and-green Brazil graphic backdrop with a huge faint CBF crest watermark and radiating light rays. Right half: Wilson Isidor, the Haitian striker for the Haiti national team, in a blue-and-red Haiti home kit with the Haitian federation crest clearly visible on the chest, mirroring determined hero pose. Behind him, a stylized blue-and-red Haiti graphic backdrop with a huge faint crest watermark and radiating light rays. Down the centre seam: a diagonal lightning-burst slash separator with dramatic energy glow, the FIFA World Cup trophy glowing as a stylized graphic accent between them. Vibrant saturated palette per side, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. Both national crests visible on the jerseys, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "vinicius",
+      "template": "stat-hero",
+      "filename": "vinicius.png",
+      "subjectHint": "Vinicius Junior — Brazil, ngôi sao chạy cánh trái",
+      "prompt": "Vertical 9:16 football poster artwork featuring Vinicius Junior, the Brazilian winger for Real Madrid and the Brazil national team, in a dynamic hero pose mid-stride driving forward with the ball at speed, explosive and intense. He wears a bright yellow Brazil home kit with the green CBF crest clearly visible on the chest. Background: a vibrant yellow-and-green Brazil graphic backdrop with a huge stylized CBF crest floating faintly behind him as a watermark, dramatic light rays radiating outward, faint blue-and-green color-block shards arranged like overlapping geometric panes. Vibrant saturated yellow palette with green and gold highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Brazil crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "isidor",
+      "template": "stat-hero",
+      "filename": "isidor.png",
+      "subjectHint": "Wilson Isidor — Haiti (Sunderland), tiền đạo cắm",
+      "prompt": "Vertical 9:16 football poster artwork featuring Wilson Isidor, the Haitian striker for Sunderland and the Haiti national team, in a confident hero pose roaring after a goal with arms outstretched, intense determined expression. He wears a blue-and-red Haiti home kit with the Haitian federation crest clearly visible on the chest. Background: a bold blue-and-red Haiti graphic backdrop with a huge stylized Haitian crest floating faintly behind him as a watermark, dramatic light rays radiating outward from behind, layered blue-and-red color-block shards arranged like overlapping geometric panes. Vibrant saturated blue-and-red palette with gold highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup underdog promotional poster. The Haiti crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "bellegarde",
+      "template": "stat-hero",
+      "filename": "bellegarde.png",
+      "subjectHint": "Jean-Ricner Bellegarde — Haiti (Wolverhampton), nhạc trưởng tuyến giữa",
+      "prompt": "Vertical 9:16 football poster artwork featuring Jean-Ricner Bellegarde, the Haitian midfielder for Wolverhampton Wanderers and the Haiti national team, in a composed hero pose driving forward with the ball, head up surveying the pitch, focused commanding expression. He wears a blue-and-red Haiti home kit with the Haitian federation crest clearly visible on the chest. Background: a deep blue Haiti graphic backdrop with a huge stylized Haitian crest floating faintly behind him as a watermark, dramatic light rays radiating outward, faint red color-block shards across the lower frame. Vibrant saturated blue-and-red palette with gold highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Haiti crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "ancelotti",
+      "template": "callout",
+      "filename": "ancelotti.png",
+      "subjectHint": "Carlo Ancelotti — HLV Brazil, phát biểu họp báo",
+      "prompt": "Vertical 9:16 football poster artwork featuring Carlo Ancelotti, the Italian head coach of the Brazil national team, in a composed touchline hero pose with arms folded and a focused expression, dressed in a sharp dark coach's jacket. Background: a bold yellow-and-green Brazil graphic backdrop with a huge stylized CBF crest floating faintly behind him as a watermark, dramatic light rays radiating outward, layered green color-block shards across the lower frame. Vibrant saturated yellow-and-green palette with gold highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup manager press-conference editorial poster. No on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "migne",
+      "template": "callout",
+      "filename": "migne.png",
+      "subjectHint": "Sébastien Migné — HLV Haiti, phát biểu họp báo",
+      "prompt": "Vertical 9:16 football poster artwork featuring Sebastien Migne, the French head coach of the Haiti national team, in a determined touchline hero pose gesturing instructions, focused passionate expression, dressed in a coach's training jacket. Background: a bold blue-and-red Haiti graphic backdrop with a huge stylized Haitian federation crest floating faintly behind him as a watermark, dramatic light rays radiating outward, layered red-and-blue color-block shards across the lower frame. Vibrant saturated blue-and-red palette with gold highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup manager press-conference editorial poster. No on-image text or captions, no scoreboard graphics."
+    }
+  ]
+}

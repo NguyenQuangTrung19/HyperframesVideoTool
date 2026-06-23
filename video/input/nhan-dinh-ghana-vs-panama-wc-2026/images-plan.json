@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "source": "nhan-dinh-ghana-vs-panama-wc-2026.txt",
+  "contentType": "PRE-MATCH PREVIEW",
+  "title": "Nhận định Ghana vs Panama — World Cup 2026: dự đoán tỷ số, đội hình và những cái tên đáng xem",
+  "createdAt": "2026-06-17T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Đối đầu mở màn bảng L: Semenyo (Ghana) so tài Diaz (Panama)",
+      "prompt": "Vertical 9:16 split-frame football poster artwork showing Antoine Semenyo of Ghana on the left wearing the white Ghana home kit with the GFA crest, confident determined pose with arms ready to sprint, set against red-gold-green national-color blocks and a huge faint Ghana crest watermark with radiating light rays; on the right Ismael Diaz of Panama wearing the red Panama home kit with the FEPAFUT crest, dynamic attacking stance, set against red-white-blue national-color blocks and a huge faint Panama crest watermark with light rays; a sharp diagonal lightning seam splits the two halves down the middle, a small golden World Cup trophy accent glowing between them. Dramatic stadium-poster lighting, ultra sharp, photoreal faces, no AI smoothness. The Ghana crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "semenyo",
+      "template": "stat-hero",
+      "filename": "semenyo.png",
+      "subjectHint": "Antoine Semenyo, mũi nhọn tốc độ của Ghana",
+      "prompt": "Vertical 9:16 football poster artwork featuring Antoine Semenyo, Ghanaian forward of Bournemouth and the Ghana national team, in a powerful driving-forward pose mid-stride as if bursting past a defender, wearing the white Ghana home kit. Backdrop built from bold red-gold-green national-color blocks, a huge faint GFA crest watermark filling the frame and dramatic light rays bursting from behind him, subtle motion-blur energy lines suggesting speed. Cinematic poster lighting, ultra sharp focus, photoreal detail on the face shot on an 85mm prime look, no AI smoothness. The Ghana crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "ayew",
+      "template": "stat-hero",
+      "filename": "ayew.png",
+      "subjectHint": "Jordan Ayew, đội trưởng và đầu tàu hàng công Ghana",
+      "prompt": "Vertical 9:16 football poster artwork featuring Jordan Ayew, captain and forward of the Ghana national team, in a commanding leadership pose with chest out and the captain's armband on his arm, wearing the white Ghana home kit. Backdrop built from rich red-gold-green national-color blocks, a huge faint GFA crest watermark behind him and warm golden light rays fanning out, giving a regal captain-of-the-Black-Stars feel. Cinematic poster lighting, ultra sharp focus, photoreal face on an 85mm prime look, no AI smoothness. The Ghana crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "diaz",
+      "template": "stat-hero",
+      "filename": "diaz.png",
+      "subjectHint": "Ismael Diaz, Vua phá lưới Gold Cup của Panama",
+      "prompt": "Vertical 9:16 football poster artwork featuring Ismael Diaz, attacking forward of the Panama national team, in a sharp goal-celebration pose with arms spread wide, wearing the red Panama home kit. Backdrop built from bold red-white-blue national-color blocks, a huge faint FEPAFUT crest watermark filling the frame and bright light rays exploding behind him, a clinical golden-boot striker energy. Cinematic poster lighting, ultra sharp focus, photoreal face on an 85mm prime look, no AI smoothness. The Panama crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "queiroz",
+      "template": "callout",
+      "filename": "queiroz.png",
+      "subjectHint": "Carlos Queiroz, huấn luyện viên Ghana, trận phải thắng",
+      "prompt": "Vertical 9:16 football poster artwork featuring Carlos Queiroz, veteran Portuguese head coach of the Ghana national team, in a focused touchline pose wearing a dark Ghana training jacket with the GFA crest, arms gesturing instructions with intense expression. Backdrop built from red-gold-green national-color blocks, a huge faint GFA crest watermark and dramatic spotlight rays from above, conveying experienced authority on the sideline. Cinematic poster lighting, ultra sharp focus, photoreal face on an 85mm prime look, no AI smoothness. The Ghana crest visible on the jacket, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "christiansen",
+      "template": "callout",
+      "filename": "christiansen.png",
+      "subjectHint": "Thomas Christiansen, huấn luyện viên Panama, tôn trọng Ghana",
+      "prompt": "Vertical 9:16 football poster artwork featuring Thomas Christiansen, head coach of the Panama national team, in a composed touchline pose wearing a dark Panama training jacket with the FEPAFUT crest, calm confident expression with arms folded. Backdrop built from red-white-blue national-color blocks, a huge faint FEPAFUT crest watermark and clean spotlight rays from above, conveying a disciplined organized leader. Cinematic poster lighting, ultra sharp focus, photoreal face on an 85mm prime look, no AI smoothness. The Panama crest visible on the jacket, no on-image text or captions, no scoreboard graphics."
+    }
+  ]
+}

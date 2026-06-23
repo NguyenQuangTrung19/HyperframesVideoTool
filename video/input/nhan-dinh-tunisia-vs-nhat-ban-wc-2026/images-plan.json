@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "source": "nhan-dinh-tunisia-vs-nhat-ban-wc-2026.txt",
+  "contentType": "PRE-MATCH PREVIEW",
+  "title": "Nhận định Tunisia vs Nhật Bản — World Cup 2026",
+  "createdAt": "2026-06-19T10:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Hook đối đầu — Skhiri (Tunisia) vs Kamada (Nhật) · tỷ số dự đoán 0-2",
+      "prompt": "Vertical 9:16 split-frame football poster artwork showing a FIFA World Cup 2026 group-stage matchup. Left half: Ellyes Skhiri, the Tunisian midfielder for the Tunisia national team, in a bright red Tunisia home kit with the Tunisian Football Federation crest clearly visible on the chest, intense focused commanding hero pose with arms slightly spread. Behind him, a stylized bright-red Tunisia graphic backdrop with a huge faint Tunisia eagle crest watermark and radiating light rays. Right half: Daichi Kamada, the Japanese midfielder for the Japan national team, in a dark Samurai-Blue Japan home kit with the JFA Japan Football Association crest clearly visible on the chest, mirroring determined hero pose. Behind him, a stylized deep-navy-blue Japan graphic backdrop with a huge faint JFA crest watermark and radiating light rays. Down the centre seam: a diagonal lightning-burst slash separator with dramatic energy glow, the FIFA World Cup trophy glowing as a stylized gold graphic accent between them. Vibrant saturated palette per side, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday rivalry promotional poster. Both national-team crests visible on the jerseys, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "star-kamada",
+      "template": "stat-hero",
+      "filename": "star-kamada.png",
+      "subjectHint": "Daichi Kamada — ghi bàn gỡ hòa phút 89 trước Hà Lan",
+      "prompt": "Vertical 9:16 football poster artwork featuring Daichi Kamada, the Japanese midfielder for the Japan national team who plays his club football at Crystal Palace, in a confident celebration pose with both arms raised and a defiant roar after scoring a dramatic late goal. He wears a dark Samurai-Blue Japan home kit with the JFA Japan Football Association crest clearly visible on the chest. Background: a bold deep-navy-blue Japan graphic backdrop with a huge stylized JFA crest floating faintly behind him as a watermark, dramatic cool-blue light rays radiating outward from behind his head, faint stylized cherry-blossom petal motifs drifting as graphic accents across the lower frame. Vibrant saturated navy-blue palette with crisp white highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Japan crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "star-nakamura",
+      "template": "stat-hero",
+      "filename": "star-nakamura.png",
+      "subjectHint": "Keito Nakamura — mở tỷ số cho Nhật ở trận ra quân",
+      "prompt": "Vertical 9:16 football poster artwork featuring Keito Nakamura, the Japanese winger for the Japan national team who plays his club football at Stade Reims, mid-stride driving forward at speed with the ball at his feet, eyes locked ahead in an explosive attacking burst. He wears a dark Samurai-Blue Japan home kit with the JFA Japan Football Association crest clearly visible on the chest. Background: a dynamic deep-navy-blue Japan graphic backdrop with a huge stylized JFA crest floating faintly behind him as a watermark, sweeping diagonal light streaks suggesting motion and pace, faint navy geometric color-block shards arranged like overlapping panes. Vibrant saturated navy-blue palette with crisp white highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Japan crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "star-skhiri",
+      "template": "stat-hero",
+      "filename": "star-skhiri.png",
+      "subjectHint": "Ellyes Skhiri — nhạc trưởng tuyến giữa Tunisia",
+      "prompt": "Vertical 9:16 football poster artwork featuring Ellyes Skhiri, the Tunisian midfielder for the Tunisia national team who plays his club football at Eintracht Frankfurt, in an intense composed pose driving forward with the ball under control, sharp focused expression as a midfield leader. He wears a bright red Tunisia home kit with the Tunisian Football Federation crest clearly visible on the chest. Background: a bold bright-red Tunisia graphic backdrop with a huge stylized Tunisia eagle crest floating faintly behind him as a watermark, dramatic warm-red light rays radiating outward from behind his head, faint red fan-scarf color bands rendered as a graphic ribbon across the lower frame. Vibrant saturated red palette with white highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Tunisia crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "coach-renard",
+      "template": "callout",
+      "filename": "coach-renard.png",
+      "subjectHint": "HLV Herve Renard (Tunisia)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Herve Renard, the French head coach of the Tunisia national team, standing on the touchline in his signature crisp white shirt, arms folded with a calm authoritative expression, gesturing tactical instructions. Background: a bold bright-red Tunisia graphic backdrop with a huge stylized Tunisia eagle crest floating prominently behind him as a watermark motif, dramatic warm-red light rays radiating outward, faint stylized technical-area touchline geometry rendered as graphic accents at the lower frame. Vibrant saturated red palette with white highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup manager editorial promotional poster. The Tunisia crest visible as the backdrop motif, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "coach-moriyasu",
+      "template": "callout",
+      "filename": "coach-moriyasu.png",
+      "subjectHint": "HLV Hajime Moriyasu (Nhật Bản)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Hajime Moriyasu, the Japanese head coach of the Japan national team, standing on the touchline in a dark formal coaching outfit, one hand raised mid-instruction with a focused composed expression. Background: a bold deep-navy-blue Japan graphic backdrop with a huge stylized JFA Japan Football Association crest floating prominently behind him as a watermark motif, dramatic cool-blue light rays radiating outward, faint stylized cherry-blossom petal motifs drifting as graphic accents at the lower frame. Vibrant saturated navy-blue palette with crisp white highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup manager editorial promotional poster. The Japan JFA crest visible as the backdrop motif, no on-image text or captions, no scoreboard graphics."
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "version": "1.0",
+  "source": "yamal-gap-anh-em-cabo-verde-wc-2026.txt",
+  "contentType": "NEWS DRAMA",
+  "title": "Anh em Cabo Verde khóa chặt Yamal trong trận hòa lịch sử",
+  "createdAt": "2026-06-16T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Yamal đối đầu anh em Duarte — split-frame World Cup poster",
+      "prompt": "Vertical 9:16 split-frame football poster artwork showing a World Cup 2026 shock matchup. Left half: Lamine Yamal, the Spanish teenage winger for Barcelona and the Spain national team, in a vibrant red Spain home kit with the Spanish federation crest clearly visible on the chest, confident hero pose. Behind him, a bold red-and-gold Spain graphic backdrop with a huge faint Spain federation crest watermark and radiating light rays. Right half: Deroy Duarte and Laros Duarte, the Cape Verde midfielders for the Cape Verde national team, both in the deep blue Cape Verde home kit with the Cape Verde football federation crest clearly visible on the chest, determined defensive hero pose shoulder to shoulder. Behind them, a deep blue Cape Verde graphic backdrop with a huge faint Cape Verde crest watermark and a stylized shark motif, radiating light rays. Down the centre seam: a diagonal lightning-burst slash separator with dramatic energy glow, the FIFA World Cup trophy glowing as a stylized graphic accent between them. Vibrant saturated palette per side, very high contrast, glossy graphic-design finish. Stylized like a World Cup knockout matchday graphic. Both crests visible on the jerseys, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "yamal-locked",
+      "template": "stat-hero",
+      "filename": "yamal-locked.png",
+      "subjectHint": "Yamal bị vây ráp, vô hại — Tây Ban Nha",
+      "prompt": "Vertical 9:16 football poster artwork featuring Lamine Yamal, the Spanish teenage winger for Barcelona and the Spain national team, in a tense frustrated pose shielding the ball while being closed down, body language showing he is stifled and out of space. He wears a vibrant red Spain home kit with the Spanish federation crest clearly visible on the chest. Two faint stylized deep-blue Cape Verde defender silhouettes press in on either side of him as graphic shapes. Background: a moody red Spain graphic backdrop with a huge faded Spain federation crest watermark, cold light rays cutting across, a somber tense atmosphere. Vibrant but moody saturated red palette, very high contrast, glossy graphic-design finish. Stylized like a World Cup editorial poster of a star being neutralised. The Spain crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "deroy",
+      "template": "callout",
+      "filename": "deroy.png",
+      "subjectHint": "Deroy Duarte — Cabo Verde (phát biểu trên ESPN)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Deroy Duarte, the Cape Verde midfielder for the Cape Verde national team, in a confident composed hero pose with arms folded, calm intense expression. He wears the deep blue Cape Verde home kit with the Cape Verde football federation crest clearly visible on the chest. Background: a deep blue Cape Verde graphic backdrop with a huge stylized Cape Verde crest floating faintly behind him as a watermark, a subtle stylized shark motif graphic in the lower frame, dramatic light rays radiating outward from behind his head. Vibrant saturated blue palette with white highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Cape Verde crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "laros",
+      "template": "callout",
+      "filename": "laros.png",
+      "subjectHint": "Laros Duarte — Cabo Verde (đá chính, chơi một tiếng)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Laros Duarte, the Cape Verde midfielder for the Cape Verde national team, in a driving mid-stride hero pose carrying the ball forward with focused determination. He wears the deep blue Cape Verde home kit with the Cape Verde football federation crest clearly visible on the chest. Background: a deep blue Cape Verde graphic backdrop with a huge stylized Cape Verde crest floating faintly behind him as a watermark, radiating light rays, faint stylized fan-crowd silhouettes flanking him as blue graphic shapes. Vibrant saturated blue palette with white highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Cape Verde crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "brothers-swap",
+      "template": "callout",
+      "filename": "brothers-swap.png",
+      "subjectHint": "Khoảnh khắc anh em thay nhau — Laros + Deroy split-frame",
+      "prompt": "Vertical 9:16 split-frame football poster artwork showing two brothers. Left half: Laros Duarte, the Cape Verde midfielder for the Cape Verde national team, in the deep blue Cape Verde home kit with the Cape Verde football federation crest clearly visible on the chest, warm proud emotional expression looking toward the other half. Behind him, a deep blue Cape Verde graphic backdrop with a faint Cape Verde crest watermark and radiating light rays. Right half: Deroy Duarte, the Cape Verde midfielder for the Cape Verde national team, in the same deep blue Cape Verde home kit with the Cape Verde crest clearly visible on the chest, determined ready expression mirroring his brother. Behind him, a matching deep blue Cape Verde graphic backdrop with a faint Cape Verde crest watermark and radiating light rays. Down the centre seam: a soft golden seam of light symbolising the brotherly bond, with a small stylized Cape Verde flag motif glowing between them. Vibrant saturated blue palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like an emotional World Cup human-interest promotional poster. Both crests visible on the jerseys, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "parents-cry",
+      "template": "callout",
+      "filename": "parents-cry.png",
+      "subjectHint": "Khán đài xúc động — bố mẹ và CĐV Cabo Verde bật khóc",
+      "prompt": "Vertical 9:16 football poster artwork depicting an emotional crowd moment in the stands at a World Cup match. Centre composition: two stylized poster-cutout figures of proud parents in deep blue Cape Verde colours wiping away tears of joy, hands over their hearts, overwhelmed with emotion. Around them, stylized fan-crowd silhouettes in deep blue Cape Verde colours waving small Cape Verde flags as graphic color bands. Background: a deep blue graphic backdrop with a huge faint Cape Verde football federation crest watermark, warm golden light rays beaming down creating a tender uplifting atmosphere. Vibrant saturated blue palette with warm golden highlights, very high contrast, glossy graphic-design finish. Stylized like an emotional World Cup human-interest promotional poster. No on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "vozinha",
+      "template": "stat-hero",
+      "filename": "vozinha.png",
+      "subjectHint": "Vozinha — thủ môn Cabo Verde, cột mốc 90 lần khoác áo",
+      "prompt": "Vertical 9:16 football poster artwork featuring Vozinha, the veteran goalkeeper for the Cape Verde national team, in an emotional triumphant pose with arms raised and eyes glistening after a milestone clean sheet, wearing a green goalkeeper kit with the Cape Verde football federation crest clearly visible on the chest and goalkeeper gloves on. Background: a deep blue Cape Verde graphic backdrop with a huge stylized Cape Verde crest floating faintly behind him as a watermark, a stylized golden milestone glow near his shoulder, dramatic warm light rays radiating outward from behind his head. Vibrant saturated blue-and-green palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a milestone-celebration World Cup broadcast graphic. The Cape Verde crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "world-class",
+      "template": "callout",
+      "filename": "world-class.png",
+      "subjectHint": "Đẳng cấp Tây Ban Nha — Rodri và Pedri split-frame",
+      "prompt": "Vertical 9:16 split-frame football poster artwork showcasing Spanish world-class quality. Left half: Rodri, the Spanish defensive midfielder for Manchester City and the Spain national team, in a vibrant red Spain home kit with the Spanish federation crest clearly visible on the chest, composed commanding hero pose on the ball. Behind him, a red-and-gold Spain graphic backdrop with a faint Spain federation crest watermark and radiating light rays. Right half: Pedri, the Spanish midfielder for Barcelona and the Spain national team, in a vibrant red Spain home kit with the Spanish federation crest clearly visible on the chest, elegant mid-turn pose threading a pass. Behind him, a matching red-and-gold Spain graphic backdrop with a faint Spain federation crest watermark and radiating light rays. Down the centre seam: a glowing golden energy separator. Vibrant saturated red-and-gold palette, very high contrast, glossy graphic-design finish. Stylized like a World Cup star-quality promotional poster. Both crests visible on the jerseys, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "curacao",
+      "template": "stat-hero",
+      "filename": "curacao.png",
+      "subjectHint": "Cảnh báo — Curacao thua Đức 1-7 đêm trước",
+      "prompt": "Vertical 9:16 football poster artwork depicting a heavy World Cup defeat as a cautionary moment. Centre composition: a dejected anonymous defender silhouette in the navy-and-yellow Curacao colours hanging his head, shoulders slumped in despair, a stylized generic German red-and-black opponent silhouette celebrating in the faded background. Background: a moody dark graphic backdrop split between Curacao navy-yellow and German red-black color blocks, cold blue downward light rays creating a somber heavy atmosphere, faint stylized crests of both nations as graphic accents in the corners. Moody saturated dark palette, very high contrast, glossy graphic-design finish. Stylized like a World Cup heavy-defeat editorial poster. No on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "knockout-dream",
+      "template": "callout",
+      "filename": "knockout-dream.png",
+      "subjectHint": "Giấc mơ vòng knock-out — đội tuyển Cabo Verde",
+      "prompt": "Vertical 9:16 football poster artwork depicting the Cape Verde national team dreaming of the World Cup knockout rounds. Centre composition: a group of stylized Cape Verde players in deep blue home kits with the Cape Verde football federation crest clearly visible on the chests, arms around each other in a tight unified huddle looking forward with hopeful determination. Background: a deep blue Cape Verde graphic backdrop with a huge stylized Cape Verde crest floating faintly as a watermark, a stylized blue shark motif rising behind them, the FIFA World Cup trophy glowing as a distant stylized graphic accent above, dramatic golden light rays radiating outward symbolising hope. Vibrant saturated blue palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like an inspirational World Cup underdog promotional poster. The Cape Verde crest visible on the jerseys, no on-image text or captions, no scoreboard graphics."
+    }
+  ]
+}

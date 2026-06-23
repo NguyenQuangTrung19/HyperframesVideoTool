@@ -1,0 +1,107 @@
+{
+  "version": "1.0",
+  "source": "cham-diem-ha-lan-vs-thuy-dien-wc-2026.txt",
+  "contentType": "MATCH RECAP",
+  "title": "Chấm điểm Hà Lan vs Thụy Điển: Gakpo rực sáng, Van de Ven thảm họa",
+  "createdAt": "2026-06-21T05:11:49.120Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Cody Gakpo và Brian Brobbey ăn mừng chiến thắng trước Thụy Điển",
+      "prompt": "Vertical 9:16 split-frame football poster artwork showing a Netherlands national team matchday victory. Left half: Cody Gakpo, the Dutch forward for Liverpool and the Netherlands national team, screaming in triumph, celebrating a goal. He wears the orange Netherlands home kit with the Royal Dutch Football Association lion crest clearly visible on the chest. Behind him, a stylized bright orange graphic backdrop with a huge faint Dutch lion crest watermark and golden light rays. Right half: Viktor Gyokeres, the Swedish striker, looking dejected with head bowed. He wears the yellow-and-blue Sweden kit with the Swedish crest clearly visible. Behind him, a stylized yellow graphic backdrop with a huge faint Swedish crest watermark. Down the centre seam: a diagonal glowing energy slash. Vibrant saturated colors, extreme contrast, glossy graphic finish. Stylized like a FIFA World Cup matchday promotional poster. Both crests visible on the jerseys, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "verbruggen",
+      "template": "stat-hero",
+      "filename": "verbruggen.png",
+      "subjectHint": "Bart Verbruggen — Điểm 7/10 | Thủ môn",
+      "prompt": "Vertical 9:16 football poster artwork featuring Bart Verbruggen, the Dutch goalkeeper for Brighton & Hove Albion and the Netherlands national team, in a diving post-save pose, fist pumping in confidence. He wears the goalkeeper shirt with the Dutch lion crest clearly visible on the chest. A stylized golden/blue rating badge glowing with the number 7 floats near his shoulder like a video-game stat overlay. Background: a stylized orange-and-black Dutch graphic backdrop with a huge giant Dutch lion crest watermark, cold white light rays radiating from behind. Saturated orange-accented palette, high contrast, glossy graphic finish. Stylized like a World Cup goalkeeper matchday poster. The crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "dumfries",
+      "template": "stat-hero",
+      "filename": "dumfries.png",
+      "subjectHint": "Denzel Dumfries — Điểm 8/10 | Hậu vệ phải",
+      "prompt": "Vertical 9:16 football poster artwork featuring Denzel Dumfries, the Dutch right-back for Inter Milan and the Netherlands national team, in a powerful sprint pose down the wing, looking up to cross. He wears the orange Netherlands home kit with the Dutch lion crest clearly visible on the chest. A large stylized golden-blue rating badge glowing brightly with the number 8 floats prominently near his shoulder like a video-game MVP stat overlay with subtle golden sparkle. Background: a vibrant orange-and-white Dutch graphic backdrop with a huge giant Dutch lion crest watermark, bright white light bursts. Saturated colors, high contrast, glossy graphic finish. Stylized like a World Cup matchday promotional poster. The crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "vanhecke",
+      "template": "stat-hero",
+      "filename": "vanhecke.png",
+      "subjectHint": "Jan Paul van Hecke — Điểm 6/10 | Trung vệ",
+      "prompt": "Vertical 9:16 football poster artwork featuring Jan Paul van Hecke, the Dutch centre-back for Brighton & Hove Albion and the Netherlands national team, in a determined defensive block pose, sliding on the pitch to intercept a pass. He wears the orange Netherlands home kit with the Dutch lion crest clearly visible on the chest. A stylized blue rating badge glowing with the number 6 floats near his shoulder like a video-game stat overlay. Background: a stylized orange graphic backdrop with a huge giant Dutch lion crest watermark, strong white light rays. Saturated colors, high contrast, glossy graphic finish. Stylized like a World Cup defensive promotional poster. The crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "vandijk",
+      "template": "stat-hero",
+      "filename": "vandijk.png",
+      "subjectHint": "Virgil van Dijk — Điểm 7/10 | Trung vệ",
+      "prompt": "Vertical 9:16 football poster artwork featuring Virgil van Dijk, the Dutch centre-back and captain for Liverpool and the Netherlands national team, in a commanding hero pose, captain's armband visible, pointing instructions to his teammates. He wears the orange Netherlands home kit with the Dutch lion crest clearly visible on the chest. A stylized golden/blue rating badge glowing with the number 7 floats near his shoulder like a video-game stat overlay. Background: a majestic orange-red graphic backdrop with a huge giant Dutch lion crest watermark, dramatic light rays. Saturated colors, high contrast, glossy graphic finish. Stylized like a World Cup captain promotional poster. The crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "vandeven",
+      "template": "stat-hero",
+      "filename": "vandeven.png",
+      "subjectHint": "Micky van de Ven — Điểm 4/10 | Hậu vệ trái",
+      "prompt": "Vertical 9:16 football poster artwork featuring Micky van de Ven, the Dutch defender for Tottenham Hotspur and the Netherlands national team, in a frustrated dejected pose walking slowly, looking down after being beaten by a winger. He wears the orange Netherlands home kit with the Dutch lion crest clearly visible on the chest. A large stylized deep-red warning rating badge glowing ominously with the number 4 floats near his shoulder like a video-game low-score stat overlay with a cracked glass effect. Background: a moody dark graphic backdrop in Dutch orange and black with a huge faded Dutch lion crest watermark, red-tinted downward light rays. High contrast, glossy graphic finish. Stylized like a player disappointment editorial poster. The crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "gravenberch",
+      "template": "stat-hero",
+      "filename": "gravenberch.png",
+      "subjectHint": "Ryan Gravenberch — Điểm 8/10 | Tiền vệ",
+      "prompt": "Vertical 9:16 football poster artwork featuring Ryan Gravenberch, the Dutch midfielder for Liverpool and the Netherlands national team, in a dynamic midfield driving pose, carrying the ball forward with confidence, intense expression. He wears the orange Netherlands home kit with the Dutch lion crest clearly visible on the chest. A large stylized golden-blue rating badge glowing brightly with the number 8 floats prominently near his shoulder like a video-game MVP stat overlay with subtle golden sparkle. Background: a vibrant orange graphic backdrop with a huge giant Dutch lion crest watermark, bright white light bursts. Saturated colors, high contrast, glossy graphic finish. Stylized like a World Cup midfield masterclass promotional poster. The crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "dejong",
+      "template": "stat-hero",
+      "filename": "dejong.png",
+      "subjectHint": "Frenkie de Jong — Điểm 7/10 | Tiền vệ",
+      "prompt": "Vertical 9:16 football poster artwork featuring Frenkie de Jong, the Dutch midfielder for Barcelona and the Netherlands national team, in a playmaker pose, looking up to pass the ball, body balanced. He wears the orange Netherlands home kit with the Dutch lion crest clearly visible on the chest. A stylized golden/blue rating badge glowing with the number 7 floats near his shoulder like a video-game stat overlay. Background: a stylized orange-and-blue graphic backdrop with a huge giant Dutch lion crest watermark, bright white light rays. Saturated colors, high contrast, glossy graphic finish. Stylized like a World Cup playmaker promotional poster. The crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "reijnders",
+      "template": "stat-hero",
+      "filename": "reijnders.png",
+      "subjectHint": "Tijjani Reijnders — Điểm 6/10 | Tiền vệ",
+      "prompt": "Vertical 9:16 football poster artwork featuring Tijjani Reijnders, the Dutch midfielder for AC Milan and the Netherlands national team, in a passing pose, kicking the ball, focused expression. He wears the orange Netherlands home kit with the Dutch lion crest clearly visible on the chest. A stylized blue rating badge glowing with the number 6 floats near his shoulder like a video-game stat overlay. Background: a high-contrast orange-and-black Dutch graphic backdrop with a huge giant Dutch lion crest watermark, bright white light bursts. Saturated colors, high contrast, glossy graphic finish. Stylized like a World Cup matchday editorial poster. The crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "malen",
+      "template": "stat-hero",
+      "filename": "malen.png",
+      "subjectHint": "Donyell Malen — Điểm 4/10 | Tiền đạo cánh",
+      "prompt": "Vertical 9:16 football poster artwork featuring Donyell Malen, the Dutch winger for AS Roma and the Netherlands national team, in a frustrated pose walking off the pitch, head hanging low. He wears the orange Netherlands home kit with the Dutch lion crest clearly visible on the chest. A large stylized deep-red warning rating badge glowing ominously with the number 4 floats near his shoulder like a video-game low-score stat overlay with a cracked glass effect. Background: a dark moody Dutch graphic backdrop with a huge faded Dutch lion crest watermark, cold blue downward light rays. High contrast, glossy graphic finish. Stylized like a player disappointment editorial poster. The crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "brobbey",
+      "template": "stat-hero",
+      "filename": "brobbey.png",
+      "subjectHint": "Brian Brobbey — Điểm 8/10 | Tiền đạo",
+      "prompt": "Vertical 9:16 football poster artwork featuring Brian Brobbey, the Dutch forward for Sunderland and the Netherlands national team, in a powerful goal celebration pose, sliding on his knees with arms wide open, screaming in joy. He wears the orange Netherlands home kit with the Dutch lion crest clearly visible on the chest. A large stylized golden-blue rating badge glowing brightly with the number 8 floats prominently near his shoulder like a video-game MVP stat overlay with subtle golden sparkle. Background: a vibrant gold-and-orange Dutch graphic backdrop with a huge giant Dutch lion crest watermark, explosive gold light bursts. Saturated gold-accented palette, extreme contrast, glossy graphic finish. Stylized like a World Cup champions celebration poster. The crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "gakpo",
+      "template": "stat-hero",
+      "filename": "gakpo.png",
+      "subjectHint": "Cody Gakpo — Điểm 9/10 (MVP) | Tiền đạo",
+      "prompt": "Vertical 9:16 football poster artwork featuring Cody Gakpo, the Dutch forward for Liverpool and the Netherlands national team, in a triumphant hero pose, holding index finger to his lips to silence critics, radiant smile. He wears the orange Netherlands home kit with the Dutch lion crest clearly visible on the chest. A large stylized golden rating badge glowing brightly with the number 9 floats prominently near his shoulder like a video-game MVP stat overlay with subtle golden sparkle and crown icon on top. Background: a majestic gold-and-orange Dutch graphic backdrop with a huge stylized Dutch lion crest watermark, dramatic golden light rays radiating outward. Saturated gold-dominated palette, extreme contrast, glossy graphic finish. Stylized like a World Cup superstar MVP broadcast graphic. The crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "summerville",
+      "template": "stat-hero",
+      "filename": "summerville.png",
+      "subjectHint": "Crysencio Summerville — Điểm 8/10 | Tiền đạo cánh",
+      "prompt": "Vertical 9:16 football poster artwork featuring Crysencio Summerville, the Dutch winger for West Ham United and the Netherlands national team, in a passionate goal celebration pose, pointing to the sky, joyful expression. He wears the orange Netherlands home kit with the Dutch lion crest clearly visible on the chest. A large stylized golden-blue rating badge glowing brightly with the number 8 floats prominently near his shoulder like a video-game MVP stat overlay with subtle golden sparkle. Background: a vibrant orange Dutch graphic backdrop with a huge giant Dutch lion crest watermark, explosive white light bursts. Saturated colors, high contrast, glossy graphic finish. Stylized like a World Cup rising-star promotional poster. The crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "koeman",
+      "template": "stat-hero",
+      "filename": "koeman.png",
+      "subjectHint": "HLV Ronald Koeman — Điểm 8/10 | Huấn luyện viên",
+      "prompt": "Vertical 9:16 football poster artwork featuring Ronald Koeman, the Dutch football manager of the Netherlands national team, standing at the touchline, shouting instructions, arms crossed, commanding expression. He wears a smart black suit with a orange tie. Behind him, a stylized orange graphic backdrop with a huge giant Dutch lion crest watermark, dramatic golden light rays radiating from behind his head. A large stylized golden-blue rating badge glowing brightly with the number 8 floats prominently near his shoulder like a video-game manager stat overlay. Saturated colors, high contrast, glossy graphic finish. Stylized like a World Cup tactical mastermind promotional poster. No on-image text or captions."
+    }
+  ]
+}

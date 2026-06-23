@@ -1,0 +1,65 @@
+{
+  "version": "1.0",
+  "source": "bai-toan-ronaldo-bo-dao-nha-wc-2026.txt",
+  "contentType": "PLAYER PROFILE",
+  "title": "Bài toán Ronaldo của Bồ Đào Nha tại World Cup 2026",
+  "createdAt": "2026-06-12T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Cristiano Ronaldo — World Cup cuối cùng, ánh đèn cô độc",
+      "prompt": "Vertical 9:16 football poster artwork featuring Cristiano Ronaldo, the Portuguese forward and captain for the Portugal national team, in a contemplative hero pose standing alone with arms folded and a serious, weighing expression, chin slightly lifted. He wears the deep red Portugal home kit with the Portuguese Football Federation crest clearly visible on the chest and the captain's armband on his left arm. Background: a dramatic dark crimson and green graphic backdrop with a huge stylized Portugal crest floating faintly behind him as a watermark, a single spotlight beam falling on him from above, long cold shadows, the FIFA World Cup trophy rendered as a faint glowing graphic element high in one corner just out of reach. Vibrant saturated red-and-green palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup farewell promotional poster. The Portugal crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "cr7-record",
+      "template": "stat-hero",
+      "filename": "cr7-record.png",
+      "subjectHint": "Ronaldo — 228 trận, 143 bàn, kỷ lục mọi thời đại",
+      "prompt": "Vertical 9:16 football poster artwork featuring Cristiano Ronaldo, the Portuguese forward and captain for the Portugal national team, in his signature triumphant celebration pose mid-air with both arms spread wide and a roar of joy. He wears the deep red Portugal home kit with the Portuguese Football Federation crest clearly visible on the chest and the captain's armband. Background: a bold red-and-green Portugal graphic backdrop with a huge stylized Portugal crest floating faintly behind him as a watermark, dramatic golden light rays radiating outward, scattered golden star accents marking a record-breaking milestone. Vibrant saturated red-and-green palette with rich gold highlights, very high contrast, glossy graphic-design finish. Stylized like a record-breaking historic-moment promotional poster. The Portugal crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "cr7-form",
+      "template": "stat-hero",
+      "filename": "cr7-form.png",
+      "subjectHint": "Ronaldo vẫn ghi bàn đều — Al Nassr 30 bàn/37 trận, Nations League vô địch",
+      "prompt": "Vertical 9:16 football poster artwork featuring Cristiano Ronaldo, the Portuguese forward, in a powerful mid-stride driving-forward pose with intense focus, sleeves rolled up, muscles tensed. He wears the bright yellow Al Nassr home kit with the Al Nassr crest clearly visible on the chest. Background: a bold yellow-and-blue Al Nassr graphic backdrop with a huge stylized Al Nassr crest floating faintly behind him as a watermark, dramatic light rays radiating outward, a faint Saudi Pro League trophy rendered as a glowing graphic accent in one corner. Vibrant saturated yellow-and-blue palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a league top-scorer promotional poster. The Al Nassr crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "cr7-wc-record",
+      "template": "stat-hero",
+      "filename": "cr7-wc-record.png",
+      "subjectHint": "Sân khấu World Cup — 8 bàn sau 22 trận, danh hiệu còn dang dở",
+      "prompt": "Vertical 9:16 football poster artwork featuring Cristiano Ronaldo, the Portuguese forward and captain for the Portugal national team, in a pensive pose with hands on hips and head slightly bowed, a heavy thoughtful expression, looking off into the distance. He wears the deep red Portugal home kit with the Portuguese Football Federation crest clearly visible on the chest and the captain's armband. Background: a moody dark green-and-crimson Portugal graphic backdrop with a huge faded Portugal crest watermark, the FIFA World Cup trophy rendered as a faint distant glowing graphic element, cool blue light rays creating a somber reflective atmosphere. Moody saturated red-and-green palette, very high contrast, glossy graphic-design finish. Stylized like a World Cup editorial reflection poster. The Portugal crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "cr7-age",
+      "template": "callout",
+      "filename": "cr7-age.png",
+      "subjectHint": "Tuổi 41 — trung phong cắm chờ bóng, không còn xé biên",
+      "prompt": "Vertical 9:16 football poster artwork featuring Cristiano Ronaldo, the Portuguese forward, at 41 in his current 2025-26 era, standing as a static target man inside the penalty box waiting for service, posture upright and grounded rather than sprinting, arm raised calling for the ball. He wears the deep red Portugal home kit with the Portuguese Football Federation crest clearly visible on the chest and the captain's armband. Background: a deep crimson Portugal graphic backdrop with a huge stylized Portugal crest floating faintly behind him as a watermark, soft directional light rays, faint stylized silhouettes of younger teammates blurred in the midfield behind him as graphic accents. Vibrant saturated red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like an editorial tactical-analysis promotional poster. The Portugal crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "ramos",
+      "template": "stat-hero",
+      "filename": "ramos.png",
+      "subjectHint": "Goncalo Ramos — phương án thay thế, từng lập hat-trick ở World Cup 2022",
+      "prompt": "Vertical 9:16 football poster artwork featuring Goncalo Ramos, the Portuguese striker for the Portugal national team, in an explosive celebration pose mid-run with one fist clenched and a fierce determined roar, full of youthful energy. He wears the deep red Portugal home kit with the Portuguese Football Federation crest clearly visible on the chest. Background: a bold red-and-green Portugal graphic backdrop with a huge stylized Portugal crest floating faintly behind him as a watermark, dramatic light rays radiating outward, a faint glowing match-ball graphic accent marking a hat-trick moment. Vibrant saturated red-and-green palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a breakout-star promotional poster. The Portugal crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "friendly-miss",
+      "template": "callout",
+      "filename": "friendly-miss.png",
+      "subjectHint": "Giao hữu trước giải — những pha bỏ lỡ gây tranh cãi",
+      "prompt": "Vertical 9:16 football poster artwork featuring Cristiano Ronaldo, the Portuguese forward, in a frustrated dejected pose with both hands raised to his head in disbelief after a glaring miss, a ghostly transparent action-replay of a header sailing wide rendered faintly in the background. He wears the deep red Portugal home kit with the Portuguese Football Federation crest clearly visible on the chest and the captain's armband. Background: a moody dark crimson Portugal graphic backdrop with a huge faded Portugal crest watermark, cold downward-pointing blue light rays creating a tense disappointed atmosphere. Moody saturated dark red palette, very high contrast, glossy graphic-design finish. Stylized like a pre-tournament editorial poster. The Portugal crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "verdict",
+      "template": "stat-hero",
+      "filename": "verdict.png",
+      "subjectHint": "Phán quyết — khác Messi đã vô địch 2022, Ronaldo vẫn đi tìm chiếc cúp",
+      "prompt": "Vertical 9:16 split-frame football poster artwork comparing two icons. Left half: Cristiano Ronaldo, the Portuguese forward and captain for the Portugal national team, in a determined hero pose, wearing the deep red Portugal home kit with the Portuguese Football Federation crest clearly visible on the chest, a red-and-green graphic backdrop with a huge faint Portugal crest watermark and radiating light rays, no trophy. Right half: Lionel Messi, the Argentine forward for the Argentina national team, lifting the FIFA World Cup trophy with a joyful expression, wearing the light-blue-and-white striped Argentina home kit with the Argentine Football Association crest clearly visible on the chest, a sky-blue graphic backdrop with a huge faint Argentina crest watermark and golden light rays. Down the centre seam: a diagonal gold lightning-burst slash separator with dramatic energy glow. Vibrant saturated palette per side, very high contrast, glossy graphic-design finish. Stylized like a legacy-comparison promotional poster. Both crests visible on the jerseys, no on-image text or captions, no scoreboard graphics."
+    }
+  ]
+}

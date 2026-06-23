@@ -1,0 +1,121 @@
+{
+  "version": "1.0",
+  "source": "cham-diem-duc-vs-bo-bien-nga-wc-2026.txt",
+  "contentType": "MATCH RECAP",
+  "title": "Chấm điểm Đức vs Bờ Biển Ngà: Undav xứng đáng đá chính",
+  "createdAt": "2026-06-21T04:57:32.133Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Deniz Undav ăn mừng bàn thắng quyết định trước Bờ Biển Ngà",
+      "prompt": "Vertical 9:16 split-frame football poster artwork showing a Germany national team matchday victory celebration. Left half: Deniz Undav, the German striker for VfB Stuttgart and the Germany national team, screaming in pure joy, fists clenched in a passionate goal celebration. He wears the white Germany home kit with the German football association eagle crest clearly visible on the chest. Behind him, a stylized white-and-black German-themed graphic backdrop with a huge faint German eagle crest watermark and dramatic golden light rays. Right half: Franck Kessie, the Ivory Coast midfielder, looking down in dejection, hands on hips, after conceding. He wears the orange Ivory Coast kit with the elephant crest clearly visible. Behind him, a stylized orange graphic backdrop with a huge faint Ivory Coast elephant crest watermark. Down the centre seam: a diagonal glowing lightning-burst separator. Vibrant saturated palette, very high contrast, glossy graphic finish. Stylized like a FIFA World Cup matchday promotional poster. Both crests visible on the jerseys, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "neuer",
+      "template": "stat-hero",
+      "filename": "neuer.png",
+      "subjectHint": "Manuel Neuer — Điểm 6/10 | Thủ môn",
+      "prompt": "Vertical 9:16 football poster artwork featuring Manuel Neuer, the veteran German goalkeeper for Bayern Munich and the Germany national team, in a focused diving pose attempting to make a save, arms outstretched. He wears the goalkeeper shirt with the German football association eagle crest clearly visible on the chest. A stylized blue rating badge glowing with the number 6 floats near his shoulder like a video-game stat overlay. Background: a stylized white-and-black German graphic backdrop with a huge giant German eagle crest watermark, cold blue light rays radiating from behind. Saturated palette, high contrast, glossy graphic finish. Stylized like a World Cup goalkeeper promotional poster. The crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "kimmich",
+      "template": "stat-hero",
+      "filename": "kimmich.png",
+      "subjectHint": "Joshua Kimmich — Điểm 5/10 | Hậu vệ phải",
+      "prompt": "Vertical 9:16 football poster artwork featuring Joshua Kimmich, the German right-back for Bayern Munich and the Germany national team, in a frustrated running pose, struggling to defend against an opponent. He wears the white Germany home kit with the German football association eagle crest clearly visible on the chest. A large stylized deep-red warning rating badge glowing ominously with the number 5 floats near his shoulder like a video-game low-score stat overlay with a cracked glass effect. Background: a moody dark graphic backdrop in German colors (black, red, gold) with a huge faded German eagle crest watermark, red-tinted light rays creating a disappointing atmosphere. High contrast, glossy graphic finish. Stylized like a matchday struggle poster. The crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "tah",
+      "template": "stat-hero",
+      "filename": "tah.png",
+      "subjectHint": "Jonathan Tah — Điểm 6/10 | Trung vệ",
+      "prompt": "Vertical 9:16 football poster artwork featuring Jonathan Tah, the tall German centre-back for Bayer Leverkusen and the Germany national team, in a commanding defensive pose, intercepting a pass, intense focused expression. He wears the white Germany home kit with the German football association eagle crest clearly visible on the chest. A stylized blue rating badge glowing with the number 6 floats near his shoulder like a video-game stat overlay. Background: a stylized black-and-white German graphic backdrop with a huge giant German eagle crest watermark, strong white light rays radiating from behind. Saturated palette, high contrast, glossy graphic finish. Stylized like a World Cup defensive promotional poster. The crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "schlotterbeck",
+      "template": "stat-hero",
+      "filename": "schlotterbeck.png",
+      "subjectHint": "Nico Schlotterbeck — Điểm 5/10 | Trung vệ",
+      "prompt": "Vertical 9:16 football poster artwork featuring Nico Schlotterbeck, the German centre-back for Borussia Dortmund and the Germany national team, in a painful grimacing pose, limping slightly due to an ankle injury. He wears the white Germany home kit with the German football association eagle crest clearly visible on the chest. A large stylized deep-red warning rating badge glowing ominously with the number 5 floats near his shoulder like a video-game low-score stat overlay with a cracked glass effect. Background: a somber dark-toned German graphic backdrop with a huge faded German eagle crest watermark, cold blue downward light rays creating an unfortunate atmosphere. High contrast, glossy graphic finish. Stylized like an injury-recap editorial poster. The crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "brown",
+      "template": "stat-hero",
+      "filename": "brown.png",
+      "subjectHint": "Nathaniel Brown — Điểm 6/10 | Hậu vệ trái",
+      "prompt": "Vertical 9:16 football poster artwork featuring Nathaniel Brown, the young German left-back for Eintracht Frankfurt and the Germany national team, in an intense tackling pose, sliding to block a pass. He wears the white Germany home kit with the German football association eagle crest clearly visible on the chest. A stylized blue rating badge glowing with the number 6 floats near his shoulder like a video-game stat overlay. Background: a vibrant German-colored graphic backdrop with a huge giant German eagle crest watermark, bright white light bursts. Saturated palette, high contrast, glossy graphic finish. Stylized like a World Cup rising-star matchday poster. The crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "nmecha",
+      "template": "stat-hero",
+      "filename": "nmecha.png",
+      "subjectHint": "Felix Nmecha — Điểm 8/10 | Tiền vệ",
+      "prompt": "Vertical 9:16 football poster artwork featuring Felix Nmecha, the German midfielder for Borussia Dortmund and the Germany national team, in a triumphant hero pose, pointing forward after a brilliant play, radiant smile. He wears the white Germany home kit with the German football association eagle crest clearly visible on the chest. A large stylized golden-blue rating badge glowing brightly with the number 8 floats prominently near his shoulder like a video-game MVP stat overlay with subtle golden sparkle. Background: a majestic gold-and-black German graphic backdrop with a huge stylized German eagle crest watermark, dramatic golden light rays radiating outward. Saturated gold-dominated palette, extreme contrast, glossy graphic finish. Stylized like an end-of-season MVP broadcast graphic. The crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "pavlovic",
+      "template": "stat-hero",
+      "filename": "pavlovic.png",
+      "subjectHint": "Aleksandar Pavlović — Điểm 4/10 | Tiền vệ",
+      "prompt": "Vertical 9:16 football poster artwork featuring Aleksandar Pavlovic, the young German midfielder for Bayern Munich and the Germany national team, in a disappointed pose, head in hands after a disallowed goal. He wears the white Germany home kit with the German football association eagle crest clearly visible on the chest. A large stylized deep-red warning rating badge glowing ominously with the number 4 floats near his shoulder like a video-game low-score stat overlay with a cracked glass effect. Background: a dark moody German-themed graphic backdrop with a huge faded German eagle crest watermark, red downward light rays creating a disappointing atmosphere. High contrast, glossy graphic finish. Stylized like a matchday disappointment poster. The crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "sane-musiala",
+      "template": "stat-hero",
+      "filename": "sane-musiala.png",
+      "subjectHint": "Leroy Sané (3/10) · Jamal Musiala (4/10) — Tiền vệ cánh & tấn công",
+      "prompt": "Vertical 9:16 split-frame football poster artwork showing a disappointing matchday performance for Germany's attackers. Left half: Leroy Sane, the German winger for Bayern Munich and the Germany national team, looking frustrated and walking slowly with head down in the white Germany kit. Behind him, a dim German-colored graphic backdrop with a giant faded crest and deep-red rating badge glowing with number 3. Right half: Jamal Musiala, the German attacking midfielder for Bayern Munich and the Germany national team, showing frustration with hands on head in the white Germany kit. Behind him, a dark German-colored graphic backdrop with a faded crest and deep-red rating badge glowing with number 4. Down the centre seam: a diagonal glowing red line. Vibrant colors, high contrast, glossy graphic finish. Stylized like a matchday disappointment broadcast graphic. Both crests visible on the jerseys, no on-image text or captions."
+    },
+    {
+      "id": "wirtz",
+      "template": "stat-hero",
+      "filename": "wirtz.png",
+      "subjectHint": "Florian Wirtz — Điểm 6/10 | Tiền vệ công",
+      "prompt": "Vertical 9:16 football poster artwork featuring Florian Wirtz, the young German playmaker for Bayer Leverkusen and the Germany national team, in a dynamic dribbling pose, maneuvering past opponents with quick footwork. He wears the white Germany home kit with the German football association eagle crest clearly visible on the chest. A stylized blue rating badge glowing with the number 6 floats near his shoulder like a video-game stat overlay. Background: a vibrant German graphic backdrop in black, red, and gold with a huge giant German eagle crest watermark, bright white light rays. Saturated colors, high contrast, glossy graphic finish. Stylized like a World Cup rising-star promotional poster. The crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "havertz",
+      "template": "stat-hero",
+      "filename": "havertz.png",
+      "subjectHint": "Kai Havertz — Điểm 6/10 | Tiền đạo",
+      "prompt": "Vertical 9:16 football poster artwork featuring Kai Havertz, the German forward for Arsenal and the Germany national team, in a frustrated expression after his goal was disallowed, looking at the referee with arms spread wide. He wears the white Germany home kit with the German football association eagle crest clearly visible on the chest. A stylized blue rating badge glowing with the number 6 floats near his shoulder like a video-game stat overlay. Background: a high-contrast German graphic backdrop with a huge giant German eagle crest watermark, dramatic white light bursts. Saturated colors, high contrast, glossy graphic finish. Stylized like a World Cup matchday editorial poster. The crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "rudiger",
+      "template": "stat-hero",
+      "filename": "rudiger.png",
+      "subjectHint": "Antonio Rüdiger — Điểm 6/10 | Trung vệ",
+      "prompt": "Vertical 9:16 football poster artwork featuring Antonio Rudiger, the German centre-back for Real Madrid and the Germany national team, in a powerful defensive stance, shouting instructions, fierce expression. He wears the white Germany home kit with the German football association eagle crest clearly visible on the chest. A stylized blue rating badge glowing with the number 6 floats near his shoulder like a video-game stat overlay. Background: a strong black-and-red German graphic backdrop with a huge giant German eagle crest watermark, sharp white light beams. High contrast, glossy graphic finish. Stylized like a World Cup defensive titan promotional poster. The crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "undav",
+      "template": "stat-hero",
+      "filename": "undav.png",
+      "subjectHint": "Deniz Undav — Điểm 7/10 | Tiền đạo",
+      "prompt": "Vertical 9:16 football poster artwork featuring Deniz Undav, the German forward for VfB Stuttgart and the Germany national team, in a passionate celebration pose, sliding on his knees with arms wide open, screaming in joy. He wears the white Germany home kit with the German football association eagle crest clearly visible on the chest. A stylized golden/blue rating badge glowing with the number 7 floats near his shoulder like a video-game stat overlay. Background: a vibrant gold-and-black German graphic backdrop with a huge giant German eagle crest watermark, explosive gold light bursts. Saturated gold-accented palette, extreme contrast, glossy graphic finish. Stylized like a World Cup champions celebration poster. The crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "amiri",
+      "template": "stat-hero",
+      "filename": "amiri.png",
+      "subjectHint": "Nadiem Amiri — Điểm 7/10 | Tiền vệ",
+      "prompt": "Vertical 9:16 football poster artwork featuring Nadiem Amiri, the German midfielder for Mainz 05 and the Germany national team, in a focused crossing pose, kicking the ball, body tilted. He wears the white Germany home kit with the German football association eagle crest clearly visible on the chest. A stylized golden/blue rating badge glowing with the number 7 floats near his shoulder like a video-game stat overlay. Background: a stylized German graphic backdrop in black, red, and gold with a huge giant German eagle crest watermark, bright white light rays. Saturated colors, high contrast, glossy graphic finish. Stylized like a World Cup playmaker promotional poster. The crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "diomande-kessie",
+      "template": "stat-hero",
+      "filename": "diomande-kessie.png",
+      "subjectHint": "Yan Diomandé (7/10) · Franck Kessié (6/10) — Bờ Biển Ngà",
+      "prompt": "Vertical 9:16 split-frame football poster artwork showing Ivory Coast's standout players. Left half: Yan Diomande, the Ivorian defender for Ivory Coast national team, running dynamically down the wing in a vibrant orange Ivory Coast kit with the elephant crest clearly visible on the chest. Behind him, a stylized orange graphic backdrop with a giant faint elephant crest and blue rating badge glowing with number 7. Right half: Franck Kessie, the Ivorian midfielder in the orange Ivory Coast home kit, celebrating a goal with arms outstretched. Behind him, a stylized orange graphic backdrop with a giant faint elephant crest and blue rating badge glowing with number 6. Down the centre seam: a diagonal glowing white line. Vibrant orange palette, very high contrast, glossy graphic finish. Stylized like a World Cup matchday promotional poster. Both crests visible on the jerseys, no on-image text or captions."
+    },
+    {
+      "id": "nagelsmann",
+      "template": "stat-hero",
+      "filename": "nagelsmann.png",
+      "subjectHint": "HLV Julian Nagelsmann — Điểm 8/10 | Huấn luyện viên",
+      "prompt": "Vertical 9:16 football poster artwork featuring Julian Nagelsmann, the German football manager of the Germany national team, standing at the touchline, shouting instructions, commanding expression. He wears a smart black suit with a white shirt and black tie. Behind him, a stylized white-and-black German graphic backdrop with a huge giant German eagle crest watermark, dramatic golden light rays. A large stylized golden-blue rating badge glowing brightly with the number 8 floats prominently near his shoulder like a video-game manager stat overlay. Saturated colors, high contrast, glossy graphic finish. Stylized like a World Cup tactical mastermind promotional poster. No on-image text or captions."
+    }
+  ]
+}

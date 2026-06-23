@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "source": "nhan-dinh-tay-ban-nha-vs-cabo-verde-wc-2026.txt",
+  "contentType": "PRE-MATCH PREVIEW",
+  "title": "Nhận định Tây Ban Nha vs Cabo Verde — World Cup 2026",
+  "createdAt": "2026-06-14T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Hook đối đầu — Oyarzabal (Tây Ban Nha) vs Ryan Mendes (Cabo Verde), split-frame WC2026",
+      "prompt": "Vertical 9:16 split-frame football poster artwork showing a FIFA World Cup 2026 group-stage matchup. Left half: Mikel Oyarzabal, the Spanish striker for the Spain national team, in the bright red Spain home kit with the yellow-and-red Spain federation crest clearly visible on the chest, intense focused hero pose driving forward. Behind him, a stylized red-and-gold Spain graphic backdrop with a huge faint Spain crest watermark, the red-yellow-red Spanish flag rendered as a graphic color band, radiating golden light rays. Right half: Ryan Mendes, the veteran captain for the Cabo Verde national team, in the blue Cabo Verde home kit with the Cabo Verde federation crest clearly visible on the chest, proud determined hero pose. Behind him, a stylized blue-white-red Cabo Verde graphic backdrop with a huge faint Cabo Verde crest watermark, the blue-with-stars Cabo Verde flag rendered as a graphic color band, radiating light rays. Down the centre seam: a diagonal lightning-burst slash separator with dramatic energy glow, the golden FIFA World Cup trophy glowing as a stylized graphic accent between them. Vibrant saturated palette per side, very high contrast, glossy graphic-design finish. Stylized like a FIFA World Cup matchday promotional poster. Both national crests visible on the jerseys, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "oyarzabal",
+      "template": "stat-hero",
+      "filename": "oyarzabal.png",
+      "subjectHint": "Mikel Oyarzabal — Tây Ban Nha (Real Sociedad), mũi nhọn cắm",
+      "prompt": "Vertical 9:16 football poster artwork featuring Mikel Oyarzabal, the Spanish forward for Real Sociedad and the Spain national team, in an explosive goal-celebration roar with arms spread wide, jersey gripped in one fist, triumphant intense expression. He wears the bright red Spain home kit with the yellow-and-red Spain federation crest clearly visible on the chest. Background: a deep red-and-gold Spain graphic backdrop with a huge stylized Spain crest floating faintly behind him as a watermark, dramatic golden light rays radiating outward from behind his head, faint red-yellow-red Spanish flag ribbon graphic across the lower frame. Vibrant saturated red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a FIFA World Cup matchday promotional poster. The Spain crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "ryan-mendes",
+      "template": "stat-hero",
+      "filename": "ryan-mendes.png",
+      "subjectHint": "Ryan Mendes — đội trưởng Cabo Verde, 36 tuổi, chân sút số một lịch sử",
+      "prompt": "Vertical 9:16 football poster artwork featuring Ryan Mendes, the veteran captain and all-time top scorer for the Cabo Verde national team, in a proud commanding captain pose with the captain's armband on his left arm, chest out, contemplative determined expression. He wears the blue Cabo Verde home kit with the Cabo Verde federation crest clearly visible on the chest. Background: a bold blue-white-red Cabo Verde graphic backdrop with a huge stylized Cabo Verde crest floating faintly behind him as a watermark, dramatic light rays radiating outward, the blue Cabo Verde flag with its ring of stars rendered as a faint graphic motif across the lower frame. Vibrant saturated blue palette with white-and-red accents, very high contrast, glossy graphic-design finish. Stylized like a FIFA World Cup debut promotional poster. The Cabo Verde crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "dailon-livramento",
+      "template": "stat-hero",
+      "filename": "dailon-livramento.png",
+      "subjectHint": "Dailon Livramento — Cabo Verde, quân bài phản công tốc độ",
+      "prompt": "Vertical 9:16 football poster artwork featuring Dailon Livramento, the fast attacking forward for the Cabo Verde national team, frozen mid-stride in an explosive sprinting counter-attack pose, ball at his feet, dynamic motion-blur trailing behind, intense focused expression. He wears the blue Cabo Verde home kit with the Cabo Verde federation crest clearly visible on the chest. Background: a high-energy blue-and-red Cabo Verde graphic backdrop with a huge stylized Cabo Verde crest floating faintly behind him as a watermark, sharp diagonal speed-line light rays radiating outward to convey pace, faint star-ring graphic motif at the lower frame. Vibrant saturated blue palette with red and white accents, very high contrast, glossy graphic-design finish. Stylized like a FIFA World Cup matchday promotional poster. The Cabo Verde crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "managers",
+      "template": "callout",
+      "filename": "managers.png",
+      "subjectHint": "Họp báo — De la Fuente (Tây Ban Nha) vs Bubista (Cabo Verde), split-frame 2 HLV",
+      "prompt": "Vertical 9:16 split-frame football poster artwork showing two national-team managers ahead of a FIFA World Cup 2026 clash. Left half: Luis de la Fuente, the Spain national team head coach, in a sharp dark suit, intense focused touchline pose pointing instructions. Behind him, a stylized red-and-gold Spain graphic backdrop with a huge faint Spain federation crest watermark and radiating light rays. Right half: Bubista, the Cabo Verde national team head coach, in a tracksuit, passionate determined touchline pose. Behind him, a stylized blue-white-red Cabo Verde graphic backdrop with a huge faint Cabo Verde federation crest watermark and radiating light rays. Down the centre seam: a diagonal energy-slash separator with a soft glow. Vibrant saturated palette per side, very high contrast, glossy graphic-design finish. Stylized like a pre-match press-conference promotional poster. No on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "prediction",
+      "template": "stat-hero",
+      "filename": "prediction.png",
+      "subjectHint": "Dự đoán tỷ số — Tây Ban Nha thắng áp đảo 3-0, sức mạnh La Roja",
+      "prompt": "Vertical 9:16 football poster artwork featuring Rodri, the Spanish midfielder and Ballon d'Or winner for the Spain national team, in a commanding central hero pose with arms slightly outstretched orchestrating play, confident dominant expression. He wears the bright red Spain home kit with the yellow-and-red Spain federation crest clearly visible on the chest. Background: a powerful red-and-gold Spain graphic backdrop with a huge stylized Spain crest floating faintly behind him as a watermark, dramatic golden light rays radiating outward suggesting total dominance, faint red-yellow-red Spanish flag color blocks layered like overlapping geometric panes, the golden FIFA World Cup trophy glowing as a stylized graphic accent in an upper corner. Vibrant saturated red palette with bold golden highlights, very high contrast, glossy graphic-design finish. Stylized like a FIFA World Cup favourites editorial poster. The Spain crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    }
+  ]
+}

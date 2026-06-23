@@ -1,0 +1,44 @@
+{
+  "version": "1.0",
+  "source": "owen-bao-ve-ronaldo-sau-tran-hoa-chdc-congo.txt",
+  "contentType": "NEWS DRAMA",
+  "title": "Owen bảo vệ Ronaldo: Thật quá dễ để đổ lỗi cho anh ấy",
+  "createdAt": "2026-06-22T05:51:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "hook-1: Michael Owen (BLV) · hook-2: Cristiano Ronaldo",
+      "prompt": "hook-1: Vertical 9:16 football poster artwork featuring Michael Owen, the English former striker and football pundit, in a smart-casual TV studio pundit suit, looking serious and analytical, framed chest-up with head in the upper third. Background: a stylized dark graphic backdrop with abstract light rays. \nhook-2: Vertical 9:16 football poster artwork featuring Cristiano Ronaldo, the Portuguese striker for the Portugal national team, wearing the red-and-green Portugal home kit with the Portugal crest, in a frustrated looking-down pose, framed chest-up with head in the upper third. Background: a red-and-green Portugal graphic backdrop with a faint Portugal crest watermark and light rays. Both images stylized like a matchday broadcast graphic poster."
+    },
+    {
+      "id": "event-1",
+      "template": "callout",
+      "filename": "event-1.png",
+      "subjectHint": "Cristiano Ronaldo — Bồ Đào Nha (Thất vọng)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Cristiano Ronaldo, the Portuguese striker and captain for the Portugal national team, in a frustrated pose looking up at the sky with hands on his hips after a missed chance. He wears a red-and-green Portugal home kit with the Portugal national team crest clearly visible on the chest. Background: a moody dark red graphic backdrop with a huge faded Portugal crest watermark, dramatic downward-pointing cold light rays creating a somber disappointed atmosphere. Moody saturated dark red palette, very high contrast, glossy graphic-design finish. Stylized like a tournament disappointment editorial poster. The Portugal crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "event-2",
+      "template": "stat-hero",
+      "filename": "event-2.png",
+      "subjectHint": "Lionel Messi — Argentina (Hat-trick vinh quang)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Lionel Messi, the Argentine forward and captain for the Argentina national team, in a triumphant hero pose celebrating a goal, pointing both index fingers to the sky. He wears a light-blue-and-white striped Argentina home kit with the AFA crest clearly visible on the chest and the captain's armband. Background: a glorious light-blue-and-white graphic backdrop with a huge stylized Argentina crest floating faintly behind him as a watermark, dramatic golden light rays radiating outward, three glowing golden star graphics representing his hat-trick faintly glowing near him. Vibrant saturated palette with gold highlights, very high contrast, glossy graphic-design finish. Stylized like a historic-moment promotional poster. The Argentina crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "event-3",
+      "template": "callout",
+      "filename": "event-3.png",
+      "subjectHint": "Michael Owen — Chuyên gia bóng đá",
+      "prompt": "Vertical 9:16 football poster artwork featuring Michael Owen, the English former striker and football pundit, in a sharp tailored suit, standing in a commanding pose as if delivering analytical commentary. Background: a sleek modern dark-blue graphic backdrop with subtle geometric patterns and abstract light rays, resembling a premium sports broadcasting studio. Moody saturated palette, very high contrast, glossy graphic-design finish. Stylized like a premium sports editorial portrait poster. No on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "context-1",
+      "template": "stat-hero",
+      "filename": "context-1.png",
+      "subjectHint": "Cristiano Ronaldo — Bồ Đào Nha (Sát thủ vòng cấm)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Cristiano Ronaldo, the Portuguese striker for the Portugal national team, in an intense focused hero pose preparing to strike the ball, intense determination in his eyes. He wears a red-and-green Portugal home kit with the Portugal national team crest clearly visible on the chest. Background: a bold red-and-green graphic backdrop with a huge stylized Portugal crest floating faintly behind him as a watermark, dramatic light rays radiating outward from behind. Vibrant saturated palette, very high contrast, glossy graphic-design finish. Stylized like a European Championship matchday promotional poster. The Portugal crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    }
+  ]
+}

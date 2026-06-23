@@ -1,0 +1,107 @@
+{
+  "version": "1.0",
+  "source": "tay-ban-nha-hoa-cabo-verde-cham-diem.txt",
+  "contentType": "MATCH RECAP",
+  "title": "Tay Ban Nha bị Cabo Verde cầm hòa 0-0 và cú sốc World Cup 2026",
+  "createdAt": "2026-06-16T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Hook — Cú sốc 0-0, La Roja bế tắc trước Cabo Verde",
+      "prompt": "Vertical 9:16 split-frame football poster artwork showing a 2026 World Cup shock. Left half: Pedri, the Spanish midfielder for Spain and FC Barcelona, in a red Spain national team home kit with the Spanish federation crest clearly visible on the chest, frustrated dejected hero pose with hands on hips. Behind him a deep red-and-gold Spain graphic backdrop with a huge faint Spanish federation crest watermark and radiating light rays. Right half: Vozinha, the veteran Cape Verde goalkeeper, in a dark green-and-blue Cape Verde goalkeeper kit with the Cape Verde federation crest clearly visible on the chest, defiant arms-spread shot-stopping pose. Behind him a blue-and-green Cape Verde graphic backdrop with a huge faint Cape Verde federation crest watermark and radiating light rays. Down the centre seam: a diagonal lightning-burst slash separator with dramatic energy glow, a stylized golden 2026 World Cup trophy graphic accent glowing between them. Vibrant saturated palette per side, very high contrast, glossy graphic-design finish. Stylized like a World Cup shock-result promotional poster. Both federation crests visible on the kits, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "cucurella",
+      "template": "stat-hero",
+      "filename": "cucurella.png",
+      "subjectHint": "Marc Cucurella — Tay Ban Nha | Điểm 7/10 (hay nhất hàng công)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Marc Cucurella, the Spanish left-back for Spain and Real Madrid, in a confident driving hero pose surging forward down the left flank with the ball at his feet. He wears a red Spain national team home kit with the Spanish federation crest clearly visible on the chest. A stylized blue rating badge glowing with the number 7 floats near his shoulder like a video-game stat overlay. Background: a bold red-and-gold Spain graphic backdrop with a huge stylized Spanish federation crest floating faintly behind him as a watermark, dramatic light rays radiating outward from behind him. Vibrant saturated red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Spain crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "rodri",
+      "template": "stat-hero",
+      "filename": "rodri.png",
+      "subjectHint": "Rodri — Tay Ban Nha | Điểm 7/10 (làm chủ tuyến giữa)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Rodri, the Spanish defensive midfielder for Spain and Manchester City, in a commanding hero pose mid-stride pointing and directing play, intense focused expression. He wears a red Spain national team home kit with the Spanish federation crest clearly visible on the chest. A stylized blue rating badge glowing with the number 7 floats near his shoulder like a video-game stat overlay. Background: a deep red-and-gold Spain graphic backdrop with a huge stylized Spanish federation crest floating faintly behind him as a watermark, dramatic light rays radiating outward from behind his head. Vibrant saturated red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Spain crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "ferran",
+      "template": "stat-hero",
+      "filename": "ferran.png",
+      "subjectHint": "Ferran Torres — Tay Ban Nha | Điểm 3/10 (dội xà từ 6 mét)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Ferran Torres, the Spanish forward for Spain and FC Barcelona, in a frustrated dejected pose clutching his head with both hands after a glaring miss, a ghostly transparent action replay of a ball striking the crossbar in the background. He wears a red Spain national team home kit with the Spanish federation crest clearly visible on the chest. A large stylized deep-red warning rating badge glowing ominously with the number 3 floats near his shoulder like a video-game low-score stat overlay with a cracked glass effect. Background: a moody dark red graphic backdrop with a huge faded Spanish federation crest watermark, cold downward-pointing light rays creating a disappointed atmosphere. Moody saturated dark red palette, very high contrast, glossy graphic-design finish. Stylized like a World Cup disappointment editorial poster. The Spain crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "gavi",
+      "template": "stat-hero",
+      "filename": "gavi.png",
+      "subjectHint": "Gavi — Tay Ban Nha | Điểm 3/10 (lựa chọn gây tranh cãi)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Gavi, the Spanish midfielder for Spain and FC Barcelona, in a frustrated dejected pose walking slowly with head hanging down and shoulders slumped after a poor performance. He wears a red Spain national team home kit with the Spanish federation crest clearly visible on the chest. A large stylized deep-red warning rating badge glowing ominously with the number 3 floats near his shoulder like a video-game low-score stat overlay with a cracked glass effect. Background: a moody dark red graphic backdrop with a huge faded Spanish federation crest watermark, cold downward-pointing blue light rays creating a somber atmosphere. Moody saturated dark red palette, very high contrast, glossy graphic-design finish. Stylized like a World Cup disappointment editorial poster. The Spain crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "oyarzabal",
+      "template": "stat-hero",
+      "filename": "oyarzabal.png",
+      "subjectHint": "Mikel Oyarzabal — Tay Ban Nha | Điểm 4/10 (thiếu số 9 đúng nghĩa)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Mikel Oyarzabal, the Spanish forward for Spain and Real Sociedad, in a dejected pose with arms lowered and a disappointed expression after an ineffective display. He wears a red Spain national team home kit with the Spanish federation crest clearly visible on the chest. A large stylized deep-red warning rating badge glowing with the number 4 floats near his shoulder like a video-game low-score stat overlay with a cracked glass effect. Background: a moody dark red graphic backdrop with a huge faded Spanish federation crest watermark, cold low light rays creating a flat disappointed atmosphere. Moody saturated dark red palette, very high contrast, glossy graphic-design finish. Stylized like a World Cup disappointment editorial poster. The Spain crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "pedri",
+      "template": "stat-hero",
+      "filename": "pedri.png",
+      "subjectHint": "Pedri — Tay Ban Nha | Điểm 5/10 (dưới chuẩn rất cao)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Pedri, the Spanish playmaker for Spain and FC Barcelona, in a contemplative pose on the ball with arms slightly out searching for a pass, a focused but subdued expression. He wears a red Spain national team home kit with the Spanish federation crest clearly visible on the chest. A stylized neutral grey-blue rating badge glowing with the number 5 floats near his shoulder like a video-game stat overlay. Background: a muted red-and-gold Spain graphic backdrop with a huge stylized Spanish federation crest floating faintly behind him as a watermark, soft restrained light rays. Saturated red palette with subdued highlights, high contrast, glossy graphic-design finish. Stylized like a World Cup matchday editorial poster. The Spain crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "laporte",
+      "template": "stat-hero",
+      "filename": "laporte.png",
+      "subjectHint": "Aymeric Laporte — Tay Ban Nha | Điểm 6/10 (đánh đầu buộc Vozinha cứu thua)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Aymeric Laporte, the Spanish centre-back for Spain, in a hero pose rising for a powerful defensive header mid-air, ball just leaving his forehead, intense commanding expression. He wears a red Spain national team home kit with the Spanish federation crest clearly visible on the chest. A stylized rating badge glowing with the number 6 floats near his shoulder like a video-game stat overlay. Background: a deep red-and-gold Spain graphic backdrop with a huge stylized Spanish federation crest floating faintly behind him as a watermark, dramatic light rays radiating outward from behind his head. Vibrant saturated red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Spain crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "yamal",
+      "template": "stat-hero",
+      "filename": "yamal.png",
+      "subjectHint": "Lamine Yamal — Dự bị Tay Ban Nha | Điểm 6/10 (vào sân muộn sau chấn thương)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Lamine Yamal, the young Spanish winger for Spain and FC Barcelona, in a dynamic driving hero pose dribbling at speed with the ball, determined expression, fresh off the substitutes' bench. He wears a red Spain national team home kit with the Spanish federation crest clearly visible on the chest. A stylized rating badge glowing with the number 6 floats near his shoulder like a video-game stat overlay. Background: a bold red-and-gold Spain graphic backdrop with a huge stylized Spanish federation crest floating faintly behind him as a watermark, dramatic light rays radiating outward from behind him. Vibrant saturated red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Spain crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "merino",
+      "template": "stat-hero",
+      "filename": "merino.png",
+      "subjectHint": "Mikel Merino — Dự bị Tay Ban Nha | Điểm 6/10 (suýt ghi bàn quyết định)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Mikel Merino, the Spanish midfielder for Spain and Arsenal, in an energetic hero pose striking the ball with his foot, leaning into a shot with intense effort. He wears a red Spain national team home kit with the Spanish federation crest clearly visible on the chest. A stylized rating badge glowing with the number 6 floats near his shoulder like a video-game stat overlay. Background: a bold red-and-gold Spain graphic backdrop with a huge stylized Spanish federation crest floating faintly behind him as a watermark, dramatic light rays radiating outward from behind him. Vibrant saturated red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Spain crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "nico-williams",
+      "template": "stat-hero",
+      "filename": "nico-williams.png",
+      "subjectHint": "Nico Williams — Dự bị Tay Ban Nha | Trở lại sau chấn thương",
+      "prompt": "Vertical 9:16 football poster artwork featuring Nico Williams, the Spanish winger for Spain and Athletic Bilbao, in a dynamic sprinting hero pose accelerating down the wing, eager and determined expression on his return from injury. He wears a red Spain national team home kit with the Spanish federation crest clearly visible on the chest. Background: a bold red-and-gold Spain graphic backdrop with a huge stylized Spanish federation crest floating faintly behind him as a watermark, dramatic light rays radiating outward from behind him. Vibrant saturated red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Spain crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "vozinha",
+      "template": "stat-hero",
+      "filename": "vozinha.png",
+      "subjectHint": "Vozinha — Thủ môn Cabo Verde 40 tuổi (người hùng giữ sạch lưới)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Vozinha, the veteran 40-year-old goalkeeper for the Cape Verde national team, in a heroic full-stretch diving save pose, fingertips reaching the ball, fierce determined expression. He wears a dark green-and-blue Cape Verde goalkeeper kit with the Cape Verde federation crest clearly visible on the chest and goalkeeper gloves. Background: a bold blue-and-green Cape Verde graphic backdrop with a huge stylized Cape Verde federation crest floating faintly behind him as a watermark, dramatic golden light rays radiating outward from behind him celebrating an iconic underdog performance. Vibrant saturated blue-and-green palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup giant-killing promotional poster. The Cape Verde crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "de-la-fuente",
+      "template": "callout",
+      "filename": "de-la-fuente.png",
+      "subjectHint": "Luis de la Fuente — HLV Tay Ban Nha | Điểm 3/10 (bị chỉ trích nặng)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Luis de la Fuente, the Spanish head coach of the Spain national team, in a tense exasperated touchline pose with arms raised in frustration and a grimacing expression, wearing a dark Spain national team coaching suit and jacket. A large stylized deep-red warning rating badge glowing ominously with the number 3 floats near his shoulder like a video-game low-score stat overlay with a cracked glass effect. Background: a moody dark red graphic backdrop with a huge faded Spanish federation crest watermark, cold downward-pointing light rays creating a somber pressured atmosphere. Moody saturated dark red palette, very high contrast, glossy graphic-design finish. Stylized like a World Cup managerial-crisis editorial poster. No on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "saudi-next",
+      "template": "callout",
+      "filename": "saudi-next.png",
+      "subjectHint": "Bối cảnh — Tay Ban Nha cần Yamal kịp bình phục cho trận gặp Saudi Arabia",
+      "prompt": "Vertical 9:16 football poster artwork featuring Lamine Yamal, the young Spanish winger for Spain and FC Barcelona, in a determined ready-to-fight hero pose with fists clenched and a focused intense expression, framed as the player Spain are pinning their hopes on. He wears a red Spain national team home kit with the Spanish federation crest clearly visible on the chest. Background: a bold red-and-gold Spain graphic backdrop with a huge stylized Spanish federation crest floating faintly behind him as a watermark, dramatic golden light rays radiating outward from behind him conveying urgency and hope, faint green Saudi Arabia flag colour bands rendered as graphic accents at the lower edge hinting at the next opponent. Vibrant saturated red-and-gold palette, very high contrast, glossy graphic-design finish. Stylized like a World Cup must-win promotional poster. The Spain crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    }
+  ]
+}

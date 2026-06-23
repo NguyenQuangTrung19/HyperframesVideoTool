@@ -1,0 +1,86 @@
+{
+  "version": "1.0",
+  "source": "cham-diem-bi-vs-iran-lukaku-mo-nhat.txt",
+  "contentType": "MATCH RECAP",
+  "title": "Chấm điểm Bỉ vs Iran: Lukaku mờ nhạt, Ngoy nhận thẻ đỏ",
+  "createdAt": "2026-06-22T06:55:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Lukaku vs Taremi — Split frame trận Bỉ vs Iran",
+      "prompt": "Vertical 9:16 split-frame football poster artwork showing a World Cup 2026 matchup. Left half: Romelu Lukaku, the Belgian striker for the Belgium national team, in a red Belgium home kit with the Royal Belgian FA crest clearly visible on the chest, intense focused hero pose. Behind him, a stylized red graphic backdrop with a huge faint Belgium crest watermark, radiating light rays. Right half: Mehdi Taremi, the Iranian striker for the Iran national team, in a white Iran away kit with the Iran national team crest clearly visible on the chest, mirroring hero pose. Behind him, a stylized white-and-green graphic backdrop with a huge faint Iran crest watermark, radiating light rays. Down the centre seam: a diagonal lightning-burst slash separator with dramatic energy glow, the FIFA World Cup trophy glowing as a stylized graphic accent between them. Vibrant saturated palette per side, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday graphic. Both national team crests visible on the jerseys, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "rating-1",
+      "template": "stat-hero",
+      "filename": "rating-1.png",
+      "subjectHint": "Thibaut Courtois — Bỉ | Điểm 8",
+      "prompt": "Vertical 9:16 football poster artwork featuring Thibaut Courtois, the Belgian goalkeeper for the Belgium national team, in an intense diving save hero pose mid-air, intense commanding expression. He wears a yellow Belgium goalkeeper kit with the Royal Belgian FA crest clearly visible on the chest. A stylized golden rating badge glowing brightly with the number 8 floats prominently near his shoulder like a video-game high-score stat overlay. Background: a bold red-and-yellow graphic backdrop with a huge stylized Belgium crest floating faintly behind him as a watermark, dramatic golden light rays radiating outward from behind. Vibrant saturated palette, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Belgium crest visible on the jersey, no scoreboard graphics."
+    },
+    {
+      "id": "rating-2",
+      "template": "stat-hero",
+      "filename": "rating-2.png",
+      "subjectHint": "Thomas Meunier — Bỉ | Điểm 5",
+      "prompt": "Vertical 9:16 football poster artwork featuring Thomas Meunier, the Belgian defender for the Belgium national team, in a focused running hero pose on the wing. He wears a red Belgium home kit with the Royal Belgian FA crest clearly visible on the chest. A large stylized deep-red warning rating badge glowing ominously with the number 5 floats near his shoulder like a video-game low-score stat overlay with a cracked glass effect. Background: a moody dark red graphic backdrop with a huge faded Belgium crest watermark, dramatic downward-pointing cold light rays creating a somber atmosphere. Moody saturated dark red palette, very high contrast, glossy graphic-design finish. Stylized like a World Cup disappointment editorial poster. The Belgium crest visible on the jersey, no scoreboard graphics."
+    },
+    {
+      "id": "rating-3",
+      "template": "stat-hero",
+      "filename": "rating-3.png",
+      "subjectHint": "Nathan Ngoy — Bỉ | Điểm 4 (Thẻ đỏ)",
+      "prompt": "Vertical 9:16 football poster artwork featuring Nathan Ngoy, the Belgian defender for the Belgium national team, in a devastated pose walking slowly with head hanging down after receiving a red card. He wears a red Belgium home kit with the Royal Belgian FA crest clearly visible on the chest. A large stylized deep-red warning rating badge glowing ominously with the number 4 floats near his shoulder like a video-game low-score stat overlay with a cracked glass effect. Background: a moody dark red graphic backdrop with a huge faded Belgium crest watermark, dramatic downward-pointing cold light rays creating a somber atmosphere, a faint red card graphic motif floating in the background. Moody saturated dark red palette, very high contrast, glossy graphic-design finish. Stylized like a World Cup disappointment editorial poster. The Belgium crest visible on the jersey, no scoreboard graphics."
+    },
+    {
+      "id": "rating-4",
+      "template": "stat-hero",
+      "filename": "rating-4.png",
+      "subjectHint": "Maxim De Cuyper — Bỉ | Điểm 7",
+      "prompt": "Vertical 9:16 football poster artwork featuring Maxim De Cuyper, the Belgian defender for the Belgium national team, in an energetic attacking hero pose mid-stride. He wears a red Belgium home kit with the Royal Belgian FA crest clearly visible on the chest. A stylized blue rating badge glowing with the number 7 floats near his shoulder like a video-game stat overlay. Background: a bold red graphic backdrop with a huge stylized Belgium crest floating faintly behind him as a watermark, radiating light rays. Vibrant saturated palette, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Belgium crest visible on the jersey, no scoreboard graphics."
+    },
+    {
+      "id": "rating-5",
+      "template": "stat-hero",
+      "filename": "rating-5.png",
+      "subjectHint": "Kevin De Bruyne — Bỉ | Điểm 6",
+      "prompt": "Vertical 9:16 football poster artwork featuring Kevin De Bruyne, the Belgian midfielder and captain for the Belgium national team, in a composed hero pose looking up to play a pass, pointing with one hand. He wears a red Belgium home kit with the Royal Belgian FA crest clearly visible on the chest and the captain's armband. A stylized blue rating badge glowing with the number 6 floats near his shoulder like a video-game stat overlay. Background: a bold red graphic backdrop with a huge stylized Belgium crest floating faintly behind him as a watermark, radiating light rays. Vibrant saturated red palette, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Belgium crest visible on the jersey, no scoreboard graphics."
+    },
+    {
+      "id": "rating-6",
+      "template": "stat-hero",
+      "filename": "rating-6.png",
+      "subjectHint": "Youri Tielemans — Bỉ | Điểm 6",
+      "prompt": "Vertical 9:16 football poster artwork featuring Youri Tielemans, the Belgian midfielder for the Belgium national team, in a focused passing hero pose mid-action. He wears a red Belgium home kit with the Royal Belgian FA crest clearly visible on the chest. A stylized blue rating badge glowing with the number 6 floats near his shoulder like a video-game stat overlay. Background: a bold red graphic backdrop with a huge stylized Belgium crest floating faintly behind him as a watermark, radiating light rays. Vibrant saturated palette, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Belgium crest visible on the jersey, no scoreboard graphics."
+    },
+    {
+      "id": "rating-7",
+      "template": "stat-hero",
+      "filename": "rating-7.png",
+      "subjectHint": "Romelu Lukaku — Bỉ | Điểm 4",
+      "prompt": "Vertical 9:16 football poster artwork featuring Romelu Lukaku, the Belgian striker for the Belgium national team, in a frustrated pose looking up at the sky with hands on his hips after a missed chance. He wears a red Belgium home kit with the Royal Belgian FA crest clearly visible on the chest. A large stylized deep-red warning rating badge glowing ominously with the number 4 floats near his shoulder like a video-game low-score stat overlay with a cracked glass effect. Background: a moody dark red graphic backdrop with a huge faded Belgium crest watermark, dramatic downward-pointing cold light rays creating a somber disappointed atmosphere. Moody saturated dark red palette, very high contrast, glossy graphic-design finish. Stylized like a World Cup disappointment editorial poster. The Belgium crest visible on the jersey, no scoreboard graphics."
+    },
+    {
+      "id": "rating-8",
+      "template": "stat-hero",
+      "filename": "rating-8.png",
+      "subjectHint": "Leandro Trossard — Bỉ | Điểm 7",
+      "prompt": "Vertical 9:16 football poster artwork featuring Leandro Trossard, the Belgian forward for the Belgium national team, in a dynamic mid-stride attacking hero pose, focused expression. He wears a red Belgium home kit with the Royal Belgian FA crest clearly visible on the chest. A stylized blue rating badge glowing brightly with the number 7 floats near his shoulder like a video-game stat overlay. Background: a bold red-and-black graphic backdrop with a huge stylized Belgium crest floating faintly behind him as a watermark, dramatic light rays radiating outward from behind. Vibrant saturated red palette, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Belgium crest visible on the jersey, no scoreboard graphics."
+    },
+    {
+      "id": "rating-9",
+      "template": "stat-hero",
+      "filename": "rating-9.png",
+      "subjectHint": "Dodi Lukebakio — Bỉ | Điểm 6",
+      "prompt": "Vertical 9:16 football poster artwork featuring Dodi Lukebakio, the Belgian forward for the Belgium national team, in a confident running hero pose after taking a shot. He wears a red Belgium home kit with the Royal Belgian FA crest clearly visible on the chest. A stylized blue rating badge glowing with the number 6 floats near his shoulder like a video-game stat overlay. Background: a bold red graphic backdrop with a huge stylized Belgium crest floating faintly behind him as a watermark, radiating light rays. Vibrant saturated palette, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Belgium crest visible on the jersey, no scoreboard graphics."
+    },
+    {
+      "id": "context-1",
+      "template": "callout",
+      "filename": "context-1.png",
+      "subjectHint": "HLV Rudi Garcia — Bỉ | Điểm 4",
+      "prompt": "Vertical 9:16 football poster artwork featuring Rudi Garcia, the manager of the Belgium national team, in a contemplative serious pose on the touchline with arms folded, looking stressed. He wears a dark training jacket with the Royal Belgian FA crest clearly visible on the chest. A large stylized deep-red warning rating badge glowing ominously with the number 4 floats near his shoulder like a video-game low-score stat overlay with a cracked glass effect. Background: a moody dark red-and-black graphic backdrop with a huge faded Belgium crest watermark, dramatic downward-pointing light rays creating a tense atmosphere. Moody saturated palette, very high contrast, glossy graphic-design finish. Stylized like a World Cup editorial poster. The Belgium crest visible on the jacket, no scoreboard graphics."
+    }
+  ]
+}

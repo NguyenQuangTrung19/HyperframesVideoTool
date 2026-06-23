@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "source": "cham-diem-mexico-vs-nam-phi-wc-2026.txt",
+  "contentType": "MATCH RECAP",
+  "title": "Chấm điểm Mexico 2-0 Nam Phi: Quinones rực sáng, Jimenez chấm dứt cơn khát bàn World Cup",
+  "createdAt": "2026-06-12T08:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Mexico mừng bàn thắng khai mạc World Cup",
+      "prompt": "Vertical 9:16 football poster artwork featuring Mexican footballers in green Mexico home kits celebrating a goal together, arms raised, roaring with joy. The Mexico FMF crest clearly visible on the chest. Background: a vivid green graphic backdrop with a huge stylized Mexico crest floating faintly as a watermark, dramatic golden light burst radiating outward, faint stylized green-and-white fan-crowd silhouettes at the lower frame edge as graphic color bands. Vibrant saturated green palette with bold gold accents, very high contrast, glossy graphic-design finish. Stylized like a World Cup opening-night promotional poster. The Mexico crest visible on the jerseys, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "quinones",
+      "template": "stat-hero",
+      "filename": "quinones.png",
+      "subjectHint": "Julian Quinones — 8/10, mở tỷ số",
+      "prompt": "Vertical 9:16 football poster artwork featuring Julian Quinones, the Mexican forward for the Mexico national team, in a hero pose celebrating a goal with an ecstatic shout, arms wide. He wears the green Mexico home kit with the FMF crest clearly visible on the chest. A stylized golden rating badge glowing with the number 8 floats near his shoulder like a video-game stat overlay. Background: a vivid green graphic backdrop with a giant faint Mexico crest watermark and dramatic golden light rays radiating outward. Vibrant saturated green palette with gold accents, very high contrast, glossy graphic-design finish. Stylized like a World Cup match-recap broadcast graphic. The Mexico crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "lira",
+      "template": "stat-hero",
+      "filename": "lira.png",
+      "subjectHint": "Erik Lira — 8/10, đoạt bóng tạo bàn",
+      "prompt": "Vertical 9:16 football poster artwork featuring Erik Lira, the Mexican midfielder for the Mexico national team, in a hero pose mid-press winning a tackle with intense focused energy. He wears the green Mexico home kit with the FMF crest clearly visible on the chest. A stylized golden rating badge glowing with the number 8 floats near his shoulder like a video-game stat overlay. Background: a deep green graphic backdrop with a giant faint Mexico crest watermark and diagonal light trails. Vibrant saturated green palette with gold accents, very high contrast, glossy graphic-design finish. Stylized like a World Cup match-recap broadcast graphic. The Mexico crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "jimenez",
+      "template": "stat-hero",
+      "filename": "jimenez.png",
+      "subjectHint": "Raul Jimenez — 7/10, đánh đầu ghi bàn World Cup đầu tiên ở tuổi 35",
+      "prompt": "Vertical 9:16 football poster artwork featuring Raul Jimenez, the veteran Mexican striker for the Mexico national team, in a hero pose rising high to power a header, eyes locked on the ball, determined expression. He wears the green Mexico home kit with the FMF crest clearly visible on the chest. A stylized blue rating badge glowing with the number 7 floats near his shoulder like a video-game stat overlay. Background: a vivid green graphic backdrop with a giant faint Mexico crest watermark, dramatic golden light burst radiating from behind. Vibrant saturated green palette with bold gold accents, very high contrast, glossy graphic-design finish. Stylized like a historic-moment promotional poster. The Mexico crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "red-cards",
+      "template": "callout",
+      "filename": "red-cards.png",
+      "subjectHint": "Drama 3 thẻ đỏ ở hiệp hai",
+      "prompt": "Vertical 9:16 football poster artwork. Centre composition: a referee's hand holding a bright red card raised high against a dramatic dark stadium-night graphic backdrop, the card glowing as the hero element. Background: deep moody green-and-black graphic backdrop with sharp red light rays radiating outward, a faint stylized World Cup 2026 motif in the upper area, tense atmosphere. Saturated red-and-green palette, very high contrast, glossy graphic-design finish. Stylized like a flashpoint editorial poster. No on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "aguirre",
+      "template": "callout",
+      "filename": "aguirre.png",
+      "subjectHint": "HLV Javier Aguirre — 7/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Javier Aguirre, the veteran Mexican head coach of the Mexico national team, in smart dark coaching attire, gesturing on the touchline with a commanding, satisfied expression. Background: a vivid green graphic backdrop with a giant faint Mexico FMF crest watermark and radiating golden light rays. Saturated green-and-gold palette, high contrast, glossy graphic-design finish. Stylized like a World Cup manager profile graphic. The Mexico crest visible on the background watermark, no on-image text or captions, no scoreboard graphics."
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "source": "nhan-dinh-duc-vs-bo-bien-nga-wc-2026.txt",
+  "contentType": "PRE-MATCH PREVIEW",
+  "title": "Nhận định Đức vs Bờ Biển Ngà — World Cup 2026: dự đoán tỷ số, đội hình và những cái tên đáng xem",
+  "createdAt": "2026-06-19T10:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Ảnh hook split-frame: ngôi sao Đức (trái) đối đầu ngôi sao Bờ Biển Ngà (phải)",
+      "prompt": "Vertical 9:16 football poster artwork featuring a dramatic split-frame face-off. Left half: Florian Wirtz, German midfielder of the Germany national team, in the white Germany home kit, captured chest-up in a determined power pose with arms tensed, lit by cool electric-blue light rays. Right half: Amad Diallo, Ivory Coast winger of the Cote d'Ivoire national team, in the vivid orange Ivory Coast home kit, captured chest-up in an explosive sprinting pose, lit by warm orange light rays. A jagged lightning bolt seam splits the two halves down the center, a small golden World Cup trophy accent glows at the top center, stadium-floodlight haze and confetti sparks in the deep background. The Germany crest visible on the left jersey and the Ivory Coast crest visible on the right jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "star-wirtz",
+      "template": "stat-hero",
+      "filename": "star-wirtz.png",
+      "subjectHint": "Florian Wirtz — nhạc trưởng tuyến giữa tuyển Đức",
+      "prompt": "Vertical 9:16 football poster artwork featuring Florian Wirtz, German attacking midfielder of the Germany national team and Bayer Leverkusen graduate, captured in a graceful mid-stride dribbling pose with the ball glued to his foot, body leaning into a turn. He wears the white Germany home kit with black trim. Cool silver and electric-blue light rays burst diagonally behind him, an abstract geometric backdrop in German flag tones of black, red and gold, faint stadium crowd haze deep in the distance, soft rim lighting on his shoulders. The Germany crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "star-havertz",
+      "template": "stat-hero",
+      "filename": "star-havertz.png",
+      "subjectHint": "Kai Havertz — tiền đạo cắm tuyển Đức",
+      "prompt": "Vertical 9:16 football poster artwork featuring Kai Havertz, German centre-forward of the Germany national team and Arsenal striker, captured in a triumphant goal-celebration pose with arms spread wide and chest pushed forward. He wears the white Germany home kit with black trim. Golden light bursts radiate from behind him like a Golden Boot glow, an abstract backdrop in black, red and gold German tones, light beams and confetti sparks falling, dramatic floodlight haze in the background. The Germany crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "star-diallo",
+      "template": "stat-hero",
+      "filename": "star-diallo.png",
+      "subjectHint": "Amad Diallo — người hùng phút 90 của Bờ Biển Ngà",
+      "prompt": "Vertical 9:16 football poster artwork featuring Amad Diallo, Ivory Coast winger of the Cote d'Ivoire national team and Manchester United forward, captured in an explosive sprinting pose at full speed, one arm pumping and torso driving forward. He wears the vivid orange Ivory Coast home kit with green and white trim. Warm orange and green light rays streak diagonally behind him, an abstract backdrop in Ivorian flag tones of orange, white and green, motion-blur speed lines, stadium floodlight haze deep in the background. The Ivory Coast crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "coach-nagelsmann",
+      "template": "callout",
+      "filename": "coach-nagelsmann.png",
+      "subjectHint": "Julian Nagelsmann — huấn luyện viên tuyển Đức",
+      "prompt": "Vertical 9:16 football poster artwork featuring Julian Nagelsmann, German head coach of the Germany national team, captured in a composed touchline pose, arms folded and shoulders squared in a confident managerial stance. He wears a sharp dark Germany team coaching jacket with the federation crest. Cool grey and electric-blue light rays fan out behind him, an abstract backdrop in black, red and gold German tones, blurred technical-area and stadium stand haze in the distance, soft rim light on his jacket. The Germany crest visible on the jacket, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "coach-fae",
+      "template": "callout",
+      "filename": "coach-fae.png",
+      "subjectHint": "Emerse Fae — huấn luyện viên Bờ Biển Ngà",
+      "prompt": "Vertical 9:16 football poster artwork featuring Emerse Fae, Ivorian head coach of the Cote d'Ivoire national team, captured in an animated touchline pose, one hand gesturing instructions and an intense focused stance. He wears a dark Ivory Coast team coaching jacket with the federation crest. Warm orange and green light rays fan out behind him, an abstract backdrop in Ivorian flag tones of orange, white and green, blurred technical-area and stadium stand haze in the distance, soft rim light on his jacket. The Ivory Coast crest visible on the jacket, no on-image text or captions, no scoreboard graphics."
+    }
+  ]
+}

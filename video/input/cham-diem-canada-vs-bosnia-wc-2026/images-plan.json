@@ -1,0 +1,100 @@
+{
+  "version": "1.0",
+  "source": "cham-diem-canada-vs-bosnia-wc-2026.txt",
+  "contentType": "MATCH RECAP",
+  "title": "Cham diem Canada vs Bosnia: Larin giai cuu ngay ra quan World Cup 2026",
+  "createdAt": "2026-06-13T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Hook — Larin ghi ban go hoa, Canada an mung diem dau tien lich su World Cup",
+      "prompt": "Vertical 9:16 football poster artwork featuring Cyle Larin, the Canadian striker for the Canada national team, in an explosive celebration roar with both arms flung wide and fists clenched after scoring a dramatic equaliser. He wears the bright red Canada national team home kit with the Canada Soccer maple-leaf crest clearly visible on the chest. Background: a bold red-and-white Canada graphic backdrop with a huge stylized maple-leaf crest floating faintly behind him as a watermark, dramatic golden light rays radiating outward, the FIFA World Cup trophy glowing faintly as a stylized graphic accent in an upper corner. Vibrant saturated red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a FIFA World Cup matchday promotional poster. The Canada crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "larin",
+      "template": "stat-hero",
+      "filename": "larin.png",
+      "subjectHint": "Cyle Larin — sieu du bi, cau thu hay nhat tran | Diem 8/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Cyle Larin, the Canadian striker for the Canada national team, in a triumphant hero pose striking the ball home from inside the box, body balanced and eyes locked, supremely confident. He wears the bright red Canada national team home kit with the Canada Soccer maple-leaf crest clearly visible on the chest. A large stylized golden-blue rating badge glowing brightly with the number 8 floats prominently near his shoulder like a video-game MVP stat overlay with subtle golden sparkle. Background: a bold red Canada graphic backdrop with a huge stylized maple-leaf crest watermark and dramatic golden light rays radiating outward. Vibrant saturated red palette with gold highlights, very high contrast, glossy graphic-design finish. Stylized like a FIFA World Cup matchday promotional poster. The Canada crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "jonathan-david",
+      "template": "stat-hero",
+      "filename": "jonathan-david.png",
+      "subjectHint": "Jonathan David — bo lo co hoi vang, bi thay ra | Diem 3/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Jonathan David, the Canadian striker for Juventus and the Canada national team, in a frustrated dejected pose with head hanging down and hands on hips after butchering a glorious chance — a missed shot sailing straight at the goalkeeper rendered as a ghostly transparent action replay behind him. He wears the bright red Canada national team home kit with the Canada Soccer maple-leaf crest clearly visible on the chest. A large stylized deep-red warning rating badge glowing ominously with the number 3 floats near his shoulder like a video-game low-score stat overlay with a cracked glass effect. Background: a moody dark red graphic backdrop with a faded maple-leaf crest watermark, cold downward light rays creating a somber disappointed atmosphere. Moody saturated dark red palette, very high contrast, glossy graphic-design finish. Stylized like a World Cup disappointment editorial poster. The Canada crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "promise-david",
+      "template": "stat-hero",
+      "filename": "promise-david.png",
+      "subjectHint": "Promise David — vao san kien tao ban go hoa | Diem 7/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Promise David, the Canadian striker for the Canada national team, in a determined hero pose playing a sharp first-time pass with his body leaning into the action, intense focused expression. He wears the bright red Canada national team home kit with the Canada Soccer maple-leaf crest clearly visible on the chest. A stylized blue rating badge glowing with the number 7 floats near his shoulder like a video-game stat overlay. Background: a bold red-and-white Canada graphic backdrop with a huge stylized maple-leaf crest watermark and dramatic light rays radiating outward. Vibrant saturated red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a FIFA World Cup matchday promotional poster. The Canada crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "crepeau",
+      "template": "stat-hero",
+      "filename": "crepeau.png",
+      "subjectHint": "Maxime Crepeau — pha cuu thua quan trong | Diem 7/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Maxime Crepeau, the Canadian goalkeeper for the Canada national team, in a spectacular full-stretch diving save pose mid-air, arms extended to push the ball away, intense determined expression. He wears a goalkeeper kit in bright green with the Canada Soccer maple-leaf crest clearly visible on the chest and goalkeeper gloves. A stylized blue rating badge glowing with the number 7 floats near his shoulder like a video-game stat overlay. Background: a bold red Canada graphic backdrop with a huge stylized maple-leaf crest watermark and dramatic light rays radiating outward. Vibrant saturated red-and-green palette, very high contrast, glossy graphic-design finish. Stylized like a FIFA World Cup matchday promotional poster. The Canada crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "kone",
+      "template": "stat-hero",
+      "filename": "kone.png",
+      "subjectHint": "Ismael Kone — di bong xe khe dan toi ban go hoa | Diem 7/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Ismael Kone, the Canadian midfielder for the Canada national team, in a dynamic mid-stride driving run with the ball at his feet, surging forward with powerful intent. He wears the bright red Canada national team home kit with the Canada Soccer maple-leaf crest clearly visible on the chest. A stylized blue rating badge glowing with the number 7 floats near his shoulder like a video-game stat overlay. Background: a bold red-and-white Canada graphic backdrop with a huge stylized maple-leaf crest watermark and dramatic light rays radiating outward. Vibrant saturated red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a FIFA World Cup matchday promotional poster. The Canada crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "laryea",
+      "template": "stat-hero",
+      "filename": "laryea.png",
+      "subjectHint": "Richie Laryea — hau ve trai soi noi, cu sut len xa | Diem 7/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Richie Laryea, the Canadian left-back for the Canada national team, in an attacking hero pose striking a fierce shot toward goal while overlapping forward, body fully committed. He wears the bright red Canada national team home kit with the Canada Soccer maple-leaf crest clearly visible on the chest. A stylized blue rating badge glowing with the number 7 floats near his shoulder like a video-game stat overlay. Background: a bold red Canada graphic backdrop with a huge stylized maple-leaf crest watermark and dramatic light rays radiating outward. Vibrant saturated red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a FIFA World Cup matchday promotional poster. The Canada crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "eustaquio",
+      "template": "stat-hero",
+      "filename": "eustaquio.png",
+      "subjectHint": "Stephen Eustaquio — doi truong, duong chuyen xe khe | Diem 6/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Stephen Eustaquio, the Canadian midfielder and captain for the Canada national team, in a commanding leadership pose pointing and organising teammates, the captain's armband on his left arm, focused expression. He wears the bright red Canada national team home kit with the Canada Soccer maple-leaf crest clearly visible on the chest. A stylized rating badge glowing with the number 6 floats near his shoulder like a video-game stat overlay. Background: a bold red-and-white Canada graphic backdrop with a huge stylized maple-leaf crest watermark and dramatic light rays radiating outward. Vibrant saturated red palette, very high contrast, glossy graphic-design finish. Stylized like a FIFA World Cup matchday promotional poster. The Canada crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "oluwaseyi",
+      "template": "stat-hero",
+      "filename": "oluwaseyi.png",
+      "subjectHint": "Tani Oluwaseyi — danh dau bi pha tren vach voi | Diem 6/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Tani Oluwaseyi, the Canadian forward for Villarreal and the Canada national team, in a powerful hero pose rising high for a header mid-air, neck muscles taut as he meets the ball, intense expression. He wears the bright red Canada national team home kit with the Canada Soccer maple-leaf crest clearly visible on the chest. A stylized rating badge glowing with the number 6 floats near his shoulder like a video-game stat overlay. Background: a bold red Canada graphic backdrop with a huge stylized maple-leaf crest watermark and dramatic light rays radiating outward. Vibrant saturated red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a FIFA World Cup matchday promotional poster. The Canada crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "millar",
+      "template": "stat-hero",
+      "filename": "millar.png",
+      "subjectHint": "Liam Millar — mo nhat, bi thay ra som | Diem 5/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Liam Millar, the Canadian winger for the Canada national team, in a subdued frustrated pose with shoulders slightly slumped and a disappointed expression after an ineffective performance. He wears the bright red Canada national team home kit with the Canada Soccer maple-leaf crest clearly visible on the chest. A large stylized deep-red warning rating badge glowing with the number 5 floats near his shoulder like a video-game low-score stat overlay with a cracked glass effect. Background: a moody dark red graphic backdrop with a faded maple-leaf crest watermark, cold light rays creating a flat disappointed atmosphere. Moody saturated dark red palette, very high contrast, glossy graphic-design finish. Stylized like a World Cup editorial poster. The Canada crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "shaffelburg",
+      "template": "stat-hero",
+      "filename": "shaffelburg.png",
+      "subjectHint": "Jacob Shaffelburg — vao san, tat bong nguy hiem | Diem 6/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Jacob Shaffelburg, the Canadian winger for the Canada national team, in a dynamic hero pose whipping in a cross with his standing leg planted and body twisting into the delivery, energetic expression. He wears the bright red Canada national team home kit with the Canada Soccer maple-leaf crest clearly visible on the chest. A stylized rating badge glowing with the number 6 floats near his shoulder like a video-game stat overlay. Background: a bold red-and-white Canada graphic backdrop with a huge stylized maple-leaf crest watermark and dramatic light rays radiating outward. Vibrant saturated red palette, very high contrast, glossy graphic-design finish. Stylized like a FIFA World Cup matchday promotional poster. The Canada crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "ahmed",
+      "template": "stat-hero",
+      "filename": "ahmed.png",
+      "subjectHint": "Ali Ahmed — vao thay nguoi, to ra nguy hiem | Diem 6/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Ali Ahmed, the Canadian midfielder for the Canada national team, in a lively hero pose dribbling forward at speed with the ball close to his feet, sharp determined expression. He wears the bright red Canada national team home kit with the Canada Soccer maple-leaf crest clearly visible on the chest. A stylized rating badge glowing with the number 6 floats near his shoulder like a video-game stat overlay. Background: a bold red Canada graphic backdrop with a huge stylized maple-leaf crest watermark and dramatic light rays radiating outward. Vibrant saturated red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a FIFA World Cup matchday promotional poster. The Canada crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "marsch",
+      "template": "stat-hero",
+      "filename": "marsch.png",
+      "subjectHint": "Jesse Marsch — HLV, nhung su thay nguoi tao bao | Diem 7/10",
+      "prompt": "Vertical 9:16 football poster artwork featuring Jesse Marsch, the American head coach of the Canada national team, in an animated touchline pose gesturing with conviction and shouting instructions, intense passionate expression, wearing a dark Canada national team coaching jacket with the Canada Soccer maple-leaf crest clearly visible on the chest. A stylized blue rating badge glowing with the number 7 floats near his shoulder like a video-game stat overlay. Background: a bold red Canada graphic backdrop with a huge stylized maple-leaf crest watermark and dramatic light rays radiating outward. Vibrant saturated red palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a FIFA World Cup matchday promotional poster. The Canada crest visible on the jacket, no on-image text or captions, no scoreboard graphics."
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "source": "nhan-dinh-scotland-vs-maroc-wc-2026.txt",
+  "contentType": "PRE-MATCH PREVIEW",
+  "title": "Nhận định Scotland vs Maroc — World Cup 2026",
+  "createdAt": "2026-06-18T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Split-frame Scotland vs Maroc — Hakimi (trái) vs McTominay (phải), ghép từ hook-1 + hook-2",
+      "prompt": "Vertical 9:16 split-frame football poster artwork showing a World Cup 2026 group-stage matchup. Left half: Achraf Hakimi, the Moroccan right-back and captain for Paris Saint-Germain and the Morocco national team, in a red Morocco home kit with the green Morocco federation crest clearly visible on the chest and the captain's armband on his left arm, intense focused hero pose. Behind him, a stylized deep-red and green Morocco graphic backdrop with a huge faint Morocco crest watermark and radiating light rays. Right half: Scott McTominay, the Scottish midfielder for Napoli and the Scotland national team, in a dark blue Scotland home kit with the Scottish FA crest clearly visible on the chest, mirroring determined hero pose. Behind him, a stylized navy-blue Scotland graphic backdrop with a huge faint Scotland thistle crest watermark and radiating light rays. Down the centre seam: a diagonal lightning-burst slash separator with dramatic energy glow, the FIFA World Cup trophy glowing as a stylized graphic accent between them. Vibrant saturated palette per side, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. Both crests visible on the jerseys, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "hakimi",
+      "template": "stat-hero",
+      "filename": "hakimi.png",
+      "subjectHint": "Achraf Hakimi — Maroc (PSG), đội trưởng",
+      "prompt": "Vertical 9:16 football poster artwork featuring Achraf Hakimi, the Moroccan right-back and captain for Paris Saint-Germain and the Morocco national team, in a dynamic mid-stride hero pose driving forward down the right flank, intense determined expression. He wears a red Morocco home kit with the green Morocco federation crest clearly visible on the chest and the captain's armband on his left arm. Background: a bold deep-red graphic backdrop with green accents and a huge stylized Morocco crest floating faintly behind him as a watermark, dramatic light rays radiating outward, faint stylized green Moroccan flag motif as a graphic ribbon across the lower frame. Vibrant saturated red-and-green palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Morocco crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "mctominay",
+      "template": "stat-hero",
+      "filename": "mctominay.png",
+      "subjectHint": "Scott McTominay — Scotland (Napoli), nhạc trưởng tuyến giữa",
+      "prompt": "Vertical 9:16 football poster artwork featuring Scott McTominay, the Scottish central midfielder for Napoli and the Scotland national team, in a commanding hero pose striking a powerful volley mid-air, intense focused expression. He wears a dark navy-blue Scotland home kit with the Scottish FA crest clearly visible on the chest. Background: a deep navy-blue graphic backdrop with a huge stylized Scotland thistle crest floating faintly behind him as a watermark, dramatic light rays radiating outward from behind his head, faint stylized Saltire-blue tartan motif as a graphic ribbon across the lower frame. Vibrant saturated navy-and-white palette with silver highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Scotland crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "saibari",
+      "template": "stat-hero",
+      "filename": "saibari.png",
+      "subjectHint": "Ismael Saibari — Maroc, người ghi bàn vào lưới Brazil",
+      "prompt": "Vertical 9:16 football poster artwork featuring Ismael Saibari, the Moroccan forward for the Morocco national team, in a triumphant goal-celebration hero pose with arms spread wide and a roaring expression after scoring. He wears a red Morocco home kit with the green Morocco federation crest clearly visible on the chest. Background: a bold deep-red graphic backdrop with green accents and a huge stylized Morocco crest floating faintly behind him as a watermark, dramatic golden light rays radiating outward, faint stylized green Moroccan flag motif as a graphic ribbon across the lower frame. Vibrant saturated red-and-green palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Morocco crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "clarke",
+      "template": "callout",
+      "filename": "clarke.png",
+      "subjectHint": "Steve Clarke — HLV Scotland, phát biểu họp báo",
+      "prompt": "Vertical 9:16 football poster artwork featuring Steve Clarke, the Scottish manager of the Scotland national team, in a focused touchline hero pose with arms folded and a serious composed expression, wearing a dark navy team coaching jacket with the Scottish FA crest clearly visible on the chest. Background: a deep navy-blue graphic backdrop with a huge stylized Scotland thistle crest floating faintly behind him as a watermark, dramatic cool-blue light rays radiating outward, faint stylized Saltire motif as a graphic accent across the lower frame. Vibrant saturated navy-and-white palette, very high contrast, glossy graphic-design finish. Stylized like a World Cup press-conference editorial poster. The Scotland crest visible on the jacket, no on-image text or captions, no scoreboard graphics."
+    },
+    {
+      "id": "ouahbi",
+      "template": "callout",
+      "filename": "ouahbi.png",
+      "subjectHint": "Mohamed Ouahbi — HLV Maroc, phát biểu họp báo",
+      "prompt": "Vertical 9:16 football poster artwork featuring Mohamed Ouahbi, the Moroccan manager of the Morocco national team, in a focused touchline hero pose gesturing tactical instructions with a composed determined expression, wearing a dark coaching jacket with the green Morocco federation crest clearly visible on the chest. Background: a bold deep-red graphic backdrop with green accents and a huge stylized Morocco crest floating faintly behind him as a watermark, dramatic warm light rays radiating outward, faint stylized green Moroccan flag motif as a graphic accent across the lower frame. Vibrant saturated red-and-green palette, very high contrast, glossy graphic-design finish. Stylized like a World Cup press-conference editorial poster. The Morocco crest visible on the jacket, no on-image text or captions, no scoreboard graphics."
+    }
+  ]
+}

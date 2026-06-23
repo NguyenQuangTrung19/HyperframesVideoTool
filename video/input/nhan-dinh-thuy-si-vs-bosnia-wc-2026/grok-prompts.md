@@ -1,0 +1,92 @@
+# Grok prompts — Nhận định Thụy Sĩ vs Bosnia — World Cup 2026
+
+7 ảnh cần tạo trên grok.com (Imagine, aspect ratio **9:16**), save về cùng folder này theo đúng tên file. Hook là split-frame ghép từ 2 ảnh đơn (`hook-1` trái + `hook-2` phải) — pipeline tự ghép lúc stage.
+
+---
+
+## [1] hook → `hook.png` (split-frame, gen 2 ảnh đơn bên dưới)
+
+**Subject:** Split-frame Xhaka (Thụy Sĩ) vs Dzeko (Bosnia) — poster đối đầu World Cup
+
+Gen 2 ảnh đơn này, save thành `hook-1.png` (trái) và `hook-2.png` (phải) — pipeline ghép thành `hook.png`. (Hoặc dùng prompt combined ở dưới làm fallback nếu muốn 1 ảnh ghép sẵn.)
+
+### hook-1 → `hook-1.png` — Granit Xhaka (Thụy Sĩ)
+
+```
+Vertical 9:16 football poster artwork featuring Granit Xhaka, the Swiss midfielder and captain for the Switzerland national team, framed chest-up with his head in the upper third, intense focused hero pose. He wears a bright red Switzerland home kit with the Swiss federation crest and white cross clearly visible on the chest and the captain's armband on his left arm. Background: a bold bright-red Switzerland graphic backdrop with a huge faint white Swiss cross watermark and radiating light rays. Vibrant saturated red-and-white palette, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Switzerland crest visible on the jersey, no on-image text or captions, no scoreboard graphics.
+```
+
+### hook-2 → `hook-2.png` — Edin Dzeko (Bosnia)
+
+```
+Vertical 9:16 football poster artwork featuring Edin Dzeko, the veteran Bosnian striker and captain for the Bosnia and Herzegovina national team, framed chest-up with his head in the upper third, steely determined hero pose. He wears a royal blue Bosnia and Herzegovina home kit with the Bosnian federation crest clearly visible on the chest and the captain's armband on his left arm. Background: a deep royal-blue and golden Bosnia graphic backdrop with a huge faint Bosnian crest watermark and radiating golden light rays. Vibrant saturated royal-blue palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Bosnia crest visible on the jersey, no on-image text or captions, no scoreboard graphics.
+```
+
+### Combined (fallback nếu muốn tự ghép 1 ảnh)
+
+```
+Vertical 9:16 split-frame football poster artwork showing a World Cup 2026 group-stage matchup. Left half: Granit Xhaka, the Swiss midfielder and captain for the Switzerland national team, in a bright red Switzerland home kit with the Swiss federation crest and white cross clearly visible on the chest, captain's armband on his left arm, intense focused hero pose. Behind him, a stylized bright-red Switzerland graphic backdrop with a huge faint white Swiss cross watermark and radiating light rays. Right half: Edin Dzeko, the Bosnian striker and captain for the Bosnia and Herzegovina national team, in a royal blue Bosnia and Herzegovina home kit with the Bosnian federation crest clearly visible on the chest, mirroring hero pose. Behind him, a stylized royal-blue and golden Bosnia graphic backdrop with a huge faint Bosnian crest watermark and radiating light rays. Down the centre seam: a diagonal lightning-burst slash separator with dramatic energy glow, the FIFA World Cup trophy glowing as a stylized graphic accent between them. Vibrant saturated palette per side, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday rivalry promotional poster. Both national crests visible on the jerseys, no on-image text or captions, no scoreboard graphics.
+```
+
+---
+
+## [2] xhaka → `xhaka.png` — Granit Xhaka (Thụy Sĩ)
+
+**Subject:** Granit Xhaka — Thụy Sĩ, thủ quân, nhạc trưởng tuyến giữa
+
+```
+Vertical 9:16 football poster artwork featuring Granit Xhaka, the Swiss midfielder and captain for the Switzerland national team, in a commanding hero pose pointing and directing teammates, intense leadership expression, mid-stride driving forward with the ball at his feet. He wears a bright red Switzerland home kit with the Swiss federation crest and white cross clearly visible on the chest and the captain's armband on his left arm. Background: a bold bright-red Switzerland graphic backdrop with a huge stylized white Swiss cross floating faintly behind him as a watermark, dramatic light rays radiating outward from behind his head. Vibrant saturated red-and-white palette, very high contrast, glossy graphic-design finish. Stylized like a World Cup matchday promotional poster. The Switzerland crest visible on the jersey, no on-image text or captions, no scoreboard graphics.
+```
+
+---
+
+## [3] dzeko → `dzeko.png` — Edin Dzeko (Bosnia)
+
+**Subject:** Edin Dzeko — Bosnia, 40 tuổi, chân sút huyền thoại 73 bàn
+
+```
+Vertical 9:16 football poster artwork featuring Edin Dzeko, the veteran Bosnian striker and captain for the Bosnia and Herzegovina national team, in a contemplative experienced hero pose with arms folded and a steely determined expression. He wears a royal blue Bosnia and Herzegovina home kit with the Bosnian federation crest clearly visible on the chest and the captain's armband on his left arm. Background: a deep royal-blue and golden Bosnia graphic backdrop with a huge stylized Bosnian crest floating faintly behind him as a watermark, dramatic golden light rays radiating outward from behind his head. Vibrant saturated royal-blue palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup veteran-legend promotional poster. The Bosnia crest visible on the jersey, no on-image text or captions, no scoreboard graphics.
+```
+
+---
+
+## [4] bajraktarevic → `bajraktarevic.png` — Esmir Bajraktarevic (Bosnia)
+
+**Subject:** Esmir Bajraktarevic — Bosnia, 21 tuổi, mũi khoan tốc độ bên cánh
+
+```
+Vertical 9:16 football poster artwork featuring Esmir Bajraktarevic, the young Bosnian winger for the Bosnia and Herzegovina national team, in a dynamic mid-stride sprinting hero pose driving forward at speed with the ball, energetic determined expression. He wears a royal blue Bosnia and Herzegovina home kit with the Bosnian federation crest clearly visible on the chest. Background: a bold royal-blue and golden Bosnia graphic backdrop with a huge stylized Bosnian crest floating faintly behind him as a watermark, dramatic light rays radiating outward suggesting speed and motion. Vibrant saturated royal-blue palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup breakout-talent promotional poster. The Bosnia crest visible on the jersey, no on-image text or captions, no scoreboard graphics.
+```
+
+---
+
+## [5] yakin → `yakin.png` — Murat Yakin (HLV Thụy Sĩ)
+
+**Subject:** Murat Yakin — HLV Thụy Sĩ, phát biểu "Tôi lạc quan"
+
+```
+Vertical 9:16 football poster artwork featuring Murat Yakin, the head coach of the Switzerland national team, in a confident touchline hero pose with a calm optimistic expression, arms gesturing instructions. He wears a smart dark coaching jacket. Background: a bold bright-red Switzerland graphic backdrop with a huge stylized white Swiss cross floating faintly behind him as a watermark, dramatic light rays radiating outward, a stylized graphic-treated stadium silhouette at the lower frame. Vibrant saturated red-and-white palette, very high contrast, glossy graphic-design finish. Stylized like a World Cup press-conference editorial poster. No on-image text or captions, no scoreboard graphics.
+```
+
+---
+
+## [6] barbarez → `barbarez.png` — Sergej Barbarez (HLV Bosnia)
+
+**Subject:** Sergej Barbarez — HLV Bosnia, phát biểu tôn trọng nhưng tự tin thắng đội mạnh
+
+```
+Vertical 9:16 football poster artwork featuring Sergej Barbarez, the head coach of the Bosnia and Herzegovina national team, in a determined touchline hero pose with an intense focused expression, one hand gesturing emphatically. He wears a smart dark coaching jacket. Background: a deep royal-blue and golden Bosnia graphic backdrop with a huge stylized Bosnian crest floating faintly behind him as a watermark, dramatic golden light rays radiating outward, a stylized graphic-treated stadium silhouette at the lower frame. Vibrant saturated royal-blue palette with golden highlights, very high contrast, glossy graphic-design finish. Stylized like a World Cup press-conference editorial poster. No on-image text or captions, no scoreboard graphics.
+```
+
+---
+
+## Tiếp theo
+
+⚡ **Tip — gen ảnh song song để tiết kiệm thời gian.** Mở 7 tab grok.com cùng lúc, paste prompt vào từng tab, bấm generate đồng loạt rồi mới chờ. Cắt thời gian từ ~10-15 phút (sequential) xuống ~3-5 phút (batch parallel).
+
+1. Mở https://grok.com trên **7 tab cùng lúc** → Imagine, aspect ratio **9:16**.
+2. Copy từng block prompt phía trên, paste vào tab tương ứng, bấm generate **đồng loạt rồi mới chờ tất cả xong**. Hook gen 2 ảnh đơn `hook-1` + `hook-2`.
+3. Save mỗi ảnh vào cùng folder với .txt (`video/input/nhan-dinh-thuy-si-vs-bosnia-wc-2026/`) với stem đúng như file đã ghi (`hook-1`, `hook-2`, `xhaka`, `dzeko`, `bajraktarevic`, `yakin`, `barbarez`).
+   - **Extension nào cũng được:** `.png` / `.jpg` / `.jpeg` / `.webp`.
+4. Khi đủ ảnh, chạy: `/create-video video/input/nhan-dinh-thuy-si-vs-bosnia-wc-2026/nhan-dinh-thuy-si-vs-bosnia-wc-2026.txt`
+```
