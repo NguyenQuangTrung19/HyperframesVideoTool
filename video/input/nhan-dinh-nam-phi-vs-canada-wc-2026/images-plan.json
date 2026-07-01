@@ -1,0 +1,45 @@
+{
+  "version": "1.0",
+  "source": "nhan-dinh-nam-phi-vs-canada-wc-2026.txt",
+  "contentType": "PRE-MATCH PREVIEW",
+  "title": "Nhận định Nam Phi vs Canada — World Cup 2026",
+  "createdAt": "2026-06-28T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Split-frame VS — hook-1: Jonathan David — Canada (tiền đạo, chest-up) · hook-2: Thapelo Maseko — Nam Phi (tiền đạo, chest-up)"
+    },
+    {
+      "id": "david",
+      "template": "stat-hero",
+      "filename": "david.png",
+      "subjectHint": "Jonathan David — Canada (Lille), tiền đạo vừa lập hat-trick vào lưới Qatar"
+    },
+    {
+      "id": "maseko",
+      "template": "stat-hero",
+      "filename": "maseko.png",
+      "subjectHint": "Thapelo Maseko — Nam Phi, người ghi bàn duy nhất hạ Hàn Quốc 1-0"
+    },
+    {
+      "id": "davies",
+      "template": "stat-hero",
+      "filename": "davies.png",
+      "subjectHint": "Alphonso Davies — Canada (Bayern Munich), hậu vệ cánh trở lại từ chấn thương"
+    },
+    {
+      "id": "broos",
+      "template": "callout",
+      "filename": "broos.png",
+      "subjectHint": "Hugo Broos — HLV trưởng Nam Phi, 74 tuổi, ngoài đường biên"
+    },
+    {
+      "id": "marsch",
+      "template": "callout",
+      "filename": "marsch.png",
+      "subjectHint": "Jesse Marsch — HLV trưởng Canada, chỉ đạo bên đường biên"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "version": "1.0",
+  "source": "nhan-dinh-bi-vs-senegal-wc-2026.txt",
+  "contentType": "PRE-MATCH PREVIEW",
+  "title": "Nhận định Bỉ vs Senegal — World Cup 2026",
+  "createdAt": "2026-07-01T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Split-frame đối đầu — hook-1: Kevin De Bruyne (Bỉ) · hook-2: Sadio Mane (Senegal)"
+    },
+    {
+      "id": "star-debruyne",
+      "template": "stat-hero",
+      "filename": "star-debruyne.png",
+      "subjectHint": "Kevin De Bruyne — Bỉ"
+    },
+    {
+      "id": "star-trossard",
+      "template": "stat-hero",
+      "filename": "star-trossard.png",
+      "subjectHint": "Leandro Trossard — Bỉ, Arsenal"
+    },
+    {
+      "id": "star-sarr",
+      "template": "stat-hero",
+      "filename": "star-sarr.png",
+      "subjectHint": "Ismaila Sarr — Senegal, Crystal Palace"
+    },
+    {
+      "id": "coach-bi",
+      "template": "callout",
+      "filename": "coach-bi.png",
+      "subjectHint": "Rudi Garcia — HLV Bỉ, đứng chỉ đạo bên đường biên"
+    },
+    {
+      "id": "coach-senegal",
+      "template": "callout",
+      "filename": "coach-senegal.png",
+      "subjectHint": "Pape Thiaw — HLV Senegal, đứng chỉ đạo bên đường biên"
+    }
+  ]
+}

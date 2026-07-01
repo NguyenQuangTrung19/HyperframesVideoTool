@@ -1,4 +1,4 @@
-# ⚽ Auto-Create-Video — SportsForAllTV
+# ⚽ HyperframesVideoTool — SportsForAllTV
 
 Tự động dựng video ngắn **9:16** (TikTok / Reels / Shorts / Facebook) cho kênh bóng đá tiếng Việt **SportsForAllTV** (`@bonglan0702`).
 

@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "source": "nhan-dinh-phap-vs-thuy-dien-wc-2026.txt",
+  "contentType": "PRE-MATCH PREVIEW",
+  "title": "Nhận định Pháp vs Thụy Điển — World Cup 2026",
+  "createdAt": "2026-06-29T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "hook-1: Kylian Mbappe (Pháp, chest-up) · hook-2: Viktor Gyokeres (Thụy Điển, chest-up)"
+    },
+    {
+      "id": "dembele",
+      "template": "stat-hero",
+      "filename": "dembele.png",
+      "subjectHint": "Ousmane Dembele — Pháp (Barcelona)"
+    },
+    {
+      "id": "mbappe",
+      "template": "stat-hero",
+      "filename": "mbappe.png",
+      "subjectHint": "Kylian Mbappe — Pháp (Real Madrid, đội trưởng)"
+    },
+    {
+      "id": "isak",
+      "template": "stat-hero",
+      "filename": "isak.png",
+      "subjectHint": "Alexander Isak — Thụy Điển"
+    },
+    {
+      "id": "gyokeres",
+      "template": "stat-hero",
+      "filename": "gyokeres.png",
+      "subjectHint": "Viktor Gyokeres — Thụy Điển"
+    },
+    {
+      "id": "potter",
+      "template": "callout",
+      "filename": "potter.png",
+      "subjectHint": "Graham Potter — HLV trưởng Thụy Điển"
+    },
+    {
+      "id": "deschamps",
+      "template": "callout",
+      "filename": "deschamps.png",
+      "subjectHint": "Didier Deschamps — HLV trưởng Pháp"
+    }
+  ]
+}

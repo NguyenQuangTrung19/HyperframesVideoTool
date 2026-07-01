@@ -1,0 +1,45 @@
+{
+  "version": "1.0",
+  "source": "nhan-dinh-bo-bien-nga-vs-na-uy-wc-2026.txt",
+  "contentType": "PRE-MATCH PREVIEW",
+  "title": "Nhận định Bờ Biển Ngà vs Na Uy — World Cup 2026",
+  "createdAt": "2026-06-29T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "hook-1: Nicolas Pepe (Bờ Biển Ngà, chest-up) · hook-2: Erling Haaland (Na Uy, chest-up)"
+    },
+    {
+      "id": "haaland",
+      "template": "stat-hero",
+      "filename": "haaland.png",
+      "subjectHint": "Erling Haaland — Na Uy (Man City)"
+    },
+    {
+      "id": "odegaard",
+      "template": "stat-hero",
+      "filename": "odegaard.png",
+      "subjectHint": "Martin Odegaard — Na Uy (Arsenal, đội trưởng)"
+    },
+    {
+      "id": "amad",
+      "template": "stat-hero",
+      "filename": "amad.png",
+      "subjectHint": "Amad Diallo — Bờ Biển Ngà (Man United)"
+    },
+    {
+      "id": "solbakken",
+      "template": "callout",
+      "filename": "solbakken.png",
+      "subjectHint": "Stale Solbakken — HLV trưởng Na Uy"
+    },
+    {
+      "id": "fae",
+      "template": "callout",
+      "filename": "fae.png",
+      "subjectHint": "Emerse Fae — HLV trưởng Bờ Biển Ngà"
+    }
+  ]
+}

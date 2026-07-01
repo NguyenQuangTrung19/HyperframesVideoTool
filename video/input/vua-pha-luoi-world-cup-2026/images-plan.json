@@ -1,0 +1,45 @@
+{
+  "version": "1.0",
+  "source": "vua-pha-luoi-world-cup-2026.txt",
+  "contentType": "RANKING",
+  "title": "Bảng xếp hạng Vua phá lưới World Cup 2026",
+  "createdAt": "2026-06-28T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Hero shot Lionel Messi — Argentina, dẫn đầu cuộc đua Chiếc giày vàng World Cup 2026"
+    },
+    {
+      "id": "rank-1",
+      "template": "stat-hero",
+      "filename": "rank-1.png",
+      "subjectHint": "Lionel Messi — Argentina (Inter Miami), dẫn đầu với 6 bàn"
+    },
+    {
+      "id": "rank-2",
+      "template": "stat-hero",
+      "filename": "rank-2.png",
+      "subjectHint": "Kylian Mbappe — Pháp (Real Madrid), 4 bàn"
+    },
+    {
+      "id": "rank-3",
+      "template": "stat-hero",
+      "filename": "rank-3.png",
+      "subjectHint": "Ousmane Dembele — Pháp, 4 bàn"
+    },
+    {
+      "id": "rank-4",
+      "template": "stat-hero",
+      "filename": "rank-4.png",
+      "subjectHint": "Vinicius Junior — Brazil (Real Madrid), 4 bàn 1 kiến tạo"
+    },
+    {
+      "id": "rank-5",
+      "template": "stat-hero",
+      "filename": "rank-5.png",
+      "subjectHint": "Erling Haaland — Na Uy (Manchester City), 4 bàn"
+    }
+  ]
+}

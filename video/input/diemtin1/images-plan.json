@@ -1,0 +1,69 @@
+{
+  "version": "1.0",
+  "source": "diemtin1.txt",
+  "contentType": "MATCH RECAP",
+  "title": "Điểm tin vòng 32 đội World Cup 2026 — Pháp, Na Uy, Mexico đi tiếp",
+  "createdAt": "2026-07-01T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Montage 3 ngôi sao điểm tin vòng 32 đội World Cup 2026: Mbappe (Pháp) · Haaland (Na Uy) · Quiñones (Mexico), phong cách poster"
+    },
+    {
+      "id": "phap",
+      "template": "stat-hero",
+      "filename": "phap.png",
+      "subjectHint": "Đội tuyển Pháp mừng chiến thắng 3-0 trước Thụy Điển — Mbappe và Barcola, áo lam World Cup"
+    },
+    {
+      "id": "mbappe",
+      "template": "stat-hero",
+      "filename": "mbappe.png",
+      "subjectHint": "Kylian Mbappe — Pháp | cú đúp, kỷ lục ghi bàn ở vòng knock-out World Cup"
+    },
+    {
+      "id": "olise",
+      "template": "stat-hero",
+      "filename": "olise.png",
+      "subjectHint": "Michael Olise — Pháp | pha kiến tạo, nhạc trưởng tuyến giữa áo lam"
+    },
+    {
+      "id": "nauy",
+      "template": "stat-hero",
+      "filename": "nauy.png",
+      "subjectHint": "Đội tuyển Na Uy mừng chiến thắng lịch sử 2-1 trước Bờ Biển Ngà — chảo lửa Dallas, áo đỏ"
+    },
+    {
+      "id": "haaland",
+      "template": "stat-hero",
+      "filename": "haaland.png",
+      "subjectHint": "Erling Haaland — Na Uy | người hùng ghi bàn phút 86, áo đỏ tuyển quốc gia"
+    },
+    {
+      "id": "nusa",
+      "template": "stat-hero",
+      "filename": "nusa.png",
+      "subjectHint": "Antonio Nusa — Na Uy | sao trẻ mở tỷ số, áo đỏ tuyển quốc gia"
+    },
+    {
+      "id": "mexico",
+      "template": "stat-hero",
+      "filename": "mexico.png",
+      "subjectHint": "Đội tuyển Mexico mừng chiến thắng 2-0 trước Ecuador — sân Azteca, El Tri áo xanh lá"
+    },
+    {
+      "id": "quinones",
+      "template": "stat-hero",
+      "filename": "quinones.png",
+      "subjectHint": "Julián Quiñones — Mexico | ghi bàn và kiến tạo, áo xanh lá El Tri"
+    },
+    {
+      "id": "mora",
+      "template": "stat-hero",
+      "filename": "mora.png",
+      "subjectHint": "Gilberto Mora — Mexico | thần đồng 17 tuổi đá chính, áo xanh lá El Tri"
+    }
+  ]
+}

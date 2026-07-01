@@ -1,0 +1,75 @@
+{
+  "version": "1.0",
+  "source": "dua-qua-bong-vang-world-cup-2026.txt",
+  "contentType": "RANKING",
+  "title": "Bảng xếp hạng đua Quả bóng vàng World Cup 2026",
+  "createdAt": "2026-06-28T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Hero shot Lionel Messi — Argentina, dẫn đầu đua Quả bóng vàng World Cup 2026"
+    },
+    {
+      "id": "rank-1",
+      "template": "stat-hero",
+      "filename": "rank-1.png",
+      "subjectHint": "Lionel Messi — Argentina, hat-trick vào lưới Algeria, ghi bàn 7 trận World Cup liên tiếp"
+    },
+    {
+      "id": "rank-2",
+      "template": "stat-hero",
+      "filename": "rank-2.png",
+      "subjectHint": "Kylian Mbappe — Pháp (Real Madrid), vượt kỷ lục ghi bàn World Cup của Pele"
+    },
+    {
+      "id": "rank-3",
+      "template": "stat-hero",
+      "filename": "rank-3.png",
+      "subjectHint": "Michael Olise — Pháp, Cầu thủ hay nhất Bundesliga, hay nhất trận gặp Senegal"
+    },
+    {
+      "id": "rank-4",
+      "template": "stat-hero",
+      "filename": "rank-4.png",
+      "subjectHint": "Erling Haaland — Na Uy (Manchester City), cú đúp vào lưới Senegal"
+    },
+    {
+      "id": "rank-5",
+      "template": "stat-hero",
+      "filename": "rank-5.png",
+      "subjectHint": "Vinicius Junior — Brazil (Real Madrid), hay nhất trận cả 3 trận vòng bảng"
+    },
+    {
+      "id": "rank-6",
+      "template": "stat-hero",
+      "filename": "rank-6.png",
+      "subjectHint": "Harry Kane — Anh (Bayern Munich), chân sút World Cup số một lịch sử tuyển Anh"
+    },
+    {
+      "id": "rank-7",
+      "template": "stat-hero",
+      "filename": "rank-7.png",
+      "subjectHint": "Deniz Undav — Đức (Stuttgart), siêu dự bị ghi bàn quyết định trước Bờ Biển Ngà"
+    },
+    {
+      "id": "rank-8",
+      "template": "stat-hero",
+      "filename": "rank-8.png",
+      "subjectHint": "Ousmane Dembele — Pháp, đương kim Quả bóng vàng, hat-trick vào lưới Na Uy"
+    },
+    {
+      "id": "rank-9",
+      "template": "stat-hero",
+      "filename": "rank-9.png",
+      "subjectHint": "Jude Bellingham — Anh (Real Madrid), ghi bàn giúp Anh nhất bảng L"
+    },
+    {
+      "id": "rank-10",
+      "template": "stat-hero",
+      "filename": "rank-10.png",
+      "subjectHint": "Alexander Isak — Thụy Điển, ghi bàn và kiến tạo trong trận thắng Tunisia 5-1"
+    }
+  ]
+}

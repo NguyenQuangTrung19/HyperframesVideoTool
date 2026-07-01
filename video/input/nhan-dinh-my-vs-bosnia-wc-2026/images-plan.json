@@ -1,0 +1,45 @@
+{
+  "version": "1.0",
+  "source": "nhan-dinh-my-vs-bosnia-wc-2026.txt",
+  "contentType": "PRE-MATCH PREVIEW",
+  "title": "Nhận định Mỹ vs Bosnia — World Cup 2026",
+  "createdAt": "2026-07-01T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Split-frame đối đầu — hook-1: Christian Pulisic (Mỹ) · hook-2: Edin Dzeko (Bosnia)"
+    },
+    {
+      "id": "star-pulisic",
+      "template": "stat-hero",
+      "filename": "star-pulisic.png",
+      "subjectHint": "Christian Pulisic — Mỹ, AC Milan"
+    },
+    {
+      "id": "star-balogun",
+      "template": "stat-hero",
+      "filename": "star-balogun.png",
+      "subjectHint": "Folarin Balogun — Mỹ, Monaco"
+    },
+    {
+      "id": "star-dzeko",
+      "template": "stat-hero",
+      "filename": "star-dzeko.png",
+      "subjectHint": "Edin Dzeko — Bosnia, lão tướng 40 tuổi"
+    },
+    {
+      "id": "coach-my",
+      "template": "callout",
+      "filename": "coach-my.png",
+      "subjectHint": "Mauricio Pochettino — HLV Mỹ, đứng chỉ đạo bên đường biên"
+    },
+    {
+      "id": "coach-bosnia",
+      "template": "callout",
+      "filename": "coach-bosnia.png",
+      "subjectHint": "Sergej Barbarez — HLV Bosnia, đứng chỉ đạo bên đường biên"
+    }
+  ]
+}
