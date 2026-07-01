@@ -194,7 +194,7 @@ After the image plan is written (or after reusing an already-prepped folder), ap
 
 Phân loại: PRE-MATCH PREVIEW
 Đã gom: dự đoán tỷ số (kênh + <nguồn>), đội hình dự kiến 2 đội, lối chơi 2 đội, <N> ngôi sao, họp báo 2 HLV.
-<N> ảnh cần tạo trên grok.com (9:16):
+<N> ảnh cần tạo trên grok.com (hook 9:16; body ngang/dọc đều được — ảnh ngang tự vào card):
 ✓ Đã thêm vào hàng đợi render: video/input/queue.xlsx (row <N>, status=planned)
 
 Tiếp theo:

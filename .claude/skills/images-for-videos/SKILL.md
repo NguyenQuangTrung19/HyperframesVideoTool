@@ -243,7 +243,7 @@ No `prompt` field — `subjectHint` is the only description (see Step 5). The sc
 ```markdown
 # Ảnh cần tạo — <title> (<N> ảnh)
 
-Gen trên grok.com (Imagine, 9:16). Save đúng tên file dưới đây vào folder này; đuôi .png/.jpg/.jpeg/.webp/.avif đều được.
+Gen trên grok.com (Imagine) hoặc lấy ảnh thật (Getty…). **Tỉ lệ ảnh linh hoạt** (pipeline tự đo & chọn cách hiển thị): ảnh `hook` nên **dọc 9:16 / 2:3** để fill trọn khung; ảnh body `stat-hero` / `callout` dùng **ngang 16:9 vẫn tốt** — pipeline tự bọc ảnh ngang vào **thẻ (card) giữa khung, không cắt, không méo** (ảnh dọc thì full-bleed). Save đúng tên file dưới đây vào folder này; đuôi .png/.jpg/.jpeg/.webp/.avif đều được.
 
 - [ ] `hook.png` — <subjectHint của scene hook>
 - [ ] `cb-1.png` — <subjectHint>
@@ -262,9 +262,10 @@ Reply with a short confirmation + the parallel-gen reminder (do NOT dump anythin
 ✓ Checklist ảnh: <input-dir>/anh-can-tao.md (xem cần tạo ảnh gì)
 <N> ảnh cần tạo (1 hook + N CB / N item / ...).
 
-⚡ Gen ảnh song song: mở <N> tab grok.com cùng lúc (Imagine, 9:16), gen theo mô tả
-   từng scene trong anh-can-tao.md, bấm generate ĐỒNG LOẠT rồi mới chờ. Save về cùng
-   folder, stem đúng tên file (`hook`, `cb-1`, ...); đuôi .png/.jpg/.jpeg/.webp/.avif
+⚡ Gen ảnh song song: mở <N> tab grok.com cùng lúc (Imagine; hook 9:16, body ngang/dọc
+   đều được — ảnh ngang tự vào card), gen theo mô tả từng scene trong anh-can-tao.md,
+   bấm generate ĐỒNG LOẠT rồi mới chờ. Hoặc lấy ảnh thật (Getty…) tỉ lệ bất kỳ. Save về
+   cùng folder, stem đúng tên file (`hook`, `cb-1`, ...); đuôi .png/.jpg/.jpeg/.webp/.avif
    đều OK. Xong → /create-video <path>.
 
 ⚠ Orphan từ plan cũ (xóa sau):  ← only if any

@@ -159,6 +159,8 @@ After classification:
 
 ⚠️ **Do NOT write `imagePrompt` on any scene** (no-prompt rule — `memory/feedback_dont_author_image_prompts.md`). Staged images bind purely by sceneId: `src/image/index.ts` PASS 1 applies the manual override at `<outputDir>/images/<sceneId>.<ext>` for every image-eligible scene **regardless of imagePrompt** (the old "filters by imagePrompt first" behavior is gone). So a hook/callout/stat-hero with a staged file renders correctly with no prompt. Scenes without a staged image just render a gradient background — that's acceptable, not a bug.
 
+ℹ️ **Image aspect is auto-handled — you don't declare it.** The pipeline measures each staged image (`src/render/image-dims.ts`) and picks the fit at compose time: **portrait / 9:16** images render **full-bleed cover** (hook stays this way — use portrait posters for it); **landscape 16:9** images on **`stat-hero` / `callout`** scenes render as a **framed hero card centered in-frame over a graphic deck** (`data-fit="card"`) so nothing is cropped or stretched. This means real photos (Getty etc.) of any orientation work — no need to force-crop to 9:16. Nothing in `script.json` changes for this.
+
 ⚠️ **Don't pad.** Hitting the lower bound for thin content is correct. Hitting the upper bound for rich content is correct. Hitting the upper bound for thin content (padding) is wrong — viewers swipe.
 
 ⚠️ **Voice speed defaults by content type:**
@@ -711,7 +713,12 @@ When the source mentions a **starting lineup, predicted XI, squad reveal, or for
 
 Rows go **back to front** (GK row first, ST row last). CSS reverses display so GK lands at the bottom of the pitch and the striker at the top. Each row spreads players evenly across the pitch width. Total players should equal 11 for a standard XI; the schema accepts 2–6 rows with 1–5 players per row to support every common formation.
 
-**Important row order rule:** Within each row, order players from **left-to-right from the viewer's perspective**. The first item in the array must be the left-most player (e.g., Left Back), and the last item must be the right-most player (e.g., Right Back). Example for Portugal defense (L to R): `["Nuno Mendes", "Inacio", "Ruben Dias", "Cancelo"]`.
+**Important row order rule — you MUST flip the source order:** Within each row, order players **left-to-right from the viewer's perspective** = **Left Back first, Right Back last**. But Sports Mole (and most lineup sources) list each line **Right Back → Left Back** (e.g. England `Pickford; Spence, Guehi, Konsa, O'Reilly; …` = RB Spence first, LB O'Reilly last). So you **MUST reverse every outfield row** before writing it into `rows`. GK and lone striker rows have one name — no flip needed.
+
+- Source: `Pickford; Spence, Guehi, Konsa, O'Reilly; Mainoo, Anderson; Madueke, Bellingham, Rashford; Kane` (4-2-3-1).
+- ✅ Correct `rows` (each multi-name line reversed): `[["Pickford"], ["O'Reilly","Konsa","Guehi","Spence"], ["Anderson","Mainoo"], ["Rashford","Bellingham","Madueke"], ["Kane"]]` — LB O'Reilly on screen-left, RB Spence on screen-right.
+- ❌ Wrong (raw source order): `["Spence","Guehi","Konsa","O'Reilly"]` — puts the Right Back on the left, mirroring the team.
+- Portugal defense reversed example: source `Cancelo, Ruben Dias, Inacio, Nuno Mendes` (RB→LB) → `["Nuno Mendes", "Inacio", "Ruben Dias", "Cancelo"]`.
 
 **Name compression — keep tokens readable:**
 - Use **surname only** when possible (`Mbappé`, `Koundé`, `Tchouaméni`, `Upamecano`).
@@ -801,7 +808,7 @@ Run this gate on every `nhan-dinh-*` script. If any box fails, fix it before sav
 
 1. ☐ **Hook** has `bigStat` = predicted scoreline (e.g. `"1-0"`), and voiceText opens with `"Kênh dự đoán <đội> thắng <tỷ số spelled>"` (flag it as a prediction, NOT a bare result) — scoreline SPELLED as words (`hai một`, never `2-1`).
 2. ☐ **No `X-Y` digit-hyphen-digit anywhere in any voiceText** (scores AND formations) — the hyphen reads as "trừ". `grep -E '"voiceText".*[0-9]-[0-9]'` on the script must return NOTHING. Formations spelled (`bốn hai ba một`); the visible `formation`/`bigStat`/board fields keep digits.
-3. ☐ **Every `formation-pitch` row goes GK-first → ST-last** (`rows[0]` is the lone goalkeeper, `rows[-1]` the striker). Inverted rows render the team upside-down on the pitch.
+3. ☐ **Every `formation-pitch` row goes GK-first → ST-last** (`rows[0]` is the lone goalkeeper, `rows[-1]` the striker). Inverted rows render the team upside-down on the pitch. **AND every multi-name row is REVERSED from the source line** — Sports Mole lists each line RB→LB, so the array must read LB→RB (Left Back is `row[0]`, Right Back is `row[-1]`). If `row[1]` of the back line is the source's Right Back, you forgot to flip.
 4. ☐ **Exactly one `comparison` verdict scoreboard** exists near the end, and **BOTH `left.flag` AND `right.flag` are set** (`https://flagcdn.com/<iso2>.svg`). `grep -c '"flag"'` on the script should be **≥ 2**. The two `value`s match the hook's `bigStat`.
 5. ☐ ISO2 codes correct for THIS fixture (verify, don't guess): e.g. Pháp `fr`, Senegal `sn`, Iraq `iq`, Na Uy `no`, Argentina `ar`, Algeria `dz`, Áo `at`, Jordan `jo`, Bồ Đào Nha `pt`, CHDC Congo `cd`, Anh `gb-eng`, Hàn Quốc `kr`, Séc `cz`. Club fixture → crest path under `assets/`.
 6. ☐ Form section present: H2H `feature-list` + one `match-results` board per team (labels overridden to `eyebrow: "Phong độ · World Cup 2026"` / `foot: "Kết quả gần đây · SportsForAllTV"`). A board titled `"… 5 trận gần nhất"` MUST list 5 matches; if you only have N<5 reliable results, title it `"… phong độ gần đây"` instead (don't claim 5 and show 4).
@@ -1053,7 +1060,7 @@ Other fields render `|` as a literal character — don't use it there.
 | `feature-list.bullets[]` | 50 each, max 4 | 50px Inter | Each = a clause/short sentence. Sentence case. CSS adds the dot — don't prefix `-` or `•`. |
 | `formation-pitch.title` | 40 | 64px Inter | Sentence case. E.g. `"Đội hình dự kiến"`, `"Đội hình ra sân"`. |
 | `formation-pitch.formation` | 12 | 56px Anton cyan | Formation label, e.g. `"4-2-3-1"`, `"4-3-3"`, `"3-5-2"`. |
-| `formation-pitch.rows[][]` | 24 per name, 1–5 names/row, 2–6 rows | 26px Inter on green pitch | Player names by row, **back to front** (GK row first, ST row last). Order within rows MUST be **left-to-right from the viewer's perspective** (Left Back first, Right Back last). Use surnames only (`Mbappé`, `T. Hernández`). Total 11 for standard XI. |
+| `formation-pitch.rows[][]` | 24 per name, 1–5 names/row, 2–6 rows | 26px Inter on green pitch | Player names by row, **back to front** (GK row first, ST row last). Order within rows MUST be **left-to-right from the viewer's perspective** (Left Back first, Right Back last) — i.e. **REVERSE the Sports Mole line**, which lists RB→LB. Use surnames only (`Mbappé`, `T. Hernández`). Total 11 for standard XI. |
 | `engagement-question.question` | 120 | 60px Inter | Content-derived question. Sentence case. `|` allowed for phrase-aware line breaks. End with `?`. |
 | `engagement-question.cta` | 40 | 38px Inter pill | Short comment prompt, e.g. `"Để lại bình luận bên dưới nhé"`. |
 | `engagement-question.tag` | 20 | 36px CSS uppercase | Optional. Natural case (`Câu hỏi`, `Bình luận`). |

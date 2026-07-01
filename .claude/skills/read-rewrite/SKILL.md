@@ -296,7 +296,7 @@ After the chained skill completes, reply with one combined summary covering both
 ✓ Checklist ảnh: video/input/<slug>/anh-can-tao.md  (xem cần tạo ảnh gì)
 
 Phân loại: <CONTENT TYPE từ classify skill>
-<N> ảnh cần tạo trên grok.com (Imagine, aspect ratio 9:16):
+<N> ảnh cần tạo trên grok.com (Imagine; hook 9:16, body ngang/dọc đều được — ảnh ngang tự vào card):
 ✓ Đã thêm vào hàng đợi render: video/input/queue.xlsx (row <N>, status=planned)
 
 Tiếp theo:
