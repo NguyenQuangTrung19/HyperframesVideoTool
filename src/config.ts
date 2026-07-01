@@ -101,6 +101,12 @@ export interface Config {
   // load) scales linearly with this — 24 cuts ~20% off the default 30, and
   // captions/animations still read smooth on TikTok. Default: 30.
   hyperframesFps: number;
+
+  // Hyperframes encoder quality preset → output bitrate / compression effort.
+  // "high" = higher bitrate, fewer compression artifacts (crisper hero images,
+  // cleaner gradients/motion) at the cost of larger files + slightly slower
+  // encode. Default: "high". Set RENDER_QUALITY=standard to render lighter/faster.
+  hyperframesQuality: "draft" | "standard" | "high";
 }
 
 function intDefault(name: string, def: number): number {
@@ -196,7 +202,7 @@ export function loadConfig(): Config {
     ausynclabSpeed: parseFloat(process.env.AUSYNCLAB_SPEED ?? "1.0"),
     ausynclabBaseUrl: process.env.AUSYNCLAB_BASE_URL ?? "https://api.ausynclab.io/api/v1",
     ausynclabPollIntervalMs: intDefault("AUSYNCLAB_POLL_INTERVAL_MS", 2000),
-    ausynclabPollTimeoutMs: intDefault("AUSYNCLAB_POLL_TIMEOUT_MS", 180000),
+    ausynclabPollTimeoutMs: intDefault("AUSYNCLAB_POLL_TIMEOUT_MS", 600000),
 
     fptaiApiKey: process.env.FPTAI_API_KEY,
     fptaiVoice: process.env.FPTAI_VOICE?.trim() || "leminh",
@@ -226,7 +232,16 @@ export function loadConfig(): Config {
     hyperframesWorkers: parseHyperframesWorkers(),
     hyperframesGpu: (process.env.HYPERFRAMES_GPU ?? "").toLowerCase() === "true",
     hyperframesFps: parseRenderFps(),
+    hyperframesQuality: parseRenderQuality(),
   };
+}
+
+function parseRenderQuality(): "draft" | "standard" | "high" {
+  const raw = (process.env.RENDER_QUALITY ?? "high").toLowerCase();
+  if (raw !== "draft" && raw !== "standard" && raw !== "high") {
+    throw new Error(`RENDER_QUALITY must be one of draft|standard|high, got "${raw}"`);
+  }
+  return raw;
 }
 
 function parseRenderFps(): number {

@@ -96,3 +96,70 @@ describe("composeHtml", () => {
     expect(html).not.toContain("background-image: url");
   });
 });
+
+describe("landscape image → framed hero card", () => {
+  function oneScene(template: "stat-hero" | "callout" | "hook"): Script {
+    const templateData =
+      template === "stat-hero"
+        ? { template, value: "19", label: "Bruno" }
+        : template === "callout"
+          ? { template, statement: "X." }
+          : { template, headline: "X" };
+    return {
+      metadata: { title: "t", channel: "SportsForAllTV" },
+      source: { url: "local", domain: "local", image: null },
+      voice: { provider: "ausynclab", voiceId: "1", speed: 1 },
+      scenes: [{ id: "s1", type: "body", voiceText: "x", templateData }],
+    } as unknown as Script;
+  }
+  const compose = (t: "stat-hero" | "callout" | "hook", aspect: number | undefined) =>
+    composeHtml({
+      script: oneScene(t),
+      sceneAudio: [{ id: "s1", durationSec: 5 }],
+      gapSec: 0.3,
+      sceneImages: { s1: "s1.jpg" },
+      sceneImageAspect: aspect === undefined ? {} : { s1: aspect },
+      audioRelPath: "voice.mp3",
+    });
+
+  it("stat-hero with a landscape image renders the card + data-fit=card", () => {
+    const html = compose("stat-hero", 1.6);
+    expect(html).toContain('data-fit="card"');
+    expect(html).toContain('class="bg-card"');
+    expect(html).toContain("aspect-ratio: 1.600");
+    expect(html).toContain("bg-card-img kb-card-zoom");
+  });
+
+  it("callout with a landscape image uses card fit", () => {
+    const html = compose("callout", 1.78);
+    expect(html).toContain('data-fit="card"');
+    expect(html).toContain('class="bg-card"');
+  });
+
+  it("portrait image keeps full-bleed cover (no card)", () => {
+    const html = compose("stat-hero", 0.667);
+    expect(html).toContain('data-fit="cover"');
+    expect(html).not.toContain('class="bg-card"');
+  });
+
+  it("unknown aspect keeps cover", () => {
+    const html = compose("stat-hero", undefined);
+    expect(html).toContain('data-fit="cover"');
+    expect(html).not.toContain('class="bg-card"');
+  });
+
+  it("hook stays on cover even for a landscape image (portrait posters only)", () => {
+    const html = compose("hook", 1.9);
+    expect(html).toContain('data-fit="cover"');
+    expect(html).not.toContain('class="bg-card"');
+  });
+
+  it("aspect just below threshold stays cover", () => {
+    expect(compose("stat-hero", 1.04)).toContain('data-fit="cover"');
+  });
+
+  it("ultra-wide aspect is clamped to 1.900", () => {
+    const html = compose("stat-hero", 3.2);
+    expect(html).toContain("aspect-ratio: 1.900");
+  });
+});

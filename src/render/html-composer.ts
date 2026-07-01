@@ -29,6 +29,14 @@ export interface ComposeArgs {
    * if their scene defines `imagePrompt`. Scenes not in the map render gradient bg.
    */
   sceneImages: Record<string, string>;
+  /**
+   * Map of scene id → image aspect ratio (width / height), when known.
+   * Landscape images (aspect ≥ LANDSCAPE_MIN) render as a framed hero card
+   * over a graphic deck instead of a cropped full-bleed `cover` background,
+   * so a 16:9 Getty photo shows in full without distortion. Missing entry →
+   * keep the default full-bleed cover fit.
+   */
+  sceneImageAspect?: Record<string, number>;
   audioRelPath: string;
   /** TikTok follow card config (injected into outro scene). Optional — defaults used if omitted. */
   tiktok?: TiktokConfig;
@@ -66,12 +74,13 @@ export function composeHtml(args: ComposeArgs): string {
   // Render scenes
   const sceneHtml = timing.map(({ scene, start, duration }) => {
     const sceneImg = sceneImages[scene.id] ?? null;
+    const sceneAspect = args.sceneImageAspect?.[scene.id] ?? null;
     let chapter: { idx: number; total: number } | null = null;
     if (scene.type === "body" && bodyTotal > 1) {
       bodyIdx += 1;
       chapter = { idx: bodyIdx, total: bodyTotal };
     }
-    return renderScene(scene, start, duration, sceneImg, tiktok, tiktokAvatar, chapter);
+    return renderScene(scene, start, duration, sceneImg, sceneAspect, tiktok, tiktokAvatar, chapter);
   }).join("\n");
 
   // Persistent shell — channel name + logo in top-left
@@ -121,16 +130,6 @@ function renderShell(metadata: Script["metadata"], avatarRelPath: string): strin
 
 <div class="particles-layer">${particlesHtml}</div>
 
-<div class="corner-accent corner-tl"></div>
-<div class="corner-accent corner-tr"></div>
-<div class="corner-accent corner-bl"></div>
-<div class="corner-accent corner-br"></div>
-
-<div class="progress-bar">
-  <div class="progress-fill" id="progress-fill"></div>
-  <div class="progress-dot" id="progress-dot"></div>
-</div>
-
 <div class="brand-shell-header">
   <div class="brand-icon"><img src="${escapeHtml(avatarRelPath)}" alt="${escapeHtml(metadata.channel)}" crossorigin="anonymous" /></div>
   <div class="brand-text">
@@ -141,16 +140,32 @@ function renderShell(metadata: Script["metadata"], avatarRelPath: string): strin
 }
 
 // ── SCENE DISPATCH ─────────────────────────────────────────────────────────
+/**
+ * Aspect ratio (w/h) at/above which a scene image is treated as landscape and
+ * rendered as a framed hero card instead of a cropped full-bleed cover.
+ * Portrait Getty posters (2:3 ≈ 0.67) and 9:16 stay on cover; 16:9 / square
+ * photos switch to the card so nothing important is cropped.
+ */
+const LANDSCAPE_MIN = 1.05;
+
 function renderScene(
   scene: Script["scenes"][number],
   start: number,
   duration: number,
   sceneImageRelPath: string | null,
+  sceneAspect: number | null,
   tiktok: TiktokConfig,
   tiktokAvatarRelPath: string,
   chapter: { idx: number; total: number } | null = null,
 ): string {
   const td = scene.templateData;
+
+  // Landscape image → card fit (only for templates that consume a scene image
+  // in a lower-anchored text layout: stat-hero, callout). Others keep cover.
+  const isLandscape = sceneAspect !== null && sceneAspect >= LANDSCAPE_MIN;
+  const cardEligible = td.template === "stat-hero" || td.template === "callout";
+  const fit: "cover" | "card" =
+    sceneImageRelPath && isLandscape && cardEligible ? "card" : "cover";
 
   let inner: string;
   let layoutName: string;
@@ -165,7 +180,7 @@ function renderScene(
       layoutName = "comparison";
       break;
     case "stat-hero":
-      inner = renderStatHeroInner(td, sceneImageRelPath);
+      inner = renderStatHeroInner(td, sceneImageRelPath, fit, sceneAspect);
       layoutName = "stat-hero";
       break;
     case "feature-list":
@@ -173,7 +188,7 @@ function renderScene(
       layoutName = "feature-list";
       break;
     case "callout":
-      inner = renderCalloutInner(td, sceneImageRelPath);
+      inner = renderCalloutInner(td, sceneImageRelPath, fit, sceneAspect);
       layoutName = "callout";
       break;
     case "big-quote":
@@ -214,7 +229,7 @@ function renderScene(
     ? `<div class="chapter-marker"><span class="chapter-idx">${chapter.idx}</span><span class="chapter-sep">/</span><span class="chapter-total">${chapter.total}</span></div>`
     : "";
 
-  return buildScene(scene, start, duration, layoutName, inner + chapterHtml);
+  return buildScene(scene, start, duration, layoutName, inner + chapterHtml, fit);
 }
 
 /** Renders a Ken-Burns photo bg + dark overlay, or a gradient fallback. */
@@ -224,6 +239,24 @@ function bgWithImageOrGradient(imageRelPath: string | null, kbClass = "kb-zoom-i
   <div class="overlay" style="opacity: ${overlayOpacity}"></div>`;
   }
   return `<div class="bg gradient-news-dark"></div>`;
+}
+
+/**
+ * Landscape-image treatment: a graphic "deck" backdrop + the photo inside a
+ * floating rounded card sized to the image's true aspect ratio (clamped so an
+ * ultra-wide crops slightly rather than becoming a thin strip). Nothing in the
+ * photo is distorted or cropped for normal 16:9 / 4:3 sources. Used by
+ * stat-hero / callout whose text is anchored in the lower safe zone, so the
+ * card owns the upper frame.
+ */
+function bgImageCard(imageRelPath: string, aspect: number | null): string {
+  // Clamp so an ultra-wide crops a touch (via object cover) instead of becoming
+  // a thin strip, and a near-square doesn't grow past the upper zone.
+  const ar = Math.min(Math.max(aspect ?? 1.6, 1.0), 1.9);
+  return `<div class="bg-deck"></div>
+  <div class="bg-card" style="aspect-ratio: ${ar.toFixed(3)}">
+    <div class="bg-card-img kb-card-zoom" style="background-image: url('${imageRelPath}')"></div>
+  </div>`;
 }
 
 // ── HOOK SCENE ─────────────────────────────────────────────────────────────
@@ -391,12 +424,19 @@ function renderComparisonScoreboard(td: Extract<TemplateDataType, { template: "c
 function renderStatHeroInner(
   td: Extract<TemplateDataType, { template: "stat-hero" }>,
   sceneImageRelPath: string | null,
+  fit: "cover" | "card" = "cover",
+  aspect: number | null = null,
 ): string {
-  const bgHtml = sceneImageRelPath
-    ? `<div class="bg kb-zoom-in" style="background-image: url('${sceneImageRelPath}')"></div>
+  let bgHtml: string;
+  if (sceneImageRelPath && fit === "card") {
+    bgHtml = bgImageCard(sceneImageRelPath, aspect);
+  } else if (sceneImageRelPath) {
+    bgHtml = `<div class="bg kb-zoom-in" style="background-image: url('${sceneImageRelPath}')"></div>
   <div class="overlay" style="opacity: 0.03"></div>
-  <div class="bg-grade-overlay" style="background: radial-gradient(ellipse 80% 70% at 50% 40%, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.32) 60%, rgba(0,0,0,0.48) 100%)"></div>`
-    : `<div class="bg gradient-forest"></div>`;
+  <div class="bg-grade-overlay" style="background: radial-gradient(ellipse 80% 70% at 50% 40%, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.32) 60%, rgba(0,0,0,0.48) 100%)"></div>`;
+  } else {
+    bgHtml = `<div class="bg gradient-forest"></div>`;
+  }
 
   const context = td.context ? `<div class="stat-context">${escapeHtml(td.context)}</div>` : "";
   const highlights = td.highlights && td.highlights.length > 0
@@ -459,12 +499,19 @@ function renderFeatureListInner(td: Extract<TemplateDataType, { template: "featu
 function renderCalloutInner(
   td: Extract<TemplateDataType, { template: "callout" }>,
   sceneImageRelPath: string | null,
+  fit: "cover" | "card" = "cover",
+  aspect: number | null = null,
 ): string {
-  const bgHtml = sceneImageRelPath
-    ? `<div class="bg kb-zoom-in" style="background-image: url('${sceneImageRelPath}')"></div>
+  let bgHtml: string;
+  if (sceneImageRelPath && fit === "card") {
+    bgHtml = bgImageCard(sceneImageRelPath, aspect);
+  } else if (sceneImageRelPath) {
+    bgHtml = `<div class="bg kb-zoom-in" style="background-image: url('${sceneImageRelPath}')"></div>
   <div class="overlay" style="opacity: 0.04"></div>
-  <div class="bg-grade-overlay" style="background: radial-gradient(ellipse 80% 70% at 50% 50%, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.28) 60%, rgba(0,0,0,0.42) 100%)"></div>`
-    : `<div class="bg gradient-cream"></div>`;
+  <div class="bg-grade-overlay" style="background: radial-gradient(ellipse 80% 70% at 50% 50%, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.28) 60%, rgba(0,0,0,0.42) 100%)"></div>`;
+  } else {
+    bgHtml = `<div class="bg gradient-cream"></div>`;
+  }
 
   const tag = td.tag ? `<div class="callout-tag">${escapeHtml(td.tag)}</div>` : "";
   return `${bgHtml}
@@ -727,11 +774,12 @@ function buildScene(
   duration: number,
   layoutName: string,
   innerHtml: string,
+  fit: "cover" | "card" = "cover",
 ): string {
   return `
 <div class="scene clip" id="scene-${scene.id}"
      data-start="${start.toFixed(2)}" data-duration="${duration.toFixed(2)}" data-active="0"
-     data-layout="${layoutName}">
+     data-layout="${layoutName}" data-fit="${fit}">
   ${innerHtml}
 </div>`.trim();
 }

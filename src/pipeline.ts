@@ -10,6 +10,7 @@ import { getDurationSec, concatWithSilence, mixSfxOntoVoice, type SfxMixSpec } f
 import { indexSfxLibrary, pickSfxForScene, defaultPlayback } from "./assets/sfx-selector.js";
 import { existsSync } from "node:fs";
 import { composeHtml } from "./render/html-composer.js";
+import { readImageAspect } from "./render/image-dims.js";
 import { renderWithHyperframes } from "./render/hyperframes-runner.js";
 import { generateSceneImages } from "./image/index.js";
 import { log } from "./utils/logger.js";
@@ -227,6 +228,15 @@ export async function runPipeline(scriptPath: string): Promise<void> {
   // Resolve image generation results (started in step 5, awaited here)
   const sceneImages = await sceneImagesPromise;
 
+  // Measure each staged image's aspect ratio so the composer can switch
+  // landscape photos (16:9 Getty etc.) to a framed hero card instead of a
+  // cropped full-bleed cover. Missing/unreadable → composer keeps cover.
+  const sceneImageAspect: Record<string, number> = {};
+  for (const [id, rel] of Object.entries(sceneImages)) {
+    const aspect = readImageAspect(join(outputDir, rel));
+    if (aspect !== null) sceneImageAspect[id] = aspect;
+  }
+
   // Resolve TikTok avatar — download URL if provided, else copy bundled default
   // Bundled avatar can be jpg/jpeg/png/webp — pick whichever exists
   const findBundledAvatar = (): string => {
@@ -256,6 +266,7 @@ export async function runPipeline(scriptPath: string): Promise<void> {
     sceneAudio: sceneAudio.map((a) => ({ id: a.id, durationSec: a.durationSec })),
     gapSec: SCENE_GAP_SEC,
     sceneImages,
+    sceneImageAspect,
     audioRelPath: "voice.mp3",
     tiktok: cfg.tiktok,
     tiktokAvatarRelPath: ttAvatarFile,
@@ -285,6 +296,7 @@ export async function runPipeline(scriptPath: string): Promise<void> {
     compositionDir: outputDir,
     outputPath: videoPath,
     fps: cfg.hyperframesFps,
+    quality: cfg.hyperframesQuality,
     workers: cfg.hyperframesWorkers,
     gpu: cfg.hyperframesGpu,
   });

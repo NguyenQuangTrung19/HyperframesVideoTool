@@ -6,6 +6,7 @@ Bản đồ tĩnh các file code hay đụng, để khỏi đào file-by-file. C
 `npm run pipeline -- <dir>/script.json` → `src/cli.ts` (entry mỏng, load `.env.local`) → **`src/pipeline.ts`** (orchestrator 9 bước: validate → TTS → align → image → concat+SFX → compose HTML → render).
 - **outputDir = thư mục chứa script.json.** Override ảnh tra ở `<outputDir>/images/<sceneId>.<ext>`. Layout chuẩn: script.json + voice/ + video.mp4 ở `video/output/<slug>/`; .txt + images-plan.json + ảnh thô ở `video/input/<slug>/`.
 - Voice cache theo existence: `<outputDir>/voice/full.mp3` + `full-words.json` (TTS+align, đắt API) — xóa để ép làm lại.
+- **Ảnh ngang tự vào card**: pipeline đo tỉ lệ mỗi ảnh staged (`image-dims.ts`) → truyền `sceneImageAspect` cho composer. Ảnh landscape (aspect ≥ 1.05) ở scene **stat-hero/callout** render thành thẻ 16:9 bo góc trên nền deck (`.bg-deck`+`.bg-card`, `data-fit="card"`) thay vì `cover` cắt cụt; ảnh dọc (poster grok 2:3) + hook giữ full-bleed cover. Không cần khai báo gì trong script.json — thả ảnh ngang Getty vào là chạy.
 
 ## File chính (theo việc)
 | Việc | File |
@@ -18,6 +19,7 @@ Bản đồ tĩnh các file code hay đụng, để khỏi đào file-by-file. C
 | TTS | `src/tts/tts-client.ts` (dispatch) · `ausynclab-client.ts` (active) |
 | Render hyperframes | `src/render/hyperframes-runner.ts` (`RENDER_FPS`, `HYPERFRAMES_WORKERS=4`) |
 | Compose HTML cảnh | `src/render/html-composer.ts` |
+| Đo tỉ lệ ảnh (JPEG/PNG/WebP/GIF header) | `src/render/image-dims.ts` |
 | Config + env | `src/config.ts` |
 | Podcast pipeline | `src/podcast/pipeline.ts` |
 
