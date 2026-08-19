@@ -492,6 +492,27 @@ async function processRow(row: Row, usedSet: Set<string>, locket: boolean): Prom
       result: `pipeline xong nhưng không thấy ${outFile}`,
     };
   }
+  // Existence alone is NOT proof of a render: ffmpeg creates the output file up
+  // front and can then die during filter-graph config, leaving a 0-byte mp4
+  // behind. Since the exit code is deliberately ignored above (benign exit 69),
+  // the probe is the only real signal — demand a decodable, non-empty file.
+  if (statSync(outFile).size === 0) {
+    return {
+      status: "Error",
+      videos: relList(videoPaths),
+      result: `pipeline xong nhưng ${slug}.mp4 rỗng (0 byte) — ffmpeg chết giữa chừng`,
+    };
+  }
+  try {
+    const outProbe = await probeVideo(outFile);
+    if (!(outProbe.durationSec > 0)) throw new Error("duration = 0");
+  } catch (e) {
+    return {
+      status: "Error",
+      videos: relList(videoPaths),
+      result: `pipeline xong nhưng ${slug}.mp4 không decode được: ${(e as Error).message}`,
+    };
+  }
 
   return {
     status: "Done",

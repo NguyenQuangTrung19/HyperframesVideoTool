@@ -53,7 +53,7 @@ This skill is for **PRE-MATCH PREVIEW** only (including tournament-scope squad/f
 Gather the full picture with WebSearch (fire several queries; prefer Sports Mole, Opta/The Analyst, ESPN, WhoScored, RotoWire, FIFA, UEFA, CBC, club/federation sites, and the channel's usual VN sources). Collect ALL of:
 
 1. **Stakes / context** — competition, group, round, what's on the line; venue; qualification route.
-2. **Recent form + head-to-head (from the Overview)** — each team's **last 5 results** with actual scorelines (friendlies, qualifiers, playoff), most recent first, AND the all-time head-to-head record between the two teams (W-D-L, standout/World Cup meeting, last meeting, or "first-ever meeting" if they've never played). The match-page Overview is the primary source; search `"<teamA> last 5 results 2026"`, `"<teamB> recent results form"`, `"<teamA> vs <teamB> head to head"`. ⚠️ Attribute each result to the correct team — send-off friendlies are team-specific, easy to mix up. This feeds 2–3 dedicated scenes downstream (H2H + a last-5 board per team).
+2. **Recent form + head-to-head (from the Overview)** — each team's **last 5 results** with actual scorelines (friendlies, qualifiers, playoff), most recent first, AND the all-time head-to-head record between the two teams (W-D-L, standout/World Cup meeting, last meeting, or "first-ever meeting" if they've never played). The match-page Overview is the primary source; search `"<teamA> last 5 results 2026"`, `"<teamB> recent results form"`, `"<teamA> vs <teamB> head to head"`. ⚠️ Attribute each result to the correct team — send-off friendlies are team-specific, easy to mix up. This feeds 2 dedicated scenes downstream (H2H feature-list + ONE combined `form-compare` board showing BOTH teams' recent results side by side — NOT a separate board per team).
    - **⚠️ MATCHDAY 2+ OF A TOURNAMENT GROUP — the previous group game IS the most recent result and MUST lead the form + anchor the analysis (user 2026-06-18).** When the fixture is matchday 2/3 of a group, each team has already played 1–2 games in THIS tournament. Those results are the freshest and most relevant — they MUST be the first entry in the team's last-5 list, tagged `(World Cup)`, and the lead paragraph + analysis MUST reference the previous group match (e.g. "Canada bị Bosnia cầm chân 1-1 ở lượt mở màn, nay tiếp Qatar"). Do NOT lead the form with pre-tournament friendlies.
    - **VERIFY each tournament result with a dedicated per-team search — do not trust one aggregated form list.** Tournament results are AFTER the assistant's knowledge cutoff, so a wrong scoreline or a vague "chuỗi vòng loại" placeholder slips through easily. Search `"<teamA> vs <opponent> World Cup 2026 result score"` for EACH team's group game(s) and confirm the exact scoreline + scorers before writing. (Real misses caught 2026-06-18: a 0-2 written as 0-1; one side's last-5 left as "hòa X, và chuỗi vòng loại trước đó" with no scorelines.)
 3. **Probable lineups for BOTH teams** — formation + the full starting XI (every named player). This is mandatory; a preview without both XIs is incomplete. If a source only gives one team, search again for the other.
@@ -62,12 +62,12 @@ Gather the full picture with WebSearch (fire several queries; prefer Sports Mole
    - **Biên độ bàn** từ form 5 trận: đội ghi đều/thủ chắc → +1 cách biệt; cả hai cùng ghi bàn tốt → tỷ số mở (2-1, 2-2); hàng thủ 1 đội rò rỉ (thủng lưới ở ≥5 trận gần) → cho thủng thêm. H2H lệch hẳn thì nghiêng theo.
    - **Mỏ neo (anchor):** đối chiếu với tỷ số `We say: X-Y` mà Sports Mole in sẵn trên trang preview (cùng trang lấy đội hình). Nếu hợp lý với suy luận Opta+form → chốt gần nó; nếu lệch nhiều → tin suy luận của mình, đừng copy mù.
    Chốt **1 tỷ số duy nhất**, trình bày là "Dự đoán của kênh". Opta % vẫn nêu như dữ kiện hỗ trợ (ghi "theo Opta"). **KHÔNG dùng tỷ số ESPN / O'Hanlon / DTAI nữa.**
-5. **Stars to watch** — 2–3 marquee names across both teams (top scorer, captain, breakout talent), each with a concrete stat. Keep these BRIEF (see the section rule below) — one tight fact per name, not a paragraph.
+5. **Stars to watch** — **2–3 marquee names PER TEAM (so 4–6 total), balanced across both sides** (top scorer, captain, playmaker, breakout talent, key defender/keeper), each with a concrete stat. **This is a knockout-stage upgrade (2026-07-06): the deeper the round, the more the individual duels matter, so give each team its own 2–3 named stars — not a shared pool of 2–3.** Keep each BRIEF (see the section rule below) — one tight fact per name, not a paragraph. Downstream each becomes its own `stat-hero` image scene, so name real, image-worthy players.
    - **Anchor each star's fact to their MOST RECENT showing, not a stale season/career stat (user 2026-06-18).** For matchday 2+ fixtures that means the group opener: who scored, shone, or flopped THERE (e.g. "Vinicius là Cầu thủ hay nhất trận hòa Maroc", "Jonathan David mờ nhạt, sút thẳng vào thủ môn", "Güler tung 8 cú sút nhiều nhất giải mà chưa có bàn"). Search the opener's player ratings (`"<teamA> vs <opp> player ratings World Cup 2026"`) to get this. Prefer the latest match over "ghi bàn thứ 15 vào lưới Bolivia" type older references.
    - If a team's actual standout from the last match isn't a marquee/imaged star, still surface them inside that team's blurb (e.g. note the super-sub or goalscorer) rather than dropping the most relevant name.
 6. **Team news** — injuries, suspensions, doubtful starters, new call-ups.
 7. **Press-conference quotes from BOTH managers** — at least one substantive quote per side, attributed to the named manager. Search e.g. `"<manager> press conference <opponent> <competition>"`. If a real quote for one side genuinely can't be found, summarize that manager's stated approach/philosophy instead of fabricating a quote.
-8. **Expected playing style / tactical approach per team** — how each side is likely to set up and play: possession vs counter, high press vs low block, wing-play vs central overloads, tempo, set-piece threat. Tie it to the formation + a key mechanism or player (e.g. "build through the No.6", "counter on <winger>'s pace"). Search `"<team> tactics style of play 2026"`, `"<manager> system <team>"`. Aim for the CONTRAST between the two sides (one controls, the other springs) — this becomes a short two-side scene downstream. Keep it tight; this is a read, not a full tactical breakdown.
+8. **Expected playing style / tactical approach per team — richer for knockouts (2026-07-06).** For EACH team gather enough to fill a tactical board: (a) an **approach headline** (≤28 chars, e.g. "Kiểm soát & pressing", "Phòng ngự phản công", "Chơi biên & tạt cánh"), (b) **2–3 concrete mechanisms** (≤42 chars each — how they build, where they press, the transition trigger, set-piece threat; e.g. "Lên bóng qua số 6 Rodri", "Vây ráp ngay phần sân đối thủ", "Rình phản công tốc độ Mbappe"), and (c) the **1 tactical linchpin** whose name anchors the plan ("chìa khóa"). Search `"<team> tactics style of play 2026"`, `"<manager> system <team>"`, plus how they set up in the previous knockout/group game. Aim for the CONTRAST between the two sides (one controls, the other springs). This feeds the dedicated **`tactics-board`** scene downstream (two-column đấu pháp graphic) — so it's now a small structured block per team, not one throwaway line.
 
 Run queries in parallel where independent. Cross-check names/numbers across ≥2 sources when they disagree; prefer the most recent (the current month is shown in the environment).
 
@@ -109,13 +109,15 @@ Nhận định <Đội A> vs <Đội B> — <giải đấu>: dự đoán tỷ s�
 - <Đội B> (<sơ đồ>): <GK>; <hậu vệ>; <tiền vệ>; <tiền đạo>.
 
 ## Lối chơi dự kiến
-- <Đội A>: <cách tiếp cận chính — vd kiểm soát bóng & pressing tầm cao / phòng ngự phản công / tạt biên / đá rắn> + 1 nét nhận diện cụ thể (một cơ chế hoặc một cầu thủ là chìa khoá).
-- <Đội B>: <cách tiếp cận — nêu rõ tương phản với đội A nếu có, vd rình phản công khi A cầm bóng> + 1 nét nhận diện.
+- <Đội A> (<sơ đồ>) — <approach headline ≤28 ký tự>: <cơ chế 1>; <cơ chế 2>; <cơ chế 3 nếu có>. Chìa khóa: <1 cầu thủ>.
+- <Đội B> (<sơ đồ>) — <approach headline>: <cơ chế 1>; <cơ chế 2>; <cơ chế 3 nếu có>. Chìa khóa: <1 cầu thủ>. (nêu rõ tương phản với đội A nếu có — vd A cầm bóng, B rình phản công.)
 
 ## Ngôi sao đáng xem
-- <Cầu thủ 1> (<đội>, <CLB/tuổi>): <vai trò + 1 số liệu cụ thể>.
-- <Cầu thủ 2> (<đội>, <tuổi/CLB>): <vai trò + số liệu>.
-- <Cầu thủ 3 hoặc bối cảnh hành trình đội>.
+- <Đội A — Cầu thủ 1> (<CLB/tuổi>): <vai trò + 1 số liệu cụ thể, gắn màn trình diễn gần nhất>.
+- <Đội A — Cầu thủ 2> (<CLB/tuổi>): <vai trò + số liệu>.
+- <Đội B — Cầu thủ 1> (<CLB/tuổi>): <vai trò + số liệu>.
+- <Đội B — Cầu thủ 2> (<CLB/tuổi>): <vai trò + số liệu>.
+- (tùy chọn — trận lớn thêm Cầu thủ 3 mỗi đội; tổng 4–6 ngôi sao, cân đối 2 đội.)
 
 ## Tin lực lượng
 - <Chấn thương / treo giò / nghi ngờ ra sân của đội A>.
@@ -126,19 +128,31 @@ Nhận định <Đội A> vs <Đội B> — <giải đấu>: dự đoán tỷ s�
 - <HLV đội B> (huấn luyện viên <đội B>, <ghi chú>): "<trích dẫn>" hoặc <tóm tắt triết lý nếu không có quote thật>.
 
 ---
+## Giới hạn thời lượng (cho /create-video — KHÔNG đọc lên, KHÔNG lên hình)
+- Mục tiêu: 35-45 giây. Trần cứng: 45 giây.
+- Tổng voiceText MỌI scene cộng lại: **≤ 170 từ** (đo thật 0,256 giây/từ trên 27 video đã render).
+- **Mỗi body scene tối đa 1 câu, ≤ 16 từ** — đây là trần quan trọng nhất: 1 cảnh = 1 hình đứng yên ~4 giây. Hook ≤ 12 từ.
+- Số scene KHÔNG giảm — video ngắn đi bằng cách nói ít hơn mỗi cảnh, không phải bằng cách bỏ cảnh.
+- Tổng scene: **≤ 13** (9 ảnh + tactics-board / form-compare / formation-pitch + engagement-question + outro). Preview được nới 13 vì có nhiều scene data-driven bắt buộc.
+- Fact nào không kịp nói thì cho lên `highlights`/`context` để người xem tắt tiếng vẫn đọc được.
+- Check trước khi render: `npx tsx _validate-script.ts <script.json>` (chặn cứng, exit 1 = không render).
+
+---
 Nguồn: <domain1>, <domain2>, ... · <full URL gốc>
 Ngày: <ngày xuất bản / today>
 ```
+
+⚠️ **Block `## Giới hạn thời lượng` là BẮT BUỘC** (2026-08-03) — copy nguyên văn. Nó nằm ở khu metadata sau `---` nên không trôi vào voiceText. Preview là type dễ phình nhất vì có sẵn nhiều scene data-driven (tactics-board, form-compare, formation-pitch, comparison scoreboard) **tốn thời lượng y hệt scene có ảnh** — chúng chỉ tiết kiệm công gen ảnh, KHÔNG tiết kiệm thời lượng. Đếm chúng vào trần 13 scene ngay từ lúc plan. Dưới luật nhịp mới chúng cũng chỉ được ≤16 từ thoại như mọi cảnh khác: bảng đấu pháp / đội hình tự nó đã nói hết, giọng chỉ cần một câu dẫn.
 
 Section rules:
 
 - **Title (line 1):** keep the literal pattern `Nhận định <A> vs <B> — <giải đấu>: dự đoán tỷ số, đội hình và những cái tên đáng xem`. Sentence case. Keep `vs` and the tournament name readable (e.g. `World Cup 2026`).
 - **Lead:** 1 paragraph, ends with the fixed sentence `Video ngắn — tập trung dự đoán, đội hình, ngôi sao hai đội và phát biểu họp báo.`
 - **Dự đoán tỷ số:** the first bullet is the **channel's own derived pick** (`Dự đoán của kênh: ...`) — chốt bằng Opta % (kèo trên) + form 5 trận (biên độ bàn) + mỏ neo Sports Mole "We say", KHÔNG copy ESPN/O'Hanlon. Second bullet = Opta win% as supporting data (`theo Opta`). Third = a tactical one-liner. Trong voiceText tỷ số CHỈ nói "kênh dự đoán", chỉ % mới gán "theo Opta".
-- **Phong độ gần đây & đối đầu:** the head-to-head line first (record / "first-ever meeting" + standout & last meeting), then **each team's last 5 results with scorelines, most recent first**. This renders downstream as **2–3 scenes** — an H2H `feature-list` + one `match-results` last-5 board per team. Keep facts concrete (real scorelines + the H2H record), never vague ("đang có phong độ tốt"). ⚠️ Don't confuse the two sides' recent results — verify each scoreline belongs to the right team (e.g. send-off friendlies are team-specific). **For matchday 2+ group fixtures, the previous group game leads the list with a `(World Cup)` tag** (e.g. `hòa Bosnia 1-1 (World Cup), ...`); never leave a side as `hòa X, và chuỗi vòng loại trước đó` — list 5 real scorelines or as many as are verifiable.
+- **Phong độ gần đây & đối đầu:** the head-to-head line first (record / "first-ever meeting" + standout & last meeting), then **each team's last 5 results with scorelines, most recent first**. This renders downstream as **2 scenes** — an H2H `feature-list` + **ONE combined `form-compare` board showing BOTH teams' recent results side by side** (2 cột split, mỗi kết quả 1 chip W/D/L + đối thủ + tỷ số). ⚠️ **KHÔNG tách 2 bảng riêng mỗi đội** — gộp chung 1 scene split cho gọn (feedback user 2026-07-06). Keep facts concrete (real scorelines + the H2H record), never vague ("đang có phong độ tốt"). ⚠️ Don't confuse the two sides' recent results — verify each scoreline belongs to the right team (e.g. send-off friendlies are team-specific). **For matchday 2+ group fixtures, the previous group game leads the list with a `(World Cup)` tag** (e.g. `hòa Bosnia 1-1 (World Cup), ...`); never leave a side as `hòa X, và chuỗi vòng loại trước đó` — list 5 real scorelines or as many as are verifiable.
 - **Đội hình dự kiến:** both XIs, formation in parentheses, positions separated by `;`, players by `,`. Mandatory both teams.
-- **Lối chơi dự kiến — NGẮN, 1 bullet/đội (tối đa 2 câu mỗi đội).** Mỗi đội: cách tiếp cận chính (kiểm soát / pressing / phản công / chơi biên / đá rắn) + 1 nét nhận diện cụ thể (một cơ chế hoặc một cầu thủ là chìa khoá). **Ưu tiên nêu tương phản** giữa 2 lối chơi khi có (A cầm bóng — B rình phản công). KHÔNG phân tích chiến thuật dài dòng — đây là 2 gạch đầu dòng, không phải bài tactical. Downstream `/create-video` render đẹp dưới dạng `comparison` (2 cột lối chơi A vs B) hoặc 2 `callout` ngắn — không cần ảnh riêng.
-- **Ngôi sao đáng xem — BRIEF + MỚI NHẤT.** 2–3 bullets, mixed across both teams, each ONE tight line: name (đội/CLB/tuổi) + a single concrete fact **gắn với màn trình diễn gần nhất** (trận mở màn cho fixture matchday 2+): ai ghi bàn / tỏa sáng / mờ nhạt ở đó — KHÔNG dùng thống kê mùa giải cũ. No multi-sentence backstory — the standout-players section is a quick hit, not a deep dive. Downstream `/create-video` renders each as a short stat-hero (1–2 short voice sentences).
+- **Lối chơi dự kiến — 1 bullet/đội, dạng CÓ CẤU TRÚC cho tactics-board.** Mỗi đội: `(<sơ đồ>) — <approach headline ≤28 ký tự>: <2–3 cơ chế, mỗi cơ chế ≤42 ký tự, ngăn bằng ";">. Chìa khóa: <1 cầu thủ>.` **Ưu tiên nêu tương phản** giữa 2 lối chơi (A cầm bóng — B rình phản công). Vẫn NGẮN, không phải bài tactical dài — nhưng đủ dữ kiện để lấp thẻ đấu pháp. Downstream `/create-video` render dưới dạng scene **`tactics-board`** (thẻ đấu pháp 2 cột: sơ đồ + approach + 2–3 cơ chế + chìa khóa mỗi đội, có phân nhánh VS ở giữa) — data-driven, KHÔNG cần ảnh riêng.
+- **Ngôi sao đáng xem — 2–3 NGÔI SAO MỖI ĐỘI (4–6 tổng), cân đối 2 bên + MỚI NHẤT.** Mỗi đội có riêng 2–3 cái tên đáng xem (đừng gộp chung 2–3 cho cả trận). Mỗi bullet ONE tight line: name (CLB/tuổi) + a single concrete fact **gắn với màn trình diễn gần nhất** (trận vòng trước): ai ghi bàn / tỏa sáng / mờ nhạt ở đó — KHÔNG dùng thống kê mùa giải cũ. No multi-sentence backstory — quick hit, không phải deep dive. **Càng vào sâu (tứ kết → bán kết → chung kết) càng cần đủ 3 sao/đội** vì các cuộc đối đầu cá nhân là điểm nhấn. Downstream `/create-video` renders each as its own stat-hero image (1–2 short voice sentences), nên `/images-for-videos` sẽ plan 1 ảnh/ngôi sao.
 - **Tin lực lượng:** injuries/suspensions/doubts. Omit the whole section only if there is genuinely no team news.
 - **Phát biểu họp báo đáng chú ý:** one bullet per manager, attributed by name + role. Quote in double quotes; if no real quote exists for a side, summarize their stated approach (don't invent a quote).
 - **Source line:** list the domains used + the original URL.
@@ -168,6 +182,8 @@ Invoke [`images-for-videos`](../images-for-videos/SKILL.md) on `video/input/<slu
 
 **Rendering convention (downstream `/create-video`):** a preview renders in the shape of `nhan-dinh-han-quoc-vs-sec-wc-2026` — the **predicted scoreline goes in the hook** (`bigStat: "1-0"`, voiceText opens with the result), and the **prediction/verdict card is a `comparison` scoreboard with both national flags + the scoreline** (set `flag` on both sides → `https://flagcdn.com/<iso2>.svg`), not a feature-list or bar chart. The `.txt` already carries the score in `## Dự đoán tỷ số`; `/create-video` lifts it into the hook + scoreboard. See `/create-video` SKILL "PRE-MATCH PREVIEW — standard shape".
 
+**Feature-list images (optional, 2026-07-04):** the H2H (`Lịch sử đối đầu`) and team-news (`Tin lực lượng`) scenes render as `feature-list` broadcast cards and can now carry ONE supporting image. When `/images-for-videos` decides a photo reinforces the whole list — team-news anchored by a key absentee/returnee, H2H anchored by a historic-clash shot — it adds that scene to the plan (aspect-flexible; landscape → hero card, portrait → full-bleed with cards floating). It's optional: a numeric/mixed list stays image-less. Bullets cap at 3 when the scene has an image.
+
 ### Step 6.5: Record the source in the video queue (queue.xlsx)
 
 After the image plan is written (or after reusing an already-prepped folder), append this source to the batch render queue so it shows up in `/video-queue` and the worksheet tracks every prepped source in one place. ALWAYS do this when the skill produced (or confirmed) a usable `<slug>.txt` + `images-plan.json`.
@@ -194,7 +210,7 @@ After the image plan is written (or after reusing an already-prepped folder), ap
 
 Phân loại: PRE-MATCH PREVIEW
 Đã gom: dự đoán tỷ số (kênh + <nguồn>), đội hình dự kiến 2 đội, lối chơi 2 đội, <N> ngôi sao, họp báo 2 HLV.
-<N> ảnh cần tạo trên grok.com (hook 9:16; body ngang/dọc đều được — ảnh ngang tự vào card):
+<N> ảnh cần tạo trên grok.com (hook 9:16 full-bleed; body ngang/dọc đều được — vào thẻ đúng tỉ lệ):
 ✓ Đã thêm vào hàng đợi render: video/input/queue.xlsx (row <N>, status=planned)
 
 Tiếp theo:

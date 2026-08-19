@@ -5,7 +5,7 @@ import { existsSync } from "node:fs";
 import type { ImageProvider, GenerateImageArgs, GenerateResult } from "./provider.js";
 
 const ENDPOINT = "https://api.openai.com/v1/images/generations";
-const SIZE_VERTICAL_9_16 = "1024x1536";
+const SIZE_BY_ASPECT = { "9:16": "1024x1536", "16:9": "1536x1024" } as const;
 const TIMEOUT_MS = 120_000;
 
 interface OpenAIResponse {
@@ -18,7 +18,7 @@ export function createOpenAIImageProvider(opts: { apiKey: string; model: string 
 
   return {
     name: "openai",
-    async generate({ prompt, outPath, quality }: GenerateImageArgs): Promise<GenerateResult> {
+    async generate({ prompt, outPath, quality, aspect = "9:16" }: GenerateImageArgs): Promise<GenerateResult> {
       if (existsSync(outPath)) {
         return { success: true, path: outPath, cached: true };
       }
@@ -29,7 +29,7 @@ export function createOpenAIImageProvider(opts: { apiKey: string; model: string 
             model,
             prompt,
             n: 1,
-            size: SIZE_VERTICAL_9_16,
+            size: SIZE_BY_ASPECT[aspect],
             quality,
             output_format: "png",
           },

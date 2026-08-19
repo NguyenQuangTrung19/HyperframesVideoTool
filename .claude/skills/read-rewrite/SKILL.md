@@ -58,10 +58,23 @@ Quick check: does the fetched text mention football clubs / players / matches / 
 
 ### Step 3: Rewrite into Vietnamese under the SportsForAllTV brand
 
-> **🔑 Nguyên tắc #1 — rewrite đổi GIỌNG, KHÔNG đổi LƯỢNG THÔNG TIN.**
-> Viết lại là để câu chữ gọn, đúng tone, đúng lexicon — **không phải để rút ngắn nội dung**. Mọi thông tin có trong bài gốc phải còn nguyên trong `.txt`: từng tên người, số liệu, tỉ số, mốc thời gian, diễn biến, so sánh, hệ quả, trích dẫn. "Gọn" = bỏ chữ thừa / câu lặp / boilerplate (quảng cáo, bài liên quan, nav), **TUYỆT ĐỐI không bỏ fact**. Khi phân vân giữ hay bỏ một chi tiết → **GIỮ**. Thà `.txt` dài còn hơn mất thông tin — `/create-video` sẽ tự chọn cái nào lên hình, nhưng nó chỉ chọn được từ những gì có trong `.txt`. Không có "tóm tắt cho ngắn".
+> **🔑 Nguyên tắc #1 — `.txt` là BẢN TÓM TẮT ĐỦ Ý, không phải bản lưu đầy đủ.** (Đổi 2026-08-03 theo yêu cầu user: *"đọc nội dung từ link xong soạn lại ngắn hơn, đủ tóm tắt và đủ ý thôi"*.)
+>
+> Viết lại vừa đổi GIỌNG vừa **rút gọn nội dung**. Mục tiêu: `.txt` chứa đúng lượng chất liệu để dựng được video 35-45 giây — không hơn. Vẫn giữ 8-11 Ý RIÊNG BIỆT (mỗi ý = 1 cảnh), chỉ là mỗi ý chỉ cần đủ chất liệu cho MỘT câu thoại 16 từ + vài con số lên hình.
+>
+> **Cỡ đích: 350-600 từ phần nội dung** (không tính block metadata cuối file). Bài gốc 2000 từ vẫn ra `.txt` ~500 từ.
+>
+> **GIỮ:** tên người + CLB/đội tuyển, mọi con số load-bearing (tỉ số, phút ghi bàn, giá chuyển nhượng, tuổi, số bàn/kiến tạo, điểm số, thứ hạng), người kiến tạo / nguyên nhân của mỗi sự kiện chính, 1-2 câu bối cảnh giải thích *vì sao chuyện này đáng nói*, trích dẫn thật sự đắt.
+>
+> **BỎ:** diễn biến phụ không dẫn tới bàn thắng hay bước ngoặt, cơ hội bỏ lỡ lặt vặt, danh sách thay người đầy đủ, câu phân tích vòng vo của tác giả, chi tiết lặp lại ý đã nêu, boilerplate (quảng cáo, bài liên quan, nav).
+>
+> **Thước đo:** mỗi ý trong `.txt` phải trả lời được câu hỏi *"ý này lên scene nào?"*. Không map được vào scene nào → bỏ. Nhắm khoảng **1,5-2 gạch đầu dòng cho mỗi scene dự kiến** (video 9 scene → ~15-18 gạch đầu dòng).
+>
+> ⚠️ **Nhưng đừng làm mờ.** Rút gọn = bỏ bớt Ý, KHÔNG phải làm ý còn lại chung chung. `"Hoàng Đức chọc khe cho Văn Vĩ dứt điểm góc hẹp, phút 6"` ĐÚNG; `"Việt Nam ghi bàn sớm"` SAI — mất số liệu là mất chất liệu cho `templateData`, scene sẽ trống. Xem [[feedback_onscreen_reading]].
+>
+> ℹ️ Link nguồn luôn nằm ở dòng `Nguồn:` cuối file, nên chi tiết đã bỏ vẫn fetch lại được nếu sau này cần mở rộng.
 
-If the source is English / other language → translate to Vietnamese while rewriting. If the source is already Vietnamese → keep most of it but tighten phrasing and re-tone where the original is verbose / clickbaity / too formal. **Tightening = câu chữ, không phải lược bỏ thông tin.**
+If the source is English / other language → translate to Vietnamese while rewriting. If the source is already Vietnamese → **vẫn phải chọn lọc xuống 350-600 từ**, đừng vì đã đúng tiếng Việt mà bê nguyên bài; chỉnh câu chữ và re-tone ở chỗ bài gốc dài dòng / clickbait / quá trang trọng.
 
 Channel voice ("SportsForAllTV") — **nhà báo bóng đá VN chuyên nghiệp**:
 
@@ -127,7 +140,7 @@ Output template — this is the literal file content (plain markdown, UTF-8):
 - <fact 2>
 - <fact 3>
 - ...
-- <fact N — extract ALL substantive facts from the source>
+- <fact N — chọn 10-14 fact mạnh nhất, ưu tiên cái có số liệu thật>
 
 ## Context
 - <historical / standings / form note that frames the story>
@@ -138,32 +151,45 @@ Output template — this is the literal file content (plain markdown, UTF-8):
 - "<quote 2>" — <speaker, role>
 
 ---
+## Giới hạn thời lượng (cho /create-video — KHÔNG đọc lên, KHÔNG lên hình)
+- Mục tiêu: 35-45 giây. Trần cứng: 45 giây.
+- Tổng voiceText MỌI scene cộng lại: **≤ 170 từ** (đo thật 0,256 giây/từ trên 27 video đã render).
+- **Mỗi body scene tối đa 1 câu, ≤ 16 từ** — đây là trần quan trọng nhất: 1 cảnh = 1 hình đứng yên ~4 giây. Hook ≤ 12 từ.
+- Số scene KHÔNG giảm — video ngắn đi bằng cách nói ít hơn mỗi cảnh, không phải bằng cách bỏ cảnh.
+- Tổng scene: **≤ 11** (N ảnh trong plan + 1 feature-list + engagement-question + outro).
+- Fact nào không kịp nói thì cho lên `highlights`/`context` để người xem tắt tiếng vẫn đọc được — đừng nhồi vào voiceText. Lớp chi tiết thứ 2-3 giờ BẮT BUỘC lên hình.
+- Check trước khi render: `npx tsx _validate-script.ts <script.json>` (chặn cứng, exit 1 = không render).
+
+---
 Nguồn: <domain> · <full URL>
 Ngày: <publication date if known, else "n/a">
 ```
+
+**⚠️ Block `## Giới hạn thời lượng` là BẮT BUỘC, copy nguyên văn vào mọi `.txt`** (2026-08-03, user: *"video gần đây quá dài"*). Nó nằm SAU dấu `---`, chung khu metadata với `Nguồn:`/`Ngày:`, nên không lẫn vào prose và không trôi vào voiceText. Đặt ở đây chứ không đợi bước script vì tới lúc viết `script.json` thì ràng buộc đã trôi mất — đó chính xác là cách 3 video ngày 2/8 lọt ra ở 205–220s. Chỉnh con số nếu user yêu cầu độ dài khác cho bài cụ thể; mặc định thì giữ nguyên.
+
+⚠️ **Đừng nhầm block này với việc tóm tắt `.txt`.** Độ dài `.txt` KHÔNG quyết định độ dài video — `/create-video` chỉ *chọn* từ `.txt`. Cắt `.txt` chỉ mất dữ liệu mà video vẫn dài. Nguyên tắc #1 (giữ đủ 100% thông tin) vẫn có hiệu lực đầy đủ; budget siết ở `voiceText`, không phải ở nguồn.
 
 Rules for the body:
 
 - **Title (line 1):** 5–12 words, the rewritten Vietnamese headline. Sentence case (only first letter + proper nouns capped, per typography rules). E.g. `"Bayern loại PSG ở bán kết Champions League"`, NOT `"Bayern Loại PSG Ở Bán Kết Champions League"`.
 - **Lead:** 1–2 sentences, 25–60 words. The "5W in one breath."
-- **Key facts:** Extract **ALL** substantive facts from the source — every stat, name, score, date, event, comparison. Each bullet ≤ 25 words. Arabic digits (`3-1`, `82%`, `€80M`). Full proper-noun diacritics (`Mbappé`, `Vinícius Júnior`, `Việt Nam`, `Bồ Đào Nha`). **Do NOT cap at a fixed number** — a source with 15 distinct facts gets 15 bullets. Only drop truly redundant/restated facts.
-- **Context:** Extract **ALL** relevant context from the source — historical standings, form notes, head-to-head records, upcoming fixtures, wider implications. **Strongly preferred** — gives `classify-football-content` enough signal in Step 6 to pick the right scene structure. If you skip context, the downstream classifier may guess wrong.
-- **Quotes:** include **ALL** direct quotes that exist in the source, not just 1-2. If the article had no quotes, **omit the entire `## Quotes` section** — don't fabricate.
+- **Key facts:** chọn **10-14 fact mạnh nhất** — ưu tiên cái có số liệu thật (tỉ số, phút, giá, tuổi, số bàn) và cái là bước ngoặt của câu chuyện. Mỗi bullet ≤ 25 từ. Arabic digits (`3-1`, `82%`, `€80M`). Full proper-noun diacritics (`Mbappé`, `Vinícius Júnior`, `Việt Nam`, `Bồ Đào Nha`). Fact thứ 15 trở đi thường là chi tiết phụ — bỏ. **Bullet giữ lại phải giữ nguyên độ cụ thể**, đừng gộp 3 fact thành 1 câu mờ.
+- **Context:** **3-5 gạch đầu dòng**, chọn cái khung được câu chuyện: vì sao chuyện này đáng nói, thứ hạng / thành tích liên quan, đối đầu lịch sử, hệ quả sắp tới. Đủ để `classify-football-content` ở Step 6 chọn đúng cấu trúc scene. Bỏ context chỉ lặp lại điều lead đã nói.
+- **Quotes:** chọn **tối đa 2-3 câu đắt nhất** — câu có thái độ, có cam kết, hoặc có thông tin mới. Bỏ quote xã giao ("chúng tôi sẽ cố gắng hết sức"). Nếu bài gốc không có quote nào, **bỏ hẳn mục `## Quotes`** — đừng bịa.
 - **Source line:** keep the domain + the full URL. Future tools (and you, in later sessions) can backtrack from this.
 - **Date:** if WebFetch returned the publication date, include it; else write `n/a`.
-- **Total length:** Length is whatever it takes to keep every distinct piece of information — do NOT target a word count, and do NOT compress to hit one. **Rule: preserve ALL unique information from the source, regardless of how long the article is.** The ONLY things you ever drop are literal repetition, filler phrasing, and boilerplate (ads, related-articles, nav, "Đọc thêm") — never a distinct fact, stat, name, date, score, quote, or context point. A long article simply yields a long `.txt`; that is correct and expected, not a problem to "fix" by trimming. If tightening for tone would remove a fact, keep the fact and tighten elsewhere.
+- **Total length:** nhắm **350-600 từ** phần nội dung (không tính block metadata cuối file). Bài gốc dài bao nhiêu không quan trọng — 2000 từ vẫn ra ~500 từ. Nếu vượt 600 từ, quay lại bỏ bớt Ý (không phải làm câu ngắn lại): xem ý nào không map được vào scene nào thì cắt.
 
-#### ⚠️ Completeness check (MANDATORY before saving .txt)
+#### ⚠️ Selection check (MANDATORY before saving .txt)
 
-Before writing the file, re-read the source and the .txt side by side. Check:
-- [ ] Every named person in the source appears in the .txt (player, coach, official)
-- [ ] Every stat/number in the source appears in Key facts or Context
-- [ ] Every direct quote in the source appears in Quotes
-- [ ] Every distinct event/development in the source has a corresponding bullet
-- [ ] No fact was "summarized away" into a vague statement — specifics beat summaries
-- [ ] **Count check:** tally the distinct facts / numbers / names / quotes in the source vs the `.txt`. The `.txt` count must be **≥** the source count. If the `.txt` carries noticeably less information than the source, you compressed too hard — go back and restore the missing items before saving.
+Đây là bước **chọn lọc**, không phải bước đối chiếu đủ/thiếu. Trước khi ghi file, đọc lại `.txt` và tự hỏi:
+- [ ] Mỗi bullet map được vào một scene cụ thể chưa? Không map được → bỏ.
+- [ ] Tổng số bullet có nằm khoảng **1,5-2 bullet / scene dự kiến** không? (video 9 scene → ~15-18 bullet)
+- [ ] Nhân vật chính + mọi con số load-bearing (tỉ số, phút, giá, tuổi, thứ hạng) còn nguyên chứ? Đây là thứ **không được** hy sinh khi rút gọn.
+- [ ] Có bullet nào bị "tóm tắt thành câu mờ" không? `"ghi bàn sớm"` / `"chơi ấn tượng"` → SAI, phải có số. Bỏ hẳn một ý còn hơn giữ nó ở dạng mờ.
+- [ ] Phần đã bỏ có gì thật sự tiếc không? Nếu có → nó nên thay chỗ một bullet yếu hơn, chứ không thêm vào cho dài ra.
 
-If you find missing info, add it. The downstream `/create-video` skill can select what to include in the video — but it can only select from what's IN the .txt. Missing info here = missing info in the final video. **When unsure whether a detail "matters enough" to include — include it.** Curation happens downstream, not here.
+⚠️ **Cân bằng:** rút quá tay thì `/create-video` không đủ chất liệu cho `templateData`, scene sẽ trống rỗng (xem [[feedback_onscreen_reading]] — mỗi scene phải qua được sound-off test). Rút không đủ thì video dài lê thê. Điểm đúng là **đủ chất liệu cho đúng số scene đã plan, không dư một ý nào.**
 
 #### ⚠️ Content-specific .txt templates (2026-05-31)
 
@@ -184,11 +210,11 @@ The general template above works for most content. For these specific types, use
 ## Chấm điểm cầu thủ — <Team A>
 - <Player Name> — <N>/10: <1-line performance summary, key action>
 - <Player Name> — <N>/10: <1-line performance summary>
-- ... (EVERY rated player gets their own bullet)
+- ... (chọn lọc — xem quy tắc ngay dưới template)
 
 ## Chấm điểm cầu thủ — <Team B>
 - <Player Name> — <N>/10: <1-line performance summary>
-- ... (EVERY rated player)
+- ... (chọn lọc)
 
 ## Context
 - <historical significance, records broken, trophy count>
@@ -202,7 +228,11 @@ Nguồn: <domain> · <full URL>
 Ngày: <date>
 ```
 
-**⚠️ CRITICAL for MATCH RECAP:** Every named player with a rating MUST have their own bullet under `## Chấm điểm`. The downstream `images-for-videos` skill creates 1 image per rated player. If you compress 10 players into 5 bullets, the video will only have 5 player images — and the user has explicitly flagged this as unacceptable quality.
+**⚠️ MATCH RECAP — chọn 6-7 cầu thủ, KHÔNG phải tất cả** (sửa 2026-08-03). Bài chấm điểm thường có 20-22 người; `images-for-videos` cấp tối đa **9 ảnh/plan** và `/create-video` chặn ở 45 giây, nên liệt kê đủ 22 người chỉ tạo ra một `.txt` mà 15 bullet trong đó không bao giờ lên hình.
+
+Chọn theo thứ tự: **điểm cao nhất trận** → **điểm thấp nhất trận** (phản diện tạo kịch tính) → **người ghi bàn / kiến tạo** → **thủ môn nếu có pha cứu thua quyết định**. Mỗi người được chọn giữ nguyên điểm số + 1 dòng mô tả cụ thể (hành động thật, không phải tính từ). Số còn lại: bỏ, hoặc gom 1 dòng tổng kiểu `"Phần còn lại của hàng thủ đều 6/10"`.
+
+> 🔄 Ghi đè hướng dẫn cũ *"EVERY rated player MUST have their own bullet, nếu gộp 10 người thành 5 bullet là chất lượng không chấp nhận được"* (2026-05-31). Feedback đó chống việc **gộp người vào bullet list mờ** — điều đó vẫn cấm. Cái được phép bây giờ là **bỏ hẳn người không đáng lên hình**. Người đã chọn thì vẫn phải có bullet riêng, có số, có chi tiết.
 
 **NEWS DRAMA (social media reactions, troll posts, rivalry banter):**
 
@@ -234,7 +264,7 @@ Nguồn: <domain> · <full URL>
 Ngày: <date>
 ```
 
-**⚠️ CRITICAL for NEWS DRAMA:** Each distinct reaction/moment gets its own bullet. Don't summarize "many fans reacted" — list the specific club accounts, named players, and notable fan reactions individually. The downstream skill creates 1 image per distinct moment.
+**⚠️ NEWS DRAMA — chọn 6-7 phản ứng đáng nhất, mỗi cái một bullet riêng.** Ưu tiên: tài khoản CLB chính thức > cầu thủ có tên > phản ứng có số liệu tương tác > fan vô danh. Phản ứng đã chọn phải nêu **cụ thể ai, nói/đăng gì** — tuyệt đối không viết `"nhiều fan phản ứng"` (câu mờ thì scene trống). Phản ứng ngoài top 7: bỏ.
 
 ### Step 5: Pick the slug + create the input folder
 
@@ -296,7 +326,7 @@ After the chained skill completes, reply with one combined summary covering both
 ✓ Checklist ảnh: video/input/<slug>/anh-can-tao.md  (xem cần tạo ảnh gì)
 
 Phân loại: <CONTENT TYPE từ classify skill>
-<N> ảnh cần tạo trên grok.com (Imagine; hook 9:16, body ngang/dọc đều được — ảnh ngang tự vào card):
+<N> ảnh cần tạo trên grok.com (Imagine; hook 9:16 full-bleed, body ngang/dọc đều được — vào thẻ đúng tỉ lệ):
 ✓ Đã thêm vào hàng đợi render: video/input/queue.xlsx (row <N>, status=planned)
 
 Tiếp theo:
@@ -333,7 +363,7 @@ If the WebFetch failed and the user pasted the article, mention it once at the t
 | Article isn't football | Bail with a clear message; do not proceed |
 | Article is in English / other language | Translate to Vietnamese while rewriting (Step 3) |
 | Article has no direct quotes | Omit the `## Quotes` section entirely — never fabricate |
-| Article is very short (<200 words of body) | Still rewrite + structure; warn the user that the source may be too thin to support a full 10–15-scene analysis video |
+| Article is very short (<200 words of body) | Still rewrite + structure; warn the user that the source may be too thin to support a full 9–11-scene analysis video |
 | Slug collides with existing `video/input/<slug>/` (or legacy `input/<slug>/`) | Append `-2`, `-3`, ... until free; mention in the final summary |
 | User passes a non-URL argument | Reject; point them at `/images-for-videos <path>` for existing `.txt` files |
 | WebFetch returns content but it's mostly noise (nav, ads) and very little article | Treat as a fetch failure → fallback message |

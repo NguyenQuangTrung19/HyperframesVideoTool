@@ -10,8 +10,10 @@ import { createGeminiImageProvider } from "./gemini.js";
 import { createXAIImageProvider } from "./xai.js";
 import { log } from "../utils/logger.js";
 
-/** Templates that benefit from a background photo (action / atmospheric). */
-const IMAGE_TEMPLATES = new Set(["hook", "callout", "stat-hero"]);
+/** Templates that benefit from a background photo (action / atmospheric).
+ *  feature-list added 2026-07-04: it now takes an optional hero/full-bleed
+ *  image, laid out by aspect (landscape → card, portrait → cover). */
+const IMAGE_TEMPLATES = new Set(["hook", "callout", "stat-hero", "feature-list"]);
 
 /** Hard cap on parallel API calls to avoid rate limits. */
 const IMAGE_CONCURRENCY = 3;
@@ -125,6 +127,7 @@ export async function generateSceneImages(
           prompt: scene.imagePrompt!,
           outPath: absPath,
           quality: config.quality,
+          aspect: script.metadata.aspect,
         });
         return { scene, relPath, result: r, ms: Date.now() - t0 };
       }),

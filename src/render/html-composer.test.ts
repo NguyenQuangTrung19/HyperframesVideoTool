@@ -79,6 +79,28 @@ describe("composeHtml", () => {
 
     // Google Fonts present
     expect(html).toContain("fonts.googleapis.com");
+
+    // No FX transition: only hook has an image → no cover→cover boundary
+    expect(html).not.toContain('id="fx-transition"');
+    expect(html).not.toContain("__FX_TRANSITIONS");
+  });
+
+  it("does NOT emit FX when the boundary image is a framed card (any shape)", () => {
+    const script = JSON.parse(readFileSync("tests/fixtures/sample-script-with-image.json", "utf8")) as Script;
+    const sceneAudio = script.scenes.map((s) => ({ id: s.id, durationSec: 5 }));
+    // Body images are ALWAYS cards now — landscape or portrait — so no boundary
+    // has two full-bleed textures to sample and the glitch shader stays off.
+    for (const aspect of [1.6, 0.67]) {
+      const html = composeHtml({
+        script,
+        sceneAudio,
+        gapSec: 0.3,
+        sceneImages: { hook: "images/hook.jpg", "body-1": "images/body-1.jpg" },
+        sceneImageAspect: { "body-1": aspect },
+        audioRelPath: "voice.mp3",
+      });
+      expect(html).not.toContain('id="fx-transition"');
+    }
   });
 
   it("falls back to gradient when sceneImages is empty", () => {
@@ -122,44 +144,71 @@ describe("landscape image → framed hero card", () => {
       audioRelPath: "voice.mp3",
     });
 
-  it("stat-hero with a landscape image renders the card + data-fit=card", () => {
+  it("stat-hero with a landscape image renders a framed card", () => {
     const html = compose("stat-hero", 1.6);
     expect(html).toContain('data-fit="card"');
-    expect(html).toContain('class="bg-card"');
-    expect(html).toContain("aspect-ratio: 1.600");
+    expect(html).toContain('data-shape="landscape"');
     expect(html).toContain("bg-card-img kb-card-zoom");
   });
 
   it("callout with a landscape image uses card fit", () => {
     const html = compose("callout", 1.78);
     expect(html).toContain('data-fit="card"');
-    expect(html).toContain('class="bg-card"');
+    expect(html).toContain('data-shape="landscape"');
   });
 
-  it("portrait image keeps full-bleed cover (no card)", () => {
+  // The photo's own ratio must NOT reach the markup at all. It used to, via
+  // `--ar` + an inline `aspect-ratio`, and that is what let the card change
+  // size on every cut — 920×613 → 640×640 → 920×460 inside one video, with the
+  // text under it moving to match. Size now comes only from the shape bucket.
+  it("the photo's exact ratio never reaches the markup", () => {
+    for (const aspect of [1.6, 0.667, 1.0, 3.2, 0.3]) {
+      const html = compose("stat-hero", aspect);
+      expect(html).not.toContain("--ar:");
+      expect(html).not.toContain("aspect-ratio:");
+    }
+  });
+
+  it("the blurred photo backdrop is gone", () => {
+    const html = compose("stat-hero", 1.6);
+    expect(html).not.toContain("bg-deck-blur");
+  });
+
+  it("portrait image is ALSO a framed card, tagged portrait", () => {
     const html = compose("stat-hero", 0.667);
-    expect(html).toContain('data-fit="cover"');
-    expect(html).not.toContain('class="bg-card"');
+    expect(html).toContain('data-fit="card"');
+    expect(html).toContain('data-shape="portrait"');
   });
 
-  it("unknown aspect keeps cover", () => {
+  // Regression: a 736×736 grok output used to fall on the portrait side of a
+  // single 1.05 cut and lose 23% of its width — enough to eat the S off
+  // "SPAIN" on the `hosts-2030` scene.
+  it("square-ish images get their own slot, not the portrait one", () => {
+    for (const aspect of [0.9, 1.0, 1.2]) {
+      expect(compose("stat-hero", aspect)).toContain('data-shape="square"');
+    }
+    expect(compose("stat-hero", 0.85)).toContain('data-shape="portrait"');
+    expect(compose("stat-hero", 1.3)).toContain('data-shape="landscape"');
+  });
+
+  it("unknown aspect still renders a card, on the landscape fallback slot", () => {
     const html = compose("stat-hero", undefined);
-    expect(html).toContain('data-fit="cover"');
-    expect(html).not.toContain('class="bg-card"');
+    expect(html).toContain('data-fit="card"');
+    expect(html).toContain('data-shape="landscape"');
   });
 
-  it("hook stays on cover even for a landscape image (portrait posters only)", () => {
-    const html = compose("hook", 1.9);
-    expect(html).toContain('data-fit="cover"');
-    expect(html).not.toContain('class="bg-card"');
+  it("hook stays full-bleed for both shapes", () => {
+    for (const aspect of [1.9, 0.5625]) {
+      const html = compose("hook", aspect);
+      expect(html).toContain('data-fit="cover"');
+      expect(html).not.toContain("bg-card");
+    }
   });
 
-  it("aspect just below threshold stays cover", () => {
-    expect(compose("stat-hero", 1.04)).toContain('data-fit="cover"');
-  });
-
-  it("ultra-wide aspect is clamped to 1.900", () => {
-    const html = compose("stat-hero", 3.2);
-    expect(html).toContain("aspect-ratio: 1.900");
+  // Extremes no longer need clamping — they just cover the nearest slot — but
+  // they must still land in a bucket rather than falling through.
+  it("pathological ratios still resolve to a slot", () => {
+    expect(compose("stat-hero", 3.2)).toContain('data-shape="landscape"');
+    expect(compose("stat-hero", 0.3)).toContain('data-shape="portrait"');
   });
 });

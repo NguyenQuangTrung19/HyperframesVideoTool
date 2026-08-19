@@ -17,12 +17,17 @@
     "typecheck": "tsc --noEmit",
     "build": "tsc",
     "render:check": "tsx scripts/verify-render.ts",
+  "validate": "tsx _validate-script.ts",
+    "thumbnail": "tsx scripts/make-thumbnail.ts",
+    "thumbnail:roundup": "tsx scripts/make-roundup-thumbnail.ts",
     "images:list": "tsx scripts/list-image-prompts.ts",
     "images:stage": "tsx scripts/stage-planned-images.ts",
     "images:combine": "tsx scripts/combine-split-images.ts",
     "podcast-queue": "tsx scripts/podcast-queue.ts",
     "podcast-queue-locket": "tsx scripts/podcast-queue.ts --locket",
-    "video-queue": "tsx scripts/video-queue.ts"
+    "video-queue": "tsx scripts/video-queue.ts",
+    "patch:hf": "tsx scripts/patch-hyperframes-gpu.ts",
+    "postinstall": "tsx scripts/patch-hyperframes-gpu.ts"
   },
   "keywords": [
     "video",

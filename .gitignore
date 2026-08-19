@@ -33,3 +33,10 @@ scratch/
 # Excel lock files
 ~$*
 
+# Background-music library — the FEATURE is the folder + README, the tracks are
+# just assets the user drops in (14 MB of mp3 does not belong in git history).
+assets/music/*.mp3
+assets/music/*.m4a
+assets/music/*.wav
+# Generated subtitle artifact from a podcast/music-video run
+/captions.ass

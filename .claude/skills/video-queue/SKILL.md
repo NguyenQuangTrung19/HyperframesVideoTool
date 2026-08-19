@@ -128,13 +128,26 @@ For each row with status planned:
    - Leave status as `planned`.
    - Log: "Row 3 còn thiếu ảnh: <slug>-p2/cb-3.jpg, <slug>-p3/hook.jpg. Gen xong rồi chạy lại /video-queue."
    - Skip to next row. Do NOT set status=error — `planned` is the correct waiting state.
-4. **All parts have images → render each:**
+4. **GATE NHỊP trước khi render (BẮT BUỘC, 2026-08-19).** Sau khi `/create-video` ghi `script.json` và TRƯỚC khi gọi `npm run pipeline`, chạy:
+   ```bash
+   npm run validate -- <outputDir>/script.json
+   ```
+   Exit 1 = **không được render**. Nó chặn cả lỗi schema lẫn lỗi nhịp (tổng > 170 từ, cảnh > 16 từ, hook > 12 từ). Render rồi mới phát hiện là tốn quota TTS + vài phút encode cho một video sai nhịp. Sửa `script.json`, chạy lại validator, rồi mới render.
+5. **All parts have images → render each:**
    - For each part folder, in order p1 → p2 → … → pN:
      - Invoke `/create-video <part-folder>/<part-folder-basename>.txt`.
+     - ⚠️ **One `npm run pipeline` per Bash call.** The Bash tool hard-caps at a 10-minute timeout and `run_in_background` does NOT raise it — chaining several renders in one `for` loop gets the last one killed mid-capture. Launch each render as its own background call and wait for its notification. If one does get killed: `voice/full.mp3` + `full-words.json` survive, so re-running costs no TTS quota — ffprobe `full.mp3` to confirm it's intact, then re-run. Never delete `voice/` to "retry clean".
      - The /create-video skill auto-detects part context (folder name ends `-p<N>` + sibling `-p<N+1>/` existence) and uses the multi-part outro for non-final parts, standard engagement+outro for the final part.
      - Capture the output mp4 path (`video/output/<part-folder-basename>/video.mp4` for plan mode, or the timestamped folder for free-form).
+     - **Background music needs no action.** Each render picks its own random track from `assets/music/` at volume `0.22` — that is the standing instruction, so a batch deliberately ends up with different beds per video. Never pin `VIDEO_BG_MUSIC` to make a batch uniform, never ask the user per row, never touch `VIDEO_BG_MUSIC_VOLUME`. See the "Background music is automatic" note in `/create-video` Step 8.
+     - **Thumbnail — BẮT BUỘC sau mỗi part render OK (user 2026-08-07).** Chụp cảnh **hook** ra ảnh tĩnh:
+       ```bash
+       npm run thumbnail --silent -- video/output/<part-slug>
+       ```
+       Script `scripts/make-thumbnail.ts` đọc `script.json` lấy `scenes[0]`, đo độ dài thật của hook từ `voice/scene-<id>.mp3`, rồi trích 1 frame ở **giữa** cảnh hook (không phải t=0 — 1 giây đầu chữ còn đang bay vào) → `video/output/<part-slug>/thumbnail.jpg`, 1080×1920.
+       Chạy SAU khi đã ffprobe xác nhận mp4 hợp lệ. Nếu bước này lỗi thì **đừng** đánh row là `error` — video vẫn tốt; báo 1 dòng rồi đi tiếp.
    - If any part render fails, capture the part's error.
-5. **Update row after all parts render:**
+6. **Update row after all parts render:**
    - All succeeded → `set <rowIdx> status=done result="<path1>; <path2>; ..."` (paths joined by `; `, in part order).
    - Some failed → `set <rowIdx> status=error result="<paths-that-succeeded>" error="part 2 fail: <msg>"`. User can fix + clear status to retry.
 
@@ -155,6 +168,10 @@ Còn lại 4 row ở trạng thái `planned` — gen ảnh xong rồi chạy /vi
 ```
 
 If a row was skipped because of an error, list it under a separate "Errors" header with the error message.
+
+**Gửi thumbnail cho user (BẮT BUỘC, user 2026-08-07).** Kết thúc Pass 2, đính kèm mọi `thumbnail.jpg` vừa tạo bằng tool `SendUserFile` (`display: "render"` để xem ngay trong panel, `status: "proactive"` vì render chạy nền và user thường đang làm việc khác). Một lần gọi cho cả loạt, caption ngắn kiểu `"3 video vừa render — ảnh cảnh hook"`. Đây là cách user duyệt nhanh xem hook có bắt mắt không mà không phải mở từng mp4.
+
+**Gói đăng bài cho MỌI phần (BẮT BUỘC, 19/8/2026).** Mỗi `<part-slug>` render xong phải có `dang-bai.txt` bên cạnh `video.mp4` — tiêu đề, caption, hashtag, theo khuôn + mức cà khịa ở `create-video/SKILL.md` Step 8.5/8.6. Video giao mà thiếu chữ đăng bài là giao một nửa: người xem gặp caption trước khi gặp khung hình đầu tiên. In nội dung từng file thẳng vào phần báo cáo cuối Pass 2 để user copy-paste được ngay, đừng bắt họ mở file.
 
 ## Idempotency + crash safety
 

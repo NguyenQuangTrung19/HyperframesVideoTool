@@ -73,6 +73,17 @@ const ComparisonData = z.object({
   template: z.literal("comparison"),
   left: ComparisonSide,
   right: ComparisonSide.extend({ winner: z.boolean().optional() }),
+  /**
+   * Scoreboard-variant overrides (only used when BOTH sides carry `flag`).
+   * Defaults suit pre-match previews; override for RECAP roundups so the board
+   * reads as a final result, not a forecast.
+   */
+  /** Top pill label. Default "Dự đoán tỉ số". Recap → e.g. "Chung cuộc". */
+  eyebrow: z.string().min(1).max(30).optional(),
+  /** Footer line. Default "Dự đoán của SportsForAllTV". Recap → e.g. "Vòng 1/16 · World Cup 2026". */
+  foot: z.string().min(1).max(40).optional(),
+  /** Optional note under the scoreline, e.g. "Sau hiệp phụ" / "Chấm luân lưu". */
+  note: z.string().min(1).max(30).optional(),
 });
 
 const StatHeroData = z.object({
@@ -93,6 +104,9 @@ const StatHeroData = z.object({
 const FeatureListData = z.object({
   template: z.literal("feature-list"),
   title: z.string().min(1).max(40),
+  // Peer talking points (team news / head-to-head / key points) — NOT ranked,
+  // so the template renders no numerals. When the scene carries an image the
+  // composer caps the visible bullets to 3 to fit the tighter safe zone.
   bullets: z.array(z.string().min(1).max(50)).min(1).max(4),
   icon: z.string().optional(),
 });
@@ -220,6 +234,98 @@ const MatchResultsData = z.object({
   matches: z.array(MatchResult).min(2).max(8),
 });
 
+/** One knockout-bracket leaf: two teams (flag + name), optional kickoff note. */
+const BracketPair = z.object({
+  left: z.object({ name: z.string().min(1).max(20), flag: z.string().min(1) }),
+  right: z.object({ name: z.string().min(1).max(20), flag: z.string().min(1) }),
+  /** Optional short kickoff note under the pairing, e.g. "00:00 · 5/7". */
+  note: z.string().max(24).optional(),
+});
+
+/**
+ * Knockout-bracket summary board — a "chia nhánh" fixture overview like sports
+ * sites use. Matches are split into two columns funnelling toward a center
+ * round badge. Data-driven (flags + names), NO AI image — same dark board
+ * family as group-intro / match-results.
+ */
+const BracketData = z.object({
+  template: z.literal("bracket"),
+  title: z.string().min(1).max(40),
+  subtitle: z.string().max(40).optional(),
+  /** Center node label, e.g. "Vòng 1/8". Defaults to "Vòng 1/8". */
+  centerLabel: z.string().max(20).optional(),
+  matches: z.array(BracketPair).min(2).max(8),
+});
+
+/**
+ * One side of a tactics board — a team's expected game-plan.
+ * `approach` is the short headline tag (e.g. "Kiểm soát & pressing",
+ * "Phòng ngự phản công"); `points` are 2–3 concrete mechanisms
+ * ("Lên bóng qua số 6", "Rình phản công tốc độ Mbappe"); `keyPlayer`
+ * is the single tactical linchpin whose name anchors the plan.
+ */
+const TacticsTeam = z.object({
+  name: z.string().min(1).max(20),
+  /** Flag/crest image — URL (e.g. flagcdn) or local path. Optional. */
+  flag: z.string().min(1).optional(),
+  /** Formation label, e.g. "4-2-3-1", "4-3-3", "3-5-2". */
+  formation: z.string().min(1).max(12),
+  /** Short approach headline, e.g. "Kiểm soát & pressing" (≤28). */
+  approach: z.string().min(1).max(28),
+  /** 2–3 concrete tactical mechanisms, each ≤42 chars. */
+  points: z.array(z.string().min(1).max(42)).min(1).max(3),
+  /** Optional tactical linchpin name shown in the "chìa khóa" footer (≤24). */
+  keyPlayer: z.string().min(1).max(24).optional(),
+  color: z.enum(["cyan", "purple"]),
+});
+
+/**
+ * Tactics board — a two-column "đấu pháp" comparison rendered in HTML/CSS
+ * (no AI image), same dark board family as group-intro / bracket. Each side
+ * shows the team's formation, approach headline, key mechanisms, and tactical
+ * linchpin, split by a center VS spine. Use for the pre-match tactical/style
+ * scene (replaces the older two-callout or bar-comparison treatment).
+ */
+const TacticsBoardData = z.object({
+  template: z.literal("tactics-board"),
+  /** Board title, default "Lối chơi dự kiến". */
+  title: z.string().min(1).max(40).optional(),
+  left: TacticsTeam,
+  right: TacticsTeam,
+});
+
+/** One recent result on a form-compare board (from the team's own perspective). */
+const FormResult = z.object({
+  /** Opponent name (strip foreign diacritics), ≤18. */
+  opponent: z.string().min(1).max(18),
+  /** Scoreline from THIS team's view first, e.g. "2-1", "0-0". Visible field — hyphen ok. */
+  score: z.string().min(1).max(8),
+  /** Outcome for this team: W win / D draw / L loss — colours the result chip. */
+  outcome: z.enum(["W", "D", "L"]),
+});
+
+const FormTeam = z.object({
+  name: z.string().min(1).max(20),
+  flag: z.string().min(1).optional(),
+  color: z.enum(["cyan", "purple"]),
+  /** 3–6 recent results, most recent first. */
+  results: z.array(FormResult).min(1).max(6),
+});
+
+/**
+ * Recent-form comparison board — BOTH teams' last few results in ONE
+ * two-column scene (concise side-by-side W/D/L + scoreline), replacing two
+ * separate `match-results` boards. Data-driven (no AI image), same dark board
+ * family as tactics-board / group-intro.
+ */
+const FormCompareData = z.object({
+  template: z.literal("form-compare"),
+  /** Board title, default "Phong độ gần đây". */
+  title: z.string().min(1).max(40).optional(),
+  left: FormTeam,
+  right: FormTeam,
+});
+
 const EngagementQuestionData = z.object({
   template: z.literal("engagement-question"),
   question: z.string().min(1).max(120),
@@ -245,6 +351,9 @@ export const TemplateData = z.discriminatedUnion("template", [
   FormationPitchData,
   GroupIntroData,
   MatchResultsData,
+  BracketData,
+  TacticsBoardData,
+  FormCompareData,
   EngagementQuestionData,
   OutroData,
 ]);
@@ -277,17 +386,35 @@ const Scene = z.object({
   type: z.enum(["hook", "body", "outro"]),
   voiceText: z.string().min(1),
   templateData: TemplateData,
+  /**
+   * Overrides the auto-numbered chapter chip ("3/11") in the corner with a
+   * literal label, e.g. "TIN 3/7". Roundups group several scenes under one news
+   * item, so counting body scenes tells the viewer nothing useful.
+   */
+  marker: z.string().min(1).max(16).optional(),
   /** Optional sound effect override (else pipeline picks per template) */
   sfx: SfxSpec.optional(),
   /**
    * Optional AI image prompt (English, sports photography style).
-   * Only generated for templates: hook (when no og:image), callout, stat-hero.
-   * Ignored for comparison, feature-list, outro.
+   * Only generated for templates: hook (when no og:image), callout, stat-hero,
+   * feature-list. Ignored for comparison, outro.
    */
   imagePrompt: z.string().min(10).max(1500).optional(),
 });
 
 // ── Root schema ────────────────────────────────────────────────────────────
+
+/**
+ * Canvas shape. "9:16" (1080×1920, TikTok/Reels) is the default and covers
+ * every skill except `/news-roundup`; "16:9" (1920×1080, YouTube) swaps in the
+ * landscape override stylesheet and lifts the scene/duration ceilings, because
+ * a landscape roundup runs minutes rather than seconds.
+ */
+export const AspectSchema = z.enum(["9:16", "16:9"]);
+export type Aspect = z.infer<typeof AspectSchema>;
+
+/** Scene-count ceiling per aspect — a 6-minute roundup needs far more scenes. */
+export const MAX_SCENES: Record<Aspect, number> = { "9:16": 20, "16:9": 40 };
 
 export const ScriptSchema = z.object({
   version: z.literal("1.0"),
@@ -299,6 +426,8 @@ export const ScriptSchema = z.object({
       image: z.string().url().nullable(),
     }),
     channel: z.string().min(1),
+    /** Canvas shape. Omitted → "9:16", so every existing script keeps working. */
+    aspect: AspectSchema.default("9:16"),
   }),
   voice: z.object({
     provider: z.enum(["vieneu", "ausynclab", "fptai", "vbee"]),
@@ -308,7 +437,10 @@ export const ScriptSchema = z.object({
   scenes: z
     .array(Scene)
     .min(5)
-    .max(20, "scenes must have at most 20 items (news 5–8, analysis 10–15)")
+    .max(
+      MAX_SCENES["16:9"],
+      `scenes must have at most ${MAX_SCENES["16:9"]} items`,
+    )
     .refine(
       (s) => s[0]?.type === "hook",
       { message: "scenes[0] must be type=hook" }
@@ -317,6 +449,18 @@ export const ScriptSchema = z.object({
       (s) => s[s.length - 1]?.type === "outro",
       { message: "last scene must be type=outro" }
     ),
+}).superRefine((script, ctx) => {
+  // The array cap above is the loosest of the two aspects (zod validates the
+  // field before the object, so it cannot read metadata.aspect). Tighten it
+  // here: 9:16 keeps the old 20-scene ceiling (news 5–8, analysis 10–15).
+  const max = MAX_SCENES[script.metadata.aspect];
+  if (script.scenes.length > max) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ["scenes"],
+      message: `scenes must have at most ${max} items for aspect ${script.metadata.aspect}`,
+    });
+  }
 });
 
 export type Script = z.infer<typeof ScriptSchema>;

@@ -89,8 +89,8 @@ export interface Config {
 
   // Hyperframes render workers — "auto" lets calibration decide (conservative,
   // often drops to 1 worker on heavy compositions); a number forces a fixed
-  // count. On a 12-core machine, forcing 4 cuts render time by ~25% with no
-  // OOM risk. Default: "auto".
+  // count (6 = trần của hyperframes). Trên máy 12 luồng + HF_ANGLE_BACKEND=d3d11,
+  // 6 workers nhanh hơn 4 khoảng 9%. Default: "auto".
   hyperframesWorkers: number | "auto";
 
   // Hyperframes GPU encoding (NVENC). Requires NVIDIA driver >= 570.0. Falls

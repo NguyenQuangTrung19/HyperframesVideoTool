@@ -20,7 +20,7 @@ export function createXAIImageProvider(opts: {
 
   return {
     name: "xai",
-    async generate({ prompt, outPath }: GenerateImageArgs): Promise<GenerateResult> {
+    async generate({ prompt, outPath, aspect = "9:16" }: GenerateImageArgs): Promise<GenerateResult> {
       if (existsSync(outPath)) {
         return { success: true, path: outPath, cached: true };
       }
@@ -31,7 +31,7 @@ export function createXAIImageProvider(opts: {
             model,
             prompt,
             n: 1,
-            aspect_ratio: "9:16",
+            aspect_ratio: aspect,
             resolution,
             response_format: "b64_json",
           },

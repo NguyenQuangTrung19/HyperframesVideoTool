@@ -254,7 +254,17 @@ export async function runPodcastPipeline(txtPath: string, opts: PodcastPipelineO
     : 0;
   const fullbleedCornerText = process.env.PODCAST_FULLBLEED_CORNER_TEXT ?? "Trạm Dừng Bất Ngờ";
   const fullbleedCornerFontSize = parseInt(process.env.PODCAST_FULLBLEED_CORNER_FONTSIZE ?? "48", 10);
-  const fullbleedCornerFontFile = process.env.PODCAST_FULLBLEED_CORNER_FONT?.trim() || "C\\:/Windows/Fonts/palai.ttf";
+  const fullbleedCornerFontFile = process.env.PODCAST_FULLBLEED_CORNER_FONT?.trim() || "C\\:/Windows/Fonts/palab.ttf";
+  // Branding style for chromeless layouts. "rail" = vertical left-edge
+  // wordmark (see composeVideo's `fullbleedCornerStyle`); anything else keeps
+  // the legacy horizontal top lockup.
+  const fullbleedCornerStyle = process.env.PODCAST_CORNER_STYLE?.trim() === "rail" ? "rail" as const : "lockup" as const;
+  const railX = process.env.PODCAST_RAIL_X ? parseInt(process.env.PODCAST_RAIL_X, 10) : undefined;
+  const railTopY = process.env.PODCAST_RAIL_TOP ? parseInt(process.env.PODCAST_RAIL_TOP, 10) : undefined;
+  const railFontSize = process.env.PODCAST_RAIL_FONTSIZE ? parseInt(process.env.PODCAST_RAIL_FONTSIZE, 10) : undefined;
+  const railFontFile = process.env.PODCAST_RAIL_FONT?.trim() || undefined;
+  const railDotSize = process.env.PODCAST_RAIL_DOT ? parseInt(process.env.PODCAST_RAIL_DOT, 10) : undefined;
+  const railAccentColor = process.env.PODCAST_RAIL_ACCENT?.trim() || undefined;
 
   // Foreground card layout. Explicit width/height/y env vars take precedence.
   // Defaults vary by layout: vignette gets a tall portrait card (760×1240 at
@@ -288,9 +298,15 @@ export async function runPodcastPipeline(txtPath: string, opts: PodcastPipelineO
     defaultY = 420;
   } else if (layout === "landscape") {
     defaultW = 1080;
-    defaultH = firstProbeW > 0 && firstProbeH > 0
+    // Rounded to an even height: yuv420p `pad` in the compose filter graph
+    // floors its target to a multiple of 2, so an odd strip height (e.g. a
+    // 1276x720 source → 609) makes pad smaller than its own input and aborts
+    // the render. compose re-clamps too; keep them agreeing so the logged
+    // geometry and the caption Y math match what actually gets drawn.
+    const rawH = firstProbeW > 0 && firstProbeH > 0
       ? Math.max(300, Math.min(1000, Math.round((1080 * firstProbeH) / firstProbeW)))
       : 608;
+    defaultH = rawH - (rawH % 2);
     // Centered vertically minus a small upward bias so captions sit comfortably
     // INSIDE the lower portion of the strip (not in the empty area below).
     defaultY = Math.max(0, Math.round((1920 - defaultH) / 2) - 80);
@@ -571,6 +587,13 @@ export async function runPodcastPipeline(txtPath: string, opts: PodcastPipelineO
     fullbleedCornerText,
     fullbleedCornerFontSize,
     fullbleedCornerFontFile,
+    fullbleedCornerStyle,
+    railX,
+    railTopY,
+    railFontSize,
+    railFontFile,
+    railDotSize,
+    railAccentColor,
     landscapeVerticalBias: process.env.PODCAST_LANDSCAPE_VBIAS
       ? parseInt(process.env.PODCAST_LANDSCAPE_VBIAS, 10)
       : undefined,

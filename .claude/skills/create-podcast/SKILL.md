@@ -21,7 +21,7 @@ The pipeline mutes the source video's audio, reformats it into a 1:1 rounded-cor
 | Input | .txt only | .txt + sibling video file |
 | Visual | Generated motion graphics (HyperFrames templates) | User's video, reformatted to 9:16 with blur-bg |
 | Captions | None on-screen (template fields carry the load) | Karaoke word-by-word burn-in |
-| Source-of-truth for length | Script-driven (6–15 scenes, 45–180s) | TTS-driven (any length the .txt produces) |
+| Source-of-truth for length | Script-driven (6–11 scenes, 25–45s) | TTS-driven (any length the .txt produces) |
 | Use case | "Branded analysis post" | "Podcast clip riding on real footage" |
 
 `/create-podcast-video` is the right choice when:

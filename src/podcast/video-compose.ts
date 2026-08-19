@@ -177,11 +177,49 @@ export interface ComposeOpts {
   fullbleedCornerFontSize?: number;
   /**
    * Fullbleed corner-text font file (absolute Windows path or ffmpeg-style
-   * escaped path). Default Palatino Linotype Italic — elegant serif italic
-   * that pairs well with scenery aesthetic. Swap to `segoesc.ttf` for a
-   * handwritten cursive, or `gabriola.ttf` for a more decorative feel.
+   * escaped path). Default Palatino Linotype Bold — elegant upright serif
+   * (was Italic until 2026-07-07 per user request). Swap to `segoesc.ttf`
+   * for a handwritten cursive, or `gabriola.ttf` for a more decorative feel.
    */
   fullbleedCornerFontFile?: string;
+  /**
+   * Chromeless-layout branding style (fullbleed / landscape):
+   *   - `"lockup"` (default): the horizontal top corner treatment — logo badge
+   *     top-right with the name to its left, or bare text top-left when no
+   *     logo is configured.
+   *   - `"rail"`: the channel name set UPRIGHT-ROTATED down the LEFT edge,
+   *     reading bottom-to-top, uppercased and letter-spaced, with a small
+   *     accent dot above its top end. Covers the least footage of any option
+   *     and never collides with the karaoke captions at y≈1500.
+   * Selected 2026-08-05 (variant "V10") after the previous Dancing Script
+   * corner text was rejected as illegible on bright scenery.
+   */
+  fullbleedCornerStyle?: "lockup" | "rail";
+  /**
+   * Rail only — X of the rail strip's LEFT edge on the 1080-wide canvas.
+   * Default 56, which puts the glyph column's optical centre at x≈86, just
+   * inside the 80px left safe margin.
+   */
+  railX?: number;
+  /**
+   * Rail only — Y of the TOP end of the rotated text (i.e. where the LAST
+   * character sits, since the rail reads bottom-up). Default 620. The text
+   * grows DOWNWARD from here, so a longer channel name never pushes into the
+   * top UI zone — it only extends toward the middle of the frame.
+   */
+  railTopY?: number;
+  /** Rail only — font size (px) before rotation. Default 30. */
+  railFontSize?: number;
+  /**
+   * Rail only — font file. Default Bahnschrift (Windows' DIN-like condensed
+   * grotesk); verified to carry full Vietnamese diacritics, which matters
+   * because drawtext uses ONE font with no per-glyph fallback.
+   */
+  railFontFile?: string;
+  /** Rail only — accent dot diameter (px). 0 disables the dot. Default 14. */
+  railDotSize?: number;
+  /** Rail only — accent dot colour as `#RRGGBB`. Default amber `#F2B33D`. */
+  railAccentColor?: string;
   /** Vignette bg: gblur sigma (higher = blurrier). Default 40. Vignette only. */
   vignetteBlurSigma?: number;
   /** Vignette bg: brightness offset (-1..1). Default -0.3 (dims for contrast). */
@@ -310,6 +348,19 @@ export interface ComposeOpts {
  * a bare filename. We copy the .ass next to the output if it's elsewhere so
  * this is safe regardless of caller layout.
  */
+/**
+ * Round a filter-graph box dimension down to an even number.
+ *
+ * yuv420p subsamples chroma 2×2, so `pad` silently rounds its target w/h down
+ * to a multiple of 2 while `scale` in front of it keeps the odd value. An odd
+ * box therefore makes pad's target one pixel SHORTER than its own input and it
+ * kills the graph ("Padded dimensions cannot be smaller than input
+ * dimensions") before a single frame is written.
+ */
+function evenDim(n: number): number {
+  return n - (n % 2);
+}
+
 export async function composeVideo(opts: ComposeOpts): Promise<void> {
   const fps = opts.fps ?? 30;
   const crf = opts.crf ?? 20;
@@ -336,7 +387,13 @@ export async function composeVideo(opts: ComposeOpts): Promise<void> {
   const fullbleedDim = Math.max(0, Math.min(1, opts.fullbleedDim ?? 0.28));
   const fullbleedCornerText = opts.fullbleedCornerText ?? "Trạm Dừng Bất Ngờ";
   const fullbleedCornerFontSize = Math.max(16, Math.floor(opts.fullbleedCornerFontSize ?? 48));
-  const fullbleedCornerFontFile = opts.fullbleedCornerFontFile ?? "C\\:/Windows/Fonts/palai.ttf";
+  const fullbleedCornerFontFile = opts.fullbleedCornerFontFile ?? "C\\:/Windows/Fonts/palab.ttf";
+  const railX = Math.max(0, Math.min(1000, Math.floor(opts.railX ?? 56)));
+  const railTopY = Math.max(0, Math.min(1900, Math.floor(opts.railTopY ?? 620)));
+  const railFontSize = Math.max(12, Math.floor(opts.railFontSize ?? 30));
+  const railFontFile = opts.railFontFile ?? "C\\:/Windows/Fonts/bahnschrift.ttf";
+  const railDotSize = Math.max(0, Math.min(60, Math.floor(opts.railDotSize ?? 14)));
+  const railAccentColor = opts.railAccentColor ?? "#F2B33D";
   const blurSigma = Math.max(0, Math.min(100, opts.vignetteBlurSigma ?? 40));
   const vBrightness = Math.max(-1, Math.min(1, opts.vignetteBrightness ?? -0.3));
   const vSaturation = Math.max(0, Math.min(3, opts.vignetteSaturation ?? 0.7));
@@ -351,8 +408,12 @@ export async function composeVideo(opts: ComposeOpts): Promise<void> {
   // card off-screen. Defaults: 660×880 (3:4 portrait), anchored at y=240. This
   // is the TikTok / Reels podcast-clip aesthetic — portrait card up top,
   // captions below.
-  const fgBoxW = Math.max(120, Math.min(1080, Math.floor(opts.foregroundWidth ?? 880)));
-  const fgBoxH = Math.max(120, Math.min(1920, Math.floor(opts.foregroundHeight ?? 880)));
+  // Box dims MUST be even: on yuv420p the `pad` filter rounds its target down
+  // to a multiple of the chroma subsampling (2), while the preceding `scale`
+  // keeps the odd value — pad then sees target < input and aborts the whole
+  // graph with "Padded dimensions cannot be smaller than input dimensions".
+  const fgBoxW = evenDim(Math.max(120, Math.min(1080, Math.floor(opts.foregroundWidth ?? 880))));
+  const fgBoxH = evenDim(Math.max(120, Math.min(1920, Math.floor(opts.foregroundHeight ?? 880))));
   const fgY = Math.max(0, Math.min(1920 - fgBoxH, Math.floor(opts.foregroundY ?? 300)));
   const fgX = opts.foregroundX !== undefined
     ? Math.max(0, Math.min(1080 - fgBoxW, Math.floor(opts.foregroundX)))
@@ -587,7 +648,13 @@ export async function composeVideo(opts: ComposeOpts): Promise<void> {
   // at the top-right, with the channel name sitting to its LEFT as a lockup
   // (added 2026-06-11). Always on for chromeless layouts; opt-in for locket
   // via `cornerBadge`.
-  const wantCornerBadge = cornerLockup && !!logoPath;
+  // Rail style — the vertical left-edge wordmark. It is text-only by nature,
+  // so it suppresses the logo badge entirely (the logo input is still used for
+  // the outro avatar when the outro is on).
+  const railStyle = cornerLockup
+    && (opts.fullbleedCornerStyle ?? "lockup") === "rail"
+    && !!fullbleedCornerText;
+  const wantCornerBadge = cornerLockup && !!logoPath && !railStyle;
   // Split the logo input into two streams only when BOTH a canvas overlay
   // (brand-shell or corner badge) AND the avatar need it. Otherwise feed the
   // single consumer directly from the raw input — splitting and leaving one
@@ -746,23 +813,79 @@ export async function composeVideo(opts: ComposeOpts): Promise<void> {
   //     of the logo PNG at (60,60), with the corner text drawn beside it,
   //     vertically centered against the badge — a horizontal lockup.
   //   • Without logo: legacy bare corner text at (60,80).
-  // Default text font is Palatino Linotype Italic; swap via
+  // Default text font is Palatino Linotype Bold; swap via
   // fullbleedCornerFontFile. Badge size/radius ride the existing logoWidth /
   // logoCornerRadius opts (env PODCAST_LOGO_WIDTH / PODCAST_LOGO_RADIUS).
   const fullbleedCornerChain: string[] = [];
   if (hasFullbleedCorner) {
     const cornerX = 60;
-    if (wantCornerBadge) {
+    if (railStyle) {
+      // ── Vertical left-edge rail ("V10", chosen 2026-08-05) ─────────────
+      // drawtext cannot typeset vertically, so the name is drawn horizontally
+      // onto its own transparent strip and the STRIP is rotated 90° CCW
+      // (`transpose=2`), which lands the last glyph at the top and makes the
+      // line read bottom-to-top with glyph tops facing left — same orientation
+      // as CSS `writing-mode:vertical-rl` + `rotate(180deg)`.
+      //
+      // The strip is deliberately over-long (RAIL_STRIP_LEN) and the text is
+      // RIGHT-aligned inside it. Post-rotation the strip's right edge becomes
+      // its top edge, so the text's top end lands at exactly `railTopY` no
+      // matter how long the channel name is — no text-width measuring pass
+      // needed, and the accent dot above it can be placed by fixed arithmetic.
+      //
+      // ⚠️ `color=c=black@0` does NOT yield a transparent source in this
+      // ffmpeg build (alpha comes back fully opaque, which paints a solid
+      // black bar down the frame). Transparency must come from the geq alpha
+      // mask, matching how every other overlay in this file is built.
+      const RAIL_STRIP_LEN = 1400;
+      const stripH = railFontSize * 2;
+      // Letter-spacing is faked by interleaving spaces (drawtext has no
+      // tracking parameter); a source space becomes three, which reads as a
+      // clear word gap at this tracking.
+      const spacedRail = fullbleedCornerText.toUpperCase().split("").join(" ");
+      fullbleedCornerChain.push(
+        `color=c=black:s=${RAIL_STRIP_LEN}x${stripH}:d=0.04:rate=${fps},format=yuva420p,`
+        + `geq=lum='p(X,Y)':cb='128':cr='128':a='0',`
+        // A directional shadow would rotate with the strip (post-rotation it
+        // would fall to the RIGHT, not below), so contrast comes from an
+        // orientation-independent outline instead. borderw=3 rather than 2:
+        // at 2px the rail washes out over pale footage — the exact failure
+        // that made the previous Dancing Script watermark unreadable.
+        + `drawtext=fontfile='${railFontFile}':text='${escapeDrawtext(spacedRail)}':fontsize=${railFontSize}:fontcolor=white@0.95:x=w-text_w-4:y=(h-text_h)/2:borderw=3:bordercolor=black@0.6,`
+        + `transpose=2,loop=loop=-1:size=1:start=0[rail]`,
+      );
+      const afterRailLabel = railDotSize > 0 ? "rail_done" : preOutroLabel;
+      fullbleedCornerChain.push(`[burned][rail]overlay=${railX}:${railTopY}[${afterRailLabel}]`);
+      if (railDotSize > 0) {
+        const dotR = railDotSize / 2;
+        const hex = railAccentColor.replace(/^#/, "");
+        const dotR8 = parseInt(hex.slice(0, 2), 16);
+        const dotG8 = parseInt(hex.slice(2, 4), 16);
+        const dotB8 = parseInt(hex.slice(4, 6), 16);
+        // Dot sits above the text's top end, centred on the glyph column.
+        const dotGap = 26;
+        const dotX = railX + Math.round(stripH / 2 - dotR);
+        const dotY = railTopY - dotGap - railDotSize;
+        fullbleedCornerChain.push(
+          `color=c=black:s=${railDotSize}x${railDotSize}:d=0.04:rate=${fps},format=yuva420p,`
+          + `geq=r='${dotR8}':g='${dotG8}':b='${dotB8}':a='if(lte(pow(X-${dotR},2)+pow(Y-${dotR},2),${dotR * dotR}),255,0)',`
+          + `loop=loop=-1:size=1:start=0[rail_dot]`,
+        );
+        fullbleedCornerChain.push(`[rail_done][rail_dot]overlay=${dotX}:${Math.max(0, dotY)}[${preOutroLabel}]`);
+      }
+    } else if (wantCornerBadge) {
       const badgeW = logoWidth;
       const badgeR = Math.max(0, Math.min(Math.floor(badgeW / 2), logoCornerRadius));
       // Top-RIGHT lockup (moved from top-left 2026-06-11): the channel name
       // sits to the LEFT of the logo badge. Geometry picked to clear the
       // TikTok / Reels top-right UI (search / camera icons live at y<160
       // hugging the corner) and the channel's 120px right safe margin:
-      //   badge right edge at x = 1080-120, badge top at y = 180.
+      //   badge right edge at x = 1080-120, badge top at y = 260 (lowered
+      //   from 180 on 2026-07-07 per user request; still clears the worst
+      //   case landscape strip top at y=380 for a 1000px-tall strip).
       const badgeRightMargin = 120;
       const badgeX = 1080 - badgeRightMargin - badgeW;
-      const badgeY = 180;
+      const badgeY = 260;
       const badgeTextGap = 26;
       const badgeMask = badgeR > 0
         ? `,format=yuva420p,geq=lum='p(X,Y)':cb='p(X,Y)':cr='p(X,Y)':a='if(lt(X,${badgeR})*lt(Y,${badgeR}),if(lte(pow(${badgeR}-X,2)+pow(${badgeR}-Y,2),${badgeR * badgeR}),255,0),if(gt(X,W-${badgeR})*lt(Y,${badgeR}),if(lte(pow(X-W+${badgeR},2)+pow(${badgeR}-Y,2),${badgeR * badgeR}),255,0),if(lt(X,${badgeR})*gt(Y,H-${badgeR}),if(lte(pow(${badgeR}-X,2)+pow(Y-H+${badgeR},2),${badgeR * badgeR}),255,0),if(gt(X,W-${badgeR})*gt(Y,H-${badgeR}),if(lte(pow(X-W+${badgeR},2)+pow(Y-H+${badgeR},2),${badgeR * badgeR}),255,0),255))))'`
@@ -788,9 +911,10 @@ export async function composeVideo(opts: ComposeOpts): Promise<void> {
       // Text-only branding (logo disabled via PODCAST_LOGO="") — the channel
       // name alone asserts the watermark. TOP-LEFT placement (moved from
       // top-right 2026-06-11 per user request): x=80 (left safe margin),
-      // y=180 (clears the TikTok / Reels top UI row at y<160).
+      // y=260 (lowered from 180 on 2026-07-07; clears the TikTok / Reels
+      // top UI row at y<160 with extra breathing room).
       const cornerLeftX = 80;
-      const cornerY = 180;
+      const cornerY = 260;
       fullbleedCornerChain.push(
         `[burned]drawtext=fontfile='${fullbleedCornerFontFile}':text='${escapeDrawtext(fullbleedCornerText)}':fontsize=${fullbleedCornerFontSize}:fontcolor=white:x=${cornerLeftX}:y=${cornerY}:shadowcolor=black@0.75:shadowx=0:shadowy=3:borderw=1:bordercolor=black@0.4[${preOutroLabel}]`,
       );
@@ -1089,7 +1213,8 @@ export async function composeVideo(opts: ComposeOpts): Promise<void> {
     // as a hint; otherwise we let ffmpeg's force_original_aspect_ratio=decrease
     // pad to a default 1080×608 box (true 16:9 strip). The pipeline normally
     // probes the source and passes the real height so the strip matches.
-    landscapeVideoH = Math.max(200, Math.min(1080, Math.floor(opts.foregroundHeight ?? 608)));
+    // Even, for the same yuv420p `pad` rounding reason as fgBoxW/fgBoxH above.
+    landscapeVideoH = evenDim(Math.max(200, Math.min(1080, Math.floor(opts.foregroundHeight ?? 608))));
     landscapeVideoY = Math.max(0, Math.min(
       1920 - landscapeVideoH,
       Math.round((1920 - landscapeVideoH) / 2) + landscapeVerticalBias,

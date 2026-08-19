@@ -10,9 +10,10 @@
  * giữa preview và render nên SSIM thấp trên scene có ảnh nền động là nhiễu
  * bình thường. Chỉ scene < WARN_THRESHOLD mới đáng mở ảnh ghép soi layout.
  */
-import { mkdirSync, existsSync } from "node:fs";
+import { mkdirSync, existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { spawnSync } from "node:child_process";
+import { CANVAS } from "./html-composer.js";
 
 export const WARN_THRESHOLD = 0.75;
 /** Scene có ảnh nền Ken Burns: pha zoom/pan giữa preview và render KHÔNG bao
@@ -26,6 +27,22 @@ export interface FidelityResult {
   ssim: number | null;
   /** Scene có nền ảnh động (class kb-*) → dùng ngưỡng nới. */
   animatedBg: boolean;
+}
+
+/**
+ * Preview viewport = the composition's canvas. Read from the script next to
+ * index.html; anything unreadable falls back to the 9:16 default, which is
+ * what every composition used before the landscape canvas existed.
+ */
+function readCanvas(outputDir: string): { width: number; height: number } {
+  let aspect: keyof typeof CANVAS = "9:16";
+  try {
+    const raw = JSON.parse(readFileSync(join(outputDir, "script.json"), "utf8"));
+    if (raw?.metadata?.aspect === "16:9") aspect = "16:9";
+  } catch {
+    // no script.json (or malformed) — keep the default
+  }
+  return { width: CANVAS[aspect].w, height: CANVAS[aspect].h };
 }
 
 function ffmpeg(args: string[]): string {
@@ -52,7 +69,7 @@ export async function checkRenderFidelity(outputDir: string): Promise<FidelityRe
   let scenes: Array<{ id: string; layout: string; t: number; animatedBg: boolean }>;
   try {
     const page = await browser.newPage();
-    await page.setViewport({ width: 1080, height: 1920 });
+    await page.setViewport(readCanvas(outputDir));
     await page.goto("file:///" + indexPath.replace(/\\/g, "/"), {
       waitUntil: "networkidle2",
       timeout: 60000,

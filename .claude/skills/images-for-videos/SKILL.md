@@ -16,6 +16,8 @@ User runs `/images-for-videos <path-to-source.txt>` BEFORE running `/create-vide
 
 If the user runs `/create-video` directly without a plan, that skill will work in fallback mode (Gemini API generates images at pipeline runtime) — the plan step is optional but strongly recommended for content where image quality matters (rankings of named players, history pieces, VS comparisons of specific people).
 
+**This skill plans 9:16 (portrait) videos only.** A 16:9 landscape roundup built from several article links is `/news-roundup`, which does its own planning — its plan carries `aspect: "16:9"` plus per-scene `fullBleed` / `marker` fields that have no meaning here.
+
 ## Input contract
 
 - Single argument: a path to a `.txt` file.
@@ -60,7 +62,7 @@ If the user runs `/create-video` directly without a plan, that skill will work i
 | 12 000 – 15 999 | 4 |
 | ≥ 16 000 | 5 (hard cap — never produce >5 parts) |
 
-**For all other types, skip the rest of this step regardless of source length.** The single-video scene-count cap (16 scenes / ~180 s) applies as the upper bound when source is rich — that's the natural limit, not a split trigger.
+**For all other types, skip the rest of this step regardless of source length.** The single-video scene-count cap (11 scenes / 45 s — 13 scenes for a "N mục" listicle) applies as the upper bound when source is rich — that's the natural limit, not a split trigger.
 
 **If N = 1 (either by content-type or by short source), skip to Step 2.** Single-part videos go through the rest of the skill exactly as before.
 
@@ -117,10 +119,10 @@ Only these templates take a custom image:
 - `hook` — opening hero shot
 - `stat-hero` — full-bleed background under one big stat
 - `callout` — atmospheric background under a quote/claim
+- `feature-list` — **optional** supporting image (added 2026-07-04). The list of peer talking points renders as green "broadcast" cards; an image is laid out by aspect automatically (landscape → hero card above the list; portrait → full-bleed photo with the cards floating as lower-thirds). Plan an image **only when a single photo genuinely reinforces the whole list** — e.g. team-news headed by one key absentee/returnee, an H2H board anchored by a historic-clash shot. If the bullets are abstract/numeric (pure stat lines, mixed subjects), leave it image-less — the cards look complete on the cream deck. Don't force one image per feature-list.
 
 These templates do NOT take images (skip them in the plan):
 - `comparison` — left/right cards on solid color
-- `feature-list` — bulleted list, no photo
 - `outro` — TikTok profile card
 
 **⚠️ Density first — count distinct substantive points before picking image count.** The plan locks the floor of `/create-video`'s scene count (script must include every plan scene). So a bloated plan forces a bloated video. Scale image count to the source's actual content density:
@@ -132,11 +134,23 @@ These templates do NOT take images (skip them in the plan):
    |---|---|---|
    | **< 3** | — | **Bail.** Tell user the source is too thin for a useful video and ask them to add more facts/context to the .txt before re-running. Do NOT write `images-plan.json`. |
    | 3–4 | hook + 2–3 image scenes (3–4 total) | Tight plan, single arc |
-   | 5–7 | hook + 4–6 image scenes (5–7 total) | Standard plan |
-   | 8–12 | hook + 7–11 image scenes (8–12 total) | Full-depth plan |
-   | 13+ | hook + 12–15 image scenes (13–16 total) | **Maximum-depth plan** — for MATCH RECAP with many rated players or NEWS DRAMA with many distinct events. Each named player/event gets their own scene. |
+   | 5–7 | hook + 4–5 image scenes (5–6 total) | Standard plan |
+   | 8+ | hook + 6–8 image scenes (7–9 total) | **Full-depth — và đây là TRẦN.** |
 
-   **⚠️ CRITICAL (2026-05-31 feedback): NEVER under-plan images.** If the .txt mentions 10 distinct players with ratings, plan 10 player scenes + hook + context scenes = ~13 total. A video with only 6-8 images for a 10-player article feels cheap and low-quality. **Every named player with a rating or significant role deserves their own image scene.**
+   **⚠️ TRẦN CỨNG 9 ẢNH / PLAN (2026-08-03).** `images-plan.json` là hợp đồng: mọi plan scene BẮT BUỘC có mặt trong `script.json`, nên **số ảnh plan = sàn cứng của scene count**. `/create-video` bị chặn ở ~11 scene; trừ engagement-question + outro + đôi khi 1 scene data-driven, còn đúng **8–9 chỗ cho ảnh**.
+
+   ℹ️ **Siết nhịp 2026-08-19 KHÔNG làm giảm số ảnh.** `/create-video` hạ trần thời lượng 120s → 45s bằng cách cắt lời thoại mỗi cảnh (35 từ → ≤16), **không phải bằng cách bỏ cảnh** — số cảnh giữ nguyên 9–11, chỉ đổi hình nhanh gấp đôi. Nên plan 8–9 ảnh vẫn là plan đúng; đừng tự hạ xuống 5 ảnh vì thấy video ngắn đi. Ngược lại, ảnh giờ QUAN TRỌNG HƠN: mỗi tấm chỉ được nhìn ~4 giây nên phải nhận ra chủ thể ngay lập tức — ưu tiên chân dung cận, một chủ thể rõ ràng, tránh bố cục đông người phải nhìn kỹ mới hiểu.
+
+   **Nguồn dày hơn KHÔNG có nghĩa plan nhiều ảnh hơn — nghĩa là chọn kỹ hơn.** Bài 20 thương vụ / 15 cầu thủ chấm điểm: chọn **8 cái đáng nhất**, phần còn lại gom vào 1 `feature-list` không ảnh hoặc bỏ. Ưu tiên chọn: có số liệu thật > có tên tuổi lớn > có ảnh dễ nhận diện.
+
+   **⚠️ NGOẠI LỆ — RANKING / listicle có SỐ trong tiêu đề thì phải ĐỦ (2026-08-15, user: *"mấy cái mà xếp hạng này kia phải đầy đủ chứ"*).** Tiêu đề hứa "9 cái tên" / "Top 10" / "7 bản hợp đồng" là một hợp đồng với người xem: **mỗi mục PHẢI có cảnh riêng + ảnh riêng, không được cắt bớt, không được gom vào `feature-list` mờ.** Ở đây trần 9 ảnh NHƯỜNG, không phải danh sách nhường:
+   - N ≤ 9 → `hook` + N ảnh (tối đa 10 ảnh, 12 scene). Trần code thật là `MAX_SCENES["9:16"] = 20` (`src/render/script-schema.ts`), validator cho tới 13 scene; 13 × 12 từ ≈ 41s vẫn dưới trần 45s.
+   - N từ 10–12 → vẫn đủ N, nhưng siết voiceText mỗi cảnh còn **1 câu ~12 từ** (thay vì trần 16) để tổng giữ ≤ 170 từ. Đừng bỏ mục nào.
+   - N > 12 → KHÔNG âm thầm cắt. Báo user và đề xuất tách 2 phần (`-p1`/`-p2`), hoặc user đồng ý hạ số thì **sửa luôn số trong tiêu đề `.txt`** cho khớp. Tiêu đề nói 15 mà video có 9 là lỗi nặng hơn video dài.
+
+   Luật "chọn 8 cái đáng nhất" ở trên chỉ áp dụng cho nguồn **không hứa số**: bài chấm điểm 22 cầu thủ, bài roundup, bài phân tích. Xem `memory/feedback_listicle_hook_doubles_as_item_one.md`.
+
+   > 🔄 **Ghi đè hướng dẫn cũ.** Dòng "NEVER under-plan images — mỗi cầu thủ có điểm đều xứng đáng 1 ảnh, plan ~13 total" (feedback 2026-05-31) nay **chỉ áp dụng trong phạm vi 9 ảnh**. Feedback đó sinh ra khi user chê video 10 cầu thủ mà chỉ có 6 ảnh; feedback 2026-08-03 ngược lại — user chê dài. Cách thỏa mãn cả hai: **9 ảnh cho 9 chủ thể mạnh nhất**, không phải 13 ảnh cho 13 chủ thể, cũng không phải 5 ảnh gộp 10 người vào 1 bullet list.
 
 3. Then apply the per-content-type shapes below — but cap at the band you picked above. A "Top 10" ranking for a thin source is rare, but if a TRANSFER NEWS source supports only 3 distinct points, that wins over the table's "1–2 stat-hero" guidance — go with `hook + 2 image scenes` total.
 
@@ -147,9 +161,9 @@ For each content type, the typical image set (capped by density above):
 | RANKING (Top N) | `hook` + N × `stat-hero` (one per item) — N = number of items |
 | VS comparison | `hook` + 2 × `stat-hero` (one per side) + 0–1 `callout` |
 | MATCH ANALYSIS | `hook` + 2–4 × `callout`/`stat-hero` for key moments |
-| **MATCH RECAP** | `hook` + **1 scene per named player with rating** (typically 8–12 `stat-hero`/`callout`) + 1–2 `context` scenes (manager/trophy/aftermath). Plan generously — each key fact and each rated player gets their own image. |
-| **NEWS DRAMA** | `hook` + **1 scene per distinct event/moment** (typically 6–10 `stat-hero`/`callout`) + 1–2 `context` scenes. Social media screenshots become stylized poster compositions. |
-| PRE-MATCH PREVIEW | `hook` + 2–4 × `callout`/`stat-hero` (stakes, key matchup, prediction visual) |
+| **MATCH RECAP** | `hook` + **1 scene cho mỗi cầu thủ/khoảnh khắc đáng nhất** (6–7 `stat-hero`/`callout`) + 1 `context` scene (HLV/cúp/hệ quả). Bài chấm điểm 15 người → chọn **7 điểm cao nhất + thấp nhất**, phần còn lại gom 1 `feature-list` không ảnh. |
+| **NEWS DRAMA** | `hook` + **1 scene per distinct event/moment** (6–7 `stat-hero`/`callout`) + 1 `context` scene. Social media screenshots become stylized poster compositions. |
+| PRE-MATCH PREVIEW | `hook` (split-frame) + **2–3 `stat-hero` stars PER team (4–6 total)** + **2 `callout` HLV (một ảnh mỗi HLV cho scene họp báo — BẮT BUỘC khi source có phát biểu 2 HLV, per `feedback_preview_plan_missing_hlv_scenes`)** + 0–1 team-news/H2H feature-list image. The tactics/đấu pháp, lineups, the `form-compare` board (one combined 2-team form scene), and verdict scoreboard are **data-driven templates (no image)** — plan NO image for them. Knockout upgrade (2026-07-06): give each team its own 2–3 stars, don't share a pool. Typical total = hook + 6 sao + 2 HLV = 9 ảnh. |
 | PLAYER PROFILE | `hook` + 3–5 × `stat-hero`/`callout` |
 | HISTORY-CAREER | `hook` + 4–6 × `callout`/`stat-hero` (key chapters) |
 | TRANSFER NEWS | `hook` + 1–2 × `stat-hero` (player + fee context) |
@@ -163,11 +177,13 @@ For each content type, the typical image set (capped by density above):
 | MATCH ANALYSIS names 3 key actors of a goal moment | 3 individual `callout` scenes, one per actor |
 | PRE-MATCH PREVIEW lists 4 key matchups | 4 individual `callout` scenes, one per matchup duel (could be split-frame each) |
 | TRANSFER NEWS shortlist (5 candidates) | 1 group `callout` + 3-5 individual `stat-hero` (one per candidate) |
-| Source lists 6+ players without per-player traits | Keep as `feature-list` (no image) — splitting 6+ creates fatigue |
+| Source lists 6+ players without per-player traits | Keep as `feature-list` (one supporting image at most, not per-player) — splitting 6+ into individual scenes creates fatigue |
 
 Each individual scene gets its own sceneId / filename / subjectHint entry in `images-plan.json`. The subjectHint names THAT player (e.g. `"Virgil van Dijk — Liverpool"`) instead of a group. The downstream `/create-video` skill renders each as a separate scene with its own image.
 
 **⚠️ Group-stage team reveal → NO per-team images (handled by the `group-intro` code template).** When the source introduces a tournament **group** (a bảng with its 3–4 teams + predicted order, e.g. "Bảng F: Argentina, Na Uy, Australia, Tunisia"), do NOT plan a `stat-hero` image per team for that table. The team reveal is rendered by the data-driven **`group-intro`** template (flags/crests + names + predicted finish — code, no AI image) by `/create-video`. Plan images ONLY for the `hook` + 1–2 **highlights** of that group (a marquee match VS, a star player). A group-stage part covering 2 bảng = `hook` + ~2 highlight image scenes in `images-plan.json`; the two `group-intro` table scenes carry no plan entry. (This is exactly how `du-doan-world-cup-2026-p1…p6` are planned.)
+
+**⚠️ Tactical/đấu pháp + phong độ scenes → NO image (handled by code templates).** A PRE-MATCH PREVIEW's "Lối chơi dự kiến" renders as the data-driven **`tactics-board`** template (two-column formation + approach + mechanisms + key player), and its "Phong độ gần đây" renders as ONE data-driven **`form-compare`** template (two-column split of both teams' recent W/D/L + scorelines — replaces the old pair of `match-results` boards). Like `group-intro` / `formation-pitch` / `match-results` / `comparison` scoreboard, these carry NO plan entry — never plan a `stat-hero`/`callout` image for the tactics or form scene. Plan images only for the `hook` + the per-team star `stat-hero`s + 2 HLV callouts + optional team-news/H2H feature-list photo.
 
 ### Step 4: Assign sceneIds + filenames
 
@@ -243,7 +259,7 @@ No `prompt` field — `subjectHint` is the only description (see Step 5). The sc
 ```markdown
 # Ảnh cần tạo — <title> (<N> ảnh)
 
-Gen trên grok.com (Imagine) hoặc lấy ảnh thật (Getty…). **Tỉ lệ ảnh linh hoạt** (pipeline tự đo & chọn cách hiển thị): ảnh `hook` nên **dọc 9:16 / 2:3** để fill trọn khung; ảnh body `stat-hero` / `callout` dùng **ngang 16:9 vẫn tốt** — pipeline tự bọc ảnh ngang vào **thẻ (card) giữa khung, không cắt, không méo** (ảnh dọc thì full-bleed). Save đúng tên file dưới đây vào folder này; đuôi .png/.jpg/.jpeg/.webp/.avif đều được.
+Gen trên grok.com (Imagine) hoặc lấy ảnh thật (Getty…). **Tỉ lệ nào cũng được** — pipeline tự đo và vẽ khung ĐÚNG tỉ lệ ảnh gốc: ảnh `hook` là ảnh full-bleed DUY NHẤT nên ưu tiên **dọc 9:16 / 2:3**; ảnh body (`stat-hero` / `callout` / `feature-list`) luôn vào **thẻ bo góc giữa khung — không cắt, không méo**, nền là chính ảnh đó làm mờ. Ngang 16:9 cho thẻ to hơn, dọc 2:3 cho thẻ cao hơn, cả hai đều đẹp. Save đúng tên file dưới đây vào folder này; đuôi .png/.jpg/.jpeg/.webp/.avif đều được.
 
 - [ ] `hook.png` — <subjectHint của scene hook>
 - [ ] `cb-1.png` — <subjectHint>
@@ -263,7 +279,7 @@ Reply with a short confirmation + the parallel-gen reminder (do NOT dump anythin
 <N> ảnh cần tạo (1 hook + N CB / N item / ...).
 
 ⚡ Gen ảnh song song: mở <N> tab grok.com cùng lúc (Imagine; hook 9:16, body ngang/dọc
-   đều được — ảnh ngang tự vào card), gen theo mô tả từng scene trong anh-can-tao.md,
+   đều được — mọi ảnh body vào thẻ đúng tỉ lệ), gen theo mô tả từng scene trong anh-can-tao.md,
    bấm generate ĐỒNG LOẠT rồi mới chờ. Hoặc lấy ảnh thật (Getty…) tỉ lệ bất kỳ. Save về
    cùng folder, stem đúng tên file (`hook`, `cb-1`, ...); đuôi .png/.jpg/.jpeg/.webp/.avif
    đều OK. Xong → /create-video <path>.

@@ -6,9 +6,16 @@ import { ScriptSchema, type Script } from "./render/script-schema.js";
 import { loadConfig, type Config } from "./config.js";
 import { createTtsClient } from "./tts/tts-client.js";
 import { fetchImage } from "./assets/image-fetcher.js";
-import { getDurationSec, concatWithSilence, mixSfxOntoVoice, type SfxMixSpec } from "./assets/audio-tools.js";
+import {
+  getDurationSec,
+  concatWithSilence,
+  mixSfxOntoVoice,
+  mixBgMusicOntoVoice,
+  resolveBgMusic,
+  type SfxMixSpec,
+} from "./assets/audio-tools.js";
 import { indexSfxLibrary, pickSfxForScene, defaultPlayback } from "./assets/sfx-selector.js";
-import { existsSync } from "node:fs";
+import { existsSync, readdirSync } from "node:fs";
 import { composeHtml } from "./render/html-composer.js";
 import { readImageAspect } from "./render/image-dims.js";
 import { renderWithHyperframes } from "./render/hyperframes-runner.js";
@@ -21,9 +28,28 @@ import { realignCaptionsToSource } from "./podcast/realign-to-source.js";
 const TOTAL_STEPS = 9;
 // Pipeline only WARNS outside this range — exact bounds enforced by skill rules.
 // News: 55–65s ideal. Analysis: 90–180s ideal. Range below tolerates both modes.
+// 16:9 is the roundup canvas (YouTube): 5–7 articles in one video, so its
+// ceiling is the skill's 6-minute cap rather than the short-form 200s.
 const DURATION_MIN_SEC = 48;
-const DURATION_MAX_SEC = 200;
+const DURATION_MAX_SEC: Record<"9:16" | "16:9", number> = { "9:16": 200, "16:9": 380 };
 const SCENE_GAP_SEC = 0.3;
+/**
+ * Lead-in kept before the very first word when CUTTING scene 0 out of full.mp3.
+ * Note this cannot save the opening on its own: AusyncLab starts speaking at
+ * sample 0, so `max(0, start - VOICE_LEAD_IN_SEC)` clamps straight back to 0 and
+ * scene 0 still begins mid-syllable. VIDEO_HEAD_LEAD_IN_SEC below is what
+ * actually gives the first word room.
+ */
+const VOICE_LEAD_IN_SEC = 0.15;
+/**
+ * Silence prepended to the finished voice track, i.e. real dead air at the top
+ * of the video. Without it the audio slams in at ~-6 dB on frame 0 and the first
+ * word is swallowed — measured on 22 of 36 delivered videos (see
+ * `concatWithSilence`). 0.35s is long enough for a phone player to ramp its
+ * output and for the viewer to register the picture before anyone speaks, and
+ * short enough that it does not read as a stall.
+ */
+const VIDEO_HEAD_LEAD_IN_SEC = 0.35;
 /**
  * Extra seconds added to the outro scene visual duration AFTER the voice ends.
  * Gives the TikTok follow card time to be read by the viewer (otherwise the
@@ -36,6 +62,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const TPL_DIR = join(__dirname, "render", "templates");
 /** Path to the SFX library (relative to project root) */
 const SFX_DIR = join(__dirname, "..", "assets", "sfx");
+/** Royalty-free background-music library. See assets/music/README.md for licensing. */
+const MUSIC_DIR = join(__dirname, "..", "assets", "music");
 
 const HYPERFRAMES_CONFIG = {
   $schema: "https://hyperframes.heygen.com/schema/hyperframes.json",
@@ -156,10 +184,12 @@ export async function runPipeline(scriptPath: string): Promise<void> {
   log.step(6, TOTAL_STEPS, "Concat voice scenes + mix SFX layer");
   const voiceRawMp3 = join(outputDir, "voice-raw.mp3");
   const voiceMp3 = join(outputDir, "voice.mp3");
-  await concatWithSilence(sceneAudio.map((a) => a.path), SCENE_GAP_SEC, voiceRawMp3);
+  await concatWithSilence(sceneAudio.map((a) => a.path), SCENE_GAP_SEC, voiceRawMp3, VIDEO_HEAD_LEAD_IN_SEC);
 
-  // Compute scene start times (cumulative voice durations + gaps)
-  let cursor = 0;
+  // Compute scene start times (cumulative voice durations + gaps). Starts at the
+  // head lead-in, not 0 — the voice track now opens with that much silence, and
+  // SFX cues below are placed against this same cursor.
+  let cursor = VIDEO_HEAD_LEAD_IN_SEC;
   const sceneStarts: Record<string, number> = {};
   for (const a of sceneAudio) {
     sceneStarts[a.id] = cursor;
@@ -216,10 +246,34 @@ export async function runPipeline(scriptPath: string): Promise<void> {
   log.info(`  mixing ${sfxList.length} SFX into voice.mp3`);
   await mixSfxOntoVoice(voiceRawMp3, sfxList, voiceMp3);
 
+  // Background-music bed (optional). Auto-on when assets/music/ has tracks;
+  // VIDEO_BG_MUSIC="" turns it off, VIDEO_BG_MUSIC=<name|path> pins one track.
+  const bgMusicPath = resolveBgMusic(
+    MUSIC_DIR,
+    process.env.VIDEO_BG_MUSIC,
+    (dir) => (existsSync(dir) ? readdirSync(dir) : []),
+  );
+  if (bgMusicPath) {
+    if (!existsSync(bgMusicPath)) {
+      throw new Error(
+        `Background music file not found: ${bgMusicPath}\n` +
+        `Check VIDEO_BG_MUSIC, or drop the track into ${MUSIC_DIR} (see its README.md).`,
+      );
+    }
+    const bgVolume = parseFloat(process.env.VIDEO_BG_MUSIC_VOLUME ?? "0.22");
+    log.info(`  bg music: ${basename(bgMusicPath)} @ volume ${bgVolume} (ducked under voice)`);
+    const voiceNoMusic = join(outputDir, "voice-nomusic.mp3");
+    await copyFile(voiceMp3, voiceNoMusic);
+    await mixBgMusicOntoVoice(voiceNoMusic, bgMusicPath, voiceMp3, { volume: bgVolume });
+  } else {
+    log.info("  bg music: none (assets/music/ empty or VIDEO_BG_MUSIC=\"\")");
+  }
+
   const totalAudioSec = await getDurationSec(voiceMp3);
   log.info(`  voice.mp3 total: ${totalAudioSec.toFixed(2)}s`);
-  if (totalAudioSec < DURATION_MIN_SEC || totalAudioSec > DURATION_MAX_SEC) {
-    log.warn(`Total duration ${totalAudioSec.toFixed(1)}s outside [${DURATION_MIN_SEC}, ${DURATION_MAX_SEC}]s tolerance — proceeding anyway`);
+  const durationMax = DURATION_MAX_SEC[script.metadata.aspect];
+  if (totalAudioSec < DURATION_MIN_SEC || totalAudioSec > durationMax) {
+    log.warn(`Total duration ${totalAudioSec.toFixed(1)}s outside [${DURATION_MIN_SEC}, ${durationMax}]s tolerance — proceeding anyway`);
   }
 
   // STEP 7 — Compose HTML + write hyperframes project files
@@ -265,6 +319,7 @@ export async function runPipeline(scriptPath: string): Promise<void> {
     script,
     sceneAudio: sceneAudio.map((a) => ({ id: a.id, durationSec: a.durationSec })),
     gapSec: SCENE_GAP_SEC,
+    leadInSec: VIDEO_HEAD_LEAD_IN_SEC,
     sceneImages,
     sceneImageAspect,
     audioRelPath: "voice.mp3",
@@ -288,6 +343,11 @@ export async function runPipeline(scriptPath: string): Promise<void> {
   // Copy templates next to the index.html so relative paths resolve
   await copyFile(join(TPL_DIR, "styles.css"),    join(outputDir, "styles.css"));
   await copyFile(join(TPL_DIR, "animations.js"), join(outputDir, "animations.js"));
+  await copyFile(join(TPL_DIR, "shader.js"),     join(outputDir, "shader.js"));
+  // 16:9 loads a second stylesheet on top (geometry only — see its header).
+  if (script.metadata.aspect === "16:9") {
+    await copyFile(join(TPL_DIR, "styles-landscape.css"), join(outputDir, "styles-landscape.css"));
+  }
 
   // STEP 8
   log.step(8, TOTAL_STEPS, "Render with hyperframes");
@@ -362,6 +422,28 @@ async function ausyncFullTextTts(
   const fullDur = await getDurationSec(fullMp3);
   log.info(`  full.mp3 duration: ${fullDur.toFixed(2)}s`);
 
+  const sourceTokenCount = fullText.trim().split(/\s+/).length;
+  const runAlign = () =>
+    alignAudio({
+      audioPath: fullMp3,
+      vieneuProjectDir: cfg.vieneuProjectDir,
+      workerScript: join(dirname(cfg.vieneuWorkerScript), "align_worker.py"),
+      uvBin: cfg.vieneuUvBin,
+      language: "vi",
+      modelSize: "small",
+      // NO initialPrompt. Feeding Whisper the whole transcript as prior context
+      // makes it treat the opening as already-said and skip ahead: measured
+      // 2026-08-09 on one 1 848-char script, same audio, same model —
+      //   with the transcript as prompt: 232 words, first at 30.00s
+      //   with no prompt:                357 words, first at  0.00s
+      // The prompt is meant to bias spelling of proper nouns, but Whisper only
+      // budgets ~224 tokens for it and a full script blows past that. Nothing
+      // is lost by dropping it: `realignCaptionsToSource` below re-spells every
+      // word against the source text anyway, which is the stronger fix. Longer
+      // scripts hit this harder, so the 16:9 roundups (3× a short) would have
+      // hit it constantly.
+    });
+
   // 2. Whisper alignment: word-level timings (cached)
   let words: WordTiming[];
   if (existsSync(wordsJsonPath)) {
@@ -369,21 +451,39 @@ async function ausyncFullTextTts(
     words = JSON.parse(await readFile(wordsJsonPath, "utf-8")) as WordTiming[];
   } else {
     log.info(`  Aligning full audio → word timings (faster-whisper)...`);
-    words = await alignAudio({
-      audioPath: fullMp3,
-      vieneuProjectDir: cfg.vieneuProjectDir,
-      workerScript: join(dirname(cfg.vieneuWorkerScript), "align_worker.py"),
-      uvBin: cfg.vieneuUvBin,
-      language: "vi",
-      modelSize: "small",
-      initialPrompt: fullText,
-    });
+    words = await runAlign();
     await writeFile(wordsJsonPath, JSON.stringify(words, null, 2), "utf-8");
   }
   log.info(`  aligned ${words.length} words across ${fullDur.toFixed(1)}s`);
 
   if (words.length === 0) {
     throw new Error("Alignment returned 0 words. Check that the TTS audio contains speech.");
+  }
+
+  // Whisper can come back having silently skipped a stretch of speech — seen
+  // 2026-08-09: 232 words for a 383-word script, the first of them timestamped
+  // at 30.0s on audio that is loud from 0.0s. Nothing downstream notices. The
+  // realigner pads the gap with synthetic words that inherit degenerate
+  // timings, the scene partition then hands the hook 30s and squeezes the two
+  // scenes after it into 0.7s and 0.2s, and the pipeline exits 0 on a video
+  // nobody can use. So: check the shape of the alignment, retry once (the
+  // audio is cached, so a retry costs no TTS quota), and refuse rather than
+  // burn a render on it.
+  let brokenWhy = alignmentDefect(words, sourceTokenCount, fullDur);
+  if (brokenWhy) {
+    log.warn(`  ⚠ alignment looks wrong (${brokenWhy}) — re-aligning once`);
+    words = await runAlign();
+    await writeFile(wordsJsonPath, JSON.stringify(words, null, 2), "utf-8");
+    log.info(`  retry aligned ${words.length} words across ${fullDur.toFixed(1)}s`);
+    brokenWhy = alignmentDefect(words, sourceTokenCount, fullDur);
+    if (brokenWhy) {
+      throw new Error(
+        `Alignment still wrong after a retry: ${brokenWhy}.\n` +
+          `Scene boundaries come from these timings, so rendering now produces sub-second scenes.\n` +
+          `voice/full.mp3 is cached (no TTS quota at stake) — delete voice/full-words.json and re-run, ` +
+          `or check the audio itself if the defect repeats.`,
+      );
+    }
   }
 
   // 2.5. Realign Whisper word timings to source-text spelling
@@ -411,11 +511,19 @@ async function ausyncFullTextTts(
   );
 
   const results: Array<{ id: string; path: string; durationSec: number }> = [];
+  const silences = await detectSilences(fullMp3);
+  log.info(`  ${silences.length} silence gaps detected — scene cuts will land inside them`);
   let wordIdx = 0;
+  let prevCutSec = 0;
+
+  // PASS A — work out every scene boundary first, WITHOUT cutting any audio.
+  // The partition has to be inspectable as a whole before it is committed: a
+  // single scene starved of audio is only visible next to its neighbours, and
+  // by the time ffmpeg has written the mp3s it is too late to reconsider.
+  const bounds: Array<{ start: number; end: number; valid: boolean; startIdx: number; endIdx: number }> = [];
 
   for (let i = 0; i < script.scenes.length; i++) {
     const scene = script.scenes[i];
-    const outPath = join(voiceDir, `scene-${scene.id}.mp3`);
 
     let startSec = 0;
     let endSec = 0;
@@ -456,7 +564,60 @@ async function ausyncFullTextTts(
       }
     }
 
-    if (!hasValidSegment) {
+    // Whisper ends a word at its last loud frame and starts the next one late, so the span
+    // between two scenes holds the previous word's tail (Vietnamese ng/nh/c/t decay) AND the
+    // next word's onset. Slicing at endWord.end throws that span away — the last syllable of
+    // every scene goes missing. Partition the timeline contiguously instead: each scene runs
+    // from the previous cut to a cut placed in the silence before the next scene's first word.
+    if (hasValidSegment) {
+      const alignedWords = isMatch ? realignedWords : words;
+      const nextWord = alignedWords[endIdx + 1];
+      startSec = i === 0 ? Math.max(0, startSec - VOICE_LEAD_IN_SEC) : prevCutSec;
+      endSec = nextWord ? pickSceneCut(endSec, nextWord.start, silences, startSec + 0.2) : fullDur;
+      prevCutSec = endSec;
+    }
+
+    bounds.push({ start: startSec, end: endSec, valid: hasValidSegment, startIdx, endIdx });
+  }
+
+  // REPAIR — a scene starved of audio means the word timings lied, not that the
+  // voice actress rushed. Whisper drops real speech silently (measured
+  // 2026-08-19: 98 of 131 words transcribed, the entire outro missing from a
+  // stretch that meters at -15 dB), and every boundary downstream of the hole
+  // is then wrong. `alignmentDefect` above only catches the gross shapes —
+  // 75 % coverage and a 3.3 s tail both slipped under its thresholds while one
+  // scene came out at 0.94 s for a nine-word line. The reliable signal is not
+  // how many words Whisper found, it is whether each scene ended up with the
+  // share of audio its OWN word count predicts.
+  const speechStart = bounds.find((b) => b.valid)?.start ?? 0;
+  const speechSpan = Math.max(0.1, fullDur - speechStart);
+  const expectedDur = (i: number) => (sceneWordCounts[i] / Math.max(1, totalSceneWords)) * speechSpan;
+  const starved = bounds
+    .map((b, i) => ({ i, ratio: b.valid ? (b.end - b.start) / Math.max(0.01, expectedDur(i)) : 0 }))
+    .filter((s) => s.ratio < 0.5);
+
+  if (starved.length > 0) {
+    const worst = starved.map((s) => `${script.scenes[s.i].id} ${(s.ratio * 100).toFixed(0)}%`).join(", ");
+    log.warn(`  ⚠ partition starves ${starved.length} scene(s) (${worst}) — rebuilding it from word SHARE, not word timings`);
+    // Lay the scenes out proportionally across the real speech span, then nudge
+    // each internal cut into the nearest true silence so the join stays clean.
+    let cursorSec = speechStart;
+    for (let i = 0; i < bounds.length; i++) {
+      const isLast = i === bounds.length - 1;
+      const rawEnd = isLast ? fullDur : cursorSec + expectedDur(i);
+      const end = isLast ? fullDur : snapToSilence(rawEnd, silences, cursorSec + 0.2, fullDur);
+      bounds[i] = { ...bounds[i], start: cursorSec, end, valid: true };
+      cursorSec = end;
+    }
+  }
+
+  // PASS B — commit the partition to disk.
+  for (let i = 0; i < script.scenes.length; i++) {
+    const scene = script.scenes[i];
+    const outPath = join(voiceDir, `scene-${scene.id}.mp3`);
+    const { start: startSec, end: endSec, valid, startIdx, endIdx } = bounds[i];
+
+    if (!valid) {
       log.warn(`  scene ${scene.id}: no aligned words — creating 1s silence`);
       await runFfmpeg([
         "-y", "-f", "lavfi", "-i", "anullsrc=r=44100:cl=mono",
@@ -481,6 +642,31 @@ async function ausyncFullTextTts(
   }
 
   return results;
+}
+
+/**
+ * Nearest point to `preferred` that sits inside a real silence, searched within
+ * ±0.6 s and clamped to [lo, hi]. Falls back to `preferred` when the voice never
+ * pauses near there — a cut mid-word beats a scene of the wrong length.
+ */
+function snapToSilence(
+  preferred: number,
+  silences: Array<{ start: number; end: number }>,
+  lo: number,
+  hi: number,
+): number {
+  const clamp = (t: number) => Math.min(hi, Math.max(lo, t));
+  const WINDOW = 0.6;
+  let best: number | null = null;
+  let bestDist = Infinity;
+  for (const s of silences) {
+    if (s.end < preferred - WINDOW || s.start > preferred + WINDOW) continue;
+    // Inside this silence, the closest legal instant to where we wanted to cut.
+    const cand = clamp(Math.min(Math.max(preferred, s.start), s.end));
+    const dist = Math.abs(cand - preferred);
+    if (dist < bestDist) { best = cand; bestDist = dist; }
+  }
+  return best ?? clamp(preferred);
 }
 
 /**
@@ -526,4 +712,98 @@ function runFfmpeg(args: string[]): Promise<void> {
     });
     proc.on("error", reject);
   });
+}
+
+/**
+ * Does this alignment describe the audio, or did Whisper lose part of it?
+ *
+ * Returns a human-readable defect, or null when the timings look usable. The
+ * thresholds are deliberately loose — every one of them is unambiguous
+ * breakage, not a judgement call:
+ *
+ *  - **coverage** — Whisper merges and splits tokens, so a word count within
+ *    ~20% of the source is normal. Below 55% it did not transcribe a chunk.
+ *  - **head** — TTS audio opens on speech within a few hundred ms. A first word
+ *    six seconds in means the opening was dropped (the 2026-08-09 case had it
+ *    at 30s).
+ *  - **tail** — likewise at the end, allowing for the natural trailing pause.
+ */
+function alignmentDefect(
+  words: WordTiming[],
+  sourceTokenCount: number,
+  fullDur: number,
+): string | null {
+  if (words.length === 0) return "0 words";
+
+  const coverage = words.length / Math.max(1, sourceTokenCount);
+  if (coverage < 0.55) {
+    return `only ${words.length}/${sourceTokenCount} words transcribed (${(coverage * 100).toFixed(0)}%)`;
+  }
+  const head = words[0].start;
+  if (head > 6) {
+    return `first word at ${head.toFixed(1)}s — the opening was dropped`;
+  }
+  const tail = fullDur - words[words.length - 1].end;
+  if (tail > 10) {
+    return `last word ends ${tail.toFixed(1)}s before the audio does`;
+  }
+  return null;
+}
+
+/** Silence intervals in `audioPath`, one ffmpeg pass. Used to place scene cuts where nobody is speaking. */
+function detectSilences(audioPath: string): Promise<Array<{ start: number; end: number }>> {
+  return new Promise((resolve, reject) => {
+    const proc = spawn("ffmpeg", [
+      "-hide_banner", "-i", audioPath,
+      "-af", "silencedetect=n=-45dB:d=0.06", "-f", "null", "-",
+    ]);
+    let err = "";
+    proc.stderr.on("data", (d: Buffer) => { err += d.toString(); });
+    proc.on("close", () => {
+      const out: Array<{ start: number; end: number }> = [];
+      let pending: number | null = null;
+      for (const line of err.split("\n")) {
+        const s = line.match(/silence_start:\s*(-?[\d.]+)/);
+        if (s) { pending = parseFloat(s[1]); continue; }
+        const e = line.match(/silence_end:\s*([\d.]+)/);
+        if (e && pending !== null) { out.push({ start: pending, end: parseFloat(e[1]) }); pending = null; }
+      }
+      resolve(out);
+    });
+    proc.on("error", reject);
+  });
+}
+
+/** How far outside the word gap to look for the real pause when Whisper's timings have drifted. */
+const CUT_SNAP_SEC = 0.6;
+
+/**
+ * Where to split two adjacent scenes. Whisper ends a word at its last loud frame and starts
+ * the next one late, so the span between them holds the previous word's tail AND the next
+ * word's onset. Cut in the middle of the silence separating them. When Whisper reports no
+ * span at all (end === next start) its timings have drifted off the real sentence boundary,
+ * so widen the search — the pause is nearby, just not where Whisper put it.
+ */
+function pickSceneCut(
+  prevEnd: number,
+  nextStart: number,
+  silences: Array<{ start: number; end: number }>,
+  floor: number,
+): number {
+  const midpointOfWidest = (lo: number, hi: number): number | null => {
+    const overlapping = silences
+      .filter((s) => s.end > lo && s.start < hi)
+      .map((s) => ({ start: Math.max(s.start, lo), end: Math.min(s.end, hi) }))
+      .filter((s) => s.end > s.start && (s.start + s.end) / 2 > floor)
+      .sort((a, b) => (b.end - b.start) - (a.end - a.start));
+    return overlapping.length > 0 ? (overlapping[0].start + overlapping[0].end) / 2 : null;
+  };
+
+  const inGap = nextStart > prevEnd ? midpointOfWidest(prevEnd, nextStart) : null;
+  if (inGap !== null) return inGap;
+
+  const snapped = midpointOfWidest(prevEnd - CUT_SNAP_SEC, nextStart + CUT_SNAP_SEC);
+  if (snapped !== null) return snapped;
+
+  return Math.max(nextStart > prevEnd ? (prevEnd + nextStart) / 2 : nextStart, floor);
 }
