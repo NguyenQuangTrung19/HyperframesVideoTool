@@ -1,0 +1,42 @@
+Rodri chọn Barcelona, Real Madrid nhận đòn đau
+
+Rodri đã tự tay khép lại cuộc đua bằng cách tuyên bố muốn tới Barcelona và từ chối lời đề nghị của Real Madrid. Barca và Manchester City giờ chỉ còn cách nhau đúng 10 triệu euro trên bàn đàm phán, và cả hai phía đều tin thương vụ sẽ chốt trong vài ngày tới.
+
+## Key facts
+- Rodri khởi động thương vụ bằng việc công khai muốn khoác áo Barcelona, gạt đề nghị của Real Madrid sang một bên.
+- Đề nghị chính thức mới nhất của Barcelona: 70 triệu euro, gồm 60 triệu cứng cộng 10 triệu phụ phí và thưởng thành tích.
+- Manchester City giữ nguyên mức 80 triệu euro trọn gói, và đã từ chối đề nghị hôm thứ Sáu của Barca.
+- Khoảng cách giữa hai bên chỉ còn 10 triệu euro — lý do khiến cả hai CLB đều lạc quan.
+- Người dẫn đàm phán là Deco, giám đốc thể thao Barcelona, đối thoại với Hugo Viana bên phía Man City. Cả hai đều là người Bồ Đào Nha.
+- Theo báo Marca, nếu Chủ nhật chưa xong thì hai CLB tự tin chốt vào thứ Hai.
+- Joan Vehils, tổng biên tập báo Sport, đặt tựa bài phân tích là "Barcelona đã có thứ Real Madrid muốn".
+- Vehils đánh giá Rodri lấp đúng vị trí gây nghi ngờ nhiều nhất trong đội hình Real Madrid.
+- Điểm mạnh của Rodri được nêu: cân bằng đội hình, điều tiết lối chơi và kiểm soát nhịp độ trận đấu.
+- Vehils cho rằng ảnh hưởng của Rodri vượt xa việc thu hồi bóng và xây dựng tấn công, chạm tới tính cách đội bóng và khả năng áp đảo những trận lớn.
+- Deco được ca ngợi vì chốt được thương vụ có thể mở ra một kỷ nguyên mới ở sân Camp Nou.
+- Hàng công Barca có tín hiệu tốt: tiền đạo người Ai Cập Hamza duy trì mạch ghi bàn, còn tân binh Bassio đến từ Club Brugge ghi 2 bàn trong giai đoạn chuẩn bị mùa giải.
+
+## Context
+- Barcelona vẫn chưa giải quyết xong vị trí trung phong cắm thực thụ, trong khi tương lai thương vụ Julián Álvarez còn bấp bênh.
+- Với Real Madrid, tuyến giữa là khu vực bị đặt dấu hỏi lớn nhất — mất Rodri đồng nghĩa bài toán đó chưa có lời giải.
+- Giới quan sát Tây Ban Nha xem thương vụ này là chỉ dấu đảo chiều cán cân giữa hai cực của bóng đá xứ đấu bò.
+- Đây là lần hiếm hoi Barcelona thắng Real Madrid trong một cuộc đua chữ ký đỉnh cao sau nhiều năm hụt hơi vì tài chính.
+
+## Quotes
+- "Barcelona đã có thứ mà Real Madrid muốn." — Joan Vehils, tổng biên tập báo Sport
+- "Một câu lạc bộ có nhiều nguồn lực hơn, nhiều lựa chọn hơn và tham vọng lớn hơn." — Joan Vehils nói về Barcelona hiện tại
+- "Thương vụ Rodri không thể bị thu gọn thành một bản hợp đồng lớn. Đó là lời tuyên bố rõ ràng về tham vọng của Barcelona." — Joan Vehils
+
+---
+## Giới hạn thời lượng (cho /create-video — KHÔNG đọc lên, KHÔNG lên hình)
+- Mục tiêu: 100-115 giây. Trần cứng: 120 giây.
+- Tổng voiceText MỌI scene cộng lại: **≤ 460 từ** (đo được 0,24 giây/từ).
+- Tổng scene: **≤ 9** (N ảnh trong plan + 1 feature-list + engagement-question + outro).
+- Mỗi body scene tối đa **2 câu** voiceText. KHÔNG viết 3-5 câu/scene.
+- Fact nào không kịp nói thì cho lên `highlights`/`context` để người xem tắt tiếng vẫn đọc được — đừng nhồi vào voiceText.
+- Check trước khi render: đếm từ, >460 thì cắt câu chứ KHÔNG bỏ scene.
+
+---
+Nguồn: goal.com · https://www.goal.com/en/news/behind-the-scenes-of-the-final-hours-what-stands-between-barcelona-and-manchester-city-in-sealing-the-rodri-deal/blt74835e0da08a2f91
+Nguồn 2: goal.com · https://www.goal.com/en/news/the-deal-of-the-century-barcelona-already-has-what-madrid-wants/bltcd8ea0543d32cfee
+Ngày: 16-17/08/2026

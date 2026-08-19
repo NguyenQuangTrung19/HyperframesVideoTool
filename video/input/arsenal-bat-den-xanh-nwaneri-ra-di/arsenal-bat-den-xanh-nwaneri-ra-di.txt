@@ -1,0 +1,36 @@
+Arsenal bật đèn xanh cho Nwaneri ra đi
+
+Arsenal đã cho phép Ethan Nwaneri rời sân Emirates ngay trong hè này, và AC Milan nổi lên là ứng viên nghiêm túc nhất. Tài năng 19 tuổi từng phá kỷ lục ngày ra mắt giờ nằm ngoài kế hoạch trước mắt của Mikel Arteta.
+
+## Key facts
+- Ethan Nwaneri, 19 tuổi, được Arsenal bật đèn xanh cho ra đi trước khi kỳ chuyển nhượng hè khép lại.
+- Nwaneri có 4 bàn sau 24 trận tại Ngoại hạng Anh.
+- Nửa sau mùa trước, anh được đẩy sang Marseille theo dạng cho mượn tại Ligue 1.
+- Chuyến đi Pháp không giúp anh trở lại nhóm nòng cốt của Pháo Thủ khi quay về.
+- Nwaneri không có tên trên ghế dự bị trận Community Shield gặp Manchester City, dù đã dự trọn mùa giao hữu hè.
+- AC Milan xem Nwaneri là lời giải cho vị trí tiền vệ tấn công mà họ đang tìm.
+- Milan cần một nhạc trưởng đa năng, chơi lệch cánh phải và hoạt động sau lưng tiền đạo cắm.
+- Bộ phận tuyển trạch của Milan đã theo dõi Nwaneri từ cuối tháng 7, khi tên anh vào danh sách rút gọn các mục tiêu tấn công.
+- Chuyên gia chuyển nhượng Fabrizio Romano xác nhận kế hoạch chia tay đã được chốt từ nhiều tuần trước.
+
+## Context
+- Nwaneri từng là hiện tượng phá kỷ lục ở tuổi ra mắt, nhưng chiều sâu đội hình Arsenal khiến anh không có suất đá chính ổn định.
+- Vấn đề của anh không phải chất lượng mà là số phút ra sân — 24 trận Ngoại hạng Anh trải qua nhiều mùa là quá ít cho một tài năng cùng lứa.
+- Serie A được xem là môi trường hợp lý để anh tìm lại nhịp thi đấu thường xuyên, điều bắt buộc phải có ở tuổi 19.
+- Việc bị gạch tên khỏi danh sách dự bị ở trận tranh Siêu cúp là tín hiệu rõ nhất cho thấy Arteta đã quyết.
+
+## Quotes
+- "Ethan Nwaneri sẽ rời Arsenal trước khi kỳ chuyển nhượng hè khép lại, đúng như kế hoạch đã định từ nhiều tuần trước. Cậu ấy thậm chí không có tên trên ghế dự bị trước Manchester City dù đã dự mùa giao hữu." — Fabrizio Romano, chuyên gia chuyển nhượng
+
+---
+## Giới hạn thời lượng (cho /create-video — KHÔNG đọc lên, KHÔNG lên hình)
+- Mục tiêu: 100-115 giây. Trần cứng: 120 giây.
+- Tổng voiceText MỌI scene cộng lại: **≤ 460 từ** (đo được 0,24 giây/từ).
+- Tổng scene: **≤ 9** (N ảnh trong plan + 1 feature-list + engagement-question + outro).
+- Mỗi body scene tối đa **2 câu** voiceText. KHÔNG viết 3-5 câu/scene.
+- Fact nào không kịp nói thì cho lên `highlights`/`context` để người xem tắt tiếng vẫn đọc được — đừng nhồi vào voiceText.
+- Check trước khi render: đếm từ, >460 thì cắt câu chứ KHÔNG bỏ scene.
+
+---
+Nguồn: goal.com · https://www.goal.com/en/lists/ethan-nwaneri-green-light-leave-arsenal-ac-milan-/blta6d4e312c55c74fa
+Ngày: 16/08/2026

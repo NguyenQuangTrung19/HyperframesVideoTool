@@ -1,0 +1,46 @@
+9 cái tên đáng xem nhất La Liga mùa 2026-27
+
+Trước ngày La Liga khởi tranh, Opta chọn ra 9 gương mặt đáng theo dõi nhất mùa 2026-27. Danh sách trải dài từ bản hợp đồng 140 triệu euro của Real Madrid tới những chân sút vừa đưa đội nhà lên hạng.
+
+## Key facts
+- Yan Diomande cập bến Real Madrid sau một mùa bùng nổ ở RB Leipzig: 12 bàn, 8 pha kiến tạo, đoạt giải Tân binh xuất sắc nhất Bundesliga.
+- Ngoài Diomande, chỉ Lamine Yamal (11 bàn, 11 kiến tạo) cán mốc 20 pha tham gia bàn thắng ở tuổi dưới 24 tại 5 giải hàng đầu châu Âu.
+- Diomande dẫn đầu Bundesliga với 7,7 pha đi bóng qua người mỗi 90 phút, tỉ lệ thành công 55,4%. Real Madrid có thể phải chi tới 140 triệu euro.
+- Anthony Gordon rời Newcastle sang Barcelona giá 80 triệu euro, sau mùa hay nhất sự nghiệp với 17 bàn trên mọi đấu trường.
+- Gordon nằm trong nhóm 10 cầu thủ nhanh nhất Ngoại hạng Anh mùa trước, tốc độ tối đa 36,3 km mỗi giờ và 25,8 pha nước rút mỗi trận — cao nhất giải.
+- 10 bàn ở Champions League của Gordon là kỷ lục một mùa cho cầu thủ Anh khoác áo câu lạc bộ Anh.
+- Robbie Ure, 22 tuổi, từ Sirius của Thụy Điển sang Sevilla với giá khởi điểm 6,5 triệu euro.
+- Ure ghi 15 bàn sau 15 trận ở Allsvenskan 2026, hơn người xếp sau 3 bàn, giúp Sirius dẫn đầu 12 điểm.
+- Sevilla đã chật vật tránh xuống hạng 3 mùa liên tiếp; Ure là canh bạc lớn nhất của họ trong kỳ chuyển nhượng này.
+- Yeremay Hernández, 23 tuổi, lần đầu đá La Liga cùng Deportivo. Hai mùa Segunda gần nhất, anh dẫn đầu về số pha đi bóng (6,7 mỗi 90 phút) và số lần tham gia bàn thắng sau khi rê dắt (17).
+- Gustavo Puerta đưa Racing Santander trở lại La Liga sau 14 năm vắng bóng, rồi dự World Cup 2026 cùng Colombia.
+- Puerta xếp thứ 2 nhóm tiền vệ Segunda về số pha dẫn bóng vượt tuyến trên 10 mét (4,1 mỗi 90 phút) và thứ 6 về số lần đoạt lại bóng (6,4).
+- Chupe, 21 tuổi, ghi 25 bàn và kiến tạo 6 lần sau 45 trận, đưa Málaga từ hạng ba lên La Liga chỉ trong hơn 2 năm.
+- 19 bàn không tính phạt đền của Chupe đến từ 13,1 bàn kỳ vọng — hiệu suất dứt điểm vượt xa chỉ số.
+- Javi Rodríguez, trung vệ lệch phải của Celta Vigo, vừa ra mắt tuyển Tây Ban Nha ở trận giao hữu trước World Cup.
+- Javi đạt 80,9% chuyền chính xác vào 1/3 cuối sân, hạng 5 nhóm trung vệ, và tung 9,2 đường chuyền xuyên tuyến mỗi 90 phút.
+- Cala, tiền vệ cánh phải thuận chân trái, là bản hợp đồng đầu tiên của giám đốc thể thao Monchi tại Espanyol.
+- Mùa trước ở Castellón, Cala có 23 pha tham gia bàn thắng (15 bàn, 8 kiến tạo) và là 1 trong 2 cầu thủ Segunda đạt cả 3,2 cú sút lẫn 1,8 pha kiến tạo cơ hội bóng sống mỗi 90 phút.
+- Buba Sangaré, hậu vệ 19 tuổi, được Elche mua đứt từ Roma với giá 4,5 triệu euro sau nửa mùa cho mượn.
+- Từ ngày 2/2, Sangaré dẫn đầu nhóm hậu vệ về số pha tranh chấp mỗi 90 phút (14,5) và xếp thứ 4 về số lần tắc bóng (3,5).
+
+## Context
+- Racing Santander, Málaga và Elche đều là tân binh mùa này. Suất trụ hạng của họ gắn chặt với phong độ những cái tên trên.
+- Diomande ra mắt chuyên nghiệp trong màu áo Leganés ngay tại Bernabéu, chưa đầy 17 tháng trước ngày anh ký hợp đồng với Real Madrid.
+- Cala phải chờ tới ngoài 20 tuổi mới lần đầu được đá hạng cao nhất; anh từng chỉ khoác áo đội B của Atlético Madrid ở hạng ba, tư và năm.
+- Sangaré sinh ra tại Elche nhưng tuổi thơ lại không thuộc về lò đào tạo đội bóng này.
+
+---
+## Giới hạn thời lượng (cho /create-video — KHÔNG đọc lên, KHÔNG lên hình)
+- Mục tiêu: 100-115 giây. Trần cứng: 120 giây.
+- Tổng voiceText MỌI scene cộng lại: **≤ 440 từ** (đo được 0,26 giây/từ).
+- Tổng scene: **12** = hook + 9 `stat-hero` (mỗi cầu thủ 1 cảnh) + engagement-question + outro. KHÔNG thêm feature-list.
+- Đủ 9 cái tên như tiêu đề, MỖI người một cảnh riêng có tên + số liệu. Cảnh `hook` là ảnh mở màn chung (cúp La Liga / sân đêm khai mạc), không lấy mặt cầu thủ nào để khỏi trùng.
+- 12 scene vẫn dưới trần: `MAX_SCENES["9:16"] = 20` trong `src/render/script-schema.ts`, và 440 từ × 0,26 = 114 giây < 120.
+- Mỗi body scene tối đa **2 câu** voiceText. KHÔNG viết 3-5 câu/scene.
+- Fact nào không kịp nói thì cho lên `highlights`/`context` để người xem tắt tiếng vẫn đọc được — đừng nhồi vào voiceText.
+- Check trước khi render: đếm từ, >440 thì cắt câu chứ KHÔNG bỏ scene.
+
+---
+Nguồn: theanalyst.com · https://theanalyst.com/articles/la-liga-players-to-watch-2026-27-stats
+Ngày: 14/08/2026

@@ -1,0 +1,33 @@
+{
+  "version": "1.0",
+  "source": "neu-nhu-messi-gia-nhap-arsenal-2003.txt",
+  "contentType": "WHAT-IF",
+  "title": "Nếu như Messi gia nhập Arsenal năm 2003",
+  "createdAt": "2026-08-18T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "hook-1: Lionel Messi tuổi teen áo Barcelona · hook-2: Poster giả định Lionel Messi áo đỏ trắng Arsenal"
+    },
+    {
+      "id": "fabregas",
+      "template": "stat-hero",
+      "filename": "fabregas.png",
+      "subjectHint": "Cesc Fabregas tuổi 16 trong màu áo Arsenal, năm 2003"
+    },
+    {
+      "id": "wenger",
+      "template": "callout",
+      "filename": "wenger.png",
+      "subjectHint": "Arsene Wenger bên đường biên Highbury thời kỳ Bất Bại"
+    },
+    {
+      "id": "messi-barca",
+      "template": "stat-hero",
+      "filename": "messi-barca.png",
+      "subjectHint": "Lionel Messi cùng Xavi và Iniesta trong màu áo Barcelona"
+    }
+  ]
+}

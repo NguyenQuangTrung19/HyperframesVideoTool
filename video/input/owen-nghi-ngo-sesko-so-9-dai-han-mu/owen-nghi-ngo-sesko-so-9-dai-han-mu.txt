@@ -1,0 +1,43 @@
+Michael Owen nghi ngờ Sesko là số 9 dài hạn của MU
+
+Benjamin Sesko vẫn là trung phong cắm duy nhất trong biên chế Manchester United, nhưng Michael Owen nói thẳng với Goal rằng ông "nghi ngờ" khả năng tiền đạo người Slovenia trở thành số 9 dài hạn ở Old Trafford. Quỷ Đỏ vẫn chưa bổ sung tiền đạo nào trước ngày trở lại Champions League.
+
+## Key facts
+- Manchester United chi 74 triệu bảng, tương đương 100 triệu đô, mua Sesko từ RB Leipzig hè 2025.
+- Sesko cần 7 trận mới có bàn đầu tiên cho Quỷ Đỏ; hết năm dương lịch anh mới ghi đúng 2 bàn.
+- Nửa sau mùa 2025-26, Sesko ghi 10 bàn sau 15 trận và tạo dựng danh tiếng "siêu dự bị".
+- Tiền đạo 23 tuổi này hiện là trung phong cắm duy nhất trong đội hình Manchester United.
+- Owen nói nếu tuần sau là chung kết Cúp C1, ông không chắc Sesko được đá chính.
+- Michael Carrick thường đẩy Matheus Cunha hoặc Bryan Mbeumo lên đá cắm, đội vẫn vận hành tốt.
+- Trước Sesko, Quỷ Đỏ từng thử Romelu Lukaku, Alexis Sánchez, Wout Weghorst và Rasmus Højlund đều không trụ được.
+- Manchester United nằm trong nhóm cân nhắc hỏi mua Igor Thiago của Brentford.
+- Igor Thiago ghi 22 bàn ở Premier League mùa trước và có suất dự World Cup cùng Brazil.
+- Owen cho rằng kiểu trung phong to cao chưa bao giờ hợp lối chơi truyền thống của Manchester United.
+- Đội chủ sân Old Trafford mất Casemiro nhưng đã thay bằng 2 tiền vệ khác.
+- Owen tin Carrick muốn thêm vài cầu thủ nữa, ưu tiên số lượng để gánh lịch Champions League.
+- Quỷ Đỏ còn 2 trận giao hữu gặp Leeds và AC Milan trước ngày khai màn.
+- Manchester United mở màn mùa 2026-27 trên sân Hull City ngày 22/8; hạn chót chuyển nhượng là 1/9.
+
+## Context
+- Manchester United trở lại Champions League mùa này, mật độ trận tăng mạnh — Owen coi đây là thứ dễ khiến họ vấp ngã nhất.
+- Hàng công Quỷ Đỏ không dày quân số, nhưng vận hành hiệu quả mùa trước dù thiếu một số 9 ổn định.
+- Amad chỉ đá khoảng nửa số trận mùa trước, cho thấy Carrick xoay tua liên tục ở tuyến trên.
+- Sesko khởi đầu chật vật nhưng đã tiến bộ rõ, và Owen thừa nhận việc thuyết phục được người hâm mộ ở Manchester United một thập kỷ qua chưa bao giờ dễ.
+
+## Quotes
+- "Nhiều thời điểm cậu ấy còn không ra sân mà đội vẫn chơi khá tốt. Nếu tuần sau là chung kết Cúp C1, tôi không chắc cậu ấy đá chính." — Michael Owen, cựu tiền đạo Manchester United
+- "Cậu ấy đã trưởng thành trong vai trò đó. Nhưng nếu hỏi tôi có xem cậu ấy là trung phong dài hạn của Manchester United không, thì tôi có sự nghi ngờ." — Michael Owen
+- "Thứ có thể làm họ vấp ngã chính là số trận mà họ sẽ phải đá mùa này." — Michael Owen
+
+---
+## Giới hạn thời lượng (cho /create-video — KHÔNG đọc lên, KHÔNG lên hình)
+- Mục tiêu: 100-115 giây. Trần cứng: 120 giây.
+- Tổng voiceText MỌI scene cộng lại: **≤ 440 từ** (đo được 0,26 giây/từ).
+- Tổng scene: **≤ 11** (N ảnh trong plan + 1 feature-list + engagement-question + outro).
+- Mỗi body scene tối đa **2 câu** voiceText. KHÔNG viết 3-5 câu/scene.
+- Fact nào không kịp nói thì cho lên `highlights`/`context` để người xem tắt tiếng vẫn đọc được — đừng nhồi vào voiceText.
+- Check trước khi render: đếm từ, >440 thì cắt câu chứ KHÔNG bỏ scene.
+
+---
+Nguồn: goal.com · https://www.goal.com/en/lists/is-benjamin-sesko-the-long-term-no-9-for-man-utd-michael-owen-has-doubts-as-red-devils-lack-options-in-the-goalscoring-department/blt68df37eb96104113
+Ngày: 9/8/2026

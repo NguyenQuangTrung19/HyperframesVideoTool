@@ -1,0 +1,39 @@
+{
+  "version": "1.0",
+  "source": "arsenal-bat-den-xanh-nwaneri-ra-di.txt",
+  "contentType": "TRANSFER NEWS",
+  "title": "Arsenal bật đèn xanh cho Nwaneri ra đi",
+  "createdAt": "2026-08-17T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Ethan Nwaneri — Arsenal, chân dung hero, tài năng trẻ 19 tuổi"
+    },
+    {
+      "id": "nwaneri-arsenal",
+      "template": "stat-hero",
+      "filename": "nwaneri-arsenal.png",
+      "subjectHint": "Ethan Nwaneri — Arsenal, thi đấu tại Ngoại hạng Anh"
+    },
+    {
+      "id": "nwaneri-marseille",
+      "template": "callout",
+      "filename": "nwaneri-marseille.png",
+      "subjectHint": "Ethan Nwaneri trong màu áo Marseille — nửa mùa cho mượn tại Ligue 1"
+    },
+    {
+      "id": "arteta-quyet",
+      "template": "callout",
+      "filename": "arteta-quyet.png",
+      "subjectHint": "Mikel Arteta — Arsenal, chỉ đạo bên đường biên"
+    },
+    {
+      "id": "milan-vao-cuoc",
+      "template": "stat-hero",
+      "filename": "milan-vao-cuoc.png",
+      "subjectHint": "Ethan Nwaneri trong màu áo AC Milan — viễn cảnh sang Serie A"
+    }
+  ]
+}

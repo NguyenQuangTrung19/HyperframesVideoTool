@@ -1,0 +1,93 @@
+{
+  "version": "1.0",
+  "aspect": "16:9",
+  "source": "ban-tin-11-08.txt",
+  "contentType": "NEWS ROUNDUP",
+  "title": "Bản tin sáng 11/8 — 8 tin nóng, Man City đối mặt 130 triệu euro",
+  "createdAt": "2026-08-11T01:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Tổng hợp chuyển nhượng — không khí phòng họp báo bóng đá châu Âu, logo các câu lạc bộ lớn"
+    },
+    {
+      "id": "tin1-open",
+      "template": "stat-hero",
+      "filename": "tin1-open.png",
+      "marker": "TIN 1/8",
+      "subjectHint": "Ayoub Bouaddi — tiền vệ Lille, tuyển thủ Morocco"
+    },
+    {
+      "id": "tin1-rodri",
+      "template": "callout",
+      "filename": "tin1-rodri.png",
+      "marker": "TIN 1/8",
+      "subjectHint": "Rodri — tiền vệ Manchester City, áo xanh nhạt"
+    },
+    {
+      "id": "tin2-open",
+      "template": "callout",
+      "filename": "tin2-open.png",
+      "marker": "TIN 2/8",
+      "subjectHint": "Ronald Araujo — trung vệ Uruguay, trong màu áo đỏ Liverpool"
+    },
+    {
+      "id": "tin2-flick",
+      "template": "stat-hero",
+      "filename": "tin2-flick.png",
+      "marker": "TIN 2/8",
+      "subjectHint": "Hansi Flick — huấn luyện viên Barcelona, chỉ đạo bên đường biên"
+    },
+    {
+      "id": "tin3-open",
+      "template": "stat-hero",
+      "filename": "tin3-open.png",
+      "marker": "TIN 3/8",
+      "subjectHint": "Ferran Torres — tiền đạo Barcelona, tuyển thủ Tây Ban Nha"
+    },
+    {
+      "id": "tin4-open",
+      "template": "callout",
+      "filename": "tin4-open.png",
+      "marker": "TIN 4/8",
+      "subjectHint": "Julian Alvarez — tiền đạo Atletico Madrid, áo sọc đỏ trắng"
+    },
+    {
+      "id": "tin5-open",
+      "template": "callout",
+      "filename": "tin5-open.png",
+      "marker": "TIN 5/8",
+      "subjectHint": "Endrick — tiền đạo Real Madrid, áo trắng, tuyển thủ Brasil"
+    },
+    {
+      "id": "tin5-mourinho",
+      "template": "stat-hero",
+      "filename": "tin5-mourinho.png",
+      "marker": "TIN 5/8",
+      "subjectHint": "Jose Mourinho — huấn luyện viên Real Madrid, sân Santiago Bernabeu"
+    },
+    {
+      "id": "tin6-open",
+      "template": "callout",
+      "filename": "tin6-open.png",
+      "marker": "TIN 6/8",
+      "subjectHint": "Sir Alex Ferguson — Manchester United, gương mặt trầm tư trên sân Old Trafford"
+    },
+    {
+      "id": "tin7-open",
+      "template": "stat-hero",
+      "filename": "tin7-open.png",
+      "marker": "TIN 7/8",
+      "subjectHint": "Micky van de Ven — trung vệ Tottenham, áo trắng, sân Tottenham Hotspur Stadium"
+    },
+    {
+      "id": "tin8-open",
+      "template": "callout",
+      "filename": "tin8-open.png",
+      "marker": "TIN 8/8",
+      "subjectHint": "Cody Gakpo — tiền đạo Liverpool, áo đỏ"
+    }
+  ]
+}

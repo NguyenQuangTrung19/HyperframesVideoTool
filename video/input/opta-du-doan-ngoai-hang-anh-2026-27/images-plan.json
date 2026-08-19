@@ -1,0 +1,57 @@
+{
+  "version": "1.0",
+  "source": "opta-du-doan-ngoai-hang-anh-2026-27.txt",
+  "contentType": "TRIVIA",
+  "title": "Siêu máy tính Opta dự đoán Ngoại hạng Anh 2026-27",
+  "createdAt": "2026-08-15T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Poster mở màn Ngoại hạng Anh 2026-27 — chiếc cúp bạc Premier League dưới ánh đèn sân vận động"
+    },
+    {
+      "id": "arteta-arsenal",
+      "template": "stat-hero",
+      "filename": "arteta-arsenal.png",
+      "subjectHint": "Mikel Arteta — huấn luyện viên Arsenal, cầu thủ áo đỏ trắng ăn mừng chức vô địch"
+    },
+    {
+      "id": "saliba",
+      "template": "stat-hero",
+      "filename": "saliba.png",
+      "subjectHint": "William Saliba — trung vệ Arsenal, tuyển Pháp"
+    },
+    {
+      "id": "maresca-city",
+      "template": "stat-hero",
+      "filename": "maresca-city.png",
+      "subjectHint": "Enzo Maresca — tân huấn luyện viên Manchester City, sân Etihad"
+    },
+    {
+      "id": "iraola-liverpool",
+      "template": "stat-hero",
+      "filename": "iraola-liverpool.png",
+      "subjectHint": "Andoni Iraola — tân huấn luyện viên Liverpool, sân Anfield"
+    },
+    {
+      "id": "carrick-mu",
+      "template": "stat-hero",
+      "filename": "carrick-mu.png",
+      "subjectHint": "Michael Carrick — huấn luyện viên Manchester United, sân Old Trafford"
+    },
+    {
+      "id": "hull-city",
+      "template": "callout",
+      "filename": "hull-city.png",
+      "subjectHint": "Hull City — tân binh Ngoại hạng Anh, áo sọc cam đen, khán đài sân MKM"
+    },
+    {
+      "id": "sunderland",
+      "template": "callout",
+      "filename": "sunderland.png",
+      "subjectHint": "Sunderland — áo sọc đỏ trắng, khán đài Stadium of Light"
+    }
+  ]
+}

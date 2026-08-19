@@ -1,0 +1,41 @@
+Piqué đổ tiền vào cờ vua, đi sau Haaland một bước
+
+Gerard Piqué công bố cổ phần chiến lược tại đội cờ vua PBG Alaskan Knights trong buổi họp báo ở Bengaluru hôm 18/8. Nhưng Erling Haaland đã đặt chân vào Global Chess League trước đó, với đội American Gambits.
+
+## Key facts
+- Piqué trở thành nhà đầu tư chiến lược của PBG Alaskan Knights, một đội thi đấu tại Global Chess League.
+- Thương vụ được công bố trong họp báo tại Bengaluru, Ấn Độ, hôm thứ Hai 18/8/2026.
+- Piqué vô địch World Cup 2010 cùng Tây Ban Nha, cả sự nghiệp CLB gắn với Barcelona.
+- Cựu trung vệ này điều hành công ty truyền thông và thể thao Kosmos.
+- Piqué nói cờ vua hút ông vì chiều sâu, sức hấp dẫn toàn cầu và sức mạnh tinh thần mà môn này đòi hỏi.
+- Haaland vào cuộc chơi trước Piqué, với cổ phần tại đội American Gambits.
+- Người hậu thuẫn Haaland trong dự án là nhà đầu tư Na Uy Morten Borge.
+- Cựu tuyển thủ cricket Ấn Độ Ravichandran Ashwin cũng là cổ đông của American Gambits.
+- Global Chess League được tập đoàn công nghệ Ấn Độ Tech Mahindra và Liên đoàn Cờ vua Quốc tế hậu thuẫn.
+- Giải chạy thể thức rút gọn, thiết kế riêng cho truyền hình và nền tảng số.
+- Mùa thứ tư của giải diễn ra tại Bengaluru vào tháng 9/2026, có American Gambits góp mặt.
+- Borge dẫn con số gần 1 tỷ người chơi cờ trên toàn cầu khi nói về tiềm năng thương mại.
+
+## Context
+- Gói đầu tư không chỉ là đội cờ: giải bán kèm tour quốc tế, nội dung số, hợp đồng tài trợ và nền tảng livestream.
+- Sức hút của cờ vua với giới bóng đá không mới. Pep Guardiola từng mượn cờ vua để nói về chiến lược, còn Mohamed Salah công khai kể về mối liên hệ của mình với môn này.
+- Ngoài bóng đá, hai tay vợt Boris Becker và Novak Djokovic cũng từng nói về cờ vua.
+- Điểm chung Borge chỉ ra: bóng đá đỉnh cao ăn nhau ở khâu chuẩn bị, chiến lược và chọn thời điểm, đúng thứ cờ vua đòi hỏi.
+
+## Quotes
+- "Cờ vua luôn cuốn hút tôi vì chiều sâu, vì sức hấp dẫn toàn cầu và vì sức mạnh tinh thần mà nó đòi hỏi." — Gerard Piqué, nhà đầu tư PBG Alaskan Knights
+- "Erling trông như một quái vật trên sân, nhưng bóng đá đỉnh cao cũng là chuẩn bị, chiến lược, chọn thời điểm và hiểu khoảnh khắc quyết định. Ở góc nhìn đó, nó giống cờ vua." — Morten Borge, nhà đầu tư Na Uy
+- "Người ta tiếp thị được cả môn phi tiêu vốn ít người chơi, trong khi gần 1 tỷ người trên thế giới chơi cờ. Cơ hội quá rõ." — Morten Borge
+
+---
+## Giới hạn thời lượng (cho /create-video — KHÔNG đọc lên, KHÔNG lên hình)
+- Mục tiêu: 75-95 giây. Trần cứng: 105 giây. (Bài mỏng, không bơm chữ cho dài ra.)
+- Tổng voiceText MỌI scene cộng lại: **≤ 340 từ** (đo được 0,24 giây/từ).
+- Tổng scene: **≤ 8** (N ảnh trong plan + 1 feature-list + engagement-question + outro).
+- Mỗi body scene tối đa **2 câu** voiceText. KHÔNG viết 3-5 câu/scene.
+- Fact nào không kịp nói thì cho lên `highlights`/`context` để người xem tắt tiếng vẫn đọc được — đừng nhồi vào voiceText.
+- Check trước khi render: đếm từ, >340 thì cắt câu chứ KHÔNG bỏ scene.
+
+---
+Nguồn: goal.com · https://www.goal.com/en/news/pique-enters-haaland-s-secret-world/blt044a85b53fd78c1d
+Ngày: 18/08/2026

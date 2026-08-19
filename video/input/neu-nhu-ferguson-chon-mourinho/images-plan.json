@@ -1,0 +1,33 @@
+{
+  "version": "1.0",
+  "source": "neu-nhu-ferguson-chon-mourinho.txt",
+  "contentType": "WHAT-IF",
+  "title": "Nếu như Ferguson chọn Mourinho thay Moyes",
+  "createdAt": "2026-08-18T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "hook-1: David Moyes thời Manchester United · hook-2: Jose Mourinho thời 2013"
+    },
+    {
+      "id": "ferguson-chia-tay",
+      "template": "stat-hero",
+      "filename": "ferguson-chia-tay.png",
+      "subjectHint": "Sir Alex Ferguson vẫy tay chào Old Trafford ngày chia tay, tháng 5 năm 2013"
+    },
+    {
+      "id": "moyes-that-bai",
+      "template": "callout",
+      "filename": "moyes-that-bai.png",
+      "subjectHint": "David Moyes thất thần bên đường biên Old Trafford"
+    },
+    {
+      "id": "mourinho-gia-dinh",
+      "template": "stat-hero",
+      "filename": "mourinho-gia-dinh.png",
+      "subjectHint": "Poster giả định: Jose Mourinho đứng ở Old Trafford với tư cách người kế vị Ferguson năm 2013"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "version": "1.0",
+  "source": "real-madrid-5-cau-hoi-mua-2026-27.txt",
+  "contentType": "TRIVIA",
+  "title": "Real Madrid 2026-27: 5 câu hỏi lớn dưới thời Mourinho",
+  "createdAt": "2026-08-15T16:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "José Mourinho trở lại sân Bernabéu — Real Madrid"
+    },
+    {
+      "id": "mourinho-tro-lai",
+      "template": "stat-hero",
+      "filename": "mourinho-tro-lai.png",
+      "subjectHint": "José Mourinho chỉ đạo bên đường biên — Real Madrid"
+    },
+    {
+      "id": "bo-ba-tan-cong",
+      "template": "stat-hero",
+      "filename": "bo-ba-tan-cong.png",
+      "subjectHint": "bo-ba-tan-cong-1: Vinícius Júnior (Real Madrid) · bo-ba-tan-cong-2: Kylian Mbappé (Real Madrid)"
+    },
+    {
+      "id": "diomande",
+      "template": "stat-hero",
+      "filename": "diomande.png",
+      "subjectHint": "Yan Diomande — tân binh Real Madrid, tiền đạo cánh người Bờ Biển Ngà"
+    },
+    {
+      "id": "bellingham",
+      "template": "stat-hero",
+      "filename": "bellingham.png",
+      "subjectHint": "Jude Bellingham ăn mừng dang hai tay — Real Madrid"
+    },
+    {
+      "id": "konate",
+      "template": "stat-hero",
+      "filename": "konate.png",
+      "subjectHint": "Ibrahima Konaté tranh chấp bóng bổng — Real Madrid"
+    },
+    {
+      "id": "cucurella",
+      "template": "stat-hero",
+      "filename": "cucurella.png",
+      "subjectHint": "Marc Cucurella — hậu vệ trái Real Madrid"
+    },
+    {
+      "id": "tchouameni",
+      "template": "callout",
+      "filename": "tchouameni.png",
+      "subjectHint": "Aurélien Tchouaméni — tiền vệ trụ Real Madrid"
+    }
+  ]
+}

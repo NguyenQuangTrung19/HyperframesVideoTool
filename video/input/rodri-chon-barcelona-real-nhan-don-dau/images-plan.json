@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "source": "rodri-chon-barcelona-real-nhan-don-dau.txt",
+  "contentType": "TRANSFER NEWS",
+  "title": "Rodri chọn Barcelona, Real Madrid nhận đòn đau",
+  "createdAt": "2026-08-17T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Rodri — tiền vệ trung tâm Manchester City, chân dung hero"
+    },
+    {
+      "id": "rodri-barca",
+      "template": "stat-hero",
+      "filename": "rodri-barca.png",
+      "subjectHint": "Rodri trong màu áo Barcelona — viễn cảnh tân binh ra mắt"
+    },
+    {
+      "id": "deco-viana",
+      "template": "callout",
+      "filename": "deco-viana.png",
+      "subjectHint": "deco-viana-1: Deco (giám đốc thể thao Barcelona) · deco-viana-2: Hugo Viana (giám đốc thể thao Manchester City)"
+    },
+    {
+      "id": "real-hut-hang",
+      "template": "callout",
+      "filename": "real-hut-hang.png",
+      "subjectHint": "Real Madrid hụt mục tiêu tuyến giữa — không khí Bernabéu ảm đạm"
+    },
+    {
+      "id": "pham-chat-rodri",
+      "template": "stat-hero",
+      "filename": "pham-chat-rodri.png",
+      "subjectHint": "Rodri — Tây Ban Nha, cầm nhịp giữa sân, thu hồi bóng và phát động"
+    },
+    {
+      "id": "city-mat-tru-cot",
+      "template": "callout",
+      "filename": "city-mat-tru-cot.png",
+      "subjectHint": "Enzo Maresca — HLV Manchester City, chỉ đạo bên đường biên"
+    },
+    {
+      "id": "alvarez-dau-hoi",
+      "template": "stat-hero",
+      "filename": "alvarez-dau-hoi.png",
+      "subjectHint": "Julián Álvarez — tương lai bấp bênh, dấu hỏi trung phong của Barcelona"
+    }
+  ]
+}

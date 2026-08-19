@@ -1,0 +1,45 @@
+Mourinho từng nhận lời thay Ferguson ở Man Utd
+
+Trong loạt phim tài liệu Netflix về sự nghiệp, Jose Mourinho thừa nhận ông đã nhận lời ngồi ghế nóng Man Utd sau khi Sir Alex Ferguson giải nghệ năm 2013, rồi đổi ý chỉ vài giờ sau đó để quay lại Chelsea.
+
+## Key facts
+- Mourinho kể trong phim tài liệu: khi rời Real Madrid năm 2013, ông đã ký để tới Man Utd kế nhiệm Sir Alex Ferguson.
+- Ferguson xác nhận đã ngồi lại giải thích tình hình và hiểu rằng Mourinho đã đồng ý nhận việc.
+- Chỉ vài giờ sau, Mourinho gọi lại cho Ferguson trong nước mắt và xin rút lời vì đã hứa với Chelsea.
+- Mourinho từng dẫn Chelsea giai đoạn 2004-2007, đoạt 2 chức vô địch Premier League liên tiếp.
+- Ông lý giải: yêu bóng đá là một chuyện, yêu một câu lạc bộ cụ thể lại là chuyện khác — sau Real, thứ ông cần là cảm giác được yêu.
+- Trở lại Stamford Bridge năm 2013, Mourinho đoạt thêm 1 Premier League và 1 League Cup.
+- Ba năm sau, ông vẫn tới Old Trafford, kế nhiệm Louis van Gaal.
+- Hai mùa rưỡi ở Man Utd, Mourinho đoạt League Cup và Europa League, rồi bị sa thải tháng 12/2018 vì thành tích đi xuống.
+- Ở Real, 2 mùa đầu của Mourinho có La Liga, Copa del Rey và Siêu cúp Tây Ban Nha; riêng mùa 2011-2012 đội đạt 100 điểm, kỷ lục La Liga.
+- Mùa thứ ba đổ vỡ: Iker Casillas ngồi dự bị gần như cả mùa 2012-2013, Real về đích kém Barcelona 15 điểm.
+- Casillas nói quan hệ giữa anh và Mourinho rất lạnh nhạt, mọi thứ bị đẩy tới giới hạn rồi sợi dây đứt hẳn.
+- Sami Khedira kể phòng thay đồ Real khi đó là một cơn ác mộng, và Mourinho lần lượt căng thẳng với Cristiano Ronaldo, Sergio Ramos cùng nhóm cầu thủ Tây Ban Nha.
+- Mourinho phản pháo rằng Casillas ba lần xin ông nới lịch: thêm ngày nghỉ cho tuyển thủ, hoãn tập vì tắc đường Madrid, bỏ buổi tập trung khách sạn trước trận.
+- Với Roman Abramovich, Mourinho nói ông chủ người Nga can thiệp chuyên môn, điển hình là vụ Andriy Shevchenko — người ông muốn mua là Samuel Eto'o.
+- Abramovich sa thải Mourinho 2 lần, năm 2007 và 2015.
+- Năm 2010, Mourinho dẫn Inter Milan loại chính Chelsea ở vòng 1/8 Champions League sau trận thắng 2-1, rồi vô địch giải đó.
+
+## Context
+- Ở tuổi 63, Mourinho lần đầu kể lại trọn vẹn ngã rẽ 2013 — thời điểm Man Utd chọn David Moyes và bắt đầu hơn một thập kỷ trắng tay ở Premier League.
+- Cuộc đối đầu Mourinho — Pep Guardiola giai đoạn 2010-2013 là trục chính của El Clasico, và mùa 100 điểm là đỉnh cao duy nhất Real vượt được Barca thời đó.
+- Mâu thuẫn với Casillas là vết nứt khiến Mourinho rời Real ngay sau mùa thứ ba, dù còn hợp đồng.
+- Trận Inter thắng Chelsea 2-1 là lần đầu Mourinho gặp lại đội bóng vừa sa thải mình, và ông thừa nhận đó là trận đấu mang tính trả đũa.
+
+## Quotes
+- "Một đêm nọ, ông ấy gọi cho tôi và khóc. Ông ấy nói: Alex, tôi không thể nhận công việc này. Tôi đã hứa với Chelsea và sẽ không nuốt lời. Tôi hiểu lý do, nhưng vẫn thất vọng." — Sir Alex Ferguson
+- "Tôi rất vinh dự khi được mời ngồi vào vị trí của Sir Alex, vì Man Utd có sức hút khó tin. Nhưng yêu bóng đá là một chuyện, yêu một câu lạc bộ lại là chuyện khác. Cảm giác đó mạnh hơn." — Jose Mourinho
+- "Iker là huyền thoại của Real, được mọi cổ động viên yêu mến. Mourinho đẩy anh ấy lên ghế dự bị, không nói chuyện, rồi chỉ trích anh ấy trên báo. Phòng thay đồ khi đó đúng là ác mộng." — Sami Khedira
+
+---
+## Giới hạn thời lượng (cho /create-video — KHÔNG đọc lên, KHÔNG lên hình)
+- Mục tiêu: 100-115 giây. Trần cứng: 120 giây.
+- Tổng voiceText MỌI scene cộng lại: **≤ 440 từ** (đo được 0,26 giây/từ).
+- Tổng scene: **≤ 11** (N ảnh trong plan + 1 feature-list + engagement-question + outro).
+- Mỗi body scene tối đa **2 câu** voiceText. KHÔNG viết 3-5 câu/scene.
+- Fact nào không kịp nói thì cho lên `highlights`/`context` để người xem tắt tiếng vẫn đọc được — đừng nhồi vào voiceText.
+- Check trước khi render: đếm từ, >440 thì cắt câu chứ KHÔNG bỏ scene.
+
+---
+Nguồn: vnexpress.net · https://vnexpress.net/mourinho-tung-dong-y-thay-ferguson-dan-dat-man-utd-5107251.html
+Ngày: 10/08/2026

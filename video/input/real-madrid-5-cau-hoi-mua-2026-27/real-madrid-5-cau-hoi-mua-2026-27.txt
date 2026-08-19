@@ -1,0 +1,42 @@
+Real Madrid 2026-27: 5 câu hỏi lớn dưới thời Mourinho
+
+José Mourinho trở lại Bernabéu sau 13 năm, thừa hưởng bộ ba Vinícius Júnior, Kylian Mbappé và tân binh kỷ lục Yan Diomande. Nhiệm vụ: giành lại La Liga từ tay Barcelona sau 2 mùa về nhì liên tiếp.
+
+## Key facts
+- Mourinho rời Real Madrid năm 2013, nay trở lại ghế nóng sau 13 năm, thay Xabi Alonso.
+- Nhiệm kỳ đầu của ông chỉ có 3 danh hiệu: Cúp Nhà vua 2011, La Liga 2011-12 và Siêu cúp Tây Ban Nha 2012.
+- Mùa 2011-12, Real Madrid đạt 100 điểm và thắng 32 trận — kỷ lục La Liga thời điểm đó; 16 trận thắng sân khách đến nay vẫn là kỷ lục tuyệt đối.
+- Cũng mùa đó, Real ghi 121 bàn tại La Liga, nhiều nhất một mùa kể từ năm 1929, với bộ ba Cristiano Ronaldo, Higuaín và Benzema.
+- Yan Diomande về từ RB Leipzig với 140 triệu euro, phí kỷ lục câu lạc bộ, khi mới 19 tuổi.
+- Mùa trước Diomande ghi 13 bàn, kiến tạo 9 lần cho Leipzig.
+- Diomande thực hiện 118 pha rê bóng thành công ở top 5 giải châu Âu, chỉ kém Lamine Yamal với 133.
+- Anh còn đoạt bóng ở 1/3 sân đối phương 27 lần, chỉ 9 cầu thủ trong top 5 giải làm tốt hơn.
+- Mbappé ghi 42 bàn trên mọi đấu trường mùa trước, cộng thêm 10 bàn cho tuyển Pháp tại World Cup 2026.
+- Vinícius Júnior ghi 22 bàn, từ chối Arsenal và ký hợp đồng mới với Real.
+- Bellingham chỉ có 8 bàn và 5 kiến tạo sau 40 trận mùa trước, tụt sâu so với 23 bàn 13 kiến tạo mùa đầu tiên ở Tây Ban Nha.
+- Tại World Cup, Bellingham ghi 7 bàn sau 8 trận khi đá số 10 sau lưng Harry Kane, giúp tuyển Anh đứng hạng 3.
+- Mùa 2025-26 anh chỉ đá vai trò số 10 trong 28% số phút ở La Liga, so với 71% số phút tại World Cup.
+- Konaté thắng 71,3% số pha tranh chấp bóng bổng ở Ngoại hạng Anh, chỉ kém đúng Van Dijk với 74,4%.
+- Cucurella tạo 37 cơ hội từ tình huống bóng sống cho Chelsea, chỉ kém Enzo Fernández và Pedro Neto.
+- Rodri gần như sang Barcelona; theo Opta Player Radar, Tchouaméni là cầu thủ có lối chơi giống Rodri thứ 2 châu Âu, sau Elliot Anderson.
+
+## Context
+- Real Madrid về sau Barcelona 2 mùa La Liga liên tiếp — điều khó chấp nhận với một câu lạc bộ quen tự quảng bá.
+- Trận mở màn gặp Espanyol bị lùi 1 tuần vì các cầu thủ dự vòng knock-out World Cup 2026.
+- Benfica của Mourinho mùa trước bất bại ở giải Bồ Đào Nha nhưng hòa tới 11 trận, chỉ về thứ 3 sau Porto và Sporting.
+- Benfica từng thắng Real 4-2 tại Lisbon ở Champions League nhờ bàn phút cuối của thủ môn Trubin, nhưng thua 1-3 sau hai lượt play-off.
+- Hàng công trống bên phải vì Rodrygo bị chấn thương, Mastantuono sang Fiorentina theo dạng cho mượn, còn Güler được đẩy vào giữa sân.
+- Bernardo Silva và Konaté cùng đến theo dạng tự do; Dumfries về từ Inter với giá rẻ, đẩy Trent Alexander-Arnold vào thế cạnh tranh suất đá chính.
+
+---
+## Giới hạn thời lượng (cho /create-video — KHÔNG đọc lên, KHÔNG lên hình)
+- Mục tiêu: 100-115 giây. Trần cứng: 120 giây.
+- Tổng voiceText MỌI scene cộng lại: **≤ 460 từ** (đo được 0,24 giây/từ).
+- Tổng scene: **≤ 9** (N ảnh trong plan + 1 feature-list + engagement-question + outro).
+- Mỗi body scene tối đa **2 câu** voiceText. KHÔNG viết 3-5 câu/scene.
+- Fact nào không kịp nói thì cho lên `highlights`/`context` để người xem tắt tiếng vẫn đọc được — đừng nhồi vào voiceText.
+- Check trước khi render: đếm từ, >460 thì cắt câu chứ KHÔNG bỏ scene.
+
+---
+Nguồn: theanalyst.com · https://theanalyst.com/articles/real-madrid-season-preview-five-key-questions-2026-27
+Ngày: 14/08/2026

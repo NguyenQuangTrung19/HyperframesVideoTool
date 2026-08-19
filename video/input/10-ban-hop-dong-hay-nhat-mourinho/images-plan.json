@@ -1,0 +1,63 @@
+{
+  "version": "1.0",
+  "source": "10-ban-hop-dong-hay-nhat-mourinho.txt",
+  "contentType": "RANKING",
+  "title": "Mười bản hợp đồng hay nhất sự nghiệp Mourinho",
+  "createdAt": "2026-08-13T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Jose Mourinho — chân dung hero, huấn luyện viên Real Madrid"
+    },
+    {
+      "id": "drogba",
+      "template": "stat-hero",
+      "filename": "drogba.png",
+      "subjectHint": "Didier Drogba — Chelsea | Hạng 1, 24 triệu bảng từ Marseille"
+    },
+    {
+      "id": "etoo",
+      "template": "stat-hero",
+      "filename": "etoo.png",
+      "subjectHint": "Samuel Eto'o — Inter Milan | Hạng 2, cú ăn ba 2009-10"
+    },
+    {
+      "id": "carvalho",
+      "template": "stat-hero",
+      "filename": "carvalho.png",
+      "subjectHint": "Ricardo Carvalho — Chelsea | Hạng 3, trung vệ 20 triệu bảng"
+    },
+    {
+      "id": "sneijder",
+      "template": "stat-hero",
+      "filename": "sneijder.png",
+      "subjectHint": "Wesley Sneijder — Inter Milan | Hạng 4, nhạc trưởng cú ăn ba"
+    },
+    {
+      "id": "milito",
+      "template": "stat-hero",
+      "filename": "milito.png",
+      "subjectHint": "Diego Milito — Inter Milan | Hạng 5, cú đúp chung kết Champions League"
+    },
+    {
+      "id": "costa",
+      "template": "stat-hero",
+      "filename": "costa.png",
+      "subjectHint": "Diego Costa — Chelsea | Hạng 6, 20 bàn sau 26 trận"
+    },
+    {
+      "id": "essien",
+      "template": "stat-hero",
+      "filename": "essien.png",
+      "subjectHint": "Michael Essien — Chelsea | Hạng 8, tiền vệ con thoi 24,4 triệu bảng"
+    },
+    {
+      "id": "ibrahimovic",
+      "template": "stat-hero",
+      "filename": "ibrahimovic.png",
+      "subjectHint": "Zlatan Ibrahimovic — Manchester United | Hạng 10, chuyển nhượng tự do 2016"
+    }
+  ]
+}

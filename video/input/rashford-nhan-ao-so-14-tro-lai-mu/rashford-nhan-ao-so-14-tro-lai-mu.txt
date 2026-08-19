@@ -1,0 +1,42 @@
+Rashford nhận áo số 14, chính thức trở lại Man United
+
+Marcus Rashford đã có mặt ở Carrington sáng Chủ nhật rồi bay sang Dublin cùng đội. Man United trao cho anh chiếc áo số 14 như một thông điệp tin tưởng, khép lại quãng thời gian gần hai năm bị đẩy ra rìa kể từ mâu thuẫn với Ruben Amorim.
+
+## Key facts
+- Fabrizio Romano tiết lộ Man United quyết định trao số áo mới cho Rashford để phát tín hiệu tin tưởng và đưa anh trở lại đội hình chính thức.
+- Rashford từng mặc áo số 10, nhưng số này giờ thuộc về Matheus Cunha nên anh nhận số 14.
+- Tiền đạo 28 tuổi bay sang Dublin hôm Chủ nhật để hội quân cùng Michael Carrick và toàn đội.
+- Carrick xác nhận đủ quân ở Dublin, gồm Rashford, Kobbie Mainoo và Lisandro Martínez, trước trận gặp Leeds hôm thứ Tư.
+- Sau Dublin, Man United đấu AC Milan tại Ba Lan — trận tái ngộ với Amorim, người đã đẩy anh khỏi đội.
+- Rashford vắng mặt ở Man United từ ngày 12/12/2024, khi Amorim phản ứng với thái độ của anh.
+- Hợp đồng của Rashford đáo hạn tháng 6/2028, với mức lương 325.000 bảng mỗi tuần — cao nhất câu lạc bộ.
+- Chính mức lương đó chặn mọi thương vụ mùa hè, dù nhiều đội lớn cần một tiền đạo cánh.
+- Mùa trước ở Barcelona, anh đá 49 trận, ghi 14 bàn và có 14 kiến tạo, vô địch La Liga cùng Siêu cúp Tây Ban Nha.
+- Barcelona không kích hoạt điều khoản mua đứt 30 triệu euro, chuyển hướng ký Anthony Gordon từ Newcastle giá 69 triệu euro và Karim Adeyemi.
+- Trước Barca, Rashford mượn Aston Villa từ tháng 2/2025: 4 bàn và 6 kiến tạo sau 17 trận.
+- Sự nghiệp ở Man United của anh có 426 trận, 138 bàn, 79 kiến tạo.
+- Anh từng vô địch Europa League, 2 FA Cup, 2 League Cup và 2 lần được bầu là cầu thủ hay nhất mùa của câu lạc bộ.
+- Theo The Sun, Rashford chỉ ghi 15 bàn kể từ khi ký hợp đồng 5 năm vào tháng 7/2023.
+
+## Context
+- Rashford công khai muốn ở lại Barcelona, nhưng đội bóng xứ Catalonia thương lượng hạ giá mua đứt bất thành rồi rút lui.
+- Mâu thuẫn với Amorim khiến sự nghiệp của một cầu thủ trưởng thành từ lò Carrington bị treo lơ lửng suốt ba mùa khó khăn.
+- Nếu tái hiện phong độ ở Tây Ban Nha, anh có thể giành lại vị trí trước khi Premier League khởi tranh.
+- Man United hè này chuyển nhượng im ắng, đang mỏng người ở cánh trái — lý do thực dụng để giữ Rashford lại.
+
+## Quotes
+- "Man United quyết định trao số áo mới cho Rashford như thông điệp tin tưởng và đưa cậu ấy vào đội. Rashford sẽ mặc áo số 14 và đang di chuyển cùng đội. Trừ khi có câu lạc bộ lớn châu Âu hỏi mua, cậu ấy có thể ở lại." — Fabrizio Romano, nhà báo chuyển nhượng
+- "Tuần tới chúng tôi có đủ đội hình ở Dublin. Chúng tôi bay thẳng tới đó và gặp Leeds vào thứ Tư. Cả đội đều có mặt, gồm Marcus, Kobbie và Lisandro." — Michael Carrick, HLV Man United
+
+---
+## Giới hạn thời lượng (cho /create-video — KHÔNG đọc lên, KHÔNG lên hình)
+- Mục tiêu: 100-115 giây. Trần cứng: 120 giây.
+- Tổng voiceText MỌI scene cộng lại: **≤ 440 từ** (đo được 0,26 giây/từ).
+- Tổng scene: **≤ 11** (N ảnh trong plan + 1 feature-list + engagement-question + outro).
+- Mỗi body scene tối đa **2 câu** voiceText. KHÔNG viết 3-5 câu/scene.
+- Fact nào không kịp nói thì cho lên `highlights`/`context` để người xem tắt tiếng vẫn đọc được — đừng nhồi vào voiceText.
+- Check trước khi render: đếm từ, >440 thì cắt câu chứ KHÔNG bỏ scene.
+
+---
+Nguồn: goal.com · https://www.goal.com/en/lists/marcus-rashford-gets-unexpected-new-manchester-united-shirt-number-returning-carrington/bltddbbf3787394179a · https://www.goal.com/en/news/has-his-future-been-settled-a-new-step-from-manchester-united-regarding-rashford/bltc9a51604b837cbe6
+Ngày: 09/08/2026

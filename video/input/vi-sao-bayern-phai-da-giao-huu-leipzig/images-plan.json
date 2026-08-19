@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "source": "vi-sao-bayern-phai-da-giao-huu-leipzig.txt",
+  "contentType": "TRIVIA",
+  "title": "Vì sao Bayern phải đá giao hữu với Leipzig",
+  "createdAt": "2026-08-13T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Allianz Arena — đại chiến Bayern Munich gặp RB Leipzig ở Telekom Cup"
+    },
+    {
+      "id": "nagelsmann",
+      "template": "stat-hero",
+      "filename": "nagelsmann.png",
+      "subjectHint": "Julian Nagelsmann — rời RB Leipzig sang Bayern Munich, phí 25 triệu euro"
+    },
+    {
+      "id": "eberl",
+      "template": "callout",
+      "filename": "eberl.png",
+      "subjectHint": "Max Eberl — giám đốc thể thao Bayern Munich, rời Leipzig tháng 3/2024"
+    },
+    {
+      "id": "gvardiol",
+      "template": "callout",
+      "filename": "gvardiol.png",
+      "subjectHint": "Josko Gvardiol — Manchester City, mua từ Leipzig năm 2023"
+    },
+    {
+      "id": "olmo",
+      "template": "callout",
+      "filename": "olmo.png",
+      "subjectHint": "Dani Olmo — Barcelona, mua từ Leipzig năm 2024"
+    },
+    {
+      "id": "sesko",
+      "template": "callout",
+      "filename": "sesko.png",
+      "subjectHint": "Benjamin Sesko — Manchester United, mua từ Leipzig năm 2025"
+    },
+    {
+      "id": "diomande",
+      "template": "callout",
+      "filename": "diomande.png",
+      "subjectHint": "Yan Diomande — Real Madrid, mua từ Leipzig hè 2026"
+    }
+  ]
+}

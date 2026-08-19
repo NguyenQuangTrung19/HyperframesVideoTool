@@ -1,0 +1,37 @@
+Vì sao Bayern phải đá giao hữu với Leipzig
+
+Bayern Munich gặp RB Leipzig ở Telekom Cup, trận tổng duyệt cuối cùng trước mùa giải mới. Trận đấu này không phải sắp xếp ngẫu nhiên: nó là điều khoản kèm theo thương vụ Julian Nagelsmann rời Leipzig sang Bayern năm 2021.
+
+## Key facts
+- Hè 2021, Leipzig giải phóng hợp đồng của Nagelsmann với phí 25 triệu euro để ông sang dẫn dắt Bayern.
+- Kèm theo khoản phí đó, 2 câu lạc bộ thỏa thuận sẽ tổ chức một trận giao hữu trong tương lai gần.
+- Trận giao hữu ấy giờ mới được thực hiện, đá tại Allianz Arena ở Munich.
+- Toàn bộ doanh thu trận đấu thuộc về Bayern. Leipzig từ bỏ phần chia lợi nhuận.
+- Theo kicker, đây không phải trận duy nhất được cài vào hợp đồng chuyển nhượng.
+- Tháng 3/2024, giám đốc thể thao Max Eberl sang Bayern khi vẫn còn hợp đồng với Leipzig.
+- Bayern hứa thêm một trận giao hữu nữa cho vụ Eberl, lần này đá trên sân của Leipzig.
+- Theo Bild, Leipzig còn treo hàng loạt trận giao hữu chưa đòi: Man City vì vụ Josko Gvardiol năm 2023.
+- Barcelona nợ một trận vì thương vụ Dani Olmo năm 2024.
+- Man United nợ một trận vì thương vụ Benjamin Sesko năm 2025.
+- Theo kicker, sau khi Yan Diomande sang Real Madrid, Leipzig và Real cũng đang lên kế hoạch giao hữu.
+- Ngày 22/8, Leipzig làm khách ở Eintracht Trier tại vòng 1 Cúp Quốc gia Đức.
+- Vài giờ sau đó cùng ngày, Bayern đá DFL Supercup gặp Borussia Dortmund.
+
+## Context
+- Bayern là đội vô địch Đức nhiều nhất lịch sử, còn Leipzig có 2 lần đoạt Cúp Quốc gia Đức.
+- Leipzig biến điều khoản giao hữu thành một mảng kinh doanh riêng: mỗi ngôi sao bán đi kèm theo một trận đấu hút khán giả.
+- Nagelsmann sau đó rời Bayern và từng dẫn dắt tuyển Đức.
+- Danh sách khách nợ của Leipzig gồm toàn tên lớn: Bayern, Man City, Barcelona, Man United và Real Madrid.
+
+---
+## Giới hạn thời lượng (cho /create-video — KHÔNG đọc lên, KHÔNG lên hình)
+- Mục tiêu: 75-95 giây. Trần cứng: 110 giây.
+- Tổng voiceText MỌI scene cộng lại: **≤ 340 từ** (đo được 0,26 giây/từ).
+- Tổng scene: **≤ 9** (N ảnh trong plan + 1 feature-list + engagement-question + outro).
+- Mỗi body scene tối đa **2 câu** voiceText. KHÔNG viết 3-5 câu/scene.
+- Fact nào không kịp nói thì cho lên `highlights`/`context` để người xem tắt tiếng vẫn đọc được — đừng nhồi vào voiceText.
+- Check trước khi render: đếm từ, >340 thì cắt câu chứ KHÔNG bỏ scene.
+
+---
+Nguồn: goal.com · https://www.goal.com/en/news/nagelsmann-deal-with-echoes-of-the-past-why-bayern-munich-and-rb-leipzig-are-playing-against-each-other-in-the-telekom-cup/blt5dc1a5477eb9386f
+Ngày: 13/08/2026

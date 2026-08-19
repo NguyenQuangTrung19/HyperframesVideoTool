@@ -1,0 +1,57 @@
+{
+  "version": "1.0",
+  "source": "viet-nam-dan-dau-moi-chi-so-asean-cup.txt",
+  "contentType": "TRIVIA",
+  "title": "Việt Nam dẫn đầu gần như mọi chỉ số trước bán kết ASEAN Cup",
+  "createdAt": "2026-08-12T09:10:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Đội tuyển Việt Nam ăn mừng bàn thắng ở ASEAN Cup 2026, áo đỏ, khán đài kín người"
+    },
+    {
+      "id": "dinh-bac",
+      "template": "stat-hero",
+      "filename": "dinh-bac.png",
+      "subjectHint": "Nguyễn Đình Bắc — tuyển Việt Nam, tiền đạo ăn mừng bàn thắng"
+    },
+    {
+      "id": "hoang-duc",
+      "template": "stat-hero",
+      "filename": "hoang-duc.png",
+      "subjectHint": "Nguyễn Hoàng Đức — tuyển Việt Nam, tiền vệ cầm nhịp chuyền bóng"
+    },
+    {
+      "id": "xuan-manh",
+      "template": "stat-hero",
+      "filename": "xuan-manh.png",
+      "subjectHint": "Phạm Xuân Mạnh — tuyển Việt Nam, hậu vệ vào bóng tranh chấp"
+    },
+    {
+      "id": "thanh-long",
+      "template": "stat-hero",
+      "filename": "thanh-long.png",
+      "subjectHint": "Lê Phạm Thành Long — tuyển Việt Nam, tiền vệ tung đường chuyền dài"
+    },
+    {
+      "id": "giang-patrik",
+      "template": "stat-hero",
+      "filename": "giang-patrik.png",
+      "subjectHint": "Lê Giang Patrik — thủ môn tuyển Việt Nam, pha cản phá trong khung gỗ"
+    },
+    {
+      "id": "khan-gia-my-dinh",
+      "template": "callout",
+      "filename": "khan-gia-my-dinh.png",
+      "subjectHint": "Khán đài sân Mỹ Đình chật kín cổ động viên Việt Nam, cờ đỏ sao vàng"
+    },
+    {
+      "id": "kim-sang-sik",
+      "template": "callout",
+      "filename": "kim-sang-sik.png",
+      "subjectHint": "Huấn luyện viên Kim Sang-sik chỉ đạo bên đường biên tuyển Việt Nam"
+    }
+  ]
+}

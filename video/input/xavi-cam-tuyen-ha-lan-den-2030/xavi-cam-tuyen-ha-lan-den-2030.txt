@@ -1,0 +1,43 @@
+Xavi làm HLV tuyển Hà Lan, hợp đồng đến 2030
+
+Liên đoàn bóng đá Hà Lan bổ nhiệm Xavi Hernandez ngồi ghế huấn luyện viên trưởng với bản hợp đồng 4 năm, tới tháng 7/2030. Ông là nhà cầm quân ngoại đầu tiên của Hà Lan sau 48 năm, và là người kế nhiệm Ronald Koeman lần thứ hai trong sự nghiệp.
+
+## Key facts
+- KNVB ký với Xavi hợp đồng 4 năm, hiệu lực đến tháng 7/2030, phủ trọn Euro 2028 và World Cup 2030.
+- Xavi 46 tuổi, thất nghiệp 2 năm kể từ khi bị Barcelona sa thải hè 2024.
+- Ông là huấn luyện viên ngoại đầu tiên của Hà Lan sau 48 năm.
+- Người ngoại quốc gần nhất là Ernst Happel, đưa Hà Lan vào chung kết World Cup 1978 rồi thua Argentina 1-3.
+- Đây là lần thứ hai Xavi kế nhiệm Koeman, sau khi thay chính ông ở Barcelona tháng 11/2021.
+- Koeman từ chức sau khi Hà Lan bị Morocco loại ở vòng 1/16 World Cup 2026.
+- KNVB mất hơn một tháng tìm người, từng đàm phán với Roberto Martinez và cân nhắc Michael Reiziger đang dẫn U21.
+- Arne Slot từ chối lời mời vì muốn tiếp tục làm việc ở cấp câu lạc bộ.
+- Xavi sinh năm 1980 tại Terrassa, vào lò Barcelona năm 11 tuổi và gắn bó 24 năm với đội bóng này.
+- Ông đoạt 25 danh hiệu trong sự nghiệp cầu thủ, trong đó có 4 chức vô địch Champions League.
+- Ở tuyển Tây Ban Nha, Xavi là trụ cột tuyến giữa thời hoàng kim với 2 chức vô địch Euro và 1 World Cup.
+- Sang Al Sadd năm 2015, giải nghệ ở tuổi 39 rồi dẫn dắt luôn đội này và đoạt 7 danh hiệu.
+- Trong 3 mùa ở Barcelona, ông giành La Liga và Siêu cúp Tây Ban Nha năm 2023.
+- Xavi ra mắt ngày 24/9 trong trận gặp Đức tại Johan Cruyff Arena ở Nations League; bảng đấu còn Serbia và Hy Lạp.
+
+## Context
+- Ghế huấn luyện viên tuyển Hà Lan là chiếc ghế lớn nhất còn trống sau World Cup 2026.
+- KNVB sốt ruột chốt người để đội tuyển kịp vào guồng ngay đợt FIFA Days tháng 9.
+- Việc chọn Xavi được xem là bước tiếp nối truyền thống bóng đá tổng lực mà Hà Lan theo đuổi.
+- Công việc cấp đội tuyển hợp với Xavi vì ông vẫn được sống ở Barcelona và có thời gian cho gia đình.
+
+## Quotes
+- "Làm huấn luyện viên đội tuyển Hà Lan là vinh dự to lớn. Từ thời còn ở học viện Barca, tôi chịu ảnh hưởng lớn từ Johan Cruyff và Rinus Michels, nên tôi có mối liên kết đặc biệt với bóng đá Hà Lan" — Xavi Hernandez
+- "Louis van Gaal đã cho tôi cơ hội ra mắt đội một Barca, còn Frank Rijkaard góp phần định hình tôi cả trên tư cách cầu thủ lẫn huấn luyện viên" — Xavi Hernandez
+- "Được đại diện cho đất nước trên cương vị huấn luyện viên trưởng một ngày nào đó sẽ là vinh dự lớn. Tuy nhiên, đây chưa phải thời điểm phù hợp với tôi" — Arne Slot, người từ chối vị trí
+
+---
+## Giới hạn thời lượng (cho /create-video — KHÔNG đọc lên, KHÔNG lên hình)
+- Mục tiêu: 100-115 giây. Trần cứng: 120 giây.
+- Tổng voiceText MỌI scene cộng lại: **≤ 460 từ** (đo được 0,24 giây/từ).
+- Tổng scene: **≤ 9** (N ảnh trong plan + 1 feature-list + engagement-question + outro).
+- Mỗi body scene tối đa **2 câu** voiceText. KHÔNG viết 3-5 câu/scene.
+- Fact nào không kịp nói thì cho lên `highlights`/`context` để người xem tắt tiếng vẫn đọc được — đừng nhồi vào voiceText.
+- Check trước khi render: đếm từ, >460 thì cắt câu chứ KHÔNG bỏ scene.
+
+---
+Nguồn: vnexpress.net · https://vnexpress.net/xavi-lam-hlv-doi-tuyen-ha-lan-5108505.html · goal.com · https://www.goal.com/en/lists/xavi-appointed-netherlands-head-coach/blt03bf48d51d8b7365
+Ngày: 13/08/2026

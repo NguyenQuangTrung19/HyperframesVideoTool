@@ -1,0 +1,45 @@
+{
+  "version": "1.0",
+  "source": "tin-chuyen-nhuong-18-8-mu-nham-casado.txt",
+  "contentType": "TRANSFER NEWS",
+  "title": "Tin chuyển nhượng 18/8: Chelsea hét giá Neto, MU nhắm Casado",
+  "createdAt": "2026-08-18T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "hook-1: Pedro Neto — Chelsea · hook-2: Enzo Fernández — Chelsea"
+    },
+    {
+      "id": "casado",
+      "template": "stat-hero",
+      "filename": "casado.png",
+      "subjectHint": "Marc Casado — tiền vệ Barcelona, bị đưa vào danh sách thanh lý"
+    },
+    {
+      "id": "enzo",
+      "template": "stat-hero",
+      "filename": "enzo.png",
+      "subjectHint": "Enzo Fernández — Chelsea, mục tiêu hơn 120 triệu bảng của Manchester City"
+    },
+    {
+      "id": "neto",
+      "template": "stat-hero",
+      "filename": "neto.png",
+      "subjectHint": "Pedro Neto — chạy cánh Chelsea, giá gần 100 triệu bảng, Al-Hilal vào cuộc"
+    },
+    {
+      "id": "bruno",
+      "template": "stat-hero",
+      "filename": "bruno.png",
+      "subjectHint": "Bruno Fernandes — đội trưởng Manchester United, được Galatasaray chào 18,3 triệu bảng mỗi mùa"
+    },
+    {
+      "id": "kane",
+      "template": "stat-hero",
+      "filename": "kane.png",
+      "subjectHint": "Harry Kane — Bayern Munich, đàm phán gia hạn trước năm cuối hợp đồng"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "version": "1.0",
+  "source": "man-city-giu-gia-foden-hop-dong-moi.txt",
+  "contentType": "TRANSFER NEWS",
+  "title": "Man City giữ giá Foden bằng bản hợp đồng mới",
+  "createdAt": "2026-08-13T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Phil Foden — Manchester City, chân dung hero áo xanh sân Etihad"
+    },
+    {
+      "id": "hop-dong-2030",
+      "template": "stat-hero",
+      "filename": "hop-dong-2030.png",
+      "subjectHint": "Phil Foden — Manchester City | Ký hợp đồng mới đến 2030"
+    },
+    {
+      "id": "danh-hieu",
+      "template": "stat-hero",
+      "filename": "danh-hieu.png",
+      "subjectHint": "Phil Foden nâng cúp Ngoại hạng Anh — 6 chức vô địch cùng Manchester City"
+    },
+    {
+      "id": "sa-sut",
+      "template": "callout",
+      "filename": "sa-sut.png",
+      "subjectHint": "Phil Foden thất vọng trên sân — 2 mùa giải phập phù ở Manchester City"
+    },
+    {
+      "id": "tuyen-anh",
+      "template": "callout",
+      "filename": "tuyen-anh.png",
+      "subjectHint": "Phil Foden trong màu áo tuyển Anh — bị gạch khỏi danh sách World Cup 2026"
+    },
+    {
+      "id": "palmer",
+      "template": "callout",
+      "filename": "palmer.png",
+      "subjectHint": "Cole Palmer — Chelsea, cũng lỡ hẹn World Cup 2026 cùng tuyển Anh"
+    },
+    {
+      "id": "maresca",
+      "template": "callout",
+      "filename": "maresca.png",
+      "subjectHint": "Enzo Maresca — huấn luyện viên Manchester City, người kế nhiệm Pep Guardiola"
+    },
+    {
+      "id": "doi-truong",
+      "template": "callout",
+      "filename": "doi-truong.png",
+      "subjectHint": "Phil Foden đeo băng đội trưởng Manchester City"
+    }
+  ]
+}

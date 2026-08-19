@@ -1,0 +1,93 @@
+{
+  "version": "1.0",
+  "aspect": "16:9",
+  "source": "ban-tin-14-08.txt",
+  "contentType": "NEWS ROUNDUP",
+  "title": "Bản tin tối 14/8 — Newcastle vỡ vụn, Barca hét giá Casado",
+  "createdAt": "2026-08-14T14:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Tổng hợp — 8 tin nóng, không khí chợ chuyển nhượng hè 2026 châu Âu"
+    },
+    {
+      "id": "tin1-open",
+      "template": "callout",
+      "filename": "tin1-open.png",
+      "marker": "TIN 1/8",
+      "subjectHint": "Bruno Guimaraes — Arsenal, rời Newcastle hè 2026"
+    },
+    {
+      "id": "tin1-jaissle",
+      "template": "callout",
+      "filename": "tin1-jaissle.png",
+      "marker": "TIN 1/8",
+      "subjectHint": "Matthias Jaissle — tân huấn luyện viên Newcastle United"
+    },
+    {
+      "id": "tin2-open",
+      "template": "callout",
+      "filename": "tin2-open.png",
+      "marker": "TIN 2/8",
+      "subjectHint": "Marc Casado — Barcelona"
+    },
+    {
+      "id": "tin2-alhilal",
+      "template": "stat-hero",
+      "filename": "tin2-alhilal.png",
+      "marker": "TIN 2/8",
+      "subjectHint": "Al Hilal — sân vận động và màu áo xanh Saudi Pro League"
+    },
+    {
+      "id": "tin3-open",
+      "template": "callout",
+      "filename": "tin3-open.png",
+      "marker": "TIN 3/8",
+      "subjectHint": "Youri Tielemans — Manchester United"
+    },
+    {
+      "id": "tin4-open",
+      "template": "callout",
+      "filename": "tin4-open.png",
+      "marker": "TIN 4/8",
+      "subjectHint": "Florian Wirtz — Liverpool"
+    },
+    {
+      "id": "tin4-bruno",
+      "template": "stat-hero",
+      "filename": "tin4-bruno.png",
+      "marker": "TIN 4/8",
+      "subjectHint": "Bruno Fernandes — Manchester United, 21 kiến tạo mùa trước"
+    },
+    {
+      "id": "tin5-open",
+      "template": "stat-hero",
+      "filename": "tin5-open.png",
+      "marker": "TIN 5/8",
+      "subjectHint": "Tijjani Reijnders — Manchester City"
+    },
+    {
+      "id": "tin6-open",
+      "template": "callout",
+      "filename": "tin6-open.png",
+      "marker": "TIN 6/8",
+      "subjectHint": "Jude Bellingham — Real Madrid"
+    },
+    {
+      "id": "tin7-open",
+      "template": "stat-hero",
+      "filename": "tin7-open.png",
+      "marker": "TIN 7/8",
+      "subjectHint": "Jeremy Doku — Manchester City"
+    },
+    {
+      "id": "tin8-open",
+      "template": "callout",
+      "filename": "tin8-open.png",
+      "marker": "TIN 8/8",
+      "subjectHint": "Trọng tài La Liga rút thẻ — luật mới chống câu giờ ở Tây Ban Nha"
+    }
+  ]
+}

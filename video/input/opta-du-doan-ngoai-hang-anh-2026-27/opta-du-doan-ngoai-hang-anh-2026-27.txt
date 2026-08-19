@@ -1,0 +1,41 @@
+Siêu máy tính Opta dự đoán Ngoại hạng Anh 2026-27
+
+Sau 10.000 lượt mô phỏng, siêu máy tính Opta đặt Arsenal ở cửa trên với 38% cơ hội bảo vệ ngôi vương. Man City bám sau ở mức 20,5%, còn Hull City là ứng viên xuống hạng số một.
+
+## Key facts
+- Arsenal dẫn đầu với 38,0% cơ hội vô địch. Mùa trước Opta chỉ xếp họ thứ 2 (24,3%) sau Liverpool (28,5%), rồi Pháo Thủ lên ngôi thật.
+- Arsenal vô địch lần đầu kể từ 2004. Lần cuối họ bảo vệ thành công ngôi vương quốc nội là mùa 1934-35.
+- Chỉ 3 câu lạc bộ từng bảo vệ được ngôi vương Ngoại hạng Anh: Manchester United thời Ferguson, Chelsea thời Mourinho và Man City thời Guardiola.
+- Hàng thủ Arsenal mùa trước thủng 27 bàn, chỉ số bàn thua kỳ vọng 0,74 mỗi trận — thấp thứ 4 kể từ 2012-13.
+- Cảnh báo lớn nhất: khi vắng William Saliba, tỉ lệ thắng của Arsenal rơi từ 68,7% xuống 47,6%. Trung vệ người Pháp dính chấn thương lưng ở World Cup.
+- Tân binh Bruno Guimarães dẫn đầu Ngoại hạng Anh mùa trước về số pha tranh chấp thắng (6,1) và số lần tắc bóng thành công (1,6) mỗi 90 phút.
+- Man City đứng thứ 2 với 20,5%. Enzo Maresca thay Pep Guardiola, chi 116 triệu bảng cho Elliot Anderson, trong khi Bernardo Silva đã sang Real Madrid.
+- Erling Haaland săn Chiếc giày vàng thứ 4 để san bằng kỷ lục của Thierry Henry và Mohamed Salah.
+- Liverpool xếp thứ 3 với 9,2%. Andoni Iraola tiếp quản ghế nóng nhưng đội bóng vẫn chưa tìm được người thay Mohamed Salah — chân sút (191 bàn) và người kiến tạo (93) số một lịch sử câu lạc bộ ở Ngoại hạng Anh.
+- Manchester United được chấm 6,2%, gấp hơn 10 lần con số 0,6% của mùa trước.
+- Từ ngày Michael Carrick trở lại ghế huấn luyện viên 12/1, Quỷ Đỏ giành 39 điểm sau 17 vòng cuối — nhiều nhất giải, hơn Arsenal 3 điểm.
+- Aston Villa 4,8%, Chelsea 4,1%, Tottenham 2,9%. Tổng cộng 13 đội có ít nhất 1% cơ hội vô địch.
+- Chỉ Arsenal (83%) và Man City (69,4%) vào top 5 ở hơn nửa số lượt mô phỏng. Kế đó là Liverpool 48,6%, Man Utd 40,0%, Villa 33,8%, Chelsea 30,3%, Newcastle 26,2%, Tottenham 24,1%, Brighton 21,5%.
+- Nhóm nguy hiểm: Hull City 38,7%, Ipswich 31,2%, Coventry 27,9%, Sunderland 25,9%, Fulham và Leeds cùng 23,4%.
+- Ngoài Arsenal (0,2%) và Man City (0,8%), mọi đội còn lại đều xuống hạng trong ít nhất 2% kịch bản.
+
+## Context
+- 9 trong 20 câu lạc bộ Ngoại hạng Anh đổi huấn luyện viên trước mùa này, và giải đấu có 9 đại diện dự cúp châu Âu.
+- Suất lên hạng của Hull City gây sốc: họ chỉ đạt 53,1 điểm kỳ vọng, nhỉnh hơn đúng đội bét bảng Sheffield Wednesday, nhưng về đích với 73 điểm.
+- Trong 34 mùa Ngoại hạng Anh, chưa đội tân binh nào lấy đủ 8 điểm sau 5 vòng đầu mà phải xuống hạng ngay. Theo Opta Power Rankings, Coventry có lịch mở màn khó nhất giải, Hull xếp thứ 5.
+- Sunderland về thứ 7 mùa trước nhưng bị cảnh báo hội chứng mùa thứ hai: bàn thắng kỳ vọng từ bóng sống chỉ 35,0 — thấp thứ 3 giải, đồng thời chịu số cú sút trúng đích nhiều thứ 4.
+- Xabi Alonso đạt trung bình 2,2 điểm mỗi trận ở Bundesliga và La Liga từ 2022-23. Chelsea đã chi gần 350 triệu bảng cho ông trong hè này.
+- Số liệu dự đoán lấy từ loạt mô phỏng chạy ngày 13/8/2026.
+
+---
+## Giới hạn thời lượng (cho /create-video — KHÔNG đọc lên, KHÔNG lên hình)
+- Mục tiêu: 100-115 giây. Trần cứng: 120 giây.
+- Tổng voiceText MỌI scene cộng lại: **≤ 440 từ** (đo được 0,26 giây/từ).
+- Tổng scene: **≤ 11** (N ảnh trong plan + 1 feature-list + engagement-question + outro).
+- Mỗi body scene tối đa **2 câu** voiceText. KHÔNG viết 3-5 câu/scene.
+- Fact nào không kịp nói thì cho lên `highlights`/`context` để người xem tắt tiếng vẫn đọc được — đừng nhồi vào voiceText.
+- Check trước khi render: đếm từ, >440 thì cắt câu chứ KHÔNG bỏ scene.
+
+---
+Nguồn: theanalyst.com · https://theanalyst.com/articles/premier-league-predictions-2026-27-opta-supercomputer
+Ngày: 14/08/2026

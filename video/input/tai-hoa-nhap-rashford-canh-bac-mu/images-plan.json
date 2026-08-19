@@ -1,0 +1,57 @@
+{
+  "version": "1.0",
+  "source": "tai-hoa-nhap-rashford-canh-bac-mu.txt",
+  "contentType": "PLAYER PROFILE",
+  "title": "Tái hòa nhập Rashford là canh bạc lớn của Man United",
+  "createdAt": "2026-08-10T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Marcus Rashford — Man United, trở lại tập trung cùng đội ở kỳ chuẩn bị mùa giải"
+    },
+    {
+      "id": "carrick-quyet-dinh",
+      "template": "callout",
+      "filename": "carrick-quyet-dinh.png",
+      "subjectHint": "Michael Carrick — HLV Man United, chỉ đạo bên đường biên"
+    },
+    {
+      "id": "ten-hag-ky-luat",
+      "template": "stat-hero",
+      "filename": "ten-hag-ky-luat.png",
+      "subjectHint": "Erik ten Hag — cựu HLV Man United, gương mặt căng thẳng thời kỳ 2023-24"
+    },
+    {
+      "id": "amorim-derby",
+      "template": "stat-hero",
+      "filename": "amorim-derby.png",
+      "subjectHint": "Ruben Amorim — cựu HLV Man United, đứng khoanh tay ngoài đường biên"
+    },
+    {
+      "id": "villa-muon",
+      "template": "stat-hero",
+      "filename": "villa-muon.png",
+      "subjectHint": "Marcus Rashford trong màu áo Aston Villa, ăn mừng bàn thắng"
+    },
+    {
+      "id": "bom-squad",
+      "template": "callout",
+      "filename": "bom-squad.png",
+      "subjectHint": "Antony, Jadon Sancho và Alejandro Garnacho — nhóm cầu thủ Man United bị đẩy ra khỏi đội một"
+    },
+    {
+      "id": "barca-clasico",
+      "template": "stat-hero",
+      "filename": "barca-clasico.png",
+      "subjectHint": "Marcus Rashford trong màu áo Barcelona, sút phạt trong trận Kinh điển gặp Real Madrid"
+    },
+    {
+      "id": "raphinha",
+      "template": "stat-hero",
+      "filename": "raphinha.png",
+      "subjectHint": "Raphinha — Barcelona, Brazil, chạy pressing đầy cường độ"
+    }
+  ]
+}

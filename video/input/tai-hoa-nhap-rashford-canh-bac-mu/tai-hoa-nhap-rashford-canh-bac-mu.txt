@@ -1,0 +1,44 @@
+Tái hòa nhập Rashford là canh bạc lớn của Man United
+
+Michael Carrick xác nhận Marcus Rashford trở lại đội một trong chuyến tập huấn tại Ireland. Nhưng Goal cảnh báo nước đi này có thể phá hỏng thứ duy nhất Ruben Amorim làm đúng ở Old Trafford: dọn sạch những cái tôi trong phòng thay đồ.
+
+## Key facts
+- Sau trận giao hữu hòa Paris Saint-Germain 1-1 tại Thụy Điển, Carrick xác nhận Rashford tập trung cùng đội ở Dublin, đi cùng Kobbie Mainoo và Lisandro Martínez.
+- Rashford có thể ra sân gặp Leeds tại Croke Park hôm thứ Tư, rồi đá trận cuối chuẩn bị với AC Milan ở Ba Lan ba ngày sau — nơi Amorim đối đầu đội bóng cũ.
+- Amorim bị sa thải hồi tháng 1 sau 14 tháng, nhưng cách ông xử lý Rashford được xem là điểm sáng hiếm hoi.
+- Mùa 2023-24 dưới thời Erik ten Hag, Rashford vi phạm kỷ luật 3 lần, nổi tiếng nhất là báo ốm sau chuyến đi Belfast 2 đêm.
+- Ten Hag mất việc tháng 10/2024 khi Quỷ Đỏ rơi xuống hạng 14 Premier League.
+- Rashford ghi 3 bàn trong 2 trận đầu của Amorim, rồi chơi tệ trước Viktoria Plzen và bị thay ra trước phút 60.
+- Amorim gạch tên anh khỏi trận derby Manchester mà Man United thắng 2-1, kèm thông điệp cầu thủ phải chiến đấu giành suất đá chính.
+- Hai ngày sau, Rashford công khai đòi "thử thách mới" trong bài phỏng vấn với Henry Winter, đẩy mình ra cửa vào tháng 1.
+- Mượn Aston Villa: 10 pha tham gia bàn thắng sau 17 trận, nhưng Villa từ chối mua đứt giá 40 triệu bảng.
+- Trở lại Old Trafford, anh bị đẩy vào "bom squad" tập riêng cùng Antony, Jadon Sancho, Alejandro Garnacho và Tyrell Malacia.
+- Bán Garnacho cho Chelsea, Antony cho Real Betis, đẩy Sancho và Rashford đi mượn — Man United mới có tiền mua Matheus Cunha, Bryan Mbeumo và Senne Lammens.
+- Tại Barcelona, Rashford có 28 bàn thắng và kiến tạo sau 49 trận, vô địch La Liga cùng Siêu cúp Tây Ban Nha, ghi bàn đá phạt hạ Thibaut Courtois ở trận Kinh điển.
+- Nhưng Raphinha ghi nhiều hơn anh 5 bàn dù đá ít hơn 16 trận, và có 2,10 hành động phòng ngự mỗi trận ở La Liga so với 1,45 của Rashford.
+- Barca không kích hoạt điều khoản mua đứt 30 triệu euro, thay vào đó chi tổng 92 triệu euro cho Anthony Gordon và Karim Adeyemi.
+
+## Context
+- Man United về thứ 3 Premier League mùa trước, nhưng hè này chuyển nhượng im ắng và mỏng người ở cánh trái lẫn tuyến giữa hàng công.
+- Phiên bản hay nhất của Rashford là mùa 2022-23 với 30 bàn — cột mốc anh chưa lặp lại lần nào.
+- Barcelona phải gánh 75% mức lương 325.000 bảng mỗi tuần của Rashford trong thời gian cho mượn.
+- Gordon kém Rashford 3 tuổi, hưởng lương gộp 14 triệu euro mỗi năm đúng bằng Rashford — Barca chọn người phù hợp, không phải chọn phương án rẻ.
+- Carrick từng đá cùng Rashford và làm trợ lý cho Mourinho lẫn Solskjaer, nên hiểu cách khai thác anh hơn hai người tiền nhiệm.
+
+## Quotes
+- "Tôi từng đá cùng cậu ấy. Tôi có mặt trong trận cậu ấy ra mắt, nên chúng tôi có lịch sử chung." — Michael Carrick, HLV Man United
+- "Tôi sẽ tung Jorge Vital vào sân trước khi dùng một cầu thủ không cống hiến tối đa mỗi ngày." — Ruben Amorim, khi Vital 63 tuổi đang là HLV thủ môn
+- "Nếu Rashford còn tương lai ở Man United, cậu ấy phải đưa ra một tuyên bố dứt khoát về lý do muốn ở lại và lý do từng đòi ra đi." — Michael Gray, cựu tuyển thủ Anh, nói trên talkSPORT
+
+---
+## Giới hạn thời lượng (cho /create-video — KHÔNG đọc lên, KHÔNG lên hình)
+- Mục tiêu: 100-115 giây. Trần cứng: 120 giây.
+- Tổng voiceText MỌI scene cộng lại: **≤ 440 từ** (đo được 0,26 giây/từ).
+- Tổng scene: **≤ 11** (N ảnh trong plan + 1 feature-list + engagement-question + outro).
+- Mỗi body scene tối đa **2 câu** voiceText. KHÔNG viết 3-5 câu/scene.
+- Fact nào không kịp nói thì cho lên `highlights`/`context` để người xem tắt tiếng vẫn đọc được — đừng nhồi vào voiceText.
+- Check trước khi render: đếm từ, >440 thì cắt câu chứ KHÔNG bỏ scene.
+
+---
+Nguồn: goal.com · https://www.goal.com/en/originals/reintegrating-marcus-rashford-huge-risk-man-utd-michael-carrick-could-undo-one-thing-ruben-amorim-got-right/blt1537f77d61a38292
+Ngày: 09/08/2026

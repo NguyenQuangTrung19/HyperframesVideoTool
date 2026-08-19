@@ -1,0 +1,63 @@
+{
+  "version": "1.0",
+  "source": "nhan-dinh-psg-vs-aston-villa-sieu-cup.txt",
+  "contentType": "PRE-MATCH PREVIEW",
+  "title": "Nhận định PSG vs Aston Villa — Siêu cúp châu Âu 2026",
+  "createdAt": "2026-08-12T09:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "hook-1: Ousmane Dembele — PSG · hook-2: Alejandro Garnacho — Aston Villa"
+    },
+    {
+      "id": "sao-kvaratskhelia",
+      "template": "stat-hero",
+      "filename": "sao-kvaratskhelia.png",
+      "subjectHint": "Khvicha Kvaratskhelia — PSG, Cầu thủ hay nhất Champions League 2025-26"
+    },
+    {
+      "id": "sao-dembele",
+      "template": "stat-hero",
+      "filename": "sao-dembele.png",
+      "subjectHint": "Ousmane Dembele — PSG, ăn mừng sau bàn thắng ở chung kết Champions League"
+    },
+    {
+      "id": "sao-vitinha",
+      "template": "stat-hero",
+      "filename": "sao-vitinha.png",
+      "subjectHint": "Vitinha — PSG, tiền vệ cầm nhịp, Cầu thủ hay nhất trận chung kết"
+    },
+    {
+      "id": "sao-buendia",
+      "template": "stat-hero",
+      "filename": "sao-buendia.png",
+      "subjectHint": "Emiliano Buendia — Aston Villa, ăn mừng bàn thắng ở chung kết Europa League"
+    },
+    {
+      "id": "sao-garnacho",
+      "template": "stat-hero",
+      "filename": "sao-garnacho.png",
+      "subjectHint": "Alejandro Garnacho — Aston Villa, tân binh mượn từ Chelsea, chạy tốc độ ở cánh"
+    },
+    {
+      "id": "sao-joao-gomes",
+      "template": "stat-hero",
+      "filename": "sao-joao-gomes.png",
+      "subjectHint": "Joao Gomes — Aston Villa, tiền vệ trụ tranh chấp quyết liệt"
+    },
+    {
+      "id": "hlv-luis-enrique",
+      "template": "callout",
+      "filename": "hlv-luis-enrique.png",
+      "subjectHint": "Luis Enrique — huấn luyện viên PSG, họp báo trước trận"
+    },
+    {
+      "id": "hlv-emery",
+      "template": "callout",
+      "filename": "hlv-emery.png",
+      "subjectHint": "Unai Emery — huấn luyện viên Aston Villa, chỉ đạo bên đường biên"
+    }
+  ]
+}

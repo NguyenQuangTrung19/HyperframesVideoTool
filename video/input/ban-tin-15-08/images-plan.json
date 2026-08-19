@@ -1,0 +1,86 @@
+{
+  "version": "1.0",
+  "aspect": "16:9",
+  "source": "ban-tin-15-08.txt",
+  "contentType": "NEWS ROUNDUP",
+  "title": "Bản tin sáng 15/8 — 7 tin nóng từ châu Âu",
+  "createdAt": "2026-08-15T01:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Tổng hợp bản tin chuyển nhượng — Victor Osimhen trong màu áo Galatasaray"
+    },
+    {
+      "id": "tin1-open",
+      "template": "callout",
+      "filename": "tin1-open.png",
+      "marker": "TIN 1/7",
+      "subjectHint": "Victor Osimhen — tiền đạo Nigeria, Galatasaray"
+    },
+    {
+      "id": "tin1-martinelli",
+      "template": "stat-hero",
+      "filename": "tin1-martinelli.png",
+      "marker": "TIN 1/7",
+      "subjectHint": "Gabriel Martinelli — Arsenal, tuyển Brazil"
+    },
+    {
+      "id": "tin2-open",
+      "template": "callout",
+      "filename": "tin2-open.png",
+      "marker": "TIN 2/7",
+      "subjectHint": "Fabián Ruiz — Paris Saint-Germain, tuyển Tây Ban Nha"
+    },
+    {
+      "id": "tin2-danh-hieu",
+      "template": "stat-hero",
+      "filename": "tin2-danh-hieu.png",
+      "marker": "TIN 2/7",
+      "subjectHint": "Fabián Ruiz nâng cúp cùng tuyển Tây Ban Nha — nhà vô địch World Cup 2026"
+    },
+    {
+      "id": "tin3-open",
+      "template": "callout",
+      "filename": "tin3-open.png",
+      "marker": "TIN 3/7",
+      "subjectHint": "Ciro Immobile — tiền đạo Ý, ngày chia tay sân cỏ"
+    },
+    {
+      "id": "tin3-lazio",
+      "template": "stat-hero",
+      "filename": "tin3-lazio.png",
+      "marker": "TIN 3/7",
+      "subjectHint": "Ciro Immobile trong màu áo xanh nhạt Lazio, ăn mừng bàn thắng"
+    },
+    {
+      "id": "tin4-open",
+      "template": "stat-hero",
+      "filename": "tin4-open.png",
+      "marker": "TIN 4/7",
+      "subjectHint": "Davide Frattesi — tiền vệ Ý, tân binh Lazio"
+    },
+    {
+      "id": "tin5-open",
+      "template": "callout",
+      "filename": "tin5-open.png",
+      "marker": "TIN 5/7",
+      "subjectHint": "Pierre-Emile Højbjerg — tiền vệ Đan Mạch, Olympique Marseille"
+    },
+    {
+      "id": "tin6-open",
+      "template": "callout",
+      "filename": "tin6-open.png",
+      "marker": "TIN 6/7",
+      "subjectHint": "Myles Lewis-Skelly — tiền vệ trẻ Arsenal, 19 tuổi"
+    },
+    {
+      "id": "tin7-open",
+      "template": "callout",
+      "filename": "tin7-open.png",
+      "marker": "TIN 7/7",
+      "subjectHint": "Lionel Messi — Inter Miami, áo hồng, khoảnh khắc lặng lẽ trên sân"
+    }
+  ]
+}

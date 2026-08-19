@@ -1,0 +1,45 @@
+{
+  "version": "1.0",
+  "source": "mourinho-xin-7-tan-binh-real-mua-5.txt",
+  "contentType": "TRANSFER NEWS",
+  "title": "Mourinho xin 7 tân binh, Real Madrid chỉ mua được 5",
+  "createdAt": "2026-08-15T16:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "José Mourinho khoanh tay trầm ngâm — Real Madrid"
+    },
+    {
+      "id": "diomande-thay-olise",
+      "template": "stat-hero",
+      "filename": "diomande-thay-olise.png",
+      "subjectHint": "Yan Diomande — tân binh Real Madrid, tiền đạo cánh phải"
+    },
+    {
+      "id": "bastoni",
+      "template": "stat-hero",
+      "filename": "bastoni.png",
+      "subjectHint": "Alessandro Bastoni — trung vệ Inter Milan"
+    },
+    {
+      "id": "militao",
+      "template": "stat-hero",
+      "filename": "militao.png",
+      "subjectHint": "Éder Militão — trung vệ Real Madrid, đang hồi phục chấn thương"
+    },
+    {
+      "id": "huijsen",
+      "template": "callout",
+      "filename": "huijsen.png",
+      "subjectHint": "Dean Huijsen — trung vệ trẻ Real Madrid"
+    },
+    {
+      "id": "asencio",
+      "template": "callout",
+      "filename": "asencio.png",
+      "subjectHint": "Raúl Asencio — trung vệ Real Madrid"
+    }
+  ]
+}

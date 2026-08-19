@@ -1,0 +1,93 @@
+{
+  "version": "1.0",
+  "aspect": "16:9",
+  "source": "ban-tin-16-08.txt",
+  "contentType": "NEWS ROUNDUP",
+  "title": "Bản tin tối 16/8 — 7 tin chuyển nhượng nóng nhất",
+  "createdAt": "2026-08-16T15:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Ferran Torres trong màu áo PSG — tổng hợp bản tin chuyển nhượng tối"
+    },
+    {
+      "id": "tin1-open",
+      "template": "callout",
+      "filename": "tin1-open.png",
+      "marker": "TIN 1/7",
+      "subjectHint": "Ferran Torres ra mắt PSG, cầm áo số 9"
+    },
+    {
+      "id": "tin1-so-lieu",
+      "template": "stat-hero",
+      "filename": "tin1-so-lieu.png",
+      "marker": "TIN 1/7",
+      "subjectHint": "Ferran Torres ăn mừng bàn thắng trong màu áo Barcelona"
+    },
+    {
+      "id": "tin2-open",
+      "template": "callout",
+      "filename": "tin2-open.png",
+      "marker": "TIN 2/7",
+      "subjectHint": "Cristian Romero ra mắt Atletico Madrid"
+    },
+    {
+      "id": "tin2-so-lieu",
+      "template": "stat-hero",
+      "filename": "tin2-so-lieu.png",
+      "marker": "TIN 2/7",
+      "subjectHint": "Diego Simeone chỉ đạo bên đường biên Atletico Madrid"
+    },
+    {
+      "id": "tin3-open",
+      "template": "callout",
+      "filename": "tin3-open.png",
+      "marker": "TIN 3/7",
+      "subjectHint": "Cody Gakpo trong màu áo Liverpool"
+    },
+    {
+      "id": "tin3-barcola",
+      "template": "stat-hero",
+      "filename": "tin3-barcola.png",
+      "marker": "TIN 3/7",
+      "subjectHint": "Bradley Barcola trong màu áo PSG"
+    },
+    {
+      "id": "tin4-open",
+      "template": "callout",
+      "filename": "tin4-open.png",
+      "marker": "TIN 4/7",
+      "subjectHint": "Thủ môn Zion Suzuki trong màu áo Parma"
+    },
+    {
+      "id": "tin4-villa",
+      "template": "stat-hero",
+      "filename": "tin4-villa.png",
+      "marker": "TIN 4/7",
+      "subjectHint": "Emiliano Martinez trong màu áo Aston Villa"
+    },
+    {
+      "id": "tin5-open",
+      "template": "callout",
+      "filename": "tin5-open.png",
+      "marker": "TIN 5/7",
+      "subjectHint": "Rafael Leao trong màu áo AC Milan"
+    },
+    {
+      "id": "tin6-open",
+      "template": "callout",
+      "filename": "tin6-open.png",
+      "marker": "TIN 6/7",
+      "subjectHint": "Jadon Sancho tập luyện, không mang áo câu lạc bộ nào"
+    },
+    {
+      "id": "tin7-open",
+      "template": "callout",
+      "filename": "tin7-open.png",
+      "marker": "TIN 7/7",
+      "subjectHint": "Franck Kessie, tiền vệ Bờ Biển Ngà"
+    }
+  ]
+}

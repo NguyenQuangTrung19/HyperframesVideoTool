@@ -1,0 +1,57 @@
+{
+  "version": "1.0",
+  "source": "9-phuong-an-thay-vinicius-cho-arsenal.txt",
+  "contentType": "RANKING",
+  "title": "9 phương án thay Vinícius Júnior cho Arsenal",
+  "createdAt": "2026-08-09T00:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "hook-1: Vinícius Júnior — Real Madrid · hook-2: Mikel Arteta — HLV Arsenal"
+    },
+    {
+      "id": "alt-yildiz",
+      "template": "stat-hero",
+      "filename": "alt-yildiz.jpg",
+      "subjectHint": "Kenan Yildiz — Juventus, tuyển Thổ Nhĩ Kỳ | 11 bàn, 9 kiến tạo"
+    },
+    {
+      "id": "alt-williams",
+      "template": "stat-hero",
+      "filename": "alt-williams.jpg",
+      "subjectHint": "Nico Williams — Athletic Club, tuyển Tây Ban Nha | Điều khoản 90 triệu euro"
+    },
+    {
+      "id": "alt-abde",
+      "template": "stat-hero",
+      "filename": "alt-abde.jpg",
+      "subjectHint": "Abde Ezzalzouli — Real Betis, tuyển Ma-rốc | 10 bàn, 8 kiến tạo La Liga"
+    },
+    {
+      "id": "alt-godts",
+      "template": "stat-hero",
+      "filename": "alt-godts.jpg",
+      "subjectHint": "Mika Godts — Ajax, tuyển Bỉ | 17 bàn, 13 kiến tạo Eredivisie"
+    },
+    {
+      "id": "alt-ndiaye",
+      "template": "stat-hero",
+      "filename": "alt-ndiaye.jpg",
+      "subjectHint": "Iliman Ndiaye — Everton, tuyển Senegal | 73 pha rê bóng thành công"
+    },
+    {
+      "id": "alt-elmala",
+      "template": "stat-hero",
+      "filename": "alt-elmala.jpg",
+      "subjectHint": "Saïd El Mala — FC Köln, 19 tuổi | 13 bàn sau 34 trận Bundesliga"
+    },
+    {
+      "id": "ngoai-luong",
+      "template": "feature-list",
+      "filename": "ngoai-luong.png",
+      "subjectHint": "ngoai-luong-1: Jack Grealish — Manchester City · ngoai-luong-2: Marcus Rashford — Manchester United"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+Man City giữ giá Foden bằng bản hợp đồng mới
+
+Phil Foden vừa ký hợp đồng mới với Manchester City đến năm 2030, kèm tùy chọn gia hạn thêm 12 tháng. Nhưng chuyên gia Colin Hendry nói với Goal rằng đây có thể là cách đội chủ sân Etihad "bảo vệ tài sản" và giữ giá bán sau 2 mùa sa sút.
+
+## Key facts
+- Foden mới 26 tuổi và đã chơi 369 trận cho Man City kể từ khi bước ra từ lò đào tạo.
+- Anh có 6 chức vô địch Ngoại hạng Anh, cùng FA Cup, League Cup và Champions League.
+- Hợp đồng mới kéo dài đến 2030, kèm điều khoản gia hạn thêm 1 năm.
+- Hai mùa gần nhất Foden chơi phập phù, không còn giữ được vị trí chính thức ở Man City.
+- Hậu quả: anh bị gạch tên khỏi danh sách tuyển Anh dự World Cup 2026.
+- Cole Palmer cũng chịu chung số phận, do tuyển Anh thừa mứa tiền vệ công.
+- Man City chưa có dấu hiệu nào cho thấy họ tính bán Foden lúc này.
+- Foden nói anh đón nhận khởi đầu mới dưới thời Enzo Maresca, người kế nhiệm Pep Guardiola.
+- Maresca từng là trợ lý của Guardiola tại chính Man City.
+- Aston Villa từng được đồn quan tâm Foden, sau khi Morgan Rogers rời Villa Park sang Chelsea.
+- Foden đã đeo băng đội trưởng vài trận giao hữu hè.
+- Man City cần chọn đội trưởng chính thức thay Bernardo Silva đã ra đi.
+- Lịch trước mắt: Community Shield gặp Arsenal, rồi mở màn mùa 2026-27 trên sân nhà tiếp Bournemouth.
+
+## Context
+- Foden là cầu thủ trưởng thành từ lò nhà, nên trên sổ sách anh là khoản lãi ròng nếu Man City bán ra.
+- Bản hợp đồng dài hạn đẩy phí phá vỡ hợp đồng lên cao, khiến mọi lời hỏi mua đều phải trả giá đắt.
+- Hendry cho rằng phần còn lại của giải Ngoại hạng Anh không đánh giá Foden cao như cách Man City định giá anh.
+- Cascarino thì tin Foden cần một cú hích: ra đi để được đá chính thay vì ngồi dự bị ở tuổi này.
+
+## Quotes
+- "Nhìn từ góc độ Man City, rõ ràng đây là bảo vệ tài sản, bảo vệ một thứ có giá trị. Cậu ấy trưởng thành từ lò nhà và phải bật lên lại vào lúc nào đó." — Colin Hendry
+- "Tôi vẫn nghĩ cậu ấy còn nhiều thứ để cống hiến. Nếu bật lên lại được, cậu ấy sẽ thành một siêu sao." — Colin Hendry
+- "Foden đi ngược hoàn toàn rồi, đúng không? Ở tuổi này và với những gì đã đạt được, cậu ấy cần một câu lạc bộ tốt để lấy lại khát khao chứng minh." — Tony Cascarino, cựu tiền đạo Aston Villa
+
+---
+## Giới hạn thời lượng (cho /create-video — KHÔNG đọc lên, KHÔNG lên hình)
+- Mục tiêu: 100-115 giây. Trần cứng: 120 giây.
+- Tổng voiceText MỌI scene cộng lại: **≤ 440 từ** (đo được 0,26 giây/từ).
+- Tổng scene: **≤ 11** (N ảnh trong plan + 1 feature-list + engagement-question + outro).
+- Mỗi body scene tối đa **2 câu** voiceText. KHÔNG viết 3-5 câu/scene.
+- Fact nào không kịp nói thì cho lên `highlights`/`context` để người xem tắt tiếng vẫn đọc được — đừng nhồi vào voiceText.
+- Check trước khi render: đếm từ, >440 thì cắt câu chứ KHÔNG bỏ scene.
+
+---
+Nguồn: goal.com · https://www.goal.com/en/lists/protecting-asset-are-man-city-phil-foden-asking-price-england-international-superstar/blt11068dab2b97454d
+Ngày: 13/08/2026

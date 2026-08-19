@@ -1,0 +1,45 @@
+{
+  "version": "1.0",
+  "source": "nam-sao-hoc-vien-cuu-mua-giai-mu.txt",
+  "contentType": "RANKING",
+  "title": "Năm sao học viện có thể cứu mùa giải của Man Utd",
+  "createdAt": "2026-08-13T08:00:00.000Z",
+  "scenes": [
+    {
+      "id": "hook",
+      "template": "hook",
+      "filename": "hook.png",
+      "subjectHint": "Lứa trẻ học viện Manchester United trên sân tập Carrington, sắc đỏ"
+    },
+    {
+      "id": "gabriel",
+      "template": "stat-hero",
+      "filename": "gabriel.png",
+      "subjectHint": "JJ Gabriel — tiền đạo trẻ Manchester United"
+    },
+    {
+      "id": "thwaites",
+      "template": "stat-hero",
+      "filename": "thwaites.png",
+      "subjectHint": "Jim Thwaites — tiền vệ trẻ Manchester United"
+    },
+    {
+      "id": "lacey",
+      "template": "callout",
+      "filename": "lacey.png",
+      "subjectHint": "Shea Lacey — cầu thủ trẻ Manchester United đi bóng"
+    },
+    {
+      "id": "devaney",
+      "template": "callout",
+      "filename": "devaney.png",
+      "subjectHint": "Jacob Devaney — cầu thủ trẻ Manchester United chỉ huy hàng thủ"
+    },
+    {
+      "id": "armer",
+      "template": "stat-hero",
+      "filename": "armer.png",
+      "subjectHint": "Dan Armer — trung vệ trẻ Manchester United, người Scotland"
+    }
+  ]
+}

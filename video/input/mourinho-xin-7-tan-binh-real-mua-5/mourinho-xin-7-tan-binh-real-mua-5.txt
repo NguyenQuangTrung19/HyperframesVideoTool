@@ -1,0 +1,40 @@
+Mourinho xin 7 tân binh, Real Madrid chỉ mua được 5
+
+José Mourinho đưa ra danh sách 7 vị trí cần bổ sung cho mùa 2026-27. Real Madrid chốt được 5, còn thiếu một trung vệ lệch trái và một tiền vệ toàn diện — hai khoảng trống chỉ có thể lấp nếu có người rời sân Bernabéu.
+
+## Key facts
+- Mourinho yêu cầu 7 bản hợp đồng; Real Madrid hoàn tất 5, với mức độ khớp yêu cầu khác nhau.
+- Năm người đã có: Cucurella cho cánh trái, Dumfries cho cánh phải, Bernardo Silva là tiền vệ đa năng, Konaté là trung vệ lệch phải, Carlos Espí là mẫu tiền đạo khác biệt so với phần còn lại.
+- Yan Diomande không hề nằm trong danh sách gốc — Real chỉ chuyển hướng sang cánh phải sau khi Bayern Munich từ chối bán Michael Olise.
+- Hai vị trí còn trống: một trung vệ lệch trái và một tiền vệ toàn diện.
+- Trung vệ lệch trái là mối lo lớn nhất của Mourinho vì mẫu cầu thủ này cực hiếm trên thị trường.
+- Alessandro Bastoni của Inter là cái tên được cân nhắc; Inter định giá 70 triệu euro, gần bằng khoản tiền Real từng để dành cho Rodri.
+- Éder Militão dự kiến hoàn tất quá trình hồi phục vào cuối tháng 10, nhưng tiền sử chấn thương của anh không cho phép lạc quan.
+- Dean Huijsen chưa chứng minh được mình ở mùa đầu tiên, dù phong độ tại Bournemouth từng hứa hẹn một bước tiến lớn hơn.
+- Raúl Asencio đứng cuối trong thứ tự ưu tiên; nếu anh ra đi, Real buộc phải lao vào thị trường lần cuối.
+- Mourinho tính rằng ông có 20 cầu thủ sẵn sàng cạnh tranh, sau khi trừ người chấn thương và người đã bị gạt khỏi kế hoạch.
+- Mẫu tiền vệ ông muốn phải chịu được nhịp độ cao mà Real sẽ áp đặt, đồng thời biết điều tiết thế trận — Real không tìm được người như vậy.
+- Thị trường chỉ mở lại cho Real nếu một cầu thủ trong biên chế ra đi trước.
+- Mourinho sẽ phải kéo một số cầu thủ đá trái vị trí và chia phút cho những người ban đầu ông không tính tới.
+
+## Context
+- Đây là mùa đầu tiên của Mourinho trong nhiệm kỳ thứ hai tại Real Madrid, sau 13 năm rời Bernabéu.
+- Real Madrid đã về sau Barcelona 2 mùa La Liga liên tiếp, nên sức ép thành tích lên bộ khung mới là rất lớn.
+- Hàng thủ là điểm yếu lộ rõ nhất: Militão chưa bình phục, Huijsen còn non, Asencio có thể ra đi.
+- Real vừa phá kỷ lục câu lạc bộ với 140 triệu euro cho Yan Diomande, khiến dư địa tài chính cho một trung vệ 70 triệu euro bị thu hẹp.
+
+## Quotes
+- "Có hai yêu cầu chưa được đáp ứng, và chúng vẫn nằm trong danh sách cần bổ sung, chờ khả năng được giải quyết." — báo Sport (Tây Ban Nha)
+
+---
+## Giới hạn thời lượng (cho /create-video — KHÔNG đọc lên, KHÔNG lên hình)
+- Mục tiêu: 100-115 giây. Trần cứng: 120 giây.
+- Tổng voiceText MỌI scene cộng lại: **≤ 460 từ** (đo được 0,24 giây/từ).
+- Tổng scene: **≤ 9** (N ảnh trong plan + 1 feature-list + engagement-question + outro).
+- Mỗi body scene tối đa **2 câu** voiceText. KHÔNG viết 3-5 câu/scene.
+- Fact nào không kịp nói thì cho lên `highlights`/`context` để người xem tắt tiếng vẫn đọc được — đừng nhồi vào voiceText.
+- Check trước khi render: đếm từ, >460 thì cắt câu chứ KHÔNG bỏ scene.
+
+---
+Nguồn: goal.com · https://www.goal.com/en/lists/two-missing-signings-real-madrid-unable-to-fulfil-two-of-mourinho-s-requests/bltac9ee1f51bc20090
+Ngày: 15/08/2026
