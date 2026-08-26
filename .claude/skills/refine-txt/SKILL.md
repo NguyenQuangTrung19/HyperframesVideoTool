@@ -167,10 +167,10 @@ Output template (literal markdown, UTF-8, no BOM):
 
 ---
 ## Giới hạn thời lượng (cho /create-video — KHÔNG đọc lên, KHÔNG lên hình)
-- Mục tiêu: 35-45 giây. Trần cứng: 45 giây.
-- Tổng voiceText MỌI scene cộng lại: **≤ 170 từ** (đo thật 0,256 giây/từ trên 27 video đã render).
-- **Mỗi body scene tối đa 1 câu, ≤ 16 từ** — đây là trần quan trọng nhất: 1 cảnh = 1 hình đứng yên ~4 giây. Hook ≤ 12 từ.
-- Số scene KHÔNG giảm — video ngắn đi bằng cách nói ít hơn mỗi cảnh, không phải bằng cách bỏ cảnh.
+- Mục tiêu: 55-65 giây. Trần cứng: 65 giây.
+- Tổng voiceText MỌI scene cộng lại: **≤ 240 từ** (đo thật 0,256 giây/từ trên 27 video đã render).
+- **Mỗi body scene tối đa 2 câu, ≤ 26 từ** — 1 cảnh = 1 hình đứng yên ~6,5 giây. Hook ≤ 18 từ.
+- Số scene GIỮ NGUYÊN — video dài hơn bằng cách nói đầy hơn mỗi cảnh, không phải bằng cách thêm cảnh.
 - Tổng scene: **≤ 11**.
 - Fact nào không kịp nói thì cho lên `highlights`/`context` để người xem tắt tiếng vẫn đọc được.
 - Check trước khi render: `npx tsx _validate-script.ts <script.json>` (chặn cứng, exit 1 = không render).
@@ -213,7 +213,7 @@ Where the band comes from:
 | 5-7 | "8-10 scenes / 33-41s" |
 | 8+ | "9-11 scenes / 41-45s" |
 
-⚠️ Trần cứng **11 scene / 45 giây** (siết 2026-08-19 từ 120s) — nguồn 20 điểm vẫn chỉ ra 11 scene, chọn 8 điểm mạnh nhất. Xem `classify-football-content/SKILL.md`.
+⚠️ Trần cứng **11 scene / 65 giây** (siết 2026-08-19 từ 120s xuống 45s, nới lại lên 65s tối cùng ngày) — nguồn 20 điểm vẫn chỉ ra 11 scene, chọn 8 điểm mạnh nhất. Xem `classify-football-content/SKILL.md`.
 
 If `<3` points, REPLACE the band line with the warning:
 ```

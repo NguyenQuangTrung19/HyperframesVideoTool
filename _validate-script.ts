@@ -6,20 +6,27 @@ import { ScriptSchema } from "./src/render/script-schema";
 
 // ─── Ngân sách nhịp ────────────────────────────────────────────────────────
 // Đo thật trên 27 video 9:16 đã render: 0,256 s/từ (median), 0,277 (worst case)
-// — đã gồm khoảng lặng giữa câu + SCENE_GAP_SEC. Trần 170 từ ⇒ ≤47s kể cả
-// worst case. Lý do siết (2026-08-19): video cũ giữ 1 hình tĩnh 8–12 giây,
-// mọi video kẹt ở 200–300 view = trượt rổ test đầu của TikTok.
+// — đã gồm khoảng lặng giữa câu + SCENE_GAP_SEC.
+//
+// Siết sáng 2026-08-19 xuống 170 từ / 16 từ mỗi cảnh (video cũ giữ 1 hình tĩnh
+// 8–12 giây, mọi video kẹt 200–300 view). NỚI LẠI tối 2026-08-19: user xem 3
+// video đầu tiên chạy trần đó và bác — "cụt ngủn, chả hay lắm, dài hơn tí đi".
+// Trần mới do user chọn: NÓI DÀI HƠN MỖI CẢNH, giữ nguyên số cảnh.
+// 240 từ ⇒ ~62s (worst case 67s); 26 từ/cảnh ⇒ ~6,5s một hình tĩnh.
+// ⚠️ 6,5s vượt mốc 4s đã đo — đây là đánh đổi user chấp nhận có ý thức, không
+// phải quên. Nếu retention rơi lại thì lối thoát đúng là TĂNG SỐ CẢNH, không
+// phải cắt chữ về 16 lần nữa.
 // Xem memory/feedback_scene_pacing_four_second_cap.md
 const SEC_PER_WORD = 0.26;
 
 const BUDGET = {
   "9:16": {
-    totalWords: 170,
+    totalWords: 240,
     scenesMin: 6,
     scenesMax: 13, // 11 thường; 12–13 chỉ cho listicle "N mục" phải đủ mục
-    wordsPerScene: 16,
-    hookWords: 12,
-    targetSec: 45,
+    wordsPerScene: 26,
+    hookWords: 18,
+    targetSec: 65,
   },
   "16:9": {
     // Bản tin YouTube — KHÔNG áp luật nhịp short, đây chỉ là lưới an toàn.
@@ -129,7 +136,7 @@ for (const file of files) {
       const held = (s.w * SEC_PER_WORD).toFixed(1);
       errors.push(
         aspect === "9:16"
-          ? `scene "${s.id}" (${s.template}): ${s.w} từ > ${cap} — ~${held}s trên MỘT hình tĩnh, trần là ~4s`
+          ? `scene "${s.id}" (${s.template}): ${s.w} từ > ${cap} — ~${held}s trên MỘT hình tĩnh, trần là ~6,5s`
           : `scene "${s.id}" (${s.template}): ${s.w} từ > ${cap} — ~${held}s, dài bất thường cho một mục bản tin`,
       );
     }

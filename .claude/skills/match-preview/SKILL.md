@@ -129,10 +129,10 @@ Nhận định <Đội A> vs <Đội B> — <giải đấu>: dự đoán tỷ s�
 
 ---
 ## Giới hạn thời lượng (cho /create-video — KHÔNG đọc lên, KHÔNG lên hình)
-- Mục tiêu: 35-45 giây. Trần cứng: 45 giây.
-- Tổng voiceText MỌI scene cộng lại: **≤ 170 từ** (đo thật 0,256 giây/từ trên 27 video đã render).
-- **Mỗi body scene tối đa 1 câu, ≤ 16 từ** — đây là trần quan trọng nhất: 1 cảnh = 1 hình đứng yên ~4 giây. Hook ≤ 12 từ.
-- Số scene KHÔNG giảm — video ngắn đi bằng cách nói ít hơn mỗi cảnh, không phải bằng cách bỏ cảnh.
+- Mục tiêu: 55-65 giây. Trần cứng: 65 giây.
+- Tổng voiceText MỌI scene cộng lại: **≤ 240 từ** (đo thật 0,256 giây/từ trên 27 video đã render).
+- **Mỗi body scene tối đa 2 câu, ≤ 26 từ** — 1 cảnh = 1 hình đứng yên ~6,5 giây. Hook ≤ 18 từ.
+- Số scene GIỮ NGUYÊN — video dài hơn bằng cách nói đầy hơn mỗi cảnh, không phải bằng cách thêm cảnh.
 - Tổng scene: **≤ 13** (9 ảnh + tactics-board / form-compare / formation-pitch + engagement-question + outro). Preview được nới 13 vì có nhiều scene data-driven bắt buộc.
 - Fact nào không kịp nói thì cho lên `highlights`/`context` để người xem tắt tiếng vẫn đọc được.
 - Check trước khi render: `npx tsx _validate-script.ts <script.json>` (chặn cứng, exit 1 = không render).
@@ -142,7 +142,7 @@ Nguồn: <domain1>, <domain2>, ... · <full URL gốc>
 Ngày: <ngày xuất bản / today>
 ```
 
-⚠️ **Block `## Giới hạn thời lượng` là BẮT BUỘC** (2026-08-03) — copy nguyên văn. Nó nằm ở khu metadata sau `---` nên không trôi vào voiceText. Preview là type dễ phình nhất vì có sẵn nhiều scene data-driven (tactics-board, form-compare, formation-pitch, comparison scoreboard) **tốn thời lượng y hệt scene có ảnh** — chúng chỉ tiết kiệm công gen ảnh, KHÔNG tiết kiệm thời lượng. Đếm chúng vào trần 13 scene ngay từ lúc plan. Dưới luật nhịp mới chúng cũng chỉ được ≤16 từ thoại như mọi cảnh khác: bảng đấu pháp / đội hình tự nó đã nói hết, giọng chỉ cần một câu dẫn.
+⚠️ **Block `## Giới hạn thời lượng` là BẮT BUỘC** (2026-08-03) — copy nguyên văn. Nó nằm ở khu metadata sau `---` nên không trôi vào voiceText. Preview là type dễ phình nhất vì có sẵn nhiều scene data-driven (tactics-board, form-compare, formation-pitch, comparison scoreboard) **tốn thời lượng y hệt scene có ảnh** — chúng chỉ tiết kiệm công gen ảnh, KHÔNG tiết kiệm thời lượng. Đếm chúng vào trần 13 scene ngay từ lúc plan. Dưới luật nhịp mới chúng cũng chỉ được ≤26 từ thoại như mọi cảnh khác: bảng đấu pháp / đội hình tự nó đã nói hết, giọng chỉ cần một câu dẫn.
 
 Section rules:
 

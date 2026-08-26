@@ -56,9 +56,9 @@ If invoked standalone, present this as a markdown report. If invoked from anothe
 | Ảnh trong `images-plan.json` | **9** |
 | Tổng từ voiceText | **170** (0,256 giây/từ, đo thật trên 27 video) |
 | **Từ / mỗi cảnh** | **16** (hook 12) — 1 cảnh = 1 hình tĩnh ~4 giây |
-| Thời lượng | **45 giây** |
+| Thời lượng | **65 giây** |
 
-Ngoại lệ duy nhất: **BIO-\* / HISTORY-\*** tự tách nhiều phần — mỗi phần được tới **14 scene / 60 giây**, nhưng vẫn là trần cho từng phần, không cộng dồn. Trần 16 từ/cảnh không có ngoại lệ nào.
+Ngoại lệ duy nhất: **BIO-\* / HISTORY-\*** tự tách nhiều phần — mỗi phần được tới **14 scene / 80 giây**, nhưng vẫn là trần cho từng phần, không cộng dồn. Trần 26 từ/cảnh không có ngoại lệ nào.
 
 ⚠️ **Số cảnh KHÔNG đổi khi siết thời lượng.** Video 45s vẫn có 9-11 cảnh — đó là chủ đích: đổi hình mỗi ~4 giây thay vì mỗi 8,5 giây như loạt video cũ.
 

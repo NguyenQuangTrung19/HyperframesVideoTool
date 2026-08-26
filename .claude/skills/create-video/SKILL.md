@@ -14,17 +14,17 @@ This is the unified video-builder for the SportsForAllTV channel — replacing t
 
 Length scales to the source's actual content density — **don't pad a thin source to hit a quota**:
 
-- **6–11 scenes, 25–45s, scaled by distinct substantive points in the source:**
-  - 3–4 distinct points → 6–8 scenes / 25–33s
-  - 5–7 distinct points → 8–10 scenes / 33–41s
-  - 8+ distinct points → 9–11 scenes / 41–45s
+- **6–11 scenes, 38–65s, scaled by distinct substantive points in the source:**
+  - 3–4 distinct points → 6–8 scenes / 38–48s
+  - 5–7 distinct points → 8–10 scenes / 48–58s
+  - 8+ distinct points → 9–11 scenes / 58–65s
   - **< 3 distinct points → bail. Tell the user the source is too thin for a useful video and ask for more material; do NOT generate a script.**
 
-> ⚠️ **HAI TRẦN CỨNG: 45 GIÂY / VIDEO và 16 TỪ / CẢNH.** Số cảnh KHÔNG giảm — chỉ có lời thoại mỗi cảnh ngắn lại một nửa. 10 cảnh trong 40 giây = **đổi hình mỗi ~4 giây**.
+> ⚠️ **HAI TRẦN CỨNG: 65 GIÂY / VIDEO và 26 TỪ / CẢNH.** Số cảnh GIỮ NGUYÊN — chỉ có lời thoại mỗi cảnh đầy hơn. 10 cảnh trong 60 giây = **đổi hình mỗi ~6,5 giây**.
 >
-> Siết ngày 2026-08-19 sau khi đo 35 video đã giao: trung bình **8,5 giây một tấm thẻ tĩnh** (cá biệt 12,6s), video dài 75–116s, và **mọi video kẹt ở 200–300 view** — đúng kích thước rổ thử nghiệm đầu của TikTok, tức là trượt vòng test retention rồi không bao giờ được đẩy tiếp. Ken Burns pan chậm KHÔNG tính là chuyển động; mắt người xem coi đó là ảnh đứng yên. Chi tiết + số đo: `memory/feedback_scene_pacing_four_second_cap.md`.
+> 🔄 **NỚI LẠI tối 2026-08-19 — user bác bản siết.** Xem 3 video đầu tiên chạy trần 16 từ, user nói *"cảm giác nội dung nó cụt ngủn, chả hay lắm, dài hơn tí đi"* và chọn phương án **nói dài hơn mỗi cảnh, giữ nguyên số cảnh** (biết rõ 6,5s/hình vượt mốc 4s đo được — đánh đổi có ý thức). Nếu retention rơi lại thì lối thoát đúng là **tăng SỐ CẢNH**, đừng cắt chữ về 16 lần nữa. Bối cảnh của lần siết buổi sáng, giữ lại để khỏi quên vì sao có trần: trung bình **8,5 giây một tấm thẻ tĩnh** (cá biệt 12,6s), video dài 75–116s, và **mọi video kẹt ở 200–300 view** — đúng kích thước rổ thử nghiệm đầu của TikTok, tức là trượt vòng test retention rồi không bao giờ được đẩy tiếp. Ken Burns pan chậm KHÔNG tính là chuyển động; mắt người xem coi đó là ảnh đứng yên. Chi tiết + số đo: `memory/feedback_scene_pacing_four_second_cap.md`.
 >
-> Ngoại lệ duy nhất: BIO-* / HISTORY-* nhiều phần được tới **60s mỗi phần** (vẫn giữ trần 16 từ/cảnh — dài hơn nghĩa là NHIỀU CẢNH hơn, không phải cảnh chậm hơn). Bản tin 16:9 (`aspect: "16:9"`) có bảng ngân sách riêng, luật nhịp này không áp.
+> Ngoại lệ duy nhất: BIO-* / HISTORY-* nhiều phần được tới **80s mỗi phần** (vẫn giữ trần 26 từ/cảnh — dài hơn nghĩa là NHIỀU CẢNH hơn, không phải cảnh chậm hơn). Bản tin 16:9 (`aspect: "16:9"`) có bảng ngân sách riêng, luật nhịp này không áp.
 
 A "distinct substantive point" = an independent fact/claim worth its own scene. Restating something said earlier doesn't count. Padding to hit a longer duration than the source supports is a worse video than a tight short one — Vietnamese short-form viewers swipe away when later scenes don't add new information.
 
@@ -48,7 +48,7 @@ Single argument: a path to a `.txt` source file. The directory containing the .t
 | Player biography | "Hành trình Modric: Từ chiến tranh đến QBV" | timeline, stat-hero, callout |
 | Club / national-team / tournament history | "100 năm Real Madrid", "Lịch sử tuyển Brazil qua các kỳ WC", "Champions League qua các thời kỳ" | timeline, stat-hero, callout |
 
-Bio + history content uses the same image-based motion-graphic pipeline as the rest of `/create-video` (AI poster images per scene, NOT real archival footage). Treat a BIO-PLAYER source as a long-form PLAYER PROFILE with career milestones as the dominant pattern; treat a HISTORY-* source as era / edition-based with timeline + stat-hero scenes (one scene per era / dynasty / edition rather than chapter-based prose). Density rules apply normally — mỗi phần tops out at **14 scenes / 60s** (ngoại lệ duy nhất của trần 45s, xem đầu file). Trần 16 từ/cảnh VẪN áp: một phần dài hơn nghĩa là nhiều cảnh hơn, không phải cảnh chậm hơn. Nguồn dày hơn thì TÁCH THÊM PHẦN, không kéo dài một phần: split the source into Phần 1 / Phần 2 `.txt` files manually and run `/create-video` on each part.
+Bio + history content uses the same image-based motion-graphic pipeline as the rest of `/create-video` (AI poster images per scene, NOT real archival footage). Treat a BIO-PLAYER source as a long-form PLAYER PROFILE with career milestones as the dominant pattern; treat a HISTORY-* source as era / edition-based with timeline + stat-hero scenes (one scene per era / dynasty / edition rather than chapter-based prose). Density rules apply normally — mỗi phần tops out at **14 scenes / 80s** (ngoại lệ duy nhất của trần 65s, xem đầu file). Trần 26 từ/cảnh VẪN áp: một phần dài hơn nghĩa là nhiều cảnh hơn, không phải cảnh chậm hơn. Nguồn dày hơn thì TÁCH THÊM PHẦN, không kéo dài một phần: split the source into Phần 1 / Phần 2 `.txt` files manually and run `/create-video` on each part.
 
 ## Plan-mode vs free-form mode
 
@@ -123,20 +123,20 @@ After classification:
    | Distinct points | Scenes (incl. hook+outro) | Voice duration | Action |
    |---|---|---|---|
    | **< 3** | — | — | **Bail.** Tell user the source is too thin for a useful video and ask them to add more facts/context. Do NOT proceed to write a script. |
-   | 3–4 | 6–8 | 25–33s | Tight short-form, single-arc structure |
-   | 5–7 | 8–10 | 33–41s | Standard mid-form |
-   | 8+ | 9–11 | 41–45s | Full-depth — **still capped at 45s** |
+   | 3–4 | 6–8 | 38–48s | Tight short-form, single-arc structure |
+   | 5–7 | 8–10 | 48–58s | Standard mid-form |
+   | 8+ | 9–11 | 58–65s | Full-depth — **still capped at 65s** |
 
    A source with 20 distinct points does NOT get a 200s video. It gets 11 scenes covering the 11 strongest points; the rest live on screen in `highlights`/`context` or get dropped. **Nguồn dày = chọn kỹ hơn, KHÔNG phải video dài hơn.**
 
-   **⚠️ ĐỪNG ĐỔI ĐỘ DÀI THÀNH ĐỘ CHẬM.** Cắt từ 100s xuống 40s KHÔNG có nghĩa là bỏ scene. Giữ nguyên 9–11 cảnh, mỗi cảnh chỉ còn **1 câu ≤16 từ** thay vì 2–3 câu 25–45 từ. Chi tiết thứ 2, thứ 3 của mỗi ý không biến mất — chúng chuyển lên màn hình (`value` / `highlights` / `context` / `bullets`), nơi người xem đọc trong 4 giây mà không cần giọng đọc hết. Đây chính là điều kiện "sound-off test" của kênh, chỉ là siết chặt hơn.
+   **⚠️ ĐỪNG ĐỔI ĐỘ DÀI THÀNH ĐỘ CHẬM.** Cắt từ 100s xuống 60s KHÔNG có nghĩa là bỏ scene. Giữ nguyên 9–11 cảnh, mỗi cảnh **1–2 câu ≤26 từ** thay vì 2–3 câu 45 từ. Chi tiết thứ 2, thứ 3 của mỗi ý không biến mất — chúng chuyển lên màn hình (`value` / `highlights` / `context` / `bullets`), nơi người xem đọc trong 4 giây mà không cần giọng đọc hết. Đây chính là điều kiện "sound-off test" của kênh, chỉ là siết chặt hơn.
 
    **Luật chống lặp khuôn (mới 2026-08-19):** `stat-hero` + `callout` **không được quá 50% số cảnh**. Đo trên 35 video đã giao: 246/390 cảnh (63%) chỉ là hai template đó, và mọi video đều đúng một bộ xương `hook → stat-hero/callout ×8 → engagement-question → outro`. Người xem lần thứ hai nhận ra ngay đây là cùng cái khuôn. Rút phần còn lại từ nhóm đang bị bỏ quên: `feature-list`, `big-quote` (rất hợp tin chuyển nhượng — lời nhà báo/HLV), `comparison`, `timeline`, `match-results`. **Ngoại lệ: listicle "N mục" phải đủ mục** (xem luật ranking) — ở đó N cảnh `stat-hero` liên tiếp là đúng, validator chỉ cảnh báo chứ không chặn.
 
    When in plan mode (images-plan.json exists), the plan's image-eligible scene count is your floor — don't go below it. If the plan declared 6 image scenes but the source only supports 3 distinct points, surface the mismatch to the user before writing the script (they should re-run `/images-for-videos` first).
 
 5. **Restructure for spoken video:** the file content is written for reading, but the video is heard. Rewrite for spoken Vietnamese:
-   - Break long sentences into short ones (**1 câu / ≤16 từ mỗi scene voiceText** — trần cứng, xem bảng ngân sách ở Step 4). Câu thứ hai chỉ được phép khi cả hai cộng lại vẫn ≤16 từ.
+   - Break long sentences into short ones (**1–2 câu / ≤26 từ mỗi scene voiceText** — trần cứng, xem bảng ngân sách ở Step 4). Câu thứ ba chỉ được phép khi cả ba cộng lại vẫn ≤26 từ.
    - Convert formal text to văn nói (spoken style).
    - Apply phonetic rules (numbers spelled out — see Step 4 "Vietnamese TTS Phonetic Rules" below).
    - Drop tangential paragraphs that don't fit the target duration from Step 2.4.
@@ -168,12 +168,12 @@ If `images-plan.json` next to the source carries `"aspect": "16:9"` (written by 
 | | default (9:16) | `aspect: "16:9"` |
 |---|---|---|
 | `metadata.aspect` | omit (defaults `"9:16"`) | **`"16:9"` — must be written explicitly** |
-| Duration ceiling | **45 s** | **360 s (6 phút)** |
+| Duration ceiling | **65 s** | **360 s (6 phút)** |
 | Scene ceiling | 11 (13 cho listicle "N mục") | **24** (schema hard cap 40) |
-| voiceText budget | **≤ 170 từ** | **≤ 1 250 từ** (0,26 s/từ) |
-| Words per body scene | **≤ 16 (1 câu)** | 45–70 (3 câu) |
-| Words in hook | **≤ 12** | ≤ 40 |
-| Giây/cảnh | **~4 s** | ~14 s |
+| voiceText budget | **≤ 240 từ** | **≤ 1 250 từ** (0,26 s/từ) |
+| Words per body scene | **≤ 26 (1–2 câu)** | 45–70 (3 câu) |
+| Words in hook | **≤ 18** | ≤ 40 |
+| Giây/cảnh | **~6,5 s** | ~14 s |
 | Full-bleed scenes | hook only | **none** — every scene is two columns, text left / photo right, hook included |
 | Usable templates | all | hook · stat-hero · callout · feature-list · comparison · engagement-question · outro **only** |
 
@@ -202,15 +202,15 @@ Everything must sit inside 1920×1080; the photo slot and the text column should
 
 | Distinct points | Scene count | Total words | Words/scene | Total duration |
 |---|---|---|---|---|
-| 3–4 | 6–8 | 95–130 | ≤16 | 25–33s |
-| 5–7 | 8–10 | 130–160 | ≤16 | 33–41s |
-| 8+ | 9–11 | 160–170 | ≤16 | 41–45s |
+| 3–4 | 6–8 | 145–185 | ≤26 | 38–48s |
+| 5–7 | 8–10 | 185–225 | ≤26 | 48–58s |
+| 8+ | 9–11 | 225–240 | ≤26 | 58–65s |
 
-**⚠️ SỐ TỪ là đơn vị đo đáng tin nhất, không phải số scene.** Đo lại trên **27 video 9:16 đã render thật** (ausynclab myna-2 speed 0.90, đã gồm khoảng lặng giữa câu + `SCENE_GAP_SEC`): **0,256 giây/từ median, 0,277 worst case** — con số 0,24 cũ là mức tốt nhất, không phải mức điển hình. Nên **tổng voiceText ≤ 170 từ** là điều kiện đủ để ≤45s kể cả worst case.
+**⚠️ SỐ TỪ là đơn vị đo đáng tin nhất, không phải số scene.** Đo lại trên **27 video 9:16 đã render thật** (ausynclab myna-2 speed 0.90, đã gồm khoảng lặng giữa câu + `SCENE_GAP_SEC`): **0,256 giây/từ median, 0,277 worst case** — con số 0,24 cũ là mức tốt nhất, không phải mức điển hình. Nên **tổng voiceText ≤ 240 từ** là điều kiện đủ để ≤67s kể cả worst case.
 
 Hai trần độc lập, phải qua CẢ HAI:
-- **Tổng ≤ 170 từ** → khống chế thời lượng video.
-- **Mỗi cảnh ≤ 16 từ** (hook ≤ 12) → khống chế thời gian MỘT hình đứng yên. 16 × 0,26 ≈ 4,1s. Đây mới là trần quan trọng: một video 40s mà chia 5 cảnh vẫn là 8s/hình, vẫn chết retention.
+- **Tổng ≤ 240 từ** → khống chế thời lượng video.
+- **Mỗi cảnh ≤ 26 từ** (hook ≤ 18) → khống chế thời gian MỘT hình đứng yên. 26 × 0,26 ≈ 6,8s. Vẫn là trần quan trọng: một video 60s mà chia 5 cảnh là 12s/hình, chết retention.
 
 Đừng đếm tay, chạy validator (nó kiểm cả schema lẫn nhịp):
 ```bash
@@ -232,7 +232,7 @@ Nếu `.txt` có block `## Giới hạn thời lượng` ở cuối file (do `/r
 - If a user later complains the voice is now too fast → flip to `0.95` then `1.0`; never push above 1.05 for news.
 - Tail-eating watch: dynaudnorm per-scene is on by default. If a scene still eats tail consonants, rephrase the ending to avoid soft-consonant closes like `…ng.` / `…nh.` — use stronger closes (`…tốt.`, `…trên sân.`, `…ngày nay.`). See `memory/feedback_voice_speed_news_faster_bio_slower.md`.
 
-⚠️ **Write RICH, not summary — RICH = ĐẶC, KHÔNG PHẢI DÀI.** Đối lập của "rich" là **mơ hồ** ("anh chơi rất hay"), không phải "ngắn". Một câu 12 từ có số liệu thật thì rich hơn ba câu 45 từ nói vòng vo — và từ 2026-08-19, câu 12 từ đó là thứ DUY NHẤT còn chỗ: mỗi body scene `voiceText` chỉ còn **1 câu, ≤16 từ, ~4 giây**.
+⚠️ **Write RICH, not summary — RICH = ĐẶC, KHÔNG PHẢI DÀI.** Đối lập của "rich" là **mơ hồ** ("anh chơi rất hay"), không phải "ngắn". Một câu 12 từ có số liệu thật thì rich hơn ba câu 45 từ nói vòng vo — và từ 2026-08-19, câu 12 từ đó là thứ DUY NHẤT còn chỗ: mỗi body scene `voiceText` gói trong **1–2 câu, ≤26 từ, ~6,5 giây**.
 
 Ngân sách siết không có nghĩa nội dung nghèo đi — nó ép chi tiết cụ thể (năm nào, đối thủ nào, bao nhiêu tiền) lên **màn hình** thay vì nằm trong giọng đọc. `value` / `label` / `context` / `highlights` / `bullets` chính là chỗ chứa lớp chi tiết thứ 2–3; người xem đọc chúng trong 4 giây, nhanh hơn nghe. Một cảnh rich dưới luật mới = 1 câu thoại đắt + 3 con số trên hình. Một cảnh nghèo = 1 câu thoại chung chung + màn hình trống. Xem `memory/feedback_script_rich_not_summary.md`.
 
@@ -520,7 +520,7 @@ The voice has ~1.5s before the viewer commits. The hook word (the surprising num
 ✅ Punch-first:
 > *"22 năm. Pháo Thủ trở lại đỉnh Ngoại hạng. 23 cầu thủ, 23 con đường tới đây."*
 
-The first SHORT sentence (≤8 words) is the hook. The voice can elaborate in sentence 2 — **but the whole hook scene is capped at 12 words** (~3s), so sentence 2 is a fragment, not a paragraph.
+The first SHORT sentence (≤8 words) is the hook. The voice can elaborate in sentence 2 — **but the whole hook scene is capped at 18 words** (~4,7s), so sentence 2 stays a short clause, not a paragraph.
 
 **⚠️ Hook MỞ vòng lặp, không ĐÓNG nó (mới 2026-08-19).** Punch-first vẫn đúng, nhưng punch ≠ toàn bộ câu chuyện. Hook cũ dài 5–9 giây và trả xong hết nội dung ngay câu 3 — người xem biết hết rồi thì lướt, và phần thân video không còn lý do tồn tại. Con số / cái tên / mâu thuẫn lên trước; **phần GIẢI THÍCH (vì sao, hệ quả, con số chốt) để dành cho thân bài.**
 
@@ -1319,7 +1319,7 @@ Per the no-prompt rule (`memory/feedback_dont_author_image_prompts.md`), scenes 
   ```bash
   npx tsx _validate-script.ts <outputDir>/script.json
   ```
-  Chặn cứng cả schema (zod field caps) lẫn nhịp: **tổng ≤ 170 từ · mỗi cảnh ≤ 16 từ · hook ≤ 12 từ · 6–13 cảnh**, và cảnh báo khi `stat-hero`+`callout` > 50% số cảnh. Exit 1 = KHÔNG được render. Vượt → cắt câu rồi chạy lại; KHÔNG bỏ scene, KHÔNG render rồi mới sửa (render xong mới cắt là tốn quota TTS + thời gian encode). Nếu `.txt` có block `## Giới hạn thời lượng` thì budget trong đó thắng, nhưng vẫn không được vượt trần validator.
+  Chặn cứng cả schema (zod field caps) lẫn nhịp: **tổng ≤ 240 từ · mỗi cảnh ≤ 26 từ · hook ≤ 18 từ · 6–13 cảnh**, và cảnh báo khi `stat-hero`+`callout` > 50% số cảnh. Exit 1 = KHÔNG được render. Vượt → cắt câu rồi chạy lại; KHÔNG bỏ scene, KHÔNG render rồi mới sửa (render xong mới cắt là tốn quota TTS + thời gian encode). Nếu `.txt` có block `## Giới hạn thời lượng` thì budget trong đó thắng, nhưng vẫn không được vượt trần validator.
 - Total word count + scene count + duration are all in the band you picked at Step 2.4 based on distinct-points count — do NOT auto-expand to fill the upper bound
 - Scene count between 6 (lower bound for 3–4 substantive points) and 11 (upper bound for 8+ substantive points; listicle "N mục" được tới 13, chỉ BIO-*/HISTORY-* nhiều phần được vượt thời lượng)
 - **`stat-hero` + `callout` ≤ 50% số cảnh** — phần còn lại lấy từ `feature-list` / `big-quote` / `comparison` / `timeline` / `match-results`. Bỏ qua khi là listicle "N mục" phải đủ mục.
@@ -1416,22 +1416,66 @@ Kênh giữ tone **báo chí chuyên**, nhưng được phép cà khịa ở **b
 - **Đúng một cú mỗi video.** Hai câu đùa cạnh nhau thì cả hai cùng hỏng.
 - **Số liệu KHÔNG được đùa.** Sự thật nền phải đúng 100% kể cả khi câu văn hài.
 
-**Mốc hiệu chỉnh — user chọn 19/8/2026.** Đưa 3 mức (không cà khịa / trớ trêu trong dữ kiện / châm thẳng), user chốt mức giữa. Đây là thước đo, viết xong đối chiếu với nó:
+**Mốc hiệu chỉnh — LẦN THỨ BA trong ngày 19/8/2026. Đây là mốc đang dùng.**
+
+Sáng: user chọn "trớ trêu trong dữ kiện". Chiều: nâng lên "châm thẳng vào quyết định CLB". Tối: **user chê cả hai là NHẠT** — *"viết gì nhạt thế, kiểu như MU mua vội Baleba nhìn cứ mắc cười, giống kiểu bạn ế đến năm 40 tuổi không ai yêu phải cưới vội cô hàng xóm"*.
+
+**Cái sai của hai mốc trước: đó là mỉa kiểu NHÀ BÁO** — đặt hai con số cạnh nhau rồi để người xem tự hiểu. Nó thông minh nhưng lạnh, và người xem không cười, chỉ gật.
+
+**Thiết bị gây cười đúng: SO SÁNH VỚI CHUYỆN ĐỜI THƯỜNG.** Lấy tình huống bóng đá và úp lên một cảnh ai cũng từng sống qua — ế, thi trượt, chia tay, đi chợ muộn, xin tiền bố mẹ.
 
 ```
-TIÊU ĐỀ
-Real trả cao hơn 10 triệu, vẫn về nhì
+Sự thật: MU cả hè không mua ai, còn 13 ngày mới hỏi mua Baleba
+❌ mốc cũ  "Chín người đi, năm người đến. Gọi đó là tăng cường cũng được."
+✅ mốc mới "Cả mùa hè ngồi yên. Còn mười ba ngày mới cuống lên đi hỏi vợ."
 
-CAPTION
-Real Madrid trả cao hơn Barcelona đúng 10 triệu euro và vẫn về nhì.
-Có những thứ tiền mua được — chỉ là không phải lần này.
-Rodri chọn bằng cái đầu hay bằng cảm tính?
+Sự thật: Liverpool dẫn 2 bàn ở 2 trận liền rồi thua cả hai
+✅ "Kiểu học chín phẩy cả kỳ rồi trượt tốt nghiệp."
 
-HASHTAG
-#bongda #chuyennhuong #barcelona #realmadrid #rodri #laliga
+Sự thật: Newcastle mất HLV ngày 31/7, sát ngày khai mạc
+✅ "Đúng kiểu chia tay trước đám cưới một tuần."
 ```
 
-Đọc kỹ vì sao câu này đạt: cú châm là **"trả cao hơn … và vẫn về nhì"** — hai sự thật đặt cạnh nhau, không có một tính từ chê nào. Câu 2 là nhận xét chứ không phải chửi. Câu 3 mở tranh luận có hai phe thật. Bản bị bác vì quá đà dùng *"Ngân sách thì to, sức thuyết phục thì chưa thấy đâu"* — đó là chê câu lạc bộ, không phải kể sự trớ trêu.
+**Luật của một câu so sánh dùng được:**
+- **Vế bóng đá phải là sự thật kiểm chứng được.** Câu đùa chỉ đổi CÁCH KỂ, không đổi dữ kiện. Bịa vế trái là mất cả hai.
+- **Cảnh đời phải phổ thông ở Việt Nam** — ế, thi cử, chia tay, đi chợ, xin tiền bố mẹ, vay nợ. Đừng lấy ví dụ chỉ dân thành thị hiểu.
+- **Nhắm vào TÌNH HUỐNG của câu lạc bộ, không nhắm vào con người.** Cười cái quyết định mua muộn thì được; ví một cầu thủ với người ế thì không.
+- **Ấm, không cay.** Ví dụ gốc của user là tự trào — ai cũng thấy mình trong đó. Đó là lý do nó buồn cười chứ không phải xúc phạm.
+- **2-3 câu mỗi video, không hơn.** Và cảnh mang CON SỐ quan trọng nhất thì đừng đùa — chỗ đó cần người xem tin.
+- Vẫn cấm: biệt ngữ mạng, xưng hô "mấy chế / con vợ" (user đã bác tháng 5/2026).
+
+**Chỗ lấy chất liệu:** file `.txt` do `/read-rewrite` sinh ra giờ có mục **`## Góc hài`** — nêu trục cười và 4-5 câu ứng viên. Chọn 2-3, đừng dùng hết.
+
+⚠️ **Ba lần hiệu chỉnh trong một ngày nghĩa là khẩu vị này chưa ổn định.** Đo bằng tỉ lệ comment, và nếu 5 video liên tiếp không nhích thì quay lại hỏi user thay vì tự đoán tiếp.
+
+### Step 8.65: Từ ĐẦU TIÊN của hook là từ bỏ đi được
+
+**Âm tiết đầu tiên của cả track voice là thứ KHÔNG đáng tin.** TTS bắt đầu phát từ sample 0 và nuốt phần đầu lưỡi của từ #1 — đo được trên 22/36 video đã giao. Đà im lặng 0,35s mà pipeline chèn vào chỉ tạo khoảng lặng cho VIDEO; nó không tái tạo được âm tiết mà TTS chưa từng phát ra.
+
+Nên **đừng bao giờ mở `voiceText` của hook bằng từ mang thông tin** — nhất là số ghép.
+
+| Mở đầu | Nghe ra |
+|---|---|
+| ❌ `"Mười ba ngày nữa đóng chợ."` | *"**Ba** ngày nữa…"* — mất "mười", sai hẳn con số |
+| ✅ `"Còn mười ba ngày nữa đóng chợ."` | đúng — chữ "Còn" hứng đòn thay |
+
+Bằng chứng trong cùng một track: cụm "mười ba" ở **giây 23** đọc đúng (Whisper ghi `13`), cụm y hệt ở **giây 0** mất âm đầu (Whisper ghi `3`). Không phải lỗi tốc độ, không phải lỗi số — thuần vị trí.
+
+Cho một chữ rẻ tiền đứng đầu: `"Còn"`, `"Và"`, `"Giờ"`, `"Ở đây"`. Nó tốn một từ trong ngân sách 18 từ của hook và đáng giá.
+
+### Step 8.7: Nhịp câu — viết cho TAI, không cho MẮT
+
+user 19/8/2026: *"cách đọc nữa"*. TTS đọc đúng dấu câu mình viết, nên nhịp là thứ mình điều khiển được mà không cần đổi giọng.
+
+- **Xen ngắn với dài.** Hai mươi sáu từ trong một câu liền mạch đọc ra như đọc báo cáo. Cắt thành 2-3 mệnh đề: *"Chín người đi, năm người đến. Gọi đó là tăng cường cũng được."*
+- **Từ đắt đặt CUỐI câu.** TTS xuống giọng ở cuối, nên từ nằm đó được nhấn tự nhiên. ❌ *"Hàng thủ thì chưa có ai được bổ sung."* ✅ *"Hàng thủ thì chưa ai."*
+- **Câu cụt là nhịp nghỉ.** *"Tiền về, người thì không."* — dấu phẩy tạo khoảng lặng ngắn, dấu chấm tạo khoảng lặng dài. Câu đùa cần một nhịp nghỉ TRƯỚC cú chốt, và dấu chấm chính là nhịp đó.
+- **Đừng mở hai câu liên tiếp bằng cùng một cấu trúc** — TTS lặp nguyên đường cong ngữ điệu, nghe ra như máy.
+- **Tốc độ đọc: GIỮ 0,90. Đã thử 0,95 và phải trả lại ngay trong ngày.** Ở 0,95 AusyncLab **nuốt âm tiết giữa của số ghép**: "tám mươi ba triệu" đọc thành "tám triệu", "mười ba ngày" thành "ba ngày". Đây là lỗi SỐ LIỆU, không phải lỗi nhịp — màn hình ghi £83M còn giọng đọc 8 triệu.
+
+  Bằng chứng là mốc thời gian, không phải bản ghi Whisper: `nhìn` kết thúc 2,14s, `triệu` bắt đầu 2,38s — **0,24 giây** cho chỗ đáng ra phải chứa ba âm tiết (~0,6s). Hai lần render trước ở 0,90 đọc đúng cả `13` lẫn `83`.
+
+  ⚠️ Muốn đổi tốc độ thì SAU khi render phải soi `full-words.json` ở đúng chỗ có số ghép, không chỉ nhìn tổng thời lượng. Video vẫn exit 0 và vẫn đủ dài khi số bị đọc sai.
 
 ⚠️ Chưa có bằng chứng giọng này kéo được view. Đo bằng **tỉ lệ comment**, không đo bằng cảm giác — và nếu 5 video liên tiếp không nhích comment thì bỏ, đừng giữ vì đã lỡ viết luật.
 

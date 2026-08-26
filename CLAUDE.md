@@ -30,6 +30,7 @@ Bản đồ tĩnh các file code hay đụng, để khỏi đào file-by-file. C
 | Đo tỉ lệ ảnh (JPEG/PNG/WebP/GIF header) | `src/render/image-dims.ts` |
 | Config + env | `src/config.ts` |
 | Podcast pipeline | `src/podcast/pipeline.ts` |
+| Normalize clip nguồn podcast | `src/podcast/normalize-sources.ts` — clone **content-addressed**, cache DÙNG CHUNG ở `podcast/_normcache/` (derived data, xoá được); reference = spec modal + fps snap 24/25/30/50/60 |
 
 ## Scripts (npm run)
 - `images:stage -- <txt>` — `scripts/stage-planned-images.ts`: verify + copy ảnh plan → `output/<slug>/images/`; chạy combine trước.

@@ -2695,3 +2695,219 @@ html, body {
 .glow-orb {
   opacity: 0.28; /* slightly brighter than default 0.20 */
 }
+
+/* ══ DARK SURFACE — PORTRAIT (9:16) ══════════════════════════════════════
+   2026-08-19, user: "visual chưa đã mắt lắm, cái logo để hơi kì. Có scene
+   không có ảnh nhìn chán."
+
+   This is the SAME move already made for the landscape bulletin on 2026-08-10
+   ("đừng dùng lưới mà dùng màu xanh dương làm chủ đạo, xanh đen thì tốt"),
+   now brought to the short. Two pieces of evidence said the light grid was the
+   problem rather than the layouts on top of it:
+
+   1. `big-quote` was already dark (green board) and was the only scene in the
+      deck with any presence — the system was contradicting itself.
+   2. On the pale grid, an image-less scene is a white card on a near-white
+      ground. In a feed that is a blank document, not a broadcast graphic.
+
+   Scoped `body:not(.ar-16x9)` so the landscape file, which has its own dark
+   section, is untouched. Comes last in the file, so equal specificity wins.  */
+
+body:not(.ar-16x9) .shell-bg {
+  background:
+    radial-gradient(ellipse 86% 60% at 26% 30%, rgba(14,134,201,0.24) 0%, transparent 64%),
+    linear-gradient(168deg, #0B1F33 0%, #143755 54%, #0A1B2C 100%);
+}
+/* The 46/230px rules are the thing that made it read as graph paper. Off. */
+body:not(.ar-16x9) .shell-bg::before,
+body:not(.ar-16x9) .shell-bg::after { display: none; }
+/* Light build hazed the CENTRE with white; on navy that fogs the frame. */
+body:not(.ar-16x9) .shell-vignette {
+  background: radial-gradient(ellipse 92% 78% at 50% 42%, transparent 40%, rgba(3,10,20,0.72) 100%);
+}
+
+/* ── Brand lockup ──
+   The white pill was built for the light shell; on navy it reads as a sticker
+   from another design. Worse, `.brand-icon` renders a logo file that already
+   contains the wordmark, at 66px — the baked-in type comes out as mush, and it
+   sits beside the SAME wordmark set in real type. One name, drawn twice, one of
+   them illegible. Dropped to a broadcast lower-third: accent rule + name. */
+body:not(.ar-16x9) .brand-shell-header {
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0 0 0 18px;
+  border-left: 5px solid var(--sky-8);
+  border-radius: 0;
+  gap: 0;
+}
+body:not(.ar-16x9) .brand-icon { display: none; }
+body:not(.ar-16x9) .brand-name { color: #FFFFFF; }
+body:not(.ar-16x9) .brand-tag  { color: rgba(255,255,255,0.62); letter-spacing: 3.5px; }
+
+/* Scene counter — was ink-on-white, invisible logic on navy. */
+body:not(.ar-16x9) .chapter-marker {
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.16);
+  box-shadow: none;
+}
+body:not(.ar-16x9) .chapter-idx   { color: #FFFFFF; }
+body:not(.ar-16x9) .chapter-sep,
+body:not(.ar-16x9) .chapter-total { color: rgba(255,255,255,0.55); }
+
+/* ── Type: white on navy ── */
+body:not(.ar-16x9) .stat-label,
+body:not(.ar-16x9) .stat-highlight-text,
+body:not(.ar-16x9) .callout-statement,
+body:not(.ar-16x9) .feat-title,
+body:not(.ar-16x9) .eq-question,
+body:not(.ar-16x9) .cmp-side-label,
+body:not(.ar-16x9) .cmp-label {
+  color: #FFFFFF;
+  text-shadow: none;
+}
+body:not(.ar-16x9) .stat-context,
+body:not(.ar-16x9) .cmp-delta-leader {
+  color: rgba(255,255,255,0.74);
+  text-shadow: none;
+}
+/* `--gold` is amber-11 (#A05A00), a brown chosen to sit on WHITE. On navy it
+   is mud — the same silent failure the landscape port hit. Big numbers move to
+   amber-9, which is what navy was contrast-tested against. */
+body:not(.ar-16x9) .stat-value,
+body:not(.ar-16x9) .stat-value-text,
+body:not(.ar-16x9) .callout-tag {
+  color: var(--amber-9);
+}
+
+/* ── Plates on a dark ground ──
+   Anything that was "the white card on a light page" has to become "the lifted
+   plate on a dark page", or it either glares or disappears. */
+body:not(.ar-16x9) .eq-card {
+  background: rgba(255,255,255,0.075);
+  border: 1px solid rgba(255,255,255,0.16);
+  box-shadow: 0 26px 70px rgba(3,10,20,0.55);
+}
+body:not(.ar-16x9) .cmp-bar-track {
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+body:not(.ar-16x9) .cmp-card {
+  background: rgba(255,255,255,0.075);
+}
+/* The photo card is the one white object that should STAY bright — it frames a
+   photograph. It only needs a rim so the crop edge does not float. */
+body:not(.ar-16x9) .bg-card,
+body:not(.ar-16x9) .feat-hero,
+body:not(.ar-16x9) .stat-hero-image-card {
+  box-shadow: 0 30px 80px rgba(3,10,20,0.60);
+}
+
+/* ── Image-less scenes: scale the type to the FRAME ──
+   user 2026-08-19: "Có scene không có ảnh nhìn chán."
+
+   Measured on the comparison card before this block: labels 38px, values 56px,
+   bars 52px tall — the whole graphic occupied ~450px of a 1920px canvas and
+   floated in the middle with roughly 700px of empty ground above and below.
+   That is the same mistake the landscape bulletin made on 2026-08-10 (sized to
+   the column instead of the frame), and the fix is the same: the type leads,
+   and it is sized against the canvas it will be watched on.
+
+   `.cmp-delta` also carried `rgba(26,60,42,0.92)` — a dark green picked for the
+   light shell, which on navy is simply not there. Another silent one: valid
+   CSS, valid render, invisible word. */
+body:not(.ar-16x9) .cmp-delta { color: rgba(255,255,255,0.80); }
+body:not(.ar-16x9) .cmp-delta-arrow,
+body:not(.ar-16x9) .cmp-delta-leader { color: var(--sky-8); }
+body:not(.ar-16x9) .cmp-delta-num { color: var(--amber-9); }
+
+body:not(.ar-16x9) .cmp-side-label { font-size: 58px; }
+body:not(.ar-16x9) .cmp-bar-value  { font-size: 96px; }
+body:not(.ar-16x9) .cmp-bar-track  { height: 84px; }
+body:not(.ar-16x9) .cmp-row        { gap: 34px; }
+body:not(.ar-16x9) .cmp-delta      { font-size: 42px; margin-top: 54px; }
+body:not(.ar-16x9) .cmp-delta-num  { font-size: 58px; }
+
+/* The engagement card is the last thing before the outro and the one asking for
+   a comment — it should not be the smallest type in the deck. */
+body:not(.ar-16x9) .eq-question { font-size: 66px; }
+body:not(.ar-16x9) .eq-card     { padding: 92px 76px 82px; }
+
+/* ── Specificity catch-up ──
+   The block above lost to `.scene[data-fit="card"] .layout-stat-hero.stat-hero-v2 …`
+   (0,2,3 vs my 0,1,1), so on the first dark pass the money figure stayed
+   `--gold` brown on navy and the label/bullets stayed ink — legible in the
+   design shot only because I knew what they said. Matching the winning chain
+   rather than reaching for `!important`, which would then have to be fought
+   again by whatever comes next. */
+body:not(.ar-16x9) .scene[data-fit] .layout-stat-hero.stat-hero-v2 .stat-value,
+body:not(.ar-16x9) .scene[data-fit] .layout-stat-hero.stat-hero-v2 .stat-value-text {
+  color: var(--amber-9);
+}
+body:not(.ar-16x9) .scene[data-fit] .layout-stat-hero.stat-hero-v2 .stat-label,
+body:not(.ar-16x9) .scene[data-fit] .layout-stat-hero.stat-hero-v2 .stat-highlight-text {
+  color: #FFFFFF;
+  text-shadow: none;
+}
+/* The context pill was ink-on-white: on navy it became the BRIGHTEST object in
+   the frame, out-ranking the number it is supposed to footnote. */
+body:not(.ar-16x9) .scene[data-fit] .layout-stat-hero.stat-hero-v2 .stat-context {
+  color: rgba(255,255,255,0.78);
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.16);
+}
+body:not(.ar-16x9) .scene[data-fit] .callout-statement,
+body:not(.ar-16x9) .scene[data-fit] .feat-title { color: #FFFFFF; text-shadow: none; }
+body:not(.ar-16x9) .scene[data-fit] .callout-tag { color: var(--amber-9); }
+
+/* ── Image-less layouts: centre on the SAFE ZONE, not on the canvas ──
+   `.layout-comparison`, `.layout-big-quote` and `.layout-engagement-question`
+   all carried `padding: 340px 80px 180px`. With `justify-content:center` that
+   centres content at y=1040, while the TikTok-safe centre is y=870 — every one
+   of these scenes sat 170px low, which is what read as "a big gap under the
+   brand bar and the graphic sagging toward the caption strip".
+
+   The 180px bottom was the more serious half: TikTok covers the bottom 420px
+   with caption + music strip, so a tall card could push real content under the
+   UI. Padding now states the reserve exactly (240 top / 420 bottom), which is
+   the rule the templates were supposed to follow all along. */
+body:not(.ar-16x9) .layout-comparison,
+body:not(.ar-16x9) .layout-big-quote,
+body:not(.ar-16x9) .layout-engagement-question {
+  padding: 240px 80px 420px;
+}
+
+/* `.callout-tag` carried the gold-soft pill built for the light shell. On navy
+   that cream plate is the brightest object in the frame and out-ranks the
+   photograph it is labelling — the same failure as `.stat-context`, missed on
+   the first pass because no callout in the test deck had an image yet. */
+body:not(.ar-16x9) .scene[data-fit] .callout-tag,
+body:not(.ar-16x9) .callout-tag {
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
+}
+
+/* ── Two things the dark port missed, both caught by the user on the render ──
+
+   1. `.out-channel` is the big serif channel name on the outro and was still
+      `var(--ink)` — near-black on navy. It is the one word the whole outro
+      exists to leave in the viewer's head, and it was the least readable thing
+      in the video. I never opened the outro shot after the surface change;
+      the fix costs one line, missing it cost a delivered render.
+
+   2. The decorative quote marks on `.callout-statement` are pulled INSIDE the
+      text box by the `data-fit="card"` variant (`left: 60px` / `right: 60px`,
+      overriding the base `-32px`). Those offsets suit a long multi-line quote,
+      where the marks sit clear of the text. With a SHORT one-line statement the
+      box is only ~141px tall and the closing mark lands on the last word.
+      Pushed back outside the box on both axes. */
+body:not(.ar-16x9) .out-channel {
+  color: #FFFFFF;
+  text-shadow: 0 2px 20px rgba(3,10,20,0.55);
+}
+body:not(.ar-16x9) .scene[data-fit="card"] .callout-statement::before {
+  top: -34px; left: -6px;
+}
+body:not(.ar-16x9) .scene[data-fit="card"] .callout-statement::after {
+  bottom: -62px; right: -6px;
+}

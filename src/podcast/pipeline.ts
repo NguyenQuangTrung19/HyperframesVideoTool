@@ -37,22 +37,40 @@ const TOTAL_STEPS = 6;
  *   3) Legacy fallback: `<inputDir>/../../output/<slug>` (the old behavior, used
  *      when no `podcast/` ancestor exists — keeps /create-music-video etc. working).
  */
+function findPodcastRoot(inputDir: string): string | null {
+  const abs = resolvePath(inputDir);
+  const segs = abs.split(/[/\\]/);
+  // Deepest `podcast` segment (handles nested workdir + multi-level inputs).
+  // Reconstruct the path up to (and including) it. On Windows the first
+  // segment is the drive ("C:"), which `join` handles correctly.
+  for (let i = segs.length - 1; i >= 0; i--) {
+    if (segs[i].toLowerCase() === "podcast") return segs.slice(0, i + 1).join("/");
+  }
+  return null;
+}
+
 function resolvePodcastOutputDir(inputDir: string, slug: string): string {
   const envBase = process.env.PODCAST_OUTPUT_DIR?.trim();
   if (envBase) return join(envBase, slug);
-  const abs = resolvePath(inputDir);
-  const segs = abs.split(/[/\\]/);
-  // Find the topmost `podcast` segment (handles nested workdir + multi-level inputs).
-  for (let i = segs.length - 1; i >= 0; i--) {
-    if (segs[i].toLowerCase() === "podcast") {
-      // Reconstruct the path up to (and including) `podcast/`. On Windows the
-      // first segment is the drive ("C:"), which `join` handles correctly.
-      const podcastRoot = segs.slice(0, i + 1).join("/");
-      return join(podcastRoot, "output", slug);
-    }
-  }
+  const podcastRoot = findPodcastRoot(inputDir);
+  if (podcastRoot) return join(podcastRoot, "output", slug);
   // Legacy fallback for callers outside a `podcast/` tree.
   return join(resolvePath(inputDir, "..", "..", "output"), slug);
+}
+
+/**
+ * Where the normalized source clones live. SHARED across every story under the
+ * same `podcast/` root, because the clones are content-addressed (see
+ * `normalize-sources.ts`): a clip normalized for story A is byte-identical to
+ * the one story B would produce, so the second story gets it for free instead
+ * of paying another ffmpeg pass. Falls back to the per-run `.normalized/` dir
+ * for callers outside a `podcast/` tree (e.g. /create-music-video).
+ */
+function resolveNormalizeCacheDir(inputDir: string): string | undefined {
+  const envDir = process.env.PODCAST_NORMCACHE_DIR?.trim();
+  if (envDir) return envDir;
+  const podcastRoot = findPodcastRoot(inputDir);
+  return podcastRoot ? join(podcastRoot, "_normcache") : undefined;
 }
 export interface PodcastPipelineOpts {
   /**
@@ -122,10 +140,13 @@ export async function runPodcastPipeline(txtPath: string, opts: PodcastPipelineO
   log.info(`  total source duration: ${totalSourceDur.toFixed(1)}s`);
 
   const autoNormalize = (process.env.PODCAST_AUTO_NORMALIZE ?? "true").toLowerCase() !== "false";
-  const normReport = await normalizeSiblingVideos(sourceVideoPaths, inputDir, { enabled: autoNormalize });
+  const normReport = await normalizeSiblingVideos(sourceVideoPaths, inputDir, {
+    enabled: autoNormalize,
+    cacheDir: resolveNormalizeCacheDir(inputDir),
+  });
   const resolvedSourcePaths = normReport.resolvedPaths;
   if (normReport.normalized.length > 0) {
-    log.info(`  normalized ${normReport.normalized.length} sibling(s) → input/${slug}/.normalized/`);
+    log.info(`  normalized ${normReport.normalized.length} sibling(s) → shared clone cache`);
   }
   if (normReport.cached.length > 0) {
     log.info(`  reused ${normReport.cached.length} cached normalized file(s)`);

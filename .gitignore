@@ -40,3 +40,6 @@ assets/music/*.m4a
 assets/music/*.wav
 # Generated subtitle artifact from a podcast/music-video run
 /captions.ass
+
+# Shared content-addressed cache of normalized podcast source clips (derived data)
+podcast/_normcache/

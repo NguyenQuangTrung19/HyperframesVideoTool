@@ -62,7 +62,7 @@ If the user runs `/create-video` directly without a plan, that skill will work i
 | 12 000 – 15 999 | 4 |
 | ≥ 16 000 | 5 (hard cap — never produce >5 parts) |
 
-**For all other types, skip the rest of this step regardless of source length.** The single-video scene-count cap (11 scenes / 45 s — 13 scenes for a "N mục" listicle) applies as the upper bound when source is rich — that's the natural limit, not a split trigger.
+**For all other types, skip the rest of this step regardless of source length.** The single-video scene-count cap (11 scenes / 65 s — 13 scenes for a "N mục" listicle) applies as the upper bound when source is rich — that's the natural limit, not a split trigger.
 
 **If N = 1 (either by content-type or by short source), skip to Step 2.** Single-part videos go through the rest of the skill exactly as before.
 
@@ -145,7 +145,7 @@ These templates do NOT take images (skip them in the plan):
 
    **⚠️ NGOẠI LỆ — RANKING / listicle có SỐ trong tiêu đề thì phải ĐỦ (2026-08-15, user: *"mấy cái mà xếp hạng này kia phải đầy đủ chứ"*).** Tiêu đề hứa "9 cái tên" / "Top 10" / "7 bản hợp đồng" là một hợp đồng với người xem: **mỗi mục PHẢI có cảnh riêng + ảnh riêng, không được cắt bớt, không được gom vào `feature-list` mờ.** Ở đây trần 9 ảnh NHƯỜNG, không phải danh sách nhường:
    - N ≤ 9 → `hook` + N ảnh (tối đa 10 ảnh, 12 scene). Trần code thật là `MAX_SCENES["9:16"] = 20` (`src/render/script-schema.ts`), validator cho tới 13 scene; 13 × 12 từ ≈ 41s vẫn dưới trần 45s.
-   - N từ 10–12 → vẫn đủ N, nhưng siết voiceText mỗi cảnh còn **1 câu ~12 từ** (thay vì trần 16) để tổng giữ ≤ 170 từ. Đừng bỏ mục nào.
+   - N từ 10–12 → vẫn đủ N, nhưng siết voiceText mỗi cảnh còn **1 câu ~18 từ** (thay vì trần 26) để tổng giữ ≤ 240 từ. Đừng bỏ mục nào.
    - N > 12 → KHÔNG âm thầm cắt. Báo user và đề xuất tách 2 phần (`-p1`/`-p2`), hoặc user đồng ý hạ số thì **sửa luôn số trong tiêu đề `.txt`** cho khớp. Tiêu đề nói 15 mà video có 9 là lỗi nặng hơn video dài.
 
    Luật "chọn 8 cái đáng nhất" ở trên chỉ áp dụng cho nguồn **không hứa số**: bài chấm điểm 22 cầu thủ, bài roundup, bài phân tích. Xem `memory/feedback_listicle_hook_doubles_as_item_one.md`.

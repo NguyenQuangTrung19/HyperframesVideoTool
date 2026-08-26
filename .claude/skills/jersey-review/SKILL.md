@@ -99,9 +99,9 @@ Plain markdown, UTF-8. One `##` section per kit, then a quick compare (if 2+), c
 
 ---
 ## Giới hạn thời lượng (cho /create-video — KHÔNG đọc lên, KHÔNG lên hình)
-- Mục tiêu: 30-40 giây. Trần cứng: 45 giây. **Video bán hàng nên ngắn hơn video tin tức** — người xem quyết định mua trong 15 giây đầu.
+- Mục tiêu: 45-60 giây. Trần cứng: 65 giây. **Video bán hàng nên ngắn hơn video tin tức** — người xem quyết định mua trong 15 giây đầu.
 - Tổng voiceText MỌI scene cộng lại: **≤ 150 từ** (đo thật 0,256 giây/từ trên 27 video đã render).
-- **Mỗi body scene tối đa 1 câu, ≤ 16 từ** — 1 cảnh = 1 hình đứng yên ~4 giây. Hook ≤ 12 từ.
+- **Mỗi body scene tối đa 2 câu, ≤ 26 từ** — 1 cảnh = 1 hình đứng yên ~6,5 giây. Hook ≤ 18 từ.
 - Tổng scene: **≤ 10** (ảnh trong plan + CTA + engagement-question + outro).
 - Check trước khi render: `npx tsx _validate-script.ts <script.json>` (chặn cứng, exit 1 = không render).
 

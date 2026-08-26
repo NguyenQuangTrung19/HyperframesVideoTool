@@ -325,7 +325,7 @@ async function materializeWorkdir(
   return { workdir, txtInWorkdir };
 }
 
-function runPodcastPipeline(txtPath: string, orientation: OrientationFilter, locket: boolean): Promise<void> {
+function runPodcastPipeline(txtPath: string, orientation: OrientationFilter, locket: boolean): Promise<number> {
   return new Promise((resolve, reject) => {
     // Pass orientation through to the pipeline via PODCAST_LAYOUT_MODE so the
     // composeVideo picks the right layout (landscape vs portrait) regardless
@@ -349,18 +349,24 @@ function runPodcastPipeline(txtPath: string, orientation: OrientationFilter, loc
     proc.on("error", reject);
     proc.on("close", (code) => {
       // Podcast pipeline historically returns non-zero even on success (exit 69 etc).
-      // Trust the existence check downstream instead of the exit code.
+      // So the exit code can NOT gate success — the file probe downstream does.
+      // But it must not be thrown away either: without it a crashed/killed run
+      // is indistinguishable from a clean run that produced nothing, and the
+      // row's `result` ends up claiming "pipeline xong" about a process that
+      // died (story156, 2026-08-20). Hand it to the caller for the message.
       // See memory/feedback_podcast_ffmpeg_exit69_benign.md
-      if (code === 0) resolve();
-      else {
-        console.warn(`  ⚠ pipeline exit code ${code} — checking output file exists`);
-        resolve();
-      }
+      if (code !== 0) console.warn(`  ⚠ pipeline exit code ${code} — checking output file exists`);
+      resolve(code ?? -1);
     });
   });
 }
 
-async function processRow(row: Row, usedSet: Set<string>, locket: boolean): Promise<ProcessResult> {
+async function processRow(
+  row: Row,
+  usedSet: Set<string>,
+  locket: boolean,
+  slugSeen: Map<string, number>,
+): Promise<ProcessResult> {
   const storyRaw = (row.story ?? "").trim();
   if (!storyRaw) return { status: "Error", videos: "", result: "story trống" };
 
@@ -373,6 +379,16 @@ async function processRow(row: Row, usedSet: Set<string>, locket: boolean): Prom
   }
 
   const slug = slugFromStoryPath(storyPath);
+  // Two pending rows pointing at the SAME .txt would otherwise share
+  // `_runs/<slug>/` and `output/<slug>/`: the second row's staging overwrites
+  // the first's clips mid-flight and both rows fight over one output file.
+  // Give every repeat its own slug so each row renders its own deliverable.
+  const nth = (slugSeen.get(slug) ?? 0) + 1;
+  slugSeen.set(slug, nth);
+  const runSlug = nth === 1 ? slug : `${slug}-${nth}`;
+  if (nth > 1) {
+    console.warn(`  ⚠ row trùng story "${slug}" (lần ${nth} trong batch này) → chạy dưới slug riêng "${runSlug}"`);
+  }
   const orientation = parseOrientation(row.orientation);
   const manualVideos = parseManualVideos(row.videos);
 
@@ -469,14 +485,15 @@ async function processRow(row: Row, usedSet: Set<string>, locket: boolean): Prom
 
   let txtInWorkdir: string;
   try {
-    const staged = await materializeWorkdir(storyPath, slug, videoPaths);
+    const staged = await materializeWorkdir(storyPath, runSlug, videoPaths);
     txtInWorkdir = staged.txtInWorkdir;
   } catch (e) {
     return { status: "Error", videos: relList(videoPaths), result: `staging lỗi: ${(e as Error).message}` };
   }
 
+  let exitCode: number;
   try {
-    await runPodcastPipeline(txtInWorkdir, orientation, locket);
+    exitCode = await runPodcastPipeline(txtInWorkdir, orientation, locket);
   } catch (e) {
     return { status: "Error", videos: relList(videoPaths), result: `pipeline lỗi: ${(e as Error).message}` };
   }
@@ -484,12 +501,25 @@ async function processRow(row: Row, usedSet: Set<string>, locket: boolean): Prom
   // Pipeline output dir resolved by resolvePodcastOutputDir() in pipeline.ts:
   // finds the `podcast/` ancestor of inputDir and outputs to `<podcast>/output/<slug>/`.
   // With workdir at podcast/_runs/<slug>/, output lands at podcast/output/<slug>/<slug>.mp4.
-  const outFile = join(OUTPUT_DIR, slug, `${slug}.mp4`);
+  const outDir = join(OUTPUT_DIR, runSlug);
+  const outFile = join(outDir, `${runSlug}.mp4`);
   if (!existsSync(outFile)) {
+    // Name the stage it died at from what the output dir does/doesn't hold —
+    // the pipeline creates the dir before step 1's normalize, writes voice.mp3
+    // in step 2, then words.json in step 3. Without this the row just said
+    // "pipeline xong nhưng không thấy <file>", which reads like a clean run
+    // that produced nothing when in fact the process had died (story156).
+    const stage = !existsSync(outDir)
+      ? "chưa tạo được thư mục output — chết ở step 1 (validate / normalize source)"
+      : !existsSync(join(outDir, "voice.mp3"))
+        ? "có thư mục output nhưng chưa có voice.mp3 — chết ở step 1 (normalize) hoặc step 2 (TTS)"
+        : !existsSync(join(outDir, "words.json"))
+          ? "có voice.mp3 nhưng chưa có words.json — chết ở step 3 (align)"
+          : "có voice.mp3 + words.json nhưng không ra mp4 — chết ở step 5 (compose)";
     return {
       status: "Error",
       videos: relList(videoPaths),
-      result: `pipeline xong nhưng không thấy ${outFile}`,
+      result: `pipeline exit ${exitCode} — ${stage}; không thấy ${relPath(outFile)}`,
     };
   }
   // Existence alone is NOT proof of a render: ffmpeg creates the output file up
@@ -500,7 +530,7 @@ async function processRow(row: Row, usedSet: Set<string>, locket: boolean): Prom
     return {
       status: "Error",
       videos: relList(videoPaths),
-      result: `pipeline xong nhưng ${slug}.mp4 rỗng (0 byte) — ffmpeg chết giữa chừng`,
+      result: `pipeline exit ${exitCode} — ${runSlug}.mp4 rỗng (0 byte), ffmpeg chết giữa chừng`,
     };
   }
   try {
@@ -510,7 +540,7 @@ async function processRow(row: Row, usedSet: Set<string>, locket: boolean): Prom
     return {
       status: "Error",
       videos: relList(videoPaths),
-      result: `pipeline xong nhưng ${slug}.mp4 không decode được: ${(e as Error).message}`,
+      result: `pipeline exit ${exitCode} — ${runSlug}.mp4 không decode được: ${(e as Error).message}`,
     };
   }
 
@@ -653,6 +683,8 @@ async function main(): Promise<void> {
   // fresh `npm run podcast-queue` — persistence across invocations would
   // require a cache file and isn't requested.
   const usedSet = new Set<string>();
+  // story slug → how many pending rows in THIS batch already claimed it.
+  const slugSeen = new Map<string, number>();
 
   let okCount = 0;
   let errCount = 0;
@@ -660,7 +692,7 @@ async function main(): Promise<void> {
     console.log(`── Row ${row.rowNumber} ─────────────`);
     let res: ProcessResult;
     try {
-      res = await processRow(row, usedSet, locketMode);
+      res = await processRow(row, usedSet, locketMode, slugSeen);
     } catch (e) {
       res = { status: "Error", videos: row.videos ?? "", result: `unexpected: ${(e as Error).message}` };
     }

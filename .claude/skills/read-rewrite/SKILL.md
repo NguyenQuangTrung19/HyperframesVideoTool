@@ -60,7 +60,7 @@ Quick check: does the fetched text mention football clubs / players / matches / 
 
 > **🔑 Nguyên tắc #1 — `.txt` là BẢN TÓM TẮT ĐỦ Ý, không phải bản lưu đầy đủ.** (Đổi 2026-08-03 theo yêu cầu user: *"đọc nội dung từ link xong soạn lại ngắn hơn, đủ tóm tắt và đủ ý thôi"*.)
 >
-> Viết lại vừa đổi GIỌNG vừa **rút gọn nội dung**. Mục tiêu: `.txt` chứa đúng lượng chất liệu để dựng được video 35-45 giây — không hơn. Vẫn giữ 8-11 Ý RIÊNG BIỆT (mỗi ý = 1 cảnh), chỉ là mỗi ý chỉ cần đủ chất liệu cho MỘT câu thoại 16 từ + vài con số lên hình.
+> Viết lại vừa đổi GIỌNG vừa **rút gọn nội dung**. Mục tiêu: `.txt` chứa đúng lượng chất liệu để dựng được video 55-65 giây — không hơn. Vẫn giữ 8-11 Ý RIÊNG BIỆT (mỗi ý = 1 cảnh), mỗi ý cần đủ chất liệu cho MỘT-HAI câu thoại ≤26 từ + vài con số lên hình.
 >
 > **Cỡ đích: 350-600 từ phần nội dung** (không tính block metadata cuối file). Bài gốc 2000 từ vẫn ra `.txt` ~500 từ.
 >
@@ -152,10 +152,10 @@ Output template — this is the literal file content (plain markdown, UTF-8):
 
 ---
 ## Giới hạn thời lượng (cho /create-video — KHÔNG đọc lên, KHÔNG lên hình)
-- Mục tiêu: 35-45 giây. Trần cứng: 45 giây.
-- Tổng voiceText MỌI scene cộng lại: **≤ 170 từ** (đo thật 0,256 giây/từ trên 27 video đã render).
-- **Mỗi body scene tối đa 1 câu, ≤ 16 từ** — đây là trần quan trọng nhất: 1 cảnh = 1 hình đứng yên ~4 giây. Hook ≤ 12 từ.
-- Số scene KHÔNG giảm — video ngắn đi bằng cách nói ít hơn mỗi cảnh, không phải bằng cách bỏ cảnh.
+- Mục tiêu: 55-65 giây. Trần cứng: 65 giây.
+- Tổng voiceText MỌI scene cộng lại: **≤ 240 từ** (đo thật 0,256 giây/từ trên 27 video đã render).
+- **Mỗi body scene tối đa 2 câu, ≤ 26 từ** — 1 cảnh = 1 hình đứng yên ~6,5 giây. Hook ≤ 18 từ.
+- Số scene GIỮ NGUYÊN — video dài hơn bằng cách nói đầy hơn mỗi cảnh, không phải bằng cách thêm cảnh.
 - Tổng scene: **≤ 11** (N ảnh trong plan + 1 feature-list + engagement-question + outro).
 - Fact nào không kịp nói thì cho lên `highlights`/`context` để người xem tắt tiếng vẫn đọc được — đừng nhồi vào voiceText. Lớp chi tiết thứ 2-3 giờ BẮT BUỘC lên hình.
 - Check trước khi render: `npx tsx _validate-script.ts <script.json>` (chặn cứng, exit 1 = không render).
@@ -179,6 +179,24 @@ Rules for the body:
 - **Source line:** keep the domain + the full URL. Future tools (and you, in later sessions) can backtrack from this.
 - **Date:** if WebFetch returned the publication date, include it; else write `n/a`.
 - **Total length:** nhắm **350-600 từ** phần nội dung (không tính block metadata cuối file). Bài gốc dài bao nhiêu không quan trọng — 2000 từ vẫn ra ~500 từ. Nếu vượt 600 từ, quay lại bỏ bớt Ý (không phải làm câu ngắn lại): xem ý nào không map được vào scene nào thì cắt.
+
+#### ⚠️ Mục `## Góc hài` — BẮT BUỘC với mọi `.txt` (19/8/2026)
+
+User 19/8: *"viết gì nhạt thế, kiểu như MU mua vội Baleba nhìn cứ mắc cười, giống kiểu bạn ế đến năm 40 tuổi không ai yêu phải cưới vội cô hàng xóm"*.
+
+`.txt` chỉ có dữ kiện thì `/create-video` viết ra bản tin lạnh. Thêm một mục ngay TRƯỚC block `## Giới hạn thời lượng`:
+
+```markdown
+## Góc hài (cho /create-video — chọn 2-3 câu, KHÔNG dùng hết)
+Trục cười: **<một câu nêu cái buồn cười cốt lõi của câu chuyện>**
+- "<câu ứng viên 1>"
+- "<câu ứng viên 2>"
+- ... (4-5 câu)
+```
+
+**Cách tìm trục cười:** hỏi *"tình huống này giống chuyện đời thường nào?"* — ế rồi cưới vội, thi trượt, chia tay sát ngày cưới, đi chợ chiều đòi giá chợ sáng, bán xe rồi mới nhớ nhà xa. Vế bóng đá phải là **sự thật kiểm chứng được**; câu đùa đổi cách kể, không đổi dữ kiện.
+
+Nhắm vào **tình huống của câu lạc bộ**, không nhắm vào con người. Giọng **ấm và tự trào**, không cay. Luật đầy đủ ở `create-video/SKILL.md` mục "Giọng cà khịa".
 
 #### ⚠️ Selection check (MANDATORY before saving .txt)
 

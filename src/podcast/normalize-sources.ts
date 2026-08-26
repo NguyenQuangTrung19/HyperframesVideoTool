@@ -32,7 +32,8 @@
  * either the original (already matched) or its `.normalized/` clone.
  */
 import { existsSync, statSync } from "node:fs";
-import { mkdir } from "node:fs/promises";
+import { mkdir, readdir, rename, rm, utimes } from "node:fs/promises";
+import { createHash } from "node:crypto";
 import { spawn } from "node:child_process";
 import { basename, dirname, join } from "node:path";
 import { probeVideo, type ProbeResult } from "./video-compose.js";
@@ -45,10 +46,25 @@ const FPS_EPSILON = 0.5;
 export interface NormalizeOpts {
   /** When false, skip normalization entirely (just probe + warn). Default true. */
   enabled?: boolean;
-  /** libx264 CRF used when re-encoding off-spec siblings. Default 18 (visually lossless for 720p). */
+  /**
+   * libx264 CRF used when re-encoding. Default 16 — these clones are an
+   * INTERMEDIATE that the compose step re-encodes anyway, so we buy quality
+   * headroom cheaply rather than optimising their file size.
+   */
   crf?: number;
-  /** libx264 preset used when re-encoding. Default "medium". */
+  /**
+   * libx264 preset used when re-encoding. Default "veryfast" — see the crf
+   * note: minutes/file on `medium` buy nothing downstream, and normalize is
+   * the single biggest wall-clock cost of a many-clip row.
+   */
   preset?: string;
+  /**
+   * Directory holding the content-addressed clones. Defaults to
+   * `<inputDir>/.normalized` (per-run). The podcast pipeline passes a SHARED
+   * dir (`podcast/_normcache`) so a clip normalized for one story is reused by
+   * every later story that picks it.
+   */
+  cacheDir?: string;
 }
 
 export interface NormalizeReport {
@@ -71,15 +87,17 @@ export async function normalizeSiblingVideos(
     throw new Error("normalizeSiblingVideos called with empty source list");
   }
   const enabled = opts.enabled !== false;
-  const crf = opts.crf ?? 18;
-  const preset = opts.preset ?? "medium";
+  const crf = opts.crf ?? Number(process.env.PODCAST_NORMALIZE_CRF ?? 16);
+  const preset = opts.preset ?? (process.env.PODCAST_NORMALIZE_PRESET?.trim() || "veryfast");
+  const anchor = process.env.PODCAST_NORMALIZE_CROP_ANCHOR?.trim().toLowerCase() || "center";
 
   // Probe everyone first so we can decide.
-  const probes: Array<{ path: string; probe: ProbeResult }> = [];
+  const probes: Array<{ path: string; probe: ProbeResult; id: string }> = [];
   for (const p of sourceVideoPaths) {
-    probes.push({ path: p, probe: await probeVideo(p) });
+    const probe = await probeVideo(p);
+    probes.push({ path: p, probe, id: sourceIdentity(p, probe) });
   }
-  const reference = probes[0].probe;
+  const reference = pickReference(probes);
 
   if (!enabled) {
     // Just emit a warning if any sibling doesn't match — let the user decide.
@@ -99,7 +117,8 @@ export async function normalizeSiblingVideos(
     };
   }
 
-  const normalizedDir = join(inputDir, NORMALIZED_DIRNAME);
+  const legacyDir = join(inputDir, NORMALIZED_DIRNAME);
+  const normalizedDir = opts.cacheDir?.trim() || legacyDir;
   const resolvedPaths: string[] = [];
   const normalized: NormalizeReport["normalized"] = [];
   const cached: NormalizeReport["cached"] = [];
@@ -116,25 +135,48 @@ export async function normalizeSiblingVideos(
   // ("No start code is found / Error splitting the input into NAL units")
   // → đen từ đoạn nối (story60, 2026-06-10). Cho mọi segment đi qua cùng
   // một libx264 encode là cách duy nhất đảm bảo extradata đồng nhất.
-  for (const { path: origPath, probe } of probes) {
+  await mkdir(normalizedDir, { recursive: true });
+  let idx = 0;
+  for (const { path: origPath, probe, id } of probes) {
+    idx++;
     const reason =
       describeMismatch(probe, reference) ?? "đồng nhất encoder/extradata cho concat demuxer";
 
-    await mkdir(normalizedDir, { recursive: true });
-    const normPath = join(normalizedDir, basename(origPath));
-    if (await isCacheValid(normPath, origPath, reference)) {
-      log.info(`  REUSE normalized: ${basename(origPath)} (cached)`);
+    // CONTENT-ADDRESSED name: hash(source identity + reference spec + encoder
+    // settings). Deliberately NOT the staged basename — podcast-queue stages
+    // its random picks into positional names (`<slug>.mp4`, `<slug>2.mp4`, …),
+    // so a re-pick puts a DIFFERENT clip behind the same name and a
+    // basename-keyed cache misses on every clip on every retry (story156,
+    // 2026-08-20: 3 attempts x 16 clips re-encoded, never reached TTS).
+    const normPath = join(normalizedDir, `${cacheKey(id, reference, { crf, preset, anchor })}.mp4`);
+
+    // One-time migration: adopt a still-valid clone left by the old
+    // basename-keyed scheme instead of re-encoding it.
+    const legacyPath = join(legacyDir, basename(origPath));
+    if (legacyPath !== normPath && !existsSync(normPath) && existsSync(legacyPath)) {
+      if (await isCacheValid(legacyPath, probe, reference)) {
+        try {
+          await rename(legacyPath, normPath);
+          log.info(`  ADOPT cached clone: ${basename(origPath)} → ${basename(normPath)}`);
+        } catch { /* fall through to a normal re-encode */ }
+      }
+    }
+
+    if (await isCacheValid(normPath, probe, reference)) {
+      log.info(`  [${idx}/${probes.length}] REUSE normalized: ${basename(origPath)} (cache ${basename(normPath)})`);
+      await utimes(normPath, new Date(), new Date()).catch(() => {}); // LRU touch
       cached.push({ original: origPath, normalized: normPath });
       resolvedPaths.push(normPath);
       continue;
     }
 
-    log.info(`  NORMALIZE: ${basename(origPath)} — ${reason} → ${reference.width}x${reference.height}@${formatFps(reference.fps)}`);
+    log.info(`  [${idx}/${probes.length}] NORMALIZE: ${basename(origPath)} — ${reason} → ${reference.width}x${reference.height}@${formatFps(reference.fps)} (crf${crf}/${preset})`);
     await reencodeToReference(origPath, normPath, reference, { crf, preset });
     normalized.push({ original: origPath, normalized: normPath, reason });
     resolvedPaths.push(normPath);
   }
 
+  await pruneCache(normalizedDir);
   return { resolvedPaths, reference, normalized, cached };
 }
 
@@ -165,31 +207,161 @@ function formatFps(fps: number): string {
 }
 
 /**
- * Cache validity — mtime alone is NOT enough:
- *   - podcast-queue stages sources via HARDLINK, so the staged file's mtime is
- *     the library file's (old) mtime, which makes any stale `.normalized/`
- *     clone look "newer than the original" forever.
- *   - re-running a queue row re-picks random videos under the SAME staged
- *     names (`<slug>2.mp4`, …), so the stale clone can be a different video
- *     encoded against a different reference → concat black-frames
- *     (story60, 2026-06-10).
- * So besides mtime, re-validate facts of THIS run: the clone must match the
- * current reference spec, and its duration must match the current original.
+ * Cache validity. The filename hash already pins WHICH source and WHICH
+ * reference/encoder settings produced this clone, so the mtime comparison is
+ * gone — it was the old scheme's weak point: podcast-queue hardlinks its
+ * sources, so a staged file carries the library file's old mtime and any stale
+ * clone looked "newer than the original" forever.
+ *
+ * What is still checked is that the file on disk is a COMPLETE, correct clone.
+ * `reencodeToReference` writes to a `.part.mp4` and renames on success, so a
+ * killed run can no longer leave a truncated file under a valid cache name;
+ * this is belt-and-braces for files predating that change.
  */
-async function isCacheValid(normPath: string, origPath: string, ref: ProbeResult): Promise<boolean> {
+async function isCacheValid(normPath: string, origProbe: ProbeResult, ref: ProbeResult): Promise<boolean> {
   if (!existsSync(normPath)) return false;
   try {
-    if (statSync(normPath).mtimeMs < statSync(origPath).mtimeMs) return false;
+    if (statSync(normPath).size === 0) return false;
   } catch {
     return false;
   }
   try {
     const norm = await probeVideo(normPath);
     if (describeMismatch(norm, ref) !== null) return false;
-    const orig = await probeVideo(origPath);
-    return Math.abs(norm.durationSec - orig.durationSec) <= Math.max(1, orig.durationSec * 0.05);
+    return Math.abs(norm.durationSec - origProbe.durationSec) <= Math.max(1, origProbe.durationSec * 0.05);
   } catch {
     return false;
+  }
+}
+
+/**
+ * Stable identity for a source clip. Hardlink-safe: podcast-queue stages via
+ * `link()`, so size/mtime are the LIBRARY file's and stay identical no matter
+ * which positional name the clip was staged under. Duration + stream spec are
+ * folded in so two different files can't collide on size+mtime alone.
+ */
+function sourceIdentity(path: string, probe: ProbeResult): string {
+  let size = 0;
+  let mtime = 0;
+  try {
+    const st = statSync(path);
+    size = st.size;
+    mtime = Math.round(st.mtimeMs);
+  } catch { /* fall back to the probe facts alone */ }
+  return [
+    size,
+    mtime,
+    probe.durationSec.toFixed(3),
+    `${probe.width}x${probe.height}`,
+    formatFps(probe.fps),
+    probe.codec ?? "",
+    probe.pixFmt ?? "",
+  ].join(":");
+}
+
+function cacheKey(srcId: string, ref: ProbeResult, enc: { crf: number; preset: string; anchor: string }): string {
+  const refSpec = `${ref.width}x${ref.height}@${formatFps(ref.fps)}:${ref.pixFmt ?? ""}`;
+  const encSpec = `x264:crf${enc.crf}:${enc.preset}:${enc.anchor}`;
+  return createHash("sha1").update(`v1|${srcId}|${refSpec}|${encSpec}`).digest("hex").slice(0, 16);
+}
+
+/**
+ * Reference format = the spec the MAJORITY of the sources already have, not
+ * "whatever got staged as `<slug>.mp4`". With a random picker "first" is
+ * arbitrary: a re-pick that promotes a 23fps clip to position 0 would force
+ * every other clip to be re-encoded to 23fps and invalidate the whole cache.
+ * Modal is order-independent, so re-picks from the same library keep hitting
+ * cache — and it minimises how many clips need touching at all. Tie-break on
+ * the lowest source identity so the choice is deterministic.
+ * `PODCAST_NORMALIZE_REF=first` restores the old behaviour.
+ */
+function pickReference(probes: Array<{ probe: ProbeResult; id: string }>): ProbeResult {
+  if ((process.env.PODCAST_NORMALIZE_REF?.trim().toLowerCase() || "modal") === "first") {
+    return probes[0].probe;
+  }
+  const groups = new Map<string, { probe: ProbeResult; count: number; minId: string }>();
+  for (const { probe, id } of probes) {
+    const snapped: ProbeResult = { ...probe, fps: snapFps(probe.fps) };
+    const spec = `${snapped.width}x${snapped.height}@${formatFps(snapped.fps)}:${snapped.pixFmt ?? ""}`;
+    const g = groups.get(spec);
+    if (!g) groups.set(spec, { probe: snapped, count: 1, minId: id });
+    else {
+      g.count++;
+      if (id < g.minId) g.minId = id;
+    }
+  }
+  const ranked = [...groups.values()].sort(
+    (a, b) =>
+      b.count - a.count ||
+      b.probe.width * b.probe.height - a.probe.width * a.probe.height ||
+      (a.minId < b.minId ? -1 : 1),
+  );
+  return ranked[0].probe;
+}
+
+/** Frame rates worth targeting. Anything else is stock footage noise. */
+const FPS_LADDER = [24, 25, 30, 50, 60];
+
+/**
+ * Snap a probed frame rate onto the standard ladder when it is within 10%.
+ * Stock b-roll libraries are full of 28.83 / 29.97 / 23.4 fps files, and
+ * without this the reference fps — and therefore the whole clone cache — moves
+ * every time the picker happens to draw a different mix (test pass 3, 2026-08-21:
+ * a 2-clip subset flipped the reference 30 → 29.97 and missed cache on both).
+ * Retiming is free here: the compose step throws the source audio away and
+ * muxes the TTS voice, so there is no A/V sync to preserve.
+ */
+function snapFps(fps: number): number {
+  if (!(fps > 0)) return 30;
+  let best = fps;
+  let bestDelta = Infinity;
+  for (const cand of FPS_LADDER) {
+    const delta = Math.abs(cand - fps);
+    if (delta < bestDelta) {
+      bestDelta = delta;
+      best = cand;
+    }
+  }
+  return bestDelta <= fps * 0.1 ? best : Math.round(fps * 100) / 100;
+}
+
+/**
+ * Keep the shared clone cache from growing without bound. Evicts the
+ * least-recently-USED entries (every cache hit touches its file) until the dir
+ * is back under the cap. Entries are pure derived data — regenerating one costs
+ * a single ffmpeg run. `PODCAST_NORMCACHE_MAX_GB=0` disables eviction.
+ */
+async function pruneCache(dir: string): Promise<void> {
+  const capGb = Number(process.env.PODCAST_NORMCACHE_MAX_GB ?? 20);
+  if (!Number.isFinite(capGb) || capGb <= 0) return;
+  const capBytes = capGb * 1024 ** 3;
+  let entries: Array<{ path: string; size: number; mtimeMs: number }>;
+  try {
+    const names = await readdir(dir);
+    entries = names
+      .filter((n) => n.endsWith(".mp4"))
+      .map((n) => {
+        const path = join(dir, n);
+        const st = statSync(path);
+        return { path, size: st.size, mtimeMs: st.mtimeMs };
+      });
+  } catch {
+    return;
+  }
+  let total = entries.reduce((sum, e) => sum + e.size, 0);
+  if (total <= capBytes) return;
+  entries.sort((a, b) => a.mtimeMs - b.mtimeMs); // least-recently-touched first
+  let evicted = 0;
+  for (const e of entries) {
+    if (total <= capBytes) break;
+    try {
+      await rm(e.path);
+      total -= e.size;
+      evicted++;
+    } catch { /* in use by a concurrent run — skip */ }
+  }
+  if (evicted > 0) {
+    log.info(`  normalize cache: evicted ${evicted} clone(s) LRU → ${(total / 1024 ** 3).toFixed(2)} GB / ${capGb} GB cap`);
   }
 }
 
@@ -216,6 +388,9 @@ async function reencodeToReference(
   opts: { crf: number; preset: string },
 ): Promise<void> {
   const targetFps = ref.fps > 0 ? formatFps(ref.fps) : "30";
+  // Encode to a sidecar and rename only on success, so a killed run can never
+  // leave a truncated file sitting under a valid-looking cache name.
+  const partPath = `${destPath}.part.mp4`;
   const anchor = (process.env.PODCAST_NORMALIZE_CROP_ANCHOR?.trim().toLowerCase() || "center") as
     | "top"
     | "center"
@@ -249,7 +424,7 @@ async function reencodeToReference(
       "-c:a", "aac",
       "-b:a", "128k",
       "-movflags", "+faststart",
-      destPath,
+      partPath,
     ];
     const proc = spawn("ffmpeg", args);
     let stderr = "";
@@ -260,4 +435,6 @@ async function reencodeToReference(
       else reject(new Error(`ffmpeg failed normalizing ${basename(srcPath)} (exit ${code}): ${stderr}`));
     });
   });
+
+  await rename(partPath, destPath);
 }

@@ -132,7 +132,7 @@ For each row with status planned:
    ```bash
    npm run validate -- <outputDir>/script.json
    ```
-   Exit 1 = **không được render**. Nó chặn cả lỗi schema lẫn lỗi nhịp (tổng > 170 từ, cảnh > 16 từ, hook > 12 từ). Render rồi mới phát hiện là tốn quota TTS + vài phút encode cho một video sai nhịp. Sửa `script.json`, chạy lại validator, rồi mới render.
+   Exit 1 = **không được render**. Nó chặn cả lỗi schema lẫn lỗi nhịp (tổng > 240 từ, cảnh > 26 từ, hook > 18 từ). Render rồi mới phát hiện là tốn quota TTS + vài phút encode cho một video sai nhịp. Sửa `script.json`, chạy lại validator, rồi mới render.
 5. **All parts have images → render each:**
    - For each part folder, in order p1 → p2 → … → pN:
      - Invoke `/create-video <part-folder>/<part-folder-basename>.txt`.

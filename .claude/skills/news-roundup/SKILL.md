@@ -31,7 +31,7 @@ Two or more `http(s)://` URLs, whitespace- or newline-separated. Sweet spot is 5
 | | 9:16 skills (`/create-video`, `/read-rewrite`, …) | `/news-roundup` |
 |---|---|---|
 | Canvas | 1080×1920 | **1920×1080** (`metadata.aspect: "16:9"`) |
-| Ceiling | 45 s, ~11 scenes (16 từ/cảnh) | **360 s (6 phút), ≤ 24 scenes** — luật nhịp short KHÔNG áp |
+| Ceiling | 65 s, ~11 scenes (26 từ/cảnh) | **360 s (6 phút), ≤ 24 scenes** — luật nhịp short KHÔNG áp |
 | Full-bleed | hook only | **never** — not even the hook |
 | Every scene | photo centred, text under it | **two columns** — text left, photo in a framed slot right |
 | Image orientation | portrait/any | any — the slot changes shape (ngang 908×605 · vuông 780² · dọc 640×834), the photo is never cropped to fit |
