@@ -1,7 +1,7 @@
 {
   "name": "auto-news-video",
   "version": "2.0.0",
-  "description": "Auto-generate Vietnamese 9:16 short news videos from URL/txt — Claude Code skill + HyperFrames + VieNeu (local) / AusyncLab (cloud) TTS",
+  "description": "SportsForAllTV — auto-generate Vietnamese 9:16 football short videos (motion-graphic / podcast / music) from txt — Claude Code skills + HyperFrames + AusyncLab (cloud) / VieNeu (local) TTS",
   "main": "src/cli.ts",
   "directories": {
     "doc": "docs"
@@ -16,10 +16,18 @@
     "rerender": "tsx rerender.ts",
     "typecheck": "tsc --noEmit",
     "build": "tsc",
-    "sfx:download": "tsx scripts/download-sfx.ts",
-    "sfx:filter": "tsx scripts/filter-sfx.ts",
+    "render:check": "tsx scripts/verify-render.ts",
+  "validate": "tsx _validate-script.ts",
+    "thumbnail": "tsx scripts/make-thumbnail.ts",
+    "thumbnail:roundup": "tsx scripts/make-roundup-thumbnail.ts",
     "images:list": "tsx scripts/list-image-prompts.ts",
-    "images:stage": "tsx scripts/stage-planned-images.ts"
+    "images:stage": "tsx scripts/stage-planned-images.ts",
+    "images:combine": "tsx scripts/combine-split-images.ts",
+    "podcast-queue": "tsx scripts/podcast-queue.ts",
+    "podcast-queue-locket": "tsx scripts/podcast-queue.ts --locket",
+    "video-queue": "tsx scripts/video-queue.ts",
+    "patch:hf": "tsx scripts/patch-hyperframes-gpu.ts",
+    "postinstall": "tsx scripts/patch-hyperframes-gpu.ts"
   },
   "keywords": [
     "video",
@@ -38,6 +46,7 @@
   "dependencies": {
     "axios": "^1.15.2",
     "dotenv": "^17.4.2",
+    "exceljs": "^4.4.0",
     "hyperframes": "^0.4.34",
     "p-limit": "^7.3.0",
     "zod": "^4.3.6"
@@ -46,6 +55,7 @@
     "@types/node": "^25.6.0",
     "@vitest/coverage-v8": "^4.1.5",
     "nock": "^14.0.13",
+    "puppeteer": "^25.1.0",
     "tsx": "^4.21.0",
     "typescript": "^6.0.3",
     "vitest": "^4.1.5"

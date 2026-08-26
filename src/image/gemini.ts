@@ -26,15 +26,19 @@ export function createGeminiImageProvider(opts: { apiKey: string; model: string 
 
   return {
     name: "gemini",
-    async generate({ prompt, outPath }: GenerateImageArgs): Promise<GenerateResult> {
+    async generate({ prompt, outPath, aspect = "9:16" }: GenerateImageArgs): Promise<GenerateResult> {
       if (existsSync(outPath)) {
         return { success: true, path: outPath, cached: true };
       }
-      // Aspect ratio is steered via prompt (we already include "vertical 9:16 composition").
-      // Append an explicit cue to nudge Gemini toward portrait output.
-      const promptWithRatio = prompt.includes("9:16") || prompt.includes("vertical")
+      // Aspect ratio is steered via prompt — Gemini has no size parameter.
+      // Append an explicit cue unless the prompt already states the orientation.
+      const orientation =
+        aspect === "16:9"
+          ? { keywords: ["16:9", "horizontal", "landscape"], cue: "16:9 horizontal landscape composition" }
+          : { keywords: ["9:16", "vertical", "portrait"], cue: "9:16 vertical portrait composition" };
+      const promptWithRatio = orientation.keywords.some((k) => prompt.includes(k))
         ? prompt
-        : `${prompt}\n\nAspect ratio: 9:16 vertical portrait composition.`;
+        : `${prompt}\n\nAspect ratio: ${orientation.cue}.`;
       try {
         const url = `${ENDPOINT_BASE}/${encodeURIComponent(model)}:generateContent?key=${apiKey}`;
         const resp = await axios.post<GeminiResponse>(

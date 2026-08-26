@@ -9,25 +9,69 @@ import { AusynclabClient } from "../tts/ausynclab-client.js";
 import { getDurationSec } from "../assets/audio-tools.js";
 import { log } from "../utils/logger.js";
 import { alignAudio, type WordTiming } from "./align.js";
-import { buildAssFromChunks, buildAssFromSentences, buildAssFromWords } from "./caption-ass.js";
+import { buildAssFromChunks, buildAssFromReveal, buildAssFromSentences, buildAssFromWords } from "./caption-ass.js";
 import { realignCaptionsToSource } from "./realign-to-source.js";
 import { composeVideo, probeVideo, writeAssFile } from "./video-compose.js";
+import { normalizeSiblingVideos } from "./normalize-sources.js";
 
 const TOTAL_STEPS = 6;
 
 /**
  * Build a 9:16 TikTok podcast clip from a .txt script + a sibling video file.
  *
- * Input layout (must hold both files):
- *   input/<slug>/<slug>.txt   ← podcast script (any Vietnamese prose)
- *   input/<slug>/<slug>.mp4   ← user-supplied background video
+ * Input layout (txt + sibling video co-located):
+ *   podcast/input/<slug>/<slug>.txt   ← podcast script (any Vietnamese prose)
+ *   podcast/input/<slug>/<slug>.mp4   ← user-supplied background video
  *
- * Output:
- *   output/<slug>/<slug>.mp4    ← final clip (the deliverable)
- *   output/<slug>/voice.mp3     ← TTS audio (intermediate, reused on rerun)
- *   output/<slug>/words.json    ← word alignment (intermediate, reused on rerun)
- *   output/<slug>/captions.ass  ← karaoke subtitle file
+ * Output (refactored 2026-05-24 from input/podcasts/output/ → podcast/output/):
+ *   podcast/output/<slug>/<slug>.mp4    ← final clip (the deliverable)
+ *   podcast/output/<slug>/voice.mp3     ← TTS audio (intermediate, reused on rerun)
+ *   podcast/output/<slug>/words.json    ← word alignment (intermediate, reused on rerun)
+ *   podcast/output/<slug>/captions.ass  ← karaoke subtitle file
+ *
+ * Output dir resolution (`resolvePodcastOutputDir`):
+ *   1) `PODCAST_OUTPUT_DIR` env var (absolute path to the output base) — explicit override.
+ *   2) Otherwise: walk up from inputDir looking for a `podcast/` segment;
+ *      output lives in `<that>/output/<slug>/`. Works for inputDir under
+ *      `podcast/input/<slug>/`, `podcast/input/story/`, `podcast/_runs/<slug>/`.
+ *   3) Legacy fallback: `<inputDir>/../../output/<slug>` (the old behavior, used
+ *      when no `podcast/` ancestor exists — keeps /create-music-video etc. working).
  */
+function findPodcastRoot(inputDir: string): string | null {
+  const abs = resolvePath(inputDir);
+  const segs = abs.split(/[/\\]/);
+  // Deepest `podcast` segment (handles nested workdir + multi-level inputs).
+  // Reconstruct the path up to (and including) it. On Windows the first
+  // segment is the drive ("C:"), which `join` handles correctly.
+  for (let i = segs.length - 1; i >= 0; i--) {
+    if (segs[i].toLowerCase() === "podcast") return segs.slice(0, i + 1).join("/");
+  }
+  return null;
+}
+
+function resolvePodcastOutputDir(inputDir: string, slug: string): string {
+  const envBase = process.env.PODCAST_OUTPUT_DIR?.trim();
+  if (envBase) return join(envBase, slug);
+  const podcastRoot = findPodcastRoot(inputDir);
+  if (podcastRoot) return join(podcastRoot, "output", slug);
+  // Legacy fallback for callers outside a `podcast/` tree.
+  return join(resolvePath(inputDir, "..", "..", "output"), slug);
+}
+
+/**
+ * Where the normalized source clones live. SHARED across every story under the
+ * same `podcast/` root, because the clones are content-addressed (see
+ * `normalize-sources.ts`): a clip normalized for story A is byte-identical to
+ * the one story B would produce, so the second story gets it for free instead
+ * of paying another ffmpeg pass. Falls back to the per-run `.normalized/` dir
+ * for callers outside a `podcast/` tree (e.g. /create-music-video).
+ */
+function resolveNormalizeCacheDir(inputDir: string): string | undefined {
+  const envDir = process.env.PODCAST_NORMCACHE_DIR?.trim();
+  if (envDir) return envDir;
+  const podcastRoot = findPodcastRoot(inputDir);
+  return podcastRoot ? join(podcastRoot, "_normcache") : undefined;
+}
 export interface PodcastPipelineOpts {
   /**
    * Optional override for the background-music file. Resolution rules:
@@ -69,26 +113,65 @@ export async function runPodcastPipeline(txtPath: string, opts: PodcastPipelineO
   const speakText = normalizeForTts(text);
   log.info(`  slug=${slug}  voice-chars=${speakText.length}  source-videos=${sourceVideoPaths.length} (${sourceVideoPaths.map((p) => basename(p)).join(", ")})`);
 
-  // Output dir
-  const outputDir = join(resolvePath(inputDir, "..", "..", "output"), slug);
+  // Output dir — resolves to <repo>/podcast/output/<slug>/ when input is under
+  // podcast/ (the common case). Legacy fallback + env override docs above.
+  const outputDir = resolvePodcastOutputDir(inputDir, slug);
   await mkdir(outputDir, { recursive: true });
 
-  // Probe every source video (also a sanity check that ffmpeg can read them)
+  // Probe every source video (also a sanity check that ffmpeg can read them).
+  // Also detect width/height/fps/codec mismatches across siblings — the concat
+  // demuxer downstream produces black frames on the off-spec segment when
+  // params drift. `normalizeSiblingVideos` re-encodes any sibling that
+  // doesn't match the first (reference) video, caches the result in
+  // `<inputDir>/.normalized/`, and returns the path the concat step should
+  // use. Opt-out via PODCAST_AUTO_NORMALIZE=false.
   let totalSourceDur = 0;
+  let firstProbeW = 0;
+  let firstProbeH = 0;
   for (const p of sourceVideoPaths) {
     const probe = await probeVideo(p);
+    if (firstProbeW === 0) {
+      firstProbeW = probe.width;
+      firstProbeH = probe.height;
+    }
     totalSourceDur += probe.durationSec;
-    log.info(`  source: ${basename(p)} ${probe.width}x${probe.height}, ${probe.durationSec.toFixed(1)}s`);
+    log.info(`  source: ${basename(p)} ${probe.width}x${probe.height} @ ${probe.fps.toFixed(0)}fps (${probe.codec}/${probe.pixFmt}), ${probe.durationSec.toFixed(1)}s`);
   }
   log.info(`  total source duration: ${totalSourceDur.toFixed(1)}s`);
 
+  const autoNormalize = (process.env.PODCAST_AUTO_NORMALIZE ?? "true").toLowerCase() !== "false";
+  const normReport = await normalizeSiblingVideos(sourceVideoPaths, inputDir, {
+    enabled: autoNormalize,
+    cacheDir: resolveNormalizeCacheDir(inputDir),
+  });
+  const resolvedSourcePaths = normReport.resolvedPaths;
+  if (normReport.normalized.length > 0) {
+    log.info(`  normalized ${normReport.normalized.length} sibling(s) → shared clone cache`);
+  }
+  if (normReport.cached.length > 0) {
+    log.info(`  reused ${normReport.cached.length} cached normalized file(s)`);
+  }
+
   // STEP 2: TTS (skipped if voice.mp3 already exists — idempotent)
-  const { client: tts, label: ttsLabel } = createPodcastTts(cfg);
-  log.step(2, TOTAL_STEPS, `Generate TTS via ${ttsLabel}`);
+  //
+  // Manual-voice mode: TTS_PROVIDER=manual (and no PODCAST_TTS_PROVIDER
+  // override) means the user supplies a pre-recorded voice.mp3 instead of any
+  // TTS API — used as a temporary fallback when the paid provider's quota runs
+  // out. In that mode we must NOT construct a TTS client (createPodcastTts →
+  // createTtsClient throws for "manual"), so client creation is deferred to the
+  // branch that actually needs it (voice.mp3 missing).
+  const manualVoice = cfg.ttsProvider === "manual" && !process.env.PODCAST_TTS_PROVIDER?.trim();
+  log.step(2, TOTAL_STEPS, `Generate TTS${manualVoice ? " (manual — expecting supplied voice.mp3)" : ""}`);
   const voiceMp3 = join(outputDir, "voice.mp3");
   if (existsSync(voiceMp3)) {
     log.info(`  REUSE existing voice.mp3 — delete to force re-TTS`);
+  } else if (manualVoice) {
+    throw new Error(
+      `TTS_PROVIDER=manual but no voice.mp3 found. Drop your pre-recorded voice at:\n  ${voiceMp3}\nthen re-run. (Set PODCAST_TTS_PROVIDER to use an API provider instead.)`,
+    );
   } else {
+    const { client: tts, label: ttsLabel } = createPodcastTts(cfg);
+    log.info(`  via ${ttsLabel}`);
     try {
       await tts.generate(speakText, voiceMp3);
     } finally {
@@ -146,13 +229,63 @@ export async function runPodcastPipeline(txtPath: string, opts: PodcastPipelineO
   await writeFile(join(outputDir, "words-realigned.json"), JSON.stringify(realignedWords, null, 2), "utf-8");
   words = realignedWords;
 
-  // Layout — `card` (default, the redesigned TikTok/Reels podcast clip:
-  // square 880×880 video card centered vertically inside a thin white outline,
-  // small logo + brand text aligned with the outline's left edge above the
-  // card) or `vignette` (legacy viral-clip aesthetic with blurred-source bg,
-  // search bar, watermark, progress bar).
-  const layoutEnv = (process.env.PODCAST_LAYOUT?.trim().toLowerCase() ?? "card");
-  const layout: "vignette" | "card" = layoutEnv === "vignette" ? "vignette" : "card";
+  // Orientation auto-detect — landscape (16:9-ish) sources get a different
+  // canvas layout than portrait (9:16) sources. Driven by the first probed
+  // sibling's W:H ratio. User can override via PODCAST_LAYOUT_MODE:
+  //   - `auto` (default): width > height → landscape, else portrait
+  //   - `landscape`: force landscape regardless of source
+  //   - `portrait`: force portrait regardless of source
+  //
+  // Orientation has HIGHER precedence than PODCAST_LAYOUT: when the source is
+  // landscape (detected or forced), layout is always "landscape" — the
+  // PODCAST_LAYOUT setting (which typically picks `card` vs `vignette` for
+  // portrait sources) is ignored. This way a user can leave PODCAST_LAYOUT=card
+  // as their portrait default and still get the right layout when they drop in
+  // a 16:9 video.
+  const orientationEnv = (process.env.PODCAST_LAYOUT_MODE?.trim().toLowerCase() ?? "auto");
+  // Locket mode: a special card variant with padded square geometry.
+  // Detected from the env var set by podcast-queue.ts --locket flag.
+  const isLocket = orientationEnv === "locket";
+  const isLandscapeSource =
+    isLocket ? false : // locket is always portrait
+    orientationEnv === "landscape" ? true :
+    orientationEnv === "portrait" ? false :
+    firstProbeW > firstProbeH; // auto
+  log.info(`  orientation: ${isLocket ? "locket" : isLandscapeSource ? "landscape" : "portrait"} (source ${firstProbeW}x${firstProbeH}, env=${orientationEnv})`);
+
+  // Layout selection:
+  //   - locket → "card" with overridden geometry (960×960, margin 60px)
+  //   - landscape source → always "landscape" (16:9 strip on black canvas)
+  //   - portrait source → PODCAST_LAYOUT decides; default `fullbleed` is the
+  //     established channel aesthetic (Palatino italic corner + Cambria Bold
+  //     lower-third captions over scenery footage). `card` / `vignette` are
+  //     legacy looks kept for opt-in via env.
+  const portraitLayoutEnv = (process.env.PODCAST_LAYOUT?.trim().toLowerCase() ?? "fullbleed");
+  const layout: "vignette" | "card" | "fullbleed" | "landscape" = isLocket
+    ? "card" // locket reuses the card filter graph with different geometry
+    : isLandscapeSource
+      ? "landscape"
+      : portraitLayoutEnv === "vignette" ? "vignette"
+        : portraitLayoutEnv === "card" ? "card"
+          : "fullbleed";
+  // Fullbleed dim overlay strength (0..1). 0 = no dim (default, max quality);
+  // raise to 0.28 for the legacy dim look (better caption legibility on bright scenery).
+  const fullbleedDim = layout === "fullbleed"
+    ? Math.max(0, Math.min(1, parseFloat(process.env.PODCAST_FULLBLEED_DIM ?? "0")))
+    : 0;
+  const fullbleedCornerText = process.env.PODCAST_FULLBLEED_CORNER_TEXT ?? "Trạm Dừng Bất Ngờ";
+  const fullbleedCornerFontSize = parseInt(process.env.PODCAST_FULLBLEED_CORNER_FONTSIZE ?? "48", 10);
+  const fullbleedCornerFontFile = process.env.PODCAST_FULLBLEED_CORNER_FONT?.trim() || "C\\:/Windows/Fonts/palab.ttf";
+  // Branding style for chromeless layouts. "rail" = vertical left-edge
+  // wordmark (see composeVideo's `fullbleedCornerStyle`); anything else keeps
+  // the legacy horizontal top lockup.
+  const fullbleedCornerStyle = process.env.PODCAST_CORNER_STYLE?.trim() === "rail" ? "rail" as const : "lockup" as const;
+  const railX = process.env.PODCAST_RAIL_X ? parseInt(process.env.PODCAST_RAIL_X, 10) : undefined;
+  const railTopY = process.env.PODCAST_RAIL_TOP ? parseInt(process.env.PODCAST_RAIL_TOP, 10) : undefined;
+  const railFontSize = process.env.PODCAST_RAIL_FONTSIZE ? parseInt(process.env.PODCAST_RAIL_FONTSIZE, 10) : undefined;
+  const railFontFile = process.env.PODCAST_RAIL_FONT?.trim() || undefined;
+  const railDotSize = process.env.PODCAST_RAIL_DOT ? parseInt(process.env.PODCAST_RAIL_DOT, 10) : undefined;
+  const railAccentColor = process.env.PODCAST_RAIL_ACCENT?.trim() || undefined;
 
   // Foreground card layout. Explicit width/height/y env vars take precedence.
   // Defaults vary by layout: vignette gets a tall portrait card (760×1240 at
@@ -163,25 +296,57 @@ export async function runPodcastPipeline(txtPath: string, opts: PodcastPipelineO
   const fgYEnv = process.env.PODCAST_FG_Y?.trim();
   const fgXEnv = process.env.PODCAST_FG_X?.trim();
   const fgMarginEnv = process.env.PODCAST_FG_MARGIN?.trim();
-  // Square card defaults (redesign 2026-05-17). Both vignette + card layouts
-  // use a square 880×880 foreground. For card layout, the card is also
-  // vertically CENTERED on the 1080×1920 canvas (y=520) so equal black space
-  // above + below frames it cleanly — TikTok/Reels production aesthetic.
-  // Vignette keeps y=300 since it has a search bar + progress bar that need
-  // room above and below.
-  const defaultW = 880;
-  const defaultH = 880;
-  const defaultY = layout === "vignette" ? 300 : 520;
+  // Card defaults (reverted 2026-05-22 per user request). Card layout uses
+  // the original 880×880 square centered on the 1080×1920 canvas at y=520 —
+  // there's a 92px black gap on the left + right between the card outline
+  // and the canvas edges (and a matching gap above + below the wordmark and
+  // captions). Vignette also uses 880×880 but anchored at y=300 since it
+  // has search bar + progress bar UI above/below the card.
+  // Landscape mode: derive strip dimensions from the probed source aspect.
+  // Strip width is the full canvas width (1080); strip height comes from the
+  // source's H/W ratio so the strip preserves the original frame composition.
+  // Cap height ≤ 1000 to keep room for the brand corner + caption.
+  let defaultW: number;
+  let defaultH: number;
+  let defaultY: number;
+  if (isLocket) {
+    // Locket geometry: full-width square video (updated 2026-06-11, was
+    // 960x960 with 60px side margins). Canvas 1080x1920, video 1080x1080,
+    // edge-to-edge horizontally. Vertical: top=420 (exactly centered),
+    // bottom of card at 1500, 420px above for the wordmark + 420px below.
+    defaultW = 1080;
+    defaultH = 1080;
+    defaultY = 420;
+  } else if (layout === "landscape") {
+    defaultW = 1080;
+    // Rounded to an even height: yuv420p `pad` in the compose filter graph
+    // floors its target to a multiple of 2, so an odd strip height (e.g. a
+    // 1276x720 source → 609) makes pad smaller than its own input and aborts
+    // the render. compose re-clamps too; keep them agreeing so the logged
+    // geometry and the caption Y math match what actually gets drawn.
+    const rawH = firstProbeW > 0 && firstProbeH > 0
+      ? Math.max(300, Math.min(1000, Math.round((1080 * firstProbeH) / firstProbeW)))
+      : 608;
+    defaultH = rawH - (rawH % 2);
+    // Centered vertically minus a small upward bias so captions sit comfortably
+    // INSIDE the lower portion of the strip (not in the empty area below).
+    defaultY = Math.max(0, Math.round((1920 - defaultH) / 2) - 80);
+  } else {
+    defaultW = 880;
+    defaultH = 880;
+    defaultY = layout === "vignette" ? 300 : 520;
+  }
   let foregroundWidth: number;
   let foregroundHeight: number;
   let foregroundY: number;
   let foregroundX: number | undefined;
-  if (fgWidthEnv || fgHeightEnv || fgYEnv || fgXEnv) {
+  if (!isLocket && (fgWidthEnv || fgHeightEnv || fgYEnv || fgXEnv)) {
+    // Locket ignores manual FG env vars — geometry is fixed by design.
     foregroundWidth = parseInt(fgWidthEnv ?? String(defaultW), 10);
     foregroundHeight = parseInt(fgHeightEnv ?? String(defaultH), 10);
     foregroundY = parseInt(fgYEnv ?? String(defaultY), 10);
     if (fgXEnv) foregroundX = parseInt(fgXEnv, 10);
-  } else if (fgMarginEnv) {
+  } else if (!isLocket && fgMarginEnv) {
     const m = parseInt(fgMarginEnv, 10);
     foregroundWidth = 1080 - 2 * m;
     foregroundHeight = 1920 - 2 * m;
@@ -191,15 +356,19 @@ export async function runPodcastPipeline(txtPath: string, opts: PodcastPipelineO
     foregroundHeight = defaultH;
     foregroundY = defaultY;
   }
-  log.info(`  layout: ${layout}  fg card: ${foregroundWidth}x${foregroundHeight} at y=${foregroundY}${foregroundX !== undefined ? `, x=${foregroundX}` : " (centered)"}`);
+  // Locket: full-width card → X=0 (edge-to-edge). Card: centered.
+  if (isLocket) foregroundX = 0;
+  log.info(`  layout: ${layout}${isLocket ? " (locket)" : ""}  fg card: ${foregroundWidth}x${foregroundHeight} at y=${foregroundY}${foregroundX !== undefined ? `, x=${foregroundX}` : " (centered)"}`);
 
   // Derive logo defaults from card position so the brand-shell aligns with
   // the card outline's left edge (same vertical line) and sits just above
   // the card with a breathing gap. Only applies when no explicit logo env
   // is set — users can still override every value.
   const cardLeftXResolved = foregroundX !== undefined ? foregroundX : Math.floor((1080 - foregroundWidth) / 2);
+  // Locket: thinner stroke (6px) for a subtler pendant-frame look.
   const cardStrokeResolved = parseInt(process.env.PODCAST_CARD_STROKE ?? (
-    layout === "card"
+    isLocket ? "6"
+    : layout === "card"
       ? "8"
       : ((process.env.PODCAST_VIGNETTE_BG ?? "true").toLowerCase() !== "false" ? "0" : "4")
   ), 10);
@@ -225,53 +394,96 @@ export async function runPodcastPipeline(txtPath: string, opts: PodcastPipelineO
   log.step(4, TOTAL_STEPS, "Generate karaoke .ass subtitle");
   const captionY = process.env.PODCAST_CAPTION_Y?.trim();
   // Caption mode:
-  //   "chunks" — viral-clip 2-4 word chunks ALL CAPS (default for vignette).
-  //   "sentence" — full current sentence with active word highlighted.
-  //   "word" — classic 3-word sliding karaoke window.
+  //   "chunks"   — viral-clip 2-4 word chunks ALL CAPS (default for vignette).
+  //   "sentence" — full current sentence with active word highlighted (default for card).
+  //   "word"    — classic 3-word sliding karaoke window.
+  //   "reveal"  — progressive word-by-word build-up, sentence fills in as
+  //               it's spoken. Cambria Bold default. (default for fullbleed.)
   const captionModeEnv = process.env.PODCAST_CAPTION_MODE?.trim().toLowerCase();
-  const captionMode: "chunks" | "sentence" | "word" =
+  const captionMode: "chunks" | "sentence" | "word" | "reveal" =
     captionModeEnv === "chunks" || (captionModeEnv == null && layout === "vignette")
       ? "chunks"
-      : captionModeEnv === "word"
-        ? "word"
-        : "sentence";
+      : captionModeEnv === "reveal" || (captionModeEnv == null && (layout === "fullbleed" || layout === "landscape"))
+        ? "reveal"
+        : captionModeEnv === "word"
+          ? "word"
+          : "sentence";
   // Auto-anchor caption position based on layout + card geometry.
   //   - vignette: place captions in the lower-1/4 of the card (overlay the
   //     bottom portion of the sharp video). Center of caption ~ cardY + cardH*0.78.
-  //   - card: place captions BELOW the card (180px gap), if room allows;
-  //     otherwise fall back to the caption module's default.
+  //   - card: place captions BELOW the OUTLINE (the white stroke ring), with
+  //     a clear 80px gap so the eye reads outline → breathing room → caption
+  //     as a clean stack rather than caption hugging the outline.
   const cardBottom = foregroundY + foregroundHeight;
+  const outlineBottom = cardBottom + cardStrokeResolved;
+  const captionGapBelowOutline = 80;
+  // Locket: caption INSIDE the card at the bottom — must not overflow outline.
   let captionAutoY: number | undefined;
-  if (layout === "vignette") {
+  if (isLocket) {
+    // Anchor ~70px above the card bottom edge. Caption font is 40px so
+    // center offset is approx 20px. This places text fully inside the card.
+    const locketCaptionCenterY = cardBottom - 70 - 20;
+    captionAutoY = locketCaptionCenterY / 1920;
+  } else if (layout === "vignette") {
     captionAutoY = (foregroundY + foregroundHeight * 0.78) / 1920;
-  } else if (cardBottom <= 1400) {
-    // 50px gap below the card bottom — captions sit TIGHT beneath the
-    // outline so the eye reads card → caption as one unit.
-    captionAutoY = (cardBottom + 50) / 1920;
+  } else if (layout === "fullbleed") {
+    // Lower-third overlay so captions sit at ~y=1500 on the 1920 canvas.
+    captionAutoY = 1500 / 1920;
+  } else if (layout === "landscape") {
+    // Caption sits INSIDE the 16:9 strip's lower portion — anchored 70px above
+    // the strip's bottom edge, then accounting for caption fontSize (~52).
+    // yPosition is the caption CENTER as a 0..1 ratio of canvas height.
+    const stripBottom = foregroundY + foregroundHeight;
+    const captionCenterY = stripBottom - 70 - 26; // 70px from bottom edge, half of 52px font
+    captionAutoY = captionCenterY / 1920;
+  } else if (outlineBottom + captionGapBelowOutline <= 1920) {
+    captionAutoY = (outlineBottom + captionGapBelowOutline) / 1920;
   }
-  // Caption wrap margins — constrain captions to stay strictly inside the
-  // card outline (not bleeding past the white stroke). Each side gets:
-  //   margin = (canvas edge → card edge) + inset
-  // where `inset` is small breathing room inside the card. For chunks mode
-  // (vignette default), WrapStyle 0 then breaks long chunks onto multiple
-  // lines instead of overflowing past the card.
+  // Caption wrap margins.
+  //   - card/vignette: constrain captions strictly inside the card outline
+  //     (not bleeding past the white stroke), so margin = (canvas edge →
+  //     card edge) + inset.
+  //   - fullbleed/landscape: use a flat safe margin from the canvas edges
+  //     (default 80px each side). Captions overlay the footage edge-to-edge
+  //     except for the safe margin, so the text never bleeds off-canvas no
+  //     matter how long it is — long lines wrap via WrapStyle 0.
   const cardLeftPx = foregroundX !== undefined ? foregroundX : Math.floor((1080 - foregroundWidth) / 2);
   const cardRightPx = cardLeftPx + foregroundWidth;
   const inset = parseInt(process.env.PODCAST_CAPTION_INSET ?? "30", 10);
-  const captionMarginL = Math.max(0, cardLeftPx + inset);
-  const captionMarginR = Math.max(0, (1080 - cardRightPx) + inset);
+  const safeEdgeMargin = parseInt(process.env.PODCAST_CAPTION_SAFE_MARGIN ?? "80", 10);
+  const captionMarginL = (layout === "fullbleed" || layout === "landscape")
+    ? safeEdgeMargin
+    : Math.max(0, cardLeftPx + inset);
+  const captionMarginR = (layout === "fullbleed" || layout === "landscape")
+    ? safeEdgeMargin
+    : Math.max(0, (1080 - cardRightPx) + inset);
+  // Default caption font size — smaller for card layout (the wordmark +
+  // edge-to-edge card already fill a lot of visual real estate, so captions
+  // can afford to be tighter). Sentence mode: 52 (was 60). Chunks/word keep
+  // their punchier sizes since they show fewer characters at a time.
+  // Locket: even smaller (40px sentence) since captions live inside the
+  // 960x960 card and must not overflow the outline boundary.
+  const defaultCaptionFontSize = isLocket
+    ? (captionMode === "sentence" ? 40 : captionMode === "word" ? 48 : 44)
+    : layout === "card"
+      ? (captionMode === "sentence" ? 52 : captionMode === "word" ? 64 : 60)
+      : undefined;
   const captionOpts = {
     font: process.env.PODCAST_CAPTION_FONT?.trim() || undefined,
-    fontSize: process.env.PODCAST_CAPTION_FONTSIZE ? parseInt(process.env.PODCAST_CAPTION_FONTSIZE, 10) : undefined,
+    fontSize: process.env.PODCAST_CAPTION_FONTSIZE
+      ? parseInt(process.env.PODCAST_CAPTION_FONTSIZE, 10)
+      : defaultCaptionFontSize,
     yPosition: captionY ? parseFloat(captionY) : captionAutoY,
     marginL: captionMarginL,
     marginR: captionMarginR,
   };
   const assContent = captionMode === "chunks"
     ? buildAssFromChunks(words, captionOpts)
-    : captionMode === "sentence"
-      ? buildAssFromSentences(words, captionOpts)
-      : buildAssFromWords(words, captionOpts);
+    : captionMode === "reveal"
+      ? buildAssFromReveal(words, captionOpts)
+      : captionMode === "sentence"
+        ? buildAssFromSentences(words, captionOpts)
+        : buildAssFromWords(words, captionOpts);
   log.info(`  caption mode: ${captionMode}`);
   const assPath = join(outputDir, "captions.ass");
   await writeAssFile(assContent, assPath);
@@ -290,6 +502,11 @@ export async function runPodcastPipeline(txtPath: string, opts: PodcastPipelineO
     const outroMp3 = join(outputDir, "outro-voice.mp3");
     if (existsSync(outroMp3)) {
       log.info(`  REUSE existing outro-voice.mp3 — delete to force re-TTS`);
+      outroVoicePath = outroMp3;
+    } else if (manualVoice) {
+      // Manual mode has no TTS to synthesize the outro line. Drop a supplied
+      // outro-voice.mp3 to include one; otherwise the outro card runs silent.
+      log.warn(`  manual mode — no outro-voice.mp3 supplied; outro card will be silent`);
     } else {
       const { client: outroTts } = createPodcastTts(cfg);
       try {
@@ -297,8 +514,8 @@ export async function runPodcastPipeline(txtPath: string, opts: PodcastPipelineO
       } finally {
         await outroTts.dispose?.();
       }
+      outroVoicePath = outroMp3;
     }
-    outroVoicePath = outroMp3;
   }
 
   // STEP 5: compose final video
@@ -343,7 +560,19 @@ export async function runPodcastPipeline(txtPath: string, opts: PodcastPipelineO
     log.info(`  bg music: ${bgMusicPath}`);
   }
 
-  // Logo overlay: default to assets/logoPodcast.png when present;
+  // Brand-shell rendering mode. Card layout defaults to the new "wordmark"
+  // look — centered "SportsForAllPodcast" text + gradient underline + cyan
+  // tag, drawn straight above the card outline. No logo PNG is overlaid (the
+  // wordmark IS the brand). Set PODCAST_BRAND_WORDMARK=false to fall back to
+  // the legacy logo + top-left brand-shell.
+  const wordmarkEnv = process.env.PODCAST_BRAND_WORDMARK?.trim().toLowerCase();
+  const brandWordmark = wordmarkEnv
+    ? (wordmarkEnv !== "false" && wordmarkEnv !== "0")
+    : (layout === "card" || layout === "fullbleed" || layout === "landscape");
+
+  // Logo overlay. In wordmark mode the logo PNG isn't drawn on the canvas;
+  // the avatar version is still needed by the outro card though, so we keep
+  // the input wired. Pure default: assets/logoPodcast.png when present;
   // PODCAST_LOGO env overrides (empty string disables).
   const logoEnv = process.env.PODCAST_LOGO;
   let logoPath: string | null = null;
@@ -354,20 +583,43 @@ export async function runPodcastPipeline(txtPath: string, opts: PodcastPipelineO
     if (existsSync(defaultLogo)) logoPath = defaultLogo;
   }
   if (logoPath) {
-    log.info(`  logo: ${logoPath}`);
+    log.info(`  logo: ${logoPath}${brandWordmark ? " (avatar-only — wordmark replaces brand-shell)" : ""}`);
   }
 
+  const resolvedBrandName = isLocket
+    ? (process.env.PODCAST_BRAND_NAME ?? "Trạm Dừng Bất Ngờ")
+    : (process.env.PODCAST_BRAND_NAME ?? (layout === "vignette" ? "" : (process.env.TIKTOK_DISPLAY_NAME ?? "Trạm Dừng Bất Ngờ")));
+  const resolvedOutroChannel = isLocket
+    ? (process.env.PODCAST_BRAND_NAME ?? "Trạm Dừng Bất Ngờ")
+    : (process.env.PODCAST_OUTRO_CHANNEL ?? cfg.tiktok.displayName ?? "SportsForAllTV");
+  log.info(`  brand: isLocket=${isLocket}, brandName="${resolvedBrandName}", outroChannel="${resolvedOutroChannel}"`);
+
   await composeVideo({
-    sourceVideoPaths,
+    sourceVideoPaths: resolvedSourcePaths,
     ttsAudioPath: voiceMp3,
     assPath,
     outPath: finalMp4,
     ttsDurationSec,
     fps: parseInt(process.env.PODCAST_FPS ?? "30", 10),
-    crf: parseInt(process.env.PODCAST_CRF ?? "20", 10),
-    preset: process.env.PODCAST_PRESET || "medium",
+    crf: parseInt(process.env.PODCAST_CRF ?? "18", 10),
+    preset: process.env.PODCAST_PRESET || "slow",
     layout,
-    cornerRadius: parseInt(process.env.PODCAST_CORNER_RADIUS ?? (layout === "vignette" ? "20" : "40"), 10),
+    fullbleedDim,
+    fullbleedCornerText,
+    fullbleedCornerFontSize,
+    fullbleedCornerFontFile,
+    fullbleedCornerStyle,
+    railX,
+    railTopY,
+    railFontSize,
+    railFontFile,
+    railDotSize,
+    railAccentColor,
+    landscapeVerticalBias: process.env.PODCAST_LANDSCAPE_VBIAS
+      ? parseInt(process.env.PODCAST_LANDSCAPE_VBIAS, 10)
+      : undefined,
+    // Locket: slightly tighter radius (36px) for the pendant-frame aesthetic.
+    cornerRadius: parseInt(process.env.PODCAST_CORNER_RADIUS ?? (isLocket ? "36" : layout === "vignette" ? "20" : "40"), 10),
     // Default stroke: card layout always 4; vignette layout depends on blur
     // bg — when blur bg is on, rounded corners read against the colored blur;
     // when bg is pure-black (PODCAST_VIGNETTE_BG=false), bump to 4 so the
@@ -398,17 +650,30 @@ export async function runPodcastPipeline(txtPath: string, opts: PodcastPipelineO
     logoMargin: logoMarginResolved,
     logoMarginTop: logoMarginTopResolved,
     logoCornerRadius: parseInt(process.env.PODCAST_LOGO_RADIUS ?? "12", 10),
-    // In vignette mode, the watermark drawtext on the card replaces the
-    // brand-shell — suppress the brand text unless explicitly set.
-    brandName: process.env.PODCAST_BRAND_NAME ?? (layout === "vignette" ? "" : (process.env.TIKTOK_DISPLAY_NAME ?? "SportsForAllPodcast")),
-    brandTag: process.env.PODCAST_BRAND_TAG ?? (layout === "vignette" ? "" : "PODCAST"),
+    // Brand name follows PODCAST_BRAND_NAME for every layout (locket included
+    // since 2026-06-11 — was hardcoded "Podcast và bạn" before the Life
+    // Podcast rebrand).
+    brandName: resolvedBrandName,
+    // Locket: no tag (elegant style suppresses it anyway); other layouts keep
+    // their existing tag behavior.
+    brandTag: isLocket ? "" : (process.env.PODCAST_BRAND_TAG ?? (layout === "vignette" ? "" : "PODCAST")),
     brandNameFontSize: parseInt(process.env.PODCAST_BRAND_NAME_FONTSIZE ?? String(defaultBrandNameFs), 10),
     brandTagFontSize: parseInt(process.env.PODCAST_BRAND_TAG_FONTSIZE ?? String(defaultBrandTagFs), 10),
+    brandWordmark,
+    // Locket: "elegant" wordmark — refined Palatino Italic serif, letter-spaced,
+    // thin separator, no glow. Other layouts keep the heavy "display" default.
+    brandWordmarkStyle: isLocket ? "elegant" as const : undefined,
+    // Locket dùng corner badge (logo góc trên phải + tên kênh bên trái) giống
+    // fullbleed/landscape — thay cho elegant wordmark giữa (2026-06-11).
+    cornerBadge: isLocket,
+    brandWordmarkFontSize: parseInt(process.env.PODCAST_WORDMARK_FONTSIZE ?? (isLocket ? "36" : "56"), 10),
+    brandWordmarkTagFontSize: parseInt(process.env.PODCAST_WORDMARK_TAG_FONTSIZE ?? "22", 10),
+    brandWordmarkUnderlineWidth: parseInt(process.env.PODCAST_WORDMARK_UNDERLINE_W ?? "280", 10),
     tailSec,
     outroSec: outroEnabled ? outroSec : 0,
     outroAudioPath: outroVoicePath,
-    outroChannelName: process.env.PODCAST_OUTRO_CHANNEL ?? cfg.tiktok.displayName ?? "SportsForAllTV",
-    outroHandle: process.env.PODCAST_OUTRO_HANDLE ?? cfg.tiktok.handle ?? "@bonglan0702",
+    outroChannelName: resolvedOutroChannel,
+    outroHandle: isLocket ? "@podcastvaban" : (process.env.PODCAST_OUTRO_HANDLE ?? cfg.tiktok.handle ?? "@bonglan0702"),
     outroFollowers: process.env.PODCAST_OUTRO_FOLLOWERS ?? cfg.tiktok.followers ?? "1.2M followers",
     outroCta: process.env.PODCAST_OUTRO_CTA ?? "Theo dõi ngay",
     outroSource: process.env.PODCAST_OUTRO_SOURCE ?? "Sưu tầm",
@@ -492,17 +757,19 @@ function createPodcastTts(cfg: Config): { client: TtsClient; label: string } {
     }
     const podcastSpeedEnv = process.env.PODCAST_AUSYNCLAB_SPEED?.trim();
     const podcastSpeed = podcastSpeedEnv ? parseFloat(podcastSpeedEnv) : cfg.ausynclabSpeed;
+    const podcastModelEnv = process.env.PODCAST_AUSYNCLAB_MODEL_NAME?.trim();
+    const podcastModel = podcastModelEnv || cfg.ausynclabModelName;
     return {
       client: new AusynclabClient({
         apiKey: cfg.ausynclabApiKey,
         voiceId: podcastVoiceId,
-        modelName: cfg.ausynclabModelName,
+        modelName: podcastModel,
         speed: podcastSpeed,
         baseUrl: cfg.ausynclabBaseUrl,
         pollIntervalMs: cfg.ausynclabPollIntervalMs,
         pollTimeoutMs: cfg.ausynclabPollTimeoutMs,
       }),
-      label: `ausynclab (model=${cfg.ausynclabModelName}, voice=${podcastVoiceId}${podcastVoiceEnv ? " [podcast-override]" : ""}, speed=${podcastSpeed}${podcastSpeedEnv ? " [podcast-override]" : ""})`,
+      label: `ausynclab (model=${podcastModel}${podcastModelEnv ? " [podcast-override]" : ""}, voice=${podcastVoiceId}${podcastVoiceEnv ? " [podcast-override]" : ""}, speed=${podcastSpeed}${podcastSpeedEnv ? " [podcast-override]" : ""})`,
     };
   }
 

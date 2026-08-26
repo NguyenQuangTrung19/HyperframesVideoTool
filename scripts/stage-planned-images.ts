@@ -6,6 +6,7 @@ import {
   stageImagesToOutput,
   validatePlan,
 } from "../src/image/plan.js";
+import { combineSplitImages } from "./combine-split-images.js";
 
 async function main() {
   const txtPath = process.argv[2];
@@ -29,7 +30,15 @@ async function main() {
 
   const inputDir = dirname(absTxt);
   const slug = deriveSlugFromTxtPath(absTxt);
-  const outputDir = resolve("output", slug);
+  const outputDir = resolve("video", "output", slug);
+
+  // Pre-step: composite any split-frame source pairs (<stem>-1 + <stem>-2 →
+  // <stem>.png) so VS / sibling-pair scenes can be fed two single-subject
+  // images instead of one hard-to-source two-person photo. No-op when none.
+  const combined = await combineSplitImages(inputDir);
+  if (combined.length > 0) {
+    console.log(`✓ combined ${combined.length} split-frame image(s): ${combined.join(", ")}\n`);
+  }
 
   const { missing, orphans } = validatePlan(plan, inputDir);
 
@@ -45,7 +54,7 @@ async function main() {
       console.error("");
     }
     console.error(`Generate the missing image(s) on grok.com and save them in ${inputDir}.`);
-    console.error(`Any of .png / .jpg / .jpeg / .webp is accepted — extension in the plan is just a recommendation.`);
+    console.error(`Any of .png / .jpg / .jpeg / .webp / .avif is accepted — extension in the plan is just a recommendation.`);
     process.exit(1);
   }
 

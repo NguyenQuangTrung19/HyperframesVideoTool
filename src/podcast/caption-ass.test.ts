@@ -44,12 +44,41 @@ describe("buildAssFromWords", () => {
     expect(events[0]).toMatch(/\\c&H0000FFFF&}Vinícius\{[^}]*\\c&H[0-9A-F]+&}/);
   });
 
-  it("emits scale-pop animation override on the active word by default", () => {
+  it("emits the active-word color override with no scale animation by default", () => {
     const ass = buildAssFromWords(sampleWords);
     const events = ass.split("\n").filter((l) => l.startsWith("Dialogue:"));
-    // Default popScale=118, popDurationMs=90 → expect \t(0,90,\fscx118\fscy118)
-    expect(events[0]).toContain("\\fscx100\\fscy100");
-    expect(events[0]).toContain("\\t(0,90,\\fscx118\\fscy118)");
+    // Default popScale=100 disables the scale-pop tween (it caused the centered
+    // text to shift left/right as the active word scaled — color change alone
+    // is enough). The active word is still color-flipped via \c.
+    expect(events[0]).toContain("\\c&H00FFFFFF&}Vinícius");
+    expect(events[0]).not.toContain("\\t(");
+  });
+
+  it("clamps overlapping events from non-monotonic word timings", () => {
+    // Simulates the realigner edge case: inserted source words whose
+    // interpolated end time runs past the next paired Whisper anchor,
+    // producing a temporally-backwards transition. Each event's end
+    // must be clamped to the next event's start so two captions never
+    // render simultaneously.
+    const nonMono = [
+      { w: "A", start: 0.0, end: 0.2 },
+      { w: "B", start: 0.2, end: 0.4 },
+      { w: "C", start: 0.1, end: 0.3 }, // starts BEFORE B ends
+    ];
+    const ass = buildAssFromWords(nonMono);
+    const events = ass.split("\n").filter((l) => l.startsWith("Dialogue:"));
+    const t2s = (t: string) => {
+      const [h, m, s] = t.split(":");
+      return +h * 3600 + +m * 60 + parseFloat(s);
+    };
+    const ranges = events.map((l) => {
+      const p = l.split(",", 10);
+      return [t2s(p[1]), t2s(p[2])] as [number, number];
+    });
+    // After sort+clamp: ranges must be monotonically tiled.
+    for (let i = 0; i < ranges.length - 1; i++) {
+      expect(ranges[i][1]).toBeLessThanOrEqual(ranges[i + 1][0] + 1e-3);
+    }
   });
 
   it("renders a 3-word window centered on the active word", () => {

@@ -4,7 +4,7 @@ import { homedir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
-export type TtsProvider = "vieneu" | "ausynclab";
+export type TtsProvider = "vieneu" | "ausynclab" | "fptai" | "vbee" | "manual";
 
 export interface TiktokConfig {
   displayName: string;
@@ -60,6 +60,25 @@ export interface Config {
   ausynclabPollIntervalMs: number;
   ausynclabPollTimeoutMs: number;
 
+  // FPT.AI (cheap Vietnamese TTS, pay-per-character)
+  fptaiApiKey?: string;
+  fptaiVoice: string;
+  fptaiSpeed: number;
+  fptaiBaseUrl: string;
+  fptaiPollIntervalMs: number;
+  fptaiPollTimeoutMs: number;
+
+  // VBee AIVoice (natural Vietnamese voices, pay-per-use)
+  vbeeAccessToken?: string;
+  vbeeAppId?: string;
+  vbeeVoiceCode: string;
+  vbeeSpeedRate: string;
+  vbeeBitrate: number;
+  vbeeCallbackUrl: string;
+  vbeeBaseUrl: string;
+  vbeePollIntervalMs: number;
+  vbeePollTimeoutMs: number;
+
   // TikTok follow card (outro)
   tiktok: TiktokConfig;
 
@@ -67,6 +86,27 @@ export interface Config {
   image: ImageGenConfig;
 
   ttsConcurrency: number;
+
+  // Hyperframes render workers — "auto" lets calibration decide (conservative,
+  // often drops to 1 worker on heavy compositions); a number forces a fixed
+  // count (6 = trần của hyperframes). Trên máy 12 luồng + HF_ANGLE_BACKEND=d3d11,
+  // 6 workers nhanh hơn 4 khoảng 9%. Default: "auto".
+  hyperframesWorkers: number | "auto";
+
+  // Hyperframes GPU encoding (NVENC). Requires NVIDIA driver >= 570.0. Falls
+  // back to libx264 if disabled. Default: false.
+  hyperframesGpu: boolean;
+
+  // Hyperframes capture frame rate. Frame count (and thus render time + CPU
+  // load) scales linearly with this — 24 cuts ~20% off the default 30, and
+  // captions/animations still read smooth on TikTok. Default: 30.
+  hyperframesFps: number;
+
+  // Hyperframes encoder quality preset → output bitrate / compression effort.
+  // "high" = higher bitrate, fewer compression artifacts (crisper hero images,
+  // cleaner gradients/motion) at the cost of larger files + slightly slower
+  // encode. Default: "high". Set RENDER_QUALITY=standard to render lighter/faster.
+  hyperframesQuality: "draft" | "standard" | "high";
 }
 
 function intDefault(name: string, def: number): number {
@@ -90,8 +130,8 @@ function findUvBin(): string {
 
 export function loadConfig(): Config {
   const provider = (process.env.TTS_PROVIDER ?? "vieneu") as TtsProvider;
-  if (provider !== "vieneu" && provider !== "ausynclab") {
-    throw new Error(`TTS_PROVIDER must be "vieneu" or "ausynclab", got "${provider}"`);
+  if (provider !== "vieneu" && provider !== "ausynclab" && provider !== "fptai" && provider !== "vbee" && provider !== "manual") {
+    throw new Error(`TTS_PROVIDER must be "vieneu", "ausynclab", "fptai", "vbee", or "manual", got "${provider}"`);
   }
 
   // Validate provider-specific required vars
@@ -110,8 +150,7 @@ export function loadConfig(): Config {
     if (!existsSync(vieneuWorkerScript)) {
       throw new Error(`VieNeu worker script missing at ${vieneuWorkerScript}`);
     }
-  } else {
-    // ausynclab
+  } else if (provider === "ausynclab") {
     if (!process.env.AUSYNCLAB_API_KEY || process.env.AUSYNCLAB_API_KEY.trim() === "") {
       throw new Error(
         `Missing AUSYNCLAB_API_KEY (required when TTS_PROVIDER=ausynclab). ` +
@@ -122,6 +161,26 @@ export function loadConfig(): Config {
       throw new Error(
         `Missing AUSYNCLAB_VOICE_ID (required when TTS_PROVIDER=ausynclab). ` +
         `Pick a voice at https://ausynclab.io/voices, click "Use", then copy the numeric ID.`
+      );
+    }
+  } else if (provider === "fptai") {
+    if (!process.env.FPTAI_API_KEY || process.env.FPTAI_API_KEY.trim() === "") {
+      throw new Error(
+        `Missing FPTAI_API_KEY (required when TTS_PROVIDER=fptai). ` +
+        `Get one at https://console.fpt.ai (Text to Speech app).`
+      );
+    }
+  } else if (provider === "vbee") {
+    if (!process.env.VBEE_ACCESS_TOKEN || process.env.VBEE_ACCESS_TOKEN.trim() === "") {
+      throw new Error(
+        `Missing VBEE_ACCESS_TOKEN (required when TTS_PROVIDER=vbee). ` +
+        `Get it from the VBee AIVoice dashboard (https://aivoice.vbee.vn).`
+      );
+    }
+    if (!process.env.VBEE_APP_ID || process.env.VBEE_APP_ID.trim() === "") {
+      throw new Error(
+        `Missing VBEE_APP_ID (required when TTS_PROVIDER=vbee). ` +
+        `Get it from the VBee AIVoice dashboard.`
       );
     }
   }
@@ -143,7 +202,24 @@ export function loadConfig(): Config {
     ausynclabSpeed: parseFloat(process.env.AUSYNCLAB_SPEED ?? "1.0"),
     ausynclabBaseUrl: process.env.AUSYNCLAB_BASE_URL ?? "https://api.ausynclab.io/api/v1",
     ausynclabPollIntervalMs: intDefault("AUSYNCLAB_POLL_INTERVAL_MS", 2000),
-    ausynclabPollTimeoutMs: intDefault("AUSYNCLAB_POLL_TIMEOUT_MS", 180000),
+    ausynclabPollTimeoutMs: intDefault("AUSYNCLAB_POLL_TIMEOUT_MS", 600000),
+
+    fptaiApiKey: process.env.FPTAI_API_KEY,
+    fptaiVoice: process.env.FPTAI_VOICE?.trim() || "leminh",
+    fptaiSpeed: parseFloat(process.env.FPTAI_SPEED ?? "0"),
+    fptaiBaseUrl: process.env.FPTAI_BASE_URL ?? "https://api.fpt.ai",
+    fptaiPollIntervalMs: intDefault("FPTAI_POLL_INTERVAL_MS", 3000),
+    fptaiPollTimeoutMs: intDefault("FPTAI_POLL_TIMEOUT_MS", 180000),
+
+    vbeeAccessToken: process.env.VBEE_ACCESS_TOKEN,
+    vbeeAppId: process.env.VBEE_APP_ID,
+    vbeeVoiceCode: process.env.VBEE_VOICE_CODE?.trim() || "hn_male_manhdung_news_48k-fhg",
+    vbeeSpeedRate: process.env.VBEE_SPEED_RATE?.trim() || "1.0",
+    vbeeBitrate: intDefault("VBEE_BITRATE", 128),
+    vbeeCallbackUrl: process.env.VBEE_CALLBACK_URL?.trim() || "https://example.com/vbee-callback",
+    vbeeBaseUrl: process.env.VBEE_BASE_URL ?? "https://vbee.vn/api/v1",
+    vbeePollIntervalMs: intDefault("VBEE_POLL_INTERVAL_MS", 3000),
+    vbeePollTimeoutMs: intDefault("VBEE_POLL_TIMEOUT_MS", 180000),
 
     tiktok: {
       displayName: process.env.TIKTOK_DISPLAY_NAME ?? "SportsForAllTV",
@@ -153,7 +229,39 @@ export function loadConfig(): Config {
     },
     image: parseImageConfig(),
     ttsConcurrency: intDefault("TTS_CONCURRENCY", 1),
+    hyperframesWorkers: parseHyperframesWorkers(),
+    hyperframesGpu: (process.env.HYPERFRAMES_GPU ?? "").toLowerCase() === "true",
+    hyperframesFps: parseRenderFps(),
+    hyperframesQuality: parseRenderQuality(),
   };
+}
+
+function parseRenderQuality(): "draft" | "standard" | "high" {
+  const raw = (process.env.RENDER_QUALITY ?? "high").toLowerCase();
+  if (raw !== "draft" && raw !== "standard" && raw !== "high") {
+    throw new Error(`RENDER_QUALITY must be one of draft|standard|high, got "${raw}"`);
+  }
+  return raw;
+}
+
+function parseRenderFps(): number {
+  const raw = process.env.RENDER_FPS;
+  if (!raw) return 30;
+  const n = parseInt(raw, 10);
+  if (isNaN(n) || n < 12 || n > 60) {
+    throw new Error(`RENDER_FPS must be an integer between 12 and 60, got "${raw}"`);
+  }
+  return n;
+}
+
+function parseHyperframesWorkers(): number | "auto" {
+  const raw = process.env.HYPERFRAMES_WORKERS;
+  if (!raw || raw.toLowerCase() === "auto") return "auto";
+  const n = parseInt(raw, 10);
+  if (isNaN(n) || n < 1) {
+    throw new Error(`HYPERFRAMES_WORKERS must be "auto" or a positive integer, got "${raw}"`);
+  }
+  return n;
 }
 
 function parseImageConfig(): ImageGenConfig {

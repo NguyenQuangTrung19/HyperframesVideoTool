@@ -62,11 +62,46 @@ export function realignCaptionsToSource(
     droppedSamples: [],
   };
 
+  // Pending batch of inserted source words (no Whisper match). Their start/end
+  // times are assigned later, once we hit the next paired anchor (or the end
+  // of the array), by distributing them evenly across the gap [lastEnd,
+  // nextAnchorStart]. The old behavior — giving each inserted word a minimum
+  // 60ms slot greedily — caused a long unpaired run (e.g. 6 source words that
+  // Whisper skipped) to overflow PAST the next anchor, producing
+  // non-monotonic word timings that visually overlap in burned captions.
   let lastEnd = 0;
+  const pendingInsertIndices: number[] = [];
+
+  const flushPendingInserts = (nextAnchorStart: number): void => {
+    if (pendingInsertIndices.length === 0) return;
+    const gap = Math.max(0, nextAnchorStart - lastEnd);
+    // Per-word slot: 80ms is the comfortable target. Compress if the available
+    // gap can't fit `count * 80ms`. Floor of 1ms keeps every inserted word
+    // captionable even when the gap is effectively zero (the caption-side
+    // overlap dedupe will then collapse them to non-overlapping tiles).
+    const idealSlot = 0.08;
+    const slot = gap >= pendingInsertIndices.length * idealSlot
+      ? idealSlot
+      : Math.max(0.001, gap / pendingInsertIndices.length);
+    let t = lastEnd;
+    for (const idx of pendingInsertIndices) {
+      const start = t;
+      const end = Math.min(t + slot, nextAnchorStart);
+      output[idx] = { w: output[idx].w, start, end };
+      t = end;
+    }
+    // Advance lastEnd to the last inserted word's end so the NEXT anchor's
+    // monotonicity is preserved going forward.
+    lastEnd = Math.max(lastEnd, output[pendingInsertIndices[pendingInsertIndices.length - 1]].end);
+    pendingInsertIndices.length = 0;
+  };
 
   for (let p = 0; p < pairs.length; p++) {
     const { source, whisper } = pairs[p];
     if (source !== null && whisper !== null) {
+      // Hit a paired anchor — flush any pending insert batch first so its
+      // timings tile cleanly into [lastEnd, whisper.start].
+      flushPendingInserts(whisper.start);
       const same = normalizeForCompare(source) === normalizeForCompare(whisper.w);
       output.push({ w: source, start: whisper.start, end: whisper.end });
       lastEnd = whisper.end;
@@ -79,34 +114,33 @@ export function realignCaptionsToSource(
         }
       }
     } else if (source !== null) {
-      // Source word without a Whisper match — interpolate timing toward
-      // the next paired event so the caption appears in roughly the right
-      // place. We use half the gap so adjacent unpaired source words don't
-      // all stack at the same start time.
-      let nextStart = lastEnd + 0.15;
-      for (let q = p + 1; q < pairs.length; q++) {
-        if (pairs[q].whisper) {
-          nextStart = pairs[q].whisper!.start;
-          break;
-        }
-      }
-      const dur = Math.max(0.06, (nextStart - lastEnd) / 2);
-      output.push({ w: source, start: lastEnd, end: lastEnd + dur });
-      lastEnd += dur;
+      // Inserted source word — push placeholder, defer timing to flush.
+      output.push({ w: source, start: lastEnd, end: lastEnd });
+      pendingInsertIndices.push(output.length - 1);
       report.inserted++;
       if (report.insertedSamples.length < sampleLimit) {
         report.insertedSamples.push(source);
       }
     } else if (whisper !== null) {
       // Whisper hallucination / filler — drop it. Don't advance lastEnd
-      // because then the next inserted source word would skip past valid
-      // timing; just remember the boundary so future inserts can use it.
+      // (would skip valid timing for any pending or future inserted words).
       lastEnd = Math.max(lastEnd, whisper.end);
       report.dropped++;
       if (report.droppedSamples.length < sampleLimit) {
         report.droppedSamples.push(whisper.w);
       }
     }
+  }
+  // End-of-array: any trailing inserted batch (no next anchor) gets a
+  // fixed 100ms tail per word so the final captions still appear.
+  if (pendingInsertIndices.length > 0) {
+    const TAIL_SLOT = 0.1;
+    let t = lastEnd;
+    for (const idx of pendingInsertIndices) {
+      output[idx] = { w: output[idx].w, start: t, end: t + TAIL_SLOT };
+      t += TAIL_SLOT;
+    }
+    pendingInsertIndices.length = 0;
   }
 
   return { words: output, report };

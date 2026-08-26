@@ -3,7 +3,7 @@ import { join, resolve } from "node:path";
 import { ScriptSchema } from "../src/render/script-schema.js";
 
 const IMAGE_TEMPLATES = new Set(["hook", "callout", "stat-hero"]);
-const OVERRIDE_EXTS = [".png", ".jpg", ".jpeg", ".webp"];
+const OVERRIDE_EXTS = [".png", ".jpg", ".jpeg", ".webp", ".avif"];
 
 function findOverride(imagesDir: string, sceneId: string): string | null {
   for (const ext of OVERRIDE_EXTS) {
@@ -24,11 +24,11 @@ function main() {
   const slug = process.argv[2];
   if (!slug) {
     console.error("Usage: npm run images:list -- <slug>");
-    console.error("       (slug is the folder name under output/)");
+    console.error("       (slug is the folder name under video/output/)");
     process.exit(2);
   }
 
-  const outputDir = resolve("output", slug);
+  const outputDir = resolve("video", "output", slug);
   const scriptPath = join(outputDir, "script.json");
   if (!existsSync(scriptPath)) {
     console.error(`✗ not found: ${scriptPath}`);

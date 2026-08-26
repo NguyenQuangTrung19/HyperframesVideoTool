@@ -10,15 +10,18 @@ import { createGeminiImageProvider } from "./gemini.js";
 import { createXAIImageProvider } from "./xai.js";
 import { log } from "../utils/logger.js";
 
-/** Templates that benefit from a background photo (action / atmospheric). */
-const IMAGE_TEMPLATES = new Set(["hook", "callout", "stat-hero"]);
+/** Templates that benefit from a background photo (action / atmospheric).
+ *  feature-list added 2026-07-04: it now takes an optional hero/full-bleed
+ *  image, laid out by aspect (landscape → card, portrait → cover). */
+const IMAGE_TEMPLATES = new Set(["hook", "callout", "stat-hero", "feature-list"]);
 
 /** Hard cap on parallel API calls to avoid rate limits. */
 const IMAGE_CONCURRENCY = 3;
 
 /** Manual override extensions, in priority order. Drop a file at
- *  `output/<slug>/images/<sceneId>.<ext>` to bypass AI generation for that scene. */
-const OVERRIDE_EXTENSIONS = [".png", ".jpg", ".jpeg", ".webp"];
+ *  `output/<slug>/images/<sceneId>.<ext>` to bypass AI generation for that scene.
+ *  AVIF is fine — the Chromium renderer decodes it natively (Chrome ≥85). */
+const OVERRIDE_EXTENSIONS = [".png", ".jpg", ".jpeg", ".webp", ".avif"];
 
 export type SceneImageMap = Record<string, string>; // sceneId → relative path from outputDir
 
@@ -42,32 +45,41 @@ export async function generateSceneImages(
     if (hookScene) map[hookScene.id] = hookOgImageRelPath;
   }
 
-  const candidates = script.scenes.filter((s) => {
-    if (!s.imagePrompt) return false;
+  // PASS 1 — manual overrides for ALL image-eligible scenes, regardless of
+  // whether the scene has an imagePrompt. A staged image at
+  // `images/<sceneId>.{png,jpg,jpeg,webp}` short-circuits any further work
+  // for that scene. (Previously this only ran on scenes with imagePrompt,
+  // which silently dropped staged images for prompt-less scenes — feedback
+  // 2026-05-26 "Mất ảnh".)
+  const eligibleScenes = script.scenes.filter((s) => {
     if (!IMAGE_TEMPLATES.has(s.templateData.template)) return false;
-    // Hook with og:image already covered → skip AI gen.
-    if (s.type === "hook" && hookOgImageRelPath) return false;
+    if (s.type === "hook" && hookOgImageRelPath) return false; // already mapped
     return true;
   });
-
-  // Manual overrides win over AI generation. A file at
-  // `images/<sceneId>.{png,jpg,jpeg,webp}` short-circuits the API call.
-  const remaining: typeof candidates = [];
-  for (const scene of candidates) {
+  for (const scene of eligibleScenes) {
+    if (map[scene.id]) continue; // already set (e.g. hook og:image)
     const overrideRel = findOverride(outputDir, scene.id);
     if (overrideRel) {
       map[scene.id] = overrideRel;
       log.info(`    scene ${scene.id}: MANUAL OVERRIDE → ${overrideRel}`);
-    } else {
-      remaining.push(scene);
     }
   }
 
+  // PASS 2 — AI generation, only for scenes with imagePrompt that didn't
+  // get a manual override above.
+  const remaining = eligibleScenes.filter(
+    (s) => !map[s.id] && s.imagePrompt,
+  );
+
   if (remaining.length === 0) {
-    if (candidates.length === 0) {
-      log.info("  AI image gen: no scenes with imagePrompt + eligible template");
+    const overrideCount = eligibleScenes.filter((s) => map[s.id]).length;
+    const withPrompt = eligibleScenes.filter((s) => s.imagePrompt).length;
+    if (overrideCount === 0 && withPrompt === 0) {
+      log.info("  AI image gen: no eligible scenes (none have imagePrompt or manual override)");
+    } else if (overrideCount > 0 && withPrompt === overrideCount) {
+      log.info(`  AI image gen: all ${overrideCount} scene(s) covered by manual overrides`);
     } else {
-      log.info(`  AI image gen: all ${candidates.length} scene(s) covered by manual overrides`);
+      log.info(`  AI image gen: ${overrideCount} manual override(s), no remaining AI work`);
     }
     return map;
   }
@@ -115,6 +127,7 @@ export async function generateSceneImages(
           prompt: scene.imagePrompt!,
           outPath: absPath,
           quality: config.quality,
+          aspect: script.metadata.aspect,
         });
         return { scene, relPath, result: r, ms: Date.now() - t0 };
       }),

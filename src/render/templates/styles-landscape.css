@@ -1,0 +1,600 @@
+/* ============================================================
+   LANDSCAPE LAYER — 16:9 (1920×1080), loaded ON TOP of styles.css
+   ============================================================
+
+   `styles.css` owns the colour scale, the shell surface, every component's
+   look, and a full set of 9:16 geometry. This file changes ONLY geometry and
+   the text colours that geometry forces, and only for the landscape canvas: it
+   is linked after styles.css and every rule is scoped to `body.ar-16x9`, so a
+   9:16 render never sees it.
+
+   ONE LAYOUT, NO EXCEPTIONS (2026-08-09, user: "đừng để phủ khung"):
+
+     photo → a framed card in a FIXED slot on the right, centred at x=1364
+     text  → a fixed 790px column on the left, x 60 → 850
+
+   TYPE IS SIZED FOR THE FRAME, NOT THE COLUMN (2026-08-10, user: "chữ với
+   cách trình bày chữ nó xấu"). An earlier pass traded column width for photo
+   width until the stack read label 46 / value 98 / caption 19 on a 1920px
+   canvas — the portrait build sets its number at 220px on a frame half as
+   wide, so landscape had ended up with less than half the type size on twice
+   the canvas, and the 19px caption was ~1% of frame width. The slot gave back
+   132px and the whole scale went up roughly 50%: label 62 / value 152 /
+   caption 27 / list 34, callout statement 70, hook headline 72.
+
+   Both are centred on the same midline, y=579 (the content band runs y=150,
+   clear of the brand plate, to y=1008). Nothing on this canvas is ever
+   full-bleed — not the body scenes, not the hook. That means **text is never
+   set on top of a photo**, so there is no scrim anywhere in this file and
+   every text colour below is ink-on-surface, overriding the white-on-photo
+   treatment styles.css ships for the portrait build.
+
+   THE TEXT COLUMN IS RE-STACKED, NOT JUST RESIZED (2026-08-09, user: "đổi
+   phong cách trình bày chữ đi, dễ nhìn"). The portrait build leads with a
+   giant number and drops the subject's name underneath, which works when the
+   whole frame is one narrow channel and fails in a column beside a photo: you
+   read "11 + 9" with nothing to attach it to. Here `order:` re-stacks the same
+   markup into label → number → caption → list, the ornamental diamond divider
+   is repurposed into the short brand bar that opens the block, the context
+   pill becomes a plain letter-spaced caption, and the bullet list becomes
+   hairline-separated rows. No new markup — the composer is untouched.
+
+   The slot's size comes from the photo's SHAPE bucket only, never its exact
+   ratio — same NGUYÊN TẮC 1 as the portrait build: cards that resize
+   scene-to-scene make the text beside them jump.
+
+   ⚠ POSITION WITH calc / flex, NEVER WITH translate(-50%). animations.js runs
+   a `fromTo` with an explicit px `y` on the photo card and on the text column;
+   GSAP reads the element's COMPUTED transform (a matrix, with the percentage
+   already resolved) and then overwrites it, so a stylesheet -50% centring
+   silently disappears the moment the tween starts.
+
+   ⚠ SELECTOR DEPTH. styles.css reaches
+   `.scene[data-fit="card"][data-shape="portrait"] .layout-…` — six levels
+   deep. Every rule here therefore carries the `body.ar-16x9 .scene[data-fit]`
+   prefix, which outranks it while still matching every scene (`data-fit` is
+   always present). Drop the prefix and the rule silently loses.
+
+   TEMPLATES TUNED HERE: hook, stat-hero, callout, feature-list, comparison
+   (bars + scoreboard), engagement-question, outro. Everything else gets only a
+   containment rule at the bottom of this file — those are built out of fixed
+   pixel geometry for a 1080-wide frame and have NOT been re-laid-out. Don't
+   emit them in a 16:9 script until they are.
+*/
+
+body.ar-16x9 {
+  /* Frame margins. YouTube overlays nothing persistent on the frame, so these
+     are plain title-safe margins, not the TikTok 240/120/420/80 keep-outs.
+     Tightened 2026-08-09 to buy the photo more room (user: "ảnh to hơn chút") —
+     the text column kept its width, the margins and the gap paid for it. */
+  --ls-pad-x: 60px;
+  --ls-band-top: 140px;     /* first line clear of the brand plate (ends y=126) */
+  --ls-band-bottom: 62px;
+  --ls-band-mid: 579px;     /* (140 + (1080 - 62)) / 2 — the shared midline */
+
+  /* Rebalanced 2026-08-10 (user: "chữ với cách trình bày chữ nó xấu"). The
+     previous split gave the photo 1080px and left the text 680px, which forced
+     the whole type scale down until the caption was 19px on a 1920px frame —
+     roughly 1% of frame width, i.e. unreadable on a phone. The photo gives
+     back 132px so the text can carry a broadcast-sized scale. */
+  --ls-col-text: 820px;     /* left column: x 60 → 880 */
+  --ls-col-gap: 40px;
+  --ls-media-cx: 1375px;    /* right slot centre: band x 920 → 1830 */
+
+  /* The one slot, in three shapes. Declared here so the hook's background and
+     the body cards read the same numbers. */
+  --ls-slot-w: 910px;
+  --ls-slot-h: 607px;       /* 3:2 */
+}
+
+html, body.ar-16x9 { width: 1920px; height: 1080px; }
+body.ar-16x9 #stage { width: 1920px; height: 1080px; }
+
+/* ── SHELL ──────────────────────────────────────────────────────────────
+   The 46/230px grid and the vignette are inset-based, so they need nothing.
+   The brand plate moves up out of the (nonexistent) TikTok overlay zone and
+   drops a size, since 1080px of height is half what it had. */
+body.ar-16x9 .brand-shell-header {
+  top: 48px; left: 60px;
+  padding: 10px 22px 10px 12px;
+  border-radius: 18px;
+  gap: 14px;
+}
+body.ar-16x9 .brand-icon { width: 56px; height: 56px; border-radius: 12px; }
+body.ar-16x9 .brand-name { font-size: 26px; }
+body.ar-16x9 .brand-tag  { font-size: 15px; letter-spacing: 2.6px; }
+
+/* Corner chip. `.chapter-label` is the roundup's literal marker ("TIN 3/7");
+   `.chapter-marker` on its own is still the auto N/total counter. */
+body.ar-16x9 .chapter-marker { top: 48px; right: 60px; padding: 9px 20px; }
+body.ar-16x9 .chapter-label .chapter-idx {
+  font-size: 26px; font-weight: 800;
+  letter-spacing: 0.12em; text-transform: uppercase;
+}
+
+/* ══ THE PHOTO SLOT ══════════════════════════════════════════════════════ */
+
+/* Body scenes (stat-hero / callout with an image). */
+body.ar-16x9 .scene[data-fit="card"] .bg-card {
+  --card-w: var(--ls-slot-w);
+  --card-h: var(--ls-slot-h);
+  left: calc(var(--ls-media-cx) - var(--card-w) / 2);
+  right: auto;
+  bottom: auto;
+  top: calc(var(--ls-band-mid) - var(--card-h) / 2);
+  transform: none;
+  width: var(--card-w);
+  height: var(--card-h);
+}
+body.ar-16x9 .scene[data-fit="card"] .bg-card[data-shape="square"] {
+  --card-w: 730px;
+  --card-h: 730px;
+}
+body.ar-16x9 .scene[data-fit="card"] .bg-card[data-shape="portrait"] {
+  --card-w: 580px;
+  --card-h: 756px;          /* 0.767 — the same portrait ratio 9:16 uses */
+}
+
+/* The hook. In 9:16 this photo is the frame; here it is reframed into the very
+   same slot the body cards use, with the same white mat, so the opening shot
+   sits in the layout instead of behind it. `.bg` is `inset: 0`, hence all four
+   offsets are reset. */
+body.ar-16x9 .scene[data-layout="hook"] .bg {
+  --card-w: var(--ls-slot-w);
+  --card-h: var(--ls-slot-h);
+  left: calc(var(--ls-media-cx) - var(--card-w) / 2);
+  top: calc(var(--ls-band-mid) - var(--card-h) / 2);
+  right: auto;
+  bottom: auto;
+  width: var(--card-w);
+  height: var(--card-h);
+  border-radius: 26px;
+  overflow: hidden;
+  border: 6px solid var(--surface);
+  box-shadow: var(--shadow-lg);
+  background-position: 50% 38%;
+  /* The kb-* keyframes scale the element itself — which here would scale the
+     white mat and the shadow with it. They also run on the wall clock, so they
+     are not reproducible under a seeked render (the same reason the card
+     push-in moved onto the GSAP timeline). Off. */
+  animation: none;
+}
+body.ar-16x9 .scene[data-layout="hook"][data-shape="square"] .bg {
+  --card-w: 730px; --card-h: 730px;
+}
+body.ar-16x9 .scene[data-layout="hook"][data-shape="portrait"] .bg {
+  --card-w: 580px; --card-h: 756px;
+}
+/* Both are full-frame dark washes built to sink a photo behind white text.
+   Nothing here sits on a photo, and over the light shell they just grey the
+   whole frame. */
+body.ar-16x9 .scene[data-layout="hook"] .overlay,
+body.ar-16x9 .scene .bg-grade-overlay { display: none; }
+
+/* ══ THE TEXT COLUMN ═════════════════════════════════════════════════════ */
+
+/* The column's height is content-driven, so it cannot be centred with `top` +
+   calc the way the photo slot is — and translate(-50%) is off the table (see
+   the header). So the LAYOUT becomes a flex box and the column becomes a
+   static flex item: centring is the parent's job, and the parallax drift GSAP
+   puts on the column rides on top instead of replacing it. */
+body.ar-16x9 .scene[data-fit] .layout-stat-hero.stat-hero-v2,
+body.ar-16x9 .scene[data-fit] .layout-callout {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: var(--ls-band-top) var(--ls-pad-x) var(--ls-band-bottom);
+}
+body.ar-16x9 .scene[data-fit] .stat-hero-content,
+body.ar-16x9 .scene[data-fit] .callout-content {
+  position: static;
+  width: var(--ls-col-text);
+  max-height: 100%;
+  align-items: flex-start;
+  justify-content: center;
+  text-align: left;
+  gap: 0;                 /* every child sets its own margin — see the stack */
+}
+
+/* The hook has no inner wrapper — its layout element IS the column, so the
+   right padding is what reserves the photo's half of the frame. */
+body.ar-16x9 .scene[data-fit] .layout-hook {
+  justify-content: center;
+  padding: var(--ls-band-top)
+           calc(var(--ls-pad-x) + var(--ls-col-gap) + var(--ls-slot-w))
+           var(--ls-band-bottom)
+           var(--ls-pad-x);
+}
+
+/* ── THE STACK ──
+   DOM order is value → divider → label → highlights → context. Reading order
+   here is: bar, name, number, caption, list. `order` does the re-stacking so
+   the composer keeps emitting one markup for both canvases. */
+body.ar-16x9 .scene[data-fit] .sh2-divider    { order: 1; }
+body.ar-16x9 .scene[data-fit] .stat-label     { order: 2; }
+body.ar-16x9 .scene[data-fit] .stat-value     { order: 3; }
+body.ar-16x9 .scene[data-fit] .stat-context   { order: 4; }
+body.ar-16x9 .scene[data-fit] .stat-highlights { order: 5; }
+
+/* ── Type scale for an 820px column ── */
+/* ── The kicker becomes the bulletin's date plate ──
+   `eyebrowSub` ships as a demoted second line (28px, 60% white) — a caption.
+   For a dated bulletin it is the opposite: the edition line is half the reason
+   someone clicks, so it is promoted above the label's own size and set in ink.
+   The red bar stretches to the block, so it grows with it for free. */
+body.ar-16x9 .scene[data-fit] .hook-kicker { margin-bottom: 34px; gap: 24px; }
+body.ar-16x9 .scene[data-fit] .hook-kicker-bar { width: 12px; min-height: 112px; }
+body.ar-16x9 .scene[data-fit] .hook-kicker-text { font-size: 31px; letter-spacing: 0.14em; }
+body.ar-16x9 .scene[data-fit] .hook-kicker-text small {
+  font-size: 66px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin-top: 7px;
+}
+
+body.ar-16x9 .scene[data-fit] .hook-bigstat { font-size: 224px; }
+body.ar-16x9 .scene[data-fit] .hook-bigstat[data-len="4"],
+body.ar-16x9 .scene[data-fit] .hook-bigstat[data-len="5"]  { font-size: 192px; }
+body.ar-16x9 .scene[data-fit] .hook-bigstat[data-len="6"],
+body.ar-16x9 .scene[data-fit] .hook-bigstat[data-len="7"],
+body.ar-16x9 .scene[data-fit] .hook-bigstat[data-len="8"]  { font-size: 146px; }
+body.ar-16x9 .scene[data-fit] .hook-bigstat[data-len="9"],
+body.ar-16x9 .scene[data-fit] .hook-bigstat[data-len="10"],
+body.ar-16x9 .scene[data-fit] .hook-bigstat[data-len="11"],
+body.ar-16x9 .scene[data-fit] .hook-bigstat[data-len="12"] { font-size: 112px; }
+body.ar-16x9 .scene[data-fit] .hook-bigstat[data-len="13"],
+body.ar-16x9 .scene[data-fit] .hook-bigstat[data-len="14"],
+body.ar-16x9 .scene[data-fit] .hook-bigstat[data-len="15"],
+body.ar-16x9 .scene[data-fit] .hook-bigstat[data-len="16"],
+body.ar-16x9 .scene[data-fit] .hook-bigstat[data-len="17"],
+body.ar-16x9 .scene[data-fit] .hook-bigstat[data-len="18"],
+body.ar-16x9 .scene[data-fit] .hook-bigstat[data-len="19"],
+body.ar-16x9 .scene[data-fit] .hook-bigstat[data-len="20"] { font-size: 86px; }
+
+body.ar-16x9 .scene[data-fit] .hook-statbar { width: 174px; height: 11px; margin: 24px 0 24px; }
+body.ar-16x9 .scene[data-fit] .hook-headline { font-size: 84px; }
+body.ar-16x9 .scene[data-fit] .hook-bigstat ~ .hook-headline { font-size: 68px; }
+body.ar-16x9 .scene[data-fit] .hook-subhead { font-size: 38px; margin-top: 20px; }
+
+/* Name first — Playfair, ink, the thing the eye should land on. */
+body.ar-16x9 .scene[data-fit] .layout-stat-hero.stat-hero-v2 .stat-label {
+  font-size: 70px;
+  line-height: 1.05;
+  margin: 0 0 14px;
+}
+/* Then the number, still the loudest object on the frame but now attached to
+   something. Tabular figures so a count-up tween doesn't jitter the width. */
+body.ar-16x9 .scene[data-fit] .layout-stat-hero.stat-hero-v2 .stat-value {
+  font-size: 176px;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  margin: 0;
+}
+/* The context was a pill — a UI chip floating in an editorial column. As a
+   letter-spaced caption directly under the number it reads as the number's
+   unit line, which is what it always was. */
+body.ar-16x9 .scene[data-fit] .layout-stat-hero.stat-hero-v2 .stat-context {
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.35;
+  margin: 12px 0 0;
+  padding: 0;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+/* The list becomes a spec table: one hairline per row, no dots. At landscape
+   scale dotted bullets read as decoration; rules read as data. */
+body.ar-16x9 .scene[data-fit] .layout-stat-hero.stat-hero-v2 .stat-highlights {
+  display: block;
+  width: 100%;
+  margin: 30px 0 0;
+  gap: 0;
+}
+body.ar-16x9 .scene[data-fit] .layout-stat-hero.stat-hero-v2 .stat-highlight {
+  gap: 0;
+  padding: 21px 0;
+  border-top: 2px solid rgba(255,255,255,0.16);
+}
+body.ar-16x9 .scene[data-fit] .layout-stat-hero.stat-hero-v2 .stat-highlight-dot { display: none; }
+body.ar-16x9 .scene[data-fit] .layout-stat-hero.stat-hero-v2 .stat-highlight-text {
+  font-size: 38px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+/* The divider's surviving rule becomes the short brand bar that opens the
+   block — the same idiom `.feat-eyebrow` already uses above a feature-list
+   title, so the two templates start the same way. */
+body.ar-16x9 .scene[data-fit] .sh2-divider { margin: 0 0 22px; }
+body.ar-16x9 .scene[data-fit] .sh2-div-line {
+  width: 96px;
+  height: 9px;
+  border-radius: 4px;
+  background: var(--accent-solid);
+  box-shadow: none;
+}
+
+/* Callout: the tag stops being a gold pill and becomes the same kind of
+   opening label, so a callout and a stat-hero begin identically. */
+body.ar-16x9 .scene[data-fit] .callout-tag {
+  font-size: 27px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  padding: 0;
+  margin: 0 0 22px;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+body.ar-16x9 .scene[data-fit] .callout-statement {
+  /* Bigger than a stat-hero's supporting text on purpose: a callout scene has
+     ONE sentence in the column and nothing else, so at stat-hero size it left
+     the bottom half of the column empty. The statement IS the scene. */
+  font-size: 80px;
+  line-height: 1.14;
+  text-align: left;
+  padding-left: 0;
+  padding-right: 0;
+}
+/* Both quote glyphs go. With the tag reading as an eyebrow above the line, a
+   pair of 72px curly quotes in a left-aligned column is one ornament too many
+   — and the closing one lands in open space with nothing to close against. */
+body.ar-16x9 .scene[data-fit] .callout-statement::before,
+body.ar-16x9 .scene[data-fit] .callout-statement::after { content: none; }
+
+/* ── Left-alignment repairs ──
+   The stat-hero stack is built for a centred column: its divider, bullet list
+   and context chip centre themselves with `margin: … auto`, which beats
+   `align-self`. Both have to go, or the number and label hug the left edge
+   while everything under them floats in the middle. */
+body.ar-16x9 .scene[data-fit] .sh2-divider,
+body.ar-16x9 .scene[data-fit] .stat-highlights,
+body.ar-16x9 .scene[data-fit] .stat-context,
+body.ar-16x9 .scene[data-fit] .callout-tag {
+  align-self: flex-start;
+  margin-left: 0;
+  margin-right: 0;
+}
+body.ar-16x9 .scene[data-fit] .sh2-divider { justify-content: flex-start; }
+body.ar-16x9 .scene[data-fit] .stat-context { text-align: left; }
+
+/* ── Text colour: ink on the shell, always ──
+   styles.css paints hook and cover-mode stat-hero/callout white with a heavy
+   black text-shadow, because in the portrait build that text sits ON the
+   photo. Here it never does, so every one of those choices inverts: ink
+   instead of white, amber-11 for the big number, and no shadow at all — a glow
+   around dark text on a light ground is what makes a graphic look homemade.
+   (styles.css already does exactly this for `data-fit="card"`; these rules
+   extend it to the hook and to image-less scenes.) */
+body.ar-16x9 .scene[data-fit] .hook-headline,
+body.ar-16x9 .scene[data-fit] .hook-kicker-text,
+body.ar-16x9 .scene[data-fit] .hook-kicker-text small,
+body.ar-16x9 .scene[data-fit] .layout-stat-hero.stat-hero-v2 .stat-label,
+body.ar-16x9 .scene[data-fit] .layout-stat-hero.stat-hero-v2 .stat-highlight-text,
+body.ar-16x9 .scene[data-fit] .callout-statement {
+  color: var(--ink);
+  text-shadow: none;
+}
+body.ar-16x9 .scene[data-fit] .hook-subhead,
+body.ar-16x9 .scene[data-fit] .layout-stat-hero.stat-hero-v2 .stat-context {
+  color: var(--ink-muted);
+  text-shadow: none;
+}
+body.ar-16x9 .scene[data-fit] .hook-bigstat,
+body.ar-16x9 .scene[data-fit] .layout-stat-hero.stat-hero-v2 .stat-value {
+  color: var(--gold);
+  text-shadow: none;
+  filter: none;
+}
+/* The gradient text-fill forces `-webkit-text-fill-color: transparent`; on a
+   light ground it thins the glyphs and fights the amber. Flat colour. */
+body.ar-16x9 .scene[data-fit] .layout-stat-hero.stat-hero-v2 .stat-value-text {
+  background: none;
+  -webkit-text-fill-color: currentColor;
+  color: var(--gold);
+  animation: none;
+}
+body.ar-16x9 .scene[data-fit] .layout-stat-hero.stat-hero-v2 .stat-context {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+body.ar-16x9 .scene[data-fit] .callout-tag { color: var(--gold); }
+/* The divider ships as a gold diamond flanked by two glowing rules. Only the
+   first rule survives, restyled above into the block's opening brand bar; the
+   diamond and the trailing rule would read as a broken hairline next to it. */
+body.ar-16x9 .scene[data-fit] .sh2-div-diamond,
+body.ar-16x9 .scene[data-fit] .sh2-div-line + .sh2-div-diamond + .sh2-div-line {
+  display: none;
+}
+
+/* ══ FEATURE LIST ════════════════════════════════════════════════════════ */
+
+/* With an image: header + cards left, hero right.
+   The hero is taken OUT of the flow and pinned to the shared slot, exactly like
+   `.bg-card`. A first attempt used a two-row grid with the hero spanning both
+   rows — but a spanning item feeds auto row sizing, so an 834px-tall portrait
+   photo stretched the two left rows to match and left a 240px hole between the
+   title and the cards. Out of flow, the left column packs normally and the
+   photo lands on the same slot every other template uses. */
+body.ar-16x9 .scene[data-fit] .layout-feature-list.feat-withcard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  gap: 30px;
+  padding: var(--ls-band-top)
+           calc(var(--ls-pad-x) + var(--ls-col-gap) + var(--ls-slot-w))
+           var(--ls-band-bottom)
+           var(--ls-pad-x);
+}
+/* Slot sizes must carry the same selector depth as the rule above them, or the
+   shape variants lose to it and every hero renders 3:2 — a portrait photo then
+   crops 43% of its height away. */
+body.ar-16x9 .scene[data-fit] .layout-feature-list.feat-withcard .feat-hero {
+  --feat-hero-w: var(--ls-slot-w);
+  --feat-hero-h: var(--ls-slot-h);
+  position: absolute;
+  left: calc(var(--ls-media-cx) - var(--feat-hero-w) / 2);
+  top: calc(var(--ls-band-mid) - var(--feat-hero-h) / 2);
+  width: var(--feat-hero-w);
+  height: var(--feat-hero-h);
+  align-self: auto;
+}
+body.ar-16x9 .scene[data-fit] .layout-feature-list.feat-withcard .feat-hero[data-shape="square"] {
+  --feat-hero-w: 730px; --feat-hero-h: 730px;
+}
+body.ar-16x9 .scene[data-fit] .layout-feature-list.feat-withcard .feat-hero[data-shape="portrait"] {
+  --feat-hero-w: 580px; --feat-hero-h: 756px;
+}
+body.ar-16x9 .scene[data-fit] .feat-withcard .feat-title { font-size: 44px; }
+body.ar-16x9 .scene[data-fit] .feat-withcard .feat-text  { font-size: 29px; }
+body.ar-16x9 .scene[data-fit] .feat-withcard .feat-card  { padding: 20px 26px 20px 32px; gap: 18px; }
+body.ar-16x9 .scene[data-fit] .feat-withcard .feat-node  { width: 44px; height: 44px; }
+body.ar-16x9 .scene[data-fit] .feat-withcard .feat-node svg { width: 22px; height: 22px; }
+
+/* Without an image: the cards would each be a 1700px-wide strip holding one
+   short line. Two columns instead; an odd last card spans both so the grid
+   never ends on a hole. */
+body.ar-16x9 .scene[data-fit] .layout-feature-list:not(.feat-withcard) {
+  padding: var(--ls-band-top) var(--ls-pad-x) var(--ls-band-bottom);
+  gap: 40px;
+}
+body.ar-16x9 .scene[data-fit] .layout-feature-list:not(.feat-withcard) .feat-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 26px 36px;
+}
+body.ar-16x9 .scene[data-fit] .layout-feature-list:not(.feat-withcard) .feat-card:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+body.ar-16x9 .scene[data-fit] .layout-feature-list:not(.feat-withcard) .feat-title { font-size: 74px; }
+body.ar-16x9 .scene[data-fit] .layout-feature-list:not(.feat-withcard) .feat-text  { font-size: 40px; }
+
+/* ══ DATA TEMPLATES ══════════════════════════════════════════════════════ */
+
+/* Comparison — bars and the scoreboard are both horizontal already, so they
+   only need the frame margins reset from the 9:16 keep-outs. */
+body.ar-16x9 .scene[data-fit] .layout-comparison {
+  padding: var(--ls-band-top) 300px var(--ls-band-bottom);
+}
+body.ar-16x9 .scene[data-fit] .layout-comparison-chart { gap: 64px; }
+body.ar-16x9 .scene[data-fit] .layout-comparison-cards { padding-left: 240px; padding-right: 240px; }
+body.ar-16x9 .scene[data-fit] .layout-comparison-score {
+  padding-left: 200px; padding-right: 200px;
+  gap: 46px;
+}
+body.ar-16x9 .scene[data-fit] .cs-flag { width: 200px; height: 134px; }
+body.ar-16x9 .scene[data-fit] .cs-team { font-size: 42px; }
+body.ar-16x9 .scene[data-fit] .cs-sc   { font-size: 150px; }
+body.ar-16x9 .scene[data-fit] .cs-dash { font-size: 92px; }
+body.ar-16x9 .scene[data-fit] .cs-side { gap: 22px; }
+
+/* Engagement question — one centred card, held to a readable measure. */
+body.ar-16x9 .scene[data-fit] .layout-engagement-question {
+  padding: var(--ls-band-top) 380px var(--ls-band-bottom);
+}
+body.ar-16x9 .scene[data-fit] .eq-card { padding: 56px 64px 50px; }
+body.ar-16x9 .scene[data-fit] .eq-question { font-size: 48px; margin-bottom: 36px; }
+
+/* Outro — text cluster above centre, TikTok card below it. */
+body.ar-16x9 .scene[data-fit] .layout-outro { padding: 120px 80px 300px; }
+body.ar-16x9 .scene[data-fit] .out-cta-top { font-size: 34px; padding: 16px 46px; margin-bottom: 46px; }
+body.ar-16x9 .scene[data-fit] .out-channel { font-size: 72px; }
+body.ar-16x9 .scene[data-fit] .out-underline { margin: 30px auto; }
+body.ar-16x9 .tt-card { bottom: 170px; padding: 20px 34px 20px 20px; gap: 24px; }
+body.ar-16x9 .tt-avatar { width: 100px; height: 100px; }
+body.ar-16x9 .tt-display-name { font-size: 36px; }
+
+/* ── UNTUNED TEMPLATES ──────────────────────────────────────────────────
+   big-quote / bracket / tactics-board / form-compare / group-intro /
+   match-results / formation-pitch / timeline are laid out in fixed pixels
+   against a 1080-wide, 1920-tall frame — and big-quote additionally puts its
+   portrait photo full-bleed behind the text, which is exactly the treatment
+   this canvas doesn't use. Re-designing them is a separate job. This rule only
+   stops them running off the frame — it does NOT make them presentable. Keep
+   them out of 16:9 scripts until each one has been laid out here properly. */
+body.ar-16x9 .layout-big-quote,
+body.ar-16x9 .layout-bracket,
+body.ar-16x9 .layout-tactics,
+body.ar-16x9 .layout-form-compare,
+body.ar-16x9 .layout-group-intro,
+body.ar-16x9 .layout-match-results,
+body.ar-16x9 .layout-formation-pitch,
+body.ar-16x9 .layout-timeline {
+  padding-top: var(--ls-band-top);
+  padding-bottom: var(--ls-band-bottom);
+  overflow: hidden;
+}
+
+/* ══ DARK BULLETIN SURFACE ═══════════════════════════════════════════════
+   2026-08-10, user: "đừng dùng lưới mà dùng màu xanh dương làm chủ đạo,
+   xanh đen thì tốt".
+
+   The light rule-grid shell is dropped for the NAVY BOARD TONE the scale
+   already carries (`--board-1` / `--board-2`) — the same family the dark-by-
+   design templates use, so this reads as sky's deep end rather than a fourth
+   colour. Only the landscape canvas changes: the 9:16 build never loads this
+   file, so the portrait shell stays exactly as it was.
+
+   Everything below inverts the "ink on a light surface" block further up.
+   These rules come LAST in the file at equal specificity, so they win. */
+
+body.ar-16x9 .shell-bg {
+  background:
+    radial-gradient(ellipse 86% 72% at 20% 38%, rgba(14,134,201,0.26) 0%, transparent 62%),
+    linear-gradient(152deg, #0B1F33 0%, #143755 52%, #0A1B2C 100%);
+}
+/* The 46/230px rules are the thing the user named. Off on this canvas. */
+body.ar-16x9 .shell-bg::before,
+body.ar-16x9 .shell-bg::after { display: none; }
+/* The vignette lifted the CENTRE with white — on navy that fogs the frame.
+   Inverted: the centre stays open, the corners sink. */
+body.ar-16x9 .shell-vignette {
+  background: radial-gradient(ellipse 94% 80% at 46% 44%, transparent 42%, rgba(3,10,20,0.70) 100%);
+}
+
+/* ── Type: white on navy ── */
+body.ar-16x9 .scene[data-fit] .hook-headline,
+body.ar-16x9 .scene[data-fit] .hook-kicker-text,
+body.ar-16x9 .scene[data-fit] .hook-kicker-text small,
+body.ar-16x9 .scene[data-fit] .layout-stat-hero.stat-hero-v2 .stat-label,
+body.ar-16x9 .scene[data-fit] .layout-stat-hero.stat-hero-v2 .stat-highlight-text,
+body.ar-16x9 .scene[data-fit] .callout-statement,
+body.ar-16x9 .scene[data-fit] .feat-title {
+  color: #FFFFFF;
+  text-shadow: none;
+}
+body.ar-16x9 .scene[data-fit] .hook-subhead,
+body.ar-16x9 .scene[data-fit] .layout-stat-hero.stat-hero-v2 .stat-context {
+  color: rgba(255,255,255,0.74);
+  text-shadow: none;
+}
+/* `--gold` is amber-11 (#A05A00) — a dark brown picked to sit on WHITE. On
+   navy it reads as mud, so every big number moves to amber-9, the scale's
+   block tone, which is what navy was contrast-tested against. */
+body.ar-16x9 .scene[data-fit] .hook-bigstat,
+body.ar-16x9 .scene[data-fit] .layout-stat-hero.stat-hero-v2 .stat-value,
+body.ar-16x9 .scene[data-fit] .layout-stat-hero.stat-hero-v2 .stat-value-text,
+body.ar-16x9 .scene[data-fit] .callout-tag {
+  color: var(--amber-9);
+}
+/* The opening brand bar was sky-9, tuned to carry weight on white. One step
+   brighter so it still reads as a mark on the dark ground. */
+body.ar-16x9 .scene[data-fit] .sh2-div-line { background: var(--sky-8); }
+
+/* ── Cards on a dark ground ──
+   `.feat-card` is itself a board-1→board-2 navy gradient: on the old white
+   shell it was the dark object in the frame, here it would sink into the
+   background. Lifted to a translucent white plate so the list still reads as
+   cards, with the sky edge kept as the marker. */
+body.ar-16x9 .scene[data-fit] .feat-card {
+  background: rgba(255,255,255,0.075);
+  border: 1px solid rgba(255,255,255,0.16);
+  box-shadow: none;
+}
+body.ar-16x9 .scene[data-fit] .feat-card::before { background: var(--sky-8); }

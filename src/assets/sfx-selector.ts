@@ -187,20 +187,27 @@ export function pickSfxForScene(args: {
   return null;
 }
 
-/** Recommended volume + offset per source/category */
+/**
+ * Recommended volume + offset per source/category.
+ *
+ * Volumes capped low (≤0.22) on purpose: SFX is mixed UNDER voice at full
+ * 1.0; even 0.30+ creates audible masking of Vietnamese tail consonants
+ * (-ng, -nh, -n, -m) when the SFX onset overlaps with words. Pair with the
+ * 1.0s duration cap in `mixSfxOntoVoice` — punchy onset, no drone.
+ */
 export function defaultPlayback(picked: PickedSfx): { volume: number; offsetSec: number } {
   const cat = picked.relPath.split("/")[0];
   switch (cat) {
-    case "transition": return { volume: 0.40, offsetSec: 0.0 };
-    case "emphasis":   return { volume: 0.35, offsetSec: 0.2 };
-    case "alert":      return { volume: 0.40, offsetSec: 0.1 };
-    case "success":    return { volume: 0.35, offsetSec: 0.3 };
-    case "fail":       return { volume: 0.35, offsetSec: 0.1 };
-    case "reveal":     return { volume: 0.30, offsetSec: 0.2 };
-    case "countdown":  return { volume: 0.30, offsetSec: 0.0 };
-    case "cinematic":  return { volume: 0.35, offsetSec: 0.0 };
-    case "drumroll":   return { volume: 0.40, offsetSec: 0.0 };
-    case "outro":      return { volume: 0.35, offsetSec: 0.5 };
-    default:           return { volume: 0.35, offsetSec: 0.1 };
+    case "transition": return { volume: 0.22, offsetSec: 0.0 };
+    case "emphasis":   return { volume: 0.18, offsetSec: 0.2 };
+    case "alert":      return { volume: 0.22, offsetSec: 0.1 };
+    case "success":    return { volume: 0.20, offsetSec: 0.3 };
+    case "fail":       return { volume: 0.20, offsetSec: 0.1 };
+    case "reveal":     return { volume: 0.18, offsetSec: 0.2 };
+    case "countdown":  return { volume: 0.18, offsetSec: 0.0 };
+    case "cinematic":  return { volume: 0.20, offsetSec: 0.0 };
+    case "drumroll":   return { volume: 0.22, offsetSec: 0.0 };
+    case "outro":      return { volume: 0.20, offsetSec: 0.5 };
+    default:           return { volume: 0.20, offsetSec: 0.1 };
   }
 }

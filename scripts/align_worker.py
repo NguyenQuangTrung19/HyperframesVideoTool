@@ -34,10 +34,17 @@ stderr: model load + transcribe progress (ignored by parent)
 First run downloads the chosen model (~150 MB for small). Cached under
 ~/.cache/huggingface so subsequent runs are fast.
 
-Install dependency (one-time, inside VieNeu uv project):
-  cd $VIENEU_PROJECT_DIR
-  uv add faster-whisper
+Dependencies are declared inline (PEP 723) so the Node side can run this with
+`uv run --script align_worker.py …` — uv auto-provisions an ephemeral, cached
+env with faster-whisper. No external project (e.g. VieNeu-TTS) is required.
 """
+
+# /// script
+# requires-python = ">=3.9"
+# dependencies = [
+#     "faster-whisper>=1.0",
+# ]
+# ///
 
 import sys
 import json

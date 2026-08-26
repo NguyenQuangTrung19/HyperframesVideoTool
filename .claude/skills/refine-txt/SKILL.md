@@ -166,9 +166,21 @@ Output template (literal markdown, UTF-8, no BOM):
 - "<quote 2>" — <speaker, role>
 
 ---
+## Giới hạn thời lượng (cho /create-video — KHÔNG đọc lên, KHÔNG lên hình)
+- Mục tiêu: 55-65 giây. Trần cứng: 65 giây.
+- Tổng voiceText MỌI scene cộng lại: **≤ 240 từ** (đo thật 0,256 giây/từ trên 27 video đã render).
+- **Mỗi body scene tối đa 2 câu, ≤ 26 từ** — 1 cảnh = 1 hình đứng yên ~6,5 giây. Hook ≤ 18 từ.
+- Số scene GIỮ NGUYÊN — video dài hơn bằng cách nói đầy hơn mỗi cảnh, không phải bằng cách thêm cảnh.
+- Tổng scene: **≤ 11**.
+- Fact nào không kịp nói thì cho lên `highlights`/`context` để người xem tắt tiếng vẫn đọc được.
+- Check trước khi render: `npx tsx _validate-script.ts <script.json>` (chặn cứng, exit 1 = không render).
+
+---
 Nguồn: ghi chú cá nhân
 Ngày: <ISO date if source has one, else "n/a">
 ```
+
+⚠️ **Block `## Giới hạn thời lượng` là BẮT BUỘC** (2026-08-03) — copy nguyên văn vào khu metadata sau `---`. Khác với `/read-rewrite`, ở đây ghi chú gốc là của user nên **đừng tự ý cắt ý** — cứ giữ mọi fact họ đã ghi (họ chép vào là có chủ đích), budget siết ở bước viết `voiceText` chứ không ở bước refine.
 
 Rules for the body:
 - **Title:** 5-12 words, Vietnamese sentence case. Lead with the strongest signal — number, surprise, verdict. NOT generic ("Phân tích về X").
@@ -197,9 +209,11 @@ Tiếp theo:
 Where the band comes from:
 | Points | Band shown |
 |---|---|
-| 3-4 | "6-8 scenes / 45-75s" |
-| 5-7 | "8-11 scenes / 75-120s" |
-| 8+ | "11-15 scenes / 120-180s" |
+| 3-4 | "6-8 scenes / 25-33s" |
+| 5-7 | "8-10 scenes / 33-41s" |
+| 8+ | "9-11 scenes / 41-45s" |
+
+⚠️ Trần cứng **11 scene / 65 giây** (siết 2026-08-19 từ 120s xuống 45s, nới lại lên 65s tối cùng ngày) — nguồn 20 điểm vẫn chỉ ra 11 scene, chọn 8 điểm mạnh nhất. Xem `classify-football-content/SKILL.md`.
 
 If `<3` points, REPLACE the band line with the warning:
 ```
@@ -244,7 +258,7 @@ local notes ──/refine-txt──► clean .txt (in place, .raw.txt backup)
                        /images-for-videos
                               │
                               ▼
-                       images-plan.json + grok-prompts.md
+                       images-plan.json + anh-can-tao.md
                               │
                               │ user gens images on grok.com
                               │
@@ -252,7 +266,7 @@ local notes ──/refine-txt──► clean .txt (in place, .raw.txt backup)
                          /create-video
                               │
                               ▼
-                    output/<slug>/video.mp4
+                    video/output/<slug>/video.mp4
 ```
 
 `/refine-txt` lives in slot 1 of this chain — strictly between "user notes" and `/images-for-videos`. It does not auto-chain because the user wants editorial control over the refined version before image planning commits to a structure.

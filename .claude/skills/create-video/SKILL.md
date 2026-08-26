@@ -1,6 +1,6 @@
 ---
 name: create-video
-description: Build a Vietnamese 9:16 motion-graphic football video from a `.txt` source file (and an optional images-plan.json next to it). Length and scene count scale automatically to the source's content density — short sources produce short videos, rich sources produce long videos. Supports match analysis, list/ranking, VS comparisons, history/career, transfer news, pre-match preview, player profile, and trivia content. The user-facing slash command is `/create-video <path-to-source.txt>`.
+description: Build a Vietnamese 9:16 motion-graphic football video from a `.txt` source file (and an optional images-plan.json next to it). Length is capped hard at 45 seconds and every scene holds at most ~4 seconds — thin sources produce 25-33s videos, rich sources produce 41-45s videos at the same fast cut rate (rich sources mean tighter wording, never more runtime). Supports match analysis, list/ranking, VS comparisons, history/career, transfer news, pre-match preview, player profile, and trivia content. The user-facing slash command is `/create-video <path-to-source.txt>`.
 ---
 
 # Create Video Skill
@@ -14,17 +14,25 @@ This is the unified video-builder for the SportsForAllTV channel — replacing t
 
 Length scales to the source's actual content density — **don't pad a thin source to hit a quota**:
 
-- **6–15 scenes, 45–180s, scaled by distinct substantive points in the source:**
-  - 3–4 distinct points → 6–8 scenes / 45–75s
-  - 5–7 distinct points → 8–11 scenes / 75–120s
-  - 8+ distinct points → 11–15 scenes / 120–180s
+- **6–11 scenes, 38–65s, scaled by distinct substantive points in the source:**
+  - 3–4 distinct points → 6–8 scenes / 38–48s
+  - 5–7 distinct points → 8–10 scenes / 48–58s
+  - 8+ distinct points → 9–11 scenes / 58–65s
   - **< 3 distinct points → bail. Tell the user the source is too thin for a useful video and ask for more material; do NOT generate a script.**
+
+> ⚠️ **HAI TRẦN CỨNG: 65 GIÂY / VIDEO và 26 TỪ / CẢNH.** Số cảnh GIỮ NGUYÊN — chỉ có lời thoại mỗi cảnh đầy hơn. 10 cảnh trong 60 giây = **đổi hình mỗi ~6,5 giây**.
+>
+> 🔄 **NỚI LẠI tối 2026-08-19 — user bác bản siết.** Xem 3 video đầu tiên chạy trần 16 từ, user nói *"cảm giác nội dung nó cụt ngủn, chả hay lắm, dài hơn tí đi"* và chọn phương án **nói dài hơn mỗi cảnh, giữ nguyên số cảnh** (biết rõ 6,5s/hình vượt mốc 4s đo được — đánh đổi có ý thức). Nếu retention rơi lại thì lối thoát đúng là **tăng SỐ CẢNH**, đừng cắt chữ về 16 lần nữa. Bối cảnh của lần siết buổi sáng, giữ lại để khỏi quên vì sao có trần: trung bình **8,5 giây một tấm thẻ tĩnh** (cá biệt 12,6s), video dài 75–116s, và **mọi video kẹt ở 200–300 view** — đúng kích thước rổ thử nghiệm đầu của TikTok, tức là trượt vòng test retention rồi không bao giờ được đẩy tiếp. Ken Burns pan chậm KHÔNG tính là chuyển động; mắt người xem coi đó là ảnh đứng yên. Chi tiết + số đo: `memory/feedback_scene_pacing_four_second_cap.md`.
+>
+> Ngoại lệ duy nhất: BIO-* / HISTORY-* nhiều phần được tới **80s mỗi phần** (vẫn giữ trần 26 từ/cảnh — dài hơn nghĩa là NHIỀU CẢNH hơn, không phải cảnh chậm hơn). Bản tin 16:9 (`aspect: "16:9"`) có bảng ngân sách riêng, luật nhịp này không áp.
 
 A "distinct substantive point" = an independent fact/claim worth its own scene. Restating something said earlier doesn't count. Padding to hit a longer duration than the source supports is a worse video than a tight short one — Vietnamese short-form viewers swipe away when later scenes don't add new information.
 
 ## Input
 
 Single argument: a path to a `.txt` source file. The directory containing the .txt is the input folder; an optional `images-plan.json` may sit next to the .txt (created earlier by `/images-for-videos`). For URL sources, route through `/read-rewrite <url>` first — this skill does not fetch URLs directly.
+
+**Default input folder (as of 2026-05-23):** new motion-graphic football content lives under `video/input/<slug>/`. Podcast inputs live under `podcast/input/<slug>/` (`/create-podcast`'s territory, not this skill). Legacy folders directly under `input/<slug>/` are still accepted — the skill resolves any path the user passes, and the slug-from-folder logic in Step 3 handles both layouts.
 
 ## Content types this skill handles
 
@@ -33,8 +41,14 @@ Single argument: a path to a `.txt` source file. The directory containing the .t
 | Match analysis | "Phân tích chiến thuật Arsenal vs Real Madrid CK C1" | callout, stat-hero, comparison |
 | List / Ranking | "Top 10 Vua phá lưới Châu Âu", "5 chuyển nhượng đắt nhất 2026" | stat-hero (per item), callout |
 | VS comparison | "Messi vs Ronaldo: Ai vĩ đại hơn?" | comparison (heavy), stat-hero |
-| History / Career | "Hành trình Modric: Từ chiến tranh đến QBV", "Cầu thủ còn thi đấu từ World Cup 2006" | callout, stat-hero, feature-list |
+| Player profile (stats deep-dive) | "Bruno Fernandes mùa giải 2025-26 — số liệu chi tiết" | stat-hero, comparison, feature-list |
+| Pre-match preview | "Đội hình dự kiến Real vs Bayern", "Squad reveal World Cup" | formation-pitch, callout, comparison |
+| Transfer news | "Bom tấn: Mbappe đến Real", "Tin chuyển nhượng tuần này" | stat-hero, callout, comparison |
 | Trivia / Did-you-know | "5 kỷ lục lạ lùng nhất Premier League" | callout, stat-hero |
+| Player biography | "Hành trình Modric: Từ chiến tranh đến QBV" | timeline, stat-hero, callout |
+| Club / national-team / tournament history | "100 năm Real Madrid", "Lịch sử tuyển Brazil qua các kỳ WC", "Champions League qua các thời kỳ" | timeline, stat-hero, callout |
+
+Bio + history content uses the same image-based motion-graphic pipeline as the rest of `/create-video` (AI poster images per scene, NOT real archival footage). Treat a BIO-PLAYER source as a long-form PLAYER PROFILE with career milestones as the dominant pattern; treat a HISTORY-* source as era / edition-based with timeline + stat-hero scenes (one scene per era / dynasty / edition rather than chapter-based prose). Density rules apply normally — mỗi phần tops out at **14 scenes / 80s** (ngoại lệ duy nhất của trần 65s, xem đầu file). Trần 26 từ/cảnh VẪN áp: một phần dài hơn nghĩa là nhiều cảnh hơn, không phải cảnh chậm hơn. Nguồn dày hơn thì TÁCH THÊM PHẦN, không kéo dài một phần: split the source into Phần 1 / Phần 2 `.txt` files manually and run `/create-video` on each part.
 
 ## Plan-mode vs free-form mode
 
@@ -43,15 +57,15 @@ Before doing anything else, check if the source .txt has a sibling `images-plan.
 | | Plan mode (preferred — visual-first workflow) | Free-form mode (fallback) |
 |---|---|---|
 | Trigger | `images-plan.json` exists next to source .txt | No plan file — user skipped `/images-for-videos` |
-| Output dir | `output/<slug>/` (no timestamp) | `output/<slug>-<timestamp>/` |
+| Output dir | `video/output/<slug>/` (no timestamp) | `video/output/<slug>-<timestamp>/` |
 | sceneIds | **MUST match** plan's `scenes[].id` exactly | Free-choice (`hook`, `rank-1`, …) |
-| imagePrompt | Copy plan's `prompt` verbatim into the matching scene | Generated by Claude |
-| Image source | Pre-staged from input folder via `npm run images:stage` | Generated at pipeline runtime by Gemini/OpenAI/xAI |
+| imagePrompt | **Omit** — not written anymore (no-prompt rule) | **Omit** — fallback scene renders gradient |
+| Image source | Pre-staged from input folder via `npm run images:stage` | Gradient fallback (AI image gen retired) |
 | If image missing | **Halt** — `npm run images:stage` exits non-zero, report missing files to user | Pipeline falls back to gradient |
 
 User is on the visual-first track when they ran `/images-for-videos` first. Respect their plan — do not reshuffle scenes, drop scenes the plan declared, or invent new image-eligible scenes the plan didn't anticipate. The plan is the contract.
 
-When in plan mode, you may STILL add non-image-eligible scenes that the plan didn't include (e.g., a `feature-list` summary, a `comparison` card) — those don't need plan entries. The plan only governs scenes whose template is `hook` / `stat-hero` / `callout`.
+When in plan mode, you may STILL add non-image-eligible scenes that the plan didn't include (e.g., an image-less `feature-list` summary, a `comparison` card) — those don't need plan entries. The plan governs scenes whose template is `hook` / `stat-hero` / `callout`, plus any `feature-list` the plan explicitly gave an image (feature-list images are optional; a feature-list with no plan entry just renders image-less).
 
 ## Workflow (MUST follow these steps in order)
 
@@ -60,7 +74,25 @@ When in plan mode, you may STILL add non-image-eligible scenes that the plan did
 - Single argument must be a path to an existing `.txt` file.
 - If user passed a URL → reject with: `"Skill này nhận file .txt. Với URL bài báo, dùng /read-rewrite <url> trước, rồi quay lại chạy /create-video trên file .txt nó tạo ra."`
 - If user passed a non-existent path or a non-.txt file → reject with a clear message.
-- If file exists, proceed to Step 2.
+- If file exists, proceed to Step 1.5.
+
+### Step 1.5: Detect multi-part context + long-source guardrail
+
+The `/images-for-videos` skill auto-splits long sources (≥ 4 000 chars) into N child folders `video/input/<base-slug>-p1/`, `<base-slug>-p2/`, …, each with its own `.txt` + `images-plan.json`. This step decides which mode `/create-video` is operating in.
+
+1. **Resolve the part marker.** Parse the parent-folder name of the source `.txt`:
+   - Pattern: `<base-slug>-p<N>` where N is a positive integer → this is a multi-part render. Set `partN = N`, `baseSlug = <base-slug>`.
+   - Otherwise → single-video render. Skip the rest of this step.
+2. **Detect non-final part.** Check whether sibling folder `video/input/<baseSlug>-p<N+1>/` exists. If it exists → this is a **non-final part**. Otherwise → **final part** (or the only part if N=1 and no -p2 sibling exists).
+3. **Long-source guardrail (single-video mode only — i.e. step 1 set no part marker).** Read the .txt char count:
+   - If chars < 4 000 → continue normally to Step 2.
+   - If chars ≥ 4 000 AND `images-plan.json` does NOT exist at the source folder → **halt** with this exact message: `"Source này dài <X> chars (≥4000) — nên split thành nhiều phần. Chạy /images-for-videos <txt-path> trước, skill sẽ tự split + tạo plan ảnh per part, sau đó chạy /create-video cho từng <slug>-pN.txt."`. Do NOT proceed to script generation. The split logic lives in one place (`/images-for-videos`); don't duplicate it here.
+   - If chars ≥ 4 000 AND `images-plan.json` DOES exist at the source folder → continue normally (user has explicitly built a single-video plan for the long source; trust them). Note: plan-mode floor still applies — every plan scene must be in the script.
+4. **For multi-part renders, the slug rule becomes:**
+   - outputDir = `video/output/<baseSlug>-p<partN>/` (still no timestamp, idempotent overwrite).
+   - The script's `title` field carries `— Phần <N>` suffix (mirroring what `/images-for-videos` wrote into the part .txt's title line).
+   - Density rules (Step 2.4) apply to THIS PART's prose only — each part is its own 6–11 scenes / 25–45s video (BIO-*/HISTORY-* được nới tới 60s/phần, xem trần cứng ở đầu file).
+5. **For non-final parts**, the closing 2 scenes change — see Step 4 "Multi-part outro override" below. Final parts (or single-video renders) use the standard engagement-question + outro pair.
 
 ### Step 2: Gather source material
 
@@ -91,14 +123,20 @@ After classification:
    | Distinct points | Scenes (incl. hook+outro) | Voice duration | Action |
    |---|---|---|---|
    | **< 3** | — | — | **Bail.** Tell user the source is too thin for a useful video and ask them to add more facts/context. Do NOT proceed to write a script. |
-   | 3–4 | 6–8 | 45–75s | Tight short-form, single-arc structure |
-   | 5–7 | 8–11 | 75–120s | Standard mid-form |
-   | 8+ | 11–15 | 120–180s | Full-depth long-form |
+   | 3–4 | 6–8 | 38–48s | Tight short-form, single-arc structure |
+   | 5–7 | 8–10 | 48–58s | Standard mid-form |
+   | 8+ | 9–11 | 58–65s | Full-depth — **still capped at 65s** |
+
+   A source with 20 distinct points does NOT get a 200s video. It gets 11 scenes covering the 11 strongest points; the rest live on screen in `highlights`/`context` or get dropped. **Nguồn dày = chọn kỹ hơn, KHÔNG phải video dài hơn.**
+
+   **⚠️ ĐỪNG ĐỔI ĐỘ DÀI THÀNH ĐỘ CHẬM.** Cắt từ 100s xuống 60s KHÔNG có nghĩa là bỏ scene. Giữ nguyên 9–11 cảnh, mỗi cảnh **1–2 câu ≤26 từ** thay vì 2–3 câu 45 từ. Chi tiết thứ 2, thứ 3 của mỗi ý không biến mất — chúng chuyển lên màn hình (`value` / `highlights` / `context` / `bullets`), nơi người xem đọc trong 4 giây mà không cần giọng đọc hết. Đây chính là điều kiện "sound-off test" của kênh, chỉ là siết chặt hơn.
+
+   **Luật chống lặp khuôn (mới 2026-08-19):** `stat-hero` + `callout` **không được quá 50% số cảnh**. Đo trên 35 video đã giao: 246/390 cảnh (63%) chỉ là hai template đó, và mọi video đều đúng một bộ xương `hook → stat-hero/callout ×8 → engagement-question → outro`. Người xem lần thứ hai nhận ra ngay đây là cùng cái khuôn. Rút phần còn lại từ nhóm đang bị bỏ quên: `feature-list`, `big-quote` (rất hợp tin chuyển nhượng — lời nhà báo/HLV), `comparison`, `timeline`, `match-results`. **Ngoại lệ: listicle "N mục" phải đủ mục** (xem luật ranking) — ở đó N cảnh `stat-hero` liên tiếp là đúng, validator chỉ cảnh báo chứ không chặn.
 
    When in plan mode (images-plan.json exists), the plan's image-eligible scene count is your floor — don't go below it. If the plan declared 6 image scenes but the source only supports 3 distinct points, surface the mismatch to the user before writing the script (they should re-run `/images-for-videos` first).
 
 5. **Restructure for spoken video:** the file content is written for reading, but the video is heard. Rewrite for spoken Vietnamese:
-   - Break long sentences into short ones (1–2 sentences per scene voiceText).
+   - Break long sentences into short ones (**1–2 câu / ≤26 từ mỗi scene voiceText** — trần cứng, xem bảng ngân sách ở Step 4). Câu thứ ba chỉ được phép khi cả ba cộng lại vẫn ≤26 từ.
    - Convert formal text to văn nói (spoken style).
    - Apply phonetic rules (numbers spelled out — see Step 4 "Vietnamese TTS Phonetic Rules" below).
    - Drop tangential paragraphs that don't fit the target duration from Step 2.4.
@@ -106,34 +144,101 @@ After classification:
 7. **Set metadata:**
    - `title` = best summary (max 80 chars). Derive from filename + content if no explicit title.
    - `source.url` = `"local"`, `source.domain` = `"local"`, `source.image` = `null`.
-   - Hook scene gets `imagePrompt` either copied from the plan (plan mode) or generated by you (free-form mode).
+   - Do NOT add an `imagePrompt` to any scene (no-prompt rule). The hook image binds from the staged file in plan mode; free-form has no image.
 
 ### Step 3: Create slug + output directory
 
 **Plan mode** (images-plan.json exists next to source .txt):
-- slug = parent folder name of the .txt (e.g. `input/topCBsITW/topCBsITW.txt` → slug = `topCBsITW`). Falls back to file stem when txt isn't in a subfolder.
-- outputDir = `output/<slug>/` — **no timestamp suffix**, reruns overwrite for idempotency.
+- slug = parent folder name of the .txt (e.g. `video/input/topCBsITW/topCBsITW.txt` → slug = `topCBsITW`; legacy `input/topCBsITW/topCBsITW.txt` → slug = `topCBsITW` also works). Falls back to file stem when txt isn't in a subfolder.
+- outputDir = `video/output/<slug>/` — **no timestamp suffix**, reruns overwrite for idempotency.
 - `mkdir -p <outputDir>`
 
 **Free-form mode** (no plan file):
 - slug = lowercase ASCII (strip Vietnamese diacritics, đ→d), replace non-alphanumeric with `-`, max 50 chars (analysis topics are longer than news)
 - timestamp = current local time as `YYYYMMDD-HHmm`
-- outputDir = `output/<slug>-<timestamp>/`
+- outputDir = `video/output/<slug>-<timestamp>/`
 - `mkdir -p <outputDir>`
 
 ### Step 4: Generate script.json
 
-**Schema:** see `src/render/script-schema.ts`. Density-scaled targets (see Step 2.4):
+#### ⚠️ FIRST — check the plan's `aspect`: 9:16 short, or 16:9 roundup?
+
+If `images-plan.json` next to the source carries `"aspect": "16:9"` (written by `/news-roundup`), this is a **landscape YouTube bulletin**, not a TikTok short, and the numbers below do not apply. Everything else in this skill — voice rules, typography, sound-off discipline, hook archetypes — applies unchanged.
+
+| | default (9:16) | `aspect: "16:9"` |
+|---|---|---|
+| `metadata.aspect` | omit (defaults `"9:16"`) | **`"16:9"` — must be written explicitly** |
+| Duration ceiling | **65 s** | **360 s (6 phút)** |
+| Scene ceiling | 11 (13 cho listicle "N mục") | **24** (schema hard cap 40) |
+| voiceText budget | **≤ 240 từ** | **≤ 1 250 từ** (0,26 s/từ) |
+| Words per body scene | **≤ 26 (1–2 câu)** | 45–70 (3 câu) |
+| Words in hook | **≤ 18** | ≤ 40 |
+| Giây/cảnh | **~6,5 s** | ~14 s |
+| Full-bleed scenes | hook only | **none** — every scene is two columns, text left / photo right, hook included |
+| Usable templates | all | hook · stat-hero · callout · feature-list · comparison · engagement-question · outro **only** |
+
+Two mechanical mappings, plan → script.json:
+
+1. `plan.aspect` → `metadata.aspect`.
+2. A plan scene's `marker` → that scene's `marker` (`"TIN 3/6"`). **Every scene of the same news item carries the same marker**, including image-less ones the plan doesn't list — set those by hand. A body scene with no marker falls back to the auto N/total chip, so a half-marked script shows two different counters.
+
+⚠️ **Never emit `big-quote` / `bracket` / `tactics-board` / `form-compare` / `group-intro` / `match-results` / `formation-pitch` / `timeline` in a 16:9 script.** Those are fixed-pixel layouts for a 1080-wide frame; the landscape stylesheet only contains them, it does not lay them out — and `big-quote` puts its portrait photo full-bleed behind the text, the one treatment this canvas doesn't use. A pull quote becomes a `callout`; fixture/result content becomes `comparison` (flags + scoreline).
+
+⚠️ **A `stat-hero` / `callout` body scene with no image is broken in 16:9** — the text takes the left column and the right half is empty. Give it an image or make it a `feature-list` (which is designed for the image-less case: bullets in a two-column card grid).
+
+⚠️ **A 16:9 render is not finished at the mp4.** A landscape bulletin ships as three things — video, cover, title. After the pipeline succeeds, run `/news-roundup` Step 10: pick 2–4 of the staged images, `npm run thumbnail:roundup -- <outputDir> --title … --date … --images …`, and hand the user the pasteable title. Don't use `npm run thumbnail` here — that grabs a frame of the hook, which is the right cover for a 9:16 short and the wrong one for a roundup.
+
+⚠️ **The hook must carry the edition date.** `eyebrow` = buổi phát (`"Bản tin sáng"`), `eyebrowSub` = `"dd/mm/yyyy"` — the landscape stylesheet renders that second line at 54px in ink, so it is the first thing read. Full field table in `/news-roundup` Step 4.
+
+Verify with the harness before rendering — it costs seconds and needs no TTS:
+
+```bash
+npx tsx scripts/_design-shots.ts <outputDir>/script.json <outDir>
+```
+
+Everything must sit inside 1920×1080; the photo slot and the text column should share the y=582 midline.
+
+**Schema:** see `src/render/script-schema.ts`. Density-scaled targets for the default 9:16 mode (see Step 2.4):
 
 | Distinct points | Scene count | Total words | Words/scene | Total duration |
 |---|---|---|---|---|
-| 3–4 | 6–8 | 150–250 | 30–45 | 45–75s |
-| 5–7 | 8–11 | 250–400 | 30–45 | 75–120s |
-| 8+ | 11–15 | 400–600 | 30–45 | 120–180s |
+| 3–4 | 6–8 | 145–185 | ≤26 | 38–48s |
+| 5–7 | 8–10 | 185–225 | ≤26 | 48–58s |
+| 8+ | 9–11 | 225–240 | ≤26 | 58–65s |
 
-`imagePrompt` is **strongly recommended on every `hook` / `callout` / `stat-hero` scene.**
+**⚠️ SỐ TỪ là đơn vị đo đáng tin nhất, không phải số scene.** Đo lại trên **27 video 9:16 đã render thật** (ausynclab myna-2 speed 0.90, đã gồm khoảng lặng giữa câu + `SCENE_GAP_SEC`): **0,256 giây/từ median, 0,277 worst case** — con số 0,24 cũ là mức tốt nhất, không phải mức điển hình. Nên **tổng voiceText ≤ 240 từ** là điều kiện đủ để ≤67s kể cả worst case.
+
+Hai trần độc lập, phải qua CẢ HAI:
+- **Tổng ≤ 240 từ** → khống chế thời lượng video.
+- **Mỗi cảnh ≤ 26 từ** (hook ≤ 18) → khống chế thời gian MỘT hình đứng yên. 26 × 0,26 ≈ 6,8s. Vẫn là trần quan trọng: một video 60s mà chia 5 cảnh là 12s/hình, chết retention.
+
+Đừng đếm tay, chạy validator (nó kiểm cả schema lẫn nhịp):
+```bash
+npx tsx _validate-script.ts <outputDir>/script.json
+```
+Nếu vượt: **cắt câu, KHÔNG bỏ scene** — bỏ scene là phí ảnh user đã gen tay, và làm hình đứng lâu hơn. Bỏ lớp chi tiết thứ 2–3 của mỗi voiceText; các số đó vẫn hiện trên `value`/`highlights`/`context` nên người xem tắt tiếng không mất gì.
+
+Nếu `.txt` có block `## Giới hạn thời lượng` ở cuối file (do `/read-rewrite` ghi), **budget trong đó thắng bảng này** — đó là user nói trực tiếp cho bài đó.
+
+⚠️ **Do NOT write `imagePrompt` on any scene** (no-prompt rule — `memory/feedback_dont_author_image_prompts.md`). Staged images bind purely by sceneId: `src/image/index.ts` PASS 1 applies the manual override at `<outputDir>/images/<sceneId>.<ext>` for every image-eligible scene **regardless of imagePrompt** (the old "filters by imagePrompt first" behavior is gone). So a hook/callout/stat-hero with a staged file renders correctly with no prompt. Scenes without a staged image just render a gradient background — that's acceptable, not a bug.
+
+ℹ️ **Image aspect is auto-handled — you don't declare it.** The pipeline measures each staged image (`src/render/image-dims.ts`) and picks the fit at compose time: **portrait / 9:16** images render **full-bleed cover** (hook stays this way — use portrait posters for it); **landscape 16:9** images on **`stat-hero` / `callout`** scenes render as a **framed hero card centered in-frame over a graphic deck** (`data-fit="card"`) so nothing is cropped or stretched. This means real photos (Getty etc.) of any orientation work — no need to force-crop to 9:16. Nothing in `script.json` changes for this.
 
 ⚠️ **Don't pad.** Hitting the lower bound for thin content is correct. Hitting the upper bound for rich content is correct. Hitting the upper bound for thin content (padding) is wrong — viewers swipe.
+
+⚠️ **Voice speed defaults by content type:**
+- **News, RANKING, MATCH ANALYSIS, TRANSFER, TRIVIA, PRE-MATCH PREVIEW, PLAYER PROFILE, VS** → `"voice": { "provider": "ausynclab", "voiceId": "1919208", "speed": 0.90 }`. ⚠️ `1919208` = **myna-2**, giọng của pipeline VIDEO. Đừng dùng `1914439` — đó là myna-1-turbo của pipeline PODCAST (skill này ghi nhầm số đó tới 2026-08-03; đối chiếu bằng `video/output/*/script.json` gần nhất nếu nghi ngờ). AusyncLab `speed` is a duration multiplier (verified `src/tts/ausynclab-client.ts` L58), so `0.90 = 10 % FASTER` playback — fits info-dense content. Floor `0.85`; below that rhythm breaks.
+- **BIO-PLAYER, HISTORY-*** → `"voice": { ..., "speed": 1.0 }`. Storytelling tone benefits from reference-rate delivery (year/age openers, reflective cadence).
+- If a user later complains the voice is now too fast → flip to `0.95` then `1.0`; never push above 1.05 for news.
+- Tail-eating watch: dynaudnorm per-scene is on by default. If a scene still eats tail consonants, rephrase the ending to avoid soft-consonant closes like `…ng.` / `…nh.` — use stronger closes (`…tốt.`, `…trên sân.`, `…ngày nay.`). See `memory/feedback_voice_speed_news_faster_bio_slower.md`.
+
+⚠️ **Write RICH, not summary — RICH = ĐẶC, KHÔNG PHẢI DÀI.** Đối lập của "rich" là **mơ hồ** ("anh chơi rất hay"), không phải "ngắn". Một câu 12 từ có số liệu thật thì rich hơn ba câu 45 từ nói vòng vo — và từ 2026-08-19, câu 12 từ đó là thứ DUY NHẤT còn chỗ: mỗi body scene `voiceText` gói trong **1–2 câu, ≤26 từ, ~6,5 giây**.
+
+Ngân sách siết không có nghĩa nội dung nghèo đi — nó ép chi tiết cụ thể (năm nào, đối thủ nào, bao nhiêu tiền) lên **màn hình** thay vì nằm trong giọng đọc. `value` / `label` / `context` / `highlights` / `bullets` chính là chỗ chứa lớp chi tiết thứ 2–3; người xem đọc chúng trong 4 giây, nhanh hơn nghe. Một cảnh rich dưới luật mới = 1 câu thoại đắt + 3 con số trên hình. Một cảnh nghèo = 1 câu thoại chung chung + màn hình trống. Xem `memory/feedback_script_rich_not_summary.md`.
+
+> 🔄 **Sửa 2026-08-03 — dòng này trước đây ghi "3–5 câu/scene" và đó CHÍNH LÀ nguyên nhân video dài.** Ba video giao ngày 2/8 đều ~900 từ → 205–220s, vượt trần. Fix đã verify cùng ngày: cắt còn ~670 từ, GIỮ NGUYÊN 15 scene và toàn bộ ảnh → 159–164s. Không cảnh nào mất, không ảnh nào phí. Nên: **giữ số scene, siết số từ.**
+
+Before writing each scene's voiceText, list out: (a) the load-bearing fact, (b) **1** supporting detail from the source, (c) 1 contextual layer (rival / era / stakes / quote) — **rồi chọn 2 trong 3 để nói, cái thứ 3 đẩy lên `highlights`/`context` cho người xem đọc.** Đó là cách giữ đủ 3 lớp thông tin mà chỉ tốn 2 câu: viewer tắt tiếng vẫn nhận đủ, viewer nghe không bị lê thê.
 
 **⚠️ CRITICAL: Journalistic voice — write like a VN football journalist, not an explainer**
 
@@ -194,38 +299,81 @@ Bộ swap mặc định khi viết voiceText / templateData. Đây là rút gọ
   - ✅ "Bruno chọc khe nhiều hơn #2 đến 50%." (chỉ một "nhiều")
 - ❌ **Doubling khác** — "rất ... rất", "đã ... đã", "không ... không" trong cùng câu. Đọc thử thành tiếng — nếu lặp âm "nhiều / rất / đã" 2 lần trong 10 từ → rephrase.
 
-#### E. Self-check trước khi finalize
+#### E. Vietnamese ambiguity & natural-phrasing filter — đọc lên thành tiếng trước khi save
+
+Mỗi `voiceText` PHẢI đi qua một pass đọc-lên-thành-tiếng (mental TTS) để check xem câu có parse 2 nghĩa không, có hợp lý không, người nghe có theo được không. Đây không phải bước tuỳ chọn — script này dùng TTS đọc cho người nghe, nên parse-ambiguity = video fail. Rule cụ thể:
+
+1. **Tránh `phải` làm body-side qualifier** (đầu gối phải, chân phải, vai phải) — modal `phải` (must/have to) collide với qualifier `phải` (right side). Người đọc/TTS sẽ parse câu theo modal trước.
+   - ❌ `"dây chằng đầu gối phải đứt"` ← parse mặc định: "knee MUST tear" thay vì "right-knee tore"
+   - ✅ `"dây chằng đầu gối bên phải bị đứt"` (rõ qualifier + bị)
+   - ✅ `"anh bị đứt dây chằng đầu gối"` (drop side info, dùng `bị`)
+   - ✅ `"chân thuận / chân không thuận"` (idiomatic VN football, không cần "phải/trái")
+2. **Dùng `bị` cho unfortunate passive events** (chấn thương, đứt, gãy, treo giò, dính thẻ đỏ, mất điểm):
+   - ✅ `anh bị đứt dây chằng` / `anh dính chấn thương dây chằng`
+   - ❌ `dây chằng đứt` (subject-less, nghe như báo cáo lạnh lùng, không có người chịu)
+3. **Sentence fragments cần explicit subject** khi nối tiếp từ câu trước:
+   - ❌ `"Đứt dây chằng cuối 2023. Mổ sụn chêm tháng 12."` ← chủ ngữ mờ
+   - ✅ `"Anh đứt dây chằng cuối 2023. Mổ sụn chêm tháng 12."` (subject set, carry over)
+4. **Quote 1st person ("tôi/mình") phải có signal verb** — không để pronouns nhảy đột ngột:
+   - ❌ `"Ancelotti dứt khoát. Tôi không phải nhà ảo thuật."` ← "tôi" là ai?
+   - ✅ `"Ancelotti nói thẳng: ông không phải nhà ảo thuật."` (giữ 3rd person — preferred trong news voice)
+   - ✅ `"HLV người Ý nói: 'Tôi không phải nhà ảo thuật.'"` (rõ ràng là quote)
+5. **Possessive `của` xa subject — dễ ambiguous** (sở hữu vs đại diện):
+   - ❌ `"Brazil của Neymar đã vào bán kết"` ← Brazil thuộc Neymar?
+   - ✅ `"Brazil cùng Neymar vào bán kết"` / `"Selecao có Neymar trong đội hình"`
+6. **`hơn cả X` vs `hơn X`** — `cả` thừa khi không nhấn:
+   - ❌ `"hơn cả Pele 2 bàn"` ← `cả` không đem nghĩa gì
+   - ✅ `"hơn Pele 2 bàn"` / `"vượt Pele đúng 2 bàn"`
+7. **Tránh "Tôi không phải X" + "Tôi đã Y" kề nhau** — 2 lần "tôi" gần nhau gây trùng âm:
+   - ❌ `"Tôi không phải nhà ảo thuật. Tôi đã làm bóng đá 40 năm."`
+   - ✅ `"Ông không phải nhà ảo thuật. 40 năm trong nghề đã chứng minh điều đó."`
+
+#### F. Self-check trước khi finalize
 
 Trước khi `Write` script.json, đọc lại từng `voiceText` và hỏi:
 1. **Có cụm phổ thông nào trong bảng A không?** Swap.
-2. **Có câu nào passive không?** Active hoá.
+2. **Có câu nào passive không?** Active hoá (trừ khi diễn tả chấn thương / sự cố — dùng `bị` per rule E.2).
 3. **Có "đặc biệt / tuyệt vời" treo lửng không specific theo sau?** Cụ thể hoá hoặc cắt.
 4. **Có lặp tên CLB / cầu thủ ≥3 lần?** Thay 1 lần bằng nickname.
 5. **Câu dài >25 từ một mệnh đề?** Tách 2 câu.
+6. **(NEW) Đọc lên thành tiếng — câu nào parse 2 nghĩa khi nghe?** Rephrase per E.1-E.7.
+7. **(NEW) Mỗi `phải` trong voiceText: là modal (must), body-side, hay copula negation (`không phải`)?** Nếu body-side → swap qualifier rõ hơn hoặc drop side info.
+8. **(NEW) Mỗi fragment-style sentence: subject có rõ từ context không?** Nếu không, thêm `anh` / `đội` / tên cụ thể.
+9. **(NEW) Quote (1st person 'tôi/mình'): có signal verb ("nói", ":", "...") không?** Nếu không, reframe 3rd person.
+10. **(NEW) Mỗi tên câu lạc bộ trong `voiceText` có phải TÊN ĐẦY ĐỦ không?** `MU` / `Man Utd` / `PSG` / `Barca` / `Spurs` → viết đủ (`Manchester United`, `Paris Saint-Germain`, `Barcelona`, `Tottenham Hotspur`). Nickname tiếng Việt (`Quỷ Đỏ`, `Pháo Thủ`) vẫn OK. Chỉ field hiển thị mới được rút gọn.
 
-Nếu pass cả 5 → tone đã chuyên. Bài đọc ra phải nghe như Sky Sports VN read out, không phải Wikipedia VN read out.
+Nếu pass cả 10 → tone đã chuyên. Bài đọc ra phải nghe như Sky Sports VN read out, không phải Wikipedia VN read out.
 
 **⚠️ CRITICAL: Vietnamese TTS Phonetic Rules**
 
-The `voiceText` field is read aloud by VieNeu Vietnamese TTS (default — local, free) or AusyncLab (paid fallback). **Numbers and symbols are read literally** — if you write "5.5", TTS may say "năm rưỡi" (five and a half). **Always spell out numbers in Vietnamese phonetic form** in `voiceText`. The `templateData` fields (visual text on screen) keep the original "5.5" / "82.7%" formatting — visual is separate from spoken.
+The `voiceText` field is read aloud by AusyncLab Vietnamese TTS (default, paid — `myna-1-turbo` voice `1914439`) or VieNeu (free fallback). **Numbers and symbols are read literally** — if you write "5.5", TTS may say "năm rưỡi" (five and a half). The `templateData` fields (visual text on screen) keep the original "5.5" / "82.7%" formatting — visual is separate from spoken.
 
-**Mandatory rules for `voiceText`:**
+**⚠️ Default to DIGIT FORM for whole-number quantities + Vietnamese unit** (years, ages, dates, counts, scores). AusyncLab + myna-1-turbo reads `26 cầu thủ` / `năm 2026` / `tháng 10 năm 2023` / `79 bàn` / `40 năm` cleanly — and avoids the "đọc hụt" (eats syllables) bug user hits on long spelled-out cụm như `hai nghìn không trăm hai mươi sáu`. **Only spell out** when there's a real phonetic ambiguity to resolve (decimals → `chấm/phẩy`, scores → `ba so với một`, brand version numbers).
 
-| Number form | WRONG (TTS misreads) | RIGHT (spell out in Vietnamese) |
+| Number form | Visible (templateData) | voiceText — preferred for AusyncLab |
 |---|---|---|
-| Decimal | `82.7%` | `tám mươi hai phẩy bảy phần trăm` |
-| Decimal version | `iOS 18.2` | `iOS mười tám chấm hai` |
-| Whole-number version | `iPhone 17` | `iPhone mười bảy` (or `iPhone 17` for whole numbers reads OK) |
-| Score | `3-1` / `3:1` | `ba một` / `ba so với một` |
-| Year | `2026` | `hai nghìn không trăm hai mươi sáu` (or `năm 2026` reads OK) |
-| Goals/stats | `41 bàn` | `bốn mươi mốt bàn` |
-| Big number | `821 bàn` | `tám trăm hai mươi mốt bàn` |
-| Money | `€80M` / `120 triệu £` | `tám mươi triệu euro` / `một trăm hai mươi triệu bảng` |
-| USD | `$5` | `năm đô la` (or `năm đô`) |
-| Percentage | `30%` | `ba mươi phần trăm` |
+| Year | `2026` | `năm 2026` (digit form, easy parse) |
+| Date | `14/6` | `ngày 14 tháng 6` (digit form) |
+| Year + date | `17/10/2023` | `ngày 17 tháng 10 năm 2023` |
+| Age | `34 tuổi` | `34 tuổi` |
+| Count + unit | `26 cầu thủ` / `79 bàn` / `40 năm` | `26 cầu thủ` / `79 bàn` / `40 năm` — digit form |
+| Score | `3-1` / `0-2` | `ba một` / `không hai` — MUST spell. A hyphen between digits is read as the minus word "trừ" (`3-1` → "ba TRỪ một") |
+| Formation | `4-2-3-1` / `4-3-3` | `bốn hai ba một` / `bốn ba ba` — MUST spell. Same hyphen-as-"trừ" bug (`4-2-3-1` → "bốn TRỪ hai TRỪ ba TRỪ một"). The visible `formation` field keeps digits |
+| Decimal | `82.7%` | `tám mươi hai phẩy bảy phần trăm` (MUST spell — decimals read wrong) |
+| Decimal version | `iOS 18.2` | `iOS mười tám chấm hai` (MUST spell) |
+| Money | `€80M` | `80 triệu euro` (digit + spelled unit) |
+| USD | `$5` | `5 đô` (digit + Vietnamese-shortened unit) |
+| Percentage | `30%` | `30 phần trăm` (digit + spelled unit) |
 | Multiplier | `2x` | `gấp đôi` (more natural than "hai lần") |
-| Time | `60 giây` | `sáu mươi giây` |
-| Height | `1m93` | `một mét chín mươi ba` |
+| Time | `60 giây` | `60 giây` |
+| Height | `1m93` | `một mét chín mươi ba` (compound height — spell) |
+| Rank | `#1` / `#7` | `hạng 1` / `hạng 7` (drop `#` symbol) |
+
+**⚠️ Vietnamese-specific number-word collisions to handle in voiceText:**
+
+1. **`năm` homophone (= year + 5)** — `bốn mươi năm` (40 years) gets read as "bốn mươi lăm" (45). **Fix: use digit form `40 năm`**. Triggers any spelled `X mươi/chục năm` followed by anything meaning "years". Detail: `memory/feedback_vietnamese_homophone_nam.md`.
+2. **Long compound spelled numbers** — AusyncLab eats syllables in `hai nghìn không trăm hai mươi sáu` style. Always prefer `2026` or `năm 2026`.
+3. **⚠️ Hyphen between digits is read as "trừ" (minus) — NEVER leave `X-Y` digit forms in voiceText.** This is a confirmed AusyncLab bug (2026-06-15): a scoreline `2-1` reads "hai TRỪ một" and a formation `4-2-3-1` reads "bốn TRỪ hai TRỪ ba TRỪ một". ALWAYS spell them as space-separated words in voiceText — scores `2-1` → `hai một`, `1-0` → `một không`, `10-0` → `mười không`; formations `4-2-3-1` → `bốn hai ba một`, `3-4-3` → `ba bốn ba`. Better still for match-results boards: drop the score from the spoken line entirely (narrative color only — the board shows the digits). The visible `templateData` fields (`bigStat`, `formation`, `match-results` scores, `comparison.value`) keep the digit/hyphen form. Detail: `memory/feedback_voicetext_hyphen_reads_as_minus.md`.
 
 **Notation choices:**
 - Decimal point — use `chấm` (more spoken/natural) or `phẩy` (formal). Pick one and stay consistent.
@@ -234,7 +382,30 @@ The `voiceText` field is read aloud by VieNeu Vietnamese TTS (default — local,
 
 **Brand names + acronyms:**
 - English brand names usually OK as-is: `Manchester United`, `Real Madrid`, `Barcelona`, `Champions League`, `Premier League` ✅.
-- Vietnamese acronyms (`MU`, `CLB`, `HLV`, `ĐTQG`, `QBV`, `UCL`) — TTS often misreads. Spell them out: `"em-iu"` for MU only if disambiguation matters, otherwise spell the full word: `"Manchester United"`, `"câu lạc bộ"`, `"huấn luyện viên"`, `"đội tuyển quốc gia"`, `"Quả Bóng Vàng"`, `"Champions League"`. **The screen field can keep the abbreviation; the voice spells it out.**
+- **Vietnamese acronyms & abbreviations (`HLV`, `CLB`, `BLV`, `WC`, `ĐTQG`, `QBV`, `UCL`, `ĐKVĐ` etc.) — MUST NEVER BE USED IN `voiceText` (the spoken script).** The text-to-speech engine often misreads or spells them out letter-by-letter. You must spell them out fully in `voiceText`: `"huấn luyện viên"` (for HLV), `"câu lạc bộ"` (for CLB), `"bình luận viên"` (for BLV), `"World Cup"` (for WC), `"đội tuyển quốc gia"` (for ĐTQG), `"Quả Bóng Vàng"` (for QBV), `"Champions League"` (for UCL), `"đương kim vô địch"` (for ĐKVĐ).
+  > [!IMPORTANT]
+  > **The screen fields (visible text in `templateData` such as `value`, `label`, `context`, `highlights`, `bigStat`, `statement`, `quote`, `question`) CAN keep the abbreviations (e.g. HLV, CLB, UCL, WC, ĐKVĐ) to save space and look neat on screen. The voiceText MUST spell them out fully.**
+- **⚠️ CLUB NAMES IN `voiceText` MUST BE THE FULL OFFICIAL NAME — never a shortened / initialised form.** TTS reads club abbreviations letter-by-letter or mangles them, so `"MU"` comes out as a garbled "em-u" instead of the club. Applies to EVERY club, not just Manchester United:
+
+  | ❌ Never in voiceText | ✅ Always write |
+  |---|---|
+  | `MU`, `Man Utd`, `Man United` | `Manchester United` |
+  | `MC`, `Man City` | `Manchester City` |
+  | `PSG` | `Paris Saint-Germain` |
+  | `RM` | `Real Madrid` |
+  | `Barca`, `Barça` | `Barcelona` |
+  | `BVB`, `Dortmund` | `Borussia Dortmund` |
+  | `Atletico`, `Atleti` | `Atletico Madrid` |
+  | `Inter`, `Milan` (khi mơ hồ) | `Inter Milan` / `AC Milan` |
+  | `Spurs` | `Tottenham Hotspur` |
+  | `Wolves` | `Wolverhampton` |
+  | `CAHN` | `Công an Hà Nội` |
+  | `HAGL` | `Hoàng Anh Gia Lai` |
+
+  The rule is general: if the club has an official full name, `voiceText` uses it in full on **every** mention, including repeats. The same goes for national teams (`ĐT Anh` → `tuyển Anh`, `TBN` → `Tây Ban Nha`, `BĐN` → `Bồ Đào Nha`).
+  > [!IMPORTANT]
+  > **Visible `templateData` fields (`label`, `context`, `highlights`, `bullets`, `value`, `statement`, …) MAY keep the short form** (`MU`, `PSG`, `Man City`) — screen space is tight and viewers read them fine. This rule is voice-only.
+- **Vietnamese club nicknames stay allowed in `voiceText`** — `Quỷ Đỏ`, `Pháo Thủ`, `Gà Trống`, `Lữ đoàn đỏ`, `Hùm xám`, `Vua trắng` are real Vietnamese words, so TTS reads them naturally. They remain the preferred way to avoid repeating a long club name 4 times in one scene (see the lexicon table above) — the ban is on initialisms/short forms, not on nicknames.
 - **Player names — strip non-Vietnamese diacritics from FOREIGN names; keep Vietnamese diacritics on Vietnamese names.** Applies to BOTH `voiceText` AND every visible `templateData` field. Examples:
   - Foreign players: `Mbappe` (NOT `Mbappé`), `Vinicius Junior` (NOT `Vinícius Júnior`), `Nedved` (NOT `Nedvěd`), `Matthaus` (NOT `Matthäus`), `Romario` (NOT `Romário`), `Muller` (NOT `Müller`), `Fenomeno` (NOT `Fenômeno`), `Suarez` (NOT `Suárez`), `Cannavaro` (already plain), `Buffon` (already plain).
   - Vietnamese players keep full dấu: `Đặng Văn Lâm`, `Nguyễn Quang Hải`, `Nguyễn Tiến Linh`.
@@ -263,12 +434,203 @@ The `voiceText` field is read aloud by VieNeu Vietnamese TTS (default — local,
 ```
 The voice reads "mười lăm bàn cùng tám pha kiến tạo"; the screen shows "15 + 8". They reinforce each other — viewer hears the spoken form and sees the compact form simultaneously.
 
-**Hook (most important — first 3s of viewer attention):**
-- Opens with a CLAIM or surprising fact, not a generic intro
-- Examples:
-  - LIST: `"Năm cầu thủ này đã thi đấu liên tục từ World Cup hai nghìn không trăm linh sáu đến nay — bạn có nhận ra ai không?"`
-  - VS: `"Messi và Ronaldo: ai mới thực sự là số một? Số liệu sẽ trả lời."`
-  - HISTORY: `"Từ một cậu bé tị nạn chiến tranh, Modric đã trở thành biểu tượng của bóng đá hiện đại."`
+**⚠️ Hook (most important — first 2s decide swipe-or-stay):**
+
+The hook scene is THE single biggest lever for view-through. Viewers decide within ~2 seconds whether to keep watching or swipe — and most of what scrolls past on TikTok is "fine, just not stopping me." The hook fails when it acts as an article title; it works when it forces a "wait, what?" reaction.
+
+#### A. Headline rule — NEVER a title, ALWAYS a hook archetype
+
+The `templateData.headline` field is what a sound-off viewer reads in 2 seconds. It MUST fit one of four archetypes — never a topic description:
+
+| Archetype | What it does | ✅ Good headline | ❌ Bad (title-style) |
+|---|---|---|---|
+| **Stat-shock** | Punches a surprising number/quantity | `"22 năm chờ đợi"`, `"19 kiến tạo"`, `"€80 triệu một mùa"` | `"Hành trình nhà vô địch"` |
+| **Question** | Forces curiosity gap | `"Sao Tuchel loại Maguire?"`, `"Ai cứu tuyển Anh đêm nay?"` | `"7 quyết định của Tuchel"` |
+| **Verdict** | Strong stance, opinionated | `"Maguire hết cửa Tam Sư"`, `"Đức đã không còn run sợ"` | `"Đội hình Đức cho WC 2026"` |
+| **Contradiction** | Pits two things that shouldn't fit | `"Vô địch, nhưng vẫn thiếu 1 thứ"`, `"22 năm đợi — 0 cầu thủ giống nhau"` | `"Vòng cuối Premier League"` |
+
+Anti-test: if the headline could appear unchanged as a `<h1>` on a news website, it's a title — rewrite. If swapping headlines between two of your videos would make either still make sense, both are too generic.
+
+#### B. `bigStat` field — use for stat-shock hooks
+
+Optional `templateData.bigStat` (≤8 chars) renders a giant **WHITE serif** value (Playfair Display) as the hero of the frame, with a short **red accent bar** drawn beneath it. When set:
+- The headline shrinks to a supporting role below the red bar.
+- The viewer's eye lands on the big number before anything else — exactly the scroll-stopper TikTok rewards.
+- The kicker (`eyebrow`, see §B2) STILL shows above the stat — competition context + the big number coexist, broadcast lower-third style.
+
+Use `bigStat` whenever the hook's punchline is a number, a money figure, a rank, a score, or a duration. Skip it for question / verdict / contradiction hooks where the words ARE the punch.
+
+> **⚠️ `bigStat` is NOT the default — pick the archetype from the punchline, not from the source (2026-07-09 feedback).**
+> A stat-dense source (Opta dumps, theanalyst trend pieces, `thongso*.txt`) tempts you into stat-shock every time, because every line is a number. That's the source talking, not the hook. Ask what actually stops the scroll: a **number** → stat-shock + `bigStat`; a **verdict / paradox / question** → words alone, and OMIT `bigStat`.
+> Hook chữ often hits harder even on a stat source: `"Ronaldo ngang Maguire ở vòng knock-out"` lands instantly, while `bigStat: "17"` (cú sút) needs a beat of thought. Same for `"Hỏng 2 phạt đền, vẫn phá mọi kỷ lục"` over `bigStat: "0,6%"`.
+> **Never ship two consecutive videos both opening on `bigStat`.** If the previous video in the batch used it, lean verdict / contradiction on this one. Rotate deliberately — the kicker (`eyebrow`) carries the broadcast authority, so a wordy hook loses nothing.
+
+| Hook archetype | Use bigStat? | Example |
+|---|---|---|
+| Stat-shock | ✅ Yes | `bigStat: "22 NĂM"`, `headline: "Pháo Thủ trở lại đỉnh"`, `subhead: "Premier League 2024-25"` |
+| Score-shock | ✅ Yes | `bigStat: "0-7"`, `headline: "Đêm Real bị nghiền nát"`, `subhead: "Tại Bernabeu"` |
+| Money-shock | ✅ Yes | `bigStat: "€222M"`, `headline: "Kỷ lục chuyển nhượng"`, `subhead: "PSG mua Neymar 2017"` |
+| Rank-shock | ✅ Yes | `bigStat: "#1"`, `headline: "Bruno bỏ xa cả Châu Âu"`, `subhead: "19 kiến tạo Ngoại hạng Anh"` |
+| Question | ❌ No | `headline: "Sao Tuchel loại Maguire?"` alone |
+| Verdict | ❌ No | `headline: "Maguire hết cửa Tam Sư"` alone, `headline: "Ronaldo ngang Maguire\|ở vòng knock-out"` |
+| Contradiction | ❌ No | `headline: "Hỏng 2 phạt đền\|vẫn phá mọi kỷ lục"` alone |
+
+`bigStat` content rules:
+- ≤8 chars hard cap (renders as one giant token; longer wraps badly at 320px font).
+- Strip spaces where possible: `"22 NĂM"`, `"€80M"`, `"0-7"`, `"#1"`.
+- UPPERCASE for VN words inside bigStat (the "NĂM" in `"22 NĂM"`); digits/symbols stay as-is.
+- Keep VN diacritics in bigStat when present (`"NĂM"`, not `"NAM"`) — visible field rules apply.
+
+#### B2. `eyebrow` + `eyebrowSub` — the competition kicker (ALWAYS fill `eyebrow`)
+
+The hook opens with a **broadcast-style kicker**: a red vertical bar + an uppercase label (Oswald font, automatic), rendered above the bigStat/headline. This is what gives the hook its **tin tức / thời sự / phân tích** authority instead of a clickbait shout — it reads like a real sports broadcast lower-third.
+
+- **`eyebrow`** (≤30 chars) = the **competition / context label**. **ALWAYS set it.** Use the tournament or league the story belongs to: `"Ngoại hạng Anh"`, `"Champions League"`, `"World Cup 2026"`, `"La Liga"`, `"Vòng loại World Cup"`, `"Chuyển nhượng"`. For non-match content pick the topical desk: bio → `"Chân dung"`, history → `"Hồi ký"`, ranking → `"Bảng xếp hạng"`, trivia → `"Có thể bạn chưa biết"`, transfer → `"Chuyển nhượng"`.
+- **`eyebrowSub`** (≤24 chars, optional) = a **second context line** under the kicker: matchweek, stage, date, or venue — `"Vòng 32"`, `"Bán kết lượt về"`, `"08.06.2026"`, `"Tại Anfield"`. Omit when it adds nothing (channel rule = fewer words).
+- ❌ Do NOT put urgency slogans here (`"TIN NÓNG"`, `"GÂY SỐC"`, `"ĐỘC QUYỀN"`). The kicker carries **context**; the headline carries the **hook**. The competition label generalizes across every video and reads as authoritative, not clickbait.
+- If `eyebrow` is omitted the kicker is hidden (only the persistent shell brand top-left shows) — always prefer to set it.
+
+#### C. `kenBurns` — pick kinetic motion for hooks, not slow zoom
+
+The default has shifted from `"zoom-in"` (slow Ken Burns) to `"impact-zoom"` (kinetic). Slow zoom on a poster reads like an article cover; kinetic motion reads like a video. Pick per hook:
+
+| Value | Effect | When to use |
+|---|---|---|
+| `"impact-zoom"` (new default) | Hard scale-down from 1.6× + blur clear in 0.6s, then gentle drift | Most hooks — versatile, attention-grabbing |
+| `"whip-pan"` | Background whips in from 40% right + blur, settles in 0.55s | Action / drama / arrival news ("Tuchel chốt danh sách") |
+| `"shake-on-beat"` | 5-tick shake then settle, drifts subtle | Conflict / shock / scandal hooks |
+| `"zoom-in"` (slow) | Original 1.0→1.18 over full scene | Meditative / tribute / legacy stories ONLY |
+| `"zoom-out"`, `"pan-left"`, `"pan-right"` | Old Ken Burns variants | Reveal-wide hooks (squad, stadium, era retrospective) |
+
+When in doubt, pick `"impact-zoom"`. The slow Ken Burns options stay available for tribute / meditative content — but they should be the exception, not the default.
+
+#### D. `voiceText` — hook word in first ≤8 words, setup AFTER
+
+The voice has ~1.5s before the viewer commits. The hook word (the surprising number, the conflict word, the question) MUST be in the FIRST CLAUSE — anything after a comma can be setup, but the punch lands first.
+
+❌ Setup-first (hook word arrives at 4s+ — viewer already gone):
+> *"Trước ngày Tuchel chốt danh sách 26 cầu thủ tuyển Anh dự World Cup 2026, đây là 7 quyết định khó nhất."*
+
+✅ Punch-first (hook word at second 1, setup follows):
+> *"7 quyết định có thể khiến tuyển Anh về sớm. Tuchel đang đứng giữa lằn ranh."*
+
+❌ Setup-first:
+> *"22 năm chờ đợi để Pháo Thủ trở lại đỉnh nước Anh. 23 cầu thủ, 23 hành trình..."*
+
+✅ Punch-first:
+> *"22 năm. Pháo Thủ trở lại đỉnh Ngoại hạng. 23 cầu thủ, 23 con đường tới đây."*
+
+The first SHORT sentence (≤8 words) is the hook. The voice can elaborate in sentence 2 — **but the whole hook scene is capped at 18 words** (~4,7s), so sentence 2 stays a short clause, not a paragraph.
+
+**⚠️ Hook MỞ vòng lặp, không ĐÓNG nó (mới 2026-08-19).** Punch-first vẫn đúng, nhưng punch ≠ toàn bộ câu chuyện. Hook cũ dài 5–9 giây và trả xong hết nội dung ngay câu 3 — người xem biết hết rồi thì lướt, và phần thân video không còn lý do tồn tại. Con số / cái tên / mâu thuẫn lên trước; **phần GIẢI THÍCH (vì sao, hệ quả, con số chốt) để dành cho thân bài.**
+
+❌ Đóng vòng lặp (hook thật, `rodri-chon-barcelona`, 41 từ / 8,9s):
+> *"Barcelona đã có thứ Real Madrid thèm muốn. Rodri tự tuyên bố muốn tới sân Camp Nou và gạt lời đề nghị của đội bóng Hoàng gia sang một bên. Giờ chỉ còn 10 triệu euro ngăn thương vụ khép lại."*
+
+✅ Mở vòng lặp (11 từ / ~2,9s):
+> *"Real trả cao hơn Barca mười triệu. Rodri vẫn chọn Barca."*
+
+Cái "vì sao" là thân bài. Đừng đưa nó vào hook.
+
+#### D-bis. Chữ và giọng KHÔNG được trùng nhau (mới 2026-08-19)
+
+`headline` và câu đầu `voiceText` phải mang **hai tầng thông tin khác nhau**. Người xem nhận cả hai cùng lúc; nếu chúng nói y hệt nhau thì tới giây 2 họ đã lấy đủ thông tin, hiểu xong, và **không còn lý do ở lại** — trong khi mình vẫn tưởng đang "nhấn mạnh".
+
+Đây là lỗi đo được, không phải suy đoán. Tập 1 series "Nếu như" trên TikTok: 610 view, avg watch **7,52s / 45s** (16,7%), xem hết 1,2%, mốc bỏ nhiều nhất **giây 0:02**. Tra `full-words.json`: tới giây 2,0 giọng đã đọc trọn *"Nếu Ronaldo về Manchester City năm 2021"*, còn `headline` ghi `"Nếu Ronaldo chọn|Man City năm 2021"`. Trùng nhau gần như từng chữ.
+
+❌ Trùng tầng:
+> headline: `"Nếu Ronaldo chọn|Man City năm 2021"`
+> voice: *"Nếu Ronaldo về Manchester City năm 2021."*
+
+✅ Hai tầng bổ nhau — chữ giữ mệnh đề, giọng nói cái giá:
+> headline: `"Man City nói không|với Ronaldo"`
+> voice: *"Bốn năm sau, họ ăn ba. Còn anh thì không."*
+
+Cách kiểm nhanh trước khi lưu `script.json`: đọc to câu đầu `voiceText` trong khi che `headline`. Nếu che đi mà **không mất thông tin nào**, một trong hai đang thừa — viết lại cái trên màn hình thành thứ giọng nói KHÔNG nói.
+
+Luật này áp cho mọi cảnh, không riêng hook: `value` / `context` / `highlights` / `bullets` là chỗ để tầng chi tiết thứ 2-3 mà giọng không đọc kịp. Người xem đọc nhanh hơn nghe — dùng màn hình để nói THÊM, không phải để lặp lại.
+
+#### E. Worked examples — full hook scenes with new fields
+
+**Stat-shock (Arsenal vô địch):**
+```json
+{
+  "id": "hook",
+  "type": "hook",
+  "voiceText": "22 năm. Pháo Thủ trở lại đỉnh Ngoại hạng. 23 cầu thủ, 23 hành trình khác nhau.",
+  "templateData": {
+    "template": "hook",
+    "eyebrow": "Ngoại hạng Anh",
+    "eyebrowSub": "Mùa 2024-25",
+    "bigStat": "22 NĂM",
+    "headline": "Pháo Thủ trở lại đỉnh",
+    "kenBurns": "impact-zoom"
+  }
+}
+```
+
+**Verdict (Maguire bị loại):**
+```json
+{
+  "id": "hook",
+  "type": "hook",
+  "voiceText": "Maguire hết cửa Tam Sư. Tuchel chốt 26 — số 5 trống.",
+  "templateData": {
+    "template": "hook",
+    "eyebrow": "World Cup 2026",
+    "eyebrowSub": "Tuyển Anh chốt 26",
+    "headline": "Maguire hết cửa|Tam Sư",
+    "kenBurns": "shake-on-beat"
+  }
+}
+```
+
+**Question (7 quyết định Tuchel):**
+```json
+{
+  "id": "hook",
+  "type": "hook",
+  "voiceText": "Bảy quyết định có thể khiến tuyển Anh về sớm. Tuchel đang đứng giữa lằn ranh.",
+  "templateData": {
+    "template": "hook",
+    "eyebrow": "World Cup 2026",
+    "eyebrowSub": "Trước ngày chốt 26",
+    "bigStat": "7",
+    "headline": "Quyết định khó nhất|của Tuchel",
+    "kenBurns": "impact-zoom"
+  }
+}
+```
+
+**Contradiction (vòng cuối):**
+```json
+{
+  "id": "hook",
+  "type": "hook",
+  "voiceText": "Vô địch xong, nhưng cuộc đua chưa hết. Mười trận, năm cuộc đua, một Chủ Nhật.",
+  "templateData": {
+    "template": "hook",
+    "eyebrow": "Ngoại hạng Anh",
+    "eyebrowSub": "Vòng cuối — 10 trận cùng giờ",
+    "bigStat": "5",
+    "headline": "Cuộc đua còn lại|của Premier League",
+    "kenBurns": "whip-pan"
+  }
+}
+```
+
+#### F. Anti-patterns — instant fail-list (run before saving the hook)
+
+- ❌ Headline is the article topic written as a noun phrase (`"Hành trình X"`, `"Đội hình Y"`, `"Vòng cuối Z"`).
+- ❌ VoiceText opens with `"Trước ngày..."`, `"Hôm nay..."`, `"Mới đây..."`, `"Trong bối cảnh..."` — these are setup verbs, not hook verbs.
+- ❌ First sentence of voiceText is >10 words.
+- ❌ bigStat contains more than one giant token (e.g. `"22 năm Pháo Thủ"` — that's a headline, not a bigStat).
+- ❌ `bigStat` was set reflexively because the SOURCE is stat-heavy, not because the PUNCHLINE is a number. Re-read §B — a verdict or contradiction hook on the same source usually hits harder, and takes no `bigStat`.
+- ❌ This video AND the previous one in the batch both open on `bigStat`. Rotate the archetype.
+- ❌ kenBurns is `"zoom-in"` and the content type isn't meditative / tribute. Default should be `"impact-zoom"`.
+- ❌ `eyebrow` is missing — the hook loses its broadcast kicker. ALWAYS set it to the competition / context label.
+- ❌ `eyebrow` or `eyebrowSub` is an urgency slogan (`"TIN NÓNG"`, `"GÂY SỐC"`) instead of competition context.
+- ❌ Hook headline and outro caption say roughly the same thing — wasted opportunity, the hook should commit harder.
 
 **Body — content-type specific patterns:**
 
@@ -358,6 +720,48 @@ The video renders `
 
 **Brand-name phonetic rule (`SportsForAllTV`).** Visible fields (`channelName`, `metadata.channel`) display the CamelCase brand `"SportsForAllTV"`. `voiceText` writes the name **split with spaces** as `"Sports For All Ti Vi"` so VieNeu TTS reads each word distinctly and pronounces `TV` as Vietnamese `"Ti Vi"`. Three English words back-to-back is at the edge of the silence-bug threshold (see `memory/feedback_vieneu_english_silence_bug.md`) — if a test render shows VieNeu stalling, fall back to the fully transliterated phonetic `"Spo Pho Ôn Ti Vi"` (5 VN-readable syllables that sound like "Sports For All TV" to a VN listener). Run `ffprobe -i voice.mp3 -af silencedetect=...` against the outro after the first new render to confirm.
 
+**Multi-part outro override (non-final parts only).**
+
+When Step 1.5 marked the render as a **non-final part** (folder is `<base>-p<N>/` and sibling `<base>-p<N+1>/` exists), the closing pair changes. The standard engagement-question + outro scenes are **replaced by a single "part teaser" outro** so the viewer is pushed toward following the channel to catch the next part, not toward answering a question that will be re-asked at the end of the final part.
+
+Schema:
+```json
+{
+  "id": "outro",
+  "type": "outro",
+  "voiceText": "Phần <N+1, spelled out> sắp lên sóng. Bấm theo dõi Sports For All Ti Vi để xem ngay khi ra mắt nhé.",
+  "templateData": {
+    "template": "outro",
+    "ctaTop": "Phần <N+1, Arabic digit> sắp lên sóng",
+    "channelName": "SportsForAllTV",
+    "source": "Sưu tầm"
+  }
+}
+```
+
+Rules for the part-teaser outro:
+- **voiceText spells the part number** in Vietnamese (`hai` for part 2, `ba` for part 3, `bốn` for part 4, `năm` for part 5). Never write `"Phần 2"` in voiceText — TTS reads digits inconsistently for this construction.
+- **`ctaTop` uses the Arabic digit** (`"Phần 2 sắp lên sóng"`, `"Phần 3 sắp lên sóng"`) — visible on screen is fine with digits.
+- **Optional content callback (1 short sentence in voiceText before the CTA).** When the part has a strong cliffhanger (the era closing, a player's breakthrough year landing, a record being broken), you may prepend ONE narrative-bridge sentence ending in a beat — e.g. `"Và thế là, chương Barca khép lại. Phía trước là chiếc cúp duy nhất anh chưa từng chạm tay. Phần hai sắp lên sóng. Bấm theo dõi Sports For All Ti Vi để xem ngay khi ra mắt nhé."`. Cap one sentence, ≤ 25 words. Skip if the part doesn't have a clean cliffhanger — the bare two-sentence teaser is the safe default.
+- **Final part (or single video) keeps the standard engagement-question + outro pair** — viewer commits opinion + follow CTA at the actual end.
+- **The non-final-part outro replaces BOTH the engagement scene AND the standard outro** (it's a single scene, not two). The script's final scene count is therefore one lower for non-final parts than a comparable single-part video.
+- Multi-part renders still apply density rules to the part's prose — don't pad just because a part feels short. A 60-second part is fine as long as it covers its segment cleanly.
+
+Worked example — Part 2 of 3 of a Modric bio (`modric-bio-p2/`, sibling `modric-bio-p3/` exists):
+```json
+{
+  "id": "outro",
+  "type": "outro",
+  "voiceText": "Cuối năm đó, anh giương cao Quả Bóng Vàng tại Paris. Nhưng đỉnh cao đó chưa phải hồi kết. Phần ba sắp lên sóng. Bấm theo dõi Sports For All Ti Vi để xem ngay khi ra mắt nhé.",
+  "templateData": {
+    "template": "outro",
+    "ctaTop": "Phần 3 sắp lên sóng",
+    "channelName": "SportsForAllTV",
+    "source": "Sưu tầm"
+  }
+}
+```
+
 ### On-screen reading discipline (CRITICAL for retention)
 
 A Vietnamese short-form viewer in 2026 watches in three modes simultaneously: **(1)** audio-on with auto-captions, **(2)** sound-off scrolling, glancing at on-screen text, **(3)** audio-on plus eyes confirming what they hear. **Every `templateData` field is part of the visual reading layer. It must let a sound-off viewer grasp the scene's point in a 2-second glance.**
@@ -379,7 +783,7 @@ This is NOT achieved by pasting `voiceText` into visible fields — voice is nar
 | `stat-hero` | value + label + highlights (1–4 ≤20c) + context (≤50c) | The number/rank + subject + 2–4 distinctive facts + one anchor (club/year) |
 | `callout` | statement (≤80c) + tag (≤20c) | The voice's main claim, condensed to ≤80c, plus a category tag |
 | `comparison` | both `value` + both `label` + winner badge | The two numbers being compared + who leads |
-| `feature-list` | title (≤40c) + 1–4 bullets (≤50c each) | The unifying topic + the items the voice enumerates, mirrored as punchy lines |
+| `feature-list` | title (≤40c) + 1–4 bullets (≤50c each) + optional image | The unifying topic + the items the voice enumerates as punchy lines. Renders as green broadcast cards (no numbering — items are peers). Optional supporting image via a plan entry (aspect-laid-out); **cap bullets at 3 when the scene has an image** |
 | `formation-pitch` | title + formation label + 11 player names placed on a green pitch graphic | The starting XI / predicted lineup, rendered as a tactical pre-match board |
 | `outro` | fixed brand card | Voice carries the CTA; visible card is the channel profile |
 
@@ -433,6 +837,13 @@ When the source mentions a **starting lineup, predicted XI, squad reveal, or for
 
 Rows go **back to front** (GK row first, ST row last). CSS reverses display so GK lands at the bottom of the pitch and the striker at the top. Each row spreads players evenly across the pitch width. Total players should equal 11 for a standard XI; the schema accepts 2–6 rows with 1–5 players per row to support every common formation.
 
+**Important row order rule — you MUST flip the source order:** Within each row, order players **left-to-right from the viewer's perspective** = **Left Back first, Right Back last**. But Sports Mole (and most lineup sources) list each line **Right Back → Left Back** (e.g. England `Pickford; Spence, Guehi, Konsa, O'Reilly; …` = RB Spence first, LB O'Reilly last). So you **MUST reverse every outfield row** before writing it into `rows`. GK and lone striker rows have one name — no flip needed.
+
+- Source: `Pickford; Spence, Guehi, Konsa, O'Reilly; Mainoo, Anderson; Madueke, Bellingham, Rashford; Kane` (4-2-3-1).
+- ✅ Correct `rows` (each multi-name line reversed): `[["Pickford"], ["O'Reilly","Konsa","Guehi","Spence"], ["Anderson","Mainoo"], ["Rashford","Bellingham","Madueke"], ["Kane"]]` — LB O'Reilly on screen-left, RB Spence on screen-right.
+- ❌ Wrong (raw source order): `["Spence","Guehi","Konsa","O'Reilly"]` — puts the Right Back on the left, mirroring the team.
+- Portugal defense reversed example: source `Cancelo, Ruben Dias, Inacio, Nuno Mendes` (RB→LB) → `["Nuno Mendes", "Inacio", "Ruben Dias", "Cancelo"]`.
+
 **Name compression — keep tokens readable:**
 - Use **surname only** when possible (`Mbappé`, `Koundé`, `Tchouaméni`, `Upamecano`).
 - For first-name+surname duos that share a club (`Théo Hernández` and `Lucas Hernández`), use `"T. Hernández"` and `"L. Hernández"` to disambiguate.
@@ -440,6 +851,245 @@ Rows go **back to front** (GK row first, ST row last). CSS reverses display so G
 
 **voiceText for the formation-pitch scene** still names every player in spoken Vietnamese — the screen carries spatial info, the voice carries the introduction. Example:
 > *"Đội hình dự kiến chạy theo sơ đồ bốn hai ba một. Maignan trấn giữ khung gỗ. Hàng thủ Koundé, Upamecano, Saliba và Théo Hernández. Tchouaméni cùng Rabiot án ngữ trục giữa. Hàng công Dembélé, Olise, Cherki vây quanh Mbappé."*
+
+#### PRE-MATCH PREVIEW — standard shape (mirror `nhan-dinh-han-quoc-vs-sec-wc-2026`)
+
+For a two-team pre-match preview, follow the proven structure of `video/output/nhan-dinh-han-quoc-vs-sec-wc-2026/script.json`. Two rules are mandatory:
+
+**1. Put the predicted scoreline IN THE HOOK.** The hook leads with the result, not a generic "trận đại chiến" line. Set `bigStat` to the predicted score and open `voiceText` with it:
+- `bigStat: "1-0"`, `eyebrow: "World Cup 2026"`, `eyebrowSub: "<bảng> · <sân>"`, `headline` = the marquee player matchup (`"Son đấu Schick|ở cao nguyên Mexico"`, `"Davies đấu Dzeko|trên sân nhà Canada"`).
+- voiceText first sentence ≤8 words IS the prediction, and MUST flag that it's a prediction so viewers don't hear it as a result — open with `"Kênh dự đoán <đội> thắng <tỷ số spelled>."`: *"Kênh dự đoán Hàn Quốc thắng một không."* / *"Kênh dự đoán Canada thắng một không."* — then one sentence of framing (giải / sân / stakes). ⚠️ SPELL the scoreline as words (`hai một`, not `2-1` — the hyphen reads as "trừ", see phonetic rules). This is a score-shock hook (see the hook archetype table). (Feedback 2026-06-15: a bare `"Pháp thắng 2-1"` opener sounds like a final result + reads the hyphen as minus — both wrong.)
+
+**2. The prediction/verdict card uses the `comparison` SCOREBOARD (flags + scoreline), NOT a feature-list or bare bars.** Place ONE `comparison` scene near the end (the "verdict", right before the engagement question). Give BOTH sides a `flag` — that triggers the score-prediction scoreboard render (two national flags + team names + a big centered scoreline, higher score glows as winner). The two `value`s ARE the predicted score.
+
+> ⚠️ **MANDATORY — DO NOT SHIP A PREVIEW WITHOUT THIS SCENE.** This is the #1 recurring miss: 4 previews in a row (2026-06-14) rendered with NO verdict scoreboard scene at all — the score appeared only in the hook, the flags+scoreline card was silently dropped. The render does NOT error on a missing scene (it's schema-valid), so nothing flags it for you. The capability is fully built (`html-composer.ts:278`, CSS `.cs-flag`, schema) and works — the only failure mode is FORGETTING to emit the scene. Every `nhan-dinh-*` script.json MUST contain exactly one `comparison` scene with `flag` set on BOTH sides. See the pre-save checklist at the end of this section.
+
+```json
+{
+  "id": "verdict",
+  "type": "body",
+  "voiceText": "Bosnia phòng ngự kỷ luật, nhưng Canada có lợi thế sân nhà. Opta nghiêng về Canada với gần sáu mươi phần trăm. Kênh chốt Canada thắng một không.",
+  "templateData": {
+    "template": "comparison",
+    "left":  { "label": "Canada", "value": "1", "color": "cyan",   "flag": "https://flagcdn.com/ca.svg" },
+    "right": { "label": "Bosnia", "value": "0", "color": "purple", "flag": "https://flagcdn.com/ba.svg" }
+  }
+}
+```
+
+- **`flag`** = a flag/crest image URL or local path. Default to national flags `https://flagcdn.com/<iso2>.svg` (e.g. `ca` Canada, `ba` Bosnia, `kr` S.Korea, `cz` Czechia, `br` Brazil, `es` Spain, `gb-eng` England). For a club fixture, point `flag` at a crest under `assets/` instead.
+- **Both sides MUST set `flag`** or the scene falls back to the bar chart (wrong for a scoreline). The score (`value`) should match the `bigStat` in the hook — keep them consistent.
+- **No `imagePrompt`** — the scoreboard is a non-image (data-driven) template, like `formation-pitch`/`group-intro`. In plan mode it's added on top of the image-eligible plan scenes; `images-for-videos` must NOT plan an image for it.
+- The bar-chart `comparison` (no flags) stays the default for METRIC comparisons (goals/trophies/QBV in VS content). Flags + scoreline is specifically the predicted-result card.
+- **RECAP / điểm tin variant (ACTUAL results, not a forecast):** the scoreboard defaults label it a prediction (top pill `"Dự đoán tỉ số"`, foot `"Dự đoán của SportsForAllTV"`) — WRONG for a match that already happened. Override with three optional fields on the `comparison` templateData: `eyebrow` (top pill, e.g. `"Chung cuộc"`), `foot` (footer, e.g. `"Vòng 1/32 · Seattle"`), and `note` (gold pill under the scoreline, e.g. `"Sau hiệp phụ"` / `"Chấm luân lưu"`). Use ONE such scoreboard per match in a `diemtin<N>` roundup (see the recap recipe) — each match gets its flags + final score, then its hero-image stat-hero scenes. The winner still glows automatically by numeric score.
+
+```json
+{
+  "template": "comparison",
+  "eyebrow": "Chung cuộc",
+  "note": "Sau hiệp phụ",
+  "foot": "Vòng 1/32 · Seattle",
+  "left":  { "label": "Bỉ",      "value": "3", "color": "cyan",   "flag": "https://flagcdn.com/be.svg" },
+  "right": { "label": "Senegal", "value": "2", "color": "purple", "flag": "https://flagcdn.com/sn.svg" }
+}
+```
+
+**3. Recent form + head-to-head = 2 scenes** (from the source's "Phong độ gần đây & đối đầu" section), placed early — right after the hook. Don't cram it into one card; give it room:
+
+- **H2H scene** (`feature-list`, title `"Lịch sử đối đầu"`): the all-time record + the standout meeting + the last meeting. If the teams have never met, a single line ("Lần đầu hai đội chạm trán") + 1–2 framing bullets is fine and this scene can be merged into the form board instead.
+- **ONE combined `form-compare` board for BOTH teams** (data-driven, NO image) — a two-column split showing each side's last few results side by side, each result a W/D/L chip + opponent + scoreline. ⚠️ **Do NOT emit two separate `match-results` boards (one per team)** — the user prefers ONE concise split scene (feedback 2026-07-06). Left = cyan, right = purple. Score from THAT team's perspective first (`"2-1"`); `outcome` `"W"`/`"D"`/`"L"` colours the chip (green/gold/red). Strip foreign-team diacritics in `opponent` (`Đức`, `Bồ Đào Nha`, `Bỉ`, `Hy Lạp`, `Maroc`). Cap ~5 results/side. See the template doc below.
+
+```json
+{
+  "id": "h2h",
+  "type": "body",
+  "voiceText": "Lịch sử nghiêng hẳn về Mỹ, đội thắng 5 trong 9 lần gặp. Lần duy nhất chạm trán ở World Cup năm 1930, Mỹ thắng 3-0. Gần nhất, Mỹ cũng thắng 2-1 cuối năm ngoái.",
+  "templateData": {
+    "template": "feature-list",
+    "title": "Lịch sử đối đầu",
+    "bullets": ["9 lần gặp: Mỹ thắng 5, hòa 2, thua 2", "World Cup 1930: Mỹ thắng 3-0", "Gần nhất: Mỹ 2-1 (11/2025)"]
+  }
+}
+```
+```json
+{
+  "id": "form",
+  "type": "body",
+  "voiceText": "Về phong độ, Mỹ chập chờn — thua Đức và Bồ Đào Nha nhưng vừa hạ Senegal. Trong khi đó Bỉ vào giải với chuỗi bất bại thuyết phục.",
+  "templateData": {
+    "template": "form-compare",
+    "title": "Phong độ gần đây",
+    "left": {
+      "name": "Mỹ", "flag": "https://flagcdn.com/us.svg", "color": "cyan",
+      "results": [
+        { "opponent": "Đức", "score": "1-2", "outcome": "L" },
+        { "opponent": "Senegal", "score": "3-2", "outcome": "W" },
+        { "opponent": "Bồ Đào Nha", "score": "0-2", "outcome": "L" },
+        { "opponent": "Bỉ", "score": "2-2", "outcome": "D" },
+        { "opponent": "Costa Rica", "score": "3-0", "outcome": "W" }
+      ]
+    },
+    "right": {
+      "name": "Bỉ", "flag": "https://flagcdn.com/be.svg", "color": "purple",
+      "results": [
+        { "opponent": "Maroc", "score": "2-0", "outcome": "W" },
+        { "opponent": "Mỹ", "score": "2-2", "outcome": "D" },
+        { "opponent": "Hy Lạp", "score": "3-1", "outcome": "W" },
+        { "opponent": "Đức", "score": "1-1", "outcome": "D" },
+        { "opponent": "Slovakia", "score": "2-0", "outcome": "W" }
+      ]
+    }
+  }
+}
+```
+
+The `form-compare voiceText` gives narrative colour (each side's run in one breath), NOT a read-out of all scores — the board shows the digits + W/D/L.
+
+**4. Keep the standout-players section BRIEF, but give EACH team 2–3 stars (knockout upgrade 2026-07-06).** A knockout preview names **2–3 stars per team (4–6 total), balanced across both sides** — each its OWN `stat-hero` image scene. Each gets just **1–2 short voice sentences** (a quick hit, not a profile) — surface the detail in the visible `value`/`highlights`/`context`, let the voice stay punchy. E.g. *"Bên kia, Edin Dzeko ở tuổi 40 vẫn là biểu tượng của Bosnia, dẫn đầu ghi bàn vòng loại với 6 pha lập công."* The deep multi-sentence treatment is for PLAYER PROFILE / BIO content, NOT for preview stars. Don't collapse both teams into a shared pool of 2–3 — individual duels are the story in the knockouts.
+
+**5. The tactical/style scene = the `tactics-board` template (data-driven, NO image).** Render the two sides' game-plans as ONE `tactics-board` scene (two-column đấu pháp graphic) instead of a `comparison` bar or two `callout`s. Each side carries formation + approach headline + 2–3 mechanisms + the tactical linchpin ("chìa khóa"). See the template doc below. The `.txt` `## Lối chơi dự kiến` section already carries this per team.
+
+A full preview thus runs: hook (score in bigStat) → **H2H feature-list + ONE `form-compare` board (both teams' recent results, 2 scenes)** → [lineups via formation-pitch] → **`tactics-board` (đấu pháp 2 đội)** → 2–3 star stat-heros PER team → manager callouts → **verdict scoreboard** → engagement → outro.
+
+##### ⚠️ Pre-save checklist (PRE-MATCH PREVIEW) — verify BEFORE writing script.json
+
+Run this gate on every `nhan-dinh-*` script. If any box fails, fix it before saving — a missing scene renders silently (no error).
+
+1. ☐ **Hook** has `bigStat` = predicted scoreline (e.g. `"1-0"`), and voiceText opens with `"Kênh dự đoán <đội> thắng <tỷ số spelled>"` (flag it as a prediction, NOT a bare result) — scoreline SPELLED as words (`hai một`, never `2-1`).
+2. ☐ **No `X-Y` digit-hyphen-digit anywhere in any voiceText** (scores AND formations) — the hyphen reads as "trừ". `grep -E '"voiceText".*[0-9]-[0-9]'` on the script must return NOTHING. Formations spelled (`bốn hai ba một`); the visible `formation`/`bigStat`/board fields keep digits.
+3. ☐ **Every `formation-pitch` row goes GK-first → ST-last** (`rows[0]` is the lone goalkeeper, `rows[-1]` the striker). Inverted rows render the team upside-down on the pitch. **AND every multi-name row is REVERSED from the source line** — Sports Mole lists each line RB→LB, so the array must read LB→RB (Left Back is `row[0]`, Right Back is `row[-1]`). If `row[1]` of the back line is the source's Right Back, you forgot to flip.
+4. ☐ **Exactly one `comparison` verdict scoreboard** exists near the end, and **BOTH `left.flag` AND `right.flag` are set** (`https://flagcdn.com/<iso2>.svg`). `grep -c '"flag"'` on the script should be **≥ 2**. The two `value`s match the hook's `bigStat`.
+5. ☐ ISO2 codes correct for THIS fixture (verify, don't guess): e.g. Pháp `fr`, Senegal `sn`, Iraq `iq`, Na Uy `no`, Argentina `ar`, Algeria `dz`, Áo `at`, Jordan `jo`, Bồ Đào Nha `pt`, CHDC Congo `cd`, Anh `gb-eng`, Hàn Quốc `kr`, Séc `cz`. Club fixture → crest path under `assets/`.
+6. ☐ Form section present: H2H `feature-list` + **ONE `form-compare` board** (both teams' recent results in a single 2-column split, title `"Phong độ gần đây"`). ⚠️ NOT two separate `match-results` boards. Each side ≤5 results, `outcome` W/D/L set, score from that team's view first.
+7. ☐ The verdict scoreboard scene has **NO `imagePrompt`** (data-driven, like formation-pitch / group-intro).
+8. ☐ **One `tactics-board` scene** present (đấu pháp 2 đội), with `left` + `right` each carrying `formation`, `approach`, 2–3 `points`, and `keyPlayer`. NO `imagePrompt` (data-driven).
+9. ☐ **2–3 star `stat-hero` scenes PER team** (4–6 total), balanced — not a shared pool of 2–3.
+
+A fast self-check after writing: `grep -c '"flag"' <script.json>` must be ≥ 2 (verdict) — more if a `group-intro` is also present.
+
+#### Tactical / style scene — use the `tactics-board` template (data-driven, NO image)
+
+For the pre-match tactical read, render ONE **`tactics-board`** scene — a two-column "đấu pháp" graphic (dark board family like group-intro / bracket), NOT a `comparison` bar or two `callout`s. Each side shows the team's formation chip, an approach headline, 2–3 concrete mechanisms, and the tactical linchpin, split by a center VS spine (left = cyan, right = purple). The data IS the visual, so no AI image (and `images-for-videos` must NOT plan one for it).
+
+**Triggers:** any PRE-MATCH PREVIEW with a `## Lối chơi dự kiến` block (both teams' game-plans). One board per fixture.
+
+**Schema usage:**
+```json
+{
+  "template": "tactics-board",
+  "title": "Lối chơi dự kiến",
+  "left": {
+    "name": "Na Uy",
+    "flag": "https://flagcdn.com/no.svg",
+    "formation": "4-3-3",
+    "approach": "Phòng ngự phản công",
+    "points": ["Dựng khối thấp, bọc lót chắc", "Phất dài tìm Haaland tuyến trên", "Chuyển trạng thái bằng tốc độ"],
+    "keyPlayer": "Erling Haaland",
+    "color": "cyan"
+  },
+  "right": {
+    "name": "Anh",
+    "flag": "https://flagcdn.com/gb-eng.svg",
+    "formation": "4-2-3-1",
+    "approach": "Kiểm soát & pressing",
+    "points": ["Cầm bóng, luân chuyển hai biên", "Bellingham dâng cao tuyến hai", "Bóng chết là vũ khí lợi hại"],
+    "keyPlayer": "Jude Bellingham",
+    "color": "purple"
+  }
+}
+```
+- **`color`** — set `left` to `cyan` and `right` to `purple` (the CSS accents each column; the right column reads best in purple).
+- **`approach`** ≤28 chars (the headline tag). **`points`** 2–3 items, each ≤42 chars (concrete mechanisms, NOT vague "chơi hay"). **`formation`** keeps digits (`4-3-3`). **`keyPlayer`** = the single linchpin (optional but recommended). **`flag`** optional (national flag SVG / crest) — set it for previews.
+- **`voiceText`** contrasts the two plans in spoken Vietnamese; the board carries the detail. Spell formations as words in voice (`bốn ba ba`), never `4-3-3` (hyphen reads "trừ"). Example: *"Na Uy dựng khối thấp, chờ phản công bằng tốc độ của Haaland. Còn tuyển Anh sẽ cầm bóng, luân chuyển hai biên và dồn ép bằng Bellingham."*
+- **No `imagePrompt`** — data-driven template like formation-pitch / group-intro / match-results.
+
+#### Recent form (both teams) — use the `form-compare` template (data-driven, NO image)
+
+For the "Phong độ gần đây" beat in a preview, render ONE **`form-compare`** scene — a two-column split (same dark board family as tactics-board) showing BOTH teams' last few results side by side, each result a W/D/L chip + opponent + scoreline. ⚠️ This **replaces the older pair of `match-results` boards** (one per team) — the user asked for one concise combined split (2026-07-06). No AI image (`images-for-videos` must NOT plan one).
+
+**Triggers:** PRE-MATCH PREVIEW with each side's recent results in the source's "Phong độ gần đây & đối đầu" section. One board per fixture.
+
+**Schema usage:**
+```json
+{
+  "template": "form-compare",
+  "title": "Phong độ gần đây",
+  "left": {
+    "name": "Mỹ",
+    "flag": "https://flagcdn.com/us.svg",
+    "color": "cyan",
+    "results": [
+      { "opponent": "Đức", "score": "1-2", "outcome": "L" },
+      { "opponent": "Senegal", "score": "3-2", "outcome": "W" },
+      { "opponent": "Bồ Đào Nha", "score": "0-2", "outcome": "L" }
+    ]
+  },
+  "right": {
+    "name": "Bỉ",
+    "flag": "https://flagcdn.com/be.svg",
+    "color": "purple",
+    "results": [
+      { "opponent": "Maroc", "score": "2-0", "outcome": "W" },
+      { "opponent": "Mỹ", "score": "2-2", "outcome": "D" },
+      { "opponent": "Hy Lạp", "score": "3-1", "outcome": "W" }
+    ]
+  }
+}
+```
+- **`color`** — `left` = `cyan`, `right` = `purple` (matches tactics-board / hook split conventions).
+- **`results`** 1–6 per side (aim ~5), MOST RECENT FIRST. `score` from THAT team's perspective first (`"2-1"` = this team scored 2), ≤8 chars — visible field so digit-hyphen is fine here. `outcome` `"W"`/`"D"`/`"L"` colours the chip green/gold/red — MUST match the score.
+- **`opponent`** ≤18 chars, strip foreign-team diacritics (`Đức`, `Bồ Đào Nha`, `Bỉ`, `Hy Lạp`, `Maroc`). **`flag`** optional (set it for previews). **`name`** ≤20 chars.
+- **`voiceText`** gives each side's run in one breath (contrast the two), NOT a read-out of every score. Spell any spoken scoreline as words (`ba hai`), never `3-2` (hyphen reads "trừ") — but the visible `score` field keeps digits.
+- **No `imagePrompt`** — data-driven.
+
+#### Group-stage team reveal — use the `group-intro` template (data-driven, NOT per-team images)
+
+When the source introduces a **World Cup / tournament group** (a bảng with its 3–4 teams + predicted finishing order), render the team reveal as ONE **`group-intro`** scene per group — a code-driven HTML/CSS card (flags/crests + team names + predicted finish), NOT a stack of per-team `stat-hero` image scenes. This is the group-stage analog of `formation-pitch`: the data is the visual, so no AI image is needed (and `images-for-videos` should NOT plan per-team posters for it).
+
+**Triggers:** content is a group-stage preview/prediction (`Bảng A`, `Bảng F`, "Group D", squad-group reveal) listing the teams in a group with a predicted order/standing.
+
+**Schema usage** (teams listed in predicted finishing order — index+1 is the displayed rank; `qualify:true` gold-highlights the advancing teams):
+```json
+{
+  "template": "group-intro",
+  "group": "F",
+  "teams": [
+    { "name": "Argentina", "flag": "https://flagcdn.com/ar.svg", "note": "Nam Mỹ · ƯCV vô địch", "result": "Nhất bảng", "qualify": true },
+    { "name": "Na Uy",     "flag": "https://flagcdn.com/no.svg", "note": "Haaland dẫn dắt",      "result": "Đi tiếp",   "qualify": true },
+    { "name": "Australia",  "flag": "https://flagcdn.com/au.svg", "note": "Châu Á · Socceroos",   "result": "Hạng 3" },
+    { "name": "Tunisia",    "flag": "https://flagcdn.com/tn.svg", "note": "Đại bàng Carthage",    "result": "Bị loại" }
+  ]
+}
+```
+- **`flag`** = an image URL or local path. Default to `https://flagcdn.com/<iso2>.svg` (national flags; e.g. `ar`, `no`, `gb-eng` for England, `de` Germany, `jp` Japan, `kr` S.Korea, `br` Brazil, `es` Spain). For federation crests instead, drop the SVG under `assets/` (or the input folder) and point `flag` at that path.
+- **`result`** ≤20 chars: `"Nhất bảng"`, `"Đi tiếp"`, `"Hạng 3"`, `"Bị loại"`. **`qualify`** true for advancing teams (gold row + gold chip).
+- **No `imagePrompt`** — `group-intro` is a non-image template (like `formation-pitch`/`comparison`); in plan mode it's added on top of the image-eligible plan scenes.
+- **`voiceText`** introduces the 4 teams + the prediction in spoken Vietnamese; the screen carries the table. Example: *"Bảng F là bảng của Messi. Argentina được dự đoán nhất bảng, Na Uy của Haaland đi tiếp. Australia và Tunisia chia tay sớm."*
+- A group-stage part covering 2 groups (e.g. Bảng A + B) = 2 `group-intro` scenes (one per group) + hook + 1–2 highlight image scenes + engagement + outro. Don't also make per-team `stat-hero` images for those teams — that's what `group-intro` replaces.
+
+#### Predicted match scores — use the `match-results` template (data-driven scoreline board, NO image)
+
+When the source carries **predicted/actual match scorelines** (a group's game-by-game results, or a knockout round's results), render them as a **`match-results`** scene — a code-driven board listing each result `home  H-A  away`, NO AI image. This is the scoreline analog of `group-intro`: the scores ARE the visual.
+
+**Triggers:** source has a "Key scores" / "Diễn biến" / game-by-game block (e.g. `Mexico 2-0 Nam Phi; Hàn Quốc 1-1 Séc; …`), OR a knockout round with multiple results. Use ONE board per group (its 6 matches) or ONE board per knockout round (its 8–16 results — cap 8 rows/board; split into 2 boards if a round has >8).
+
+**Schema usage:**
+```json
+{
+  "template": "match-results",
+  "title": "Bảng A · Kết quả",
+  "matches": [
+    { "home": "Mexico",   "homeScore": "2", "away": "Nam Phi",  "awayScore": "0" },
+    { "home": "Hàn Quốc", "homeScore": "1", "away": "Séc",      "awayScore": "1" },
+    { "home": "Séc",       "homeScore": "1", "away": "Mexico",   "awayScore": "2", "note": "luân lưu" }
+  ]
+}
+```
+- **`title`** ≤40 (e.g. `"Bảng A · Kết quả"`, `"Vòng 16 đội"`). Optional **`subtitle`** ≤40.
+- **`home`/`away`** ≤20 (team name, strip foreign diacritics per typography rules). **`homeScore`/`awayScore`** are strings ≤8 (allow `"2"`, or pen shorthand). **`note`** ≤20 optional (`"luân lưu"`, `"Nhất bảng"`).
+- **2–8 matches** per board. **No `imagePrompt`** — non-image template; `images-for-videos` must NOT plan an image for it.
+- **`voiceText` summarizes, does NOT read all scores** — the board shows the digits; the voice gives narrative color (who stayed unbeaten, the key result). E.g. *"Đây là toàn bộ kết quả Bảng A. Mexico bất bại, chỉ bị Hàn Quốc cầm chân. Séc vượt Nam Phi lấy vé vớt."* Reading 6 scorelines aloud is robotic — don't.
+- For a group-stage part: pair each `group-intro` (standings) with a `match-results` (the 6 scores) — standings answer "ai đi tiếp", scores answer "diễn biến thế nào". For knockout parts, a `match-results` board replaces a stack of per-match `comparison` scenes when a round has many results (a round of 16 = 8 rows in ONE board, not 8 separate scenes).
 
 #### Player lists (NOT lineups) — SPLIT into individual stat-hero scenes, don't pack into feature-list
 
@@ -469,12 +1119,11 @@ When the source names **2-5 specific named players** as a thematic group (worker
     "label": "Joshua Kimmich",
     "highlights": ["Nhạc trưởng", "Tranh chấp", "Bayern Munich"],
     "context": "Trụ cột trung tâm tuyển Đức"
-  },
-  "imagePrompt": "Cinematic vertical 9:16 portrait sports photograph of Joshua Kimmich..."
+  }
 }
 ```
 
-Each individual scene gets its own `imagePrompt` (image-eligible by template). The image-plan (`/images-for-videos`) MUST declare one scene per player, with the planned filename matching the sceneId.
+Each individual scene is image-eligible by template (no `imagePrompt` field). The image-plan (`/images-for-videos`) MUST declare one scene per player, with the planned filename matching the sceneId.
 
 **Worked example — from the Nagelsmann / Đức workers section (instead of one `workers-list` feature-list):**
 
@@ -580,7 +1229,7 @@ Screen real estate is precious (huge fonts, 1080px width). Voice has time. So **
 - `EPL` / `NHA` = Premier League / Ngoại hạng Anh
 - `WC` = World Cup (or write `World Cup` — same length)
 - `vs` = đối đầu (lowercase, no period)
-- `MU`, `MC`, `PSG`, `RM`, `BVB`, `CAHN` (Công an Hà Nội) — only when context is unambiguous
+- `MU`, `MC`, `PSG`, `RM`, `BVB`, `CAHN` (Công an Hà Nội) — only when context is unambiguous. **SCREEN ONLY** — `voiceText` must always carry the full official club name (`Manchester United`, `Paris Saint-Germain`, …); see the club-name rule in the phonetic section.
 
 **B2. Stat-value shorthand** — `stat-hero.value` (cap 20, font 220px) must be ultra-compact. Common patterns:
 - Single number + unit: `15`, `82%`, `€80M`, `1m93`
@@ -634,10 +1283,10 @@ Other fields render `|` as a literal character — don't use it there.
 | `stat-hero.context` | 50 | 44px Inter pill | Single anchor line: club, year, or metric framing (`Bàn thắng + 5 kiến tạo`, `Hơn 1 bàn / trận`, `Barcelona`). Sentence case. |
 | `stat-hero.highlights[]` | 20 each, max 4 | 44px Inter | Punchy fragments — no full sentences. (`Sức mạnh`, `Không chiến`, `24 bàn / 32 trận`, `19 tuổi`) |
 | `feature-list.title` | 40 | 60px Inter purple | Sentence case. `|` allowed. |
-| `feature-list.bullets[]` | 50 each, max 4 | 50px Inter | Each = a clause/short sentence. Sentence case. CSS adds the dot — don't prefix `-` or `•`. |
+| `feature-list.bullets[]` | 50 each, max 4 (max 3 if the scene has an image) | 42px Inter, cream on green card | Each = a clause/short sentence. Sentence case. Rendered as green broadcast cards — no `-`/`•`/number prefix. Optionally wrap ONE key name in `**...**` (e.g. `**Kone** gãy chân, nghỉ hết giải`) → renders as a gold highlight. The `**` markers count toward the 50-char cap. |
 | `formation-pitch.title` | 40 | 64px Inter | Sentence case. E.g. `"Đội hình dự kiến"`, `"Đội hình ra sân"`. |
 | `formation-pitch.formation` | 12 | 56px Anton cyan | Formation label, e.g. `"4-2-3-1"`, `"4-3-3"`, `"3-5-2"`. |
-| `formation-pitch.rows[][]` | 24 per name, 1–5 names/row, 2–6 rows | 26px Inter on green pitch | Player names by row, **back to front** (GK row first, ST row last). Use surnames only (`Mbappé`, `T. Hernández`); compress long first-names with initial (e.g. `"T. Hernández"` for `"Théo Hernández"`). Total should be 11 for a standard XI. |
+| `formation-pitch.rows[][]` | 24 per name, 1–5 names/row, 2–6 rows | 26px Inter on green pitch | Player names by row, **back to front** (GK row first, ST row last). Order within rows MUST be **left-to-right from the viewer's perspective** (Left Back first, Right Back last) — i.e. **REVERSE the Sports Mole line**, which lists RB→LB. Use surnames only (`Mbappé`, `T. Hernández`). Total 11 for standard XI. |
 | `engagement-question.question` | 120 | 60px Inter | Content-derived question. Sentence case. `|` allowed for phrase-aware line breaks. End with `?`. |
 | `engagement-question.cta` | 40 | 38px Inter pill | Short comment prompt, e.g. `"Để lại bình luận bên dưới nhé"`. |
 | `engagement-question.tag` | 20 | 36px CSS uppercase | Optional. Natural case (`Câu hỏi`, `Bình luận`). |
@@ -657,49 +1306,35 @@ For each scene, ask:
 5. **Outro source:** Did I omit the `"Nguồn:"` prefix from `outro.source` (the composer adds it)?
 6. **Em dash:** Did I avoid `—` (U+2014) in any visible field? Replaced with ` · ` in label/bullet, `: ` in `callout.statement`, or restructured? (See A6.)
 
-### imagePrompt rules (CRITICAL — videos live or die by visuals)
+### Image rules — NO imagePrompt
 
-Every hook / callout / stat-hero scene SHOULD have an `imagePrompt`. Same rules apply when this skill writes prompts in free-form mode AND when `images-for-videos` writes prompts upstream — keep both ends consistent:
-- **English** prompts (image models are much stronger in English)
-- Sports photography style — cinematic, action, atmospheric
-- Include `"vertical 9:16 composition"` or `"portrait orientation"`
-- **80–180 words** — the realism + iconography blocks below need room to breathe
-- Avoid **scoreboards** and **on-image text overlays / lower-thirds / broadcast graphics** (the pipeline overlays its own captions; in-image text fights that)
-- **For specific named players: lean on the NAME, not facial description.** Lead with `"<Full Name>, the <Nationality> <position> for <Club> and the <National Team>"` and let the model use its training data to render the actual person. Do NOT add skin tone / hair / beard / jaw / eye descriptors — those average the face into a generic look and override the real likeness. Spend the word budget on kit + crest, pose, setting, and lighting instead.
-- **Real club iconography is encouraged, not avoided.** Earlier guidance said "no logos" — that produced sterile fake-looking jerseys. Reverse it: **DO ask for the real club crest visible on the chest**, kit manufacturer's stripes when canonical (Adidas three-stripes, Nike swoosh placement), club scarves in fan shots, banners with the club crest, tifo / mosaics in the stands, real stadium signage that exists in broadcast photos (`"Allianz Arena"` lettering, Anfield's "This Is Anfield" tunnel sign, Dortmund's Yellow Wall). End each prompt with `"the club's real crest visible on the jersey, no scoreboard graphics or text overlays"`.
-- **Hook for VS / matchup content — split-frame with both clubs' iconography.** When the video pits two clubs/players against each other, the hook MUST show both: vertical split-frame, one named player from each side in their **real club kit with crest visible**, fans behind each in matching colors raising club scarves, the competition's real trophy (UCL starball, World Cup, Premier League trophy) hovering between them when relevant.
-- **Atmospheric / illustrative scenes — pull from a variety pool**, don't default to "player on pitch": ultras with smoke flares (Yellow Wall, Virage Auteuil, the Kop), tifo / mosaic in the stands forming the club crest, club mascot on the touchline, scarf wall, club mural on a city street, stadium exterior landmarks (Allianz red facade, Bernabéu skin, Camp Nou facade, San Siro spirals), tunnel walk, dressing room with shirts hanging, trophy on a plinth, manager at the press desk with the club crest backdrop. One or two atmospheric scenes per video — not every callout needs to be a player.
-- **Stack realism cues for press-photo feel** — pick 2–3 per prompt: telephoto realism, shallow depth of field, motion blur on the ball, dramatic rim-lighting from floodlights, atmospheric haze, natural skin texture (no plastic AI smoothness), 35mm/85mm lens compression, shot on Canon/Sony press body, rain streaks in floodlights when wet, breath steam in cold-evening matches, golden hour side-lighting for afternoon kickoffs.
-- **"Ảnh chế" / meme scenes — 0–2 per video when content invites it.** When the source has built-in irony (manager mind-games like *Pep cổ vũ West Ham*, drama / soap-opera plots like Mbappé saga, banter / rivalry tension, absurd "still going" stats), include 1–2 humor scenes. They are NOT cartoons — photo-realistic press-style edits with ONE clean impossible element (the wrong jersey, the wrong gesture, the wrong scarf) and a believable reaction shot in the background. Same naming/likeness/iconography rules as regular scenes; the joke lands because the West Ham crest is *correctly* on the kit Pep is *wrongly* wearing. Skip memes for tributes, sober tactical breakdowns, pure ranking countdowns, and heavy news (injuries, tragedies). Tag the prompt as `(humor edit / playful what-if scene)` up front so the model knows it's intentional. Hard cap **2 memes per video** — they REPLACE a regular image scene, not stack on top of the band. Mark `subjectHint` with `"Ảnh chế — ..."` so the user spots the intent at a glance. Full recipe + Pep / West Ham example lives in the `images-for-videos` SKILL.md.
-
-**Example imagePrompts for football contexts:**
-
-| Context | Prompt |
-|---|---|
-| Named player goal (Haaland) | `Cinematic vertical 9:16 portrait sports photograph of Erling Haaland, the Norwegian striker for Manchester City and the Norway national team, in a light blue Manchester City home kit with the City crest visible on the chest, roaring after scoring at the Etihad Stadium, captain's armband on his left arm, packed home end behind him waving sky-blue scarves, dramatic floodlights, telephoto compression, shallow depth of field, motion blur on his fists, sharp focus on his face, dramatic rim-lighting, natural skin texture, professional sports press photography matching Premier League broadcast photographs. No scoreboard, no on-image text overlays.` |
-| Named player action (Vinicius) | `Cinematic vertical 9:16 portrait sports photograph of Vinícius Júnior, the Brazilian winger for Real Madrid and the Brazil national team, dribbling at full speed past a defender in a white Real Madrid home kit with the Real Madrid crest visible on the chest, the Santiago Bernabéu's metallic exterior skin glowing in the background, packed stands behind him in white waving Madrid flags, dramatic floodlights, telephoto compression, motion blur on the defender, sharp focus on Vinícius and the ball, professional sports press photography matching La Liga and Champions League broadcast photographs. No scoreboard, no on-image text overlays.` |
-| VS hook (Messi vs Ronaldo) | `Cinematic vertical 9:16 split-frame sports photograph of a generation-defining matchup. On the left half, Lionel Messi, the Argentine forward and captain for the Argentina national team, in a light-blue and white striped Argentina kit with the AFA crest visible on the chest, focused intense expression. On the right half, Cristiano Ronaldo, the Portuguese forward and captain for the Portugal national team, in a dark red Portugal home kit with the FPF crest visible on the chest, mirroring stance. Down the centre seam, a golden Ballon d'Or trophy hovers under a dramatic spotlight. Behind each side, packed stands in matching colors waving national flags. Telephoto compression, shallow depth of field, dramatic rim-lighting, atmospheric haze, photo-realistic press photography. No scoreboard, no on-image text overlays.` |
-| Ultras / fan tribute (Dortmund) | `Cinematic vertical 9:16 portrait sports photograph of the Borussia Dortmund Yellow Wall at night — the Südtribüne packed wall-to-wall with fans in bright yellow, scarves raised above heads, a giant tifo banner unfurling across the stand reading "BVB", yellow smoke flares lit at the front, dramatic floodlights piercing through the smoke haze, telephoto compression, sharp focus on the front rows with the back rows softly bokeh'd, photo-realistic press photography matching Bundesliga broadcast photographs. No scoreboard, no on-image text overlays.` |
-| Mascot moment | `Cinematic vertical 9:16 portrait sports photograph of Bayern Munich's mascot Berni the bear standing on the touchline at the Allianz Arena before kickoff, waving a Bayern Munich scarf with the Bayern crest visible, packed red-clad stands in the background, the arena's iconic red-illuminated facade visible above the stand, golden hour evening lighting, telephoto compression, shallow depth of field, photo-realistic press photography. No scoreboard, no on-image text overlays.` |
-| Stadium exterior landmark | `Cinematic vertical 9:16 portrait sports photograph of the Allianz Arena at night, the iconic outer facade glowing entirely in red illuminated panels stretching upward into a deep blue evening sky, "Allianz Arena" lettering visible on the facade, fans in red Bayern shirts and scarves walking toward the entrance in the foreground, atmospheric haze, telephoto compression, lens flare from the facade lighting, photo-realistic press photography. No scoreboard, no on-image text overlays.` |
-| Tunnel walkout | `Cinematic vertical 9:16 portrait sports photograph from inside a Premier League stadium tunnel, two teams lined up about to walk out, the leading captain visible in foreground with the captain's armband, club crest on the chest of the home kit, the "This Is Anfield" red sign or equivalent club tunnel signage visible above, photographers' camera flashes lighting the entrance, motion blur on the players' legs, sharp focus on the lead captain, dramatic press-pit lighting, photo-realistic press photography. No scoreboard, no on-image text overlays.` |
-| Trophy lift (named captain) | `Cinematic vertical 9:16 portrait sports photograph of Lionel Messi, the Argentine captain for the Argentina national team, in a light blue and white striped Argentina kit with the AFA crest visible on the chest, lifting the golden FIFA World Cup trophy at a Middle Eastern stadium, gold confetti raining, teammates blurred in celebration behind him, dramatic floodlight rim-lighting on the trophy, telephoto compression, sharp focus on Messi's face and the trophy, natural skin texture, photo-realistic press photography matching 2022 World Cup final broadcast photographs. No scoreboard, no on-image text overlays.` |
+Per the no-prompt rule (`memory/feedback_dont_author_image_prompts.md`), scenes carry **no `imagePrompt` field**. Images are generated by the user on grok.com (planned via `/images-for-videos`) and bound by sceneId at stage time. In this skill you only ensure:
+- Every plan scene appears in script.json with the EXACT same `id` + matching `templateData.template` — that is how the staged image binds (see Step 7). `src/image/index.ts` PASS 1 applies the override for every image-eligible scene regardless of any prompt.
+- Image-eligible templates = `hook` / `callout` / `stat-hero` / `feature-list` (feature-list image is **optional** — added 2026-07-04). The rest (`comparison` / `formation-pitch` / `group-intro` / `match-results` / `outro`) are data-driven, no image. When `/images-for-videos` planned an image for a feature-list scene, keep that scene's `id` matching so the staged image binds; the composer lays it out by aspect (landscape → hero card above the list, portrait → full-bleed with cards floating) and **shows at most 3 bullets** in that case — so an imaged feature-list should carry ≤3 bullets.
+- Free-form mode (no plan): image-eligible scenes just render a gradient background (AI image gen is retired). Do NOT invent prompts to avoid it.
 
 ### Step 5: Self-validate before writing
 
-- Total word count + scene count + duration are all in the band you picked at Step 2.4 based on distinct-points count — do NOT auto-expand to fill 90–180s
-- Scene count between 6 (lower bound for 3–4 substantive points) and 15 (upper bound for 8+ substantive points)
+- **GATE NHỊP (bắt buộc, chạy trước khi render):**
+  ```bash
+  npx tsx _validate-script.ts <outputDir>/script.json
+  ```
+  Chặn cứng cả schema (zod field caps) lẫn nhịp: **tổng ≤ 240 từ · mỗi cảnh ≤ 26 từ · hook ≤ 18 từ · 6–13 cảnh**, và cảnh báo khi `stat-hero`+`callout` > 50% số cảnh. Exit 1 = KHÔNG được render. Vượt → cắt câu rồi chạy lại; KHÔNG bỏ scene, KHÔNG render rồi mới sửa (render xong mới cắt là tốn quota TTS + thời gian encode). Nếu `.txt` có block `## Giới hạn thời lượng` thì budget trong đó thắng, nhưng vẫn không được vượt trần validator.
+- Total word count + scene count + duration are all in the band you picked at Step 2.4 based on distinct-points count — do NOT auto-expand to fill the upper bound
+- Scene count between 6 (lower bound for 3–4 substantive points) and 11 (upper bound for 8+ substantive points; listicle "N mục" được tới 13, chỉ BIO-*/HISTORY-* nhiều phần được vượt thời lượng)
+- **`stat-hero` + `callout` ≤ 50% số cảnh** — phần còn lại lấy từ `feature-list` / `big-quote` / `comparison` / `timeline` / `match-results`. Bỏ qua khi là listicle "N mục" phải đủ mục.
 - scenes[0].type === "hook"
 - **second-to-last scene template === "engagement-question"** (mandatory channel convention — derived from content; see "Engagement question" rule above)
 - last scene type === "outro"
 - Each text field ≤ schema max (use the field caps in `script-schema.ts` — e.g., `headline ≤ 40`, `bullets[i] ≤ 50`)
-- Every hook/callout/stat-hero has an `imagePrompt` — fix yourself silently if missing
+- No scene has an `imagePrompt` field — remove it if present (no-prompt rule)
+- **16:9 mode only** (plan says `aspect: "16:9"`): `metadata.aspect === "16:9"`; ≤ 1 250 từ / ≤ 24 scene; every plan scene's `marker` copied over, and every scene of one news item sharing that item's marker; no un-ported template (`big-quote`/`bracket`/`tactics-board`/`form-compare`/`group-intro`/`match-results`/`formation-pitch`/`timeline`); no image-less `stat-hero`/`callout`
 
 ### Step 6: Write script.json
 
 Use the `Write` tool to write to `<outputDir>/script.json`.
 
-**Plan mode extra rule:** every plan scene must appear in script.json with the EXACT same `id` and a matching `templateData.template`. Mismatched ids = staged image won't bind. `imagePrompt` field should be copied verbatim from the plan (it acts as a fallback if the staged image is later removed).
+**Plan mode extra rule:** every plan scene must appear in script.json with the EXACT same `id` and a matching `templateData.template`. Mismatched ids = staged image won't bind. Do NOT add an `imagePrompt` (no-prompt rule) — the staged file binds by sceneId alone.
 
 ### Step 7 (plan mode only): Stage planned images
 
@@ -713,7 +1348,7 @@ The script:
 1. Reads `images-plan.json`
 2. Verifies every planned `filename` exists in the input folder
 3. **Exits non-zero** with a list of missing files (and their prompts) if any are absent
-4. Otherwise copies each planned file to `output/<slug>/images/<sceneId>.<ext>` so the pipeline's override mechanism picks them up
+4. Otherwise copies each planned file to `video/output/<slug>/images/<sceneId>.<ext>` so the pipeline's override mechanism picks them up
 
 If the staging step fails:
 - DO NOT proceed to the pipeline.
@@ -728,20 +1363,141 @@ npm run pipeline -- <outputDir>/script.json
 
 **Expected latency:** TTS ~30–60s + image gen ~30–90s (parallel) + render ~3–5min. Analysis videos take longer than news due to more scenes.
 
-In plan mode the image generation step is essentially free — every eligible scene already has a staged file at `output/<slug>/images/<sceneId>.<ext>`, so the pipeline logs `MANUAL OVERRIDE` for each and skips the AI provider entirely.
+In plan mode the image generation step is essentially free — every eligible scene already has a staged file at `video/output/<slug>/images/<sceneId>.<ext>`, so the pipeline logs `MANUAL OVERRIDE` for each and skips the AI provider entirely.
+
+**Background music is automatic — leave it alone.** Step 6 picks ONE track at random from `assets/music/`, loops it to the voice length, and ducks it under the narration at volume `0.22`. Standing instruction from the channel owner (2026-07-31): **always random, every video.** Concretely that means:
+
+- Do NOT set `VIDEO_BG_MUSIC` to pin a track, and do NOT propose a track per video.
+- Do NOT ask which track to use, or whether to enable music — it is on by default whenever `assets/music/` holds audio files.
+- Do NOT change `VIDEO_BG_MUSIC_VOLUME`. `0.22` was chosen by the owner from a blind A/B against 0.14 and 0.18; it sits deliberately a bit louder than the 15–20 dB broadcast norm. It is a taste call, not a bug — do not "correct" it downward.
+- Just report which track the log picked (`bg music: <file> @ volume <n>`) in the Step 9 summary, so the owner knows what they are hearing.
+
+Empty `assets/music/` → no music, pipeline behaves exactly as before. See `assets/music/README.md` for licensing rules before adding tracks (⚠️ `assets/beat/` holds commercial tracks — never copy those in).
+
+### Step 8.5: Gói đăng bài (BẮT BUỘC — mp4 chưa phải là xong)
+
+Một short 9:16 giao thiếu chữ đăng bài là giao một nửa. Người xem gặp video qua **ảnh bìa + dòng caption** trước khi gặp khung hình đầu tiên, mà tới 19/8/2026 pipeline chưa từng sinh ra thứ nào trong hai thứ đó cho bản dọc (chỉ bản tin 16:9 có `tieu-de.txt`). Đây là khúc phễu duy nhất chưa ai đụng vào.
+
+**1. Ảnh bìa:** `npm run thumbnail -- <outputDir>` → `thumbnail.jpg` (frame giữa cảnh hook). Gửi kèm cho user.
+
+**2. Viết `<outputDir>/dang-bai.txt`** đúng khuôn sau:
+
+```
+TIÊU ĐỀ
+<≤60 ký tự. KHÔNG trùng headline trên màn hình — bìa đã có headline rồi,
+tiêu đề phải nói tầng thứ hai, đúng luật mục D-bis.>
+
+CAPTION
+<2-3 câu. Câu 1 nêu điều đang treo. Câu 2-3 được phép cà khịa (xem dưới).
+Kết bằng MỘT câu hỏi mở — chỗ này đẻ comment, và comment là đòn bẩy
+phân phối mạnh nhất của kênh nhỏ.>
+
+HASHTAG
+<5-7 thẻ. 2 thẻ rộng (#bongda #football), 2-3 thẻ chủ đề (#manchesterunited
+#ngoaihanganh), 1-2 thẻ series nếu có (#neunhu). KHÔNG nhồi 20 thẻ —
+không giúp phân phối, chỉ làm caption trông như spam.>
+```
+
+⚠️ Caption KHÔNG được là tóm tắt video. Nếu người xem đọc caption xong biết hết nội dung thì họ không cần xem — đúng lỗi "đóng vòng lặp" của hook, chỉ khác chỗ đứng.
+
+### Step 8.6: Giọng cà khịa (mới 19/8/2026 — theo yêu cầu user)
+
+Kênh giữ tone **báo chí chuyên**, nhưng được phép cà khịa ở **ba chỗ có giới hạn**. Đây không phải đổi giọng toàn video — lần thử "banter mode" tháng 5/2026 thất bại đúng vì rải slang lên toàn bài, đọc ra máy móc chứ không buồn cười (`memory/feedback_humor_mode_didnt_land.md`).
+
+**Được cà khịa ở:**
+1. **Caption** (Step 8.5) — chỗ an toàn nhất, không ảnh hưởng uy tín phần số liệu.
+2. **Cảnh `engagement-question`** — vốn đã là chỗ khơi tranh luận.
+3. **TỐI ĐA MỘT** dòng thân bài mỗi video.
+
+**Luật của một câu cà khịa dùng được:**
+- **Punchline phải nằm trong DỮ KIỆN, không nằm trong tính từ.** Cái buồn cười là sự thật trớ trêu, mình chỉ đặt nó cạnh nhau. ✅ *"Sáu năm, bốn đời huấn luyện viên, vẫn đúng cái hàng thủ ấy."* ❌ *"Hàng thủ dở tệ không thể tin nổi."* — cái sau chỉ là chê, không phải đùa.
+- **Cà khịa TÌNH HUỐNG, không cà khịa CON NGƯỜI.** Được cười cái quyết định, cái bản hợp đồng, cái thống kê. Không hạ nhục cầu thủ, không đụng ngoại hình / gia đình / quốc tịch.
+- **Không dùng biệt ngữ mạng và không xưng hô kiểu "mấy chế / con vợ"** — đã thử, user bác.
+- **Đúng một cú mỗi video.** Hai câu đùa cạnh nhau thì cả hai cùng hỏng.
+- **Số liệu KHÔNG được đùa.** Sự thật nền phải đúng 100% kể cả khi câu văn hài.
+
+**Mốc hiệu chỉnh — LẦN THỨ BA trong ngày 19/8/2026. Đây là mốc đang dùng.**
+
+Sáng: user chọn "trớ trêu trong dữ kiện". Chiều: nâng lên "châm thẳng vào quyết định CLB". Tối: **user chê cả hai là NHẠT** — *"viết gì nhạt thế, kiểu như MU mua vội Baleba nhìn cứ mắc cười, giống kiểu bạn ế đến năm 40 tuổi không ai yêu phải cưới vội cô hàng xóm"*.
+
+**Cái sai của hai mốc trước: đó là mỉa kiểu NHÀ BÁO** — đặt hai con số cạnh nhau rồi để người xem tự hiểu. Nó thông minh nhưng lạnh, và người xem không cười, chỉ gật.
+
+**Thiết bị gây cười đúng: SO SÁNH VỚI CHUYỆN ĐỜI THƯỜNG.** Lấy tình huống bóng đá và úp lên một cảnh ai cũng từng sống qua — ế, thi trượt, chia tay, đi chợ muộn, xin tiền bố mẹ.
+
+```
+Sự thật: MU cả hè không mua ai, còn 13 ngày mới hỏi mua Baleba
+❌ mốc cũ  "Chín người đi, năm người đến. Gọi đó là tăng cường cũng được."
+✅ mốc mới "Cả mùa hè ngồi yên. Còn mười ba ngày mới cuống lên đi hỏi vợ."
+
+Sự thật: Liverpool dẫn 2 bàn ở 2 trận liền rồi thua cả hai
+✅ "Kiểu học chín phẩy cả kỳ rồi trượt tốt nghiệp."
+
+Sự thật: Newcastle mất HLV ngày 31/7, sát ngày khai mạc
+✅ "Đúng kiểu chia tay trước đám cưới một tuần."
+```
+
+**Luật của một câu so sánh dùng được:**
+- **Vế bóng đá phải là sự thật kiểm chứng được.** Câu đùa chỉ đổi CÁCH KỂ, không đổi dữ kiện. Bịa vế trái là mất cả hai.
+- **Cảnh đời phải phổ thông ở Việt Nam** — ế, thi cử, chia tay, đi chợ, xin tiền bố mẹ, vay nợ. Đừng lấy ví dụ chỉ dân thành thị hiểu.
+- **Nhắm vào TÌNH HUỐNG của câu lạc bộ, không nhắm vào con người.** Cười cái quyết định mua muộn thì được; ví một cầu thủ với người ế thì không.
+- **Ấm, không cay.** Ví dụ gốc của user là tự trào — ai cũng thấy mình trong đó. Đó là lý do nó buồn cười chứ không phải xúc phạm.
+- **2-3 câu mỗi video, không hơn.** Và cảnh mang CON SỐ quan trọng nhất thì đừng đùa — chỗ đó cần người xem tin.
+- Vẫn cấm: biệt ngữ mạng, xưng hô "mấy chế / con vợ" (user đã bác tháng 5/2026).
+
+**Chỗ lấy chất liệu:** file `.txt` do `/read-rewrite` sinh ra giờ có mục **`## Góc hài`** — nêu trục cười và 4-5 câu ứng viên. Chọn 2-3, đừng dùng hết.
+
+⚠️ **Ba lần hiệu chỉnh trong một ngày nghĩa là khẩu vị này chưa ổn định.** Đo bằng tỉ lệ comment, và nếu 5 video liên tiếp không nhích thì quay lại hỏi user thay vì tự đoán tiếp.
+
+### Step 8.65: Từ ĐẦU TIÊN của hook là từ bỏ đi được
+
+**Âm tiết đầu tiên của cả track voice là thứ KHÔNG đáng tin.** TTS bắt đầu phát từ sample 0 và nuốt phần đầu lưỡi của từ #1 — đo được trên 22/36 video đã giao. Đà im lặng 0,35s mà pipeline chèn vào chỉ tạo khoảng lặng cho VIDEO; nó không tái tạo được âm tiết mà TTS chưa từng phát ra.
+
+Nên **đừng bao giờ mở `voiceText` của hook bằng từ mang thông tin** — nhất là số ghép.
+
+| Mở đầu | Nghe ra |
+|---|---|
+| ❌ `"Mười ba ngày nữa đóng chợ."` | *"**Ba** ngày nữa…"* — mất "mười", sai hẳn con số |
+| ✅ `"Còn mười ba ngày nữa đóng chợ."` | đúng — chữ "Còn" hứng đòn thay |
+
+Bằng chứng trong cùng một track: cụm "mười ba" ở **giây 23** đọc đúng (Whisper ghi `13`), cụm y hệt ở **giây 0** mất âm đầu (Whisper ghi `3`). Không phải lỗi tốc độ, không phải lỗi số — thuần vị trí.
+
+Cho một chữ rẻ tiền đứng đầu: `"Còn"`, `"Và"`, `"Giờ"`, `"Ở đây"`. Nó tốn một từ trong ngân sách 18 từ của hook và đáng giá.
+
+### Step 8.7: Nhịp câu — viết cho TAI, không cho MẮT
+
+user 19/8/2026: *"cách đọc nữa"*. TTS đọc đúng dấu câu mình viết, nên nhịp là thứ mình điều khiển được mà không cần đổi giọng.
+
+- **Xen ngắn với dài.** Hai mươi sáu từ trong một câu liền mạch đọc ra như đọc báo cáo. Cắt thành 2-3 mệnh đề: *"Chín người đi, năm người đến. Gọi đó là tăng cường cũng được."*
+- **Từ đắt đặt CUỐI câu.** TTS xuống giọng ở cuối, nên từ nằm đó được nhấn tự nhiên. ❌ *"Hàng thủ thì chưa có ai được bổ sung."* ✅ *"Hàng thủ thì chưa ai."*
+- **Câu cụt là nhịp nghỉ.** *"Tiền về, người thì không."* — dấu phẩy tạo khoảng lặng ngắn, dấu chấm tạo khoảng lặng dài. Câu đùa cần một nhịp nghỉ TRƯỚC cú chốt, và dấu chấm chính là nhịp đó.
+- **Đừng mở hai câu liên tiếp bằng cùng một cấu trúc** — TTS lặp nguyên đường cong ngữ điệu, nghe ra như máy.
+- **Tốc độ đọc: GIỮ 0,90. Đã thử 0,95 và phải trả lại ngay trong ngày.** Ở 0,95 AusyncLab **nuốt âm tiết giữa của số ghép**: "tám mươi ba triệu" đọc thành "tám triệu", "mười ba ngày" thành "ba ngày". Đây là lỗi SỐ LIỆU, không phải lỗi nhịp — màn hình ghi £83M còn giọng đọc 8 triệu.
+
+  Bằng chứng là mốc thời gian, không phải bản ghi Whisper: `nhìn` kết thúc 2,14s, `triệu` bắt đầu 2,38s — **0,24 giây** cho chỗ đáng ra phải chứa ba âm tiết (~0,6s). Hai lần render trước ở 0,90 đọc đúng cả `13` lẫn `83`.
+
+  ⚠️ Muốn đổi tốc độ thì SAU khi render phải soi `full-words.json` ở đúng chỗ có số ghép, không chỉ nhìn tổng thời lượng. Video vẫn exit 0 và vẫn đủ dài khi số bị đọc sai.
+
+⚠️ Chưa có bằng chứng giọng này kéo được view. Đo bằng **tỉ lệ comment**, không đo bằng cảm giác — và nếu 5 video liên tiếp không nhích comment thì bỏ, đừng giữ vì đã lỡ viết luật.
 
 ### Step 9: Report success
 
 ```markdown
 ✓ Video:  [video.mp4](<outputDir>/video.mp4)
+✓ Bìa:    [thumbnail.jpg](<outputDir>/thumbnail.jpg)
+✓ Đăng:   [dang-bai.txt](<outputDir>/dang-bai.txt) — tiêu đề + caption + hashtag
 ✓ Audio:  [voice.mp3](<outputDir>/voice.mp3) — for CapCut
 ✓ Script: [script.txt](<outputDir>/script.txt) — for CapCut auto-caption
 Tổng thời lượng: XX.Xs
+Nhạc nền: <track file the log reported> (random)
 ```
 
-(Use the actual output dir — `output/<slug>/` in plan mode, `output/<slug>-<timestamp>/` in free-form mode.)
+Drop the `Nhạc nền` line when the log says `bg music: none`.
+
+(Use the actual output dir — `video/output/<slug>/` in plan mode, `video/output/<slug>-<timestamp>/` in free-form mode.)
 
 ## Examples
+
+> ⚠️ **Legacy note:** some example `script.json` blocks below still show an `imagePrompt` field. That field is **no longer written** (no-prompt rule) — ignore it / omit it. The examples are here for **scene structure** (`templateData` shape, ids, field usage), not for image prompts.
 
 ### Example 1: List / Ranking — "Top 5 Vua phá lưới C1 mùa 2024-25"
 
@@ -753,55 +1509,55 @@ Tổng thời lượng: XX.Xs
     "source": { "url": "local", "domain": "local", "image": null },
     "channel": "SportsForAllTV"
   },
-  "voice": { "provider": "ausynclab", "voiceId": "${VOICE_ID}", "speed": 1.0 },
+  "voice": { "provider": "ausynclab", "voiceId": "${VOICE_ID}", "speed": 0.90 },
   "scenes": [
     {
       "id": "hook", "type": "hook",
       "voiceText": "Năm cây săn bàn đáng sợ nhất Champions League mùa hai nghìn không trăm hai mươi bốn — ai đứng đầu sẽ khiến bạn bất ngờ.",
       "templateData": { "template": "hook", "headline": "Top 5 Vua phá lưới", "subhead": "Champions League 24-25", "kenBurns": "zoom-in" },
-      "imagePrompt": "Cinematic vertical 9:16 portrait sports photograph of a packed UEFA Champions League final atmosphere at night — the iconic UCL starball trophy in golden detail rising under a dramatic spotlight in the centre of the pitch, the stands behind it packed with fans waving multi-club scarves and flags of all colors, smoke flares lit in the upper tiers, dramatic floodlights piercing through atmospheric haze, telephoto compression, shallow depth of field on the trophy, dramatic rim-lighting, photo-realistic press photography matching UEFA Champions League final broadcast photographs. No scoreboard, no on-image text overlays."
+      "imagePrompt": "Vertical 9:16 football poster artwork. Centre composition: the iconic UEFA Champions League starball trophy rising hero-style from the lower frame, dramatic golden light burst radiating outward behind it. Background: a layered dark navy graphic backdrop with a huge stylized UCL starball pattern floating faintly as a watermark, multi-club scarves rendered as graphic color bands at the lower frame edge (Real Madrid white, Liverpool red, Barcelona blue-and-red, Bayern red, PSG navy). Vibrant saturated palette with bold gold accents, very high contrast, glossy graphic-design finish. Stylized like a UEFA Champions League knockout matchday graphic. No on-image text or captions, no scoreboard graphics."
     },
     {
       "id": "rank-5", "type": "body",
       "voiceText": "Hạng năm, Vinicius Junior — chín bàn cùng năm pha kiến tạo, tốc độ và kỹ thuật của anh vẫn là cơn ác mộng cho mọi hàng thủ.",
       "templateData": { "template": "stat-hero", "value": "9", "label": "Vinicius Jr.", "context": "Bàn thắng + 5 kiến tạo" },
-      "imagePrompt": "Cinematic vertical 9:16 portrait sports photograph of Vinícius Júnior, the Brazilian winger for Real Madrid and the Brazil national team, in a white Real Madrid home kit with the Real Madrid crest clearly visible on the chest, dribbling at full speed past a defender at the Santiago Bernabéu, the stadium's metallic exterior skin visible in the upper background, packed home end behind him in white waving Madrid flags, dramatic floodlights, telephoto compression, motion blur on the defender, sharp focus on Vinícius and the ball, dramatic rim-lighting, natural skin texture, professional sports press photography matching La Liga and Champions League broadcast photographs. No scoreboard, no on-image text overlays."
+      "imagePrompt": "Vertical 9:16 football poster artwork featuring Vinícius Júnior, the Brazilian winger for Real Madrid and the Brazil national team, in a hero composition mid-stride driving forward with the ball, intense focused expression. He wears a white Real Madrid home kit with the Real Madrid crest clearly visible on the chest. Background: a layered white-and-gold Real Madrid graphic backdrop with a huge stylized Real Madrid crest floating faintly behind him as a watermark, the Bernabéu's metallic skin abstracted as a subtle silhouette motif, dramatic golden light rays radiating outward. Vibrant saturated white palette with bold gold and royal-purple accents, very high contrast, glossy graphic-design finish. Stylized like a UEFA Champions League matchday graphic. The Real Madrid crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
     },
     {
       "id": "rank-4", "type": "body",
       "voiceText": "Hạng tư, Robert Lewandowski — mười bàn cho Barcelona, một tay đưa đội bóng vào bán kết.",
       "templateData": { "template": "stat-hero", "value": "10", "label": "R. Lewandowski", "context": "Bàn thắng / 11 trận" },
-      "imagePrompt": "Cinematic vertical 9:16 portrait sports photograph of Robert Lewandowski, the Polish striker for Barcelona and the Poland national team, in a dark blue and red striped Barcelona home kit with the FC Barcelona crest clearly visible on the chest, celebrating a goal with arms outstretched, packed Barcelona home stand behind him waving blaugrana scarves, dramatic stadium floodlights, telephoto compression, shallow depth of field, sharp focus on Lewandowski's face and torso, motion blur on his outstretched fingers, dramatic rim-lighting, natural skin texture, professional sports press photography matching La Liga and Champions League broadcast photographs. No scoreboard, no on-image text overlays."
+      "imagePrompt": "Vertical 9:16 football poster artwork featuring Robert Lewandowski, the Polish striker for Barcelona and the Poland national team, in a hero pose celebrating a goal with arms outstretched and an open-mouthed shout. He wears a dark-blue-and-red striped Barcelona home kit with the FC Barcelona crest clearly visible on the chest. Background: a layered blaugrana graphic backdrop with a huge stylized FC Barcelona crest floating faintly behind him as a watermark, dramatic light rays radiating outward from behind his head, faint stylized fan-crowd silhouettes in blaugrana at the lower frame edge as graphic color bands. Vibrant saturated blaugrana palette with golden accents, very high contrast, glossy graphic-design finish. Stylized like a Premier League / UCL matchday promotional poster. The FC Barcelona crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
     },
     {
       "id": "rank-3", "type": "body",
       "voiceText": "Hạng ba, Kylian Mbappe — mười một bàn trong mùa đầu khoác áo Real Madrid, tốc độ vẫn không có đối thủ.",
       "templateData": { "template": "stat-hero", "value": "11", "label": "Kylian Mbappe", "context": "Mùa đầu tại Real" },
-      "imagePrompt": "Cinematic vertical 9:16 portrait sports photograph of Kylian Mbappé, the French striker for Real Madrid and the France national team, in a white Real Madrid home kit with the Real Madrid crest clearly visible on the chest, sprinting at full speed with the ball at the Santiago Bernabéu, the stadium's metallic exterior skin glowing in the background, packed home end in white waving Madrid scarves, dramatic floodlights, telephoto compression, motion blur on his legs, sharp focus on Mbappé and the ball, dramatic rim-lighting, natural skin texture, professional sports press photography matching La Liga and Champions League broadcast photographs. No scoreboard, no on-image text overlays."
+      "imagePrompt": "Vertical 9:16 football poster artwork featuring Kylian Mbappé, the French striker for Real Madrid and the France national team, in a hero composition mid-sprint with the ball at his feet, intense focused expression. He wears a white Real Madrid home kit with the Real Madrid crest clearly visible on the chest. Background: a layered white-and-gold Real Madrid graphic backdrop with a huge stylized Real Madrid crest floating faintly behind him as a watermark, the Bernabéu's metallic exterior abstracted as a subtle silhouette motif in the upper background, dramatic golden light rays radiating outward. Vibrant saturated white palette with bold gold and royal-purple accents, very high contrast, glossy graphic-design finish. Stylized like a UEFA Champions League matchday graphic. The Real Madrid crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
     },
     {
       "id": "rank-2", "type": "body",
       "voiceText": "Hạng nhì, Erling Haaland — mười ba bàn cho Manchester City, hiệu suất gần như mỗi trận một bàn.",
       "templateData": { "template": "stat-hero", "value": "13", "label": "Erling Haaland", "context": "Hơn 1 bàn / trận" },
-      "imagePrompt": "Cinematic vertical 9:16 portrait sports photograph of Erling Haaland, the Norwegian striker for Manchester City and the Norway national team, in a light blue Manchester City home kit with the City crest clearly visible on the chest, roaring after scoring a goal at the Etihad Stadium, packed home stand behind him waving sky-blue scarves, dramatic floodlights, telephoto compression, shallow depth of field, sharp focus on Haaland's face, motion blur on his fists, dramatic rim-lighting, natural skin texture, professional sports press photography matching Premier League broadcast photographs. No scoreboard, no on-image text overlays."
+      "imagePrompt": "Vertical 9:16 football poster artwork featuring Erling Haaland, the Norwegian striker for Manchester City and the Norway national team, in a hero pose celebrating with both arms outstretched and an open-mouthed roaring shout. He wears a sky-blue Manchester City home kit with the Manchester City crest clearly visible on the chest. Background: a vivid sky-blue Manchester City graphic backdrop with a huge stylized Manchester City crest floating faintly behind him as a watermark, a dramatic golden light burst radiating outward from behind, gold particles scattered across the frame as graphic accents. Vibrant saturated sky-blue palette with bold gold accents, very high contrast, glossy graphic-design finish. Stylized like a Premier League matchday promotional poster. The Manchester City crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
     },
     {
       "id": "rank-1-tease", "type": "body",
       "voiceText": "Và hạng nhất sẽ khiến nhiều người bất ngờ — không phải Mbappe, không phải Haaland.",
       "templateData": { "template": "callout", "statement": "Hạng nhất không phải tên bạn nghĩ.", "tag": "Twist" },
-      "imagePrompt": "Cinematic vertical 9:16 portrait sports photograph of a packed European stadium at night just before a goal — dramatic stadium floodlights piercing through atmospheric haze, fog rolling across the pitch, the Yellow Wall at Borussia Dortmund's Südtribüne packed wall-to-wall with fans in yellow with scarves raised, yellow smoke flares lit at the front, anticipation atmosphere, telephoto compression, shallow depth of field, dramatic rim-lighting, photo-realistic press photography matching Bundesliga broadcast photographs. No scoreboard, no on-image text overlays."
+      "imagePrompt": "Vertical 9:16 football poster artwork. Centre composition: stylized fan-crowd silhouettes in a wall of bright yellow filling the lower two-thirds of the frame (Borussia Dortmund Yellow Wall motif), scarves raised above heads as graphic color bands, a stylized 'BVB' tifo banner ribbon graphic unfurling across the upper frame. Background: a layered yellow-and-black BVB graphic backdrop with a huge stylized Borussia Dortmund crest floating faintly as a watermark, dramatic yellow light rays radiating outward, anticipation atmosphere with question-mark accent graphic in a corner. Vibrant saturated yellow palette with bold black accents, very high contrast, glossy graphic-design finish. Stylized like a Bundesliga matchday promotional poster. The Borussia Dortmund crest visible as the watermark, no on-image text or captions, no scoreboard graphics."
     },
     {
       "id": "rank-1", "type": "body",
       "voiceText": "Hạng nhất, Raphinha — mười lăm bàn thắng cùng tám pha kiến tạo, người đã khoác lên Barcelona một sức sống mới.",
       "templateData": { "template": "stat-hero", "value": "15 + 8", "label": "Raphinha", "context": "Bàn thắng + kiến tạo" },
-      "imagePrompt": "Cinematic vertical 9:16 portrait sports photograph of Raphinha, the Brazilian winger for Barcelona and the Brazil national team, in a dark blue and red striped Barcelona home kit with the FC Barcelona crest clearly visible on the chest, celebrating after scoring with arms wide, intense joy expression, packed Barcelona home end behind him waving blaugrana scarves, dramatic floodlights, telephoto compression, shallow depth of field, sharp focus on Raphinha's face, motion blur on his fingertips, dramatic rim-lighting, natural skin texture, professional sports press photography matching La Liga and Champions League broadcast photographs. No scoreboard, no on-image text overlays."
+      "imagePrompt": "Vertical 9:16 football poster artwork featuring Raphinha, the Brazilian winger for Barcelona and the Brazil national team, in a hero pose celebrating with arms wide and an intense ecstatic expression. He wears a dark-blue-and-red striped Barcelona home kit with the FC Barcelona crest clearly visible on the chest. Background: a layered blaugrana graphic backdrop with a huge stylized FC Barcelona crest floating faintly behind him as a watermark, dramatic golden light burst radiating outward from behind his head, faint stylized blaugrana fan-crowd silhouettes as graphic color bands at the lower frame edge. Vibrant saturated blaugrana palette with bold gold accents, very high contrast, glossy graphic-design finish. Stylized like a UEFA Champions League top-scorer promotional poster. The FC Barcelona crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
     },
     {
       "id": "context", "type": "body",
       "voiceText": "Một mùa giải mà các tiền đạo trẻ thực sự thống trị. Bốn trong năm cầu thủ này đều dưới hai mươi sáu tuổi.",
       "templateData": { "template": "callout", "statement": "Thế hệ vàng mới đã đến.", "tag": "Insight" },
-      "imagePrompt": "Cinematic vertical 9:16 portrait sports photograph of multiple young football players in different European club home kits — Real Madrid white, Manchester City light blue, Barcelona blaugrana stripes, PSG navy with red trim — each with their respective real club crests visible on the chest, standing side by side in a heroic line on a stadium pitch at night, dramatic floodlight rim-lighting from behind, packed stadium softly bokeh'd, telephoto compression, shallow depth of field, sharp focus on the front-row faces, photo-realistic press photography. No scoreboard, no on-image text overlays."
+      "imagePrompt": "Vertical 9:16 football poster artwork featuring a hero-line composition of multiple young European football stars side by side, each in their respective real club home kits — Real Madrid white, Manchester City sky-blue, Barcelona blaugrana stripes, PSG navy — each with their real club crests visible on the chest. Background: a layered multi-color graphic backdrop in overlapping shards of each club's primary color, dramatic golden light rays radiating outward from behind the line, faint stylized European-stars graphic accents in the upper corners (gold UEFA-style stars on a deep blue motif). Vibrant saturated palette with bold gold accents, very high contrast, glossy graphic-design finish. Stylized like an end-of-season generation broadcast graphic. All club crests visible on the jerseys, no on-image text or captions, no scoreboard graphics."
     },
     {
       "id": "outro", "type": "outro",
@@ -855,13 +1611,13 @@ Cả hai đều đã định nghĩa lại bóng đá hiện đại, mỗi ngư�
     "source": { "url": "local", "domain": "local", "image": null },
     "channel": "SportsForAllTV"
   },
-  "voice": { "provider": "ausynclab", "voiceId": "${VOICE_ID}", "speed": 1.0 },
+  "voice": { "provider": "ausynclab", "voiceId": "${VOICE_ID}", "speed": 0.90 },
   "scenes": [
     {
       "id": "hook", "type": "hook",
       "voiceText": "Messi và Ronaldo: ai mới thực sự vĩ đại hơn? Số liệu sẽ trả lời.",
       "templateData": { "template": "hook", "headline": "Messi vs Ronaldo", "subhead": "Số liệu lên tiếng", "kenBurns": "zoom-in" },
-      "imagePrompt": "Cinematic vertical 9:16 split-frame sports photograph of a generation-defining matchup at a night stadium. On the left half, Lionel Messi, the Argentine forward and captain for the Argentina national team, in a light blue and white striped Argentina kit with the AFA crest clearly visible on the chest, captain's armband on his left arm, focused intense expression. On the right half, Cristiano Ronaldo, the Portuguese forward and captain for the Portugal national team, in a dark red Portugal home kit with the FPF crest clearly visible on the chest, mirroring stance with arms ready. Down the centre seam, a golden Ballon d'Or trophy hovers under a dramatic spotlight beside a glowing UEFA Champions League starball trophy. Behind Messi, packed stands waving Argentina blue-and-white flags; behind Ronaldo, packed stands waving Portugal red-and-green flags. Dramatic floodlight rim-lighting, atmospheric haze, telephoto compression, shallow depth of field, sharp focus on both faces, natural skin texture, photo-realistic press photography. No scoreboard, no on-image text overlays."
+      "imagePrompt": "Vertical 9:16 split-frame football poster artwork showing a generation-defining matchup. Left half: Lionel Messi, the Argentine forward and captain for the Argentina national team, in a light-blue-and-white striped Argentina kit with the AFA crest clearly visible on the chest and the captain's armband on his left arm, intense focused hero pose. Behind him, a stylized light-blue-and-white graphic backdrop with a huge faint AFA crest watermark and radiating light rays. Right half: Cristiano Ronaldo, the Portuguese forward and captain for the Portugal national team, in a dark red Portugal home kit with the FPF crest clearly visible on the chest and the captain's armband on his left arm, mirroring hero pose. Behind him, a stylized red-and-green Portugal graphic backdrop with a huge faint FPF crest watermark and radiating light rays. Down the centre seam: a diagonal lightning-burst slash separator with dramatic energy glow, a golden Ballon d'Or trophy and a glowing UCL starball trophy hovering as stylized graphic accents between them. Vibrant saturated palette per side, very high contrast, glossy graphic-design finish. Stylized like a matchday rivalry promotional poster. Both national crests visible on the jerseys, no on-image text or captions, no scoreboard graphics."
     },
     {
       "id": "compare-balon-dor", "type": "body",
@@ -871,7 +1627,7 @@ Cả hai đều đã định nghĩa lại bóng đá hiện đại, mỗi ngư�
         "left":  { "label": "Messi",   "value": "8 QBV", "color": "cyan" },
         "right": { "label": "Ronaldo", "value": "5 QBV", "color": "purple", "winner": false }
       },
-      "imagePrompt": "Cinematic vertical 9:16 portrait sports photograph of Lionel Messi, the Argentine forward and captain for Inter Miami and the Argentina national team, in a light blue and white striped Argentina kit with the AFA crest clearly visible on the chest, holding a golden Ballon d'Or trophy at chest height, dramatic spotlight from above creating a halo on the trophy, dark stage backdrop with subtle photographers' flashes, telephoto compression, shallow depth of field, sharp focus on Messi's face and the trophy, natural skin texture, photo-realistic press photography matching Ballon d'Or ceremony broadcast photographs. No scoreboard, no on-image text overlays."
+      "imagePrompt": "Vertical 9:16 football poster artwork featuring Lionel Messi, the Argentine forward and captain for Inter Miami and the Argentina national team, in a hero pose holding a golden Ballon d'Or trophy at chest height, a calm satisfied expression. He wears a light-blue-and-white striped Argentina kit with the AFA crest clearly visible on the chest and the captain's armband on his left arm. Background: a deep navy-and-gold graphic backdrop with a huge stylized Ballon d'Or graphic floating faintly behind him as a watermark, a dramatic golden halo light burst radiating outward from above the trophy, gold particles scattered across the frame as graphic accents. Vibrant saturated navy palette with bold gold accents, very high contrast, glossy graphic-design finish. Stylized like a Ballon d'Or ceremony broadcast graphic. The AFA crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
     },
     {
       "id": "compare-goals", "type": "body",
@@ -881,7 +1637,7 @@ Cả hai đều đã định nghĩa lại bóng đá hiện đại, mỗi ngư�
         "left":  { "label": "Messi",   "value": "821 bàn", "color": "cyan" },
         "right": { "label": "Ronaldo", "value": "924 bàn", "color": "purple", "winner": true }
       },
-      "imagePrompt": "Cinematic vertical 9:16 portrait sports photograph of Cristiano Ronaldo, the Portuguese forward and captain for Al-Nassr and the Portugal national team, in his Real Madrid era wearing a white Real Madrid home kit with the Real Madrid crest clearly visible on the chest, celebrating a goal with his iconic SIU jump mid-air, packed Bernabéu home end behind him in white waving Madrid scarves and flags, dramatic stadium floodlights, telephoto compression, motion blur on his trailing legs, sharp focus on his face and torso, dramatic rim-lighting from below, natural skin texture, photo-realistic press photography matching La Liga and Champions League broadcast photographs. No scoreboard, no on-image text overlays."
+      "imagePrompt": "Vertical 9:16 football poster artwork featuring Cristiano Ronaldo, the Portuguese forward and captain for Al-Nassr and the Portugal national team, in his Real Madrid era — in a hero pose mid-air doing his iconic SIU jump celebration, body twisted at the peak with arms outstretched. He wears a white Real Madrid home kit with the Real Madrid crest clearly visible on the chest. Background: a layered white-and-gold Real Madrid graphic backdrop with a huge stylized Real Madrid crest floating faintly behind him as a watermark, dramatic golden light rays radiating outward from below his airborne pose, gold particles and confetti graphic accents. Vibrant saturated white palette with bold gold and royal-purple accents, very high contrast, glossy graphic-design finish. Stylized like a UEFA Champions League knockout matchday graphic. The Real Madrid crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
     },
     {
       "id": "compare-trophies", "type": "body",
@@ -900,13 +1656,13 @@ Cả hai đều đã định nghĩa lại bóng đá hiện đại, mỗi ngư�
         "left":  { "label": "Messi",   "value": "World Cup",  "color": "cyan", "winner": true },
         "right": { "label": "Ronaldo", "value": "Euro + NL",  "color": "purple" }
       },
-      "imagePrompt": "Cinematic vertical 9:16 portrait sports photograph of Lionel Messi, the Argentine captain for the Argentina national team, in a light blue and white striped Argentina national team kit with the AFA crest clearly visible on the chest, lifting the golden FIFA World Cup trophy above his head at Lusail Stadium, gold confetti raining around him, teammates blurred in celebration behind, packed Argentina-blue-and-white stands waving flags, dramatic floodlight rim-lighting on the trophy, telephoto compression, shallow depth of field, sharp focus on Messi's face and the trophy, natural skin texture, photo-realistic press photography matching 2022 World Cup final broadcast photographs. No scoreboard, no on-image text overlays."
+      "imagePrompt": "Vertical 9:16 football poster artwork featuring Lionel Messi, the Argentine captain for the Argentina national team, in a hero pose lifting the golden FIFA World Cup trophy high above his head with both hands, head tilted upward in triumph. He wears a light-blue-and-white striped Argentina kit with the AFA crest clearly visible on the chest and the captain's armband on his left arm. Background: a layered light-blue-and-white graphic backdrop with a huge stylized AFA crest floating faintly behind him as a watermark, golden confetti and gold particles scattered across the frame as graphic accents, a dramatic golden light burst radiating outward from behind the trophy. Vibrant saturated light-blue palette with bold gold accents, very high contrast, glossy graphic-design finish. Stylized like a trophy-lift promotional poster or 2022 World Cup champions celebration broadcast graphic. The AFA crest visible on the jersey, no on-image text or captions, no scoreboard graphics."
     },
     {
       "id": "compare-style", "type": "body",
       "voiceText": "Phong cách — Messi tinh tế, không gian, kỹ thuật cá nhân. Ronaldo bùng nổ, thể chất, không chiến.",
       "templateData": { "template": "callout", "statement": "Messi tinh tế. Ronaldo bùng nổ.", "tag": "Phong cách" },
-      "imagePrompt": "Cinematic vertical 9:16 split-frame sports photograph showing two contrasting football styles — left side, a delicate close-up of dancing footwork on the ball low to the grass with motion blur on the dribbler's planted leg; right side, a powerful mid-air header attacking the ball at the top of a jump, neck muscles tensed. Dramatic stadium floodlight rim-lighting on both sides, packed stands softly bokeh'd in the background, telephoto compression, shallow depth of field, photo-realistic press photography. No scoreboard, no on-image text overlays."
+      "imagePrompt": "Vertical 9:16 split-frame football poster artwork showing two contrasting football styles. Left half: a stylized close-up composition of dancing footwork on the ball low to the grass, the dribbler's planted leg as the hero element, against a deep blue graphic backdrop with abstract motion-trail graphic lines curving around the ball. Right half: a powerful mid-air header at the top of a jump, neck muscles tensed, against a deep red graphic backdrop with explosive light-burst rays radiating outward from the impact point. Down the centre seam: a diagonal lightning-burst slash separator with dramatic energy glow. Vibrant saturated palette per side, very high contrast, glossy graphic-design finish. Stylized like a matchday rivalry promotional poster. No on-image text or captions, no scoreboard graphics."
     },
     {
       "id": "compare-physical", "type": "body",
@@ -921,7 +1677,7 @@ Cả hai đều đã định nghĩa lại bóng đá hiện đại, mỗi ngư�
       "id": "verdict", "type": "body",
       "voiceText": "Câu trả lời thật ra không có. Cả hai đã định nghĩa lại bóng đá hiện đại, mỗi người một cách. Chúng ta may mắn vì được sống cùng thời đại của họ.",
       "templateData": { "template": "callout", "statement": "Cả hai đều là huyền thoại — theo cách của riêng mình.", "tag": "Verdict" },
-      "imagePrompt": "Cinematic vertical 9:16 portrait sports photograph of Lionel Messi and Cristiano Ronaldo standing together on a stadium pitch at golden hour, exchanging a respectful handshake with quiet smiles, Messi in a light blue and white Argentina kit with the AFA crest visible, Ronaldo in a dark red Portugal kit with the FPF crest visible, packed stadium softly bokeh'd in the background with mixed-color flags, golden hour side-lighting casting long shadows, telephoto compression, shallow depth of field, sharp focus on both faces, natural skin texture, mutual respect atmosphere, photo-realistic press photography. No scoreboard, no on-image text overlays."
+      "imagePrompt": "Vertical 9:16 football poster artwork featuring Lionel Messi and Cristiano Ronaldo together in a hero composition, exchanging a respectful handshake with quiet smiles. Messi on the left in a light-blue-and-white striped Argentina kit with the AFA crest clearly visible on the chest; Ronaldo on the right in a dark red Portugal home kit with the FPF crest clearly visible on the chest. Background: a layered split graphic backdrop — light-blue-and-white on Messi's side, red-and-green on Ronaldo's side — meeting in the centre where the two players' hands clasp, both national team crests floating faintly as huge watermarks on their respective sides, golden light rays radiating outward from the centre handshake point. Vibrant saturated palette with warm golden accents, very high contrast, glossy graphic-design finish. Stylized like a mutual-respect tribute broadcast graphic. Both national crests visible on the jerseys, no on-image text or captions, no scoreboard graphics."
     },
     {
       "id": "outro", "type": "outro",
@@ -934,7 +1690,7 @@ Cả hai đều đã định nghĩa lại bóng đá hiện đại, mỗi ngư�
 
 **Notes about the transformation:**
 - Source file used `8 QBV` / `1m70` / `821 bàn` → voiceText spells out `"tám Quả Bóng Vàng"` / `"một mét bảy mươi"` / `"tám trăm hai mươi mốt bàn"` per phonetic rules. The visual `templateData.value` keeps the compact original (`"8 QBV"`, `"1m70"`, `"821 bàn"`).
-- 9 scenes total (1 hook + 7 body + 1 outro). Within the 5–16 schema cap and the 10–15 analysis target window.
+- 9 scenes total (1 hook + 7 body + 1 outro). Within the schema cap and the 9–11 analysis target window.
 - `winner: true` is set per metric on whichever player leads.
 - The user's note "ai vĩ đại hơn" gets a balanced verdict scene rather than a forced winner — preserves the user's nuanced ending.
 
@@ -942,7 +1698,7 @@ Cả hai đều đã định nghĩa lại bóng đá hiện đại, mỗi ngư�
 
 Structure: hook → 1 scene per remaining player (callout with story + stat-hero with key number) → final reflection callout → outro.
 
-Each player scene benefits from imagePrompt that names the player + club + national team and pairs it with a signature scene/pose (e.g., `"Cinematic photo of Sergio Ramos, the Spanish defender for the Spain national team, lifting the World Cup trophy in 2010..."`). Don't describe facial features.
+Each player scene is image-eligible (the user gens the image from the plan's subjectHint). No `imagePrompt` field.
 
 ## Edge cases
 
@@ -959,3 +1715,31 @@ Each player scene benefits from imagePrompt that names the player + club + natio
 ## Channel context
 
 This skill writes for the **SportsForAllTV** (`@bonglan0702`) channel — Vietnamese football news + analysis. Outro and metadata.channel are both `"SportsForAllTV"`. See `memory/project_channel_focus.md` for full brand context.
+
+### Cụm tên nước ngoài trong `voiceText` — tối đa 2 từ liền nhau (mới 19/8/2026)
+
+Whisper (bước align) **bỏ mất nguyên cụm** khi `voiceText` có từ 3 token nước ngoài liền nhau, hoặc hai cụm 2-token quá gần nhau. Scene cắt theo mốc từ của Whisper nên cảnh đó teo lại — đo được **0,94 giây cho một câu 9 từ**, và người xem thấy hình lướt qua trước khi kịp nhận ra ai.
+
+Bằng chứng, hai lần render cùng một bài:
+
+| voiceText | Whisper nghe được | Kết quả |
+|---|---|---|
+| "Youri Tielemans **từ Aston Villa**, ba mươi lăm triệu bảng" | "Yuri Thila Bằng" | ❌ mất 6 từ → cảnh 0,94s |
+| "…là **Lewis Hall. Newcastle** trả lời không bán" | "Mục tiêu số 1, trả lời không bán" | ❌ mất 4 từ → cảnh 1,96s |
+| "Andrey Santos **từ** Chelsea, bốn mươi tám triệu bảng" | đầy đủ | ✅ |
+| "Rasmus Hojlund **sang** Napoli với giá bốn mươi bốn triệu" | đầy đủ | ✅ |
+| "Antonee Robinson **của** Fulham, phương án dễ nhất" | đầy đủ | ✅ |
+
+**⚠️ Quy luật này đã được KIỂM CHỨNG LẠI và phải nói cho đúng (19/8/2026, lần render thứ ba).** Sửa câu theo đúng khuôn trên (`"…là Lewis Hall. **Nhưng** Newcastle trả lời dứt khoát: không bán."`) thì nửa sau lọt được — Whisper nghe ra "nhưng Newcastle trả lời rất khoát. Không bán". Nhưng nửa đầu *"Mục tiêu số một là Lewis Hall"* lại biến mất, **kể cả 5 chữ tiếng Việt thuần**. Lần trước nó nuốt đúng đoạn ngược lại.
+
+Nên kết luận đúng là: **Whisper thỉnh thoảng đánh rơi một khúc ~4-7 từ, khúc nào thì không cố định giữa các lần chạy.** Cụm tên nước ngoài dày làm chuyện đó DỄ XẢY RA hơn, nhưng không phải nguyên nhân duy nhất — đừng tin rằng viết đúng khuôn là miễn nhiễm.
+
+**Điều thật sự cần nhớ khi thấy một cảnh hụt:** cộng nó với cảnh liền trước. Nếu tổng ra ~0,22-0,25 s/từ thì **không mất chữ nào**, chỉ là điểm cắt lệch — người xem vẫn nghe đủ câu, hình đổi trễ vài phần mười giây. Đó là phiền chứ không phải hỏng, và KHÔNG đáng render lại. Chỉ khi tổng hai cảnh vẫn cao bất thường mới là mất tiếng thật.
+
+```
+malacia    14 từ  3,63s  0,259 s/từ   ← cao
+lewis-hall 15 từ  2,73s  0,182 s/từ   ← thấp
+CỘNG       29 từ  6,37s  0,220 s/từ   ← bình thường ⇒ chỉ lệch mốc cắt
+```
+
+Vẫn nên viết theo khuôn `2 token tên riêng + từ tiếng Việt + 1 token` — nó giảm rủi ro và không tốn gì. Chỉ đừng hứa với người dùng rằng nó chữa dứt điểm.

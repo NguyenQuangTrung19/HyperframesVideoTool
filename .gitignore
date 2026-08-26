@@ -9,5 +9,37 @@ output/
 # One-off debug scripts
 debug-*.ts
 
-# Big SFX library (downloaded by `npm run sfx:download` — too large to commit)
-SFX/
+# Big external SFX library (not committed; curated subset lives in assets/sfx/)
+# Anchored to repo root so it does NOT match assets/sfx/ on case-insensitive FS.
+/SFX/
+
+# ── Media (videos / audio / generated images) — keep the repo code-only ──
+# Rendered output (videos, voice, frames, staged images) — all generated
+video/output/
+podcast/output/
+podcast/_runs/
+# Source/generated media inside content input folders (grok images, footage, voice)
+video/input/**/*.jpg
+video/input/**/*.jpeg
+video/input/**/*.png
+video/input/**/*.webp
+video/input/**/*.mp4
+video/input/**/*.mp3
+podcast/**/*.mp4
+podcast/**/*.mp3
+podcast/**/*.wav
+# Design scratch — local-only experiments (mockups, one-off debug scripts, specs)
+scratch/
+# Excel lock files
+~$*
+
+# Background-music library — the FEATURE is the folder + README, the tracks are
+# just assets the user drops in (14 MB of mp3 does not belong in git history).
+assets/music/*.mp3
+assets/music/*.m4a
+assets/music/*.wav
+# Generated subtitle artifact from a podcast/music-video run
+/captions.ass
+
+# Shared content-addressed cache of normalized podcast source clips (derived data)
+podcast/_normcache/
